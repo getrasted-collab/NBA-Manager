@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NBA Manager - Browser Preview</title>
+    <link rel="stylesheet" href="./ui/styles.css" />
+  </head>
+  <body>
+    <section class="broadcast-shell">
+      <header class="topbar">
+        <div class="topbar-brand">
+          <div class="league-mark">NBA</div>
+          <div>
+            <div class="brand-title">NBA Manager</div>
+            <div class="brand-subtitle">Browser Preview</div>
+          </div>
+        </div>
+        <nav class="top-nav" id="top-nav" aria-label="Primary navigation"></nav>
+        <div class="career-date-pill" id="career-date-pill" aria-label="Current league week and date"></div>
+        <div class="topbar-team">
+          <button class="theme-toggle-button" id="theme-toggle-button" type="button" aria-label="Toggle dark mode" aria-pressed="false"></button>
+          <button class="menu-link" id="career-menu-button" type="button">Main Menu</button>
+          <div class="profile-badge" id="team-badge">26</div>
+          <div>
+            <strong id="profile-team">Boston Celtics</strong>
+            <small id="profile-record">0 W / 0 L</small>
+          </div>
+        </div>
+      </header>
+      <div class="main-shell">
+        <aside class="context-sidebar">
+          <div class="context-heading">
+            <span id="context-section">Home</span>
+            <strong id="context-title">Main Menu</strong>
+          </div>
+          <nav class="context-nav" id="context-nav" aria-label="Section navigation"></nav>
+          <section class="sidebar-next-game" id="sidebar-next-game" aria-label="Next scheduled game"></section>
+        </aside>
+        <main class="workspace">
+          <section class="page-shell-header" id="page-context"></section>
+          <section class="page" id="page">
+            <section class="startup-loading" role="status" aria-live="polite" aria-label="NBA Manager is loading">
+              <div class="startup-court" aria-hidden="true"><i></i><i></i><i></i></div>
+              <header class="startup-brand"><span>NBA</span><div><strong>NBA MANAGER</strong><small>FRANCHISE SIMULATION</small></div></header>
+              <main class="startup-loading-main">
+                <div class="startup-ball" aria-hidden="true"><span></span></div>
+                <div class="startup-copy"><span>LOADING FRANCHISE HQ</span><h1>NBA<br><em>MANAGER</em></h1><p>Preparing rosters, cap sheets, schedules, scouting reports, and league systems.</p></div>
+                <div class="startup-progress"><div><i></i></div><span>SYNCING LEAGUE DATABASE</span><b>GETTING LOCKED IN</b></div>
+              </main>
+              <footer class="startup-footer"><span>MYNBA SIM</span><p><b>TIP</b> Build around fit, flexibility, and future draft capital.</p><small>FRONT OFFICE ENGINE</small></footer>
+            </section>
+          </section>
+        </main>
+      </div>
+    </section>
+    <script>
+      (function installStartupFallback() {
+        function showStartupError(message) {
+          var page = document.querySelector("#page");
+          if (!page) return;
+          page.innerHTML = '<section class="card card-pad"><div class="card-label">startup error</div><div class="player-name">NBA Manager could not finish loading</div><div class="meta">' + String(message || "Unknown renderer error").replace(/[&<>"']/g, function(character) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[character]; }) + '</div><div class="meta">Hard refresh the page after saving fixes, then check the browser console if this remains.</div></section>';
+        }
+        window.addEventListener("error", function(event) { showStartupError(event.message); });
+        window.addEventListener("unhandledrejection", function(event) { showStartupError(event.reason && (event.reason.message || event.reason)); });
+        window.setTimeout(function() {
+          var page = document.querySelector("#page");
+          if (page && !page.textContent.trim()) showStartupError("Renderer did not produce page content.");
+        }, 2500);
+      })();
+    </script>
+    <script src="./data/game-data.js"></script>
+    <script src="./data/offseason-data.js"></script>
+    <script src="./ui/browser-bridge.js"></script>
+    <script src="./ui/roster-data.js"></script>
+    <script src="./ui/data-loader.js"></script>
+    <script src="./ui/simulation-engine.js"></script>
+    <script src="./ui/renderer.js"></script>
+  </body>
+</html>

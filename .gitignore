@@ -1,0 +1,22 @@
+node_modules/
+.python/
+
+# Local app/runtime noise
+*.log
+*.tmp
+Thumbs.db
+Desktop.ini
+
+# Build and package output
+dist/
+build/
+out/
+release/
+
+# Large recovered/downloaded archives
+*.rar
+*.zip
+
+# Environment files
+.env
+.env.*
