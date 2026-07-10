@@ -1,0 +1,29 @@
+/* Light mode: keep simulation action buttons on the light surface. */
+body.dashboard-mode:not(.dark-mode) .sim-controls :is(.btn, button),
+body.dashboard-mode:not(.dark-mode) .matchup-card .actions :is(.btn, button) {
+  border-color: rgba(6, 76, 255, .32) !important;
+  color: #071b60 !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 8px 18px rgba(9, 28, 88, .08) !important;
+}
+
+body.dashboard-mode:not(.dark-mode) .sim-controls :is(.btn, button):hover:not(:disabled),
+body.dashboard-mode:not(.dark-mode) .matchup-card .actions :is(.btn, button):hover:not(:disabled) {
+  border-color: rgba(7, 83, 255, .62) !important;
+  color: #0753ff !important;
+  background: #f6f9ff !important;
+  background-color: #f6f9ff !important;
+  box-shadow: 0 10px 20px rgba(7, 83, 255, .12) !important;
+}
+
+body.dashboard-mode:not(.dark-mode) .sim-controls :is(.btn, button):disabled,
+body.dashboard-mode:not(.dark-mode) .matchup-card .actions :is(.btn, button):disabled {
+  border-color: rgba(160, 174, 203, .42) !important;
+  color: #98a4bd !important;
+  background: #eef2f8 !important;
+  background-color: #eef2f8 !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}

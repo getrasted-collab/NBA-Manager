@@ -421,8 +421,8 @@ body.dashboard-mode.staff-layout .staff-list-panel {
   grid-template-rows: 50px 32px minmax(0, 1fr) !important;
   min-height: 0 !important;
   height: 100% !important;
-  border-radius: 10px !important;
-  overflow: hidden !important;
+
+
 }
 
 body.dashboard-mode.staff-layout .staff-list-panel > header {
@@ -468,14 +468,14 @@ body.dashboard-mode.staff-layout .staff-list-head {
 body.dashboard-mode.staff-layout .staff-list-body {
   display: grid !important;
   grid-auto-rows: minmax(68px, auto) !important;
-  align-content: start !important;
-  min-height: 0 !important;
-  max-height: 100% !important;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  padding-bottom: 14px !important;
-  scrollbar-width: thin !important;
-  scrollbar-color: rgba(7, 83, 255, .5) transparent !important;
+
+
+
+
+
+
+
+
 }
 
 body.dashboard-mode.staff-layout .staff-list-row {

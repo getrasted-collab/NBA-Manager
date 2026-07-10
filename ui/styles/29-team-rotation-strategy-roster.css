@@ -1532,13 +1532,13 @@ body.dashboard-mode.standings-cup-layout .nba-cup-heading .player-name {
 }
 
 body.dashboard-mode.standings-cup-layout .nba-cup-grid {
-  min-height: 0 !important;
+
   height: min(100%, calc(100vh - 160px)) !important;
   overflow: hidden !important;
 }
 
 body.dashboard-mode.standings-cup-layout .nba-cup-table {
-  min-height: 0 !important;
+
   overflow: hidden !important;
 }
 

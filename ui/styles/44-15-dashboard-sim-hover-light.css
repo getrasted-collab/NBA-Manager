@@ -1,0 +1,19 @@
+/* Dashboard light mode: the secondary sim hero button should not turn dark on hover. */
+body.dashboard-mode:not(.dark-mode) .reference-season-hero :is(.reference-week-button, .btn:not(.reference-primary)) {
+  border-color: rgba(6, 76, 255, .32) !important;
+  color: #071b60 !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 8px 18px rgba(9, 28, 88, .08) !important;
+  opacity: 1 !important;
+}
+
+body.dashboard-mode:not(.dark-mode) .reference-season-hero :is(.reference-week-button, .btn:not(.reference-primary)):hover:not(:disabled) {
+  border-color: rgba(7, 83, 255, .62) !important;
+  color: #0753ff !important;
+  background: #f6f9ff !important;
+  background-color: #f6f9ff !important;
+  background-image: none !important;
+  box-shadow: 0 10px 20px rgba(7, 83, 255, .12) !important;
+}

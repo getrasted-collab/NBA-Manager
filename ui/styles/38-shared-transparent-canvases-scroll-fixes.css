@@ -212,14 +212,10 @@ body.dashboard-mode.player-development-layout .player-dev-action-card article {
   padding: 10px !important;
 }
 
-body.dashboard-mode.player-development-layout .player-dev-action-card article > div {
-  min-width: 0 !important;
-}
-
 body.dashboard-mode.player-development-layout .player-dev-action-card article div div {
   display: flex !important;
   flex-wrap: wrap !important;
-  gap: 7px !important;
+
   margin-top: 8px !important;
 }
 
@@ -262,7 +258,7 @@ body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments {
 }
 
 body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments article {
-  grid-template-columns: 40px minmax(0, 1fr) 82px 64px !important;
+
   min-height: 68px !important;
   padding: 12px 6px !important;
 }
@@ -381,7 +377,7 @@ body.dashboard-mode.locker-room-layout .locker-issue-list article div div {
 
 body.dashboard-mode.locker-room-layout .locker-issue-list .btn {
   min-height: 24px !important;
-  padding: 0 6px !important;
+
 }
 
 body.dashboard-mode.locker-room-layout .locker-issue-headshot {
@@ -468,15 +464,15 @@ body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrol
 }
 
 body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrollbar-track {
-  border-radius: 999px !important;
+
   background: rgba(222, 231, 247, .72) !important;
 }
 
 body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrollbar-thumb {
   border: 2px solid rgba(222, 231, 247, .72) !important;
-  border-radius: 999px !important;
+
   background: rgba(7, 83, 255, .82) !important;
-  background-clip: padding-box !important;
+
 }
 
 /* Always show the Player Morale scroll rail. */
@@ -512,7 +508,7 @@ body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrol
 body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrollbar-thumb {
   min-height: 46px !important;
   border: 2px solid rgba(222, 231, 247, .65) !important;
-  background: #0753ff !important;
+
 }
 
 /* Player development tracker: visible internal scroll for longer player lists. */
@@ -723,9 +719,9 @@ body.dashboard-mode.social-layout-page .social-quick-dms {
 body.dashboard-mode.social-layout-page .social-quick-dms::before {
   width: 38px !important;
   height: 27px !important;
-  border-width: 4px !important;
+
   border-radius: 18px !important;
-  transform: translateY(-2px) !important;
+
 }
 
 body.dashboard-mode.social-layout-page .social-quick-dms::after {
@@ -806,8 +802,8 @@ body.dashboard-mode.staff-layout .staff-openings-panel > footer {
   height: 46px !important;
   min-height: 46px !important;
   padding: 8px 12px 10px !important;
-  border-bottom-right-radius: 10px !important;
-  border-bottom-left-radius: 10px !important;
+
+
   overflow: visible !important;
 }
 
@@ -891,8 +887,8 @@ body.dashboard-mode.staff-layout .staff-openings-panel {
 
 body.dashboard-mode.staff-layout .staff-openings-panel > footer {
   margin-bottom: 0 !important;
-  border-bottom-right-radius: 10px !important;
-  border-bottom-left-radius: 10px !important;
+
+
   overflow: hidden !important;
 }
 
@@ -1055,8 +1051,8 @@ body.dark-mode.dashboard-mode .broadcast-shell {
   background:
     linear-gradient(90deg, rgba(5, 8, 18, .9), rgba(14, 18, 35, .72)),
     url("../../assets/nba-manager-bg-og.png") !important;
-  background-size: cover !important;
-  background-position: center !important;
+
+
 }
 
 body.dark-mode.dashboard-mode .topbar {

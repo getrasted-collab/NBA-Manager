@@ -9,6 +9,15 @@ body.dark-mode.dashboard-mode {
   --dm-border: rgba(140, 160, 204, .38);
   --dm-muted: #aebadc;
   --dm-text: #f6f8ff;
+  --surface-page-dark: var(--dm-page);
+  --surface-card-dark: var(--dm-panel);
+  --surface-card-dark-flat: var(--dm-panel-flat);
+  --surface-card-dark-soft: var(--dm-panel-soft);
+  --surface-row-dark: var(--dm-row);
+  --surface-row-dark-alt: var(--dm-row-alt);
+  --border-dark: var(--dm-border);
+  --text-primary-dark: var(--dm-text);
+  --text-secondary-dark: var(--dm-muted);
 }
 
 body.dark-mode.dashboard-mode :is(
@@ -109,7 +118,7 @@ body.dark-mode.dashboard-mode .calendar-game {
 }
 
 body.dark-mode.dashboard-mode .calendar-game.played {
-  color: #aebadc !important;
+  color: var(--dm-muted) !important;
   background: rgba(16, 23, 41, .8) !important;
 }
 
@@ -150,7 +159,7 @@ body.dark-mode.dashboard-mode.gameplan-layout :is(
   .gameplan-shot-bar
 ) {
   border-color: rgba(140, 160, 204, .24) !important;
-  color: #f6f8ff !important;
+  color: var(--dm-text) !important;
   background: rgba(9, 15, 29, .42) !important;
 }
 
@@ -179,7 +188,7 @@ body.dark-mode.dashboard-mode.gameplan-layout .gameplan-summary-card.orange::bef
 
 body.dark-mode.dashboard-mode :is(input, select, textarea) {
   border-color: rgba(145, 165, 210, .55) !important;
-  color: #f6f8ff !important;
+  color: var(--dm-text) !important;
   background: rgba(7, 12, 24, .88) !important;
 }
 

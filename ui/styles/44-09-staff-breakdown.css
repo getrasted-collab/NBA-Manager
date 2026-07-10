@@ -1,0 +1,7 @@
+/* Staff breakdown: the Analytics row should connect cleanly to the Total footer. */
+body.dashboard-mode.staff-layout .staff-breakdown-panel .staff-breakdown-row:last-of-type,
+body.dark-mode.dashboard-mode.staff-layout .staff-breakdown-panel .staff-breakdown-row:last-of-type {
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  clip-path: none !important;
+}

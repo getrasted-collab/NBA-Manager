@@ -2,13 +2,12 @@
 
 /* NBA Manager styles are split by cascade order. Keep these imports ordered. */
 @import url("./styles/01-base-tokens-reset.css");
-@import url("./styles/02-shell-startup-loading.css");
-@import url("./styles/03-shell-app-start-menu-and-components.css");
+@import url("./styles/02-shell-startup.css");
+@import url("./styles/03-menu.css");
 @import url("./styles/04-shared-season-team-legacy-components.css");
 @import url("./styles/05-league-history-legacy.css");
 @import url("./styles/06-scouting-fullscreen-legacy.css");
 @import url("./styles/07-shared-legacy-feature-compat.css");
-@import url("./styles/08-menu-opening-experience.css");
 @import url("./styles/09-dashboard-reference-layout.css");
 @import url("./styles/10-shared-career-ui-refinement.css");
 @import url("./styles/11-social-hub.css");
@@ -26,7 +25,6 @@
 @import url("./styles/23-shell-broadcast-skin.css");
 @import url("./styles/24-dashboard-polish.css");
 @import url("./styles/25-shared-scrollbars-metrics-typography.css");
-@import url("./styles/26-menu-light-opening-refresh.css");
 @import url("./styles/27-front-office-staff-reference-layout.css");
 @import url("./styles/28-front-office-trade-machine.css");
 @import url("./styles/29-team-rotation-strategy-roster.css");
@@ -35,7 +33,7 @@
 @import url("./styles/32-dashboard-reference-shell.css");
 @import url("./styles/33-league-social-finance-content.css");
 @import url("./styles/34-shared-fullscreen-correction.css");
-@import url("./styles/35-shell-refined-startup-arena.css");
+@import url("./styles/35-gameplan-history-layout.css");
 @import url("./styles/36-shell-arena-background-canvases.css");
 @import url("./styles/37-shared-action-centers-scroll.css");
 @import url("./styles/38-shared-transparent-canvases-scroll-fixes.css");
@@ -44,5 +42,20 @@
 @import url("./styles/41-theme-dark-surface-repairs.css");
 @import url("./styles/42-dashboard-theme-hero-edge-and-controls.css");
 @import url("./styles/43-theme-dark-mode-foundation.css");
-@import url("./styles/44-theme-page-specific-light-dark-fixes.css");
-@import url("./styles/45-tools-settings-dark-mode-and-final-fixes.css");
+@import url("./styles/44-01-gameplan-dark.css");
+@import url("./styles/44-02-trade-dark.css");
+@import url("./styles/44-03-rotation-dark.css");
+@import url("./styles/44-04-trade-light.css");
+@import url("./styles/44-05-free-agency-watchlist-dark.css");
+@import url("./styles/44-06-free-agency-rating-dark.css");
+@import url("./styles/44-07-staff-rating-dark.css");
+@import url("./styles/44-08-staff-panels-dark.css");
+@import url("./styles/44-09-staff-breakdown.css");
+@import url("./styles/44-10-social-trending.css");
+@import url("./styles/44-11-standings-headers-light.css");
+@import url("./styles/44-12-simulation-actions-light.css");
+@import url("./styles/44-13-standings-tabs-light.css");
+@import url("./styles/44-14-staff-buttons-light.css");
+@import url("./styles/44-15-dashboard-sim-hover-light.css");
+@import url("./styles/44-16-free-agency-rules-dark.css");
+@import url("./styles/45-tools-settings.css");

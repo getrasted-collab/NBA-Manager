@@ -1,0 +1,17 @@
+/* Standings light mode: inactive tabs should not use the dark navy button fill. */
+body.dashboard-mode:not(.dark-mode).standings-layout :is(.standings-tabs, .standings-view-toggle) button:not(.active) {
+  border-color: rgba(7, 31, 92, .22) !important;
+  color: #071b60 !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 7px 14px rgba(9, 28, 88, .08) !important;
+}
+
+body.dashboard-mode:not(.dark-mode).standings-layout :is(.standings-tabs, .standings-view-toggle) button:not(.active):hover {
+  border-color: rgba(7, 83, 255, .5) !important;
+  color: #0753ff !important;
+  background: #f6f9ff !important;
+  background-color: #f6f9ff !important;
+  box-shadow: 0 9px 18px rgba(7, 83, 255, .12) !important;
+}

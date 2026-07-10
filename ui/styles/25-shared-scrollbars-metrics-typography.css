@@ -11,7 +11,7 @@
 
 ::-webkit-scrollbar-track {
   border: 1px solid rgba(196, 207, 229, .62);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: rgba(255, 255, 255, .96);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .85), 0 8px 18px rgba(9, 28, 88, .06);
 }
@@ -20,7 +20,7 @@
   min-height: 58px;
   min-width: 58px;
   border: 4px solid rgba(255, 255, 255, .96);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: #8c98b4;
   background-clip: padding-box;
   box-shadow: 0 2px 8px rgba(9, 28, 88, .14);
@@ -44,7 +44,7 @@
   width: 14px;
   height: 18px;
   border: 1px solid rgba(196, 207, 229, .7);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background-color: rgba(255, 255, 255, .98);
   background-position: center;
   background-repeat: no-repeat;
@@ -93,7 +93,7 @@ body.dashboard-mode .workspace::-webkit-scrollbar-track,
 body.dashboard-mode .context-nav::-webkit-scrollbar-track,
 body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-track {
   border: 1px solid rgba(196, 207, 229, .62);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: rgba(255, 255, 255, .96);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .85), 0 8px 18px rgba(9, 28, 88, .06);
 }
@@ -105,7 +105,7 @@ body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-tabl
   min-height: 58px;
   min-width: 58px;
   border: 4px solid rgba(255, 255, 255, .96);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: #8c98b4;
   background-clip: padding-box;
   box-shadow: 0 2px 8px rgba(9, 28, 88, .14);
@@ -135,7 +135,7 @@ body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-tabl
   width: 14px;
   height: 18px;
   border: 1px solid rgba(196, 207, 229, .7);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background-color: rgba(255, 255, 255, .98);
   background-position: center;
   background-repeat: no-repeat;
@@ -167,7 +167,7 @@ body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-tabl
 
 /* Reference metric cards: soft white NBA.com stat panels. */
 .reference-stat-grid {
-  gap: 14px;
+  gap: var(--space-6);
 }
 
 .metric-card,
@@ -284,7 +284,7 @@ body.dashboard-mode .workspace::-webkit-scrollbar-track,
 body.dashboard-mode .context-nav::-webkit-scrollbar-track,
 body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-track {
   border: 1px solid rgba(201, 211, 230, .72) !important;
-  border-radius: 999px !important;
+  border-radius: var(--radius-pill) !important;
   background: #ffffff !important;
   box-shadow: 0 8px 20px rgba(9, 28, 88, .08) !important;
 }
@@ -297,7 +297,7 @@ body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-tabl
   min-height: 64px !important;
   min-width: 64px !important;
   border: 5px solid #ffffff !important;
-  border-radius: 999px !important;
+  border-radius: var(--radius-pill) !important;
   background: #8794ad !important;
   background-clip: padding-box !important;
   box-shadow: none !important;
@@ -326,7 +326,7 @@ body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-tabl
   width: 16px !important;
   height: 18px !important;
   border: 1px solid rgba(201, 211, 230, .82) !important;
-  border-radius: 999px !important;
+  border-radius: var(--radius-pill) !important;
   background-color: #ffffff !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
@@ -402,7 +402,7 @@ body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-tabl
   min-height: 0;
   overflow: hidden;
   border: 1px solid rgba(200, 210, 229, .8);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: #ffffff;
   box-shadow: 0 10px 22px rgba(9, 28, 88, .09);
 }
@@ -413,7 +413,7 @@ body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-tabl
   left: 50%;
   width: 6px;
   min-height: 44px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: #8490aa;
   box-shadow: 0 1px 4px rgba(9, 28, 88, .16);
   transform: translateX(-50%);
@@ -428,7 +428,7 @@ body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-tabl
   height: 18px;
   padding: 0;
   border: 1px solid rgba(200, 210, 229, .82);
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
   background-color: #ffffff;
   box-shadow: 0 5px 12px rgba(9, 28, 88, .08);
   cursor: pointer;
@@ -495,11 +495,11 @@ body.dashboard-mode .custom-scrollbar-shell :is(.custom-scrollbar-arrow-top, .cu
   place-items: center !important;
   width: 18px !important;
   min-width: 18px !important;
-  height: 18px !important;
-  min-height: 18px !important;
+
+
   padding: 0 !important;
   border: 1px solid rgba(200, 210, 229, .82) !important;
-  border-radius: 5px !important;
+  border-radius: var(--radius-sm) !important;
   color: transparent !important;
   background: #ffffff !important;
   box-shadow: 0 5px 12px rgba(9, 28, 88, .08) !important;
@@ -534,7 +534,7 @@ body.dashboard-mode .custom-scrollbar-shell,
   padding: 1px 0 !important;
   overflow: hidden !important;
   border: 1px solid rgba(202, 212, 231, .9) !important;
-  border-radius: 999px !important;
+  border-radius: var(--radius-pill) !important;
   background: #ffffff !important;
   box-shadow: 0 8px 18px rgba(9, 28, 88, .12) !important;
 }
@@ -543,7 +543,7 @@ body.dashboard-mode .custom-scrollbar-track,
 .custom-scrollbar-track {
   width: 100% !important;
   border: 0 !important;
-  border-radius: 999px !important;
+  border-radius: var(--radius-pill) !important;
   background: #ffffff !important;
   box-shadow: none !important;
 }
@@ -553,7 +553,7 @@ body.dashboard-mode .custom-scrollbar-thumb,
   left: 50% !important;
   width: 6px !important;
   min-height: 46px !important;
-  border-radius: 999px !important;
+  border-radius: var(--radius-pill) !important;
   background: #8793ad !important;
   box-shadow: 0 1px 3px rgba(9, 28, 88, .16) !important;
 }
@@ -576,13 +576,13 @@ body.dashboard-mode .custom-scrollbar-shell :is(.custom-scrollbar-arrow-top, .cu
 body.dashboard-mode .custom-scrollbar-shell .custom-scrollbar-arrow-top,
 .custom-scrollbar-shell .custom-scrollbar-arrow-top {
   border-bottom: 1px solid rgba(209, 218, 235, .72) !important;
-  border-radius: 999px 999px 5px 5px !important;
+  border-radius: var(--radius-pill) 999px 5px 5px !important;
 }
 
 body.dashboard-mode .custom-scrollbar-shell .custom-scrollbar-arrow-bottom,
 .custom-scrollbar-shell .custom-scrollbar-arrow-bottom {
   border-top: 1px solid rgba(209, 218, 235, .72) !important;
-  border-radius: 5px 5px 999px 999px !important;
+  border-radius: var(--radius-sm) 5px 999px 999px !important;
 }
 
 /* Typography polish: clean sports broadcast type without arcade spacing. */
@@ -724,14 +724,14 @@ body.dashboard-mode .context-nav::-webkit-scrollbar {
 }
 
 body.dashboard-mode .context-nav::-webkit-scrollbar-track {
-  border-radius: 999px !important;
+  border-radius: var(--radius-pill) !important;
   background: rgba(255, 255, 255, .72) !important;
 }
 
 body.dashboard-mode .context-nav::-webkit-scrollbar-thumb {
-  min-height: 42px !important;
+  min-height: var(--control-height-lg) !important;
   border: 2px solid rgba(255, 255, 255, .72) !important;
-  border-radius: 999px !important;
+  border-radius: var(--radius-pill) !important;
   background: #8b96ad !important;
   background-clip: padding-box !important;
 }

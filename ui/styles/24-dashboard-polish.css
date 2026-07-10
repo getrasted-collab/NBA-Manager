@@ -577,7 +577,7 @@ body.dashboard-mode .reference-primary::before {
 }
 
 body.dashboard-mode .sidebar-next-game .btn {
-  color: var(--blue);
+
   background: rgba(255, 255, 255, .86);
 }
 
@@ -742,7 +742,7 @@ body.dashboard-mode .workspace,
 body.dashboard-mode .context-nav,
 body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div) {
   scrollbar-color: rgba(112, 128, 170, .55) rgba(255, 255, 255, .3);
-  scrollbar-width: thin;
+
 }
 
 body.dashboard-mode::-webkit-scrollbar,
@@ -769,7 +769,7 @@ body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-tabl
   border: 2px solid rgba(255, 255, 255, .22);
   border-radius: 999px;
   background: rgba(112, 128, 170, .55);
-  background-clip: padding-box;
+
 }
 
 body.dashboard-mode::-webkit-scrollbar-thumb:hover,

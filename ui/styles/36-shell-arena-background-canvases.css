@@ -52,7 +52,7 @@ body.dashboard-mode.league-history-layout .history-dynasty-stats small {
 
 body.dashboard-mode.league-history-layout .history-key-people {
   gap: 18px !important;
-  align-content: start !important;
+
 }
 
 body.dashboard-mode.league-history-layout .history-key-people b,
@@ -73,7 +73,7 @@ body.dashboard-mode.league-history-layout .history-mini-shot {
 
 body.dashboard-mode.league-history-layout .history-dynasty-copy .text-link {
   min-height: 48px !important;
-  padding: 0 16px !important;
+
   font-size: 11px !important;
 }
 
@@ -421,9 +421,9 @@ body.dashboard-mode.awards-layout .awards-main-layout {
 }
 
 body.dashboard-mode.awards-layout .awards-table-wrap {
-  max-height: 386px !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
+
+
+
   scrollbar-width: thin !important;
   scrollbar-color: rgba(7, 83, 255, .5) transparent !important;
 }
@@ -927,10 +927,6 @@ body.dashboard-mode.staff-layout .staff-openings-panel > footer {
   border-bottom-left-radius: 24px !important;
 }
 
-body.dashboard-mode.staff-layout .staff-openings-panel > footer {
-  overflow: hidden !important;
-}
-
 body.dashboard-mode.staff-layout .staff-office-layout {
   padding-bottom: 12px !important;
 }
@@ -950,7 +946,7 @@ body.dashboard-mode.staff-layout .staff-openings-panel {
 body.dashboard-mode.staff-layout .staff-openings-panel > footer {
   border-bottom-right-radius: 28px !important;
   border-bottom-left-radius: 28px !important;
-  overflow: hidden !important;
+
 }
 
 body.dashboard-mode.staff-layout .staff-side-panels {

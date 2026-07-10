@@ -10,27 +10,6 @@
   padding: 18px 20px;
 }
 
-.front-office-hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-}
-
-.front-office-badge {
-  display: grid;
-  place-items: center;
-  width: 74px;
-  height: 74px;
-  border: 1px solid color-mix(in srgb, var(--team-primary) 26%, var(--stroke));
-  border-radius: 16px;
-  color: var(--team-contrast);
-  background: linear-gradient(135deg, var(--team-primary), #111827);
-  font-size: 22px;
-  font-weight: 950;
-  letter-spacing: 2px;
-}
-
 .player-name {
   margin-top: 12px;
   font-size: 20px;
@@ -72,13 +51,6 @@
 .wide-card {
   margin-top: 12px;
   padding: 17px 18px;
-}
-
-.game-link-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
 }
 
 .calendar-toolbar {
@@ -256,22 +228,6 @@
 
 .season-feature.transaction-feature {
   border-left-color: var(--green);
-}
-
-.transaction-status-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 22px;
-  margin: 12px 0;
-  padding: 17px 18px;
-}
-
-.transaction-rule-pills {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
 }
 
 .rule-pill {

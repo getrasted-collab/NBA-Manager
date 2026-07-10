@@ -96,7 +96,7 @@ body.dashboard-mode.finance-layout .finance-page-header h1 {
 }
 
 body.dashboard-mode.finance-layout .finance-top-metrics {
-  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+
   gap: 10px;
 }
 
@@ -236,7 +236,7 @@ body.dashboard-mode.finance-layout .finance-activity article {
 }
 
 body.dashboard-mode.finance-layout .finance-lower-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
   gap: 10px;
 }
 
@@ -249,14 +249,6 @@ body.dashboard-mode.finance-layout .finance-dashboard-policy {
 @media (max-width: 1180px) {
   body.dashboard-mode.finance-layout .finance-top-metrics {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  }
-
-  body.dashboard-mode.scouting-layout .scouting-board-layout {
-    grid-template-areas:
-      "draft"
-      "selected"
-      "rail"
-      "bottom" !important;
   }
 
   body.dashboard-mode.finance-layout .finance-main-grid,
@@ -1450,14 +1442,6 @@ body.dashboard-mode.league-history-layout .history-top-card strong {
   font-size: 23px !important;
 }
 
-body.dashboard-mode.league-history-layout .history-top-card b,
-body.dashboard-mode.league-history-layout .history-top-card small {
-  min-width: 0 !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-}
-
 body.dashboard-mode.league-history-layout .history-spark {
   bottom: 19px !important;
   height: 20px !important;
@@ -1467,7 +1451,7 @@ body.dashboard-mode.league-history-layout .league-history-tabs {
   min-height: 34px !important;
   gap: 8px !important;
   padding: 0 !important;
-  overflow: hidden !important;
+
 }
 
 body.dashboard-mode.league-history-layout .league-history-tabs button {
@@ -1479,8 +1463,8 @@ body.dashboard-mode.league-history-layout .league-history-tabs button {
 body.dashboard-mode.league-history-layout .league-history-main {
   display: grid !important;
   grid-template-columns: minmax(330px, .9fr) minmax(500px, 1.28fr) minmax(230px, .62fr) !important;
-  gap: 10px !important;
-  align-items: stretch !important;
+
+
   min-width: 0 !important;
 }
 
@@ -1507,7 +1491,7 @@ body.dashboard-mode.league-history-layout .history-dynasty-bg {
 
 body.dashboard-mode.league-history-layout .history-dynasty-player {
   right: -10px !important;
-  width: 190px !important;
+
   height: 238px !important;
 }
 
@@ -1551,10 +1535,10 @@ body.dashboard-mode.league-history-layout .history-action-center {
 }
 
 body.dashboard-mode.league-history-layout .history-action-card {
-  grid-template-columns: 1fr !important;
+
   gap: 7px !important;
   margin-bottom: 8px !important;
-  padding: 9px !important;
+
 }
 
 body.dashboard-mode.league-history-layout .history-action-card button {
@@ -1563,11 +1547,11 @@ body.dashboard-mode.league-history-layout .history-action-card button {
 
 body.dashboard-mode.league-history-layout .league-history-lower-grid {
   grid-template-columns: 1fr 1fr .82fr 1.1fr !important;
-  gap: 10px !important;
+
 }
 
 body.dashboard-mode.league-history-layout .history-leaders-card > div {
-  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+
   gap: 6px !important;
   padding: 0 10px 10px !important;
 }

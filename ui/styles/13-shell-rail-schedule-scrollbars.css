@@ -17,7 +17,7 @@ body.dashboard-mode .sidebar-next-game {
 body.dashboard-mode .sidebar-next-game > span { color: #8b919b; font-size: 8px; }
 body.dashboard-mode .sidebar-next-game > strong { color: #fff; font-size: 18px; letter-spacing: .4px; }
 body.dashboard-mode .sidebar-next-game > small { font-size: 9px; }
-body.dashboard-mode .sidebar-next-game .btn { min-height: 34px; margin-top: auto; }
+body.dashboard-mode .sidebar-next-game .btn {  margin-top: auto; }
 body.dashboard-mode .career-date-pill {
   min-height: 36px;
   padding: 0 14px;
@@ -105,7 +105,7 @@ body.dashboard-mode .context-nav::-webkit-scrollbar-thumb {
 }
 body.dashboard-mode::-webkit-scrollbar-thumb:hover,
 body.dashboard-mode .workspace::-webkit-scrollbar-thumb:hover,
-body.dashboard-mode .context-nav::-webkit-scrollbar-thumb:hover { background: #4a505b; background-clip: padding-box; }
+body.dashboard-mode .context-nav::-webkit-scrollbar-thumb:hover { background: #4a505b;  }
 
 @media (max-width: 800px) {
   body.dashboard-mode .main-shell { width: 100%; grid-template-columns: 1fr; }

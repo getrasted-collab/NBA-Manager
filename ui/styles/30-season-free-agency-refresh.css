@@ -352,10 +352,6 @@ body.dashboard-mode .in-season-fa-stat-filter button.active {
 }
 
 body.dashboard-mode .in-season-fa-stat-filter button.active::after {
-  color: #0753ff !important;
-}
-
-body.dashboard-mode .in-season-fa-stat-filter button.active::after {
   display: block !important;
   color: #0753ff !important;
   content: "\25B2" !important;
@@ -624,7 +620,7 @@ body.dashboard-mode .in-season-fa-fit {
 }
 
 body.dashboard-mode .in-season-fa-fit span {
-  grid-column: 1 !important;
+
   color: var(--navy) !important;
   font-size: 9px !important;
   font-weight: 900 !important;
@@ -664,7 +660,7 @@ body.dashboard-mode .in-season-fa-fit-ring strong {
 
 body.dashboard-mode .in-season-fa-fit ul {
   display: grid !important;
-  gap: 4px !important;
+
   margin: 0 !important;
   padding: 0 !important;
   list-style: none !important;
@@ -675,7 +671,7 @@ body.dashboard-mode .in-season-fa-fit li {
   overflow: hidden !important;
   padding-left: 12px !important;
   color: #52608a !important;
-  font-size: 8px !important;
+
   font-weight: 800 !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;

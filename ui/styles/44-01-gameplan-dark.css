@@ -1,0 +1,33 @@
+/* Gameplan dark mode: labels should read white, not low-contrast blue. */
+body.dark-mode.dashboard-mode.gameplan-layout :is(
+  .gameplan-header p,
+  .gameplan-matchup-card > span,
+  .gameplan-summary-card span,
+  .gameplan-card header h2,
+  .gameplan-scout-card header strong,
+  .gameplan-page .strategy-control span,
+  .gameplan-pill-group > span,
+  .gameplan-action-column > span,
+  .gameplan-range span,
+  .gameplan-shot-bar span,
+  .gameplan-shot-bar strong,
+  .gameplan-footer span,
+  .gameplan-scout-card b,
+  .coach-recommendations article b,
+  .action-center article b
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout :is(
+  .gameplan-matchup-card small,
+  .gameplan-summary-card small,
+  .gameplan-range small,
+  .gameplan-shot-bar small,
+  .gameplan-toggle small,
+  .gameplan-scout-card span,
+  .coach-recommendations article span,
+  .action-center article span
+) {
+  color: #c8d3ee !important;
+}

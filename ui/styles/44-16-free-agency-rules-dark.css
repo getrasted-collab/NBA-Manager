@@ -1,0 +1,49 @@
+/* Free agency dark mode: keep the roster-spots rule block solid. */
+body.dark-mode.dashboard-mode .in-season-fa-hero {
+  border-color: rgba(104, 135, 194, .48) !important;
+  color: #edf4ff !important;
+  background: #151e31 !important;
+  background-color: #151e31 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-hero .in-season-fa-rule {
+  border-color: rgba(104, 135, 194, .52) !important;
+  color: #edf4ff !important;
+  background: #10192b !important;
+  background-color: #10192b !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-hero::before,
+body.dark-mode.dashboard-mode .in-season-fa-hero::after,
+body.dark-mode.dashboard-mode .in-season-fa-hero .in-season-fa-rule::before,
+body.dark-mode.dashboard-mode .in-season-fa-hero .in-season-fa-rule::after {
+  display: none !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode #page[data-page="offseason"] > .card.in-season-fa-hero,
+body.dark-mode.dashboard-mode #page[data-page="offseason"] .in-season-fa-hero,
+body.dark-mode.dashboard-mode .secondary-page[data-page="offseason"] .card.in-season-fa-hero {
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  isolation: isolate !important;
+  border-color: rgba(104, 135, 194, .48) !important;
+  color: #edf4ff !important;
+  background: #151e31 !important;
+  background-color: #151e31 !important;
+  background-image: none !important;
+  background-blend-mode: normal !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode #page[data-page="offseason"] .in-season-fa-hero > div:first-child {
+  background: #151e31 !important;
+  background-color: #151e31 !important;
+  background-image: none !important;
+}

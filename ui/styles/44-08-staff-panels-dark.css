@@ -1,0 +1,29 @@
+/* Staff dark mode: let empty space under side-card rows show the page background. */
+body.dark-mode.dashboard-mode.staff-layout :is(.staff-breakdown-panel, .staff-openings-panel) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout :is(
+  .staff-breakdown-panel > header,
+  .staff-openings-panel > header,
+  .staff-breakdown-row,
+  .staff-opening-row,
+  .staff-breakdown-panel > footer,
+  .staff-openings-panel > footer
+) {
+  border-color: rgba(104, 135, 194, .38) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .92) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .94), rgba(9, 15, 29, .92)) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout :is(.staff-office-layout, .staff-side-panels) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}

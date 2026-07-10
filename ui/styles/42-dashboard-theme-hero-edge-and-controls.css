@@ -577,7 +577,7 @@ body.dark-mode.dashboard-mode select[data-rotation-secondary-position]:disabled 
   color: rgba(226, 235, 255, .5) !important;
   background-color: rgba(31, 42, 64, .72) !important;
   background-image: linear-gradient(180deg, rgba(44, 54, 75, .72), rgba(27, 35, 52, .72)) !important;
-  opacity: 1 !important;
+
 }
 
 body.dark-mode.dashboard-mode .rotation-position-select option {

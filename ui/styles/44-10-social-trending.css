@@ -1,0 +1,9 @@
+/* Social Trending Topics: use one flat background color. */
+body.dark-mode.dashboard-mode.social-layout-page .social-trends,
+body.dark-mode.dashboard-mode.social-layout-page .social-trends header,
+body.dark-mode.dashboard-mode.social-layout-page .social-trends article {
+  background: #101827 !important;
+  background-color: #101827 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}

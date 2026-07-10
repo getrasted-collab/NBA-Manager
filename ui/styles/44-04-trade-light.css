@@ -1,0 +1,41 @@
+/* Trade machine light mode: keep failed rules readable and card-like. */
+body.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule-list {
+  display: grid !important;
+  gap: 8px !important;
+  padding: 14px 24px !important;
+  background: rgba(246, 249, 254, .72) !important;
+}
+
+body.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule {
+  display: grid !important;
+  grid-template-columns: 54px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 14px !important;
+  min-height: 42px !important;
+  padding: 9px 14px !important;
+  border: 1px solid rgba(196, 207, 229, .9) !important;
+  border-radius: 7px !important;
+  color: #071b60 !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 18px rgba(15, 31, 68, .045) !important;
+}
+
+body.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule span {
+  display: inline-grid !important;
+  place-items: center !important;
+  width: 42px !important;
+  height: 22px !important;
+  border: 1px solid rgba(214, 31, 67, .28) !important;
+  border-radius: 999px !important;
+  color: #d61f43 !important;
+  background: rgba(214, 31, 67, .07) !important;
+  font-size: 8px !important;
+  font-weight: 950 !important;
+  letter-spacing: .08em !important;
+}
+
+body.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule.ok span {
+  border-color: rgba(0, 155, 91, .32) !important;
+  color: #009b5b !important;
+  background: rgba(0, 155, 91, .08) !important;
+}

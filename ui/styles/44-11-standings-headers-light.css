@@ -1,0 +1,26 @@
+/* Standings light mode: keep conference headers on the light table surface. */
+body.dashboard-mode:not(.dark-mode).standings-conference-layout .standings-table .standings-title {
+  border-bottom-color: rgba(202, 212, 231, .72) !important;
+  color: var(--navy) !important;
+  background-color: rgba(255, 255, 255, .94) !important;
+  background-image: linear-gradient(90deg, #ffffff, rgba(247, 249, 253, .78)) !important;
+  box-shadow: none !important;
+}
+
+body.dashboard-mode:not(.dark-mode).standings-conference-layout .standings-table .standings-title span {
+  color: var(--navy) !important;
+}
+
+body.dashboard-mode:not(.dark-mode).standings-conference-layout .standings-table .conference-logo {
+  border-color: rgba(6, 76, 255, .24) !important;
+  color: var(--blue) !important;
+  background-color: #ffffff !important;
+  background-image: linear-gradient(135deg, rgba(6, 76, 255, .1), rgba(255, 255, 255, .96)) !important;
+  box-shadow: inset 0 -3px 0 rgba(6, 76, 255, .12) !important;
+}
+
+body.dashboard-mode:not(.dark-mode).standings-conference-layout .standings-table .conference-logo-west {
+  border-color: rgba(215, 25, 63, .24) !important;
+  color: var(--red) !important;
+  background-image: linear-gradient(135deg, rgba(215, 25, 63, .1), rgba(255, 255, 255, .96)) !important;
+}

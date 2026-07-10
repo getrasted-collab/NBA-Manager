@@ -742,7 +742,6 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .transaction-status-card,
   .contract-office-header,
   .contract-controls,
   .trade-header {
@@ -756,10 +755,6 @@ textarea {
 
   .contract-cap-meter {
     text-align: left;
-  }
-
-  .transaction-rule-pills {
-    justify-content: flex-start;
   }
 
   .mode-grid,
@@ -1473,8 +1468,8 @@ body.dashboard-mode.locker-room-layout .locker-room-main {
 }
 
 body.dashboard-mode.locker-room-layout .locker-action-center {
-  grid-column: 3;
-  grid-row: 1 / span 2;
+
+
   align-self: start;
   width: 100%;
   max-width: none;

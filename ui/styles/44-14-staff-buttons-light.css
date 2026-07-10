@@ -1,0 +1,27 @@
+/* Staff light mode: staff hire buttons should use the light button surface. */
+body.dashboard-mode:not(.dark-mode) :is(.staff-market, .staff-card, .staff-candidate, .staff-opening-row) :is(.staff-hire-button, .reference-week-button, button[data-hire-staff]) {
+  border-color: rgba(6, 76, 255, .32) !important;
+  color: #071b60 !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 8px 18px rgba(9, 28, 88, .08) !important;
+  opacity: 1 !important;
+}
+
+body.dashboard-mode:not(.dark-mode) :is(.staff-market, .staff-card, .staff-candidate, .staff-opening-row) :is(.staff-hire-button, .reference-week-button, button[data-hire-staff]):hover:not(:disabled):not([aria-disabled="true"]) {
+  border-color: rgba(7, 83, 255, .62) !important;
+  color: #0753ff !important;
+  background: #f6f9ff !important;
+  background-color: #f6f9ff !important;
+  box-shadow: 0 10px 20px rgba(7, 83, 255, .12) !important;
+}
+
+body.dashboard-mode:not(.dark-mode) :is(.staff-market, .staff-card, .staff-candidate, .staff-opening-row) :is(.staff-hire-button, .reference-week-button, button[data-hire-staff]):is(:disabled, [aria-disabled="true"]) {
+  border-color: rgba(160, 174, 203, .42) !important;
+  color: #98a4bd !important;
+  background: #eef2f8 !important;
+  background-color: #eef2f8 !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}

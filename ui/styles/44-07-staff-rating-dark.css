@@ -1,0 +1,15 @@
+/* Staff dark mode: remove the white fill from OVR badges. */
+body.dark-mode.dashboard-mode.staff-layout .staff-list-panel .staff-list-row b.staff-rating-badge,
+body.dark-mode.dashboard-mode.staff-layout .staff-list-panel b.staff-rating-badge,
+body.dark-mode.dashboard-mode .staff-list-panel .staff-list-row b.staff-rating-badge,
+body.dark-mode.dashboard-mode .staff-list-panel b.staff-rating-badge,
+html.dark-mode body.dashboard-mode .staff-list-panel .staff-list-row b.staff-rating-badge,
+html.dark-mode body.dashboard-mode .staff-list-panel b.staff-rating-badge {
+  border: 3px solid #15b77a !important;
+  outline: 0 !important;
+  color: #dff8ef !important;
+  background: rgba(21, 183, 122, .10) !important;
+  background-color: rgba(21, 183, 122, .10) !important;
+  background-image: none !important;
+  box-shadow: 0 0 0 1px rgba(21, 183, 122, .10), 0 0 10px rgba(21, 183, 122, .18) !important;
+}

@@ -3,14 +3,22 @@
 body.dark-mode,
 body[data-theme="dark"],
 body.theme-dark {
-  --bg: #101827;
-  --panel: #1b2638;
-  --panel-soft: #202c41;
-  --panel-lift: #263550;
-  --stroke: #3b4a63;
-  --text: #f4f7ff;
-  --muted: #b8c5d8;
-  --dim: #8d9cb2;
+  --surface-page: #101827;
+  --surface-card: #1b2638;
+  --surface-card-soft: #202c41;
+  --surface-card-raised: #263550;
+  --border-default: #3b4a63;
+  --text-primary: #f4f7ff;
+  --text-secondary: #b8c5d8;
+  --text-tertiary: #8d9cb2;
+  --bg: var(--surface-page);
+  --panel: var(--surface-card);
+  --panel-soft: var(--surface-card-soft);
+  --panel-lift: var(--surface-card-raised);
+  --stroke: var(--border-default);
+  --text: var(--text-primary);
+  --muted: var(--text-secondary);
+  --dim: var(--text-tertiary);
   background:
     radial-gradient(circle at 85% 18%, rgba(65, 105, 225, .14), transparent 32%),
     linear-gradient(135deg, #111a2b 0%, #172238 48%, #23182a 100%);

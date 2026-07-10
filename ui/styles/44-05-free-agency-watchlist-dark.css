@@ -1,0 +1,30 @@
+/* Free agency dark mode: keep the watchlist star from becoming a white pill. */
+body.dark-mode.dashboard-mode .in-season-fa-player-cell .in-season-fa-star,
+body.dark-mode.dashboard-mode button.in-season-fa-star {
+  display: grid !important;
+  place-items: center !important;
+  width: 18px !important;
+  min-width: 18px !important;
+  max-width: 18px !important;
+  height: 18px !important;
+  min-height: 18px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: #8fa3cc !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  font-size: 15px !important;
+  line-height: 1 !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player-cell .in-season-fa-star:hover,
+body.dark-mode.dashboard-mode button.in-season-fa-star:hover {
+  color: #cfe0ff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}

@@ -1,0 +1,22 @@
+/* Free agency dark mode: remove the white fill from OVR badges. */
+body.dark-mode.dashboard-mode .in-season-fa-player .in-season-fa-ovr,
+body.dark-mode.dashboard-mode .in-season-fa-player-cell .in-season-fa-ovr,
+body.dark-mode.dashboard-mode.in-season-free-agency .in-season-fa-player-cell .in-season-fa-ovr,
+body.dark-mode.dashboard-mode .in-season-free-agency .in-season-fa-player-cell .in-season-fa-ovr {
+  border-color: #0753ff !important;
+  color: #8fb3ff !important;
+  background: rgba(7, 83, 255, .10) !important;
+  background-color: rgba(7, 83, 255, .10) !important;
+  background-image: none !important;
+  box-shadow: 0 0 0 1px rgba(143, 179, 255, .10), 0 0 10px rgba(7, 83, 255, .18) !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player .in-season-fa-ovr b,
+body.dark-mode.dashboard-mode .in-season-fa-player-cell .in-season-fa-ovr b {
+  color: #dce8ff !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player .in-season-fa-ovr span,
+body.dark-mode.dashboard-mode .in-season-fa-player-cell .in-season-fa-ovr span {
+  color: #9fb2d8 !important;
+}

@@ -1,0 +1,64 @@
+/* Rotation dark mode: remove the light capsule from the row position controls. */
+body.dark-mode.dashboard-mode.rotation-layout .rotation-position-cell {
+  color: #dbe6ff !important;
+}
+
+body.dark-mode.dashboard-mode.rotation-layout .rotation-drag-handle {
+  color: #90a3ca !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.rotation-layout .rotation-drag-handle:hover {
+  color: #cfe0ff !important;
+}
+
+body.dark-mode.dashboard-mode.rotation-layout .rotation-slot-lock span {
+  border-color: rgba(106, 142, 255, .46) !important;
+  color: #dbe6ff !important;
+  background: rgba(18, 31, 58, .92) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .025) !important;
+}
+
+body.dark-mode.dashboard-mode.rotation-layout .rotation-slot-lock.locked span {
+  border-color: rgba(7, 83, 255, .92) !important;
+  color: #ffffff !important;
+  background: #0753ff !important;
+  box-shadow: 0 0 12px rgba(7, 83, 255, .22) !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-cell {
+  color: #dbe6ff !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-cell .rotation-drag-handle,
+body.dark-mode.dashboard-mode .rotation-drag-handle[role="button"] {
+  color: #90a3ca !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-cell .rotation-drag-handle:hover,
+body.dark-mode.dashboard-mode .rotation-drag-handle[role="button"]:hover {
+  color: #cfe0ff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-cell .rotation-slot-lock span {
+  border-color: rgba(106, 142, 255, .46) !important;
+  color: #dbe6ff !important;
+  background: rgba(18, 31, 58, .92) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .025) !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-cell .rotation-slot-lock.locked span {
+  border-color: rgba(7, 83, 255, .92) !important;
+  color: #ffffff !important;
+  background: #0753ff !important;
+  box-shadow: 0 0 12px rgba(7, 83, 255, .22) !important;
+}

@@ -14,9 +14,9 @@ body.dashboard-mode .context-heading { gap: 4px; padding: 0 8px 14px; }
 body.dashboard-mode .context-heading span { color: #69707b; font-size: 8px; }
 body.dashboard-mode .context-heading strong { font-size: 13px; }
 body.dashboard-mode .context-heading strong small { display: block; margin-top: 7px; color: #11d7a2; font-size: 9px; font-weight: 850; }
-body.dashboard-mode .context-nav { gap: 2px; padding-top: 10px; }
+body.dashboard-mode .context-nav { gap: 2px;  }
 body.dashboard-mode .context-nav button { display: grid; grid-template-columns: 20px 1fr auto; gap: 7px; min-height: 34px; padding: 0 9px; border-radius: 4px; color: #777e89; font-size: 10px; }
-body.dashboard-mode .context-nav button i { color: #68707c; font-size: 12px; font-style: normal; text-align: center; }
+body.dashboard-mode .context-nav button i { color: #68707c; font-size: 12px;   }
 body.dashboard-mode .context-nav button span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 body.dashboard-mode .context-nav button b { color: var(--dash-gold); font-size: 16px; }
 body.dashboard-mode .context-nav button.active { color: var(--dash-gold); background: #0a0b0d; border-color: transparent; box-shadow: none; }
@@ -33,8 +33,6 @@ body.dashboard-mode .page { max-width: 1040px; margin: 0; }
 
 .reference-dashboard { display: grid; gap: 12px; color: #f4f4f2; }
 .reference-page-title { margin: 0 0 5px; font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; font-size: 22px; letter-spacing: .4px; }
-.logo-page-title { display: flex; align-items: center; gap: 12px; }
-.page-title-team-logo { width: 42px; height: 42px; object-fit: contain; filter: drop-shadow(0 6px 10px rgba(0,0,0,.34)); }
 .reference-season-hero { display: flex; align-items: center; justify-content: space-between; gap: 22px; min-height: 138px; padding: 20px; border: 1px solid #282c33; border-radius: 5px; background: #101217; }
 .reference-season-hero > div:first-child { display: flex; align-items: center; gap: 15px; }
 .reference-season-hero span { color: #c4c7cd; font-size: 8px; font-weight: 950; letter-spacing: 1.1px; text-transform: uppercase; }
@@ -55,7 +53,7 @@ body.dashboard-mode .page { max-width: 1040px; margin: 0; }
 
 .reference-analytics-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
 .reference-chart-panel, .reference-leaders-panel, .reference-upcoming, .reference-management-grid > article { border: 1px solid #2b2f37; border-radius: 5px; background: #111319; }
-.reference-chart-panel { position: relative; min-height: 252px; padding: 18px 18px 16px 58px; }
+.reference-chart-panel { position: relative;  padding: 18px 18px 16px 58px; }
 .reference-chart-panel header { position: absolute; top: 18px; left: 18px; right: 18px; display: flex; justify-content: space-between; }
 .reference-chart-panel header strong, .reference-leaders-panel header, .reference-upcoming header { font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; font-size: 13px; letter-spacing: .5px; }
 .reference-chart-panel header span { color: #777d87; font-size: 8px; font-weight: 900; letter-spacing: 1px; }
@@ -97,7 +95,6 @@ body.dashboard-mode .page { max-width: 1040px; margin: 0; }
 }
 
 @media (max-width: 800px) {
-  body.dashboard-mode .main-shell { grid-template-columns: 1fr; }
   body.dashboard-mode .context-sidebar { border-bottom: 1px solid #292d34; }
   body.dashboard-mode .context-nav { display: flex; }
   body.dashboard-mode .context-nav button { min-width: max-content; }

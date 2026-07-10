@@ -779,7 +779,7 @@ body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout
 }
 
 body.dashboard-mode.gameplan-layout .workspace {
-  overflow: hidden !important;
+
   padding: 12px 22px 14px !important;
 }
 
@@ -800,7 +800,7 @@ body.dashboard-mode.gameplan-layout .gameplan-page {
   display: grid !important;
   grid-template-rows: 38px 98px 34px minmax(0, 1fr) 56px !important;
   gap: 7px !important;
-  height: 100% !important;
+
   overflow: hidden !important;
 }
 
@@ -887,7 +887,7 @@ body.dashboard-mode.gameplan-layout .gameplan-main-layout {
   grid-template-columns: minmax(0, 1fr) 285px !important;
   gap: 8px !important;
   align-self: stretch !important;
-  height: 100% !important;
+
   min-height: 0 !important;
   overflow: hidden !important;
 }
@@ -896,7 +896,7 @@ body.dashboard-mode.gameplan-layout .gameplan-main {
   display: grid !important;
   grid-template-rows: 188px 140px minmax(150px, 1fr) !important;
   gap: 8px !important;
-  height: 100% !important;
+
   min-height: 0 !important;
   overflow: hidden !important;
 }
@@ -904,7 +904,7 @@ body.dashboard-mode.gameplan-layout .gameplan-main {
 body.dashboard-mode.gameplan-layout .gameplan-rail {
   width: auto !important;
   gap: 8px !important;
-  height: 100% !important;
+
   min-height: 0 !important;
   overflow: hidden !important;
   grid-template-rows: minmax(0, 1fr) 146px !important;
@@ -982,7 +982,7 @@ body.dashboard-mode.gameplan-layout .gameplan-shot-bar i {
 
 body.dashboard-mode.gameplan-layout .gameplan-bottom-grid {
   gap: 8px !important;
-  height: 100% !important;
+
   min-height: 0 !important;
   overflow: hidden !important;
 }

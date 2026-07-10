@@ -63,7 +63,7 @@ body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout
   .finance-page-header
 ) {
   min-height: 48px;
-  gap: 14px;
+  gap: var(--space-6);
 }
 
 body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
@@ -133,7 +133,7 @@ body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout
 ) {
   border-color: var(--concept-blue);
   color: #ffffff;
-  background: linear-gradient(180deg, #1264ff, #0753ff);
+  background: linear-gradient(180deg, #1264ff, var(--concept-blue));
   box-shadow: 0 9px 18px rgba(7, 83, 255, .22);
 }
 
@@ -187,7 +187,7 @@ body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout
   .finance-dashboard .card
 ) {
   border-color: var(--concept-stroke);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background: rgba(255, 255, 255, .96);
   box-shadow: var(--concept-shadow);
 }
@@ -235,7 +235,7 @@ body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout
   .scouting-board-head
 ) {
   background: var(--concept-soft);
-  color: #52618f;
+  color: var(--concept-muted);
   font-size: 8px;
   font-weight: 950;
   letter-spacing: .5px;

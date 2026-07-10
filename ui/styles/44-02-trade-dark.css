@@ -1,0 +1,41 @@
+/* Trade machine dark mode: make rule rows feel like rows, not flat blocks. */
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule-list {
+  display: grid !important;
+  gap: 8px !important;
+  padding: 14px 24px !important;
+  background: rgba(7, 12, 24, .42) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule {
+  display: grid !important;
+  grid-template-columns: 54px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 14px !important;
+  min-height: 42px !important;
+  padding: 9px 14px !important;
+  border: 1px solid rgba(104, 135, 194, .36) !important;
+  border-radius: 7px !important;
+  color: #f8fbff !important;
+  background: linear-gradient(180deg, rgba(20, 31, 55, .98), rgba(11, 18, 34, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .025) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule span {
+  display: inline-grid !important;
+  place-items: center !important;
+  width: 42px !important;
+  height: 22px !important;
+  border: 1px solid rgba(255, 123, 145, .48) !important;
+  border-radius: 999px !important;
+  color: #ffccd4 !important;
+  background: rgba(118, 28, 47, .42) !important;
+  font-size: 8px !important;
+  font-weight: 950 !important;
+  letter-spacing: .08em !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule.ok span {
+  border-color: rgba(45, 212, 151, .5) !important;
+  color: #b8ffe5 !important;
+  background: rgba(10, 120, 80, .36) !important;
+}

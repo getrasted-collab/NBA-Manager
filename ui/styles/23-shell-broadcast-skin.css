@@ -1,26 +1,39 @@
 ﻿/* NBA Manager broadcast skin test pass */
 :root {
-  --bg: #f6f8fc;
-  --surface: rgba(255, 255, 255, .88);
-  --surface-soft: rgba(244, 247, 252, .9);
-  --navy: #071a64;
-  --blue: #064cff;
-  --red: #d7193f;
-  --border: #d8dfec;
-  --muted: #647192;
-  --success: #06915f;
-  --danger: #d7193f;
-  --shadow: 0 18px 42px rgba(7, 26, 100, .12);
+  --surface-page: #f6f8fc;
+  --surface-card: rgba(255, 255, 255, .88);
+  --surface-card-soft: rgba(244, 247, 252, .9);
+  --surface-card-raised: #ffffff;
+  --text-primary: #071a64;
+  --text-secondary: #647192;
+  --text-tertiary: #8d98b4;
+  --border-default: #d8dfec;
+  --status-success: #06915f;
+  --status-danger: #d7193f;
+  --shadow-surface: 0 18px 42px rgba(7, 26, 100, .12);
+  --color-brand-blue: #064cff;
+  --color-brand-red: #d7193f;
+  --bg: var(--surface-page);
+  --surface: var(--surface-card);
+  --surface-soft: var(--surface-card-soft);
+  --navy: var(--text-primary);
+  --blue: var(--color-brand-blue);
+  --red: var(--color-brand-red);
+  --border: var(--border-default);
+  --muted: var(--text-secondary);
+  --success: var(--status-success);
+  --danger: var(--status-danger);
+  --shadow: var(--shadow-surface);
   --panel: var(--surface);
   --panel-soft: var(--surface-soft);
-  --panel-lift: #ffffff;
+  --panel-lift: var(--surface-card-raised);
   --stroke: var(--border);
   --text: var(--navy);
-  --dim: #8d98b4;
+  --dim: var(--text-tertiary);
   --team-primary: var(--blue);
   --team-secondary: var(--red);
   --team-accent: var(--navy);
-  --team-contrast: #ffffff;
+  --team-contrast: var(--surface-card-raised);
   --purple: var(--blue);
   --purple-deep: var(--navy);
   --purple-bright: var(--red);
@@ -39,14 +52,14 @@ body {
 }
 
 body.dashboard-mode {
-  --bg: #f6f8fc;
+  --bg: var(--surface-page);
   --panel: var(--surface);
   --panel-soft: var(--surface-soft);
-  --panel-lift: #ffffff;
+  --panel-lift: var(--surface-card-raised);
   --stroke: var(--border);
   --text: var(--navy);
-  --muted: #647192;
-  --dim: #8d98b4;
+  --muted: var(--text-secondary);
+  --dim: var(--text-tertiary);
   --surface-shadow: var(--shadow);
   color: var(--navy);
 }
@@ -143,7 +156,7 @@ body.dashboard-mode .context-sidebar {
   margin-top: 10px;
   margin-bottom: 0;
   border: 1px solid rgba(216, 223, 236, .92);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: var(--navy);
   background: rgba(255, 255, 255, .78);
   box-shadow: var(--shadow);
@@ -162,7 +175,7 @@ body.dashboard-mode .card-label {
 
 body.dashboard-mode .context-heading strong {
   color: var(--navy);
-  font-size: 17px;
+
 }
 
 body.dashboard-mode .context-heading small {
@@ -175,19 +188,19 @@ body.dashboard-mode .context-heading small {
 body.dashboard-mode .context-nav button {
   border-radius: 6px;
   color: var(--navy);
-  background: transparent;
+
 }
 
 body.dashboard-mode .context-nav button:hover {
-  color: var(--blue);
+
   background: rgba(6, 76, 255, .07);
 }
 
 body.dashboard-mode .context-nav button.active {
-  color: var(--blue);
+
   border-color: rgba(216, 223, 236, .85);
   background: rgba(248, 250, 255, .92);
-  box-shadow: inset 3px 0 0 var(--blue);
+
 }
 
 body.dashboard-mode .context-nav button i {
@@ -196,7 +209,7 @@ body.dashboard-mode .context-nav button i {
 
 body.dashboard-mode .sidebar-next-game {
   border: 1px solid rgba(216, 223, 236, .92);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: var(--navy);
   background: rgba(255, 255, 255, .74);
   box-shadow: 0 10px 24px rgba(7, 26, 100, .08);
@@ -251,7 +264,7 @@ body.dashboard-mode .free-agent-card,
 body.dashboard-mode .award-card,
 body.dashboard-mode .history-season {
   border: 1px solid rgba(216, 223, 236, .95);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: var(--navy);
   background:
     linear-gradient(135deg, rgba(255, 255, 255, .94), rgba(248, 250, 255, .82)),
@@ -351,7 +364,7 @@ body.dashboard-mode .player-name {
 }
 
 .reference-stat-grid article {
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background: rgba(255, 255, 255, .86);
   box-shadow: var(--shadow);
 }
@@ -531,7 +544,7 @@ body.dashboard-mode .player-modal-backdrop {
 
 body.dashboard-mode .player-detail-card {
   border-color: var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background: rgba(255, 255, 255, .96);
   box-shadow: 0 26px 70px rgba(7, 26, 100, .2);
 }
@@ -570,14 +583,14 @@ body.dashboard-mode .workspace::-webkit-scrollbar-thumb,
 body.dashboard-mode .context-nav::-webkit-scrollbar-thumb,
 body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-thumb {
   border: 2px solid transparent;
-  border-radius: 999px;
+
   background: #93a2c0;
-  background-clip: padding-box;
+
 }
 
 @media (max-width: 800px) {
   body.dashboard-mode .main-shell {
-    gap: 12px;
+    gap: var(--space-5);
     padding: 0 14px 18px;
   }
 

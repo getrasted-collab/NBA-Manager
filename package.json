@@ -8,6 +8,7 @@
     "browser": "node scripts/dev_server.cjs",
     "start": "electron .",
     "electron": "electron .",
+    "audit:css-runtime": "electron scripts/css_runtime_audit.cjs",
     "test:simulation": "node scripts/simulation_engine_test.mjs"
   },
   "dependencies": {
