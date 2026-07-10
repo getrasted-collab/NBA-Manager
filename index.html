@@ -4,6 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>NBA Manager - Browser Preview</title>
+    <script>
+      try {
+        if (localStorage.getItem("nba-manager-dark-mode") === "true") document.documentElement.classList.add("dark-mode");
+      } catch {}
+    </script>
     <link rel="stylesheet" href="./ui/styles.css" />
   </head>
   <body>

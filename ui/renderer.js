@@ -305,6 +305,8 @@ function render() {
   if (active === "god mode") page.innerHTML = importView();
   if (active === "settings") page.innerHTML = settings();
   page.innerHTML += playerDetailModal();
+  lockPinnedDarkButtonStyles();
+  lockPinnedDarkFormStyles();
   attachActions();
   if (pageChanged) {
     const workspace = document.querySelector(".workspace");
@@ -463,11 +465,199 @@ function installThemeToggle() {
 
 function applyThemeMode() {
   document.body.classList.toggle("dark-mode", darkModeEnabled);
+  document.documentElement.classList.toggle("dark-mode", darkModeEnabled);
+  lockPinnedDarkButtonStyles();
+  lockPinnedDarkFormStyles();
   const button = document.querySelector("#theme-toggle-button");
   if (!button) return;
   button.classList.toggle("active", darkModeEnabled);
   button.setAttribute("aria-pressed", String(darkModeEnabled));
   button.title = darkModeEnabled ? "Switch to light mode" : "Switch to dark mode";
+}
+
+function lockPinnedDarkButtonStyles() {
+  const darkMode = document.body.classList.contains("dark-mode");
+  const rotationButtons = [...document.querySelectorAll(".rotation-footer button")];
+  const freeAgencyButtons = [
+    ...document.querySelectorAll("[data-in-season-waive]"),
+    ...document.querySelectorAll("[data-action='filter-in-season-fa']"),
+    ...document.querySelectorAll(".in-season-fa-actions .btn"),
+    ...document.querySelectorAll(".in-season-fa-stat-filter button")
+  ];
+  const lockerButtons = [
+    ...document.querySelectorAll(".locker-room-page .btn"),
+    ...document.querySelectorAll(".locker-room-page .mini-action"),
+    ...document.querySelectorAll(".locker-menu-button")
+  ];
+  const developmentButtons = [
+    ...document.querySelectorAll(".player-dev-page .btn"),
+    ...document.querySelectorAll(".player-dev-page .mini-action")
+  ];
+  const staffButtons = [
+    ...document.querySelectorAll(".staff-page .btn"),
+    ...document.querySelectorAll(".staff-page .mini-action"),
+    ...document.querySelectorAll(".staff-list-panel .mini-action"),
+    ...document.querySelectorAll(".staff-openings-panel .mini-action"),
+    ...document.querySelectorAll(".staff-hire-button")
+  ];
+  const scoutingButtons = [
+    ...document.querySelectorAll(".scouting-page .btn"),
+    ...document.querySelectorAll(".scouting-page .mini-action"),
+    ...document.querySelectorAll(".scouting-page button")
+  ];
+  const awardsButtons = [
+    ...document.querySelectorAll(".awards-dashboard button")
+  ];
+  const socialButtons = [
+    ...document.querySelectorAll(".social-page .btn"),
+    ...document.querySelectorAll(".social-page .mini-action"),
+    ...document.querySelectorAll(".social-page-header button")
+  ];
+  const financeButtons = [
+    ...document.querySelectorAll(".finance-dashboard .btn"),
+    ...document.querySelectorAll(".finance-dashboard .mini-action")
+  ];
+  const pinnedDarkButtons = [
+    ...document.querySelectorAll("[data-action='open-staff-market']"),
+    ...document.querySelectorAll(".sim-controls [data-sim-control]"),
+    ...document.querySelectorAll(".matchup-card .actions [data-simcast-game]"),
+    ...document.querySelectorAll(".matchup-card .actions [data-sim-game]"),
+    ...document.querySelectorAll(".matchup-card .actions button:disabled"),
+    ...document.querySelectorAll(".standings-tabs button:not(.active)"),
+    ...document.querySelectorAll(".standings-view-toggle button:not(.active)")
+  ];
+  if (!darkMode) {
+    pinnedDarkButtons.forEach(clearPinnedInlineStyles);
+    rotationButtons.forEach(clearPinnedInlineStyles);
+    freeAgencyButtons.forEach(clearPinnedInlineStyles);
+    lockerButtons.forEach(clearPinnedInlineStyles);
+    developmentButtons.forEach(clearPinnedInlineStyles);
+    staffButtons.forEach(clearPinnedInlineStyles);
+    scoutingButtons.forEach(clearPinnedInlineStyles);
+    awardsButtons.forEach(clearPinnedInlineStyles);
+    socialButtons.forEach(clearPinnedInlineStyles);
+    financeButtons.forEach(clearPinnedInlineStyles);
+    return;
+  }
+  const buttons = [
+    ...pinnedDarkButtons,
+    ...(darkMode ? freeAgencyButtons : []),
+    ...(darkMode ? lockerButtons : []),
+    ...(darkMode ? developmentButtons : []),
+    ...(darkMode ? staffButtons : []),
+    ...(darkMode ? scoutingButtons : []),
+    ...(darkMode ? awardsButtons : []),
+    ...(darkMode ? socialButtons : []),
+    ...(darkMode ? financeButtons : []),
+    ...(darkMode ? rotationButtons : [])
+  ];
+  if (!buttons.length) return;
+  const baseStyles = {
+    "border-color": "rgba(150, 174, 222, .58)",
+    color: "#edf4ff",
+    "background-color": "rgba(16, 24, 43, .98)",
+    "background-image": "linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98))",
+    "box-shadow": "inset 0 0 0 1px rgba(255, 255, 255, .03)",
+    opacity: "1",
+    transition: "border-color .16s ease, background .16s ease, color .16s ease, transform .16s ease, box-shadow .16s ease"
+  };
+  const hoverStyles = {
+    "border-color": "rgba(79, 139, 255, .9)",
+    color: "#ffffff",
+    "background-color": "rgba(22, 34, 62, .98)",
+    "background-image": "linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98))",
+    "box-shadow": "inset 0 0 0 1px rgba(255, 255, 255, .05), 0 0 0 1px rgba(79, 139, 255, .16), 0 0 12px rgba(79, 139, 255, .22)"
+  };
+  const primaryStyles = {
+    "border-color": "rgba(79, 139, 255, .95)",
+    color: "#ffffff",
+    "background-color": "#0753ff",
+    "background-image": "linear-gradient(180deg, #1266ff, #0b49c9)",
+    "box-shadow": "0 8px 18px rgba(6, 76, 255, .22)",
+    opacity: "1"
+  };
+  const disabledStyles = {
+    "border-color": "rgba(150, 174, 222, .34)",
+    color: "rgba(226, 235, 255, .56)",
+    "background-color": "rgba(31, 42, 64, .76)",
+    "background-image": "linear-gradient(180deg, rgba(44, 54, 75, .76), rgba(27, 35, 52, .76))",
+    "box-shadow": "inset 0 0 0 1px rgba(255, 255, 255, .025)",
+    opacity: "1"
+  };
+  buttons.forEach((button) => {
+    const applyStyles = (styles) => Object.entries(styles).forEach(([property, value]) => button.style.setProperty(property, value, "important"));
+    const restingStyles = button.disabled ? disabledStyles : button.classList.contains("in-season-negotiate") || button.classList.contains("primary") ? primaryStyles : baseStyles;
+    applyStyles(restingStyles);
+    button.onmouseenter = () => {
+      if (!button.disabled) applyStyles(hoverStyles);
+    };
+    button.onmouseleave = () => applyStyles(restingStyles);
+    button.onfocus = () => {
+      if (!button.disabled) applyStyles(hoverStyles);
+    };
+    button.onblur = () => applyStyles(restingStyles);
+  });
+}
+
+function lockPinnedDarkFormStyles() {
+  const controls = [
+    ...document.querySelectorAll("select[data-rotation-position]"),
+    ...document.querySelectorAll("select[data-rotation-secondary-position]"),
+    ...document.querySelectorAll(".gameplan-page select"),
+    ...document.querySelectorAll("select[data-plan-field]"),
+    ...document.querySelectorAll("#in-season-fa-search"),
+    ...document.querySelectorAll("#in-season-fa-position"),
+    ...document.querySelectorAll("#in-season-fa-sort"),
+    ...document.querySelectorAll(".staff-list-controls select"),
+    ...document.querySelectorAll(".staff-list-controls input"),
+    ...document.querySelectorAll(".scouting-page input"),
+    ...document.querySelectorAll(".scouting-page select"),
+    ...document.querySelectorAll(".finance-dashboard select")
+  ];
+  if (!controls.length) return;
+  if (!document.body.classList.contains("dark-mode")) {
+    controls.forEach(clearPinnedInlineStyles);
+    return;
+  }
+  const baseStyles = {
+    appearance: "none",
+    "-webkit-appearance": "none",
+    "border-color": "rgba(150, 174, 222, .58)",
+    color: "#edf4ff",
+    "background-color": "rgba(16, 24, 43, .98)",
+    "background-image": "linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98))",
+    "box-shadow": "inset 0 0 0 1px rgba(255, 255, 255, .03)",
+    opacity: "1"
+  };
+  const disabledStyles = {
+    ...baseStyles,
+    "border-color": "rgba(150, 174, 222, .34)",
+    color: "rgba(226, 235, 255, .56)",
+    "background-color": "rgba(31, 42, 64, .76)",
+    "background-image": "linear-gradient(180deg, rgba(44, 54, 75, .76), rgba(27, 35, 52, .76))"
+  };
+  controls.forEach((control) => {
+    const styles = control.disabled ? disabledStyles : baseStyles;
+    Object.entries(styles).forEach(([property, value]) => control.style.setProperty(property, value, "important"));
+  });
+}
+
+function clearPinnedInlineStyles(element) {
+  [
+    "appearance",
+    "-webkit-appearance",
+    "border-color",
+    "color",
+    "background-color",
+    "background-image",
+    "box-shadow",
+    "opacity",
+    "transition"
+  ].forEach((property) => element.style.removeProperty(property));
+  element.onmouseenter = null;
+  element.onmouseleave = null;
+  element.onfocus = null;
+  element.onblur = null;
 }
 
 function renderContextNav() {
@@ -487,7 +677,7 @@ function renderContextNav() {
       ["development", "Player Development", "◆"], ["staff", "Staff", "♟"], ["scouting", "Scouting", "⌖"], ["finances", "Finances", "$"], ["social", "Social", "◉"], ["stats", "League Stats", "↗"],
       ["awards", "Awards", "☆"], ["history", "League History", "◷"], ["settings", "Settings", "⚙"]
     ];
-    contextNav.innerHTML = sidebarItems.map(([id, label, icon]) => `${id === "social" ? '<span class="sidebar-nav-divider">League</span>' : ""}<button class="${active === id ? "active" : ""}" data-nav="${id}"><i>${icon}</i><span>${label}</span>${active === id ? "<b>›</b>" : ""}</button>`).join("");
+    contextNav.innerHTML = sidebarItems.map(([id, label, icon]) => `${id === "social" ? '<span class="sidebar-nav-divider">League</span>' : ""}<button class="${active === id ? "active" : ""}" data-nav="${id}"><i>${icon}</i><span>${label}</span>${active === id ? '<b aria-hidden="true"></b>' : ""}</button>`).join("");
   } else {
   const current = currentNavSection();
   if (sectionLabel) sectionLabel.textContent = current.label;
@@ -520,7 +710,7 @@ function renderSidebarNextGame() {
   const opponent = getTeam(opponentId);
   const venue = next.home === selectedTeam.id ? "vs" : "@";
   const opponentLabel = opponent?.abbr || opponent?.name || "TBD";
-  target.innerHTML = `<span>NEXT GAME</span><div class="sidebar-next-game-matchup">${teamLogo(opponent, "sidebar-next-game-logo")}<div><strong>${venue} ${escapeHtml(opponentLabel)}</strong><small>${formatShortDate(next.date)} &middot; ${next.home === selectedTeam.id ? "Home" : "Away"}</small></div></div><button class="btn" data-action="go-games">&#9655; SIM GAME</button>`;
+  target.innerHTML = `<span>NEXT GAME</span><div class="sidebar-next-game-matchup">${teamLogo(opponent, "sidebar-next-game-logo")}<div><strong>${venue} ${escapeHtml(opponentLabel)}</strong><small>${formatShortDate(next.date)} &middot; ${next.home === selectedTeam.id ? "Home" : "Away"}</small></div></div><button class="btn primary sidebar-sim-game-button" data-sim-control="next" style="border-color: rgba(79, 139, 255, .95) !important; color: #fff !important; background: linear-gradient(180deg, #0d55ef, #063fcf) !important; box-shadow: 0 10px 20px rgba(6, 76, 255, .24) !important;">&#9655; SIM GAME</button>`;
   target.querySelector("[data-action='go-games']")?.addEventListener("click", () => { active = "play"; render(); });
 }
 
@@ -917,7 +1107,7 @@ function dashboardReferencePage() {
 
       <section class="reference-season-hero panel-card selected-card">
         <div class="team-hero-identity">${teamLogo(selectedTeam, "page-hero-logo reference-hero-logo")}<div><span>${save.season}-${String(save.season + 1).slice(-2)} REGULAR SEASON &middot; ${escapeHtml(save.phase)}</span><h2>${escapeHtml(selectedTeam.city)} ${escapeHtml(selectedTeam.name)}</h2><p><strong>${selectedTeam.wins}-${selectedTeam.losses}</strong> ${escapeHtml(selectedTeam.conf)} Conference <b>${selectedTeam.wins >= selectedTeam.losses ? "PLAYOFF HUNT" : "BUILDING"}</b></p></div></div>
-        <div><button class="btn reference-primary" data-action="go-games">▷ SIM NEXT</button><button class="btn" data-action="go-games">▷ SIM WEEK</button></div>
+        <div><button class="btn reference-primary" data-action="go-games">▷ SIM NEXT</button><button class="btn reference-week-button" data-sim-control="week">▷ SIM WEEK</button></div>
       </section>
 
       <section class="reference-stat-grid">
@@ -947,7 +1137,7 @@ function dashboardReferencePage() {
       <h2 class="reference-section-title">COMMAND CENTER</h2>
       <section class="reference-management-grid command-center-cards">
         <article class="action-card"><header><span>GM CAREER</span><strong>FRANCHISE STATUS</strong></header>${metric("Owner Approval", `${save.gmCareer?.approval || 60}%`)}${metric("Seasons", save.gmCareer?.seasons || 0)}${metric("Playoff Trips", save.gmCareer?.playoffTrips || 0)}${metric("Championships", save.gmCareer?.titles || 0)}${metric("League Compliance", `${leagueComplianceCount(save.season)}/30 legal`)}</article>
-        <article class="action-card"><header><span>COACHING STAFF</span><strong>${escapeHtml(coachingProfile(selectedTeam.id).name || "Head Coach")}</strong></header>${metric("Identity", coachingProfile(selectedTeam.id).style)}${metric("Tactics", coachingProfile(selectedTeam.id).tactics)}${metric("Development", coachingProfile(selectedTeam.id).development)}${metric("Medical", coachingProfile(selectedTeam.id).medical)}<button class="btn secondary-button" data-action="open-staff-market">STAFF MARKET</button></article>
+        <article class="action-card"><header><span>COACHING STAFF</span><strong>${escapeHtml(coachingProfile(selectedTeam.id).name || "Head Coach")}</strong></header>${metric("Identity", coachingProfile(selectedTeam.id).style)}${metric("Tactics", coachingProfile(selectedTeam.id).tactics)}${metric("Development", coachingProfile(selectedTeam.id).development)}${metric("Medical", coachingProfile(selectedTeam.id).medical)}<button class="btn staff-market-button" data-action="open-staff-market" style="border-color: rgba(150, 174, 222, .58) !important; color: #edf4ff !important; background-color: rgba(16, 24, 43, .98) !important; background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important; opacity: 1 !important;">STAFF MARKET</button></article>
         <article class="action-card danger-accent"><header><span>ROSTER NEEDS</span><strong>TEAM BUILDING</strong></header>${metric("Best Player", `${needs.best.name} (${needs.best.ovr})`)}${metric("Weakest Group", needs.weakest)}${metric("Highest Potential", `${needs.potential.name} (${needs.potential.pot})`)}${metric("Age Risk", `${needs.oldest.name} (${needs.oldest.age})`)}</article>
         <article><header><span>LEAGUE OPERATIONS</span><strong>${nextDeadline ? escapeHtml(nextDeadline.label) : "YEAR COMPLETE"}</strong></header><p>${nextDeadline ? `${formatGameDate(nextDeadline.date)} · ${escapeHtml(nextDeadline.description)}` : "No remaining transaction deadlines."}</p><div class="reference-rules">${rulePill("Trades", transactionState.tradesOpen ? "Open" : "Closed", transactionState.tradesOpen)}${rulePill("10-Day", transactionState.tenDayContracts ? "Allowed" : "Locked", transactionState.tenDayContracts)}${rulePill("Roster", rosterRules.valid ? "Legal" : "Illegal", rosterRules.valid)}</div></article>
         <article class="action-card reference-inbox-card data-table"><header><span>FRONT OFFICE</span><strong>INBOX</strong></header><div>${inbox.map((message, index) => `<p><b>${String(index + 1).padStart(2, "0")}</b>${escapeHtml(message)}</p>`).join("")}</div></article>
@@ -1013,7 +1203,7 @@ function renderDashboardUpcomingCard(item) {
 function staffMarketPanel() {
   const budget = save.gmCareer?.finances?.staffBudget || 18;
   const candidates = (save.staffMarket || []).filter((staff) => staff.available).slice(0, 4);
-  return `<section class="card wide-card staff-market"><div class="staff-market-head"><div><div class="card-label">staff market</div><div class="player-name">Specialists Available</div><div class="meta">Annual staff budget: $${budget.toFixed(1)}M</div></div></div><div class="staff-grid">${candidates.map((staff) => `<div class="staff-card"><span>${escapeHtml(staff.specialty)}</span><strong>${escapeHtml(staff.name)}</strong><small>${staff.rating} rating - $${staff.salary}M</small><button class="btn" data-hire-staff="${staff.id}" ${staff.salary > budget ? "disabled" : ""}>Hire</button></div>`).join("") || '<div class="muted-line">No staff candidates are currently available.</div>'}</div></section>`;
+  return `<section class="card wide-card staff-market"><div class="staff-market-head"><div><div class="card-label">staff market</div><div class="player-name">Specialists Available</div><div class="meta">Annual staff budget: $${budget.toFixed(1)}M</div></div></div><div class="staff-grid">${candidates.map((staff) => { const affordable = Number(staff.salary) <= budget; return `<div class="staff-card"><span>${escapeHtml(staff.specialty)}</span><strong>${escapeHtml(staff.name)}</strong><small>${staff.rating} rating - $${staff.salary}M</small><button class="btn staff-hire-button reference-week-button${affordable ? "" : " staff-hire-unavailable"}" data-hire-staff="${staff.id}" ${affordable ? "" : 'aria-disabled="true"'}>${affordable ? "Hire" : "Over Budget"}</button></div>`; }).join("") || '<div class="muted-line">No staff candidates are currently available.</div>'}</div></section>`;
 }
 
 function legacyStaffPage() {
@@ -1057,7 +1247,7 @@ function staffDepartmentCard(name, rating, description) {
 
 function staffCandidateCard(staff, budget) {
   const affordable = Number(staff.salary) <= budget;
-  return `<article class="staff-candidate"><div class="staff-candidate-mark">${escapeHtml(staff.specialty.slice(0, 2).toUpperCase())}</div><div><span>${escapeHtml(staff.specialty)}</span><strong>${escapeHtml(staff.name)}</strong><small>${staff.rating} rating · $${Number(staff.salary).toFixed(1)}M</small></div><button class="btn ${affordable ? "primary" : ""}" data-hire-staff="${staff.id}" ${affordable ? "" : "disabled"}>${affordable ? "Hire" : "Over Budget"}</button></article>`;
+  return `<article class="staff-candidate"><div class="staff-candidate-mark">${escapeHtml(staff.specialty.slice(0, 2).toUpperCase())}</div><div><span>${escapeHtml(staff.specialty)}</span><strong>${escapeHtml(staff.name)}</strong><small>${staff.rating} rating · $${Number(staff.salary).toFixed(1)}M</small></div><button class="btn staff-hire-button reference-week-button" data-hire-staff="${staff.id}" ${affordable ? "" : "disabled"}>${affordable ? "Hire" : "Over Budget"}</button></article>`;
 }
 
 function staffPage() {
@@ -1170,7 +1360,7 @@ function staffBreakdownRow(row) {
 
 function staffOpeningRow(staff, budget) {
   const affordable = Number(staff.salary) <= budget;
-  return `<article class="staff-opening-row"><div><strong>${escapeHtml(staff.specialty)} ${staff.rating >= 82 ? "Lead" : "Assistant"}</strong><small>${escapeHtml(staff.specialty)}</small></div><button class="btn" data-hire-staff="${staff.id}" ${affordable ? "" : "disabled"}>${affordable ? "Hire" : "Over Budget"}</button></article>`;
+  return `<article class="staff-opening-row"><div><strong>${escapeHtml(staff.specialty)} ${staff.rating >= 82 ? "Lead" : "Assistant"}</strong><small>${escapeHtml(staff.specialty)}</small></div><button class="btn staff-hire-button reference-week-button" data-hire-staff="${staff.id}" ${affordable ? "" : "disabled"}>${affordable ? "Hire" : "Over Budget"}</button></article>`;
 }
 
 function financesPage() {
@@ -1526,7 +1716,7 @@ function play() {
         <strong>${new Date(year, month - 1, 1).toLocaleDateString([], { month: "long", year: "numeric" })}</strong>
         <button class="icon-btn" data-calendar-shift="1" title="Next month" aria-label="Next month">&gt;</button>
       </div>
-      <div class="sim-controls"><button class="btn primary" data-sim-control="next">Next Game</button><button class="btn" data-sim-control="week">1 Week</button><button class="btn" data-sim-control="month">1 Month</button><button class="btn" data-sim-control="decision">Next Decision</button></div>
+      <div class="sim-controls"><button class="btn" data-sim-control="next">Next Game</button><button class="btn" data-sim-control="week">1 Week</button><button class="btn" data-sim-control="month">1 Month</button><button class="btn" data-sim-control="decision">Next Decision</button></div>
     </section>
     <section class="card season-calendar">
       <div class="calendar-weekdays">${["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => `<span>${day}</span>`).join("")}</div>
@@ -1761,7 +1951,7 @@ function lockerMoraleRow(player) {
   const concern = player.dissatisfaction || { level: 0, reason: "" };
   const morale = Number(player.morale || 75);
   const label = morale >= 86 ? "Very Happy" : morale >= 72 ? "Happy" : morale >= 58 ? "Content" : morale >= 42 ? "Concerned" : "Unhappy";
-  return `<article>${playerHeadshot(player, "locker-small-headshot")}<span><strong>${escapeHtml(player.name)}</strong><small>${escapeHtml(player.pos)} - ${escapeHtml(actualPlayerRole(player))}</small></span><b class="${morale < 55 ? "bad" : "ok"}">${escapeHtml(label)}</b><em>${concern.level ? "▼" : "▲"}</em><small>${escapeHtml(concern.level ? concern.reason : "-")}</small></article>`;
+  return `<article>${playerHeadshot(player, "locker-small-headshot")}<span><strong>${escapeHtml(player.name)}</strong><small>${escapeHtml(player.pos)} - ${escapeHtml(actualPlayerRole(player))}</small></span><b class="${morale < 55 ? "bad" : "ok"}">${escapeHtml(label)}</b><em class="${concern.level ? "negative" : "positive"}">${concern.level ? "▼" : "▲"}</em><small>${escapeHtml(concern.level ? concern.reason : "-")}</small></article>`;
 }
 
 function lockerGroupRows(players) {
@@ -2179,7 +2369,7 @@ function gameMatchupCard(game) {
       <div class="actions">
         ${game.played
           ? '<button class="btn" disabled>Game Complete</button>'
-          : `<button class="btn primary" data-simcast-game="${game.id}">Open SimCast</button><button class="btn" data-sim-game="${game.id}">${simLabel}</button>`}
+          : `<button class="btn" data-simcast-game="${game.id}">Open SimCast</button><button class="btn" data-sim-game="${game.id}">${simLabel}</button>`}
         <button class="btn" disabled>Offseason After Finals</button>
       </div>
     </section>
@@ -2764,7 +2954,7 @@ function inSeasonFreeAgencyPage() {
           <button class="btn" data-action="filter-in-season-fa">Apply</button>
         </div>
       </header>
-      <div class="in-season-fa-list"><div class="in-season-fa-list-head"><span>Player</span><span class="in-season-fa-stat-filter">${[["ppg", "PPG"], ["rpg", "RPG"], ["apg", "APG"], ["fg", "FG"], ["three", "3P"]].map(([value, label]) => `<button class="${inSeasonFaSort === value ? `active ${inSeasonFaSortDirection}` : ""}" data-in-season-fa-sort="${value}">${label}</button>`).join("")}</span><span>Contract Expectation</span><span>Interest In Your Team</span><span>Team Fit</span><span>Actions</span></div>${freeAgents.map((player) => inSeasonFreeAgentCard(player, rules, rosterSpots)).join("") || '<div class="muted-line">No unsigned players match these filters.</div>'}</div>
+      <div class="in-season-fa-list"><div class="in-season-fa-list-head"><span>Player</span><span class="in-season-fa-stat-filter">${[["ppg", "PPG"], ["rpg", "RPG"], ["apg", "APG"], ["fg", "FG"], ["three", "3P"]].map(([value, label]) => `<button class="${inSeasonFaSort === value ? `active ${inSeasonFaSortDirection}` : ""}" data-in-season-fa-sort="${value}">${label}</button>`).join("")}</span><span>Contract</span><span>Interest</span><span>Fit</span><span>Actions</span></div>${freeAgents.map((player) => inSeasonFreeAgentCard(player, rules, rosterSpots)).join("") || '<div class="muted-line">No unsigned players match these filters.</div>'}</div>
     </section>`;
 }
 
@@ -4491,7 +4681,8 @@ function leagueStatsTeamLines() {
   return save.teams.map((team) => {
     const rating = teamRating(team);
     const plan = gamePlan(team.id);
-    const pace = Number((94.8 + (team.pace || 50) * 0.08 + (plan.pace - 50) * 0.04).toFixed(1));
+    const planPace = plan.pace === "fast" ? 70 : plan.pace === "slow" ? 42 : 55;
+    const pace = Number((94.8 + (team.pace || 50) * 0.08 + (planPace - 50) * 0.04).toFixed(1));
     const offRtg = Number((102 + (rating - 70) * 0.82 + team.wins * 0.45).toFixed(1));
     const defRtg = Number((118 - (rating - 70) * 0.53 - team.wins * 0.32 + team.losses * 0.18).toFixed(1));
     const netRtg = Number((offRtg - defRtg).toFixed(1));
@@ -6015,6 +6206,7 @@ function attachActions() {
   });
 
   document.querySelectorAll("[data-hire-staff]").forEach((button) => button.addEventListener("click", async () => {
+    if (button.getAttribute("aria-disabled") === "true") return;
     hireStaffMember(button.dataset.hireStaff);
     await persist();
     render();
