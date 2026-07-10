@@ -1,0 +1,6 @@
+NBA Manager visual checkpoint
+Date: 2026-07-10 07:04:05 America/Chicago
+Branch: visual-state-2026-07-10
+Commit: 89b245d Save current visual state checkpoint
+Source app: http://127.0.0.1:4173
+Screenshots: 00-start-menu.png through 19-dashboard-dark-mode.png
