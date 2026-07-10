@@ -1,0 +1,1048 @@
+﻿/* Dashboard polish pass: closer to the provided NBA Manager concept. */
+:root {
+  --shadow: 0 16px 36px rgba(9, 28, 88, .095);
+  --broadcast-font: "Aptos", "Segoe UI", Arial, sans-serif;
+  --broadcast-heading: "Aptos Display", "Arial Narrow", "Roboto Condensed", "Segoe UI", sans-serif;
+}
+
+body,
+button,
+select,
+textarea,
+input {
+  font-family: var(--broadcast-font);
+}
+
+body.dashboard-mode {
+  background:
+    radial-gradient(circle at 14% 96%, rgba(6, 76, 255, .3), transparent 22%),
+    radial-gradient(circle at 98% 60%, rgba(215, 25, 63, .18), transparent 24%),
+    linear-gradient(90deg, rgba(238, 243, 250, .9), rgba(226, 234, 246, .62)),
+    url("../../assets/nba-manager-bg-og.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.dashboard-mode .broadcast-shell {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(90deg, rgba(238, 243, 250, .76), rgba(226, 234, 246, .54)),
+    url("../../assets/nba-manager-bg-og.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.dashboard-mode .broadcast-shell::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(108deg, transparent 0 84%, rgba(215, 25, 63, .62) 84.2% 89%, transparent 89.2%),
+    linear-gradient(121deg, rgba(6, 76, 255, .52) 0 7.4%, transparent 7.6%),
+    repeating-linear-gradient(150deg, rgba(7, 26, 100, .055) 0 1px, transparent 1px 72px),
+    repeating-linear-gradient(82deg, rgba(215, 25, 63, .035) 0 1px, transparent 1px 110px);
+  opacity: .5;
+  content: "";
+}
+
+body.dashboard-mode .broadcast-shell::after {
+  position: fixed;
+  top: 42px;
+  left: 90px;
+  z-index: -1;
+  color: rgba(7, 26, 100, .035);
+  content: "NBA";
+  font-family: var(--broadcast-heading);
+  font-size: 170px;
+  font-weight: 900;
+  letter-spacing: -6px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+body.dashboard-mode .brand-title::before {
+  font-family: var(--broadcast-heading);
+  font-size: 27px;
+  font-stretch: condensed;
+  font-weight: 900;
+  letter-spacing: -.8px;
+}
+
+body.dashboard-mode .brand-title::after {
+  font-family: var(--broadcast-heading);
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -.4px;
+}
+
+body.dashboard-mode .context-sidebar {
+  padding: 20px 16px 16px;
+  border-color: rgba(218, 225, 238, .68);
+  background: rgba(255, 255, 255, .62);
+  box-shadow: 0 18px 44px rgba(9, 28, 88, .08);
+}
+
+body.dashboard-mode .context-heading {
+  gap: 7px;
+  padding: 0 10px 20px;
+  border-bottom: 0;
+}
+
+body.dashboard-mode .context-heading span,
+body.dashboard-mode .sidebar-nav-divider {
+  color: #354578;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.9px;
+}
+
+body.dashboard-mode .context-heading strong {
+  font-family: var(--broadcast-font);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -.2px;
+}
+
+body.dashboard-mode .context-nav {
+  gap: 5px;
+  padding-top: 10px;
+}
+
+body.dashboard-mode .context-nav button {
+  min-height: 36px;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 7px;
+  color: #18285e;
+  background: transparent;
+  box-shadow: none;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+body.dashboard-mode .context-nav button i {
+  width: 22px;
+  color: #5c6b96;
+  font-style: normal;
+  text-align: center;
+}
+
+body.dashboard-mode .context-nav button span {
+  flex: 1;
+}
+
+body.dashboard-mode .context-nav button b {
+  color: var(--blue);
+  font-size: 18px;
+  line-height: 1;
+}
+
+body.dashboard-mode .context-nav button:hover {
+  color: var(--blue);
+  background: rgba(6, 76, 255, .045);
+}
+
+body.dashboard-mode .context-nav button.active {
+  color: var(--blue);
+  border: 0;
+  background: linear-gradient(90deg, rgba(6, 76, 255, .09), rgba(255, 255, 255, .64));
+  box-shadow: inset 3px 0 0 var(--blue);
+}
+
+body.dashboard-mode .topbar-team .menu-link,
+body.dashboard-mode .topbar-team .menu-link:not(.reference-primary):not(.primary-button) {
+  width: 34px;
+  min-width: 34px;
+  padding: 0;
+  overflow: hidden;
+  color: transparent;
+  background: rgba(255, 255, 255, .84);
+  box-shadow: 0 8px 20px rgba(7, 26, 100, .08);
+  font-size: 0;
+  white-space: nowrap;
+}
+
+body.dashboard-mode .sidebar-next-game {
+  min-height: 124px;
+  padding: 15px 15px 16px;
+  border-color: rgba(218, 225, 238, .72);
+  background: rgba(255, 255, 255, .72);
+  box-shadow: 0 14px 32px rgba(9, 28, 88, .075);
+}
+
+body.dashboard-mode .workspace {
+  padding-top: 8px;
+}
+
+body.dashboard-mode .page {
+  width: min(1140px, 100%);
+  max-width: 1140px;
+}
+
+.reference-page-title {
+  display: none;
+}
+
+.reference-section-title,
+.reference-chart-panel header strong,
+.reference-leaders-panel header,
+.reference-upcoming header,
+.reference-management-grid article > header strong,
+.reference-season-hero h2,
+.reference-stat-grid strong {
+  font-family: var(--broadcast-heading);
+  font-stretch: condensed;
+  font-weight: 900;
+  letter-spacing: -.15px;
+}
+
+.reference-season-hero {
+  min-height: 150px;
+  padding: 24px 26px;
+  border: 1px solid rgba(218, 225, 238, .68) !important;
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, .96), rgba(255, 255, 255, .78)),
+    linear-gradient(180deg, transparent 0 54%, rgba(7, 26, 100, .055) 54%),
+    url("../../assets/nba-manager-bg-og.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  box-shadow: 0 16px 38px rgba(9, 28, 88, .08) !important;
+}
+
+.reference-season-hero::before {
+  position: absolute;
+  right: 285px;
+  bottom: 16px;
+  width: 190px;
+  height: 54px;
+  opacity: .055;
+  background:
+    linear-gradient(to top, #6f7fa6 0 34px, transparent 34px),
+    linear-gradient(to top, transparent 0 10px, #6f7fa6 10px 50px, transparent 50px),
+    linear-gradient(to top, transparent 0 18px, #6f7fa6 18px 62px, transparent 62px);
+  background-size: 22px 100%, 36px 100%, 52px 100%;
+  background-position: 0 100%, 50px 100%, 112px 100%;
+  background-repeat: repeat-x;
+  content: "";
+}
+
+.reference-season-hero .team-hero-identity {
+  flex: 1;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 24px;
+  min-width: 0;
+}
+
+.reference-season-hero .team-hero-identity > div {
+  gap: 7px;
+}
+
+.reference-season-hero h2 {
+  color: var(--navy);
+  max-width: min(550px, 44vw);
+  font-size: clamp(30px, 3.25vw, 44px);
+  line-height: .88;
+  text-transform: uppercase;
+}
+
+.reference-season-hero span {
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.reference-season-hero p {
+  gap: 16px;
+  color: #26376e;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+}
+
+.reference-season-hero p strong {
+  color: var(--blue);
+  font-family: var(--broadcast-heading);
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.reference-season-hero p b {
+  padding: 7px 14px;
+  border-color: rgba(6, 76, 255, .55);
+  border-radius: 5px;
+  color: var(--blue);
+  background: rgba(255, 255, 255, .78);
+  font-size: 11px;
+  letter-spacing: .7px;
+}
+
+.reference-hero-logo {
+  width: 98px;
+  height: 98px;
+  flex-basis: 98px;
+  filter: drop-shadow(0 13px 20px rgba(7, 26, 100, .18));
+}
+
+.reference-season-hero > div:last-child {
+  align-self: center;
+  gap: 10px;
+}
+
+.panel-card,
+.metric-card,
+.action-card,
+.reference-upcoming button,
+body.dashboard-mode .card,
+body.dashboard-mode .table-card,
+body.dashboard-mode .stats-table,
+body.dashboard-mode .contract-table,
+body.dashboard-mode .editor-table {
+  border-color: rgba(218, 225, 238, .72);
+  background: rgba(255, 255, 255, .88);
+  box-shadow: 0 14px 32px rgba(9, 28, 88, .075);
+}
+
+.panel-card::after,
+.metric-card::after,
+.action-card::after,
+.reference-upcoming button::after {
+  right: -38px;
+  bottom: -41px;
+  width: 128px;
+  height: 82px;
+  border-top: 1px solid rgba(6, 76, 255, .14);
+  border-left: 1px solid rgba(6, 76, 255, .08);
+  transform: skewX(-35deg);
+}
+
+.metric-card,
+.reference-stat-grid article {
+  min-height: 112px;
+  padding: 18px 20px;
+  border-width: 1px;
+  border-radius: 8px;
+  box-shadow: 0 13px 28px rgba(9, 28, 88, .075), inset 0 -4px 0 var(--blue);
+}
+
+.reference-stat-grid article:last-child,
+.reference-stat-grid .danger-metric {
+  box-shadow: 0 13px 28px rgba(9, 28, 88, .075), inset 0 -4px 0 var(--red);
+}
+
+.reference-stat-grid span,
+.reference-stat-grid small,
+.reference-management-grid article > header span {
+  color: var(--navy);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.25px;
+}
+
+.reference-stat-grid strong {
+  font-size: 40px;
+  line-height: .95;
+}
+
+.reference-chart-panel {
+  min-height: 252px;
+  padding: 22px 22px 18px 64px;
+}
+
+.reference-chart-panel header {
+  top: 20px;
+  right: 24px;
+  left: 24px;
+}
+
+.reference-chart-panel header strong,
+.reference-leaders-panel header,
+.reference-upcoming header,
+.reference-section-title {
+  color: var(--navy);
+  font-size: 20px;
+  letter-spacing: -.15px;
+}
+
+.reference-chart-panel header span {
+  color: var(--navy);
+  font-size: 11px;
+}
+
+.reference-chart-scale {
+  top: 66px;
+  bottom: 44px;
+  left: 24px;
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.reference-bars {
+  inset: 66px 26px 34px 66px;
+  gap: 24px;
+  border-bottom: 1px solid rgba(7, 26, 100, .14);
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 32%, rgba(7, 26, 100, .09) 32.5%, transparent 33%),
+    linear-gradient(180deg, transparent, rgba(255, 255, 255, .26));
+}
+
+.reference-bars i {
+  width: min(34px, 68%);
+  border: 1px solid rgba(7, 26, 100, .34);
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(180deg, #35436a, #1a274e);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .16);
+}
+
+.reference-bars b,
+.reference-bars span {
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.reference-leaders-panel {
+  padding: 21px 23px;
+}
+
+.reference-leaders-panel > div {
+  min-height: 64px;
+  border-top-color: rgba(7, 26, 100, .12);
+}
+
+.reference-leaders-panel span {
+  color: var(--navy);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.reference-leaders-panel span strong {
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.reference-leaders-panel > div > b {
+  color: var(--blue);
+  font-size: 30px;
+}
+
+.reference-upcoming {
+  padding: 19px 20px 22px;
+}
+
+.reference-upcoming button {
+  min-height: 92px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  box-shadow: 0 12px 26px rgba(9, 28, 88, .07), inset 0 -4px 0 var(--blue);
+}
+
+.reference-upcoming button span,
+.reference-upcoming button small {
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.reference-upcoming button strong {
+  color: var(--blue);
+  font-size: 18px;
+}
+
+.reference-section-title {
+  margin: 18px 0 -2px;
+}
+
+.reference-management-grid {
+  gap: 12px;
+}
+
+.action-card,
+.reference-management-grid > article {
+  min-height: 192px;
+  padding: 20px 22px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .9);
+}
+
+.reference-management-grid article > header {
+  position: relative;
+  grid-template-columns: 42px 1fr;
+  gap: 2px 14px;
+  align-items: center;
+  margin-bottom: 13px;
+  padding-bottom: 12px;
+  border-bottom-color: rgba(7, 26, 100, .11);
+}
+
+.reference-management-grid article > header::before {
+  display: grid;
+  grid-row: 1 / 3;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--blue);
+  background: rgba(6, 76, 255, .08);
+  content: "+";
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.reference-management-grid article:nth-child(1) > header::before { content: "GM"; font-size: 10px; }
+.reference-management-grid article:nth-child(2) > header::before { content: "ST"; font-size: 10px; }
+.reference-management-grid article:nth-child(3) > header::before {
+  color: var(--red);
+  background: rgba(215, 25, 63, .08);
+  content: "R";
+  font-size: 13px;
+}
+.reference-management-grid article:nth-child(4) > header::before { content: "L"; font-size: 13px; }
+.reference-management-grid article:nth-child(5) > header::before { content: "@"; font-size: 16px; }
+.reference-management-grid article:nth-child(6) > header::before { content: "N"; font-size: 13px; }
+
+.reference-management-grid article > header span,
+.reference-management-grid article > header strong {
+  grid-column: 2;
+}
+
+.reference-management-grid article > header strong {
+  color: var(--navy);
+  overflow: visible;
+  font-size: 18px;
+  line-height: 1.02;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.reference-management-grid .metric-row {
+  min-height: 34px;
+  border-bottom-color: rgba(7, 26, 100, .1) !important;
+}
+
+.reference-management-grid .metric-row span,
+.reference-management-grid .metric-row strong {
+  font-size: 12px;
+}
+
+.reference-inbox-card p,
+.reference-news-card p {
+  border-bottom-color: rgba(7, 26, 100, .11);
+  color: #243469;
+  font-size: 11px;
+}
+
+.reference-inbox-card p b,
+.reference-news-card p b {
+  color: #7884a5;
+}
+
+body.dashboard-mode .btn,
+body.dashboard-mode button:not(.reference-primary):not(.primary-button) {
+  min-height: 35px;
+  padding: 0 15px;
+  border-color: #bdc8df;
+  border-radius: 5px;
+  color: var(--navy);
+  background: rgba(255, 255, 255, .8);
+  box-shadow: 0 8px 18px rgba(9, 28, 88, .065);
+  font-size: 11px;
+}
+
+body.dashboard-mode .reference-primary,
+body.dashboard-mode .primary-button {
+  min-height: 39px;
+  padding: 0 20px;
+  border-radius: 5px;
+  font-size: 11px;
+}
+
+body.dashboard-mode .sidebar-next-game .btn::before {
+  margin-right: 8px;
+  content: ">";
+  font-size: 11px;
+}
+
+body.dashboard-mode .reference-primary::before {
+  content: none;
+}
+
+body.dashboard-mode .sidebar-next-game .btn {
+  color: var(--blue);
+  background: rgba(255, 255, 255, .86);
+}
+
+body.dashboard-mode .reference-primary {
+  background: linear-gradient(180deg, #0d55ef, #063fcf) !important;
+}
+
+body.dashboard-mode .topbar-team .menu-link,
+body.dashboard-mode .topbar-team .menu-link:not(.reference-primary):not(.primary-button),
+body.dashboard-mode .topbar-team .menu-link:hover {
+  width: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0;
+  overflow: hidden;
+  color: transparent;
+  background: rgba(255, 255, 255, .84);
+  box-shadow: 0 8px 20px rgba(7, 26, 100, .08);
+  font-size: 0;
+  white-space: nowrap;
+  transform: none;
+}
+
+body.dashboard-mode .context-nav button,
+body.dashboard-mode .context-nav button:not(.reference-primary):not(.primary-button) {
+  border: 0;
+  color: #18285e;
+  background: transparent;
+  box-shadow: none;
+}
+
+body.dashboard-mode .context-nav button:hover,
+body.dashboard-mode .context-nav button:not(.reference-primary):not(.primary-button):hover {
+  color: var(--blue);
+  background: rgba(6, 76, 255, .045);
+  box-shadow: none;
+  transform: none;
+}
+
+body.dashboard-mode .context-nav button.active,
+body.dashboard-mode .context-nav button.active:not(.reference-primary):not(.primary-button) {
+  color: var(--blue);
+  background: linear-gradient(90deg, rgba(6, 76, 255, .09), rgba(255, 255, 255, .64));
+  box-shadow: inset 3px 0 0 var(--blue);
+}
+
+body.dashboard-mode .reference-management-grid > article.action-card,
+body.dashboard-mode .reference-management-grid > article:nth-child(4),
+body.dashboard-mode .command-center-cards > article.action-card,
+body.dashboard-mode .reference-chart-panel.panel-card,
+body.dashboard-mode .reference-leaders-panel.panel-card,
+body.dashboard-mode .reference-upcoming.panel-card,
+body.dashboard-mode .reference-stat-grid > article.metric-card {
+  border: 1px solid rgba(218, 225, 238, .72) !important;
+}
+
+body.dashboard-mode .reference-management-grid > article.action-card {
+  background: rgba(255, 255, 255, .9) !important;
+}
+
+body.dashboard-mode .reference-management-grid > article:nth-child(4) {
+  background: rgba(255, 255, 255, .9) !important;
+  box-shadow: inset 0 -4px 0 var(--blue), var(--shadow);
+}
+
+body.dashboard-mode select,
+body.dashboard-mode textarea,
+body.dashboard-mode input {
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .reference-season-hero .team-hero-identity {
+    flex-direction: row;
+  }
+
+  .reference-hero-logo {
+    width: 78px;
+    height: 78px;
+    flex-basis: 78px;
+  }
+}
+
+/* Markup screenshot fix list: final visual-only dashboard corrections. */
+body.dashboard-mode .topbar {
+  position: relative;
+  z-index: 20;
+  height: 76px;
+  min-height: 76px;
+}
+
+body.dashboard-mode .broadcast-shell {
+  grid-template-rows: 76px minmax(0, 1fr);
+}
+
+body.dashboard-mode .main-shell {
+  padding-top: 18px;
+}
+
+body.dashboard-mode .workspace {
+  padding-top: 0;
+}
+
+body.dashboard-mode .context-heading small {
+  color: var(--blue) !important;
+}
+
+.reference-season-hero,
+body.dashboard-mode .reference-season-hero {
+  min-height: 164px;
+  border: 1px solid rgba(218, 225, 238, .62) !important;
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, .98), rgba(255, 255, 255, .9)) !important;
+  box-shadow: 0 14px 32px rgba(9, 28, 88, .075) !important;
+}
+
+.reference-season-hero::before {
+  display: none;
+}
+
+.reference-season-hero .team-hero-identity {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 26px;
+}
+
+.reference-season-hero h2 {
+  max-width: none;
+}
+
+.reference-season-hero > div:last-child {
+  align-items: center;
+  margin-left: auto;
+}
+
+.reference-hero-logo {
+  width: 104px;
+  height: 104px;
+  flex: 0 0 104px;
+}
+
+body.dashboard-mode .context-nav button b {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  margin-left: auto !important;
+  color: transparent;
+  font-size: 0;
+}
+
+body.dashboard-mode .context-nav button b::before {
+  color: var(--blue);
+  content: "\203A";
+  font-family: var(--broadcast-font);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+body.dashboard-mode,
+body.dashboard-mode .workspace,
+body.dashboard-mode .context-nav,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div) {
+  scrollbar-color: rgba(112, 128, 170, .55) rgba(255, 255, 255, .3);
+  scrollbar-width: thin;
+}
+
+body.dashboard-mode::-webkit-scrollbar,
+body.dashboard-mode .workspace::-webkit-scrollbar,
+body.dashboard-mode .context-nav::-webkit-scrollbar,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+body.dashboard-mode::-webkit-scrollbar-track,
+body.dashboard-mode .workspace::-webkit-scrollbar-track,
+body.dashboard-mode .context-nav::-webkit-scrollbar-track,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, .24);
+  border-radius: 999px;
+}
+
+body.dashboard-mode::-webkit-scrollbar-thumb,
+body.dashboard-mode .workspace::-webkit-scrollbar-thumb,
+body.dashboard-mode .context-nav::-webkit-scrollbar-thumb,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-thumb {
+  min-height: 42px;
+  border: 2px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  background: rgba(112, 128, 170, .55);
+  background-clip: padding-box;
+}
+
+body.dashboard-mode::-webkit-scrollbar-thumb:hover,
+body.dashboard-mode .workspace::-webkit-scrollbar-thumb:hover,
+body.dashboard-mode .context-nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(88, 108, 158, .68);
+  background-clip: padding-box;
+}
+
+.reference-upcoming {
+  padding: 18px 20px 20px;
+}
+
+.reference-upcoming > div {
+  gap: 10px;
+}
+
+.reference-upcoming button,
+body.dashboard-mode .reference-upcoming button,
+body.dashboard-mode .reference-upcoming button:not(.reference-primary):not(.primary-button) {
+  grid-template-columns: 1fr;
+  gap: 7px;
+  min-height: 112px !important;
+  align-content: center;
+  padding: 15px 20px 18px !important;
+  border: 1px solid rgba(196, 207, 229, .9);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .92) !important;
+  box-shadow: 0 12px 26px rgba(9, 28, 88, .07), inset 0 -4px 0 var(--blue);
+}
+
+body.dashboard-mode .reference-upcoming .upcoming-card {
+  overflow: hidden;
+  border-left: 1px solid rgba(196, 207, 229, .9) !important;
+  box-shadow: 0 12px 26px rgba(9, 28, 88, .07), inset 0 -4px 0 var(--blue) !important;
+}
+
+body.dashboard-mode .reference-upcoming .upcoming-game-card {
+  grid-template-columns: 70px minmax(0, 1fr) !important;
+  grid-template-rows: auto 1fr auto !important;
+  align-content: center;
+  column-gap: 14px;
+  row-gap: 2px;
+}
+
+body.dashboard-mode .reference-upcoming .upcoming-card::before {
+  position: absolute;
+  z-index: 0;
+  right: 10px;
+  bottom: 10px;
+  width: 76px;
+  height: 38px;
+  opacity: .32;
+  background: repeating-linear-gradient(135deg, transparent 0 10px, rgba(6, 76, 255, .08) 10px 11px, transparent 11px 19px);
+  content: "";
+}
+
+body.dashboard-mode .reference-upcoming .upcoming-card span {
+  position: relative;
+  z-index: 1;
+  color: var(--blue) !important;
+  grid-column: 1 !important;
+  align-self: end;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase;
+}
+
+body.dashboard-mode .reference-upcoming .upcoming-card > span:not(.upcoming-event-icon) {
+  max-width: calc(100% - 58px);
+}
+
+body.dashboard-mode .reference-upcoming .upcoming-game-card > span {
+  grid-column: 1 / -1 !important;
+  grid-row: 1 !important;
+  max-width: none;
+}
+
+body.dashboard-mode .reference-upcoming .upcoming-card strong {
+  position: relative;
+  z-index: 1;
+  grid-column: 1 !important;
+  color: #0647df !important;
+  font-family: var(--broadcast-number) !important;
+  font-size: clamp(26px, 2.5vw, 34px) !important;
+  font-weight: 900 !important;
+  letter-spacing: -.02em !important;
+  line-height: .95 !important;
+}
+
+body.dashboard-mode .reference-upcoming .upcoming-game-card strong {
+  position: relative;
+  top: auto;
+  right: auto;
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  justify-self: end;
+  align-self: center;
+  max-width: 132px;
+  color: #071a64 !important;
+  font-family: var(--broadcast-font) !important;
+  font-size: 20px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0 !important;
+  line-height: 1 !important;
+  text-align: right;
+}
+
+body.dashboard-mode .reference-upcoming .upcoming-card small {
+  position: relative;
+  z-index: 1;
+  grid-column: 1 !important;
+  display: -webkit-box;
+  overflow: hidden;
+  color: #647192 !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  line-height: 1.2 !important;
+  text-transform: uppercase;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+body.dashboard-mode .reference-upcoming .upcoming-game-card small {
+  position: relative;
+  top: auto;
+  right: auto;
+  grid-column: 2 !important;
+  grid-row: 3 !important;
+  justify-self: end;
+  align-self: start;
+  max-width: 112px;
+  text-align: right;
+}
+
+body.dashboard-mode .reference-upcoming .upcoming-event-card {
+  cursor: pointer;
+}
+
+body.dashboard-mode .reference-upcoming .upcoming-event-icon {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(6, 76, 255, .16);
+  border-radius: 999px;
+  color: var(--blue) !important;
+  background: rgba(6, 76, 255, .08);
+  font-family: var(--broadcast-font) !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase;
+}
+
+body.dashboard-mode .reference-upcoming .upcoming-event-deadline {
+  box-shadow: 0 12px 26px rgba(9, 28, 88, .07), inset 0 -4px 0 var(--red) !important;
+}
+
+body.dashboard-mode .reference-upcoming .upcoming-event-deadline .upcoming-event-icon {
+  color: var(--red) !important;
+  background: rgba(215, 25, 63, .08);
+}
+
+.upcoming-team-logo {
+  position: relative;
+  z-index: 1;
+  top: auto;
+  left: auto;
+  grid-column: 1 !important;
+  grid-row: 2 / span 2 !important;
+  align-self: center;
+  justify-self: start;
+  display: block;
+  width: 62px;
+  height: 62px;
+  object-fit: contain;
+  filter: drop-shadow(0 9px 14px rgba(9, 28, 88, .18));
+}
+
+.reference-upcoming button span {
+  align-self: end;
+  font-size: 12px;
+}
+
+.reference-upcoming button strong {
+  font-size: 20px;
+}
+
+.reference-upcoming button small {
+  align-self: start;
+  font-size: 12px;
+}
+
+body.dashboard-mode .sidebar-next-game .btn::before {
+  content: none;
+}
+
+body.dashboard-mode .sidebar-next-game .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 34px;
+  color: var(--blue);
+  background: rgba(255, 255, 255, .9);
+}
+
+body.dashboard-mode .sidebar-next-game .btn::after {
+  content: none;
+}
+
+.sidebar-next-game-matchup {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.sidebar-next-game-matchup > div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.sidebar-next-game-matchup strong,
+body.dashboard-mode .sidebar-next-game-matchup strong {
+  color: var(--navy);
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: .2px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar-next-game-matchup small,
+body.dashboard-mode .sidebar-next-game-matchup small {
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.sidebar-next-game-logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 9px rgba(9, 28, 88, .14));
+}
+
+.panel-card,
+.metric-card,
+.action-card,
+.reference-upcoming button,
+body.dashboard-mode .card,
+body.dashboard-mode .table-card,
+body.dashboard-mode .stats-table,
+body.dashboard-mode .contract-table,
+body.dashboard-mode .editor-table {
+  border-color: rgba(218, 225, 238, .62);
+  box-shadow: 0 12px 28px rgba(9, 28, 88, .07);
+}
+
+.metric-card,
+.reference-stat-grid article,
+.action-card:not(.danger-accent),
+.reference-management-grid > article:nth-child(4) {
+  box-shadow: 0 12px 28px rgba(9, 28, 88, .07), inset 0 -4px 0 var(--blue);
+}
+

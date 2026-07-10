@@ -1,0 +1,859 @@
+﻿/* Refined startup loading screen */
+.startup-loading {
+  grid-template-rows: 74px minmax(0, 1fr) 58px !important;
+  color: #071b60 !important;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, .94), rgba(255, 255, 255, .66)),
+    url("../../assets/nba-manager-bg-og.png") center / cover no-repeat !important;
+}
+
+.startup-loading::before {
+  opacity: .42 !important;
+  background-image:
+    linear-gradient(rgba(7, 26, 100, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(7, 26, 100, .045) 1px, transparent 1px) !important;
+  background-size: 58px 58px !important;
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 82%, transparent) !important;
+}
+
+.startup-loading::after {
+  height: 5px !important;
+  background: linear-gradient(90deg, #0057ff 0 48%, #ffffff 48% 52%, #d90429 52% 100%) !important;
+}
+
+.startup-brand,
+.startup-footer {
+  padding: 0 clamp(24px, 4.6vw, 76px) !important;
+  border-color: rgba(192, 205, 229, .8) !important;
+}
+
+.startup-brand {
+  background: rgba(255, 255, 255, .48) !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+.startup-brand > span {
+  width: 34px !important;
+  height: 46px !important;
+  border: 0 !important;
+  border-radius: 7px !important;
+  color: #fff !important;
+  background: linear-gradient(90deg, #0753ff 0 48%, #d90429 48% 100%) !important;
+  box-shadow: 0 10px 24px rgba(7, 26, 100, .14) !important;
+}
+
+.startup-brand strong {
+  color: #071b60 !important;
+  font-size: 20px !important;
+  letter-spacing: .4px !important;
+}
+
+.startup-brand small {
+  color: #52618f !important;
+  font-size: 8px !important;
+}
+
+.startup-loading-main {
+  grid-template-columns: minmax(250px, .72fr) minmax(420px, .98fr) !important;
+  grid-template-rows: minmax(0, 1fr) auto !important;
+  column-gap: clamp(34px, 6vw, 104px) !important;
+  width: min(1160px, calc(100% - 56px)) !important;
+}
+
+.startup-ball {
+  width: clamp(230px, 26vw, 360px) !important;
+  border-color: rgba(7, 83, 255, .22) !important;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, .72), rgba(255, 255, 255, .2) 56%, transparent 57%),
+    conic-gradient(from 15deg, rgba(7, 83, 255, .28), rgba(217, 4, 41, .28), rgba(7, 83, 255, .28)) !important;
+  box-shadow: 0 24px 60px rgba(7, 26, 100, .12) !important;
+}
+
+.startup-ball::before,
+.startup-ball::after {
+  border-color: rgba(7, 83, 255, .18) !important;
+}
+
+.startup-ball > span {
+  width: 46% !important;
+  border: 0 !important;
+  background:
+    radial-gradient(circle at 34% 28%, #ffffff 0 10%, #ffb453 11% 26%, #e47820 27% 64%, #9d3e0d 65% 100%) !important;
+  box-shadow:
+    inset -18px -18px 24px rgba(83, 27, 6, .28),
+    0 18px 38px rgba(228, 90, 24, .24) !important;
+}
+
+.startup-ball > span::before {
+  background: rgba(83, 27, 6, .72) !important;
+}
+
+.startup-ball > span::after {
+  border-color: rgba(83, 27, 6, .72) !important;
+}
+
+.startup-copy {
+  align-self: center !important;
+  padding: 28px 32px 32px !important;
+  border: 1px solid rgba(198, 210, 231, .92) !important;
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, .76) !important;
+  box-shadow: 0 24px 60px rgba(7, 26, 100, .12) !important;
+  backdrop-filter: blur(18px) !important;
+}
+
+.startup-copy > span {
+  color: #0753ff !important;
+  font-size: 10px !important;
+  letter-spacing: 1.8px !important;
+}
+
+.startup-copy h1 {
+  margin: 13px 0 12px !important;
+  color: #071b60 !important;
+  font-size: clamp(56px, 7vw, 104px) !important;
+  letter-spacing: 0 !important;
+  line-height: .82 !important;
+}
+
+.startup-copy h1 em {
+  color: #d90429 !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+.startup-copy p {
+  max-width: 540px !important;
+  color: #52618f !important;
+  font-size: 12px !important;
+  line-height: 1.45 !important;
+}
+
+.startup-progress {
+  align-self: start !important;
+  margin-top: 18px !important;
+  padding: 16px 18px !important;
+  border: 1px solid rgba(198, 210, 231, .9) !important;
+  border-radius: 9px !important;
+  background: rgba(255, 255, 255, .7) !important;
+  box-shadow: 0 16px 34px rgba(7, 26, 100, .08) !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+.startup-progress > div {
+  height: 8px !important;
+  border-radius: 999px !important;
+  background: #dce6f5 !important;
+}
+
+.startup-progress > div i {
+  width: 46% !important;
+  border-radius: inherit !important;
+  background: linear-gradient(90deg, #0753ff, #ffffff 48%, #d90429) !important;
+  box-shadow: 0 0 20px rgba(7, 83, 255, .2) !important;
+}
+
+.startup-progress span,
+.startup-progress b {
+  color: #52618f !important;
+  font-size: 9px !important;
+}
+
+.startup-progress b {
+  color: #071b60 !important;
+}
+
+.startup-footer {
+  color: #52618f !important;
+  background: rgba(255, 255, 255, .48) !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+.startup-footer p b {
+  color: #0753ff !important;
+}
+
+.startup-court {
+  right: -9vw !important;
+  bottom: -16vw !important;
+  border-color: rgba(7, 83, 255, .12) !important;
+}
+
+.startup-court::before,
+.startup-court::after,
+.startup-court i {
+  border-color: rgba(7, 83, 255, .12) !important;
+}
+
+body.dashboard-mode.gameplan-layout .workspace {
+  padding: 18px 22px 22px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.gameplan-layout .page {
+  height: calc(100vh - 116px) !important;
+  max-height: calc(100vh - 116px) !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-page {
+  grid-template-rows: 42px 106px 36px minmax(0, 1fr) 66px !important;
+  height: 100% !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-main-layout {
+  height: 100% !important;
+  align-items: stretch !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-main {
+  grid-template-rows: 222px 216px minmax(116px, 1fr) !important;
+  height: 100% !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-rail {
+  grid-template-rows: minmax(0, 1fr) 170px !important;
+  height: 100% !important;
+}
+
+body.dashboard-mode.gameplan-layout :is(.gameplan-matchup-card, .gameplan-summary-card) {
+  min-height: 106px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-card {
+  padding: 11px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid {
+  align-items: stretch !important;
+  min-height: 216px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid .gameplan-card {
+  min-height: 216px !important;
+  align-content: start !important;
+  gap: 9px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid .gameplan-card select {
+  min-height: 34px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-shot-bar {
+  row-gap: 7px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-offense-card {
+  min-height: 226px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-toggle {
+  min-height: 34px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-toggle input {
+  flex: 0 0 auto !important;
+  margin-top: 2px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-pill-group button,
+body.dashboard-mode.gameplan-layout .gameplan-action-grid button {
+  min-height: 32px !important;
+  line-height: 1.05 !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid .gameplan-card > .strategy-control:nth-last-child(1) {
+  display: none !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid .gameplan-card:nth-child(4) {
+  gap: 7px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid .gameplan-card:nth-child(4) .strategy-control select {
+  min-height: 31px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid .gameplan-card:nth-child(4) .gameplan-manage {
+  display: block !important;
+  min-height: 30px !important;
+  padding: 5px 9px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-main {
+  grid-template-rows: 252px 206px minmax(96px, 1fr) !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-offense-card {
+  min-height: 252px !important;
+  gap: 10px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-offense-card :is(.gameplan-control-column, .gameplan-action-column, .gameplan-scout-card) {
+  gap: 9px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-offense-card select {
+  min-height: 34px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-offense-card .gameplan-toggle {
+  min-height: 36px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-offense-card .gameplan-scout-card {
+  min-height: 100% !important;
+  align-content: start !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-offense-card .gameplan-scout-card article {
+  min-height: 38px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid,
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid .gameplan-card {
+  min-height: 206px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-page {
+  grid-template-rows: 42px 136px 36px minmax(0, 1fr) 66px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-main {
+  grid-template-rows: 238px 196px minmax(88px, 1fr) !important;
+}
+
+body.dashboard-mode.gameplan-layout :is(.gameplan-matchup-card, .gameplan-summary-card) {
+  min-height: 136px !important;
+  padding: 18px 20px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-summary-card {
+  padding-left: 78px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-summary-card::before {
+  top: 32px !important;
+  left: 22px !important;
+  width: 42px !important;
+  height: 42px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-matchup-card > div {
+  gap: 16px !important;
+  margin: 12px 0 8px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-team-logo {
+  width: 46px !important;
+  height: 46px !important;
+}
+
+body.dashboard-mode.gameplan-layout :is(.gameplan-matchup-card strong, .gameplan-summary-card strong) {
+  font-size: 21px !important;
+}
+
+body.dashboard-mode.gameplan-layout :is(.gameplan-matchup-card small, .gameplan-summary-card small) {
+  margin-top: 7px !important;
+  font-size: 10px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-matchup-card {
+  display: grid !important;
+  grid-template-rows: auto minmax(44px, 1fr) auto auto !important;
+  align-content: center !important;
+  padding: 18px 20px 14px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-matchup-card > span {
+  align-self: start !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-matchup-card > div {
+  align-self: center !important;
+  margin: 4px 0 2px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-matchup-card strong {
+  align-self: end !important;
+  font-size: 19px !important;
+  line-height: 1 !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-matchup-card small {
+  margin-top: 4px !important;
+  font-size: 9px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-bottom-grid {
+  height: 100% !important;
+  align-items: stretch !important;
+}
+
+body.dashboard-mode.gameplan-layout .action-center {
+  grid-template-rows: auto repeat(3, minmax(98px, 1fr)) !important;
+}
+
+body.dashboard-mode.gameplan-layout .action-center article {
+  min-height: 98px !important;
+}
+
+body.dashboard-mode.gameplan-layout .opponent-threats article {
+  min-height: 42px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-footer {
+  min-height: 66px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-main {
+  grid-template-rows: 220px 240px minmax(96px, 1fr) !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-offense-card {
+  min-height: 220px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-offense-card .gameplan-scout-card article {
+  min-height: 34px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid {
+  min-height: 240px !important;
+  overflow: visible !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid .gameplan-card {
+  min-height: 240px !important;
+  gap: 10px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid .gameplan-shot-profile {
+  align-content: start !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid .gameplan-toggle {
+  min-height: 42px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-main {
+  grid-template-rows: 248px 224px minmax(88px, 1fr) !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-offense-card {
+  min-height: 248px !important;
+  padding-bottom: 14px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-offense-card .gameplan-toggle {
+  min-height: 34px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid,
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid .gameplan-card {
+  min-height: 224px !important;
+}
+
+body.dashboard-mode.league-history-layout .league-history-dashboard {
+  grid-template-rows: auto 100px 34px minmax(282px, 1fr) 226px 124px !important;
+}
+
+body.dashboard-mode.league-history-layout .league-history-main {
+  min-height: 282px !important;
+  height: 100% !important;
+  align-items: stretch !important;
+  gap: 10px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-champions-card,
+body.dashboard-mode.league-history-layout .history-dynasty-feature,
+body.dashboard-mode.league-history-layout .history-action-center {
+  min-height: 278px !important;
+}
+
+body.dashboard-mode.league-history-layout .league-history-lower-grid {
+  grid-template-columns: 1.08fr 1.16fr .92fr 1.08fr !important;
+  gap: 10px !important;
+  min-height: 226px !important;
+}
+
+body.dashboard-mode.league-history-layout .league-history-lower-grid > :is(section, article),
+body.dashboard-mode.league-history-layout :is(.history-leaders-card, .history-award-legacy, .history-franchise-titles, .history-news-card) {
+  min-height: 218px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.league-history-layout .history-table-wrap {
+  max-height: 248px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-feature {
+  grid-template-columns: 190px minmax(0, 1fr) !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-art {
+  height: 216px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-player {
+  width: 156px !important;
+  height: 202px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-action-card {
+  min-height: 70px !important;
+  padding: 9px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-action-card:nth-of-type(n+4) {
+  display: none !important;
+}
+
+body.dashboard-mode.league-history-layout .history-leaders-card > div {
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  padding: 0 10px 12px !important;
+  gap: 7px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-leaders-card article {
+  min-height: 172px !important;
+  padding: 8px 5px !important;
+  grid-template-rows: 38px 16px minmax(32px, auto) 22px !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.league-history-layout .history-leader-shot {
+  width: 36px !important;
+  height: 36px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-leaders-card span {
+  font-size: 7px !important;
+  line-height: 1 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-leaders-card b {
+  max-width: 100% !important;
+  min-height: 24px !important;
+  overflow: hidden !important;
+  font-size: 9px !important;
+  line-height: 1.12 !important;
+  overflow-wrap: anywhere !important;
+}
+
+body.dashboard-mode.league-history-layout .history-leaders-card strong {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  font-size: 15px !important;
+  line-height: 1 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.league-history-layout .history-award-columns {
+  grid-template-columns: 1fr 1fr !important;
+  min-height: 154px !important;
+  padding: 0 10px 10px !important;
+  gap: 10px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.league-history-layout .history-award-columns article {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.league-history-layout .history-award-columns h3 {
+  font-size: 8px !important;
+  line-height: 1.1 !important;
+  margin-bottom: 5px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-award-columns div {
+  grid-template-columns: 16px minmax(0, 1fr) auto !important;
+  min-height: 25px !important;
+  gap: 6px !important;
+  font-size: 9px !important;
+  line-height: 1.12 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-award-columns b,
+body.dashboard-mode.league-history-layout .history-award-columns span {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  line-height: 1.12 !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+}
+
+body.dashboard-mode.league-history-layout .history-award-columns strong {
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.league-history-layout .history-award-columns article:nth-child(2) div {
+  grid-template-columns: minmax(0, 1fr) auto !important;
+}
+
+body.dashboard-mode.league-history-layout .history-award-columns article:nth-child(2) b {
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+}
+
+body.dashboard-mode.league-history-layout .league-history-lower-grid {
+  grid-template-columns: 1.08fr 1.16fr .92fr !important;
+}
+
+body.dashboard-mode.league-history-layout .history-news-card {
+  display: none !important;
+}
+
+body.dashboard-mode.league-history-layout .history-franchise-titles > div {
+  gap: 7px !important;
+  padding-bottom: 8px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-franchise-titles article {
+  min-height: 28px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-franchise-titles b {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  line-height: 1.15 !important;
+  text-overflow: ellipsis !important;
+}
+
+body.dashboard-mode.league-history-layout .league-history-lower-grid {
+  grid-template-columns: 1.45fr 1.05fr .95fr !important;
+}
+
+body.dashboard-mode.league-history-layout .history-leaders-card,
+body.dashboard-mode.league-history-layout .history-franchise-titles {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) 42px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-leaders-card > div {
+  align-items: stretch !important;
+  padding: 0 12px 10px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-leaders-card article {
+  min-height: 154px !important;
+  padding: 8px 6px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-leaders-card strong {
+  font-size: 16px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-franchise-titles > div {
+  display: grid !important;
+  align-content: stretch !important;
+  gap: 0 !important;
+  padding: 0 14px 8px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-franchise-titles article {
+  grid-template-columns: 18px minmax(0, 1fr) 100px 28px !important;
+  min-height: 33px !important;
+  padding: 4px 0 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-franchise-titles i {
+  height: 9px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-franchise-titles .text-link,
+body.dashboard-mode.league-history-layout .history-leaders-card .text-link {
+  min-height: 42px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-leaders-card,
+body.dashboard-mode.league-history-layout .history-franchise-titles {
+  grid-template-rows: 40px minmax(0, 1fr) 30px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-leaders-card > div {
+  min-height: 0 !important;
+  padding: 0 12px 4px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-leaders-card article {
+  min-height: 126px !important;
+  grid-template-rows: 32px 13px minmax(30px, 1fr) 20px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-franchise-titles > div {
+  min-height: 0 !important;
+  padding: 0 14px 4px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-franchise-titles article {
+  min-height: 27px !important;
+  padding: 1px 0 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-franchise-titles .text-link,
+body.dashboard-mode.league-history-layout .history-leaders-card .text-link {
+  align-self: stretch !important;
+  min-height: 30px !important;
+  height: 30px !important;
+  padding: 0 10px !important;
+  border-top: 1px solid rgba(202, 212, 231, .7) !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-news-card > div {
+  gap: 9px !important;
+  padding-bottom: 12px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-news-card article {
+  min-height: 62px !important;
+  padding: 7px 9px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-timeline-strip {
+  min-height: 124px !important;
+  padding-bottom: 12px !important;
+  box-sizing: border-box !important;
+}
+
+body.dashboard-mode.league-history-layout .history-timeline-strip > div {
+  gap: 7px !important;
+  padding: 0 10px 12px !important;
+  align-items: stretch !important;
+}
+
+body.dashboard-mode.league-history-layout .history-timeline-strip article {
+  min-height: 74px !important;
+  grid-template-columns: 42px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 9px !important;
+  padding: 8px 10px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-timeline-logo {
+  width: 38px !important;
+  height: 38px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-timeline-strip article > div {
+  display: grid !important;
+  gap: 4px !important;
+  min-width: 0 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-timeline-strip strong {
+  overflow: hidden !important;
+  font-size: 10px !important;
+  line-height: 1.15 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.league-history-layout .history-timeline-strip small,
+body.dashboard-mode.league-history-layout .history-timeline-strip span {
+  font-size: 8px !important;
+  line-height: 1.15 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-champions-card {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) 44px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-champions-card .history-table-wrap {
+  height: 100% !important;
+  max-height: none !important;
+}
+
+body.dashboard-mode.league-history-layout .history-champions-card table {
+  height: 100% !important;
+}
+
+body.dashboard-mode.league-history-layout .history-champions-card thead tr {
+  height: 34px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-champions-card tbody tr {
+  height: calc((100% - 34px) / 6) !important;
+}
+
+body.dashboard-mode.league-history-layout .history-champions-card .text-link {
+  align-self: stretch !important;
+  min-height: 44px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-feature {
+  align-items: stretch !important;
+  height: 100% !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-art {
+  height: 100% !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy {
+  display: grid !important;
+  grid-template-rows: auto auto auto auto minmax(0, 1fr) auto auto 44px !important;
+  height: 100% !important;
+}
+
+body.dashboard-mode.league-history-layout .history-key-people {
+  align-self: stretch !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy .text-link {
+  align-self: end !important;
+  justify-self: end !important;
+  min-height: 44px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-feature {
+  grid-template-columns: 226px minmax(0, 1fr) !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-art {
+  min-height: 100% !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-player {
+  width: 190px !important;
+  height: 242px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-bg {
+  width: 130px !important;
+  height: 130px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-trophy {
+  position: absolute !important;
+  left: 4px !important;
+  bottom: -14px !important;
+  z-index: 1 !important;
+  width: 270px !important;
+  height: 380px !important;
+  object-fit: contain !important;
+  opacity: .96 !important;
+  filter: drop-shadow(0 18px 24px rgba(7, 18, 58, .28)) !important;
+  pointer-events: none !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-bg {
+  z-index: 2 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-player {
+  z-index: 3 !important;
+}
+

@@ -1,0 +1,593 @@
+﻿/* NBA Manager broadcast skin test pass */
+:root {
+  --bg: #f6f8fc;
+  --surface: rgba(255, 255, 255, .88);
+  --surface-soft: rgba(244, 247, 252, .9);
+  --navy: #071a64;
+  --blue: #064cff;
+  --red: #d7193f;
+  --border: #d8dfec;
+  --muted: #647192;
+  --success: #06915f;
+  --danger: #d7193f;
+  --shadow: 0 18px 42px rgba(7, 26, 100, .12);
+  --panel: var(--surface);
+  --panel-soft: var(--surface-soft);
+  --panel-lift: #ffffff;
+  --stroke: var(--border);
+  --text: var(--navy);
+  --dim: #8d98b4;
+  --team-primary: var(--blue);
+  --team-secondary: var(--red);
+  --team-accent: var(--navy);
+  --team-contrast: #ffffff;
+  --purple: var(--blue);
+  --purple-deep: var(--navy);
+  --purple-bright: var(--red);
+  --green: var(--success);
+  --surface-shadow: var(--shadow);
+}
+
+body {
+  color: var(--navy);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, .94), rgba(255, 255, 255, .76)),
+    url("../../assets/nba-manager-bg-og.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.dashboard-mode {
+  --bg: #f6f8fc;
+  --panel: var(--surface);
+  --panel-soft: var(--surface-soft);
+  --panel-lift: #ffffff;
+  --stroke: var(--border);
+  --text: var(--navy);
+  --muted: #647192;
+  --dim: #8d98b4;
+  --surface-shadow: var(--shadow);
+  color: var(--navy);
+}
+
+.app-shell,
+body.dashboard-mode .broadcast-shell {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, .96), rgba(255, 255, 255, .7)),
+    url("../../assets/nba-manager-bg-og.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.dashboard-mode .topbar {
+  min-height: 76px;
+  color: var(--navy);
+  background: rgba(255, 255, 255, .72);
+  border-top: 0;
+  border-bottom: 1px solid rgba(216, 223, 236, .9);
+  box-shadow: none;
+  backdrop-filter: blur(14px);
+}
+
+body.dashboard-mode .league-mark {
+  width: 34px;
+  height: 46px;
+  border-radius: 7px;
+  background: linear-gradient(90deg, var(--blue) 0 48%, var(--red) 48% 100%);
+  box-shadow: 0 8px 18px rgba(7, 26, 100, .14);
+}
+
+body.dashboard-mode .brand-title {
+  color: var(--navy);
+  font-size: 25px;
+  letter-spacing: -.3px;
+}
+
+body.dashboard-mode .brand-title::after {
+  color: var(--red);
+  content: " MANAGER";
+}
+
+body.dashboard-mode .brand-title {
+  font-size: 0;
+}
+
+body.dashboard-mode .brand-title::before {
+  color: var(--navy);
+  content: "NBA";
+  font-size: 25px;
+}
+
+body.dashboard-mode .brand-title::after {
+  font-size: 19px;
+}
+
+body.dashboard-mode .brand-subtitle,
+body.dashboard-mode .top-nav {
+  display: none;
+}
+
+body.dashboard-mode .career-date-pill,
+body.dashboard-mode .topbar-team .menu-link {
+  border: 1px solid #c6d0e4;
+  border-radius: 6px;
+  color: var(--navy);
+  background: rgba(255, 255, 255, .84);
+  box-shadow: 0 8px 20px rgba(7, 26, 100, .08);
+}
+
+body.dashboard-mode .career-date-pill span,
+body.dashboard-mode .career-date-pill strong,
+body.dashboard-mode .career-date-pill b {
+  color: var(--navy);
+}
+
+body.dashboard-mode .topbar-team .menu-link::after {
+  color: var(--navy);
+  content: "X";
+  font-size: 13px;
+  font-weight: 900;
+}
+
+body.dashboard-mode .main-shell {
+  gap: 22px;
+  padding: 0 24px 24px;
+}
+
+.app-sidebar,
+body.dashboard-mode .context-sidebar {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 0;
+  border: 1px solid rgba(216, 223, 236, .92);
+  border-radius: 8px;
+  color: var(--navy);
+  background: rgba(255, 255, 255, .78);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+}
+
+body.dashboard-mode .context-heading {
+  border-bottom-color: rgba(216, 223, 236, .8);
+}
+
+body.dashboard-mode .context-heading span,
+body.dashboard-mode .breadcrumb,
+body.dashboard-mode .card-label {
+  color: var(--navy);
+}
+
+body.dashboard-mode .context-heading strong {
+  color: var(--navy);
+  font-size: 17px;
+}
+
+body.dashboard-mode .context-heading small {
+  display: block;
+  margin-top: 4px;
+  color: var(--blue);
+  font-size: 12px;
+}
+
+body.dashboard-mode .context-nav button {
+  border-radius: 6px;
+  color: var(--navy);
+  background: transparent;
+}
+
+body.dashboard-mode .context-nav button:hover {
+  color: var(--blue);
+  background: rgba(6, 76, 255, .07);
+}
+
+body.dashboard-mode .context-nav button.active {
+  color: var(--blue);
+  border-color: rgba(216, 223, 236, .85);
+  background: rgba(248, 250, 255, .92);
+  box-shadow: inset 3px 0 0 var(--blue);
+}
+
+body.dashboard-mode .context-nav button i {
+  color: inherit;
+}
+
+body.dashboard-mode .sidebar-next-game {
+  border: 1px solid rgba(216, 223, 236, .92);
+  border-radius: 8px;
+  color: var(--navy);
+  background: rgba(255, 255, 255, .74);
+  box-shadow: 0 10px 24px rgba(7, 26, 100, .08);
+}
+
+body.dashboard-mode .sidebar-next-game > span,
+body.dashboard-mode .sidebar-next-game > small {
+  color: var(--muted);
+}
+
+body.dashboard-mode .sidebar-next-game > strong {
+  color: var(--navy);
+}
+
+body.dashboard-mode .workspace {
+  padding: 14px 0 26px;
+  color: var(--navy);
+}
+
+body.dashboard-mode .page {
+  width: min(1120px, 100%);
+  max-width: 1120px;
+}
+
+.page-title,
+body.dashboard-mode .page-title,
+.reference-page-title,
+.reference-section-title {
+  color: var(--navy);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  letter-spacing: .4px;
+}
+
+.panel-card,
+.metric-card,
+.action-card,
+.card,
+body.dashboard-mode .card,
+body.dashboard-mode .table-card,
+body.dashboard-mode .stats-table,
+body.dashboard-mode .contract-table,
+body.dashboard-mode .editor-table,
+body.dashboard-mode .season-calendar,
+body.dashboard-mode .calendar-day,
+body.dashboard-mode .trade-team-panel,
+body.dashboard-mode .trade-decision,
+body.dashboard-mode .locker-player,
+body.dashboard-mode .strategy-control,
+body.dashboard-mode .scout-card,
+body.dashboard-mode .prospect-card,
+body.dashboard-mode .free-agent-card,
+body.dashboard-mode .award-card,
+body.dashboard-mode .history-season {
+  border: 1px solid rgba(216, 223, 236, .95);
+  border-radius: 8px;
+  color: var(--navy);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .94), rgba(248, 250, 255, .82)),
+    var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.panel-card,
+.metric-card,
+.action-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.panel-card::after,
+.metric-card::after,
+.action-card::after {
+  position: absolute;
+  right: -28px;
+  bottom: -31px;
+  width: 96px;
+  height: 66px;
+  border-top: 2px solid rgba(6, 76, 255, .13);
+  transform: skewX(-34deg);
+  content: "";
+  pointer-events: none;
+}
+
+.danger-accent::after,
+.danger-metric::after {
+  border-top-color: rgba(215, 25, 63, .2);
+}
+
+.selected-card {
+  border-color: rgba(6, 76, 255, .36);
+  box-shadow: inset 0 -4px 0 var(--blue), var(--shadow);
+}
+
+.reference-dashboard {
+  color: var(--navy);
+}
+
+.reference-season-hero {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, .96), rgba(255, 255, 255, .76)),
+    url("../../assets/nba-manager-bg-og.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+.reference-season-hero span,
+.reference-stat-grid span,
+.reference-stat-grid small,
+.reference-chart-panel header span,
+.reference-bars span,
+.reference-bars b,
+.reference-leaders-panel span,
+.reference-upcoming button span,
+.reference-upcoming button small,
+.reference-management-grid article > header span,
+.reference-management-grid .metric-row span,
+.reference-inbox-card p,
+.reference-news-card p,
+body.dashboard-mode .meta,
+body.dashboard-mode .muted-line {
+  color: var(--muted);
+}
+
+.reference-season-hero h2,
+.reference-season-hero p,
+.reference-season-hero p strong,
+.reference-stat-grid strong,
+.reference-chart-panel header strong,
+.reference-leaders-panel header,
+.reference-leaders-panel span strong,
+.reference-management-grid article > header strong,
+.reference-management-grid .metric-row strong,
+.reference-upcoming button strong,
+body.dashboard-mode .player-name {
+  color: var(--navy);
+}
+
+.reference-season-hero p strong,
+.reference-stat-grid .featured strong,
+.reference-leaders-panel > div > b {
+  color: var(--blue);
+}
+
+.reference-season-hero p b,
+.status-badge,
+.rule-pill {
+  border: 1px solid rgba(6, 76, 255, .22);
+  border-radius: 6px;
+  color: var(--blue);
+  background: rgba(6, 76, 255, .06);
+}
+
+.reference-stat-grid article {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .86);
+  box-shadow: var(--shadow);
+}
+
+.reference-stat-grid article.featured {
+  border-color: rgba(6, 76, 255, .3);
+  background: rgba(255, 255, 255, .9);
+}
+
+.reference-stat-grid .danger-metric strong,
+.reference-stat-grid article:last-child strong {
+  color: var(--red);
+}
+
+.reference-stat-grid article:last-child {
+  border-color: rgba(215, 25, 63, .2);
+}
+
+.reference-bars {
+  border-bottom-color: var(--border);
+  background: repeating-linear-gradient(to bottom, transparent 0 24%, rgba(7, 26, 100, .08) 25%);
+}
+
+.reference-bars i {
+  border-color: rgba(7, 26, 100, .18);
+  background: linear-gradient(180deg, #2f426b, #18264f);
+}
+
+.reference-upcoming button {
+  border-color: var(--border);
+  border-radius: 7px;
+  color: var(--navy);
+  background: rgba(255, 255, 255, .82);
+  box-shadow: inset 0 -3px 0 var(--blue);
+}
+
+.reference-upcoming button:hover {
+  border-color: rgba(6, 76, 255, .4);
+  background: #ffffff;
+}
+
+.action-card.danger-accent {
+  box-shadow: inset 0 -4px 0 var(--red), var(--shadow);
+}
+
+.action-card:not(.danger-accent) {
+  box-shadow: inset 0 -4px 0 var(--blue), var(--shadow);
+}
+
+.data-table,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts) {
+  overflow: hidden;
+}
+
+body.dashboard-mode table {
+  color: var(--navy);
+  background: rgba(255, 255, 255, .76);
+}
+
+body.dashboard-mode th {
+  color: var(--muted);
+  background: #f1f4fa;
+  border-bottom: 1px solid var(--border);
+}
+
+body.dashboard-mode td {
+  color: var(--navy);
+  border-bottom-color: var(--border);
+}
+
+body.dashboard-mode tr:hover td {
+  background: rgba(6, 76, 255, .055);
+}
+
+.btn,
+.primary-button,
+.secondary-button,
+.danger-button,
+body.dashboard-mode .btn,
+body.dashboard-mode button,
+body.dashboard-mode .menu-link {
+  border-radius: 6px;
+  font-weight: 900;
+  letter-spacing: .35px;
+  transition: border-color .16s ease, background .16s ease, color .16s ease, transform .16s ease, box-shadow .16s ease;
+}
+
+.primary-button,
+body.dashboard-mode .btn.primary,
+body.dashboard-mode .reference-primary {
+  border-color: var(--blue) !important;
+  color: #ffffff !important;
+  background: linear-gradient(180deg, #0d59ff, #063fd2) !important;
+  box-shadow: 0 10px 20px rgba(6, 76, 255, .2);
+}
+
+.secondary-button,
+body.dashboard-mode .btn,
+body.dashboard-mode button:not(.reference-primary):not(.primary-button) {
+  border-color: #bdc8df;
+  color: var(--navy);
+  background: rgba(255, 255, 255, .82);
+}
+
+.danger-button,
+body.dashboard-mode .btn.danger {
+  border-color: var(--red);
+  color: #ffffff;
+  background: var(--red);
+}
+
+body.dashboard-mode .btn:hover,
+body.dashboard-mode button:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: #ffffff;
+  transform: translateY(-1px);
+}
+
+body.dashboard-mode .reference-primary:hover,
+body.dashboard-mode .primary-button:hover {
+  color: #ffffff !important;
+  box-shadow: 0 14px 28px rgba(6, 76, 255, .26);
+}
+
+body.dashboard-mode select,
+body.dashboard-mode textarea,
+body.dashboard-mode input {
+  border: 1px solid #c6d0e4;
+  border-radius: 6px;
+  color: var(--navy);
+  background: rgba(255, 255, 255, .88);
+}
+
+body.dashboard-mode :is(.btn, button, select, input, textarea):focus-visible {
+  outline: 2px solid rgba(6, 76, 255, .35);
+  outline-offset: 2px;
+}
+
+body.dashboard-mode :is(.ok, .positive) {
+  color: var(--success);
+}
+
+body.dashboard-mode :is(.bad, .negative) {
+  color: var(--danger);
+}
+
+body.dashboard-mode .calendar-day {
+  background: rgba(255, 255, 255, .76);
+}
+
+body.dashboard-mode .calendar-day.empty {
+  background: rgba(244, 247, 252, .72);
+}
+
+body.dashboard-mode .calendar-game {
+  border-color: rgba(6, 76, 255, .25);
+  color: var(--blue);
+  background: rgba(6, 76, 255, .07);
+}
+
+body.dashboard-mode .calendar-game.selected,
+body.dashboard-mode .selected-row td,
+body.dashboard-mode .trade-player.selected,
+body.dashboard-mode .trade-pick.selected,
+body.dashboard-mode .multi-trade-asset-picker > div > button.selected {
+  border-color: var(--blue);
+  color: var(--navy);
+  background: rgba(6, 76, 255, .09);
+  box-shadow: inset 3px 0 0 var(--blue);
+}
+
+body.dashboard-mode .player-modal-backdrop {
+  background: rgba(7, 26, 100, .24);
+  backdrop-filter: blur(8px);
+}
+
+body.dashboard-mode .player-detail-card {
+  border-color: var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: 0 26px 70px rgba(7, 26, 100, .2);
+}
+
+body.dashboard-mode .player-card-close {
+  border-color: #c6d0e4;
+  color: var(--navy);
+  background: #ffffff;
+}
+
+body.dashboard-mode .sidebar-next-game,
+body.dashboard-mode .workspace,
+body.dashboard-mode .context-nav,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div) {
+  scrollbar-width: thin;
+  scrollbar-color: #93a2c0 rgba(255, 255, 255, .35);
+}
+
+body.dashboard-mode::-webkit-scrollbar,
+body.dashboard-mode .workspace::-webkit-scrollbar,
+body.dashboard-mode .context-nav::-webkit-scrollbar,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+body.dashboard-mode::-webkit-scrollbar-track,
+body.dashboard-mode .workspace::-webkit-scrollbar-track,
+body.dashboard-mode .context-nav::-webkit-scrollbar-track,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, .42);
+}
+
+body.dashboard-mode::-webkit-scrollbar-thumb,
+body.dashboard-mode .workspace::-webkit-scrollbar-thumb,
+body.dashboard-mode .context-nav::-webkit-scrollbar-thumb,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: #93a2c0;
+  background-clip: padding-box;
+}
+
+@media (max-width: 800px) {
+  body.dashboard-mode .main-shell {
+    gap: 12px;
+    padding: 0 14px 18px;
+  }
+
+  body.dashboard-mode .context-sidebar {
+    margin-top: 8px;
+  }
+
+  .reference-analytics-grid,
+  .reference-management-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

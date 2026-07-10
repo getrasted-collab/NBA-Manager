@@ -1,0 +1,1091 @@
+﻿/* Transparent page canvases: keep cards intact, let the arena background show through. */
+body.dashboard-mode:is(
+  .awards-layout,
+  .league-stats-layout,
+  .social-layout-page,
+  .staff-layout,
+  .player-development-layout,
+  .locker-room-layout,
+  .gameplan-layout,
+  .standings-layout
+) :is(.workspace, .page),
+body.dashboard-mode .page:has(:is(
+  .calendar-toolbar,
+  .trade-page-title,
+  .multi-trade-steps,
+  .in-season-fa-hero,
+  .rotation-page-title,
+  .rotation-header,
+  .league-roster-browser,
+  .standings-header
+)),
+body.dashboard-mode:is(
+  .awards-layout,
+  .league-stats-layout,
+  .social-layout-page,
+  .staff-layout,
+  .player-development-layout,
+  .locker-room-layout,
+  .gameplan-layout,
+  .standings-layout
+) :is(
+  .awards-dashboard,
+  .league-stats-page,
+  .social-page,
+  .staff-page,
+  .staff-office-layout,
+  .player-dev-page,
+  .locker-room-page,
+  .gameplan-page,
+  .standings-page
+),
+body.dashboard-mode .page:has(:is(
+  .calendar-toolbar,
+  .trade-page-title,
+  .multi-trade-steps,
+  .in-season-fa-hero,
+  .rotation-page-title,
+  .rotation-header,
+  .league-roster-browser,
+  .standings-header
+)) > :not(.card),
+body.dashboard-mode:is(
+  .awards-layout,
+  .league-stats-layout,
+  .social-layout-page,
+  .staff-layout,
+  .player-development-layout,
+  .locker-room-layout,
+  .gameplan-layout,
+  .standings-layout
+) :is(
+  .page-shell-header,
+  .awards-header,
+  .league-stats-header,
+  .social-page-header,
+  .staff-page-hero,
+  .player-dev-header,
+  .locker-room-header,
+  .gameplan-header,
+  .standings-header
+),
+body.dashboard-mode .page:has(.calendar-toolbar) > .page-title,
+body.dashboard-mode .page:has(.trade-page-title) > .trade-page-title,
+body.dashboard-mode .page:has(.in-season-fa-hero) > .page-title,
+body.dashboard-mode .page:has(.rotation-page-title) > .rotation-page-title {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Final scroll and floating-action corrections. Keep card sizes stable, but make hidden bottoms reachable. */
+body.dashboard-mode.awards-layout .awards-race-table {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap {
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding-bottom: 18px !important;
+  scroll-padding-bottom: 18px !important;
+}
+
+body.dashboard-mode.awards-layout .awards-race-table .text-link {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+body.dashboard-mode.social-layout-page .social-quick-dms {
+  margin: 142px 12px 0 auto !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-leadership-panel,
+body.dashboard-mode.locker-room-layout .locker-morale-panel,
+body.dashboard-mode.locker-room-layout .locker-action-center > .locker-panel {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-leadership-panel > div,
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div,
+body.dashboard-mode.locker-room-layout .locker-issue-list {
+  min-height: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding-bottom: 16px !important;
+  scroll-padding-bottom: 16px !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(7, 83, 255, .5) transparent !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-leadership-panel > div::-webkit-scrollbar,
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrollbar,
+body.dashboard-mode.locker-room-layout .locker-issue-list::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-leadership-panel > div::-webkit-scrollbar-track,
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrollbar-track,
+body.dashboard-mode.locker-room-layout .locker-issue-list::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-leadership-panel > div::-webkit-scrollbar-thumb,
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrollbar-thumb,
+body.dashboard-mode.locker-room-layout .locker-issue-list::-webkit-scrollbar-thumb {
+  border: 2px solid transparent !important;
+  border-radius: 999px !important;
+  background: rgba(7, 83, 255, .48) !important;
+  background-clip: padding-box !important;
+}
+
+/* Force the locker-room lists to scroll inside their cards instead of expanding the cards. */
+body.dashboard-mode.locker-room-layout .locker-leadership-panel,
+body.dashboard-mode.locker-room-layout .locker-morale-panel {
+  height: 356px !important;
+  max-height: 356px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-action-center > .locker-panel {
+  height: 612px !important;
+  max-height: 612px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-action-center {
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-leadership-panel > div,
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div,
+body.dashboard-mode.locker-room-layout .locker-issue-list {
+  max-height: 100% !important;
+  overscroll-behavior: contain !important;
+}
+
+/* Taller standings table rhythm for the compact full-screen standings views. */
+body.dashboard-mode.standings-division-layout .standings-division-grid,
+body.dashboard-mode.standings-wildcard-layout .standings-conference-grid {
+  max-height: calc(100vh - 184px) !important;
+}
+
+body.dashboard-mode.standings-division-layout .standings-table tbody tr {
+  height: 58px !important;
+}
+
+body.dashboard-mode.standings-wildcard-layout .standings-table tbody tr {
+  height: 84px !important;
+}
+
+body.dashboard-mode.standings-cup-layout .nba-cup-grid {
+  height: calc(100vh - 154px) !important;
+}
+
+body.dashboard-mode.standings-cup-layout .nba-cup-table tbody tr {
+  height: 66px !important;
+}
+
+/* Player development: hide the tracker scrollbar and let action buttons breathe. */
+body.dashboard-mode.player-development-layout .player-dev-tracker,
+body.dashboard-mode.player-development-layout .player-dev-tracker > div:last-child {
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-tracker::-webkit-scrollbar,
+body.dashboard-mode.player-development-layout .player-dev-tracker > div:last-child::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-action-card article {
+  grid-template-columns: 42px minmax(0, 1fr) !important;
+  align-items: center !important;
+  min-height: 92px !important;
+  padding: 10px !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-action-card article > div {
+  min-width: 0 !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-action-card article div div {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 7px !important;
+  margin-top: 8px !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-action-card .btn {
+  min-width: 78px !important;
+  min-height: 27px !important;
+  padding: 0 9px !important;
+  font-size: 7px !important;
+}
+
+/* Bottom-safe scroll lanes for awards and league-stats side panels. */
+body.dashboard-mode.awards-layout .awards-race-table {
+  grid-template-rows: auto minmax(0, 386px) 38px !important;
+  min-height: 466px !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap {
+  max-height: 386px !important;
+  padding-bottom: 34px !important;
+  scroll-padding-bottom: 34px !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap table {
+  margin-bottom: 34px !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-stats-action-center {
+  padding-bottom: 32px !important;
+  scroll-padding-bottom: 32px !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-stats-action-center > :last-child {
+  margin-bottom: 32px !important;
+}
+
+/* Scouting assignments: taller right-rail rows for cleaner names and status pills. */
+body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments {
+  grid-template-rows: auto repeat(3, minmax(68px, 1fr)) !important;
+  min-height: 284px !important;
+}
+
+body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments article {
+  grid-template-columns: 40px minmax(0, 1fr) 82px 64px !important;
+  min-height: 68px !important;
+  padding: 12px 6px !important;
+}
+
+body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments .scouting-mini-headshot {
+  width: 36px !important;
+  height: 36px !important;
+}
+
+/* Locker morale: keep the card title separate from the table labels. */
+body.dashboard-mode.locker-room-layout .locker-morale-panel {
+  grid-template-rows: 42px 24px minmax(0, 1fr) !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > header {
+  order: 1 !important;
+  min-height: 42px !important;
+  border-bottom: 1px solid #e1e8f4 !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel::before {
+  order: 2 !important;
+  align-items: center !important;
+  min-height: 24px !important;
+  padding: 0 14px 0 52px !important;
+  border-bottom: 1px solid #e1e8f4 !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div {
+  order: 3 !important;
+}
+
+/* Player development action alerts: restore text-left, headshot-right layout. */
+body.dashboard-mode.player-development-layout .player-dev-action-card article {
+  grid-template-columns: minmax(0, 1fr) 46px !important;
+  grid-template-areas: "content photo" !important;
+  gap: 10px !important;
+  align-items: center !important;
+  min-height: 104px !important;
+  padding: 11px !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-action-card article > img,
+body.dashboard-mode.player-development-layout .player-dev-action-card article > .development-action-headshot {
+  grid-area: photo !important;
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  align-self: center !important;
+  justify-self: center !important;
+  width: 42px !important;
+  height: 42px !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-action-card article > div {
+  grid-area: content !important;
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  display: grid !important;
+  gap: 4px !important;
+  min-width: 0 !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-action-card article span,
+body.dashboard-mode.player-development-layout .player-dev-action-card article strong,
+body.dashboard-mode.player-development-layout .player-dev-action-card article small {
+  display: block !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  line-height: 1.2 !important;
+  text-overflow: ellipsis !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-action-card article div div {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(76px, 1fr)) !important;
+  gap: 7px !important;
+  margin-top: 6px !important;
+}
+
+/* Locker action center: keep buttons inside each alert card while preserving outer card size. */
+body.dashboard-mode.locker-room-layout .locker-issue-list {
+  gap: 9px !important;
+  padding: 9px 8px 22px !important;
+  scroll-padding-bottom: 22px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-issue-list article {
+  grid-template-columns: 28px minmax(0, 1fr) 44px !important;
+  align-items: center !important;
+  min-height: 96px !important;
+  padding: 8px 9px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-issue-list article > div {
+  min-width: 0 !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-issue-list article span,
+body.dashboard-mode.locker-room-layout .locker-issue-list article strong,
+body.dashboard-mode.locker-room-layout .locker-issue-list article small {
+  display: block !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  line-height: 1.18 !important;
+  text-overflow: ellipsis !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-issue-list article small {
+  margin: 3px 0 5px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-issue-list article div div {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 28px !important;
+  gap: 7px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-issue-list .btn {
+  min-height: 24px !important;
+  padding: 0 6px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-issue-headshot {
+  width: 38px !important;
+  height: 38px !important;
+}
+
+/* Keep the Action Center card size, but make each alert box more compact. */
+body.dashboard-mode.locker-room-layout .locker-issue-list article {
+  gap: 7px !important;
+  min-height: 82px !important;
+  padding: 7px 8px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-issue-list article strong {
+  margin-top: 1px !important;
+  font-size: 8px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-issue-list article small {
+  margin: 2px 0 4px !important;
+  font-size: 8px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-issue-list article div div {
+  gap: 6px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-issue-list .btn {
+  min-height: 22px !important;
+  padding: 0 6px !important;
+  font-size: 7px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-issue-headshot {
+  width: 34px !important;
+  height: 34px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-quick-actions {
+  min-height: 154px !important;
+  padding: 13px 12px 16px !important;
+  overflow: visible !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-quick-actions > div {
+  align-items: stretch !important;
+  gap: 9px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-quick-actions .btn {
+  min-height: 44px !important;
+}
+
+/* Locker morale footer: rounded bottom action strip. */
+body.dashboard-mode.locker-room-layout .locker-morale-panel {
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::after {
+  display: grid !important;
+  place-items: center !important;
+  min-height: 48px !important;
+  margin: 0 !important;
+  padding: 0 12px !important;
+  border-top: 1px solid #e1e8f4 !important;
+  border-radius: 0 0 14px 14px !important;
+  background: rgba(255, 255, 255, .96) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7) !important;
+  line-height: 1 !important;
+  text-align: center !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div {
+  padding-right: 10px !important;
+  scrollbar-gutter: stable !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(7, 83, 255, .82) rgba(222, 231, 247, .72) !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrollbar {
+  width: 10px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrollbar-track {
+  border-radius: 999px !important;
+  background: rgba(222, 231, 247, .72) !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(222, 231, 247, .72) !important;
+  border-radius: 999px !important;
+  background: rgba(7, 83, 255, .82) !important;
+  background-clip: padding-box !important;
+}
+
+/* Always show the Player Morale scroll rail. */
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div {
+  position: relative !important;
+  overflow-y: scroll !important;
+  padding-right: 14px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::before {
+  position: sticky !important;
+  top: 8px !important;
+  float: right !important;
+  display: block !important;
+  width: 7px !important;
+  height: calc(100% - 16px) !important;
+  min-height: 120px !important;
+  margin-right: -10px !important;
+  border-radius: 999px !important;
+  background: rgba(222, 231, 247, .9) !important;
+  content: "" !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::after {
+  z-index: 1 !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrollbar {
+  width: 12px !important;
+  background: rgba(222, 231, 247, .55) !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrollbar-thumb {
+  min-height: 46px !important;
+  border: 2px solid rgba(222, 231, 247, .65) !important;
+  background: #0753ff !important;
+}
+
+/* Player development tracker: visible internal scroll for longer player lists. */
+body.dashboard-mode.player-development-layout .player-dev-tracker {
+  display: grid !important;
+  grid-template-rows: auto auto minmax(0, 1fr) !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-tracker > div:last-child {
+  min-height: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding-right: 8px !important;
+  padding-bottom: 18px !important;
+  scroll-padding-bottom: 18px !important;
+  scrollbar-gutter: stable !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(7, 83, 255, .82) rgba(222, 231, 247, .72) !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-tracker > div:last-child::-webkit-scrollbar {
+  display: block !important;
+  width: 10px !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-tracker > div:last-child::-webkit-scrollbar-track {
+  border-radius: 999px !important;
+  background: rgba(222, 231, 247, .72) !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-tracker > div:last-child::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(222, 231, 247, .72) !important;
+  border-radius: 999px !important;
+  background: rgba(7, 83, 255, .82) !important;
+  background-clip: padding-box !important;
+}
+
+/* Locker right rail: shorten Action Center so the full rail fits without clipping. */
+body.dashboard-mode.locker-room-layout .locker-action-center {
+  grid-template-rows: 470px auto auto !important;
+  gap: 10px !important;
+  overflow: visible !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-action-center > .locker-panel {
+  height: 470px !important;
+  max-height: 470px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-action-center > .locker-panel .locker-issue-list {
+  max-height: 418px !important;
+}
+
+/* Player Morale: keep a visible scrollbar lane inside the card. */
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div {
+  overflow-y: scroll !important;
+  padding-right: 22px !important;
+  background:
+    linear-gradient(#0753ff, #0753ff) right 7px top 82px / 7px 86px no-repeat,
+    linear-gradient(rgba(218, 228, 246, .95), rgba(218, 228, 246, .95)) right 7px top 10px / 7px calc(100% - 70px) no-repeat !important;
+  scrollbar-gutter: stable !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::before {
+  display: none !important;
+  content: none !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::after {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 58px !important;
+  padding: 8px 12px 0 !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrollbar {
+  display: block !important;
+  width: 13px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrollbar-track {
+  border-radius: 999px !important;
+  background: rgba(218, 228, 246, .95) !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrollbar-thumb {
+  min-height: 64px !important;
+  border: 3px solid rgba(218, 228, 246, .95) !important;
+  border-radius: 999px !important;
+  background: #0753ff !important;
+  background-clip: padding-box !important;
+}
+
+/* Player Morale footer label: visual center in the rounded bottom strip. */
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::after {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 64px !important;
+  min-height: 64px !important;
+  padding: 10px 22px 0 0 !important;
+  box-sizing: border-box !important;
+  line-height: 1 !important;
+  text-align: center !important;
+}
+
+/* NBA Cup standings: remove the extra empty tail under the rows. */
+body.dashboard-mode.standings-cup-layout .nba-cup-card {
+  align-self: start !important;
+  height: auto !important;
+  min-height: 0 !important;
+  grid-template-rows: auto auto !important;
+}
+
+body.dashboard-mode.standings-cup-layout .nba-cup-grid {
+  height: auto !important;
+  min-height: 0 !important;
+  align-content: start !important;
+}
+
+body.dashboard-mode.standings-cup-layout .nba-cup-table {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* Player Morale: compact columns so the table fits the narrow card cleanly. */
+body.dashboard-mode.locker-room-layout .locker-morale-panel::before,
+body.dashboard-mode.locker-room-layout .locker-morale-panel article {
+  grid-template-columns: 26px minmax(0, 1fr) 58px 28px 56px !important;
+  gap: 6px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel::before {
+  padding-left: 44px !important;
+  padding-right: 8px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel article {
+  padding-left: 10px !important;
+  padding-right: 8px !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel article b,
+body.dashboard-mode.locker-room-layout .locker-morale-panel article em,
+body.dashboard-mode.locker-room-layout .locker-morale-panel article > small:last-child {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-align: center !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div {
+  padding-right: 12px !important;
+  background:
+    linear-gradient(#0753ff, #0753ff) right 4px top 82px / 5px 80px no-repeat,
+    linear-gradient(rgba(218, 228, 246, .95), rgba(218, 228, 246, .95)) right 4px top 10px / 5px calc(100% - 70px) no-repeat !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::after {
+  width: calc(100% + 12px) !important;
+  margin-right: -12px !important;
+  padding: 10px 0 0 !important;
+}
+
+/* Player Morale: draw the scroll rail on the card so it stays visible. */
+body.dashboard-mode.locker-room-layout .locker-morale-panel {
+  position: relative !important;
+}
+
+body.dashboard-mode.locker-room-layout .locker-morale-panel::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Player Morale footer: tighter bottom action strip. */
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div::after {
+  height: 42px !important;
+  min-height: 42px !important;
+  padding: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Player Morale: one visible native scrollbar only. */
+body.dashboard-mode.locker-room-layout .locker-morale-panel > div {
+  padding-right: 4px !important;
+  background: transparent !important;
+  scrollbar-gutter: stable !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #0753ff rgba(218, 228, 246, .9) !important;
+}
+
+/* Social DM button: larger icon with a clean rounded shadow. */
+body.dashboard-mode.social-layout-page .social-quick-dms {
+  width: 70px !important;
+  height: 70px !important;
+  min-width: 70px !important;
+  border: 1px solid rgba(255, 255, 255, .3) !important;
+  border-radius: 21px !important;
+  background: linear-gradient(145deg, #020204 0%, #050608 54%, #111318 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), inset 0 -1px 0 rgba(255, 255, 255, .04) !important;
+  filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .34)) drop-shadow(0 0 10px rgba(255, 255, 255, .12)) !important;
+}
+
+body.dashboard-mode.social-layout-page .social-quick-dms::before {
+  width: 38px !important;
+  height: 27px !important;
+  border-width: 4px !important;
+  border-radius: 18px !important;
+  transform: translateY(-2px) !important;
+}
+
+body.dashboard-mode.social-layout-page .social-quick-dms::after {
+  left: 22px !important;
+  bottom: 19px !important;
+  width: 13px !important;
+  height: 11px !important;
+  border-width: 0 0 4px 4px !important;
+  border-bottom-left-radius: 8px !important;
+}
+
+/* Social sidebar: give Trending Topics the taller reference-card rhythm. */
+body.dashboard-mode.social-layout-page .social-trends {
+  min-height: 310px !important;
+  padding: 16px 16px 18px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-trends header {
+  min-height: 48px !important;
+  margin-bottom: 8px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-trends article {
+  min-height: 54px !important;
+  padding: 13px 0 !important;
+  grid-template-columns: 34px minmax(0, 1fr) 22px !important;
+  gap: 11px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-trends article > b {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-trends article strong {
+  font-size: 11px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-trends article small {
+  margin-top: 3px !important;
+  font-size: 10px !important;
+}
+
+/* Social DM button: remove the oversized gap below Trending Topics. */
+body.dashboard-mode.social-layout-page .social-quick-dms {
+  margin: 14px 12px 0 auto !important;
+}
+
+/* Staff list: remove the blank white strip under the final row. */
+body.dashboard-mode.staff-layout .staff-list-body {
+  padding-bottom: 0 !important;
+  scroll-padding-bottom: 0 !important;
+}
+
+body.dashboard-mode.staff-layout .staff-list-panel > footer {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+body.dashboard-mode.staff-layout .staff-list-row:last-child {
+  border-bottom: 0 !important;
+}
+
+/* Staff Open Positions: match top corner radius and stop footer clipping. */
+body.dashboard-mode.staff-layout .staff-openings-panel {
+  border-radius: 10px !important;
+  clip-path: inset(0 round 10px) !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.staff-layout .staff-openings-panel > footer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 46px !important;
+  min-height: 46px !important;
+  padding: 8px 12px 10px !important;
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+  overflow: visible !important;
+}
+
+body.dashboard-mode.staff-layout .staff-openings-panel > footer .mini-action {
+  min-height: 28px !important;
+  line-height: 1 !important;
+}
+
+/* Staff Breakdown: reduce the overly rounded bottom corners. */
+body.dashboard-mode.staff-layout .staff-breakdown-panel {
+  border-radius: 10px !important;
+  clip-path: inset(0 round 10px) !important;
+}
+
+body.dashboard-mode.staff-layout .staff-breakdown-panel > footer,
+body.dashboard-mode.staff-layout .staff-breakdown-row:last-of-type {
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+/* Scouting assignments: give the right-rail assignment list more height. */
+body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments {
+  grid-template-rows: auto repeat(3, minmax(78px, 1fr)) !important;
+  min-height: 330px !important;
+}
+
+body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments article {
+  grid-template-columns: 40px minmax(0, 1fr) 82px 64px !important;
+  min-height: 78px !important;
+  padding: 14px 6px !important;
+}
+
+body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments .scouting-mini-headshot {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+/* Social DM button: larger and nudged lower. */
+body.dashboard-mode.social-layout-page .social-quick-dms {
+  width: 82px !important;
+  height: 82px !important;
+  min-width: 82px !important;
+  border-radius: 24px !important;
+  margin: 24px 10px 0 auto !important;
+  filter: drop-shadow(0 16px 20px rgba(0, 0, 0, .36)) drop-shadow(0 0 12px rgba(255, 255, 255, .12)) !important;
+}
+
+body.dashboard-mode.social-layout-page .social-quick-dms::before {
+  width: 44px !important;
+  height: 31px !important;
+  border-width: 4px !important;
+  border-radius: 20px !important;
+  transform: translateY(-2px) !important;
+}
+
+body.dashboard-mode.social-layout-page .social-quick-dms::after {
+  left: 26px !important;
+  bottom: 23px !important;
+  width: 14px !important;
+  height: 12px !important;
+}
+
+/* Staff list: keep the final row fully reachable without the old empty footer strip. */
+body.dashboard-mode.staff-layout .staff-list-body {
+  padding-bottom: 18px !important;
+  scroll-padding-bottom: 18px !important;
+}
+
+body.dashboard-mode.staff-layout .staff-list-row:last-child {
+  margin-bottom: 8px !important;
+}
+
+/* Staff Open Positions: restore visible rounded bottom corners. */
+body.dashboard-mode.staff-layout .staff-openings-panel {
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+  overflow: hidden !important;
+  clip-path: inset(0 round 10px) !important;
+  contain: paint !important;
+}
+
+body.dashboard-mode.staff-layout .staff-openings-panel > footer {
+  margin-bottom: 0 !important;
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+  overflow: hidden !important;
+}
+
+/* Social DM button: remove the visible drop-shadow patch. */
+body.dashboard-mode.social-layout-page .social-quick-dms {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Staff list: show the rounded card bottom and let the last row clear it. */
+body.dashboard-mode.staff-layout .staff-office-layout {
+  padding-bottom: 24px !important;
+  box-sizing: border-box !important;
+}
+
+body.dashboard-mode.staff-layout .staff-list-panel {
+  height: calc(100% - 12px) !important;
+  max-height: calc(100% - 12px) !important;
+  border-radius: 10px !important;
+  clip-path: inset(0 round 10px) !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.staff-layout .staff-list-body {
+  padding-bottom: 36px !important;
+  scroll-padding-bottom: 36px !important;
+}
+
+body.dashboard-mode.staff-layout .staff-list-row:last-child {
+  margin-bottom: 14px !important;
+}
+
+/* Staff Open Positions: let the rounded panel surface own the bottom edge. */
+body.dashboard-mode.staff-layout .staff-openings-panel {
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, .94) !important;
+  background-clip: padding-box !important;
+  overflow: hidden !important;
+  clip-path: inset(0 round 10px) !important;
+  isolation: isolate !important;
+}
+
+body.dashboard-mode.staff-layout .staff-openings-panel > header,
+body.dashboard-mode.staff-layout .staff-openings-panel .staff-opening-row,
+body.dashboard-mode.staff-layout .staff-openings-panel > footer {
+  background: transparent !important;
+}
+
+/* Locker right rail: let gaps between cards show the page background in dark mode. */
+body.dark-mode.dashboard-mode.locker-room-layout .locker-action-center {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+body.dashboard-mode.staff-layout .staff-openings-panel > footer {
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+/* Social DM icon: match the simpler rounded chat outline reference. */
+body.dashboard-mode.social-layout-page .social-quick-dms,
+body.dashboard-mode.social-layout-page .social-dms-button {
+  display: grid !important;
+  place-items: center !important;
+}
+
+body.dashboard-mode.social-layout-page .social-quick-dms::before,
+body.dashboard-mode.social-layout-page .social-dms-button::before {
+  width: 37px !important;
+  height: 31px !important;
+  border: 4px solid #fff !important;
+  border-radius: 999px !important;
+  transform: translateY(0) !important;
+  content: "" !important;
+}
+
+body.dashboard-mode.social-layout-page .social-quick-dms::after,
+body.dashboard-mode.social-layout-page .social-dms-button::after {
+  left: 24px !important;
+  bottom: 24px !important;
+  width: 12px !important;
+  height: 12px !important;
+  border: 0 !important;
+  border-bottom: 4px solid #fff !important;
+  border-left: 4px solid #fff !important;
+  border-bottom-left-radius: 8px !important;
+  background: transparent !important;
+  transform: rotate(-10deg) skew(-8deg) !important;
+  content: "" !important;
+}
+
+/* Staff list: trim the extra bottom strip while keeping the final row reachable. */
+body.dashboard-mode.staff-layout .staff-list-body {
+  padding-bottom: 8px !important;
+  scroll-padding-bottom: 8px !important;
+}
+
+body.dashboard-mode.staff-layout .staff-list-row:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Topbar dark-mode toggle beside the week pill and close button. */
+body.dashboard-mode .topbar-team {
+  gap: 8px !important;
+}
+
+body.dashboard-mode .theme-toggle-button {
+  position: relative !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  padding: 0 !important;
+  border: 1px solid #c6d0e4 !important;
+  border-radius: 6px !important;
+  color: var(--navy) !important;
+  background: rgba(255, 255, 255, .84) !important;
+  box-shadow: 0 8px 20px rgba(7, 26, 100, .08) !important;
+  cursor: pointer !important;
+}
+
+body.dashboard-mode .theme-toggle-button::before {
+  width: 15px !important;
+  height: 15px !important;
+  border-radius: 999px !important;
+  background: var(--navy) !important;
+  box-shadow: inset -5px -3px 0 rgba(255, 255, 255, .92) !important;
+  content: "" !important;
+}
+
+body.dashboard-mode .theme-toggle-button.active::before {
+  width: 14px !important;
+  height: 14px !important;
+  background: #f9c74f !important;
+  box-shadow:
+    0 -9px 0 -5px #f9c74f,
+    0 9px 0 -5px #f9c74f,
+    9px 0 0 -5px #f9c74f,
+    -9px 0 0 -5px #f9c74f,
+    6px 6px 0 -5px #f9c74f,
+    -6px 6px 0 -5px #f9c74f,
+    6px -6px 0 -5px #f9c74f,
+    -6px -6px 0 -5px #f9c74f !important;
+}
+
+body.dark-mode.dashboard-mode {
+  --navy: #edf3ff;
+  --secondary-ink: #edf3ff;
+  --secondary-muted: #aebadc;
+  --secondary-surface: rgba(15, 20, 35, .9);
+  --secondary-stroke: rgba(128, 148, 190, .42);
+  color: #edf3ff !important;
+}
+
+body.dark-mode.dashboard-mode .broadcast-shell {
+  background:
+    linear-gradient(90deg, rgba(5, 8, 18, .9), rgba(14, 18, 35, .72)),
+    url("../../assets/nba-manager-bg-og.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+body.dark-mode.dashboard-mode .topbar {
+  color: #edf3ff !important;
+  border-bottom-color: rgba(111, 132, 176, .38) !important;
+  background: rgba(8, 12, 24, .84) !important;
+}
+
+body.dark-mode.dashboard-mode .career-date-pill,
+body.dark-mode.dashboard-mode .topbar-team .menu-link,
+body.dark-mode.dashboard-mode .theme-toggle-button {
+  border-color: rgba(134, 155, 202, .55) !important;
+  color: #edf3ff !important;
+  background: rgba(18, 24, 42, .92) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .18) !important;
+}
+
+body.dark-mode.dashboard-mode .career-date-pill span,
+body.dark-mode.dashboard-mode .career-date-pill strong,
+body.dark-mode.dashboard-mode .career-date-pill b,
+body.dark-mode.dashboard-mode .topbar-team .menu-link::after {
+  color: #edf3ff !important;
+}
+
+body.dark-mode.dashboard-mode .card,
+body.dark-mode.dashboard-mode .page-shell-header,
+body.dark-mode.dashboard-mode .context-sidebar {
+  border-color: rgba(128, 148, 190, .38) !important;
+  color: #edf3ff !important;
+  background: rgba(15, 20, 35, .82) !important;
+}
+

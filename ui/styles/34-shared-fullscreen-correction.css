@@ -1,0 +1,1203 @@
+﻿/* Full-screen correction: keep enlarged top blocks without breaking the dashboard fit. */
+@media (min-width: 1400px) and (min-height: 760px) {
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) .workspace {
+    height: calc(100vh - 76px) !important;
+    padding: 18px !important;
+    overflow: clip !important;
+    scrollbar-gutter: auto !important;
+  }
+
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) .broadcast-shell {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: clip !important;
+  }
+
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) .main-shell {
+    height: calc(100vh - 76px) !important;
+    max-height: calc(100vh - 76px) !important;
+    overflow: clip !important;
+  }
+
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) .page {
+    height: auto !important;
+    max-height: calc(100vh - 112px) !important;
+    overflow: hidden !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-page,
+  body.dashboard-mode.finance-layout .finance-dashboard {
+    height: calc(100vh - 112px) !important;
+    max-height: calc(100vh - 112px) !important;
+    gap: 8px !important;
+    overflow: hidden !important;
+  }
+
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) :is(.scouting-page-header h1, .finance-page-header h1) {
+    font-size: 29px !important;
+    line-height: .95 !important;
+  }
+
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) :is(.scouting-page-header p, .finance-page-header p) {
+    margin-top: 3px !important;
+    font-size: 11px !important;
+  }
+
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) :is(.scouting-page-header .btn, .finance-page-header .btn) {
+    min-height: 32px !important;
+    padding: 6px 12px !important;
+    font-size: 10px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-metrics,
+  body.dashboard-mode.finance-layout .finance-top-metrics {
+    gap: 7px !important;
+    min-width: 0 !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-metrics {
+    padding: 10px 12px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-top-metrics {
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-metric-card,
+  body.dashboard-mode.finance-layout .finance-dash-metric,
+  body.dashboard-mode.finance-layout .finance-apron-metric {
+    min-width: 0 !important;
+    min-height: 74px !important;
+    padding: 8px 10px !important;
+    gap: 3px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-metric-card strong,
+  body.dashboard-mode.finance-layout .finance-dash-metric strong,
+  body.dashboard-mode.finance-layout .finance-apron-metric strong {
+    font-size: 22px !important;
+    line-height: .98 !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-metric-card small,
+  body.dashboard-mode.finance-layout .finance-dash-metric small,
+  body.dashboard-mode.finance-layout .finance-dash-metric em,
+  body.dashboard-mode.finance-layout .finance-apron-metric small {
+    font-size: 9px !important;
+    line-height: 1.15 !important;
+  }
+
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) :is(.scouting-metric-card span, .finance-dash-metric span, .finance-apron-metric span) {
+    font-size: 9px !important;
+    line-height: 1.1 !important;
+  }
+
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) :is(.scouting-metric-card i, .finance-dash-metric i, .finance-apron-metric i) {
+    height: 4px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-page {
+    grid-template-rows: auto 112px 32px minmax(0, 1fr) !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-metric-card {
+    min-height: 90px !important;
+    padding: 11px 12px !important;
+    gap: 5px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-metric-card strong {
+    font-size: 25px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-metric-card i {
+    height: 5px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-tabs {
+    min-height: 32px !important;
+    gap: 6px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-tabs button {
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 12px !important;
+    font-size: 9px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-board-layout {
+    height: 100% !important;
+    grid-template-columns: minmax(320px, .9fr) minmax(470px, 1.22fr) minmax(300px, .8fr) !important;
+    grid-template-rows: 438px minmax(172px, 1fr) !important;
+    gap: 8px !important;
+    align-items: stretch !important;
+    align-content: start !important;
+    overflow: hidden !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-right-rail,
+  body.dashboard-mode.finance-layout .finance-right-rail {
+    gap: 8px !important;
+    overflow: hidden !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-right-rail {
+    grid-template-rows: minmax(0, 1fr) auto !important;
+    align-content: start !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-action-center {
+    min-height: 0 !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments {
+    align-self: end !important;
+  }
+
+  body.dashboard-mode.scouting-layout :is(.scouting-draft-board, .scouting-selected-panel, .scouting-action-center, .scouting-assignments, .scouting-team-summary, .scouting-coverage-map, .scouting-staff-recs, .scouting-comparison-widget) {
+    padding: 9px !important;
+    overflow: hidden !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-selected-panel {
+    align-self: start !important;
+    height: 438px !important;
+    max-height: 438px !important;
+    min-height: 0 !important;
+    grid-template-rows: auto auto auto auto auto auto !important;
+    gap: 5px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-draft-board {
+    align-self: start !important;
+    height: 438px !important;
+    max-height: 438px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-draft-board > div:last-of-type {
+    max-height: 336px !important;
+    overflow: auto !important;
+  }
+
+  body.dashboard-mode.scouting-layout :is(.scouting-board-head, .scouting-draft-board button[data-view-player]) {
+    min-height: 29px !important;
+    padding: 4px 7px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-row-headshot {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-selected-panel > header {
+    grid-template-columns: 56px minmax(0, 1fr) 88px !important;
+    gap: 10px !important;
+    align-items: center !important;
+    min-height: 72px !important;
+    margin-bottom: 4px !important;
+    padding-bottom: 8px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-selected-headshot {
+    width: 54px !important;
+    height: 54px !important;
+    border-radius: 9px !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-selected-panel > header > div {
+    align-self: center !important;
+    display: grid !important;
+    gap: 2px !important;
+    min-width: 0 !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-selected-panel > header > div strong {
+    overflow: hidden !important;
+    color: #071b60 !important;
+    font-size: 21px !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-selected-panel > header > div small {
+    overflow: hidden !important;
+    font-size: 10px !important;
+    line-height: 1.25 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-selected-panel header aside {
+    align-self: center !important;
+    justify-items: start !important;
+    gap: 2px !important;
+    min-height: 64px !important;
+    padding: 7px 8px !important;
+    border-radius: 7px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-selected-panel header aside span,
+  body.dashboard-mode.scouting-layout .scouting-selected-panel header aside small {
+    font-size: 9px !important;
+    line-height: 1.15 !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-selected-panel header aside b {
+    font-size: 22px !important;
+    line-height: 1 !important;
+    justify-self: end !important;
+  }
+
+  body.dashboard-mode.scouting-layout :is(.scouting-profile-chips, .scouting-report-grid, .scouting-fit-grid) {
+    gap: 5px !important;
+    margin-bottom: 5px !important;
+  }
+
+  body.dashboard-mode.scouting-layout :is(.scouting-profile-chips span, .scouting-report-grid article, .scouting-fit-grid article) {
+    padding: 5px 6px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-profile-chips b,
+  body.dashboard-mode.scouting-layout .scouting-report-grid strong,
+  body.dashboard-mode.scouting-layout .scouting-fit-grid strong {
+    font-size: 13px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-report-grid strong {
+    font-size: 20px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-fit-grid small {
+    font-size: 8px !important;
+    line-height: 1.25 !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-report-tabs {
+    min-height: 27px !important;
+    margin-bottom: 5px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-report-tabs button {
+    min-height: 25px !important;
+    font-size: 8px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-fit-grid {
+    align-self: start !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-fit-grid article {
+    align-content: start !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-next-steps {
+    margin-top: 2px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-next-steps .btn {
+    min-height: 28px !important;
+    padding: 5px 10px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-action-center article:nth-of-type(n+5),
+  body.dashboard-mode.scouting-layout .scouting-team-summary {
+    display: none !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-bottom-team-summary {
+    display: block !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-bottom-team-summary > div {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-bottom-team-summary article {
+    min-height: 84px !important;
+    padding: 8px 5px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-bottom-team-summary article span {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  body.dashboard-mode.scouting-layout :is(.scouting-action-center article, .scouting-assignments article, .scouting-staff-recs article) {
+    gap: 6px !important;
+    padding: 6px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments article {
+    min-height: 31px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-bottom-grid {
+    grid-template-columns: .95fr .95fr 1fr !important;
+    gap: 8px !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-bottom-grid > .card {
+    height: 100% !important;
+    min-height: 0 !important;
+    padding: 10px !important;
+  }
+
+  body.dashboard-mode.scouting-layout :is(.scouting-bottom-grid header, .scouting-comparison-widget header) {
+    min-height: 30px !important;
+    margin-bottom: 6px !important;
+    padding-bottom: 5px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-coverage-map > div {
+    height: 118px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-dashboard {
+    grid-template-rows: auto 96px minmax(0, 1fr) 154px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-page-header > div:last-child {
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-header-policy {
+    min-width: 152px !important;
+    padding: 5px 9px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-header-policy select {
+    min-height: 22px !important;
+    font-size: 10px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-main-grid {
+    grid-template-columns: minmax(430px, 1.18fr) minmax(230px, .7fr) minmax(230px, .7fr) minmax(260px, .74fr) !important;
+    gap: 8px !important;
+    align-items: stretch !important;
+    overflow: hidden !important;
+    min-height: 0 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-center-stack {
+    gap: 7px !important;
+    overflow: hidden !important;
+    min-height: 0 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-center-stack:has(.finance-cap-overview) {
+    grid-template-rows: minmax(0, 1fr) 210px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-center-stack:has(.finance-payroll-timeline) {
+    grid-template-rows: 268px 154px minmax(0, 1fr) !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-right-rail {
+    grid-template-rows: minmax(0, 1fr) 210px !important;
+    min-height: 0 !important;
+  }
+
+  body.dashboard-mode.finance-layout :is(.finance-cap-sheet, .finance-cap-overview, .finance-payroll-timeline, .finance-breakdown, .finance-owner-profile, .finance-activity, .finance-action-center, .finance-advisor, .finance-mini-list, .finance-exceptions) {
+    padding: 8px !important;
+    overflow: hidden !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet {
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    align-self: stretch !important;
+    height: 100% !important;
+    min-height: 0 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet table {
+    min-width: 0 !important;
+    table-layout: fixed !important;
+    font-size: 8px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td) {
+    height: 22px !important;
+    padding: 2px 4px !important;
+    font-size: 8px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td):nth-child(1) {
+    width: 38% !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td):nth-child(2) {
+    width: 11% !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td):nth-child(3) {
+    width: 15% !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td):nth-child(4) {
+    width: 8% !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td):nth-child(5) {
+    width: 11% !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td):nth-child(6) {
+    width: 6% !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td):nth-child(7) {
+    width: 11% !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet td:first-child {
+    min-width: 0 !important;
+    gap: 5px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet td:first-child span {
+    min-width: 0 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet td:first-child :is(strong, small) {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet td em {
+    display: inline-flex !important;
+    max-width: 100% !important;
+    padding: 2px 4px !important;
+    white-space: normal !important;
+    line-height: 1.05 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet tbody tr:nth-child(n+10) {
+    display: none !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-player-headshot {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-overview article {
+    grid-template-columns: 74px 1fr 56px !important;
+    gap: 5px !important;
+    padding: 3px 0 !important;
+    font-size: 8px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-chart-legend {
+    gap: 10px !important;
+    margin-bottom: 2px !important;
+    font-size: 7px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-chart-legend span::before {
+    width: 14px !important;
+    margin-right: 4px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-bars {
+    min-height: 176px !important;
+    padding: 15px 8px 15px 34px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-bars article {
+    height: 144px !important;
+    gap: 5px !important;
+    font-size: 8px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-bars article b {
+    width: 30px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-bars article strong {
+    font-size: 8px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-bars > i {
+    right: 8px !important;
+    left: 34px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-axis {
+    inset: 12px auto 22px 5px !important;
+    width: 25px !important;
+    font-size: 7px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-breakdown {
+    grid-template-columns: 64px minmax(0, 1fr) !important;
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    gap: 6px 10px !important;
+    align-items: center !important;
+    align-content: start !important;
+    min-height: 0 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-donut,
+  body.dashboard-mode.finance-layout .finance-owner-score {
+    width: 58px !important;
+    height: 58px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-donut {
+    justify-self: center !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-donut b {
+    font-size: 10px !important;
+    line-height: 1 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-donut small {
+    font-size: 6px !important;
+    line-height: 1 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-breakdown ul {
+    align-self: center !important;
+    gap: 5px !important;
+    min-width: 0 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-breakdown li {
+    grid-template-columns: 9px minmax(0, 1fr) 46px !important;
+    gap: 4px !important;
+    font-size: 7px !important;
+    align-items: center !important;
+    min-width: 0 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-breakdown li b {
+    text-align: right !important;
+    white-space: nowrap !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-breakdown .mini-action {
+    justify-self: start !important;
+    min-height: 22px !important;
+    padding: 3px 8px !important;
+    font-size: 8px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-advisor {
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    align-content: start !important;
+    min-height: 0 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-owner-profile {
+    grid-template-columns: 74px minmax(0, 1fr) !important;
+    grid-template-rows: auto minmax(0, 1fr) !important;
+    gap: 8px 12px !important;
+    align-items: center !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-owner-score {
+    align-self: center !important;
+    justify-self: center !important;
+    width: 66px !important;
+    height: 66px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-owner-profile dl {
+    align-self: center !important;
+    grid-template-columns: 72px minmax(0, 1fr) !important;
+    gap: 7px 10px !important;
+    margin: 0 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-owner-profile dt,
+  body.dashboard-mode.finance-layout .finance-owner-profile dd {
+    font-size: 8px !important;
+    line-height: 1.1 !important;
+    white-space: nowrap !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-owner-score b {
+    font-size: 23px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-owner-score span {
+    font-size: 7px !important;
+    line-height: 1 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-owner-profile .mini-action {
+    display: none !important;
+    justify-self: start !important;
+    min-height: 22px !important;
+    padding: 3px 8px !important;
+    font-size: 8px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-activity {
+    min-height: 0 !important;
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr) !important;
+    align-self: stretch !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-activity header {
+    min-height: 30px !important;
+    margin-bottom: 4px !important;
+    padding-bottom: 5px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-activity article:nth-of-type(n+4) {
+    display: none !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-activity article {
+    min-height: 34px !important;
+    padding: 4px 0 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-action-center article:nth-of-type(n+5) {
+    display: none !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-action-center article {
+    min-height: 56px !important;
+    padding: 6px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-action-headshot,
+  body.dashboard-mode.finance-layout .finance-action-center article > i {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  body.dashboard-mode.finance-layout :is(.finance-action-center article .btn, .mini-action) {
+    min-height: 23px !important;
+    padding: 3px 7px !important;
+    font-size: 8px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-advisor div {
+    grid-template-columns: 40px 1fr !important;
+    gap: 8px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-advisor div span {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-lower-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  body.dashboard-mode.finance-layout :is(.finance-mini-list article, .finance-exceptions article, .finance-activity article) {
+    min-height: 34px !important;
+    padding: 6px 0 !important;
+    font-size: 9px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-mini-list {
+    display: grid !important;
+    grid-template-rows: auto minmax(0, auto) minmax(0, auto) !important;
+    align-content: start !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-mini-list > .mini-action {
+    display: none !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-exceptions {
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    align-content: start !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-exceptions > .mini-action {
+    align-self: end !important;
+    margin-top: 2px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-activity > div {
+    display: grid !important;
+    grid-template-rows: repeat(3, minmax(38px, auto)) !important;
+    align-content: start !important;
+    min-height: 114px !important;
+    overflow: hidden !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-activity article {
+    min-height: 38px !important;
+    padding: 4px 0 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-activity article small {
+    line-height: 1.15 !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-dashboard-policy {
+    min-height: 0 !important;
+    grid-template-columns: minmax(0, 1fr) 170px 160px !important;
+    padding: 6px 10px !important;
+    overflow: hidden !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-dashboard-policy p {
+    display: none !important;
+  }
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) {
+  background: var(--bg) !important;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) .broadcast-shell {
+  background:
+    linear-gradient(90deg, rgba(238, 243, 250, .76), rgba(226, 234, 246, .54)),
+    url("../../assets/nba-manager-bg-og.png") center / cover no-repeat !important;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(.main-shell, .workspace) {
+  background: transparent !important;
+}
+
+body.dashboard-mode.gameplan-layout .workspace {
+  overflow: hidden !important;
+  padding: 12px 22px 14px !important;
+}
+
+body.dashboard-mode.gameplan-layout .workspace::-webkit-scrollbar,
+body.dashboard-mode.gameplan-layout .custom-scrollbar-shell--workspace {
+  display: none !important;
+}
+
+body.dashboard-mode.gameplan-layout .page {
+  width: min(1320px, 100%) !important;
+  max-width: 1320px !important;
+  height: calc(100vh - 88px) !important;
+  max-height: calc(100vh - 88px) !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-page {
+  display: grid !important;
+  grid-template-rows: 38px 98px 34px minmax(0, 1fr) 56px !important;
+  gap: 7px !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-header {
+  align-items: start !important;
+  min-height: 0 !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-header .page-title {
+  font-size: 24px !important;
+  line-height: .95 !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-header p {
+  margin-top: 2px !important;
+  font-size: 10px !important;
+}
+
+body.dashboard-mode.gameplan-layout :is(.gameplan-actions, .gameplan-tabs) {
+  gap: 7px !important;
+}
+
+body.dashboard-mode.gameplan-layout :is(.gameplan-actions button, .gameplan-tabs button, .gameplan-footer button, .gameplan-action-grid button, .gameplan-pill-group button, .gameplan-manage) {
+  min-height: 28px !important;
+  padding: 5px 9px !important;
+  font-size: 9px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-summary-grid {
+  gap: 8px !important;
+  min-height: 0 !important;
+}
+
+body.dashboard-mode.gameplan-layout :is(.gameplan-matchup-card, .gameplan-summary-card) {
+  min-height: 98px !important;
+  padding: 12px 14px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-summary-card {
+  padding-left: 58px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-summary-card::before {
+  top: 20px !important;
+  left: 17px !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-matchup-card > div {
+  gap: 10px !important;
+  margin: 6px 0 4px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-team-logo {
+  width: 38px !important;
+  height: 38px !important;
+}
+
+body.dashboard-mode.gameplan-layout :is(.gameplan-matchup-card strong, .gameplan-summary-card strong) {
+  font-size: 17px !important;
+}
+
+body.dashboard-mode.gameplan-layout :is(.gameplan-matchup-card small, .gameplan-summary-card small) {
+  margin-top: 4px !important;
+  font-size: 9px !important;
+  line-height: 1.15 !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-tabs {
+  min-height: 32px !important;
+  padding: 0 6px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-tabs button {
+  min-width: 0 !important;
+  flex: 1 1 0 !important;
+  height: 30px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-main-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 285px !important;
+  gap: 8px !important;
+  align-self: stretch !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-main {
+  display: grid !important;
+  grid-template-rows: 188px 140px minmax(150px, 1fr) !important;
+  gap: 8px !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-rail {
+  width: auto !important;
+  gap: 8px !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  grid-template-rows: minmax(0, 1fr) 146px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-card {
+  padding: 9px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-offense-card {
+  grid-template-columns: .9fr 1fr 1.15fr !important;
+  gap: 8px !important;
+}
+
+body.dashboard-mode.gameplan-layout :is(.gameplan-control-column, .gameplan-action-column, .gameplan-lower-grid .gameplan-card, .gameplan-scout-card) {
+  gap: 7px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-page .strategy-control select {
+  min-height: 28px !important;
+  padding: 4px 8px !important;
+  font-size: 10px !important;
+}
+
+body.dashboard-mode.gameplan-layout :is(.gameplan-page .strategy-control span, .gameplan-range span, .gameplan-shot-bar span, .gameplan-pill-group > span, .gameplan-card header h2, .gameplan-scout-card header strong) {
+  font-size: 8px !important;
+  line-height: 1.1 !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-pill-group,
+body.dashboard-mode.gameplan-layout .gameplan-action-grid {
+  gap: 5px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-toggle {
+  gap: 6px !important;
+  font-size: 9px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-toggle small,
+body.dashboard-mode.gameplan-layout .gameplan-range small,
+body.dashboard-mode.gameplan-layout .gameplan-scout-card span {
+  font-size: 8px !important;
+  line-height: 1.15 !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-scout-card {
+  padding: 8px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-scout-logo,
+body.dashboard-mode.gameplan-layout .gameplan-threat-shot {
+  width: 26px !important;
+  height: 26px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-scout-card article {
+  padding-left: 7px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-lower-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  min-height: 0 !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-shot-bar {
+  gap: 3px 6px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-shot-bar i {
+  height: 5px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-bottom-grid {
+  gap: 8px !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.gameplan-layout .matchup-assignments article:nth-of-type(n+3),
+body.dashboard-mode.gameplan-layout .coach-recommendations article:nth-of-type(n+3),
+body.dashboard-mode.gameplan-layout .opponent-threats article:nth-of-type(n+4) {
+  display: none !important;
+}
+
+body.dashboard-mode.gameplan-layout :is(.matchup-assignments article, .coach-recommendations article, .opponent-threats article, .action-center article) {
+  min-height: 0 !important;
+  padding: 5px 0 !important;
+  gap: 6px !important;
+}
+
+body.dashboard-mode.gameplan-layout .action-center {
+  display: grid !important;
+  grid-template-rows: auto repeat(3, minmax(86px, 1fr)) !important;
+  align-content: start !important;
+  gap: 7px !important;
+}
+
+body.dashboard-mode.gameplan-layout .action-center article {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 7px !important;
+  margin: 0 !important;
+  padding: 8px !important;
+  min-height: 86px !important;
+}
+
+body.dashboard-mode.gameplan-layout .action-center article > div {
+  min-width: 0 !important;
+}
+
+body.dashboard-mode.gameplan-layout .action-center article b {
+  display: block !important;
+  overflow: hidden !important;
+  font-size: 10px !important;
+  line-height: 1.1 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.gameplan-layout .action-center article span {
+  display: block !important;
+  margin-top: 3px !important;
+  font-size: 8px !important;
+  line-height: 1.2 !important;
+}
+
+body.dashboard-mode.gameplan-layout .action-center footer {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+}
+
+body.dashboard-mode.gameplan-layout .action-center footer button {
+  min-height: 27px !important;
+  padding: 4px 6px !important;
+  white-space: normal !important;
+  line-height: 1.05 !important;
+}
+
+body.dashboard-mode.gameplan-layout .action-center article:nth-of-type(n+4) {
+  display: none !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-footer {
+  align-items: center !important;
+  min-height: 0 !important;
+  padding: 7px 10px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-footer b {
+  width: 34px !important;
+  height: 34px !important;
+  border-width: 2px !important;
+}
+
+body.dashboard-mode.gameplan-layout .gameplan-footer .primary {
+  min-width: 220px !important;
+}
+
+body.dashboard-mode.standings-division-layout .standings-division-grid,
+body.dashboard-mode.standings-wildcard-layout .standings-conference-grid {
+  max-height: calc(100vh - 196px) !important;
+}
+
+body.dashboard-mode.standings-division-layout .standings-division-grid {
+  gap: 10px !important;
+}
+
+body.dashboard-mode:is(.standings-division-layout, .standings-wildcard-layout) .standings-title {
+  min-height: 44px !important;
+  padding: 8px 12px !important;
+}
+
+body.dashboard-mode.standings-division-layout .standings-table tbody tr {
+  height: 50px !important;
+}
+
+body.dashboard-mode.standings-wildcard-layout .standings-table tbody tr {
+  height: 72px !important;
+}
+
+body.dashboard-mode:is(.standings-division-layout, .standings-wildcard-layout) .standings-table th,
+body.dashboard-mode:is(.standings-division-layout, .standings-wildcard-layout) .standings-table td {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+body.dashboard-mode:is(.standings-division-layout, .standings-wildcard-layout) .standings-team-logo {
+  width: 22px !important;
+  height: 22px !important;
+  flex-basis: 22px !important;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) .broadcast-shell {
+  grid-template-rows: 76px minmax(0, 1fr) !important;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) .topbar {
+  display: grid !important;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) .main-shell {
+  min-height: 0 !important;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) .context-sidebar {
+  align-self: start !important;
+  margin-top: 10px !important;
+  max-height: calc(100vh - 110px) !important;
+}
+
+body.dashboard-mode:is(.locker-room-layout, .player-development-layout, .staff-layout) .workspace {
+  scrollbar-width: none !important;
+}
+
+body.dashboard-mode:is(.locker-room-layout, .player-development-layout, .staff-layout) .workspace::-webkit-scrollbar,
+body.dashboard-mode:is(.locker-room-layout, .player-development-layout, .staff-layout) .workspace::-webkit-scrollbar-track,
+body.dashboard-mode:is(.locker-room-layout, .player-development-layout, .staff-layout) .workspace::-webkit-scrollbar-thumb,
+body.dashboard-mode:is(.locker-room-layout, .player-development-layout, .staff-layout) .workspace::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+body.dashboard-mode:is(.locker-room-layout, .player-development-layout, .staff-layout) .custom-scrollbar-shell--workspace {
+  display: none !important;
+}
+
+body.dashboard-mode.league-history-layout .league-history-dashboard {
+  grid-template-rows: auto 114px 34px minmax(0, 1fr) 128px 108px !important;
+}
+
+body.dashboard-mode.league-history-layout .league-history-top-grid {
+  gap: 10px !important;
+  min-height: 114px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-top-card {
+  min-height: 108px !important;
+  padding: 10px 12px 18px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-top-card > div:first-of-type {
+  grid-template-columns: 34px minmax(0, 1fr) !important;
+  gap: 3px 8px !important;
+  align-items: center !important;
+  margin-top: 8px !important;
+  min-width: 0 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-top-logo,
+body.dashboard-mode.league-history-layout .history-hof-medal {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-top-card strong {
+  font-size: 21px !important;
+  line-height: .95 !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.league-history-layout .history-top-card b,
+body.dashboard-mode.league-history-layout .history-top-card small {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  font-size: 8px !important;
+  line-height: 1.12 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.league-history-layout .history-top-card > span {
+  font-size: 8px !important;
+  line-height: 1.1 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-top-card.rivalry > div:first-of-type {
+  grid-template-columns: 28px auto 28px minmax(0, 1fr) !important;
+}
+
+body.dashboard-mode.league-history-layout .history-top-card em {
+  right: 10px !important;
+  bottom: 5px !important;
+  max-width: calc(100% - 20px) !important;
+  overflow: hidden !important;
+  font-size: 8px !important;
+  line-height: 1 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+

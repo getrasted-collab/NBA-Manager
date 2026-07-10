@@ -1,0 +1,1191 @@
+﻿/* League Stats and Awards content pass: closer to the concept panels without sidebar changes. */
+body.dashboard-mode.league-stats-layout :is(.league-stats-header, .league-stats-top-grid, .league-stats-content, .league-stats-bottom-grid, .league-stat-updates),
+body.dashboard-mode.awards-layout :is(.awards-header, .awards-top-grid, .awards-main-layout, .awards-lower-grid, .award-activity-strip) {
+  max-width: 100%;
+}
+
+body.dashboard-mode.league-stats-layout :is(.league-stats-actions, .awards-actions),
+body.dashboard-mode.awards-layout .awards-actions {
+  align-items: center;
+  gap: 9px;
+}
+
+body.dashboard-mode.league-stats-layout .league-stats-actions button,
+body.dashboard-mode.awards-layout .awards-actions button {
+  min-height: 36px;
+  padding: 0 14px;
+  border-color: #d7e1f2;
+  color: #11265f;
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
+  box-shadow: 0 5px 14px rgba(11, 35, 86, .06);
+}
+
+body.dashboard-mode.awards-layout .awards-actions .primary {
+  border-color: #0753ff;
+  color: #fff;
+  background: linear-gradient(180deg, #1264ff, #0753ff);
+}
+
+body.dashboard-mode.league-stats-layout .league-stats-actions .icon-button,
+body.dashboard-mode.awards-layout .awards-actions .icon-button {
+  width: 38px;
+  padding: 0;
+  font-size: 13px;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card,
+body.dashboard-mode.awards-layout .award-top-card {
+  isolation: isolate;
+  border-color: #d8e3f4;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .98), rgba(248, 251, 255, .94)),
+    #fff;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card::before,
+body.dashboard-mode.awards-layout .award-top-card::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: #0753ff;
+  content: "";
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card.def::before,
+body.dashboard-mode.awards-layout .award-top-card.dpoy::before,
+body.dashboard-mode.awards-layout .award-top-card.coach::before {
+  background: #0a9b5b;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card.ppg::before,
+body.dashboard-mode.awards-layout .award-top-card.sixth::before,
+body.dashboard-mode.awards-layout .award-top-card.mip::before {
+  background: #ff8a00;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card.pace::before,
+body.dashboard-mode.awards-layout .award-top-card.rookie::before {
+  background: #7b4df2;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-identity {
+  min-height: 38px;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-identity b,
+body.dashboard-mode.awards-layout .award-top-main b {
+  color: #11265f;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card > div:nth-child(2) {
+  min-width: 0;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card strong,
+body.dashboard-mode.awards-layout .award-top-main strong {
+  letter-spacing: 0;
+}
+
+body.dashboard-mode.league-stats-layout .league-mini-chart i,
+body.dashboard-mode.awards-layout .award-spark i {
+  min-width: 3px;
+  border-radius: 6px 6px 0 0;
+  opacity: .96;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card.def .league-mini-chart i,
+body.dashboard-mode.awards-layout .award-top-card.dpoy .award-spark i,
+body.dashboard-mode.awards-layout .award-top-card.coach .award-spark i {
+  background: linear-gradient(180deg, #0a9b5b, rgba(10, 155, 91, .1));
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card.ppg .league-mini-chart i,
+body.dashboard-mode.awards-layout .award-top-card.mip .award-spark i {
+  background: linear-gradient(180deg, #ff8a00, rgba(255, 138, 0, .12));
+}
+
+body.dashboard-mode.league-stats-layout :is(.league-stats-table-card, .league-stats-action-center, .league-leaders-panel, .league-advanced-panel, .league-trend-panel, .league-stat-updates),
+body.dashboard-mode.awards-layout :is(.awards-race-table, .award-feature-panel, .awards-action-center, .award-leaders-by-award, .award-team-projection, .award-rookie-ladder, .award-news-panel, .award-activity-strip) {
+  border-color: #d8e3f4;
+  box-shadow: 0 12px 26px rgba(11, 35, 86, .065);
+}
+
+body.dashboard-mode.league-stats-layout :is(.league-stats-table-card header, .league-stats-action-center header, .league-leaders-panel header, .league-advanced-panel header, .league-trend-panel header, .league-stat-updates header),
+body.dashboard-mode.awards-layout :is(.awards-race-table header, .awards-action-center header, .award-leaders-by-award header, .award-team-projection header, .award-rookie-ladder header, .award-news-panel header) {
+  min-height: 42px;
+  border-bottom: 1px solid #edf2fa;
+}
+
+body.dashboard-mode.league-stats-layout :is(.league-stats-table-card h2, .league-stats-action-center h2, .league-leaders-panel h2, .league-advanced-panel h2, .league-trend-panel h2, .league-stat-updates h2),
+body.dashboard-mode.awards-layout :is(.awards-race-table h2, .awards-action-center h2, .award-leaders-by-award h2, .award-team-projection h2, .award-rookie-ladder h2, .award-news-panel h2) {
+  font-size: 12px;
+  letter-spacing: .35px;
+}
+
+body.dashboard-mode.league-stats-layout .league-stats-table-wrap tbody tr,
+body.dashboard-mode.awards-layout .awards-table-wrap tbody tr {
+  transition: background .16s ease, box-shadow .16s ease;
+}
+
+body.dashboard-mode.league-stats-layout .league-stats-table-wrap tbody tr:hover,
+body.dashboard-mode.awards-layout .awards-table-wrap tbody tr:hover {
+  background: #f8fbff;
+  box-shadow: inset 3px 0 0 #0753ff;
+}
+
+body.dashboard-mode.league-stats-layout .league-stats-table-wrap td:first-child,
+body.dashboard-mode.awards-layout .awards-table-wrap td:first-child {
+  color: #52618f;
+  font-weight: 950;
+}
+
+body.dashboard-mode.league-stats-layout :is(.league-player-cell b, .league-team-cell b),
+body.dashboard-mode.awards-layout .award-player-cell b {
+  color: #0753ff;
+}
+
+body.dashboard-mode.league-stats-layout .league-stats-action-center,
+body.dashboard-mode.awards-layout .awards-action-center {
+  display: grid;
+  align-content: start;
+}
+
+body.dashboard-mode.league-stats-layout .league-action-card,
+body.dashboard-mode.awards-layout .award-action-card {
+  position: relative;
+  overflow: hidden;
+  border-left-width: 5px;
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+}
+
+body.dashboard-mode.league-stats-layout .league-action-card span {
+  justify-self: start;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #f0f4ff;
+  color: #40517f;
+  font-size: 8px;
+}
+
+body.dashboard-mode.league-stats-layout .league-action-card strong,
+body.dashboard-mode.awards-layout .award-action-card strong {
+  color: #11265f;
+  font-size: 11px;
+}
+
+body.dashboard-mode.league-stats-layout .league-action-card footer button,
+body.dashboard-mode.awards-layout .award-action-card footer button {
+  min-height: 28px;
+  border-color: #d8e3f4;
+  color: #0753ff;
+  background: #fff;
+}
+
+body.dashboard-mode.league-stats-layout .league-action-card footer button:first-child,
+body.dashboard-mode.awards-layout .award-action-card footer button:first-child {
+  background: #f5f8ff;
+}
+
+body.dashboard-mode.league-stats-layout .league-leader-grid article,
+body.dashboard-mode.awards-layout .award-leaders-by-award article,
+body.dashboard-mode.awards-layout .award-team-projection article {
+  border-color: #dce6f5;
+  background: #fbfdff;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-updates article,
+body.dashboard-mode.awards-layout .award-news-panel article {
+  border-color: #dce6f5;
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+}
+
+body.dashboard-mode.awards-layout .award-feature-panel {
+  background:
+    linear-gradient(90deg, rgba(7, 83, 255, .045), transparent 34%),
+    rgba(255, 255, 255, .97);
+}
+
+body.dashboard-mode.awards-layout .award-feature-hero {
+  align-items: center;
+}
+
+body.dashboard-mode.awards-layout .award-feature-shot {
+  border: 1px solid #dce6f5;
+  background:
+    radial-gradient(circle at 50% 18%, #ffffff, #eef4ff 72%);
+  box-shadow: 0 12px 22px rgba(11, 35, 86, .08);
+}
+
+body.dashboard-mode.awards-layout .award-feature-title {
+  flex-wrap: wrap;
+}
+
+body.dashboard-mode.awards-layout .award-feature-title h2 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  letter-spacing: .15px;
+}
+
+body.dashboard-mode.awards-layout .award-feature-title span {
+  white-space: nowrap;
+}
+
+body.dashboard-mode.awards-layout .award-season-stats div {
+  background: #fbfdff;
+}
+
+body.dashboard-mode.awards-layout .award-feature-details article {
+  border-color: #edf2fa;
+}
+
+body.dashboard-mode.awards-layout .award-activity-strip {
+  border-radius: 8px;
+}
+
+@media (max-width: 1380px) {
+  body.dashboard-mode.league-stats-layout .league-stats-top-grid,
+  body.dashboard-mode.awards-layout .awards-top-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  body.dashboard-mode.league-stats-layout .league-stats-content,
+  body.dashboard-mode.awards-layout .awards-main-layout {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  body.dashboard-mode.league-stats-layout .league-stats-action-center,
+  body.dashboard-mode.awards-layout .awards-action-center {
+    width: auto !important;
+  }
+}
+
+/* Social content pass: richer feed/media cards and clearer analytics rail. */
+body.dashboard-mode.social-layout-page .social-page {
+  position: relative;
+}
+
+body.dashboard-mode.social-layout-page .social-page::after {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  width: min(20vw, 260px);
+  height: min(34vw, 420px);
+  clip-path: polygon(62% 0, 100% 0, 100% 100%, 0 100%);
+  background: linear-gradient(160deg, rgba(237, 23, 76, .9), rgba(7, 83, 255, .76));
+  opacity: .18;
+  pointer-events: none;
+  content: "";
+}
+
+body.dashboard-mode.social-layout-page :is(.social-page-header, .social-metrics, .social-layout) {
+  position: relative;
+  z-index: 1;
+}
+
+body.dashboard-mode.social-layout-page .social-page-header .btn {
+  min-height: 38px;
+  padding: 0 16px;
+}
+
+body.dashboard-mode.social-layout-page .social-metrics {
+  border-color: #dbe5f5;
+  background: rgba(255, 255, 255, .98);
+  box-shadow: 0 12px 28px rgba(11, 35, 86, .06);
+}
+
+body.dashboard-mode.social-layout-page .social-metric-card {
+  min-height: 92px;
+  border-right-color: #dbe5f5;
+}
+
+body.dashboard-mode.social-layout-page .social-metric-card > span {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  color: #0753ff;
+  background: #eef4ff;
+  font-size: 9px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+body.dashboard-mode.social-layout-page .social-metric-card.red > span {
+  color: #e11d48;
+  background: #fff0f4;
+}
+
+body.dashboard-mode.social-layout-page .social-metric-card.purple > span {
+  color: #7b35e8;
+  background: #f4efff;
+}
+
+body.dashboard-mode.social-layout-page .social-metric-card strong {
+  color: #071b60;
+  font-size: 26px;
+  letter-spacing: 0;
+}
+
+body.dashboard-mode.social-layout-page .social-metric-card small {
+  color: #0a9b5b;
+  font-weight: 900;
+}
+
+body.dashboard-mode.social-layout-page .social-metric-card small em {
+  color: #52618f;
+  font-weight: 700;
+}
+
+body.dashboard-mode.social-layout-page .social-feed,
+body.dashboard-mode.social-layout-page .social-sidebar > section {
+  border-color: #dbe5f5;
+  background: rgba(255, 255, 255, .97);
+  box-shadow: 0 12px 28px rgba(11, 35, 86, .06);
+}
+
+body.dashboard-mode.social-layout-page .social-feed > header {
+  min-height: 48px;
+  padding: 0 18px;
+  border-bottom-color: #dbe5f5;
+  background: #fbfdff;
+}
+
+body.dashboard-mode.social-layout-page .social-tabs {
+  gap: 22px;
+  overflow-x: auto;
+}
+
+body.dashboard-mode.social-layout-page .social-tabs button {
+  min-width: max-content;
+  height: 46px;
+  color: #24366f;
+}
+
+body.dashboard-mode.social-layout-page .social-tabs button.active {
+  color: #0753ff;
+}
+
+body.dashboard-mode.social-layout-page .social-post {
+  background: #fff;
+  transition: background .16s ease;
+}
+
+body.dashboard-mode.social-layout-page .social-post:hover {
+  background: #fbfdff;
+}
+
+body.dashboard-mode.social-layout-page .social-avatar {
+  border-color: #dbe5f5;
+  background: #f8fbff;
+  box-shadow: 0 6px 14px rgba(11, 35, 86, .06);
+}
+
+body.dashboard-mode.social-layout-page .social-post-body header i {
+  width: 12px;
+  height: 12px;
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+body.dashboard-mode.social-layout-page .social-post-body header button,
+body.dashboard-mode.social-layout-page .social-page-header .btn[aria-label] {
+  letter-spacing: 1px;
+}
+
+body.dashboard-mode.social-layout-page .social-game-card {
+  border-color: #dbe5f5;
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(11, 35, 86, .055);
+}
+
+body.dashboard-mode.social-layout-page .social-game-art {
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, .28), transparent 62%),
+    radial-gradient(circle at 16% 22%, rgba(255, 255, 255, .2), transparent 22%),
+    linear-gradient(135deg, var(--team-primary), #111a39 66%);
+}
+
+body.dashboard-mode.social-layout-page .social-game-art::after {
+  position: absolute;
+  inset: auto -20px -42px auto;
+  z-index: -1;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--team-secondary) 55%, transparent);
+  opacity: .32;
+  content: "";
+}
+
+body.dashboard-mode.social-layout-page .social-game-art strong {
+  text-shadow: 0 8px 18px rgba(0, 0, 0, .28);
+}
+
+body.dashboard-mode.social-layout-page .social-game-card aside {
+  border-left: 1px solid #dbe5f5;
+}
+
+body.dashboard-mode.social-layout-page .social-game-card aside div {
+  justify-content: space-between;
+}
+
+body.dashboard-mode.social-layout-page .social-video-card {
+  border: 1px solid #dbe5f5;
+  box-shadow: 0 10px 20px rgba(11, 35, 86, .055);
+}
+
+body.dashboard-mode.social-layout-page .social-video-card::before {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent, rgba(0, 0, 0, .34)),
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, .22), transparent 28%);
+  content: "";
+}
+
+body.dashboard-mode.social-layout-page .social-video-logo,
+body.dashboard-mode.social-layout-page .social-video-card button,
+body.dashboard-mode.social-layout-page .social-video-card span {
+  z-index: 1;
+}
+
+body.dashboard-mode.social-layout-page .social-video-card button {
+  font-size: 0;
+}
+
+body.dashboard-mode.social-layout-page .social-video-card button::before {
+  width: 0;
+  height: 0;
+  margin-left: 4px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid #fff;
+  content: "";
+}
+
+body.dashboard-mode.social-layout-page .social-post footer {
+  align-items: center;
+}
+
+body.dashboard-mode.social-layout-page .social-post footer button {
+  min-width: 54px;
+  color: #52618f;
+  font-weight: 850;
+}
+
+body.dashboard-mode.social-layout-page .social-sidebar header {
+  padding-bottom: 8px;
+  border-bottom: 1px solid #edf2fa;
+}
+
+body.dashboard-mode.social-layout-page .social-sidebar header strong {
+  letter-spacing: .25px;
+}
+
+body.dashboard-mode.social-layout-page .social-summary article i {
+  border-radius: 8px;
+}
+
+body.dashboard-mode.social-layout-page .social-summary article:nth-of-type(1) i {
+  background: linear-gradient(135deg, #f97316, #e11d48, #7c3aed);
+}
+
+body.dashboard-mode.social-layout-page .social-summary article:nth-of-type(2) i {
+  background: #111827;
+}
+
+body.dashboard-mode.social-layout-page .social-summary article:nth-of-type(3) i {
+  background: #1877f2;
+}
+
+body.dashboard-mode.social-layout-page .social-summary article:nth-of-type(4) i {
+  background: #050505;
+}
+
+body.dashboard-mode.social-layout-page .social-summary article:nth-of-type(5) i {
+  background: #ff0000;
+}
+
+body.dashboard-mode.social-layout-page .social-trends article b {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: #52618f;
+  background: #f3f6fb;
+}
+
+body.dashboard-mode.social-layout-page .social-trends article em {
+  color: #0a9b5b;
+  font-weight: 950;
+}
+
+body.dashboard-mode.social-layout-page .social-media article > b {
+  border-radius: 6px;
+  color: #e11d48;
+  background: #fff5f7;
+  box-shadow: 0 4px 10px rgba(11, 35, 86, .05);
+}
+
+@media (max-width: 1180px) {
+  body.dashboard-mode.social-layout-page .social-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.dashboard-mode.social-layout-page .social-sidebar {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  body.dashboard-mode.social-layout-page .social-metrics,
+  body.dashboard-mode.social-layout-page .social-sidebar {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.dashboard-mode.social-layout-page .social-game-card {
+    grid-template-columns: 1fr;
+  }
+
+  body.dashboard-mode.social-layout-page .social-game-card aside {
+    border-top: 1px solid #dbe5f5;
+    border-left: 0;
+  }
+}
+
+/* Finances and Scouting content pass: sharper operational panels and report surfaces. */
+body.dashboard-mode.finance-layout :is(.finance-page-header, .finance-top-metrics, .finance-main-grid, .finance-lower-grid, .finance-dashboard-policy),
+body.dashboard-mode.scouting-layout :is(.scouting-page-header, .scouting-metrics, .scouting-tabs, .scouting-board-layout) {
+  max-width: 100%;
+}
+
+body.dashboard-mode.finance-layout .finance-page-header .btn,
+body.dashboard-mode.scouting-layout .scouting-page-header .btn {
+  min-height: 38px;
+  padding: 0 15px;
+  border-color: #d8e3f4;
+  color: #11265f;
+  background: linear-gradient(180deg, #fff, #f8fbff);
+  box-shadow: 0 6px 14px rgba(11, 35, 86, .06);
+}
+
+body.dashboard-mode.finance-layout .finance-page-header .btn.primary,
+body.dashboard-mode.scouting-layout .scouting-page-header .btn.primary {
+  border-color: #0753ff;
+  color: #fff;
+  background: linear-gradient(180deg, #1264ff, #0753ff);
+}
+
+body.dashboard-mode.finance-layout :is(.finance-dash-metric, .finance-apron-metric),
+body.dashboard-mode.scouting-layout .scouting-metric-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-color: #d8e3f4;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.98), rgba(248,251,255,.94)),
+    #fff;
+}
+
+body.dashboard-mode.finance-layout :is(.finance-dash-metric, .finance-apron-metric)::before,
+body.dashboard-mode.scouting-layout .scouting-metric-card::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: #0753ff;
+  content: "";
+}
+
+body.dashboard-mode.finance-layout .finance-dash-metric.green::before,
+body.dashboard-mode.scouting-layout .scouting-metric-card.green::before {
+  background: #0a9b5b;
+}
+
+body.dashboard-mode.finance-layout .finance-dash-metric.red::before,
+body.dashboard-mode.finance-layout .finance-apron-metric::before {
+  background: #d61f43;
+}
+
+body.dashboard-mode.scouting-layout .scouting-metric-card.orange::before {
+  background: #ff8a00;
+}
+
+body.dashboard-mode.scouting-layout .scouting-metric-card.purple::before {
+  background: #7b4df2;
+}
+
+body.dashboard-mode.finance-layout :is(.finance-cap-sheet, .finance-cap-overview, .finance-payroll-timeline, .finance-breakdown, .finance-owner-profile, .finance-activity, .finance-action-center, .finance-advisor, .finance-mini-list, .finance-exceptions),
+body.dashboard-mode.scouting-layout :is(.scouting-draft-board, .scouting-selected-panel, .scouting-action-center, .scouting-assignments, .scouting-team-summary, .scouting-coverage-map, .scouting-staff-recs, .scouting-comparison-widget) {
+  border-color: #d8e3f4;
+  background: rgba(255, 255, 255, .97);
+  box-shadow: 0 12px 26px rgba(11, 35, 86, .065);
+}
+
+body.dashboard-mode.finance-layout .finance-dashboard header,
+body.dashboard-mode.scouting-layout :is(.scouting-draft-board header, .scouting-action-center header, .scouting-assignments header, .scouting-team-summary header, .scouting-bottom-grid header, .scouting-comparison-widget header) {
+  min-height: 38px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #edf2fa;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet tbody tr,
+body.dashboard-mode.scouting-layout .scouting-draft-board button[data-view-player] {
+  transition: background .16s ease, box-shadow .16s ease;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet tbody tr:hover,
+body.dashboard-mode.scouting-layout .scouting-draft-board button[data-view-player]:hover {
+  background: #f8fbff;
+  box-shadow: inset 3px 0 0 #0753ff;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet td:first-child {
+  min-width: 190px;
+}
+
+body.dashboard-mode.finance-layout .finance-player-headshot,
+body.dashboard-mode.scouting-layout :is(.scouting-row-headshot, .scouting-selected-headshot, .scouting-action-headshot, .scouting-mini-headshot) {
+  background: #edf3ff;
+  box-shadow: inset 0 0 0 1px rgba(7, 83, 255, .08), 0 5px 12px rgba(11, 35, 86, .055);
+}
+
+body.dashboard-mode.finance-layout .finance-cap-overview article {
+  min-height: 25px;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-overview article i,
+body.dashboard-mode.finance-layout .finance-dash-metric i,
+body.dashboard-mode.scouting-layout .scouting-metric-card i {
+  background: #edf2fa;
+}
+
+body.dashboard-mode.finance-layout .finance-bars {
+  position: relative;
+  border: 1px solid #edf2fa;
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(7, 83, 255, .06), transparent 42%),
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(82, 97, 143, .13) 32px);
+}
+
+body.dashboard-mode.finance-layout .finance-bars article b {
+  width: min(52px, 68%);
+  background: linear-gradient(180deg, #1f74ff, #0753ff);
+}
+
+body.dashboard-mode.finance-layout .finance-bars article:nth-child(3) b,
+body.dashboard-mode.finance-layout .finance-bars article:nth-child(4) b {
+  background: linear-gradient(180deg, #64a0ff, #0753ff);
+}
+
+body.dashboard-mode.finance-layout .finance-donut,
+body.dashboard-mode.finance-layout .finance-owner-score {
+  box-shadow: 0 8px 18px rgba(11, 35, 86, .07);
+}
+
+body.dashboard-mode.finance-layout .finance-breakdown li,
+body.dashboard-mode.finance-layout :is(.finance-mini-list article, .finance-exceptions article, .finance-activity article),
+body.dashboard-mode.scouting-layout :is(.scouting-assignments article, .scouting-staff-recs article, .scouting-comparison-widget article) {
+  border-color: #edf2fa;
+}
+
+body.dashboard-mode.finance-layout .finance-action-center article,
+body.dashboard-mode.scouting-layout .scouting-action-center article {
+  position: relative;
+  overflow: hidden;
+  border-left-width: 5px;
+  background: linear-gradient(180deg, #fff, #fbfdff);
+  box-shadow: 0 7px 16px rgba(11, 35, 86, .045);
+}
+
+body.dashboard-mode.finance-layout .finance-action-center article span,
+body.dashboard-mode.scouting-layout .scouting-action-center span {
+  color: #11265f;
+  font-size: 11px;
+}
+
+body.dashboard-mode.finance-layout .finance-action-center article .btn,
+body.dashboard-mode.scouting-layout .scouting-action-center .btn,
+body.dashboard-mode.scouting-layout .scouting-next-steps .btn {
+  min-height: 28px;
+  border-color: #d8e3f4;
+  color: #0753ff;
+  background: #fff;
+}
+
+body.dashboard-mode.finance-layout .finance-action-center article .btn.primary,
+body.dashboard-mode.scouting-layout .scouting-action-center .btn.primary,
+body.dashboard-mode.scouting-layout .scouting-next-steps .btn.primary {
+  border-color: #0753ff;
+  color: #fff;
+  background: #0753ff;
+}
+
+body.dashboard-mode.finance-layout .finance-advisor {
+  background:
+    linear-gradient(135deg, rgba(7, 83, 255, .065), transparent 55%),
+    #fff;
+}
+
+body.dashboard-mode.finance-layout .finance-advisor div {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+body.dashboard-mode.finance-layout .finance-advisor div span {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 36%, #fff 0 22%, transparent 23%),
+    linear-gradient(135deg, #dce8ff, #f8fbff);
+  box-shadow: inset 0 0 0 1px #d8e3f4;
+}
+
+body.dashboard-mode.scouting-layout .scouting-draft-board input {
+  border-color: #d8e3f4;
+  background: #fbfdff;
+}
+
+body.dashboard-mode.scouting-layout .scouting-draft-board button[data-view-player].active {
+  background:
+    linear-gradient(90deg, rgba(7, 83, 255, .1), rgba(248, 251, 255, .92));
+  box-shadow: inset 3px 0 0 #0753ff;
+}
+
+body.dashboard-mode.scouting-layout .scouting-selected-panel {
+  background:
+    linear-gradient(90deg, rgba(7, 83, 255, .04), transparent 46%),
+    #fff;
+}
+
+body.dashboard-mode.scouting-layout .scouting-selected-panel > header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #edf2fa;
+}
+
+body.dashboard-mode.scouting-layout .scouting-selected-panel header aside {
+  padding: 10px;
+  border: 1px solid #d8e3f4;
+  border-radius: 8px;
+  background: #fbfdff;
+}
+
+body.dashboard-mode.scouting-layout .scouting-profile-chips span,
+body.dashboard-mode.scouting-layout .scouting-report-grid article,
+body.dashboard-mode.scouting-layout .scouting-fit-grid article,
+body.dashboard-mode.scouting-layout .scouting-team-summary article {
+  border-color: #dce6f5;
+  background: #fbfdff;
+}
+
+body.dashboard-mode.scouting-layout .scouting-report-grid strong {
+  letter-spacing: 0;
+}
+
+body.dashboard-mode.scouting-layout .scouting-fit-grid article:nth-child(2) small::before {
+  color: #0a9b5b;
+}
+
+body.dashboard-mode.scouting-layout .scouting-fit-grid article:nth-child(3) small::before {
+  color: #ff8a00;
+}
+
+body.dashboard-mode.scouting-layout .scouting-coverage-map div {
+  border: 1px solid #dce6f5;
+  background:
+    radial-gradient(circle at 21% 34%, rgba(7,83,255,.12), transparent 18%),
+    radial-gradient(circle at 69% 42%, rgba(10,155,91,.14), transparent 18%),
+    linear-gradient(135deg, #e7f0ff, #ffffff 44%, #e9f8ef);
+}
+
+body.dashboard-mode.scouting-layout .scouting-coverage-map div::before {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(7, 83, 255, .08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(7, 83, 255, .08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+  content: "";
+}
+
+body.dashboard-mode.scouting-layout .scouting-team-summary article span {
+  border: 1px solid #d8e3f4;
+}
+
+body.dashboard-mode.scouting-layout .scouting-compare-head {
+  padding: 8px;
+  border: 1px solid #edf2fa;
+  border-radius: 8px;
+  background: #fbfdff;
+}
+
+@media (max-width: 1380px) {
+  body.dashboard-mode.finance-layout .finance-top-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-board-layout,
+  body.dashboard-mode.finance-layout .finance-main-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-right-rail,
+  body.dashboard-mode.finance-layout .finance-right-rail,
+  body.dashboard-mode.scouting-layout .scouting-bottom-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 900px) {
+  body.dashboard-mode.finance-layout .finance-top-metrics,
+  body.dashboard-mode.finance-layout .finance-right-rail,
+  body.dashboard-mode.finance-layout .finance-lower-grid,
+  body.dashboard-mode.scouting-layout .scouting-metrics,
+  body.dashboard-mode.scouting-layout .scouting-right-rail,
+  body.dashboard-mode.scouting-layout .scouting-bottom-grid,
+  body.dashboard-mode.scouting-layout .scouting-profile-chips,
+  body.dashboard-mode.scouting-layout .scouting-report-grid,
+  body.dashboard-mode.scouting-layout .scouting-fit-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Reference spacing repair for the circled Finances and Scouting content areas. */
+@media (min-width: 1400px) and (min-height: 760px) {
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) .workspace {
+    height: calc(100vh - 76px) !important;
+    padding: 24px 24px 32px !important;
+    overflow: auto !important;
+    scrollbar-gutter: stable !important;
+  }
+
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) .broadcast-shell,
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) .main-shell,
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) .page {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) :is(.scouting-page, .finance-dashboard) {
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    gap: 14px !important;
+    overflow: visible !important;
+    align-content: start !important;
+  }
+
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) :is(.scouting-page-header, .finance-page-header) {
+    margin: 0 0 2px !important;
+  }
+
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) :is(.scouting-page-header h1, .finance-page-header h1) {
+    font-size: 34px !important;
+    line-height: 1 !important;
+  }
+
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) :is(.scouting-page-header p, .finance-page-header p) {
+    margin-top: 6px !important;
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+  }
+
+  body.dashboard-mode:is(.scouting-layout, .finance-layout) :is(.scouting-page-header .btn, .finance-page-header .btn) {
+    min-height: 42px !important;
+    padding: 10px 18px !important;
+    font-size: 12px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-metrics,
+  body.dashboard-mode.finance-layout .finance-top-metrics {
+    gap: 14px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-metric-card,
+  body.dashboard-mode.finance-layout .finance-dash-metric,
+  body.dashboard-mode.finance-layout .finance-apron-metric {
+    min-height: 116px !important;
+    padding: 17px 18px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-metric-card strong,
+  body.dashboard-mode.finance-layout .finance-dash-metric strong,
+  body.dashboard-mode.finance-layout .finance-apron-metric strong {
+    font-size: 29px !important;
+    line-height: 1.05 !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-metric-card small,
+  body.dashboard-mode.finance-layout .finance-dash-metric small,
+  body.dashboard-mode.finance-layout .finance-dash-metric em,
+  body.dashboard-mode.finance-layout .finance-apron-metric small {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-tabs {
+    min-height: 44px !important;
+    gap: 10px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-tabs button {
+    height: 42px !important;
+    min-height: 42px !important;
+    padding: 0 18px !important;
+    font-size: 11px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-page {
+    grid-template-rows: auto auto auto auto !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-board-layout {
+    height: auto !important;
+    min-height: 0 !important;
+    grid-template-columns: minmax(360px, .9fr) minmax(560px, 1.22fr) minmax(330px, .86fr) !important;
+    grid-template-areas: "draft selected rail" "bottom bottom rail" !important;
+    grid-template-rows: auto auto !important;
+    gap: 14px !important;
+    align-items: start !important;
+    align-content: start !important;
+    overflow: visible !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-right-rail {
+    gap: 14px !important;
+    overflow: visible !important;
+  }
+
+  body.dashboard-mode.scouting-layout :is(.scouting-draft-board, .scouting-selected-panel, .scouting-action-center, .scouting-assignments, .scouting-team-summary, .scouting-coverage-map, .scouting-staff-recs, .scouting-comparison-widget) {
+    min-height: 0 !important;
+    padding: 16px !important;
+    overflow: visible !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-draft-board {
+    align-self: start !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-draft-board > div:last-of-type {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  body.dashboard-mode.scouting-layout :is(.scouting-board-head, .scouting-draft-board button[data-view-player]) {
+    min-height: 38px !important;
+    padding: 8px 10px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-row-headshot {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-selected-panel > header {
+    min-height: 96px !important;
+    margin-bottom: 12px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-selected-headshot {
+    width: 78px !important;
+    height: 78px !important;
+  }
+
+  body.dashboard-mode.scouting-layout :is(.scouting-profile-chips, .scouting-report-grid, .scouting-fit-grid) {
+    gap: 10px !important;
+    margin-bottom: 12px !important;
+  }
+
+  body.dashboard-mode.scouting-layout :is(.scouting-profile-chips span, .scouting-report-grid article, .scouting-fit-grid article) {
+    padding: 12px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-report-tabs {
+    min-height: 42px !important;
+    margin-bottom: 12px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-report-tabs button {
+    min-height: 38px !important;
+    font-size: 10px !important;
+  }
+
+  body.dashboard-mode.scouting-layout :is(.scouting-action-center article:nth-of-type(n+4), .scouting-team-summary) {
+    display: grid !important;
+  }
+
+  body.dashboard-mode.scouting-layout :is(.scouting-action-center article, .scouting-assignments article, .scouting-staff-recs article) {
+    gap: 10px !important;
+    padding: 10px !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-bottom-grid {
+    min-height: 0 !important;
+    grid-template-columns: .9fr .9fr 1fr !important;
+    gap: 14px !important;
+    overflow: visible !important;
+  }
+
+  body.dashboard-mode.scouting-layout .scouting-coverage-map > div {
+    height: 152px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-dashboard {
+    grid-template-rows: auto auto auto auto auto !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-main-grid {
+    min-height: 0 !important;
+    grid-template-columns: minmax(480px, 1.28fr) minmax(300px, .86fr) minmax(300px, .9fr) minmax(340px, .94fr) !important;
+    gap: 14px !important;
+    align-items: start !important;
+    overflow: visible !important;
+  }
+
+  body.dashboard-mode.finance-layout :is(.finance-center-stack, .finance-right-rail) {
+    gap: 14px !important;
+    overflow: visible !important;
+  }
+
+  body.dashboard-mode.finance-layout :is(.finance-cap-sheet, .finance-cap-overview, .finance-payroll-timeline, .finance-breakdown, .finance-owner-profile, .finance-activity, .finance-action-center, .finance-advisor, .finance-mini-list, .finance-exceptions) {
+    min-height: 0 !important;
+    padding: 16px !important;
+    overflow: visible !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet {
+    display: grid !important;
+    grid-template-rows: auto auto auto !important;
+    align-self: start !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet table {
+    min-width: 650px !important;
+    font-size: 10px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td) {
+    height: 39px !important;
+    padding: 6px 9px !important;
+    font-size: 10px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-sheet tbody tr:nth-child(n+9),
+  body.dashboard-mode.finance-layout .finance-action-center article:nth-of-type(n+4) {
+    display: table-row !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-action-center article:nth-of-type(n+4) {
+    display: grid !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-player-headshot {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-cap-overview article {
+    grid-template-columns: 115px 1fr 86px !important;
+    gap: 8px !important;
+    padding: 9px 0 !important;
+    font-size: 10px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-bars {
+    min-height: 218px !important;
+    padding: 16px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-bars article {
+    height: 190px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-breakdown {
+    grid-template-columns: 116px minmax(0, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-donut,
+  body.dashboard-mode.finance-layout .finance-owner-score {
+    width: 96px !important;
+    height: 96px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-owner-profile dl {
+    gap: 8px 14px !important;
+    font-size: 10px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-action-center article {
+    min-height: 82px !important;
+    padding: 12px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-action-headshot,
+  body.dashboard-mode.finance-layout .finance-action-center article > i {
+    width: 54px !important;
+    height: 54px !important;
+  }
+
+  body.dashboard-mode.finance-layout :is(.finance-action-center article .btn, .mini-action) {
+    min-height: 30px !important;
+    padding: 6px 10px !important;
+    font-size: 10px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-advisor div {
+    grid-template-columns: 58px 1fr !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-advisor div span {
+    width: 58px !important;
+    height: 58px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-lower-grid {
+    min-height: 0 !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    overflow: visible !important;
+  }
+
+  body.dashboard-mode.finance-layout :is(.finance-mini-list article, .finance-exceptions article, .finance-activity article) {
+    min-height: 35px !important;
+    padding: 7px 0 !important;
+    font-size: 10px !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-dashboard-policy {
+    min-height: 76px !important;
+    grid-template-columns: minmax(0, 1fr) 220px 210px !important;
+    padding: 14px 16px !important;
+    overflow: visible !important;
+  }
+
+  body.dashboard-mode.finance-layout .finance-dashboard-policy p {
+    display: block !important;
+  }
+}
+

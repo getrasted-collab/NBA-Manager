@@ -1,0 +1,114 @@
+﻿/* Larger career rail and more prominent schedule controls. */
+@media (min-width: 1051px) {
+  body.dashboard-mode .main-shell { grid-template-columns: 270px minmax(0, 1fr); }
+}
+
+body.dashboard-mode .context-sidebar { padding: 14px 16px 16px; }
+body.dashboard-mode .context-heading { padding-right: 10px; padding-left: 10px; }
+body.dashboard-mode .context-nav button { min-height: 39px; padding-right: 13px; padding-left: 13px; }
+body.dashboard-mode .sidebar-next-game {
+  gap: 8px;
+  min-height: 132px;
+  margin-top: 14px;
+  padding: 15px;
+  border-color: #343943;
+  background: #191c23;
+}
+body.dashboard-mode .sidebar-next-game > span { color: #8b919b; font-size: 8px; }
+body.dashboard-mode .sidebar-next-game > strong { color: #fff; font-size: 18px; letter-spacing: .4px; }
+body.dashboard-mode .sidebar-next-game > small { font-size: 9px; }
+body.dashboard-mode .sidebar-next-game .btn { min-height: 34px; margin-top: auto; }
+body.dashboard-mode .career-date-pill {
+  min-height: 36px;
+  padding: 0 14px;
+  border-color: #363b45;
+  background: #191c23;
+}
+
+@media (max-width: 1050px) and (min-width: 801px) {
+  body.dashboard-mode .main-shell { grid-template-columns: 230px minmax(0, 1fr); }
+}
+
+/* Center the complete career frame so the rail and dashboard move together. */
+body.dashboard-mode .main-shell {
+  width: min(1520px, 100%);
+  margin-right: auto;
+  margin-left: auto;
+  grid-template-columns: 280px minmax(0, 1fr);
+}
+body.dashboard-mode .topbar {
+  padding-right: max(20px, calc((100vw - 1520px) / 2 + 20px));
+  padding-left: max(20px, calc((100vw - 1520px) / 2 + 20px));
+}
+
+/* The reference uses the final topbar slot as a small close/menu control. */
+body.dashboard-mode .topbar-team { gap: 0; padding-left: 4px; border-left: 0; }
+body.dashboard-mode .topbar-team .profile-badge,
+body.dashboard-mode .topbar-team > div:last-child { display: none; }
+body.dashboard-mode .topbar-team .menu-link {
+  width: 28px;
+  min-width: 28px;
+  padding: 0;
+  border: 0;
+  color: transparent;
+  background: transparent;
+  font-size: 0;
+}
+body.dashboard-mode .topbar-team .menu-link::after {
+  content: "\00D7";
+  color: #747b86;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+body.dashboard-mode .career-date-pill {
+  min-height: 31px;
+  padding: 0 11px;
+  background: #171a20;
+}
+body.dashboard-mode .career-date-pill strong,
+body.dashboard-mode .career-date-pill b { font-size: 9px; font-weight: 800; }
+
+/* Compact card pinned to the very bottom of the sidebar. */
+body.dashboard-mode .sidebar-next-game {
+  gap: 5px;
+  min-height: 116px;
+  margin: auto 0 0;
+  padding: 13px;
+  background: #191c23;
+}
+body.dashboard-mode .sidebar-next-game > span { font-size: 7px; }
+body.dashboard-mode .sidebar-next-game > strong { font-size: 14px; }
+body.dashboard-mode .sidebar-next-game > small { font-size: 8px; }
+body.dashboard-mode .sidebar-next-game .btn { min-height: 29px; margin-top: 4px; }
+
+/* Slim dark scrollbars that blend into the game shell. */
+body.dashboard-mode,
+body.dashboard-mode .workspace,
+body.dashboard-mode .context-nav {
+  scrollbar-width: thin;
+  scrollbar-color: #353a43 transparent;
+}
+body.dashboard-mode::-webkit-scrollbar,
+body.dashboard-mode .workspace::-webkit-scrollbar,
+body.dashboard-mode .context-nav::-webkit-scrollbar { width: 8px; height: 8px; }
+body.dashboard-mode::-webkit-scrollbar-track,
+body.dashboard-mode .workspace::-webkit-scrollbar-track,
+body.dashboard-mode .context-nav::-webkit-scrollbar-track { background: transparent; }
+body.dashboard-mode::-webkit-scrollbar-thumb,
+body.dashboard-mode .workspace::-webkit-scrollbar-thumb,
+body.dashboard-mode .context-nav::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: #353a43;
+  background-clip: padding-box;
+}
+body.dashboard-mode::-webkit-scrollbar-thumb:hover,
+body.dashboard-mode .workspace::-webkit-scrollbar-thumb:hover,
+body.dashboard-mode .context-nav::-webkit-scrollbar-thumb:hover { background: #4a505b; background-clip: padding-box; }
+
+@media (max-width: 800px) {
+  body.dashboard-mode .main-shell { width: 100%; grid-template-columns: 1fr; }
+  body.dashboard-mode .topbar { padding-right: 14px; padding-left: 14px; }
+}
+

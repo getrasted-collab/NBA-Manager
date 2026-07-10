@@ -1,0 +1,860 @@
+﻿/* Free agency: regular-season market refresh. */
+body.dashboard-mode .page:has(.in-season-fa-hero) {
+  width: min(1380px, 100%) !important;
+  max-width: 1380px !important;
+  padding: 20px 22px 36px !important;
+}
+
+body.dashboard-mode .page:has(.in-season-fa-hero) > .page-title {
+  margin: 0 0 14px !important;
+  color: var(--navy) !important;
+  font-family: var(--broadcast-heading) !important;
+  font-size: clamp(30px, 3vw, 42px) !important;
+  line-height: 1 !important;
+  letter-spacing: .02em !important;
+  text-transform: uppercase !important;
+}
+
+body.dashboard-mode .in-season-fa-hero {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 300px !important;
+  align-items: center !important;
+  gap: 30px !important;
+  min-height: 182px !important;
+  margin-bottom: 18px !important;
+  padding: 30px !important;
+  border: 1px solid rgba(188, 200, 223, .95) !important;
+  border-radius: 12px !important;
+  color: var(--navy) !important;
+  background: rgba(255, 255, 255, .84) !important;
+  box-shadow: 0 18px 40px rgba(9, 28, 88, .08) !important;
+}
+
+body.dashboard-mode .in-season-fa-hero > div:first-child {
+  display: grid !important;
+  gap: 13px !important;
+}
+
+body.dashboard-mode .in-season-fa-hero .card-label {
+  color: var(--navy) !important;
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  letter-spacing: .14em !important;
+}
+
+body.dashboard-mode .in-season-fa-hero .player-name {
+  color: var(--navy) !important;
+  font-family: var(--broadcast-heading) !important;
+  font-size: clamp(38px, 4vw, 58px) !important;
+  letter-spacing: .01em !important;
+  line-height: .95 !important;
+}
+
+body.dashboard-mode .in-season-fa-hero p {
+  max-width: 720px !important;
+  margin: 0 !important;
+  color: #4e5a88 !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+}
+
+body.dashboard-mode .in-season-fa-rule {
+  min-width: 0 !important;
+  min-height: 122px !important;
+  padding: 20px 22px !important;
+  border: 1px solid rgba(70, 112, 255, .35) !important;
+  border-radius: 7px !important;
+  background: rgba(255, 255, 255, .72) !important;
+  text-align: right !important;
+  box-shadow: none !important;
+}
+
+body.dashboard-mode .in-season-fa-rule span {
+  color: var(--navy) !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  letter-spacing: .12em !important;
+}
+
+body.dashboard-mode .in-season-fa-rule strong {
+  color: var(--navy) !important;
+  font-family: var(--broadcast-heading) !important;
+  font-size: 34px !important;
+  line-height: 1 !important;
+}
+
+body.dashboard-mode .in-season-fa-rule small {
+  color: #243468 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+body.dashboard-mode .in-season-fa-summary {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  margin: 0 0 18px !important;
+}
+
+body.dashboard-mode .in-season-fa-stat {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 64px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 18px !important;
+  min-height: 132px !important;
+  padding: 24px 28px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(202, 212, 231, .88) !important;
+  border-bottom: 3px solid var(--blue) !important;
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, .86) !important;
+  box-shadow: 0 14px 28px rgba(9, 28, 88, .055) !important;
+}
+
+body.dashboard-mode .in-season-fa-stat.warning {
+  border-bottom-color: var(--red) !important;
+}
+
+body.dashboard-mode .in-season-fa-stat::after {
+  position: absolute;
+  right: -22px;
+  bottom: -34px;
+  width: 86px;
+  height: 86px;
+  border: 1px solid rgba(202, 212, 231, .55);
+  border-radius: 50%;
+  content: "";
+}
+
+body.dashboard-mode .in-season-fa-stat-icon {
+  position: relative !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 58px !important;
+  height: 58px !important;
+  border-radius: 50% !important;
+  color: var(--blue) !important;
+  background: rgba(6, 76, 255, .08) !important;
+  font-family: var(--broadcast-heading) !important;
+  font-size: 24px !important;
+}
+
+body.dashboard-mode .in-season-fa-stat.warning .in-season-fa-stat-icon {
+  color: var(--navy) !important;
+}
+
+body.dashboard-mode .in-season-fa-stat-icon.players::before,
+body.dashboard-mode .in-season-fa-stat-icon.roster::before {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: -9px 14px 0 1px currentColor, 9px 14px 0 1px currentColor;
+  content: "";
+}
+
+body.dashboard-mode .in-season-fa-stat-icon.cap::before {
+  content: "$";
+}
+
+body.dashboard-mode .in-season-fa-stat-icon.exception::before {
+  content: "D";
+}
+
+body.dashboard-mode .in-season-fa-stat .card-label {
+  color: var(--navy) !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  letter-spacing: .14em !important;
+}
+
+body.dashboard-mode .in-season-fa-stat .stat-value {
+  margin-top: 12px !important;
+  color: var(--navy) !important;
+  font-family: var(--broadcast-heading) !important;
+  font-size: 37px !important;
+  line-height: 1 !important;
+}
+
+body.dashboard-mode .in-season-waiver-strip {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 24px !important;
+  min-height: 124px !important;
+  margin-bottom: 10px !important;
+  padding: 22px 30px !important;
+  border: 1px solid rgba(202, 212, 231, .88) !important;
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, .88) !important;
+  box-shadow: 0 14px 30px rgba(9, 28, 88, .06) !important;
+}
+
+body.dashboard-mode .in-season-waiver-strip strong {
+  color: #34416f !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+body.dashboard-mode .in-season-waiver-strip small {
+  color: var(--navy) !important;
+  font-size: 12px !important;
+}
+
+body.dashboard-mode .in-season-waiver-strip > div:last-child {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-end !important;
+  gap: 12px !important;
+}
+
+body.dashboard-mode .in-season-waiver-strip .btn {
+  min-width: 210px !important;
+  min-height: 48px !important;
+  border-color: rgba(219, 31, 61, .58) !important;
+  color: var(--navy) !important;
+  background: rgba(255, 255, 255, .9) !important;
+}
+
+body.dashboard-mode .in-season-fa-market {
+  overflow: hidden !important;
+  border: 1px solid rgba(202, 212, 231, .88) !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, .92) !important;
+  box-shadow: 0 18px 36px rgba(9, 28, 88, .08) !important;
+}
+
+body.dashboard-mode .in-season-fa-toolbar {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: end !important;
+  min-height: 108px !important;
+  padding: 25px 30px !important;
+  border-bottom: 1px solid rgba(202, 212, 231, .74) !important;
+  background: rgba(255, 255, 255, .78) !important;
+  box-shadow: none !important;
+}
+
+body.dashboard-mode .in-season-fa-toolbar .player-name {
+  color: var(--navy) !important;
+  font-family: var(--broadcast-heading) !important;
+  font-size: 26px !important;
+}
+
+body.dashboard-mode .in-season-fa-controls {
+  display: grid !important;
+  grid-template-columns: minmax(250px, 300px) 146px 164px 86px !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+body.dashboard-mode .in-season-fa-controls input,
+body.dashboard-mode .in-season-fa-controls select {
+  min-height: 48px !important;
+  border-radius: 5px !important;
+  color: #2f3b70 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+body.dashboard-mode .in-season-fa-controls input {
+  width: auto !important;
+}
+
+body.dashboard-mode .in-season-fa-list {
+  display: grid !important;
+}
+
+body.dashboard-mode .in-season-fa-list::before {
+  display: none !important;
+  content: none !important;
+}
+
+body.dashboard-mode .in-season-fa-list-head {
+  display: grid !important;
+  grid-template-columns: minmax(300px, 1.2fr) minmax(218px, .84fr) minmax(116px, .46fr) minmax(128px, .5fr) minmax(164px, .64fr) 88px !important;
+  align-items: center !important;
+  min-height: 44px !important;
+  padding: 0 10px 0 14px !important;
+  border-bottom: 1px solid rgba(202, 212, 231, .82) !important;
+  color: #687498 !important;
+  background: #f5f7fb !important;
+  font-size: 9px !important;
+  font-weight: 900 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+body.dashboard-mode .in-season-fa-list-head span {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode .in-season-fa-list-head span:nth-child(4),
+body.dashboard-mode .in-season-fa-list-head span:nth-child(5) {
+  padding-right: 8px !important;
+  letter-spacing: .04em !important;
+}
+
+body.dashboard-mode .in-season-fa-list-head span:nth-child(5) {
+  text-align: center !important;
+}
+
+body.dashboard-mode .in-season-fa-list-head .in-season-fa-stat-filter {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 3px !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+}
+
+body.dashboard-mode .in-season-fa-stat-filter button {
+  display: grid !important;
+  place-items: center !important;
+  grid-template-rows: 1fr auto !important;
+  min-width: 0 !important;
+  min-height: 28px !important;
+  padding: 0 2px !important;
+  border: 1px solid transparent !important;
+  border-radius: 6px !important;
+  color: #1f2f68 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 8px !important;
+  font-weight: 950 !important;
+  letter-spacing: .06em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+}
+
+body.dashboard-mode .in-season-fa-stat-filter button::after {
+  display: none !important;
+  height: 8px !important;
+  color: #0753ff !important;
+  font-size: 8px !important;
+  line-height: 1 !important;
+  content: "\25B2" !important;
+}
+
+body.dashboard-mode .in-season-fa-stat-filter button:hover {
+  color: #0753ff !important;
+  background: transparent !important;
+}
+
+body.dashboard-mode .in-season-fa-stat-filter button.active {
+  border-color: #0753ff !important;
+  color: #0753ff !important;
+  background: #eef4ff !important;
+  box-shadow: 0 4px 10px rgba(11, 35, 86, .045) !important;
+}
+
+body.dashboard-mode .in-season-fa-stat-filter button.active::after {
+  color: #0753ff !important;
+}
+
+body.dashboard-mode .in-season-fa-stat-filter button.active::after {
+  display: block !important;
+  color: #0753ff !important;
+  content: "\25B2" !important;
+}
+
+body.dashboard-mode .in-season-fa-stat-filter button.active.asc::after {
+  content: "\25BC" !important;
+}
+
+body.dashboard-mode .in-season-fa-player {
+  display: grid !important;
+  grid-template-columns: minmax(300px, 1.2fr) minmax(218px, .84fr) minmax(116px, .46fr) minmax(128px, .5fr) minmax(164px, .64fr) 88px !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  min-height: 136px !important;
+  padding: 0 !important;
+  border-bottom: 1px solid rgba(202, 212, 231, .78) !important;
+  background: rgba(255, 255, 255, .78) !important;
+  box-shadow: none !important;
+}
+
+body.dashboard-mode .in-season-fa-player:last-child {
+  border-bottom: 0 !important;
+}
+
+body.dashboard-mode .in-season-fa-player:hover {
+  background: rgba(246, 249, 254, .94) !important;
+}
+
+body.dashboard-mode .in-season-fa-player > * {
+  min-width: 0 !important;
+  padding: 12px 8px !important;
+  border-left: 1px solid rgba(202, 212, 231, .62) !important;
+}
+
+body.dashboard-mode .in-season-fa-player > :first-child {
+  border-left: 0 !important;
+}
+
+body.dashboard-mode .in-season-fa-player-cell {
+  display: grid !important;
+  grid-template-columns: 16px 64px 34px minmax(0, 1fr) 30px !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+body.dashboard-mode .in-season-fa-star {
+  display: grid !important;
+  place-items: center !important;
+  width: 18px !important;
+  height: 18px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  color: #8ea0c0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 15px !important;
+}
+
+body.dashboard-mode .in-season-fa-portrait {
+  position: relative !important;
+  width: 64px !important;
+  height: 82px !important;
+  align-self: center !important;
+  border: 1px solid rgba(202, 212, 231, .88) !important;
+  border-radius: 6px !important;
+  background: #f4f7fc !important;
+  box-shadow: none !important;
+}
+
+body.dashboard-mode .in-season-fa-headshot {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center bottom !important;
+}
+
+body.dashboard-mode .in-season-fa-portrait > b {
+  display: none !important;
+}
+
+body.dashboard-mode .in-season-fa-ovr {
+  display: grid !important;
+  place-items: center !important;
+  width: 34px !important;
+  height: 34px !important;
+  border: 2px solid var(--blue) !important;
+  border-radius: 50% !important;
+  color: var(--blue) !important;
+  background: #fff !important;
+  box-shadow: 0 3px 9px rgba(7, 83, 255, .12) !important;
+}
+
+body.dashboard-mode .in-season-fa-ovr b {
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  line-height: .92 !important;
+}
+
+body.dashboard-mode .in-season-fa-ovr span {
+  display: block !important;
+  color: #52628d !important;
+  font-size: 6px !important;
+  font-weight: 900 !important;
+}
+
+body.dashboard-mode .in-season-fa-identity {
+  display: grid !important;
+  align-content: center !important;
+  gap: 4px !important;
+}
+
+body.dashboard-mode .in-season-fa-identity > strong {
+  color: var(--navy) !important;
+  overflow: hidden !important;
+  font-size: 15px !important;
+  font-weight: 900 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode .in-season-fa-identity > span {
+  color: #46547e !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+}
+
+body.dashboard-mode .in-season-fa-identity small,
+body.dashboard-mode .in-season-fa-identity em {
+  color: #53628b !important;
+  font-size: 9px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+}
+
+body.dashboard-mode .in-season-fa-identity em {
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+}
+
+body.dashboard-mode .in-season-fa-mini-logo {
+  width: 16px !important;
+  height: 16px !important;
+  object-fit: contain !important;
+}
+
+body.dashboard-mode .in-season-fa-pot {
+  display: grid !important;
+  justify-items: center !important;
+  gap: 1px !important;
+  color: #00965f !important;
+  font-weight: 900 !important;
+}
+
+body.dashboard-mode .in-season-fa-pot b {
+  font-size: 16px !important;
+}
+
+body.dashboard-mode .in-season-fa-pot span {
+  font-size: 8px !important;
+}
+
+body.dashboard-mode .in-season-fa-stats {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  align-content: center !important;
+  gap: 8px 7px !important;
+}
+
+body.dashboard-mode .in-season-fa-stats span {
+  display: grid !important;
+  gap: 4px !important;
+}
+
+body.dashboard-mode .in-season-fa-stats small {
+  color: #69769d !important;
+  font-size: 8px !important;
+  font-weight: 900 !important;
+}
+
+body.dashboard-mode .in-season-fa-stats b {
+  color: var(--navy) !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+}
+
+body.dashboard-mode .in-season-fa-contract {
+  display: grid !important;
+  align-content: center !important;
+  gap: 9px !important;
+  justify-items: start !important;
+}
+
+body.dashboard-mode .in-season-fa-contract strong {
+  color: var(--navy) !important;
+  font-size: 21px !important;
+  font-weight: 900 !important;
+}
+
+body.dashboard-mode .in-season-fa-contract strong small {
+  font-size: 11px !important;
+}
+
+body.dashboard-mode .in-season-fa-contract span,
+body.dashboard-mode .in-season-fa-contract em {
+  color: #46547e !important;
+  font-size: 10px !important;
+  font-style: normal !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .in-season-fa-interest {
+  display: grid !important;
+  align-content: center !important;
+  gap: 4px !important;
+  justify-items: start !important;
+}
+
+body.dashboard-mode .in-season-fa-interest strong {
+  color: #0a9b5b !important;
+  font-size: 24px !important;
+  font-weight: 900 !important;
+}
+
+body.dashboard-mode .in-season-fa-interest.medium strong {
+  color: #f59e0b !important;
+}
+
+body.dashboard-mode .in-season-fa-interest.low strong {
+  color: #ef3b24 !important;
+}
+
+body.dashboard-mode .in-season-fa-interest span,
+body.dashboard-mode .in-season-fa-interest small {
+  color: #52608a !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .in-season-fa-interest div {
+  display: flex !important;
+  gap: 2px !important;
+}
+
+body.dashboard-mode .in-season-fa-interest i {
+  color: #d4dbe8 !important;
+  font-style: normal !important;
+  font-size: 14px !important;
+}
+
+body.dashboard-mode .in-season-fa-interest i.filled {
+  color: #10a86b !important;
+}
+
+body.dashboard-mode .in-season-fa-fit {
+  display: grid !important;
+  grid-template-columns: 52px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 7px !important;
+  min-height: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.dashboard-mode .in-season-fa-fit span {
+  grid-column: 1 !important;
+  color: var(--navy) !important;
+  font-size: 9px !important;
+  font-weight: 900 !important;
+  text-align: center !important;
+}
+
+body.dashboard-mode .in-season-fa-fit-ring {
+  display: grid !important;
+  place-items: center !important;
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  background: conic-gradient(#10a86b var(--fit), #edf2fa 0) !important;
+}
+
+body.dashboard-mode .in-season-fa-fit.medium .in-season-fa-fit-ring,
+body.dashboard-mode .in-season-fa-fit.average .in-season-fa-fit-ring {
+  background: conic-gradient(#f59e0b var(--fit), #edf2fa 0) !important;
+}
+
+body.dashboard-mode .in-season-fa-fit.poor .in-season-fa-fit-ring {
+  background: conic-gradient(#ef3b24 var(--fit), #edf2fa 0) !important;
+}
+
+body.dashboard-mode .in-season-fa-fit-ring strong {
+  display: grid !important;
+  place-items: center !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  background: #fff !important;
+  color: var(--navy) !important;
+  font-size: 14px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+
+body.dashboard-mode .in-season-fa-fit ul {
+  display: grid !important;
+  gap: 4px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+body.dashboard-mode .in-season-fa-fit li {
+  position: relative !important;
+  overflow: hidden !important;
+  padding-left: 12px !important;
+  color: #52608a !important;
+  font-size: 8px !important;
+  font-weight: 800 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode .in-season-fa-fit li::before {
+  position: absolute !important;
+  left: 0 !important;
+  color: #10a86b !important;
+  content: "\2713" !important;
+}
+
+body.dashboard-mode .in-season-fa-fit li.warn::before {
+  color: #f59e0b !important;
+  content: "!" !important;
+}
+
+body.dashboard-mode .in-season-fa-fit li.bad::before {
+  color: #ef3b24 !important;
+  content: "\00D7" !important;
+}
+
+body.dashboard-mode .in-season-fa-actions {
+  display: grid !important;
+  justify-items: stretch !important;
+  align-items: center !important;
+  align-content: center !important;
+  gap: 7px !important;
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+  border-left: 1px solid rgba(202, 212, 231, .78) !important;
+}
+
+body.dashboard-mode .in-season-fa-actions .btn {
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 24px !important;
+  padding: 3px 6px !important;
+  border-radius: 4px !important;
+  font-size: 8px !important;
+  font-weight: 900 !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode .in-season-negotiate {
+  justify-content: center !important;
+  min-width: 0 !important;
+  min-height: 28px !important;
+  gap: 0 !important;
+  border: 1px solid rgba(6, 76, 255, .54) !important;
+  border-radius: 4px !important;
+  color: #fff !important;
+  background: linear-gradient(180deg, #0d55ef, #063fcf) !important;
+  box-shadow: 0 7px 16px rgba(19, 53, 120, .08) !important;
+  font-size: 8px !important;
+  font-weight: 900 !important;
+}
+
+body.dashboard-mode .in-season-fa-player > .in-season-fa-fit {
+  display: grid !important;
+  grid-template-columns: 56px minmax(0, 1fr) !important;
+  grid-template-rows: 1fr !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 0 !important;
+  padding: 14px 12px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.dashboard-mode .in-season-fa-player:hover > .in-season-fa-fit {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.dashboard-mode .in-season-fa-fit-ring {
+  width: 52px !important;
+  height: 52px !important;
+  box-shadow: none !important;
+}
+
+body.dashboard-mode .in-season-fa-fit-ring strong {
+  width: 39px !important;
+  height: 39px !important;
+  font-size: 13px !important;
+}
+
+body.dashboard-mode .in-season-fa-fit span {
+  grid-column: 1 !important;
+  align-self: start !important;
+  margin-top: 5px !important;
+  color: #071b60 !important;
+  font-size: 8px !important;
+  line-height: 1 !important;
+}
+
+body.dashboard-mode .in-season-fa-fit ul {
+  align-self: center !important;
+  gap: 4px !important;
+  min-width: 0 !important;
+}
+
+body.dashboard-mode .in-season-fa-fit li {
+  max-width: 100% !important;
+  padding-left: 13px !important;
+  font-size: 8px !important;
+  line-height: 1.1 !important;
+}
+
+body.dashboard-mode .in-season-negotiate span {
+  display: grid !important;
+  place-items: center !important;
+  width: 20px !important;
+  height: 20px !important;
+  border: 1px solid currentColor !important;
+  border-radius: 50% !important;
+  color: var(--blue) !important;
+  background: rgba(6, 76, 255, .06) !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+}
+
+@media (max-width: 1180px) {
+  body.dashboard-mode .in-season-fa-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  body.dashboard-mode .in-season-fa-toolbar {
+    align-items: stretch !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  body.dashboard-mode .in-season-fa-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  body.dashboard-mode .in-season-fa-list {
+    overflow-x: auto !important;
+  }
+
+  body.dashboard-mode .in-season-fa-list-head,
+  body.dashboard-mode .in-season-fa-player {
+    grid-template-columns: 300px 218px 116px 128px 164px 88px !important;
+    min-width: 1014px !important;
+  }
+
+  body.dashboard-mode .in-season-fa-actions {
+    justify-content: stretch !important;
+    padding-left: 14px !important;
+    border-left: 1px solid rgba(202, 212, 231, .62) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body.dashboard-mode .page:has(.in-season-fa-hero) {
+    padding: 18px 12px 28px !important;
+  }
+
+  body.dashboard-mode .in-season-fa-hero,
+  body.dashboard-mode .in-season-waiver-strip {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.dashboard-mode .in-season-fa-rule {
+    text-align: left !important;
+  }
+
+  body.dashboard-mode .in-season-fa-summary,
+  body.dashboard-mode .in-season-fa-controls {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.dashboard-mode .in-season-fa-fit,
+  body.dashboard-mode .in-season-fa-actions {
+    grid-column: auto !important;
+    padding-left: 0 !important;
+    border-left: 0 !important;
+  }
+}
+

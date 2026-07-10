@@ -1,0 +1,730 @@
+﻿/* Trade Machine: clean NBA Manager broadcast layout. */
+body.dashboard-mode .trade-page-title {
+  margin: 0 0 18px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  color: var(--navy) !important;
+  font-family: var(--broadcast-heading) !important;
+  font-size: clamp(32px, 3.3vw, 44px) !important;
+  font-weight: 700 !important;
+  letter-spacing: .02em !important;
+  line-height: 1 !important;
+  text-transform: uppercase;
+}
+
+body.dashboard-mode .page:has(.trade-page-title) {
+  width: min(1210px, 100%) !important;
+  max-width: 1210px !important;
+  padding: 12px 10px 28px !important;
+}
+
+body.dashboard-mode .multi-trade-steps {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto !important;
+  gap: 16px !important;
+  min-height: 88px !important;
+  padding: 16px 18px !important;
+  border: 1px solid rgba(202, 212, 231, .78) !important;
+  border-radius: 10px !important;
+  color: var(--navy) !important;
+  background: rgba(255, 255, 255, .92) !important;
+  box-shadow: 0 14px 32px rgba(9, 28, 88, .075) !important;
+}
+
+body.dashboard-mode .multi-trade-steps > div {
+  min-height: 54px !important;
+  padding: 0 18px !important;
+  border-right: 1px solid rgba(202, 212, 231, .78) !important;
+}
+
+body.dashboard-mode .multi-trade-steps > div > b {
+  width: 34px !important;
+  height: 34px !important;
+  flex-basis: 34px !important;
+  border: 1px solid rgba(6, 76, 255, .28) !important;
+  color: var(--navy) !important;
+  background: rgba(6, 76, 255, .06) !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .multi-trade-steps > div.active > b {
+  border-color: var(--blue) !important;
+  color: #ffffff !important;
+  background: var(--blue) !important;
+  box-shadow: 0 8px 16px rgba(6, 76, 255, .18);
+}
+
+body.dashboard-mode .multi-trade-steps > div strong {
+  color: var(--navy) !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+}
+
+body.dashboard-mode .multi-trade-steps > div.active strong {
+  color: var(--blue) !important;
+}
+
+body.dashboard-mode .multi-trade-steps > div small {
+  color: #304176 !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+body.dashboard-mode .multi-trade-steps > .btn {
+  min-width: 126px !important;
+  min-height: 42px !important;
+  margin-left: 4px !important;
+  border-color: rgba(6, 76, 255, .42) !important;
+  color: var(--blue) !important;
+  background: rgba(255, 255, 255, .9) !important;
+}
+
+body.dashboard-mode .multi-trade-team-picker {
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  gap: 18px !important;
+  padding: 18px 20px !important;
+  border: 1px solid rgba(202, 212, 231, .78) !important;
+  border-radius: 10px !important;
+  color: var(--navy) !important;
+  background: rgba(255, 255, 255, .92) !important;
+  box-shadow: 0 12px 28px rgba(9, 28, 88, .06) !important;
+}
+
+body.dashboard-mode .multi-trade-team-picker > div:first-child span {
+  color: var(--blue) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: .12em !important;
+}
+
+body.dashboard-mode .multi-trade-team-picker > div:first-child strong {
+  color: var(--navy) !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .multi-trade-team-chips {
+  gap: 10px !important;
+}
+
+body.dashboard-mode .multi-trade-team-chips > span {
+  min-height: 42px !important;
+  padding: 6px 12px !important;
+  border: 1px solid rgba(188, 200, 223, .95) !important;
+  border-radius: 7px !important;
+  color: var(--navy) !important;
+  background: rgba(255, 255, 255, .9) !important;
+  box-shadow: 0 6px 14px rgba(9, 28, 88, .045) !important;
+}
+
+body.dashboard-mode .multi-trade-chip-logo {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+body.dashboard-mode .multi-trade-team-chips b {
+  color: var(--navy) !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .multi-trade-team-chips small {
+  color: var(--blue) !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .multi-trade-team-chips button {
+  color: var(--navy) !important;
+  font-size: 18px !important;
+}
+
+body.dashboard-mode .multi-trade-team-picker > label {
+  align-items: center;
+  gap: 10px !important;
+}
+
+body.dashboard-mode .multi-trade-team-picker > label select {
+  min-width: 210px !important;
+  min-height: 42px !important;
+  border-color: rgba(188, 200, 223, .95) !important;
+  border-radius: 7px !important;
+  color: var(--navy) !important;
+  background: #ffffff !important;
+}
+
+body.dashboard-mode .multi-trade-top-add-team {
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: 46px !important;
+  height: 46px !important;
+  padding: 0 !important;
+  border: 1px dashed rgba(142, 158, 190, .9) !important;
+  border-radius: 999px !important;
+  color: var(--blue) !important;
+  background: rgba(6, 76, 255, .055) !important;
+  cursor: pointer;
+  box-shadow: none !important;
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1;
+  transition: transform .16s ease, border-color .16s ease, background .16s ease;
+}
+
+body.dashboard-mode .multi-trade-top-add-team:hover {
+  border-color: rgba(6, 76, 255, .72) !important;
+  background: rgba(6, 76, 255, .1) !important;
+  transform: translateY(-1px);
+}
+
+body.dashboard-mode .multi-trade-team-grid {
+  gap: 10px !important;
+  padding: 0 0 12px !important;
+}
+
+body.dashboard-mode .multi-trade-team-panel {
+  min-width: 300px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(202, 212, 231, .78) !important;
+  border-radius: 10px !important;
+  color: var(--navy) !important;
+  background: rgba(255, 255, 255, .94) !important;
+  box-shadow: 0 12px 28px rgba(9, 28, 88, .075) !important;
+}
+
+body.dashboard-mode .multi-trade-add-team-empty {
+  min-height: 82px !important;
+  border-style: dashed !important;
+  border-color: rgba(142, 158, 190, .9) !important;
+  color: var(--navy) !important;
+  background: rgba(255, 255, 255, .72) !important;
+}
+
+body.dashboard-mode .multi-trade-add-team-empty strong {
+  color: var(--navy) !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .multi-trade-add-team-empty small {
+  color: var(--muted) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+body.dashboard-mode .multi-trade-add-team-mark {
+  display: grid !important;
+  place-items: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  padding: 0 !important;
+  border: 1px dashed rgba(142, 158, 190, .9) !important;
+  border-radius: 999px !important;
+  color: var(--blue) !important;
+  background: rgba(6, 76, 255, .055) !important;
+  box-shadow: none !important;
+  font-size: 21px !important;
+  font-weight: 900 !important;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .16s ease, border-color .16s ease, background .16s ease;
+}
+
+body.dashboard-mode .multi-trade-add-team-mark:hover:not(:disabled) {
+  border-color: rgba(6, 76, 255, .72) !important;
+  background: rgba(6, 76, 255, .1) !important;
+  transform: translateY(-1px);
+}
+
+body.dashboard-mode .multi-trade-add-team-mark:disabled {
+  cursor: not-allowed;
+  opacity: .45;
+}
+
+body.dashboard-mode .multi-trade-add-team-empty .multi-trade-flow-block,
+body.dashboard-mode .multi-trade-add-team-empty .multi-trade-asset-picker,
+body.dashboard-mode .multi-trade-add-team-empty > footer {
+  display: none !important;
+}
+
+body.dashboard-mode .multi-trade-team-popover {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  align-items: start;
+  justify-items: center;
+  padding: 34px 18px;
+}
+
+body.dashboard-mode .multi-trade-team-popover-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(7, 17, 58, .26);
+  cursor: pointer;
+}
+
+body.dashboard-mode .multi-trade-team-select-card {
+  position: relative;
+  z-index: 1;
+  width: min(690px, 100%);
+  max-height: calc(100vh - 86px);
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 24px 60px rgba(7, 17, 58, .24) !important;
+}
+
+body.dashboard-mode .multi-trade-team-select-card > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 58px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(202, 212, 231, .86);
+  background: linear-gradient(90deg, rgba(255, 255, 255, .98), rgba(246, 249, 254, .9));
+}
+
+body.dashboard-mode .multi-trade-team-select-card > header div {
+  display: grid;
+  gap: 4px;
+}
+
+body.dashboard-mode .multi-trade-team-select-card > header span {
+  color: var(--blue);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+body.dashboard-mode .multi-trade-team-select-card > header strong {
+  color: var(--navy);
+  font-size: 19px;
+}
+
+body.dashboard-mode .multi-trade-team-select-card > header button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(202, 212, 231, .95);
+  border-radius: 8px;
+  color: var(--navy);
+  background: #ffffff;
+  cursor: pointer;
+}
+
+body.dashboard-mode .multi-trade-team-select-card > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  padding: 12px;
+}
+
+body.dashboard-mode .multi-trade-team-select-card > div > button {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 8px 10px;
+  border: 1px solid rgba(202, 212, 231, .86);
+  border-left: 3px solid var(--blue);
+  border-radius: 8px;
+  color: var(--navy);
+  background: rgba(255, 255, 255, .92);
+  cursor: pointer;
+  text-align: left;
+}
+
+body.dashboard-mode .multi-trade-team-select-card > div > button:hover {
+  border-color: rgba(6, 76, 255, .52);
+  background: rgba(6, 76, 255, .045);
+}
+
+body.dashboard-mode .multi-trade-select-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+body.dashboard-mode .multi-trade-team-select-card button span {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+body.dashboard-mode .multi-trade-team-select-card button strong {
+  overflow: hidden;
+  color: var(--navy);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.dashboard-mode .multi-trade-team-select-card button small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.dashboard-mode .multi-trade-team-select-card button b {
+  color: var(--blue);
+  font-size: 12px;
+}
+
+@media (max-width: 700px) {
+  body.dashboard-mode .multi-trade-team-select-card > div {
+    grid-template-columns: 1fr;
+  }
+}
+
+body.dashboard-mode .multi-trade-team-panel > header {
+  grid-template-columns: 52px minmax(0, 1fr) auto !important;
+  gap: 12px !important;
+  min-height: 82px !important;
+  padding: 16px 18px !important;
+  border-bottom: 1px solid rgba(202, 212, 231, .72) !important;
+  color: var(--navy) !important;
+  background: linear-gradient(90deg, rgba(255, 255, 255, .98), rgba(246, 249, 254, .9)) !important;
+}
+
+body.dashboard-mode .multi-trade-team-logo {
+  width: 48px !important;
+  height: 48px !important;
+  filter: drop-shadow(0 7px 12px rgba(9, 28, 88, .12));
+}
+
+body.dashboard-mode .multi-trade-team-panel > header strong {
+  color: var(--navy) !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .multi-trade-team-panel > header span {
+  color: #304176 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+body.dashboard-mode .multi-trade-team-panel > header aside small {
+  color: var(--blue) !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+}
+
+body.dashboard-mode .multi-trade-team-panel > header aside b {
+  color: var(--success) !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .multi-trade-flow-block {
+  gap: 8px !important;
+  padding: 14px 16px !important;
+  border-bottom: 1px solid rgba(202, 212, 231, .68) !important;
+  background: transparent !important;
+}
+
+body.dashboard-mode .multi-trade-flow-block > div:first-child {
+  color: #405181 !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+}
+
+body.dashboard-mode .multi-trade-flow-block > div:first-child span {
+  color: var(--blue) !important;
+}
+
+body.dashboard-mode .multi-trade-flow-block > div:first-child b {
+  color: var(--blue) !important;
+  font-size: 11px !important;
+}
+
+body.dashboard-mode .multi-trade-asset {
+  grid-template-columns: 42px minmax(0, 1fr) auto auto !important;
+  gap: 10px !important;
+  min-height: 58px !important;
+  padding: 8px 10px !important;
+  border: 1px solid rgba(202, 212, 231, .68) !important;
+  border-radius: 7px !important;
+  color: var(--navy) !important;
+  background: rgba(255, 255, 255, .76) !important;
+}
+
+body.dashboard-mode .multi-trade-player-headshot,
+body.dashboard-mode .multi-trade-picker-headshot {
+  width: 42px !important;
+  height: 42px !important;
+  border: 1px solid rgba(202, 212, 231, .92);
+  border-radius: 7px !important;
+  background: #f4f7fc !important;
+  box-shadow: 0 6px 12px rgba(9, 28, 88, .07);
+}
+
+body.dashboard-mode .multi-trade-asset strong,
+body.dashboard-mode .multi-trade-asset-picker button strong {
+  color: var(--navy) !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .multi-trade-asset small,
+body.dashboard-mode .multi-trade-asset > b,
+body.dashboard-mode .multi-trade-asset-picker button small {
+  color: var(--muted) !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+}
+
+body.dashboard-mode .multi-trade-asset > button {
+  color: var(--navy) !important;
+  font-size: 20px !important;
+}
+
+body.dashboard-mode .multi-trade-asset select {
+  min-width: 82px !important;
+  min-height: 30px !important;
+  border-color: rgba(188, 200, 223, .95) !important;
+  color: var(--navy) !important;
+  background: #ffffff !important;
+  font-size: 10px !important;
+}
+
+body.dashboard-mode .multi-trade-pick-mark {
+  width: 42px !important;
+  height: 42px !important;
+  border-color: rgba(6, 76, 255, .32) !important;
+  color: var(--blue) !important;
+  background: rgba(6, 76, 255, .07) !important;
+}
+
+body.dashboard-mode .multi-trade-asset-picker {
+  border-bottom: 1px solid rgba(202, 212, 231, .68) !important;
+  background: transparent !important;
+}
+
+body.dashboard-mode .multi-trade-asset-picker > summary {
+  padding: 14px 16px !important;
+  color: var(--blue) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+}
+
+body.dashboard-mode .multi-trade-asset-picker > div {
+  gap: 6px !important;
+  padding: 0 12px 12px !important;
+}
+
+body.dashboard-mode .multi-trade-asset-picker > div > button {
+  grid-template-columns: 42px minmax(0, 1fr) auto !important;
+  gap: 10px !important;
+  min-height: 58px !important;
+  padding: 8px 10px !important;
+  border: 1px solid rgba(202, 212, 231, .68) !important;
+  border-radius: 7px !important;
+  color: var(--navy) !important;
+  background: rgba(255, 255, 255, .76) !important;
+}
+
+body.dashboard-mode .multi-trade-asset-picker > div > button:hover,
+body.dashboard-mode .multi-trade-asset-picker > div > button.selected {
+  border-color: rgba(6, 76, 255, .38) !important;
+  color: var(--blue) !important;
+  background: rgba(6, 76, 255, .055) !important;
+}
+
+body.dashboard-mode .multi-trade-team-panel > footer {
+  min-height: 48px !important;
+  padding: 12px 16px !important;
+  border-top: 1px solid rgba(202, 212, 231, .68) !important;
+  color: var(--muted) !important;
+  background: #f7f9fd !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+body.dashboard-mode .multi-trade-team-panel > footer strong {
+  color: var(--navy) !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .multi-trade-analysis {
+  overflow: hidden !important;
+  border: 1px solid rgba(202, 212, 231, .78) !important;
+  border-radius: 10px !important;
+  color: var(--navy) !important;
+  background: rgba(255, 255, 255, .94) !important;
+  box-shadow: 0 14px 32px rgba(9, 28, 88, .08) !important;
+}
+
+body.dashboard-mode .multi-trade-analysis > header {
+  min-height: 86px !important;
+  padding: 20px 24px !important;
+  border-bottom: 1px solid rgba(202, 212, 231, .72) !important;
+  background: #ffffff !important;
+}
+
+body.dashboard-mode .multi-trade-analysis .card-label {
+  color: var(--navy) !important;
+  font-size: 15px !important;
+  letter-spacing: .08em !important;
+}
+
+body.dashboard-mode .multi-trade-analysis > header strong {
+  color: var(--red) !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .multi-trade-analysis.valid > header strong {
+  color: var(--success) !important;
+}
+
+body.dashboard-mode .multi-trade-analysis > header small,
+body.dashboard-mode .multi-trade-analysis > header > span {
+  color: #304176 !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+body.dashboard-mode .multi-trade-impact-grid {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)) !important;
+  border-bottom: 1px solid rgba(202, 212, 231, .72);
+}
+
+body.dashboard-mode .multi-trade-impact-grid article {
+  min-height: 92px !important;
+  padding: 18px 20px !important;
+  border-right: 1px solid rgba(202, 212, 231, .72) !important;
+}
+
+body.dashboard-mode .multi-trade-impact-logo {
+  width: 46px !important;
+  height: 46px !important;
+}
+
+body.dashboard-mode .multi-trade-impact-grid span,
+body.dashboard-mode .multi-trade-impact-grid small {
+  color: var(--muted) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+}
+
+body.dashboard-mode .multi-trade-impact-grid strong {
+  color: var(--navy) !important;
+  font-family: var(--broadcast-number) !important;
+  font-size: 25px !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .multi-trade-receiving-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+  gap: 10px !important;
+  padding: 12px 14px !important;
+  border-top: 1px solid rgba(202, 212, 231, .68) !important;
+}
+
+body.dashboard-mode .multi-trade-receiving-card {
+  overflow: hidden !important;
+  border: 1px solid rgba(202, 212, 231, .82) !important;
+  border-radius: 6px !important;
+  background: rgba(255, 255, 255, .86) !important;
+}
+
+body.dashboard-mode .multi-trade-receiving-card > header {
+  display: grid !important;
+  grid-template-columns: 35px minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 9px !important;
+  min-height: 58px !important;
+  padding: 9px 11px !important;
+  border-bottom: 1px solid rgba(202, 212, 231, .68) !important;
+  background: rgba(246, 249, 254, .82) !important;
+}
+
+body.dashboard-mode .multi-trade-receiving-card > header > div {
+  display: grid !important;
+  gap: 3px !important;
+}
+
+body.dashboard-mode .multi-trade-receiving-card > header span {
+  color: #596793 !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+}
+
+body.dashboard-mode .multi-trade-receiving-card > header strong {
+  color: var(--navy) !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .multi-trade-receiving-card > header b {
+  color: var(--success) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode .multi-trade-receiving-card > div {
+  display: grid !important;
+  gap: 7px !important;
+  padding: 9px !important;
+}
+
+body.dashboard-mode .multi-trade-analysis .trade-rule-list {
+  max-height: 180px !important;
+  padding: 14px 24px !important;
+}
+
+body.dashboard-mode .multi-trade-analysis .trade-rule {
+  min-height: 36px;
+  color: var(--navy) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+body.dashboard-mode .multi-trade-analysis > footer {
+  min-height: 68px !important;
+  padding: 14px 24px !important;
+  border-top: 1px solid rgba(202, 212, 231, .72) !important;
+  background: rgba(255, 255, 255, .96) !important;
+}
+
+body.dashboard-mode .multi-trade-analysis > footer .btn {
+  min-width: 150px !important;
+  min-height: 42px !important;
+}
+
+@media (max-width: 900px) {
+  body.dashboard-mode .multi-trade-steps {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.dashboard-mode .multi-trade-steps > div {
+    border-right: 0 !important;
+    border-bottom: 1px solid rgba(202, 212, 231, .72) !important;
+  }
+
+  body.dashboard-mode .multi-trade-team-picker {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.dashboard-mode .multi-trade-team-picker > label {
+    flex-wrap: wrap;
+  }
+}
+

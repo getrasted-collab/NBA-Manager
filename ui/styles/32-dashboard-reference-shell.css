@@ -1,0 +1,291 @@
+﻿/* Concept-art dashboard shell: shared polish for the reference-style pages. */
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) {
+  --concept-ink: #071b60;
+  --concept-muted: #52618f;
+  --concept-soft: #f5f8fd;
+  --concept-stroke: #d7e1f2;
+  --concept-blue: #0753ff;
+  --concept-green: #0a9b5b;
+  --concept-red: #d61f43;
+  --concept-orange: #ff8a00;
+  --concept-shadow: 0 12px 30px rgba(11, 35, 86, .075);
+  --concept-shadow-soft: 0 7px 18px rgba(11, 35, 86, .055);
+  background:
+    linear-gradient(180deg, #fbfdff 0%, #f8fbff 44%, #ffffff 100%);
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) .broadcast-shell {
+  grid-template-rows: 0 minmax(0, 1fr);
+  background:
+    radial-gradient(circle at 100% 0, rgba(7, 83, 255, .08), transparent 32%),
+    linear-gradient(180deg, #fbfdff 0%, #ffffff 72%);
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) .topbar,
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) .page-shell-header {
+  display: none;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) .main-shell {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fbfdff, #fff);
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) .workspace {
+  padding: 16px 22px 20px;
+  background: #fbfdff;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) .page {
+  width: 100%;
+  max-width: none;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .social-page,
+  .league-stats-page,
+  .awards-dashboard,
+  .league-history-dashboard,
+  .scouting-page,
+  .finance-dashboard
+) {
+  max-width: 1720px;
+  margin: 0 auto;
+  color: var(--concept-ink);
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .social-page-header,
+  .league-stats-header,
+  .awards-header,
+  .league-history-header,
+  .scouting-page-header,
+  .finance-page-header
+) {
+  min-height: 48px;
+  gap: 14px;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .social-page-header h1,
+  .league-stats-header .page-title,
+  .awards-header .page-title,
+  .league-history-header .page-title,
+  .scouting-page-header h1,
+  .finance-page-header h1
+) {
+  margin: 0;
+  color: var(--concept-ink);
+  font-family: Oswald, Impact, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(29px, 2.2vw, 38px);
+  font-weight: 700;
+  letter-spacing: .2px;
+  line-height: .95;
+  text-transform: uppercase;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .social-page-header p,
+  .league-stats-header p,
+  .awards-header p,
+  .league-history-header p,
+  .scouting-page-header p,
+  .finance-page-header p
+) {
+  margin-top: 5px;
+  color: var(--concept-muted);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .btn,
+  .ghost-button,
+  .icon-button,
+  .mini-action,
+  .text-link,
+  .awards-actions button,
+  .awards-tabs button,
+  .award-action-card footer button,
+  .award-activity-strip button,
+  .league-history-actions button,
+  .league-history-tabs button,
+  .history-action-card button,
+  .history-timeline-strip .text-link,
+  .history-champions-card .text-link,
+  .history-leaders-card .text-link,
+  .history-franchise-titles .text-link,
+  .history-news-card .text-link,
+  .league-stats-actions button,
+  .league-stats-tabs button,
+  .league-action-card footer button,
+  .scouting-tabs button,
+  .scouting-report-tabs button
+) {
+  border-radius: 6px;
+  letter-spacing: .25px;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .btn.primary,
+  .awards-actions .primary,
+  .league-history-actions .primary
+) {
+  border-color: var(--concept-blue);
+  color: #ffffff;
+  background: linear-gradient(180deg, #1264ff, #0753ff);
+  box-shadow: 0 9px 18px rgba(7, 83, 255, .22);
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .btn:not(.primary),
+  .ghost-button,
+  .icon-button,
+  .awards-actions button:not(.primary),
+  .league-history-actions button:not(.primary)
+) {
+  border: 1px solid var(--concept-stroke);
+  color: var(--concept-ink);
+  background: rgba(255, 255, 255, .94);
+  box-shadow: var(--concept-shadow-soft);
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .social-metrics,
+  .league-stat-card,
+  .league-stats-table-card,
+  .league-stats-action-center,
+  .league-leaders-panel,
+  .league-advanced-panel,
+  .league-trend-panel,
+  .league-stat-updates,
+  .award-top-card,
+  .awards-race-table,
+  .award-feature-panel,
+  .awards-action-center,
+  .award-leaders-by-award,
+  .award-team-projection,
+  .award-rookie-ladder,
+  .award-news-panel,
+  .award-activity-strip,
+  .history-top-card,
+  .history-champions-card,
+  .history-dynasty-feature,
+  .history-action-center,
+  .history-leaders-card,
+  .history-award-legacy,
+  .history-franchise-titles,
+  .history-news-card,
+  .history-timeline-strip,
+  .scouting-metrics,
+  .scouting-draft-board,
+  .scouting-selected-panel,
+  .scouting-action-center,
+  .scouting-assignments,
+  .scouting-team-summary,
+  .scouting-bottom-grid > .card,
+  .finance-dashboard .card
+) {
+  border-color: var(--concept-stroke);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: var(--concept-shadow);
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .league-stats-tabs,
+  .awards-tabs,
+  .league-history-tabs,
+  .scouting-tabs
+) {
+  border: 0;
+  border-bottom: 1px solid var(--concept-stroke);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow-x: auto;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .league-stats-tabs button,
+  .awards-tabs button,
+  .league-history-tabs button,
+  .scouting-tabs button
+) {
+  color: #24366f;
+  background: transparent;
+  box-shadow: none;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .league-stats-tabs button.active,
+  .awards-tabs button.active,
+  .league-history-tabs button.active,
+  .scouting-tabs button.active
+) {
+  border-bottom-color: var(--concept-blue);
+  color: var(--concept-blue);
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .league-stats-table-wrap th,
+  .awards-table-wrap th,
+  .history-table-wrap th,
+  .finance-cap-sheet th,
+  .scouting-board-head
+) {
+  background: var(--concept-soft);
+  color: #52618f;
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .league-stats-table-wrap td,
+  .awards-table-wrap td,
+  .history-table-wrap td,
+  .finance-cap-sheet td,
+  .scouting-draft-board button[data-view-player],
+  .finance-mini-list article,
+  .finance-exceptions article,
+  .finance-activity article,
+  .scouting-assignments article,
+  .scouting-staff-recs article,
+  .scouting-comparison-widget article
+) {
+  border-color: var(--concept-stroke);
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) img {
+  max-width: 100%;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .league-player-shot,
+  .award-table-shot,
+  .finance-player-headshot,
+  .scouting-row-headshot,
+  .social-post-avatar-img
+) {
+  background: #edf3ff;
+  box-shadow: inset 0 0 0 1px rgba(7, 83, 255, .08);
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) :is(
+  .league-action-card,
+  .award-action-card,
+  .history-action-card,
+  .finance-action-center article,
+  .scouting-action-center article
+) {
+  box-shadow: 0 5px 14px rgba(11, 35, 86, .045);
+}
+
+@media (max-width: 980px) {
+  body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) .workspace {
+    padding: 14px;
+  }
+}
+

@@ -1,0 +1,80 @@
+﻿/* 2K-style SimCast */
+.simcast-shell { display: grid; gap: 12px; color: #f3f4f5; }
+.simcast-topline { display: flex; align-items: center; justify-content: space-between; gap: 18px; color: #727985; font-size: 9px; font-weight: 850; letter-spacing: 1px; text-transform: uppercase; }
+.simcast-topline > div:first-child { display: flex; align-items: center; gap: 9px; }
+.simcast-topline span { color: var(--dash-gold); font-family: Impact, sans-serif; font-size: 22px; letter-spacing: 1.3px; }
+.simcast-topline strong { padding: 4px 7px; border: 1px solid rgba(21,215,159,.34); border-radius: 3px; color: #15d79f; background: rgba(21,215,159,.08); font-size: 7px; }
+.simcast-scoreboard { display: grid; grid-template-columns: minmax(0,1fr) 150px minmax(0,1fr); align-items: center; min-height: 178px; padding: 24px 30px; overflow: hidden; background: radial-gradient(circle at center, rgba(245,166,35,.07), transparent 34%), #101319; }
+.simcast-team { display: grid; grid-template-columns: 74px minmax(0,1fr) auto; align-items: center; gap: 16px; }
+.simcast-team.home { grid-template-columns: auto minmax(0,1fr) 74px; text-align: right; }
+.simcast-team > div { display: grid; gap: 3px; }
+.simcast-team span, .simcast-team small { color: #737a85; font-size: 8px; font-weight: 850; letter-spacing: .7px; text-transform: uppercase; }
+.simcast-team strong { font-family: Impact, Haettenschweiler, sans-serif; font-size: clamp(20px,2vw,30px); letter-spacing: .5px; text-transform: uppercase; }
+.simcast-team > b { min-width: 72px; font-family: Impact, Haettenschweiler, sans-serif; font-size: clamp(46px,5vw,72px); font-weight: 500; line-height: 1; text-align: center; }
+.simcast-team-logo { width: 72px; height: 72px; object-fit: contain; filter: drop-shadow(0 8px 12px rgba(0,0,0,.3)); }
+.simcast-clock { display: grid; justify-items: center; gap: 3px; padding: 0 18px; border-right: 1px solid #292e36; border-left: 1px solid #292e36; text-align: center; }
+.simcast-clock span { color: var(--dash-gold); font-size: 10px; font-weight: 950; letter-spacing: 1px; }
+.simcast-clock strong { font-family: "Arial Narrow", sans-serif; font-size: 42px; font-variant-numeric: tabular-nums; letter-spacing: -2px; }
+.simcast-clock small { color: #606772; font-size: 7px; font-weight: 900; letter-spacing: .8px; }
+.simcast-progress { height: 3px; overflow: hidden; border-radius: 999px; background: #242932; }
+.simcast-progress span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--dash-gold); transition: width .18s linear; }
+.simcast-period-strip { display: grid; grid-template-columns: max-content; justify-content: center; padding: 9px 14px; overflow-x: auto; }
+.simcast-period-strip > div { display: flex; align-items: center; min-width: max-content; text-align: center; }
+.simcast-period-strip > div > * { width: 34px; flex: 0 0 34px; }
+.simcast-period-strip > div > :first-child { position: sticky; left: 0; width: 52px; flex-basis: 52px; color: #dfe1e4; background: #11141a; text-align: left; }
+.simcast-period-strip > div > :last-child { width: 38px; flex-basis: 38px; }
+.simcast-period-strip span { color: #69717c; font-size: 7px; font-weight: 900; }
+.simcast-period-strip b, .simcast-period-strip strong { padding: 3px 6px; font-size: 8px; font-variant-numeric: tabular-nums; }
+.simcast-period-strip b.live { color: var(--dash-gold); }
+.simcast-period-head { border-bottom: 1px solid #292e36; }
+.simcast-period-head strong { color: #737b86; font-size: 7px; }
+.simcast-body { display: grid; grid-template-columns: minmax(0,1.75fr) minmax(280px,.75fr); gap: 12px; min-height: 390px; }
+.simcast-feed-panel { display: grid; grid-template-rows: auto 1fr; min-height: 0; overflow: hidden; }
+.simcast-feed-panel > header { display: flex; align-items: center; justify-content: space-between; padding: 14px 17px; border-bottom: 1px solid #292e36; background: #0d1015; }
+.simcast-feed-panel > header > div { display: grid; gap: 3px; }
+.simcast-feed-panel header span, .simcast-side-panel section > span { color: var(--dash-gold); font-size: 7px; font-weight: 950; letter-spacing: 1.2px; }
+.simcast-feed-panel header strong, .simcast-side-panel section > strong { font-size: 13px; }
+.simcast-feed-panel header small { color: #68707b; font-size: 8px; }
+.simcast-feed { max-height: 390px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #343a44 transparent; }
+.simcast-feed-row { display: grid; grid-template-columns: 44px 26px minmax(0,1fr) 58px; align-items: center; gap: 8px; min-height: 43px; padding: 8px 14px; border-bottom: 1px solid #252a32; }
+.simcast-feed-row:first-child { background: rgba(245,166,35,.055); }
+.simcast-feed-row > b { color: #8a919c; font-size: 9px; font-variant-numeric: tabular-nums; }
+.simcast-feed-row > span { color: #59606b; font-size: 8px; font-weight: 900; }
+.simcast-feed-row p { margin: 0; color: #c8cbd0; font-size: 10px; line-height: 1.35; }
+.simcast-feed-row > strong { color: #f0f1f2; font-size: 10px; text-align: right; }
+.simcast-feed-row.home { box-shadow: inset 3px 0 0 var(--team-primary); }
+.simcast-feed-row.away { box-shadow: inset 3px 0 0 #747b86; }
+.simcast-feed-row.period p { color: var(--dash-gold); font-weight: 900; letter-spacing: .5px; text-transform: uppercase; }
+.simcast-feed-empty { display: grid; place-items: center; min-height: 200px; color: #656c77; font-size: 10px; }
+.simcast-side-panel { display: grid; align-content: start; gap: 12px; }
+.simcast-side-panel section { padding: 15px; }
+.simcast-side-panel section > strong { display: block; margin: 4px 0 13px; }
+.simcast-stat-row { display: grid; grid-template-columns: 1fr 1.2fr 1fr; align-items: center; min-height: 36px; border-top: 1px solid #292e36; text-align: center; }
+.simcast-stat-row span { color: #727985; font-size: 8px; text-transform: uppercase; }
+.simcast-stat-row b { font-size: 11px; }
+.simcast-leaders > div { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid #292e36; }
+.simcast-leaders > div > span { display: grid; gap: 3px; }
+.simcast-leaders > div b { font-size: 10px; }
+.simcast-leaders > div small { color: #6f7680; font-size: 8px; }
+.simcast-leader-headshot { width: 42px; height: 42px; border-radius: 4px; background: #1a1e25; object-fit: cover; object-position: center top; }
+.simcast-controls { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 12px 15px; }
+.simcast-speed { display: flex; align-items: center; gap: 5px; }
+.simcast-speed > span { margin-right: 5px; color: #737a85; font-size: 8px; font-weight: 900; letter-spacing: 1px; }
+.simcast-speed button { min-width: 42px; min-height: 29px; border: 1px solid #343a44; border-radius: 3px; color: #777e89; background: #181c22; font-size: 8px; font-weight: 950; cursor: pointer; }
+.simcast-speed button.active { border-color: var(--dash-gold); color: #08090b; background: var(--dash-gold); }
+.simcast-coaching { overflow: hidden; }
+.simcast-coaching > header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 13px 16px; border-bottom: 1px solid #292e36; background: #0d1015; }
+.simcast-coaching > header > div { display: grid; gap: 3px; }
+.simcast-coaching > header span, .simcast-lineup-presets > span, .simcast-coaching label > span { color: var(--dash-gold); font-size: 7px; font-weight: 950; letter-spacing: 1px; text-transform: uppercase; }
+.simcast-coaching > header strong { font-size: 13px; }
+.simcast-coaching-grid { display: grid; grid-template-columns: minmax(320px,1.2fr) minmax(210px,.7fr) minmax(400px,1.4fr); gap: 1px; background: #292e36; }
+.simcast-coaching-grid > div { min-width: 0; padding: 14px; background: #11141a; }
+.simcast-strategy-controls { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 9px; }
+.simcast-strategy-controls label, .simcast-substitution label { display: grid; gap: 6px; min-width: 0; }
+.simcast-coaching select { width: 100%; min-width: 0; height: 33px; padding: 0 9px; border: 1px solid #353b45; border-radius: 3px; color: #d9dce0; background: #191d24; font-size: 8px; text-transform: capitalize; }
+.simcast-lineup-presets { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; align-content: start; }
+.simcast-lineup-presets > span { grid-column: 1 / -1; margin-bottom: 1px; }
+.simcast-lineup-presets .btn { min-height: 31px; padding: 6px; font-size: 8px; text-transform: capitalize; }
+.simcast-substitution { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) auto; align-items: end; gap: 9px; }
+.simcast-substitution .btn { min-height: 33px; white-space: nowrap; }
+

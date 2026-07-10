@@ -1,0 +1,2779 @@
+﻿/* Dashboard hero edge fix: keep the sim actions on the card surface at every width. */
+body.dashboard-mode .page {
+  width: 100%;
+  max-width: none;
+}
+
+body.dashboard-mode .reference-dashboard {
+  width: min(1320px, 100%);
+}
+
+body.dashboard-mode .reference-season-hero {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+body.dashboard-mode .reference-season-hero > div:last-child {
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  body.dashboard-mode .reference-season-hero {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  body.dashboard-mode .reference-season-hero > div:last-child {
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+}
+
+body.dark-mode.dashboard-mode .staff-market .staff-card > button.btn,
+body.dark-mode.dashboard-mode .staff-market .staff-card > button.btn:disabled,
+body.dark-mode.staff-layout .staff-market .staff-card > button.btn,
+body.dark-mode.staff-layout .staff-market .staff-card > button.btn:disabled {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode .staff-market .staff-card > button.btn:hover:not(:disabled),
+body.dark-mode.staff-layout .staff-market .staff-card > button.btn:hover:not(:disabled) {
+  border-color: rgba(79, 139, 255, .85) !important;
+  color: #ffffff !important;
+  background-color: rgba(22, 34, 62, .98) !important;
+  background-image: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
+}
+
+body.dark-mode.dashboard-mode .reference-dashboard .staff-market .staff-card > button.btn:disabled,
+body.dark-mode.dashboard-mode .reference-dashboard .staff-market .staff-card > button.btn[disabled],
+body.dark-mode.dashboard-mode .reference-dashboard .staff-market .staff-card > button.staff-hire-unavailable,
+body.dark-mode.dashboard-mode .reference-dashboard .staff-market .staff-card > button[aria-disabled="true"] {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  cursor: not-allowed !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode .reference-dashboard .staff-market .staff-card > button.btn,
+body.dark-mode.dashboard-mode .reference-dashboard .staff-market .staff-card > button.btn:not(:disabled),
+body.dark-mode.dashboard-mode .reference-dashboard .staff-market .staff-card > button.btn:hover,
+body.dark-mode.dashboard-mode .reference-dashboard .staff-market .staff-card > button.btn:focus,
+body.dark-mode.dashboard-mode .reference-management-grid .action-card > button.staff-market-button,
+body.dark-mode.dashboard-mode .reference-management-grid .action-card > button[data-action="open-staff-market"],
+body.dark-mode.dashboard-mode .action-card > button.staff-market-button,
+body.dark-mode.dashboard-mode .action-card > button[data-action="open-staff-market"] {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode .reference-management-grid .action-card > button.staff-market-button:hover,
+body.dark-mode.dashboard-mode .reference-management-grid .action-card > button[data-action="open-staff-market"]:hover,
+body.dark-mode.dashboard-mode .action-card > button.staff-market-button:hover,
+body.dark-mode.dashboard-mode .action-card > button[data-action="open-staff-market"]:hover {
+  border-color: rgba(79, 139, 255, .85) !important;
+  color: #ffffff !important;
+  background-color: rgba(22, 34, 62, .98) !important;
+  background-image: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
+}
+
+body.dashboard-mode .reference-dashboard .reference-management-grid .action-card > button[data-action="open-staff-market"],
+body.dashboard-mode .reference-dashboard .reference-management-grid .action-card > button.staff-market-button,
+body.dashboard-mode .reference-management-grid .action-card > button[data-action="open-staff-market"],
+body.dashboard-mode .reference-management-grid .action-card > button.staff-market-button {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dashboard-mode .reference-dashboard .reference-management-grid .action-card > button[data-action="open-staff-market"]:hover,
+body.dashboard-mode .reference-dashboard .reference-management-grid .action-card > button.staff-market-button:hover,
+body.dashboard-mode .reference-management-grid .action-card > button[data-action="open-staff-market"]:hover,
+body.dashboard-mode .reference-management-grid .action-card > button.staff-market-button:hover {
+  border-color: rgba(79, 139, 255, .85) !important;
+  color: #ffffff !important;
+  background-color: rgba(22, 34, 62, .98) !important;
+  background-image: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
+}
+
+button[data-action="open-staff-market"],
+button.staff-market-button,
+.secondary-button[data-action="open-staff-market"],
+.btn[data-action="open-staff-market"] {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+button[data-action="open-staff-market"]:hover,
+button.staff-market-button:hover,
+.secondary-button[data-action="open-staff-market"]:hover,
+.btn[data-action="open-staff-market"]:hover {
+  border-color: rgba(79, 139, 255, .85) !important;
+  color: #ffffff !important;
+  background-color: rgba(22, 34, 62, .98) !important;
+  background-image: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
+}
+
+body.dashboard-mode .sim-controls .btn,
+body.dashboard-mode .sim-controls button[data-sim-control],
+body.dashboard-mode .matchup-card .actions .btn,
+body.dashboard-mode .matchup-card .actions button {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dashboard-mode .sim-controls .btn:hover,
+body.dashboard-mode .sim-controls button[data-sim-control]:hover,
+body.dashboard-mode .matchup-card .actions .btn:hover:not(:disabled),
+body.dashboard-mode .matchup-card .actions button:hover:not(:disabled),
+body.dashboard-mode .standings-tabs button:not(.active):hover,
+body.dashboard-mode .standings-view-toggle button:not(.active):hover,
+button[data-action="open-staff-market"]:hover,
+button.staff-market-button:hover {
+  border-color: rgba(79, 139, 255, .9) !important;
+  color: #ffffff !important;
+  background-color: rgba(22, 34, 62, .98) !important;
+  background-image: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), 0 0 0 1px rgba(79, 139, 255, .16), 0 0 12px rgba(79, 139, 255, .22) !important;
+  transform: translateY(-1px);
+}
+
+body.dashboard-mode .standings-tabs button:not(.active),
+body.dashboard-mode .standings-view-toggle button:not(.active) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dashboard-mode .standings-tabs button.active,
+body.dashboard-mode .standings-view-toggle button.active {
+  border-color: rgba(79, 139, 255, .95) !important;
+  color: #ffffff !important;
+  background-color: #0753ff !important;
+  background-image: linear-gradient(180deg, #0d55ef, #063fcf) !important;
+  box-shadow: 0 8px 18px rgba(6, 76, 255, .2) !important;
+}
+
+body.dashboard-mode .standings-table .standings-title,
+body.dashboard-mode .nba-cup-table .standings-title {
+  border-bottom-color: rgba(104, 135, 194, .38) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(27, 39, 66, .98), rgba(13, 20, 38, .98)) !important;
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .04) !important;
+}
+
+body.dashboard-mode .standings-table .standings-title span,
+body.dashboard-mode .nba-cup-table .standings-title span {
+  color: #edf4ff !important;
+}
+
+body.dashboard-mode .standings-table .conference-logo,
+body.dashboard-mode .nba-cup-table .conference-logo {
+  border-color: rgba(150, 174, 222, .45) !important;
+  color: #edf4ff !important;
+  background-color: rgba(12, 20, 40, .94) !important;
+  background-image: linear-gradient(135deg, rgba(79, 139, 255, .16), rgba(12, 20, 40, .94)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04) !important;
+}
+
+body.dashboard-mode .standings-table .conference-logo-west,
+body.dashboard-mode .nba-cup-table .conference-logo-west {
+  border-color: rgba(255, 123, 145, .42) !important;
+  background-image: linear-gradient(135deg, rgba(215, 25, 63, .18), rgba(12, 20, 40, .94)) !important;
+}
+
+body.dashboard-mode.standings-cup-layout .nba-cup-card {
+  border-color: rgba(104, 135, 194, .42) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .96) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .98), rgba(9, 15, 29, .98)) !important;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .26) !important;
+}
+
+body.dashboard-mode.standings-cup-layout .nba-cup-heading {
+  border-bottom-color: rgba(104, 135, 194, .38) !important;
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(24, 34, 58, .96), rgba(13, 20, 38, .96)) !important;
+}
+
+body.dashboard-mode.standings-cup-layout .nba-cup-heading :is(.card-label, .player-name, .meta),
+body.dashboard-mode.standings-cup-layout .standings-legend {
+  color: #edf4ff !important;
+}
+
+body.dashboard-mode.standings-cup-layout .nba-cup-table {
+  background: rgba(9, 15, 29, .72) !important;
+}
+
+body.dashboard-mode.standings-cup-layout .nba-cup-table:first-child {
+  border-right-color: rgba(104, 135, 194, .38) !important;
+}
+
+body.dashboard-mode.standings-cup-layout .nba-cup-table thead,
+body.dashboard-mode.standings-cup-layout .nba-cup-table th {
+  border-color: rgba(104, 135, 194, .32) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .94) !important;
+  background-image: none !important;
+}
+
+body.dashboard-mode.standings-cup-layout .nba-cup-table tbody tr,
+body.dashboard-mode.standings-cup-layout .nba-cup-table tbody tr:nth-child(even),
+body.dashboard-mode.standings-cup-layout .nba-cup-table td {
+  border-color: rgba(104, 135, 194, .24) !important;
+  color: #edf4ff !important;
+  background-color: rgba(18, 27, 48, .78) !important;
+  background-image: none !important;
+}
+
+body.dashboard-mode.standings-cup-layout .nba-cup-table tbody tr.playoff-seed td:first-child {
+  box-shadow: inset 4px 0 0 #0753ff !important;
+}
+
+body.dashboard-mode.standings-cup-layout .nba-cup-table tbody tr.playin-seed td:first-child {
+  box-shadow: inset 4px 0 0 #f5a623 !important;
+}
+
+body.dashboard-mode.standings-cup-layout .nba-cup-table .standings-team-cell strong {
+  color: #edf4ff !important;
+}
+
+body.dark-mode.dashboard-mode .league-roster-browser {
+  border-color: rgba(104, 135, 194, .42) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .96) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .98), rgba(9, 15, 29, .98)) !important;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .26) !important;
+}
+
+body.dark-mode.dashboard-mode .league-roster-browser > header {
+  border-bottom-color: rgba(104, 135, 194, .38) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(24, 34, 58, .96), rgba(13, 20, 38, .96)) !important;
+}
+
+body.dark-mode.dashboard-mode .league-roster-browser > header strong,
+body.dark-mode.dashboard-mode .league-roster-browser > header small {
+  color: #edf4ff !important;
+}
+
+body.dark-mode.dashboard-mode .roster-team-grid {
+  background: rgba(9, 15, 29, .92) !important;
+}
+
+body.dark-mode.dashboard-mode .roster-team-grid button {
+  border-color: rgba(104, 135, 194, .48) !important;
+  color: #edf4ff !important;
+  background-color: rgba(18, 27, 48, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode .roster-team-grid button:hover {
+  border-color: rgba(79, 139, 255, .86) !important;
+  color: #ffffff !important;
+  background-color: rgba(22, 34, 62, .98) !important;
+  background-image: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), 0 0 12px rgba(79, 139, 255, .18) !important;
+}
+
+body.dark-mode.dashboard-mode .roster-team-grid button.active {
+  border-color: rgba(79, 139, 255, .95) !important;
+  color: #ffffff !important;
+  background-color: rgba(79, 139, 255, .28) !important;
+  background-image: linear-gradient(180deg, rgba(111, 158, 255, .45), rgba(45, 81, 159, .72)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06), 0 0 0 2px rgba(79, 139, 255, .18) !important;
+}
+
+body.dark-mode.dashboard-mode .league-roster-table .roster-waive-btn,
+body.dark-mode.dashboard-mode .league-roster-table button.roster-waive-btn.btn.danger {
+  min-width: 64px !important;
+  min-height: 30px !important;
+  border-color: rgba(240, 93, 104, .55) !important;
+  color: #ff9aa3 !important;
+  background-color: rgba(92, 24, 38, .52) !important;
+  background-image: linear-gradient(180deg, rgba(107, 31, 49, .62), rgba(57, 20, 34, .74)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .035) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode .league-roster-table .roster-waive-btn:hover,
+body.dark-mode.dashboard-mode .league-roster-table button.roster-waive-btn.btn.danger:hover {
+  border-color: rgba(255, 120, 132, .78) !important;
+  color: #ffffff !important;
+  background-color: rgba(132, 35, 56, .68) !important;
+  background-image: linear-gradient(180deg, rgba(154, 42, 63, .78), rgba(82, 24, 42, .88)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .055), 0 0 12px rgba(240, 93, 104, .18) !important;
+}
+
+html.dark-mode,
+body.dark-mode.start-mode {
+  background: #050914 !important;
+}
+
+html.dark-mode .startup-loading,
+body.dark-mode .startup-loading,
+body.dark-mode.start-mode {
+  color: #edf4ff !important;
+  background:
+    radial-gradient(circle at 2% 84%, rgba(79, 139, 255, .16), transparent 18%),
+    radial-gradient(circle at 100% 76%, rgba(215, 25, 63, .16), transparent 19%),
+    linear-gradient(115deg, rgba(5, 9, 20, .98), rgba(10, 16, 32, .94)),
+    url("../../assets/nba-manager-bg-og.png") center / cover no-repeat !important;
+}
+
+html.dark-mode .startup-loading::before,
+body.dark-mode .startup-loading::before {
+  opacity: .2 !important;
+  background-image:
+    linear-gradient(rgba(140, 160, 204, .08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140, 160, 204, .08) 1px, transparent 1px) !important;
+}
+
+html.dark-mode .startup-loading::after,
+body.dark-mode .startup-loading::after {
+  background: linear-gradient(90deg, #0753ff 0 48%, rgba(237, 244, 255, .9) 48% 52%, #d90429 52% 100%) !important;
+}
+
+html.dark-mode .startup-brand,
+html.dark-mode .startup-footer,
+body.dark-mode .startup-brand,
+body.dark-mode .startup-footer {
+  border-color: rgba(104, 135, 194, .38) !important;
+  background: rgba(7, 12, 25, .76) !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+html.dark-mode .startup-brand strong,
+html.dark-mode .startup-progress b,
+body.dark-mode .startup-brand strong,
+body.dark-mode .startup-progress b {
+  color: #f8fbff !important;
+}
+
+html.dark-mode .startup-brand small,
+html.dark-mode .startup-copy p,
+html.dark-mode .startup-progress span,
+html.dark-mode .startup-footer,
+body.dark-mode .startup-brand small,
+body.dark-mode .startup-copy p,
+body.dark-mode .startup-progress span,
+body.dark-mode .startup-footer {
+  color: rgba(226, 235, 255, .68) !important;
+}
+
+html.dark-mode .startup-copy,
+html.dark-mode .startup-progress,
+body.dark-mode .startup-copy,
+body.dark-mode .startup-progress {
+  border-color: rgba(104, 135, 194, .42) !important;
+  background: rgba(10, 16, 32, .78) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .28) !important;
+}
+
+html.dark-mode .startup-copy > span,
+html.dark-mode .startup-footer p b,
+body.dark-mode .startup-copy > span,
+body.dark-mode .startup-footer p b {
+  color: #4f8bff !important;
+}
+
+html.dark-mode .startup-copy h1,
+body.dark-mode .startup-copy h1 {
+  color: #f8fbff !important;
+}
+
+html.dark-mode .startup-copy h1 em,
+body.dark-mode .startup-copy h1 em {
+  color: #4f8bff !important;
+}
+
+html.dark-mode .startup-progress > div,
+body.dark-mode .startup-progress > div {
+  background: rgba(35, 48, 76, .9) !important;
+}
+
+html.dark-mode .startup-ball,
+body.dark-mode .startup-ball {
+  border-color: rgba(79, 139, 255, .26) !important;
+  background:
+    radial-gradient(circle at center, rgba(18, 27, 48, .76), rgba(10, 16, 32, .2) 56%, transparent 57%),
+    conic-gradient(from 15deg, rgba(79, 139, 255, .28), rgba(217, 4, 41, .22), rgba(79, 139, 255, .28)) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .26) !important;
+}
+
+body.dark-mode.start-mode :is(.broadcast-shell, .main-shell, .workspace, .page) {
+  color: #edf4ff !important;
+  background: transparent !important;
+}
+
+body.dark-mode.start-mode .workspace {
+  background-image:
+    linear-gradient(rgba(140, 160, 204, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140, 160, 204, .045) 1px, transparent 1px) !important;
+}
+
+body.dark-mode.start-mode .opening-header {
+  border-bottom-color: rgba(104, 135, 194, .38) !important;
+}
+
+body.dark-mode.start-mode :is(
+  .opening-copy,
+  .arena-visual,
+  .opening-menu .mode-card,
+  .opening-utilities,
+  .save-archive-heading,
+  .save-archive-summary,
+  .save-slot-card,
+  .save-slot-card > header,
+  .save-archive-footer,
+  .team-select-heading,
+  .team-select-menu .team-card,
+  .empty-save-state
+) {
+  border-color: rgba(104, 135, 194, .42) !important;
+  color: #edf4ff !important;
+  background-color: rgba(10, 16, 32, .86) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .92), rgba(8, 13, 26, .92)) !important;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .26) !important;
+}
+
+body.dark-mode.start-mode :is(.save-slot-card.latest, .team-select-menu .team-card:hover, .opening-menu .mode-card:hover, .save-slot-card:hover) {
+  border-color: rgba(79, 139, 255, .66) !important;
+  background-color: rgba(16, 24, 43, .96) !important;
+  background-image: linear-gradient(180deg, rgba(29, 43, 73, .96), rgba(12, 20, 38, .96)) !important;
+}
+
+body.dark-mode.start-mode :is(
+  .opening-logo,
+  .opening-copy h1,
+  .menu-page-heading h1,
+  .save-archive-heading h1,
+  .opening-menu .mode-card strong,
+  .save-slot-copy strong,
+  .team-select-menu .team-card strong,
+  .empty-save-state strong,
+  .arena-score-card strong,
+  .save-archive-summary strong
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.start-mode :is(
+  .opening-copy > p,
+  .menu-page-heading p,
+  .opening-season,
+  .opening-continue small,
+  .arena-score-card span,
+  .arena-score-card small,
+  .save-archive-heading p,
+  .save-archive-summary span,
+  .save-archive-summary small,
+  .save-slot-copy small,
+  .save-career-stats span,
+  .save-archive-footer small,
+  .team-select-menu .team-card small,
+  .team-select-menu .team-card > b small,
+  .opening-utilities > small,
+  .opening-back
+) {
+  color: rgba(226, 235, 255, .68) !important;
+}
+
+body.dark-mode.start-mode :is(.opening-kicker, .opening-logo b, .opening-menu .mode-card .card-label, .save-slot-copy span, .team-select-menu .team-card > b, .save-career-stats strong, .save-archive-summary strong) {
+  color: #4f8bff !important;
+}
+
+body.dark-mode.start-mode :is(.opening-season, .opening-back, .start-actions .btn, .opening-utilities .btn) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.start-mode :is(.opening-continue, .save-load-button, .empty-save-state .btn.primary) {
+  border-color: rgba(79, 139, 255, .95) !important;
+  color: #ffffff !important;
+  background-color: #0753ff !important;
+  background-image: linear-gradient(180deg, #0d55ef, #063fcf) !important;
+  box-shadow: 0 14px 28px rgba(6, 76, 255, .22) !important;
+}
+
+body.dark-mode.start-mode .opening-continue.disabled,
+body.dark-mode.start-mode .opening-continue:disabled {
+  border-color: rgba(150, 174, 222, .38) !important;
+  color: rgba(226, 235, 255, .62) !important;
+  background-color: rgba(31, 42, 64, .92) !important;
+  background-image: linear-gradient(180deg, rgba(44, 54, 75, .92), rgba(27, 35, 52, .92)) !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.start-mode .save-career-stats,
+body.dark-mode.start-mode .save-career-stats > div,
+body.dark-mode.start-mode .save-archive-summary article {
+  border-color: rgba(104, 135, 194, .32) !important;
+}
+
+body.dark-mode.start-mode :is(.save-team-mark, .team-card-mark) {
+  border-color: rgba(79, 139, 255, .24) !important;
+  background: rgba(79, 139, 255, .1) !important;
+}
+
+body.dark-mode.start-mode .arena-score-card {
+  border-color: rgba(104, 135, 194, .42) !important;
+  border-left-color: #4f8bff !important;
+  background: rgba(10, 16, 32, .88) !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-select select,
+body.dark-mode.dashboard-mode .rotation-lineup-card .rotation-position-select select,
+body.dark-mode.dashboard-mode select[data-rotation-position],
+body.dark-mode.dashboard-mode select[data-rotation-secondary-position] {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-select select:disabled,
+body.dark-mode.dashboard-mode select[data-rotation-position]:disabled,
+body.dark-mode.dashboard-mode select[data-rotation-secondary-position]:disabled {
+  border-color: rgba(150, 174, 222, .34) !important;
+  color: rgba(226, 235, 255, .5) !important;
+  background-color: rgba(31, 42, 64, .72) !important;
+  background-image: linear-gradient(180deg, rgba(44, 54, 75, .72), rgba(27, 35, 52, .72)) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-select option {
+  color: #edf4ff !important;
+  background: #10182b !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-footer .btn,
+body.dark-mode.dashboard-mode .rotation-footer button,
+body.dark-mode.dashboard-mode .rotation-footer button.btn,
+body.dark-mode.dashboard-mode .rotation-footer button[data-action="rotation-reset"],
+body.dark-mode.dashboard-mode .rotation-footer button[data-action="rotation-save"] {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-footer .btn:hover,
+body.dark-mode.dashboard-mode .rotation-footer button:hover,
+body.dark-mode.dashboard-mode .rotation-footer button.btn:hover,
+body.dark-mode.dashboard-mode .rotation-footer button[data-action="rotation-reset"]:hover,
+body.dark-mode.dashboard-mode .rotation-footer button[data-action="rotation-save"]:hover {
+  border-color: rgba(79, 139, 255, .9) !important;
+  color: #ffffff !important;
+  background-color: rgba(22, 34, 62, .98) !important;
+  background-image: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), 0 0 12px rgba(79, 139, 255, .18) !important;
+}
+
+body.dark-mode.start-mode,
+body.dark-mode.start-mode .broadcast-shell,
+body.dark-mode.start-mode .main-shell,
+body.dark-mode.start-mode .workspace,
+body.dark-mode.start-mode #page,
+body.dark-mode.start-mode .page,
+body.dark-mode.start-mode .start-menu,
+body.dark-mode.start-mode .opening-menu,
+body.dark-mode.start-mode .save-slots-menu,
+body.dark-mode.start-mode .team-select-menu {
+  color: #edf4ff !important;
+  background-color: #050914 !important;
+  background-image:
+    radial-gradient(circle at 2% 84%, rgba(79, 139, 255, .16), transparent 18%),
+    radial-gradient(circle at 100% 76%, rgba(215, 25, 63, .16), transparent 19%),
+    linear-gradient(115deg, rgba(5, 9, 20, .98), rgba(10, 16, 32, .94)),
+    url("../../assets/nba-manager-bg-og.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+}
+
+body.dark-mode.start-mode .workspace {
+  background-image:
+    linear-gradient(rgba(140, 160, 204, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140, 160, 204, .045) 1px, transparent 1px),
+    radial-gradient(circle at 2% 84%, rgba(79, 139, 255, .16), transparent 18%),
+    radial-gradient(circle at 100% 76%, rgba(215, 25, 63, .16), transparent 19%),
+    linear-gradient(115deg, rgba(5, 9, 20, .98), rgba(10, 16, 32, .94)) !important;
+  background-size: 44px 44px, 44px 44px, cover, cover, cover !important;
+}
+
+body.dark-mode.start-mode .start-menu {
+  box-shadow: inset 0 0 0 1px rgba(104, 135, 194, .12) !important;
+}
+
+body.dark-mode.start-mode .opening-header,
+body.dark-mode.start-mode .save-archive-heading,
+body.dark-mode.start-mode .team-select-heading {
+  background-color: rgba(10, 16, 32, .86) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .92), rgba(8, 13, 26, .92)) !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-total,
+body.dark-mode.dashboard-mode .rotation-lineup-card .rotation-total,
+body.dark-mode.dashboard-mode .rotation-total.valid {
+  border-color: rgba(79, 139, 255, .72) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 3px 0 0 #0753ff, inset 0 0 0 1px rgba(255, 255, 255, .04) !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-total.invalid {
+  border-color: rgba(240, 93, 104, .6) !important;
+  background-color: rgba(57, 20, 34, .82) !important;
+  background-image: linear-gradient(180deg, rgba(107, 31, 49, .62), rgba(57, 20, 34, .82)) !important;
+  box-shadow: inset 3px 0 0 #f05d68, inset 0 0 0 1px rgba(255, 255, 255, .04) !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-total strong,
+body.dark-mode.dashboard-mode .rotation-total span {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-select select,
+body.dark-mode.dashboard-mode select[data-rotation-position],
+body.dark-mode.dashboard-mode select[data-rotation-secondary-position] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  min-width: 96px !important;
+  padding-right: 28px !important;
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background:
+    linear-gradient(45deg, transparent 50%, rgba(237, 244, 255, .72) 50%) calc(100% - 15px) 50% / 6px 6px no-repeat,
+    linear-gradient(135deg, rgba(237, 244, 255, .72) 50%, transparent 50%) calc(100% - 11px) 50% / 6px 6px no-repeat,
+    linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-select select:disabled,
+body.dark-mode.dashboard-mode select[data-rotation-position]:disabled,
+body.dark-mode.dashboard-mode select[data-rotation-secondary-position]:disabled {
+  color: rgba(226, 235, 255, .54) !important;
+  background:
+    linear-gradient(45deg, transparent 50%, rgba(226, 235, 255, .4) 50%) calc(100% - 15px) 50% / 6px 6px no-repeat,
+    linear-gradient(135deg, rgba(226, 235, 255, .4) 50%, transparent 50%) calc(100% - 11px) 50% / 6px 6px no-repeat,
+    linear-gradient(180deg, rgba(44, 54, 75, .76), rgba(27, 35, 52, .76)) !important;
+  background-color: rgba(31, 42, 64, .76) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.rotation-page-title),
+body.dark-mode.dashboard-mode .rotation-lineup-card,
+body.dark-mode.dashboard-mode .rotation-lineup-list {
+  background-color: rgba(9, 15, 29, .96) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .98), rgba(9, 15, 29, .98)) !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-lineup-row,
+body.dark-mode.dashboard-mode .rotation-lineup-row.in-rotation,
+body.dark-mode.dashboard-mode .rotation-lineup-row:nth-child(even) {
+  border-color: rgba(104, 135, 194, .24) !important;
+  background-color: rgba(18, 27, 48, .78) !important;
+  background-image: linear-gradient(90deg, rgba(79, 139, 255, .06), rgba(18, 27, 48, .78) 42%) !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout .gameplan-page select,
+body.dark-mode.dashboard-mode.gameplan-layout .strategy-control select,
+body.dark-mode.dashboard-mode.gameplan-layout select[data-plan-field],
+body.dark-mode.dashboard-mode.gameplan-layout .matchup-assignments select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background:
+    linear-gradient(45deg, transparent 50%, rgba(237, 244, 255, .72) 50%) calc(100% - 15px) 50% / 6px 6px no-repeat,
+    linear-gradient(135deg, rgba(237, 244, 255, .72) 50%, transparent 50%) calc(100% - 11px) 50% / 6px 6px no-repeat,
+    linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout .gameplan-page select option {
+  color: #edf4ff !important;
+  background: #10182b !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout :is(
+  .gameplan-card header,
+  .gameplan-scout-card header,
+  .matchup-assignments header,
+  .coach-recommendations header,
+  .action-center header,
+  .opponent-threats header
+) {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(24, 34, 58, .96), rgba(13, 20, 38, .96)) !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout :is(
+  .gameplan-card header h2,
+  .gameplan-scout-card header strong,
+  .matchup-assignments header h2,
+  .coach-recommendations header h2,
+  .action-center header h2,
+  .opponent-threats header h2
+) {
+  color: #edf4ff !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout .gameplan-card,
+body.dark-mode.dashboard-mode.gameplan-layout .gameplan-scout-card,
+body.dark-mode.dashboard-mode.gameplan-layout .gameplan-main-layout,
+body.dark-mode.dashboard-mode.gameplan-layout .gameplan-main,
+body.dark-mode.dashboard-mode.gameplan-layout .gameplan-rail {
+  border-color: rgba(104, 135, 194, .38) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .84) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .9), rgba(9, 15, 29, .9)) !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout .opponent-threats em {
+  border: 1px solid rgba(255, 123, 145, .42) !important;
+  color: #ffb3bd !important;
+  background-color: rgba(92, 24, 38, .54) !important;
+  background-image: linear-gradient(180deg, rgba(107, 31, 49, .66), rgba(57, 20, 34, .78)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .035) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) :is(
+  .multi-trade-steps,
+  .multi-trade-team-picker,
+  .multi-trade-team-panel,
+  .multi-trade-analysis,
+  .multi-trade-receiving-card
+) {
+  border-color: rgba(104, 135, 194, .42) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .9) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .96), rgba(9, 15, 29, .94)) !important;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .26) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) :is(
+  .multi-trade-steps > div,
+  .multi-trade-team-panel > header,
+  .multi-trade-team-panel > footer,
+  .multi-trade-flow-block,
+  .multi-trade-asset-picker,
+  .multi-trade-analysis > header,
+  .multi-trade-analysis > footer,
+  .multi-trade-impact-grid article,
+  .multi-trade-receiving-grid,
+  .multi-trade-receiving-card > header
+) {
+  border-color: rgba(104, 135, 194, .34) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) :is(
+  .multi-trade-team-panel > header,
+  .multi-trade-team-panel > footer,
+  .multi-trade-analysis > header,
+  .multi-trade-analysis > footer,
+  .multi-trade-receiving-card > header
+) {
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(24, 34, 58, .96), rgba(13, 20, 38, .96)) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) :is(
+  .multi-trade-steps > div strong,
+  .multi-trade-team-picker > div:first-child strong,
+  .multi-trade-team-chips b,
+  .multi-trade-team-panel > header strong,
+  .multi-trade-add-team-empty strong,
+  .multi-trade-asset strong,
+  .multi-trade-asset-picker button strong,
+  .multi-trade-receiving-card > header strong
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) :is(
+  .multi-trade-steps > div small,
+  .multi-trade-team-panel > header span,
+  .multi-trade-team-panel > header aside small,
+  .multi-trade-team-panel > footer,
+  .multi-trade-asset small,
+  .multi-trade-asset > b,
+  .multi-trade-asset-picker button small,
+  .multi-trade-empty,
+  .multi-trade-analysis > header small,
+  .multi-trade-analysis > header > span,
+  .multi-trade-impact-grid span,
+  .multi-trade-impact-grid small,
+  .multi-trade-receiving-card > header span
+) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) :is(
+  .multi-trade-steps > div.active strong,
+  .multi-trade-team-picker > div:first-child span,
+  .multi-trade-team-chips small,
+  .multi-trade-flow-block > div:first-child span,
+  .multi-trade-asset-picker > summary
+) {
+  color: #4f8bff !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) .multi-trade-steps > div > b {
+  border-color: rgba(106, 142, 255, .48) !important;
+  color: #cfe0ff !important;
+  background: rgba(79, 139, 255, .12) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) .multi-trade-steps > div.active > b {
+  border-color: rgba(79, 139, 255, .95) !important;
+  color: #ffffff !important;
+  background: #0753ff !important;
+  box-shadow: 0 0 14px rgba(79, 139, 255, .24) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) :is(
+  .multi-trade-team-chips > span,
+  .multi-trade-asset,
+  .multi-trade-asset-picker > div > button,
+  .multi-trade-analysis .trade-rule
+) {
+  border-color: rgba(104, 135, 194, .32) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .88) !important;
+  background-image: linear-gradient(180deg, rgba(22, 32, 55, .88), rgba(11, 17, 31, .9)) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) :is(
+  .multi-trade-asset-picker > div > button:hover,
+  .multi-trade-asset-picker > div > button.selected
+) {
+  border-color: rgba(79, 139, 255, .56) !important;
+  background-color: rgba(22, 34, 62, .98) !important;
+  background-image: linear-gradient(180deg, rgba(42, 60, 98, .98), rgba(18, 28, 52, .98)) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) .multi-trade-add-team-empty {
+  border-color: rgba(104, 135, 194, .48) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .72) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .78), rgba(9, 15, 29, .78)) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) .multi-trade-receiving-card > div {
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: linear-gradient(180deg, rgba(13, 20, 38, .72), rgba(9, 15, 29, .86)) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) :is(
+  .multi-trade-steps > .btn,
+  .multi-trade-top-add-team,
+  .multi-trade-add-team-mark,
+  .multi-trade-team-select-card button,
+  .multi-trade-asset > button,
+  .multi-trade-analysis > footer .btn
+) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) :is(
+  .multi-trade-steps > .btn:hover,
+  .multi-trade-top-add-team:hover,
+  .multi-trade-add-team-mark:hover:not(:disabled),
+  .multi-trade-analysis > footer .btn:hover
+) {
+  border-color: rgba(79, 139, 255, .72) !important;
+  background-color: rgba(22, 34, 62, .98) !important;
+  background-image: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), 0 0 12px rgba(79, 139, 255, .18) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .multi-trade-steps,
+  .multi-trade-team-picker,
+  .multi-trade-team-panel,
+  .multi-trade-analysis,
+  .multi-trade-receiving-card
+) {
+  border-color: rgba(104, 135, 194, .42) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .9) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .96), rgba(9, 15, 29, .94)) !important;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .26) !important;
+}
+
+body.dark-mode.dashboard-mode .multi-trade-steps > div,
+body.dark-mode.dashboard-mode .multi-trade-flow-block,
+body.dark-mode.dashboard-mode .multi-trade-asset-picker,
+body.dark-mode.dashboard-mode .multi-trade-asset-picker > summary,
+body.dark-mode.dashboard-mode .multi-trade-asset-picker > div {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(10, 16, 30, .92) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .86), rgba(10, 16, 30, .92)) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .multi-trade-team-panel > header,
+  .multi-trade-team-panel > footer,
+  .multi-trade-analysis > header,
+  .multi-trade-analysis > footer,
+  .multi-trade-receiving-card > header
+) {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(24, 34, 58, .96), rgba(13, 20, 38, .96)) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .multi-trade-steps > div strong,
+  .multi-trade-team-picker > div:first-child strong,
+  .multi-trade-team-chips b,
+  .multi-trade-team-panel > header strong,
+  .multi-trade-add-team-empty strong,
+  .multi-trade-asset strong,
+  .multi-trade-asset-picker button strong,
+  .multi-trade-receiving-card > header strong,
+  .multi-trade-team-panel > footer strong
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .multi-trade-steps > div small,
+  .multi-trade-team-panel > header span,
+  .multi-trade-team-panel > header aside small,
+  .multi-trade-team-panel > footer,
+  .multi-trade-asset small,
+  .multi-trade-asset > b,
+  .multi-trade-asset-picker button small,
+  .multi-trade-empty,
+  .multi-trade-analysis > header small,
+  .multi-trade-analysis > header > span,
+  .multi-trade-impact-grid span,
+  .multi-trade-impact-grid small,
+  .multi-trade-receiving-card > header span
+) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .multi-trade-steps > div.active strong,
+  .multi-trade-team-picker > div:first-child span,
+  .multi-trade-team-chips small,
+  .multi-trade-flow-block > div:first-child span,
+  .multi-trade-flow-block > div:first-child b,
+  .multi-trade-asset-picker > summary
+) {
+  color: #4f8bff !important;
+}
+
+body.dark-mode.dashboard-mode .multi-trade-steps > div > b {
+  border-color: rgba(106, 142, 255, .48) !important;
+  color: #cfe0ff !important;
+  background: rgba(79, 139, 255, .12) !important;
+}
+
+body.dark-mode.dashboard-mode .multi-trade-steps > div.active > b {
+  border-color: rgba(79, 139, 255, .95) !important;
+  color: #ffffff !important;
+  background: #0753ff !important;
+  box-shadow: 0 0 14px rgba(79, 139, 255, .24) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .multi-trade-team-chips > span,
+  .multi-trade-asset,
+  .multi-trade-asset-picker > div > button,
+  .multi-trade-analysis .trade-rule,
+  .multi-trade-receiving-card > div
+) {
+  border-color: rgba(104, 135, 194, .32) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .88) !important;
+  background-image: linear-gradient(180deg, rgba(22, 32, 55, .88), rgba(11, 17, 31, .9)) !important;
+}
+
+body.dark-mode.dashboard-mode .multi-trade-add-team-empty {
+  border-color: rgba(104, 135, 194, .48) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .72) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .78), rgba(9, 15, 29, .78)) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .multi-trade-steps > .btn,
+  .multi-trade-top-add-team,
+  .multi-trade-add-team-mark,
+  .multi-trade-team-select-card button,
+  .multi-trade-asset > button,
+  .multi-trade-analysis > footer .btn
+) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .in-season-fa-hero,
+  .in-season-fa-stat,
+  .in-season-waiver-strip,
+  .in-season-fa-market
+) {
+  border-color: rgba(104, 135, 194, .42) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .9) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .96), rgba(9, 15, 29, .94)) !important;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .24) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .in-season-fa-rule,
+  .in-season-fa-toolbar,
+  .in-season-fa-list-head,
+  .in-season-fa-player,
+  .in-season-fa-portrait,
+  .in-season-fa-ovr,
+  .in-season-fa-pot,
+  .in-season-fa-contract,
+  .in-season-fa-interest,
+  .in-season-fa-fit
+) {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .88) !important;
+  background-image: linear-gradient(180deg, rgba(22, 32, 55, .88), rgba(11, 17, 31, .9)) !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-toolbar {
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-list-head {
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(24, 34, 58, .96), rgba(13, 20, 38, .96)) !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player:hover {
+  background-color: rgba(18, 28, 52, .98) !important;
+  background-image: linear-gradient(180deg, rgba(31, 45, 76, .94), rgba(18, 28, 52, .98)) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .in-season-fa-hero .player-name,
+  .in-season-fa-toolbar .player-name,
+  .in-season-fa-rule strong,
+  .in-season-fa-stat .stat-value,
+  .in-season-fa-identity > strong,
+  .in-season-fa-ovr b,
+  .in-season-fa-pot b,
+  .in-season-fa-contract strong,
+  .in-season-fa-interest strong,
+  .in-season-fa-fit-ring strong,
+  .in-season-waiver-strip strong
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .in-season-fa-hero p,
+  .in-season-fa-rule small,
+  .in-season-fa-stat .card-label,
+  .in-season-fa-identity > span,
+  .in-season-fa-identity small,
+  .in-season-fa-identity em,
+  .in-season-fa-stats span,
+  .in-season-fa-contract span,
+  .in-season-fa-contract em,
+  .in-season-fa-interest span,
+  .in-season-fa-interest small,
+  .in-season-fa-fit span,
+  .in-season-waiver-strip small,
+  .in-season-fa-list-head span
+) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .in-season-fa-rule span,
+  .in-season-fa-stat .card-label,
+  .in-season-fa-list-head .in-season-fa-stat-filter button.active
+) {
+  color: #4f8bff !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-controls input,
+body.dark-mode.dashboard-mode .in-season-fa-controls select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background:
+    linear-gradient(45deg, transparent 50%, rgba(237, 244, 255, .72) 50%) calc(100% - 15px) 50% / 6px 6px no-repeat,
+    linear-gradient(135deg, rgba(237, 244, 255, .72) 50%, transparent 50%) calc(100% - 11px) 50% / 6px 6px no-repeat,
+    linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-controls input {
+  background:
+    linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-controls input::placeholder {
+  color: rgba(190, 202, 231, .7) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .in-season-waiver-strip .btn,
+  .in-season-fa-controls .btn,
+  .in-season-fa-actions .btn,
+  .in-season-fa-stat-filter button
+) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .in-season-waiver-strip .btn:hover,
+  .in-season-fa-controls .btn:hover,
+  .in-season-fa-actions .btn:hover,
+  .in-season-fa-stat-filter button:hover
+) {
+  border-color: rgba(79, 139, 255, .72) !important;
+  background-color: rgba(22, 34, 62, .98) !important;
+  background-image: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), 0 0 12px rgba(79, 139, 255, .18) !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-negotiate,
+body.dark-mode.dashboard-mode .in-season-fa-actions .btn.primary {
+  border-color: rgba(79, 139, 255, .9) !important;
+  color: #ffffff !important;
+  background-color: #0753ff !important;
+  background-image: linear-gradient(180deg, #1266ff, #0b49c9) !important;
+  box-shadow: 0 8px 18px rgba(6, 76, 255, .22) !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout :is(
+  .locker-metric-card,
+  .locker-panel,
+  .locker-action-center > .locker-panel,
+  .locker-advice-card,
+  .locker-quick-actions,
+  .locker-recent-events,
+  .locker-issue-list article,
+  .locker-factors-panel article,
+  .locker-groups-panel article,
+  .locker-morale-panel article,
+  .locker-leadership-panel article
+) {
+  border-color: rgba(104, 135, 194, .38) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .92), rgba(9, 15, 29, .9)) !important;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .22) !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout :is(
+  .locker-panel > header,
+  .locker-quick-actions > header,
+  .locker-action-center > .locker-panel > header
+) {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(24, 34, 58, .96), rgba(13, 20, 38, .96)) !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout :is(
+  .locker-ring,
+  .locker-factors-panel article::before,
+  .locker-issue-list article > i,
+  .locker-recent-events b,
+  .locker-room-tabs button:not(.active)
+) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-ring {
+  background:
+    radial-gradient(circle at center, rgba(16, 24, 43, .98) 58%, transparent 59%),
+    conic-gradient(var(--metric-color, #4f8bff) var(--metric), rgba(150, 174, 222, .28) 0) !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-ring strong {
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-metric-card.green .locker-ring {
+  background:
+    radial-gradient(circle at center, rgba(16, 24, 43, .98) 58%, transparent 59%),
+    conic-gradient(#20c987 var(--metric), rgba(150, 174, 222, .28) 0) !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-metric-card.blue .locker-ring {
+  background:
+    radial-gradient(circle at center, rgba(16, 24, 43, .98) 58%, transparent 59%),
+    conic-gradient(#4f8bff var(--metric), rgba(150, 174, 222, .28) 0) !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-metric-card.purple .locker-ring {
+  background:
+    radial-gradient(circle at center, rgba(16, 24, 43, .98) 58%, transparent 59%),
+    conic-gradient(#9b6cff var(--metric), rgba(150, 174, 222, .28) 0) !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-metric-card.orange .locker-ring {
+  background:
+    radial-gradient(circle at center, rgba(16, 24, 43, .98) 58%, transparent 59%),
+    conic-gradient(#ff8a2a var(--metric), rgba(150, 174, 222, .28) 0) !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout :is(
+  .locker-metric-card strong,
+  .locker-metric-card b,
+  .locker-panel header strong,
+  .locker-issue-list article span,
+  .locker-issue-list article strong,
+  .locker-advice-card strong,
+  .locker-quick-actions strong,
+  .locker-recent-events span,
+  .locker-factors-panel article strong,
+  .locker-groups-panel article strong,
+  .locker-morale-panel article strong,
+  .locker-leadership-panel article strong
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout :is(
+  .locker-metric-card span,
+  .locker-metric-card em,
+  .locker-issue-list article small,
+  .locker-advice-card small,
+  .locker-advice-card p,
+  .locker-factors-panel article small,
+  .locker-groups-panel article small,
+  .locker-morale-panel article small,
+  .locker-leadership-panel article small
+) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout :is(
+  .locker-issue-list .btn,
+  .locker-advice-card .btn,
+  .locker-quick-actions .btn,
+  .locker-room-header .btn,
+  .locker-panel .mini-action,
+  .locker-recent-events .mini-action
+) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout :is(
+  .locker-issue-list .btn.primary,
+  .locker-room-header .btn.primary
+) {
+  border-color: rgba(79, 139, 255, .9) !important;
+  color: #ffffff !important;
+  background-color: #0753ff !important;
+  background-image: linear-gradient(180deg, #1266ff, #0b49c9) !important;
+  box-shadow: 0 8px 18px rgba(6, 76, 255, .22) !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-morale-panel > div::after {
+  border-color: rgba(104, 135, 194, .34) !important;
+  background-color: rgba(9, 15, 29, .96) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .9), rgba(9, 15, 29, .96)) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.player-development-layout :is(
+  .player-dev-selected,
+  .player-dev-plan,
+  .player-dev-plan > div,
+  .player-dev-plan article,
+  .player-dev-attributes,
+  .player-dev-action-card,
+  .player-dev-action-card article,
+  .dev-mini-panel,
+  .dev-mini-panel article,
+  .player-dev-chart div
+) {
+  border-color: rgba(104, 135, 194, .38) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .92), rgba(9, 15, 29, .9)) !important;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .22) !important;
+}
+
+body.dark-mode.dashboard-mode.player-development-layout :is(
+  .player-dev-plan > header,
+  .player-dev-attributes > header,
+  .player-dev-action-card > header,
+  .dev-mini-panel > header
+) {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(24, 34, 58, .96), rgba(13, 20, 38, .96)) !important;
+}
+
+body.dark-mode.dashboard-mode.player-development-layout :is(
+  .player-dev-selected strong,
+  .player-dev-plan article strong,
+  .player-dev-action-card article span,
+  .player-dev-action-card article strong,
+  .dev-mini-panel strong,
+  .player-dev-attributes span,
+  .player-dev-chart strong
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.player-development-layout :is(
+  .player-dev-selected small,
+  .player-dev-plan article small,
+  .player-dev-action-card article small,
+  .dev-mini-panel small,
+  .player-dev-attributes em,
+  .player-dev-attributes header strong
+) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.player-development-layout :is(
+  .player-dev-traits span,
+  .player-dev-plan article span,
+  .dev-mini-panel article > b
+) {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .88) !important;
+  background-image: linear-gradient(180deg, rgba(22, 32, 55, .88), rgba(11, 17, 31, .9)) !important;
+}
+
+body.dark-mode.dashboard-mode.player-development-layout :is(
+  .player-dev-action-card .btn,
+  .player-dev-selected .mini-action,
+  .dev-mini-panel .mini-action,
+  .player-dev-header .btn
+) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode.player-development-layout :is(
+  .player-dev-action-card .btn.primary,
+  .player-dev-header .btn.primary
+) {
+  border-color: rgba(79, 139, 255, .9) !important;
+  color: #ffffff !important;
+  background-color: #0753ff !important;
+  background-image: linear-gradient(180deg, #1266ff, #0b49c9) !important;
+  box-shadow: 0 8px 18px rgba(6, 76, 255, .22) !important;
+}
+
+body.dark-mode.dashboard-mode.player-development-layout .player-dev-chart div {
+  background-color: rgba(9, 15, 29, .96) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .9), rgba(9, 15, 29, .96)) !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout :is(
+  .staff-list-panel,
+  .staff-openings-panel,
+  .staff-breakdown-panel,
+  .staff-list-row,
+  .staff-opening-row,
+  .staff-metric-card
+) {
+  border-color: rgba(104, 135, 194, .38) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .92), rgba(9, 15, 29, .9)) !important;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .22) !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout :is(
+  .staff-list-panel > header,
+  .staff-list-head,
+  .staff-openings-panel > header,
+  .staff-breakdown-panel > header,
+  .staff-list-panel > footer,
+  .staff-openings-panel > footer
+) {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(24, 34, 58, .96), rgba(13, 20, 38, .96)) !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout :is(
+  .staff-list-controls select,
+  .staff-list-controls input
+) {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  min-height: 36px !important;
+  padding-block: 0 !important;
+  padding-inline: 10px 28px !important;
+  border-color: rgba(150, 174, 222, .58) !important;
+  border-radius: 5px !important;
+  color: #edf4ff !important;
+  font-size: 11px !important;
+  background:
+    linear-gradient(45deg, transparent 50%, rgba(237, 244, 255, .72) 50%) calc(100% - 15px) 50% / 6px 6px no-repeat,
+    linear-gradient(135deg, rgba(237, 244, 255, .72) 50%, transparent 50%) calc(100% - 11px) 50% / 6px 6px no-repeat,
+    linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout .staff-list-controls input {
+  width: 170px !important;
+  padding-right: 28px !important;
+  background:
+    linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout .staff-list-controls input::placeholder {
+  color: rgba(190, 202, 231, .7) !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout :is(
+  .staff-list-row strong,
+  .staff-opening-row strong,
+  .staff-list-panel > header > strong,
+  .staff-openings-panel > header,
+  .staff-breakdown-panel > header,
+  .staff-breakdown-row span,
+  .staff-breakdown-row strong,
+  .staff-breakdown-panel footer span,
+  .staff-breakdown-panel footer strong
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout :is(
+  .staff-list-row small,
+  .staff-opening-row small,
+  .staff-list-head span,
+  .staff-list-row span,
+  .staff-metric-card span,
+  .staff-metric-card small
+) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout :is(
+  .staff-list-row > div:first-child > span,
+  .staff-candidate-mark,
+  .staff-avatar,
+  .staff-rating-badge,
+  .staff-row-menu
+) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout .staff-rating-badge {
+  border: 2px solid #00c878 !important;
+  outline: 0 !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: radial-gradient(circle at center, rgba(16, 24, 43, .98) 62%, rgba(16, 24, 43, .98) 63%) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout :is(
+  .staff-hire-button,
+  .staff-list-row button,
+  .staff-list-panel .mini-action,
+  .staff-openings-panel .mini-action
+) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout :is(
+  .staff-hire-button:hover,
+  .staff-list-row button:hover,
+  .staff-list-panel .mini-action:hover,
+  .staff-openings-panel .mini-action:hover
+) {
+  border-color: rgba(79, 139, 255, .72) !important;
+  background-color: rgba(22, 34, 62, .98) !important;
+  background-image: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), 0 0 12px rgba(79, 139, 255, .18) !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout :is(
+  .scouting-metric-card,
+  .scouting-draft-board,
+  .scouting-selected-panel,
+  .scouting-action-center,
+  .scouting-assignments,
+  .scouting-team-summary,
+  .scouting-staff-recs,
+  .scouting-comparison-widget,
+  .scouting-action-center article,
+  .scouting-assignments article,
+  .scouting-staff-recs article,
+  .scouting-bottom-team-summary article,
+  .scouting-profile-chips span,
+  .scouting-report-grid article,
+  .scouting-fit-grid article
+) {
+  border-color: rgba(104, 135, 194, .38) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .92), rgba(9, 15, 29, .9)) !important;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .22) !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout :is(
+  .scouting-draft-board > header,
+  .scouting-board-head,
+  .scouting-selected-panel > header,
+  .scouting-action-center > header,
+  .scouting-assignments > header,
+  .scouting-team-summary > header,
+  .scouting-staff-recs > header,
+  .scouting-comparison-widget > header
+) {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(24, 34, 58, .96), rgba(13, 20, 38, .96)) !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-page :is(input, select) {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-page input::placeholder {
+  color: rgba(190, 202, 231, .7) !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout :is(
+  .scouting-page-header .btn,
+  .scouting-tabs button,
+  .scouting-report-tabs button,
+  .scouting-next-steps .btn,
+  .scouting-action-center .btn,
+  .scouting-page .mini-action,
+  .scouting-draft-board > header .btn
+) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout :is(
+  .scouting-page-header .btn.primary,
+  .scouting-tabs button.active,
+  .scouting-report-tabs button.active,
+  .scouting-next-steps .btn.primary,
+  .scouting-action-center .btn.primary
+) {
+  border-color: rgba(79, 139, 255, .9) !important;
+  color: #ffffff !important;
+  background-color: #0753ff !important;
+  background-image: linear-gradient(180deg, #1266ff, #0b49c9) !important;
+  box-shadow: 0 8px 18px rgba(6, 76, 255, .22) !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout :is(
+  .scouting-selected-panel > header strong,
+  .scouting-profile-chips b,
+  .scouting-report-grid strong,
+  .scouting-fit-grid strong,
+  .scouting-action-center article strong,
+  .scouting-assignments article strong,
+  .scouting-staff-recs article strong,
+  .scouting-comparison-widget article b,
+  .scouting-bottom-team-summary article span,
+  .scouting-metric-card strong
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout :is(
+  .scouting-selected-panel > header small,
+  .scouting-selected-panel > header aside span,
+  .scouting-selected-panel > header aside small,
+  .scouting-profile-chips span,
+  .scouting-report-grid span,
+  .scouting-report-grid small,
+  .scouting-fit-grid span,
+  .scouting-fit-grid small,
+  .scouting-action-center article small,
+  .scouting-assignments article small,
+  .scouting-staff-recs article small,
+  .scouting-comparison-widget article span,
+  .scouting-metric-card span,
+  .scouting-metric-card small
+) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-compare-head {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .88) !important;
+  background-image: linear-gradient(180deg, rgba(22, 32, 55, .88), rgba(11, 17, 31, .9)) !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-assignments article em {
+  border-color: rgba(32, 240, 160, .36) !important;
+  color: #20f0a0 !important;
+  background-color: rgba(20, 76, 54, .42) !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout :is(
+  .awards-race-table,
+  .award-feature-panel,
+  .awards-action-center,
+  .award-team-projection,
+  .award-rookie-ladder,
+  .award-news-panel,
+  .award-action-card,
+  .award-team-projection article,
+  .award-news-panel article,
+  .award-season-stats,
+  .award-feature-details,
+  .award-activity-strip
+) {
+  border-color: rgba(104, 135, 194, .38) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .92), rgba(9, 15, 29, .9)) !important;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .22) !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout :is(
+  .awards-race-table > header,
+  .award-feature-panel > header,
+  .awards-action-center > header,
+  .award-team-projection > header,
+  .award-rookie-ladder > header,
+  .award-news-panel > header
+) {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(24, 34, 58, .96), rgba(13, 20, 38, .96)) !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout .award-season-stats div {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .88) !important;
+  background-image: linear-gradient(180deg, rgba(22, 32, 55, .88), rgba(11, 17, 31, .9)) !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout .award-feature-panel footer {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(24, 34, 58, .96), rgba(13, 20, 38, .96)) !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout :is(
+  .award-feature-title h2,
+  .award-feature-score strong,
+  .award-season-stats b,
+  .award-feature-details h3,
+  .award-feature-details span,
+  .award-feature-details article strong,
+  .award-action-card strong,
+  .award-team-projection h3,
+  .award-team-projection article div,
+  .award-rookie-ladder article,
+  .award-news-panel strong,
+  .award-activity-strip b
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout :is(
+  .award-feature-hero p,
+  .award-feature-score span,
+  .award-season-stats span,
+  .award-feature-details p,
+  .award-feature-details small,
+  .award-action-card small,
+  .award-news-panel span,
+  .award-news-panel small,
+  .award-activity-strip span,
+  .award-activity-strip small
+) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout :is(
+  .award-team-projection article,
+  .award-news-panel article,
+  .award-news-logo,
+  .award-feature-title span
+) {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .88) !important;
+  background-image: linear-gradient(180deg, rgba(22, 32, 55, .88), rgba(11, 17, 31, .9)) !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout :is(
+  .awards-actions button,
+  .awards-tabs button,
+  .award-action-card footer button,
+  .award-feature-panel footer button,
+  .award-team-projection .text-link,
+  .award-rookie-ladder .text-link,
+  .award-news-panel .text-link,
+  .award-activity-strip button
+) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout :is(
+  .awards-actions .primary,
+  .awards-tabs button.active
+) {
+  border-color: rgba(79, 139, 255, .9) !important;
+  color: #ffffff !important;
+  background-color: #0753ff !important;
+  background-image: linear-gradient(180deg, #1266ff, #0b49c9) !important;
+  box-shadow: 0 8px 18px rgba(6, 76, 255, .22) !important;
+}
+
+body.dark-mode.dashboard-mode.league-stats-layout :is(
+  .league-leader-grid article,
+  .league-stat-updates article,
+  .league-action-card,
+  .league-trend-chart,
+  .league-radar,
+  .league-advanced-matchup
+) {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .9) !important;
+  background-image: linear-gradient(180deg, rgba(22, 32, 55, .9), rgba(11, 17, 31, .92)) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.league-stats-layout :is(
+  .league-leader-grid article b,
+  .league-leader-grid article strong,
+  .league-stat-updates article strong,
+  .league-action-card strong,
+  .league-advanced-matchup strong,
+  .league-trend-panel strong
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.league-stats-layout :is(
+  .league-leader-grid article span,
+  .league-stat-updates article span,
+  .league-stat-updates article small,
+  .league-action-card small,
+  .league-action-card span,
+  .league-advanced-matchup span,
+  .league-trend-panel span
+) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.league-stats-layout :is(
+  .league-action-card footer button,
+  .league-leaders-panel .text-link,
+  .league-advanced-panel .text-link,
+  .league-stats-action-center > .text-link
+) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode.league-history-layout .history-timeline-strip article {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .9) !important;
+  background-image: linear-gradient(180deg, rgba(22, 32, 55, .9), rgba(11, 17, 31, .92)) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.league-history-layout .history-timeline-strip article strong {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.league-history-layout .history-timeline-strip article :is(span, small) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode :is(.staff-page, .staff-list-panel) .staff-rating-badge,
+html.dark-mode body :is(.staff-page, .staff-list-panel) .staff-rating-badge {
+  border: 2px solid #00c878 !important;
+  outline: 0 !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: radial-gradient(circle at center, rgba(16, 24, 43, .98) 62%, rgba(16, 24, 43, .98) 63%) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout :is(
+  .scouting-metrics,
+  .scouting-tabs,
+  .scouting-report-tabs
+) {
+  border-color: rgba(104, 135, 194, .34) !important;
+  background-color: rgba(9, 15, 29, .72) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .78), rgba(9, 15, 29, .74)) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-metrics {
+  gap: 10px !important;
+  padding: 0 !important;
+  border-color: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-metric-card {
+  border: 1px solid rgba(104, 135, 194, .38) !important;
+  border-top-width: 4px !important;
+  border-radius: 8px !important;
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .92), rgba(9, 15, 29, .9)) !important;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, .18) !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-selected-panel header aside {
+  border: 1px solid rgba(104, 135, 194, .34) !important;
+  border-radius: 8px !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .9) !important;
+  background-image: linear-gradient(180deg, rgba(22, 32, 55, .9), rgba(11, 17, 31, .92)) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-selected-panel header aside b {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-selected-panel header aside :is(span, small) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-draft-board button[data-view-player] {
+  color: #edf4ff !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-draft-board button[data-view-player] :is(b, strong, i) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-draft-board button[data-view-player] small {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-draft-board button[data-view-player] i.down {
+  color: #ff4b6b !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-draft-board button[data-view-player] i.up {
+  color: #20f0a0 !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout :is(
+  .finance-header-policy,
+  .finance-header-policy select,
+  .finance-action-center article,
+  .finance-action-center article > i,
+  .finance-advisor div
+) {
+  border-color: rgba(104, 135, 194, .38) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .92) !important;
+  background-image: linear-gradient(180deg, rgba(22, 32, 55, .92), rgba(11, 17, 31, .94)) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout .finance-header-policy select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background:
+    linear-gradient(45deg, transparent 50%, rgba(237, 244, 255, .75) 50%) calc(100% - 16px) 50% / 6px 6px no-repeat,
+    linear-gradient(135deg, rgba(237, 244, 255, .75) 50%, transparent 50%) calc(100% - 12px) 50% / 6px 6px no-repeat,
+    linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout :is(
+  .finance-page-header .btn,
+  .finance-action-center article .btn,
+  .finance-action-center .mini-action,
+  .finance-advisor .mini-action
+) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout .finance-page-header .btn.primary {
+  border-color: rgba(79, 139, 255, .9) !important;
+  color: #ffffff !important;
+  background-color: #0753ff !important;
+  background-image: linear-gradient(180deg, #1266ff, #0b49c9) !important;
+  box-shadow: 0 8px 18px rgba(6, 76, 255, .22) !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout :is(
+  .finance-header-policy span,
+  .finance-action-center article span,
+  .finance-action-center article strong,
+  .finance-advisor p,
+  .finance-action-center article > i
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout :is(.finance-donut, .finance-owner-score) {
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image:
+    radial-gradient(circle at center, rgba(13, 20, 38, .96) 58%, transparent 59%),
+    conic-gradient(#20f0a0 0 68%, rgba(226, 235, 255, .9) 68% 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(104, 135, 194, .28) !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout .finance-donut {
+  background-image:
+    radial-gradient(circle at center, rgba(13, 20, 38, .96) 58%, transparent 59%),
+    conic-gradient(#1266ff 0 72%, #e21c3d 72% 84%, #12a66a 84% 93%, #ff8a00 93% 100%) !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout :is(.finance-donut b, .finance-owner-score b) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout :is(.finance-donut small, .finance-owner-score span) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout .finance-cap-sheet :is(table, thead, tbody, tr, td) {
+  background-color: rgba(13, 20, 38, .92) !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout .finance-cap-sheet tbody tr:nth-child(even) {
+  background-color: rgba(18, 27, 48, .94) !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout .finance-cap-sheet tbody tr:hover {
+  background-color: rgba(24, 36, 62, .98) !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td, td strong, td b) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout .finance-cap-sheet td small {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page :is(
+  .social-trends article > b,
+  .social-summary article i,
+  .social-media article > b,
+  .social-avatar
+) {
+  border: 1px solid rgba(104, 135, 194, .42) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .96), rgba(13, 20, 38, .96)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page :is(
+  .social-page-header .btn,
+  .social-page-header button,
+  .social-trends .mini-action,
+  .social-tabs button
+) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page :is(
+  .social-page-header .btn.primary,
+  .social-tabs button.active
+) {
+  border-color: rgba(79, 139, 255, .9) !important;
+  color: #ffffff !important;
+  background-color: #0753ff !important;
+  background-image: linear-gradient(180deg, #1266ff, #0b49c9) !important;
+  box-shadow: 0 8px 18px rgba(6, 76, 255, .22) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .history-champions-card,
+  .awards-race-table,
+  .league-stats-table-card
+) :is(table, thead, tbody, tr, td) {
+  background-color: rgba(13, 20, 38, .92) !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .history-champions-card,
+  .awards-race-table,
+  .league-stats-table-card
+) tbody tr:nth-child(even) {
+  background-color: rgba(18, 27, 48, .94) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .history-champions-card,
+  .awards-race-table,
+  .league-stats-table-card
+) tbody tr:hover {
+  background-color: rgba(24, 36, 62, .98) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .history-champions-card,
+  .awards-race-table,
+  .league-stats-table-card
+) :is(th, td, td strong, td b) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .history-champions-card,
+  .awards-race-table,
+  .league-stats-table-card
+) :is(td small, td span) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.league-stats-layout .league-action-card > span {
+  border: 1px solid rgba(104, 135, 194, .38) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .96) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .96), rgba(16, 24, 43, .96)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player {
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .96), rgba(13, 20, 38, .96)) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player:hover {
+  background-color: rgba(20, 31, 54, .98) !important;
+  background-image: linear-gradient(180deg, rgba(24, 36, 62, .98), rgba(15, 24, 44, .98)) !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player > * {
+  border-left-color: rgba(104, 135, 194, .34) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .in-season-fa-stats,
+  .in-season-fa-contract,
+  .in-season-fa-interest,
+  .in-season-fa-fit,
+  .in-season-fa-actions
+) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player :is(
+  .in-season-fa-stats,
+  .in-season-fa-contract,
+  .in-season-fa-interest,
+  .in-season-fa-fit,
+  .in-season-fa-actions
+)::before,
+body.dark-mode.dashboard-mode .in-season-fa-player :is(
+  .in-season-fa-stats,
+  .in-season-fa-contract,
+  .in-season-fa-interest,
+  .in-season-fa-fit,
+  .in-season-fa-actions
+)::after {
+  display: none !important;
+  content: none !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-fit-ring {
+  background: conic-gradient(#20f0a0 var(--fit), rgba(226, 235, 255, .22) 0) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-fit.medium .in-season-fa-fit-ring,
+body.dark-mode.dashboard-mode .in-season-fa-fit.average .in-season-fa-fit-ring {
+  background: conic-gradient(#f59e0b var(--fit), rgba(226, 235, 255, .22) 0) !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-fit.poor .in-season-fa-fit-ring {
+  background: conic-gradient(#ef3b24 var(--fit), rgba(226, 235, 255, .22) 0) !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-fit-ring strong {
+  color: #f8fbff !important;
+  background: rgba(13, 20, 38, .96) !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player > .in-season-fa-fit {
+  border-left-color: rgba(104, 135, 194, .18) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-fit :is(ul, li, span) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-fit li {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-issue-list article.high {
+  border-color: rgba(215, 25, 63, .38) !important;
+  background-color: rgba(215, 25, 63, .055) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-issue-list article.medium {
+  border-color: rgba(249, 115, 22, .38) !important;
+  background-color: rgba(249, 115, 22, .055) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-issue-list article.low {
+  border-color: rgba(7, 83, 255, .38) !important;
+  background-color: rgba(7, 83, 255, .07) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-issue-list article.positive {
+  border-color: rgba(0, 155, 91, .38) !important;
+  background-color: rgba(0, 155, 91, .07) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-issue-list article.high > i {
+  border-color: rgba(215, 25, 63, .32) !important;
+  color: #ffffff !important;
+  background-color: #e21c3d !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-issue-list article.medium > i {
+  border-color: rgba(249, 115, 22, .32) !important;
+  color: #ffffff !important;
+  background-color: #f97316 !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-issue-list article.low > i {
+  border-color: rgba(7, 83, 255, .32) !important;
+  color: #ffffff !important;
+  background-color: #0753ff !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-issue-list article.positive > i {
+  border-color: rgba(0, 155, 91, .32) !important;
+  color: #ffffff !important;
+  background-color: #009b5b !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-morale-panel b.ok {
+  color: #15d79f !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-morale-panel b.bad {
+  color: #f05d68 !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-morale-panel article em.positive {
+  color: #15d79f !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-morale-panel article em.negative {
+  color: #f05d68 !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-recent-events b.positive {
+  border-color: rgba(21, 215, 159, .32) !important;
+  color: #eafff7 !important;
+  background-color: rgba(21, 215, 159, .16) !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-recent-events b.negative {
+  border-color: rgba(240, 93, 104, .32) !important;
+  color: #fff0f2 !important;
+  background-color: rgba(240, 93, 104, .16) !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout .staff-rating-badge,
+body.dark-mode :is(.staff-page, .staff-list-panel) .staff-rating-badge,
+html.dark-mode body :is(.staff-page, .staff-list-panel) .staff-rating-badge {
+  border: 3px solid #15b77a !important;
+  color: #071b60 !important;
+  background-color: #ffffff !important;
+  background-image: radial-gradient(circle at center, #ffffff 62%, #ffffff 63%) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout .staff-list-row .ok {
+  color: #15d79f !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-action-center article {
+  border-color: rgba(104, 135, 194, .38) !important;
+  border-left-color: #e21c3d !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: none !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .18) !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-action-center article:nth-of-type(2) {
+  border-left-color: #ff8a00 !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-action-center article:nth-of-type(3),
+body.dark-mode.dashboard-mode.scouting-layout .scouting-action-center article:nth-of-type(4) {
+  border-left-color: #0753ff !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-action-center article:nth-of-type(5) {
+  border-left-color: #0a9b5b !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-action-center article :is(span, strong) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-action-center article small {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.scouting-layout .scouting-action-center article span b {
+  color: #e21c3d !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout .finance-action-center article.red {
+  border-color: rgba(104, 135, 194, .38) !important;
+  border-left-color: #e21c3d !important;
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: none !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .18) !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout .finance-action-center article.orange {
+  border-color: rgba(104, 135, 194, .38) !important;
+  border-left-color: #ff8a00 !important;
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: none !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .18) !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout .finance-action-center article.green {
+  border-color: rgba(104, 135, 194, .38) !important;
+  border-left-color: #12a66a !important;
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: none !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .18) !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout .finance-action-center article.cyan,
+body.dark-mode.dashboard-mode.finance-layout .finance-action-center article.blue {
+  border-color: rgba(104, 135, 194, .38) !important;
+  border-left-color: #10a7c8 !important;
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: none !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .18) !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout .finance-action-center article :is(span, strong) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.finance-layout .finance-action-center article > i {
+  border-color: transparent !important;
+  color: #0753ff !important;
+  background-color: #e8f0ff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout .awards-action-center .award-action-card {
+  border-color: rgba(104, 135, 194, .38) !important;
+  border-left-color: #0753ff !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: none !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .18) !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout .awards-action-center .award-action-card.purple {
+  border-left-color: #8b35ff !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout .awards-action-center .award-action-card.green {
+  border-left-color: #0a9b5b !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout .awards-action-center .award-action-card.blue {
+  border-left-color: #0753ff !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout .awards-action-center .award-action-card.orange {
+  border-left-color: #ff8a00 !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout .awards-action-center .award-action-card.red {
+  border-left-color: #d61f43 !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout .awards-action-center .award-action-card > div :is(strong, small) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout .awards-action-center .award-action-card > div small {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.awards-layout .awards-action-center .award-action-card footer button {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-metrics,
+body.dark-mode.dashboard-mode.social-layout-page .social-summary {
+  border-color: rgba(104, 135, 194, .38) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .92), rgba(9, 15, 29, .9)) !important;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .22) !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-metric-card {
+  border-right-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-metric-card > span,
+body.dark-mode.dashboard-mode.social-layout-page .social-metric-card.blue > span {
+  color: #0753ff !important;
+  background-color: #eaf1ff !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-metric-card.red > span {
+  color: #e11d48 !important;
+  background-color: #ffe8ee !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-metric-card.purple > span {
+  color: #7b35e8 !important;
+  background-color: #f1e8ff !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-metric-card :is(b, strong) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-metric-card small {
+  color: #0a9b5b !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-metric-card small em {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-summary > header {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .96) !important;
+  background-image: linear-gradient(180deg, rgba(24, 34, 58, .96), rgba(13, 20, 38, .96)) !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-summary article {
+  border-color: rgba(104, 135, 194, .28) !important;
+  color: #edf4ff !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-summary article :is(strong, small, span) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-summary article small {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-summary article b {
+  color: #0a9b5b !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-summary article i {
+  color: #ffffff !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-summary article:nth-of-type(1) i {
+  background: linear-gradient(135deg, #f97316, #e11d48, #7c3aed) !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-summary article:nth-of-type(2) i {
+  background-color: #111827 !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-summary article:nth-of-type(3) i {
+  background-color: #1877f2 !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-summary article:nth-of-type(4) i {
+  background-color: #050505 !important;
+}
+
+body.dark-mode.dashboard-mode.social-layout-page .social-summary article:nth-of-type(5) i {
+  background-color: #ff0000 !important;
+}
+
+body.dark-mode.dashboard-mode.league-stats-layout .league-stats-action-center .league-action-card {
+  border-color: rgba(104, 135, 194, .38) !important;
+  border-left-color: #0753ff !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .86) !important;
+  background-image: none !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .18) !important;
+}
+
+body.dark-mode.dashboard-mode.league-stats-layout .league-stats-action-center .league-action-card.purple {
+  border-left-color: #8b35ff !important;
+}
+
+body.dark-mode.dashboard-mode.league-stats-layout .league-stats-action-center .league-action-card.green {
+  border-left-color: #0a9b5b !important;
+}
+
+body.dark-mode.dashboard-mode.league-stats-layout .league-stats-action-center .league-action-card.red {
+  border-left-color: #e01f3f !important;
+}
+
+body.dark-mode.dashboard-mode.league-stats-layout .league-stats-action-center .league-action-card.orange {
+  border-left-color: #ff8a00 !important;
+}
+
+body.dark-mode.dashboard-mode.league-stats-layout .league-stats-action-center .league-action-card :is(strong, small) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.league-stats-layout .league-stats-action-center .league-action-card small {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.league-stats-layout .league-stats-action-center .league-action-card > span {
+  border-color: rgba(104, 135, 194, .38) !important;
+  color: #40517f !important;
+  background-color: #f0f4ff !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode.league-stats-layout .league-stats-action-center .league-action-card footer button {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout .staff-list-panel .staff-list-row b.staff-rating-badge,
+body.dark-mode.dashboard-mode.staff-layout .staff-list-panel b.staff-rating-badge {
+  border: 3px solid #15b77a !important;
+  outline: 0 !important;
+  color: #071b60 !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode .staff-list-panel .staff-list-row b.staff-rating-badge,
+body.dark-mode.dashboard-mode .staff-list-panel b.staff-rating-badge,
+html.dark-mode body.dashboard-mode .staff-list-panel .staff-list-row b.staff-rating-badge,
+html.dark-mode body.dashboard-mode .staff-list-panel b.staff-rating-badge {
+  border: 3px solid #15b77a !important;
+  outline: 0 !important;
+  color: #071b60 !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-factors-panel article::before {
+  border-color: transparent !important;
+  color: #0753ff !important;
+  background-color: #eef4ff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.locker-room-layout .locker-leadership-panel article b {
+  color: #009b5b !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player .in-season-fa-ovr {
+  border: 2px solid #0753ff !important;
+  color: #0753ff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 3px 9px rgba(7, 83, 255, .12) !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player .in-season-fa-ovr b {
+  color: #0753ff !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player .in-season-fa-ovr span {
+  color: #52628d !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player .in-season-fa-pot,
+body.dark-mode.dashboard-mode .in-season-fa-player .in-season-fa-pot b,
+body.dark-mode.dashboard-mode .in-season-fa-player .in-season-fa-pot span {
+  color: #00965f !important;
+}
+
+body.dark-mode.dashboard-mode.in-season-free-agency .in-season-fa-player-cell .in-season-fa-ovr,
+body.dark-mode.dashboard-mode .in-season-free-agency .in-season-fa-player-cell .in-season-fa-ovr {
+  width: 34px !important;
+  height: 34px !important;
+  border: 2px solid #0753ff !important;
+  border-radius: 50% !important;
+  color: #0753ff !important;
+  background: #ffffff !important;
+  box-shadow: 0 3px 9px rgba(7, 83, 255, .12) !important;
+}
+
+body.dark-mode.dashboard-mode.in-season-free-agency .in-season-fa-player-cell .in-season-fa-ovr b,
+body.dark-mode.dashboard-mode .in-season-free-agency .in-season-fa-player-cell .in-season-fa-ovr b {
+  color: #0753ff !important;
+  font-size: 13px !important;
+  line-height: .92 !important;
+}
+
+body.dark-mode.dashboard-mode.in-season-free-agency .in-season-fa-player-cell .in-season-fa-ovr span,
+body.dark-mode.dashboard-mode .in-season-free-agency .in-season-fa-player-cell .in-season-fa-ovr span {
+  color: #52628d !important;
+  font-size: 6px !important;
+}
+
+body.dark-mode.dashboard-mode .multi-trade-team-popover-backdrop {
+  background: rgba(3, 7, 18, .62) !important;
+}
+
+body.dark-mode.dashboard-mode .multi-trade-team-select-card {
+  border: 1px solid rgba(104, 135, 194, .42) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .96) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .98), rgba(9, 15, 29, .96)) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .38) !important;
+}
+
+body.dark-mode.dashboard-mode .multi-trade-team-select-card > header {
+  border-color: rgba(104, 135, 194, .34) !important;
+  color: #edf4ff !important;
+  background-color: rgba(13, 20, 38, .98) !important;
+  background-image: linear-gradient(180deg, rgba(24, 34, 58, .98), rgba(13, 20, 38, .98)) !important;
+}
+
+body.dark-mode.dashboard-mode .multi-trade-team-select-card > header span {
+  color: #4f8bff !important;
+}
+
+body.dark-mode.dashboard-mode .multi-trade-team-select-card > header strong {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode .multi-trade-team-select-card > div {
+  background-color: rgba(9, 15, 29, .96) !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode .multi-trade-team-select-card > div > button {
+  border-color: rgba(104, 135, 194, .5) !important;
+  border-left-color: #0753ff !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .96) !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode .multi-trade-team-select-card > div > button:hover {
+  border-color: rgba(79, 139, 255, .72) !important;
+  background-color: rgba(22, 34, 62, .98) !important;
+}
+
+body.dark-mode.dashboard-mode .reference-bars {
+  border-bottom-color: rgba(188, 202, 234, .34) !important;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 31.5%,
+      rgba(188, 202, 234, .16) 32%,
+      transparent 32.7%
+    ),
+    linear-gradient(180deg, transparent, rgba(255, 255, 255, .11)) !important;
+}
+
+body.dark-mode.dashboard-mode .reference-chart-scale {
+  color: rgba(248, 251, 255, .86) !important;
+}
+
+body.dark-mode.dashboard-mode .reference-bars span,
+body.dark-mode.dashboard-mode .reference-bars b {
+  color: #f8fbff !important;
+}
+
+

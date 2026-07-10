@@ -1,0 +1,474 @@
+﻿/* Gameplan dark mode: labels should read white, not low-contrast blue. */
+body.dark-mode.dashboard-mode.gameplan-layout :is(
+  .gameplan-header p,
+  .gameplan-matchup-card > span,
+  .gameplan-summary-card span,
+  .gameplan-card header h2,
+  .gameplan-scout-card header strong,
+  .gameplan-page .strategy-control span,
+  .gameplan-pill-group > span,
+  .gameplan-action-column > span,
+  .gameplan-range span,
+  .gameplan-shot-bar span,
+  .gameplan-shot-bar strong,
+  .gameplan-footer span,
+  .gameplan-scout-card b,
+  .coach-recommendations article b,
+  .action-center article b
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout :is(
+  .gameplan-matchup-card small,
+  .gameplan-summary-card small,
+  .gameplan-range small,
+  .gameplan-shot-bar small,
+  .gameplan-toggle small,
+  .gameplan-scout-card span,
+  .coach-recommendations article span,
+  .action-center article span
+) {
+  color: #c8d3ee !important;
+}
+
+/* Trade machine dark mode: make rule rows feel like rows, not flat blocks. */
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule-list {
+  display: grid !important;
+  gap: 8px !important;
+  padding: 14px 24px !important;
+  background: rgba(7, 12, 24, .42) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule {
+  display: grid !important;
+  grid-template-columns: 54px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 14px !important;
+  min-height: 42px !important;
+  padding: 9px 14px !important;
+  border: 1px solid rgba(104, 135, 194, .36) !important;
+  border-radius: 7px !important;
+  color: #f8fbff !important;
+  background: linear-gradient(180deg, rgba(20, 31, 55, .98), rgba(11, 18, 34, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .025) !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule span {
+  display: inline-grid !important;
+  place-items: center !important;
+  width: 42px !important;
+  height: 22px !important;
+  border: 1px solid rgba(255, 123, 145, .48) !important;
+  border-radius: 999px !important;
+  color: #ffccd4 !important;
+  background: rgba(118, 28, 47, .42) !important;
+  font-size: 8px !important;
+  font-weight: 950 !important;
+  letter-spacing: .08em !important;
+}
+
+body.dark-mode.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule.ok span {
+  border-color: rgba(45, 212, 151, .5) !important;
+  color: #b8ffe5 !important;
+  background: rgba(10, 120, 80, .36) !important;
+}
+
+/* Rotation dark mode: remove the light capsule from the row position controls. */
+body.dark-mode.dashboard-mode.rotation-layout .rotation-position-cell {
+  color: #dbe6ff !important;
+}
+
+body.dark-mode.dashboard-mode.rotation-layout .rotation-drag-handle {
+  color: #90a3ca !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.rotation-layout .rotation-drag-handle:hover {
+  color: #cfe0ff !important;
+}
+
+body.dark-mode.dashboard-mode.rotation-layout .rotation-slot-lock span {
+  border-color: rgba(106, 142, 255, .46) !important;
+  color: #dbe6ff !important;
+  background: rgba(18, 31, 58, .92) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .025) !important;
+}
+
+body.dark-mode.dashboard-mode.rotation-layout .rotation-slot-lock.locked span {
+  border-color: rgba(7, 83, 255, .92) !important;
+  color: #ffffff !important;
+  background: #0753ff !important;
+  box-shadow: 0 0 12px rgba(7, 83, 255, .22) !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-cell {
+  color: #dbe6ff !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-cell .rotation-drag-handle,
+body.dark-mode.dashboard-mode .rotation-drag-handle[role="button"] {
+  color: #90a3ca !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-cell .rotation-drag-handle:hover,
+body.dark-mode.dashboard-mode .rotation-drag-handle[role="button"]:hover {
+  color: #cfe0ff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-cell .rotation-slot-lock span {
+  border-color: rgba(106, 142, 255, .46) !important;
+  color: #dbe6ff !important;
+  background: rgba(18, 31, 58, .92) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .025) !important;
+}
+
+body.dark-mode.dashboard-mode .rotation-position-cell .rotation-slot-lock.locked span {
+  border-color: rgba(7, 83, 255, .92) !important;
+  color: #ffffff !important;
+  background: #0753ff !important;
+  box-shadow: 0 0 12px rgba(7, 83, 255, .22) !important;
+}
+
+/* Trade machine light mode: keep failed rules readable and card-like. */
+body.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule-list {
+  display: grid !important;
+  gap: 8px !important;
+  padding: 14px 24px !important;
+  background: rgba(246, 249, 254, .72) !important;
+}
+
+body.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule {
+  display: grid !important;
+  grid-template-columns: 54px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 14px !important;
+  min-height: 42px !important;
+  padding: 9px 14px !important;
+  border: 1px solid rgba(196, 207, 229, .9) !important;
+  border-radius: 7px !important;
+  color: #071b60 !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 18px rgba(15, 31, 68, .045) !important;
+}
+
+body.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule span {
+  display: inline-grid !important;
+  place-items: center !important;
+  width: 42px !important;
+  height: 22px !important;
+  border: 1px solid rgba(214, 31, 67, .28) !important;
+  border-radius: 999px !important;
+  color: #d61f43 !important;
+  background: rgba(214, 31, 67, .07) !important;
+  font-size: 8px !important;
+  font-weight: 950 !important;
+  letter-spacing: .08em !important;
+}
+
+body.dashboard-mode .page:has(.trade-page-title) .multi-trade-analysis .trade-rule.ok span {
+  border-color: rgba(0, 155, 91, .32) !important;
+  color: #009b5b !important;
+  background: rgba(0, 155, 91, .08) !important;
+}
+
+/* Free agency dark mode: keep the watchlist star from becoming a white pill. */
+body.dark-mode.dashboard-mode .in-season-fa-player-cell .in-season-fa-star,
+body.dark-mode.dashboard-mode button.in-season-fa-star {
+  display: grid !important;
+  place-items: center !important;
+  width: 18px !important;
+  min-width: 18px !important;
+  max-width: 18px !important;
+  height: 18px !important;
+  min-height: 18px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: #8fa3cc !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  font-size: 15px !important;
+  line-height: 1 !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player-cell .in-season-fa-star:hover,
+body.dark-mode.dashboard-mode button.in-season-fa-star:hover {
+  color: #cfe0ff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* Free agency dark mode: remove the white fill from OVR badges. */
+body.dark-mode.dashboard-mode .in-season-fa-player .in-season-fa-ovr,
+body.dark-mode.dashboard-mode .in-season-fa-player-cell .in-season-fa-ovr,
+body.dark-mode.dashboard-mode.in-season-free-agency .in-season-fa-player-cell .in-season-fa-ovr,
+body.dark-mode.dashboard-mode .in-season-free-agency .in-season-fa-player-cell .in-season-fa-ovr {
+  border-color: #0753ff !important;
+  color: #8fb3ff !important;
+  background: rgba(7, 83, 255, .10) !important;
+  background-color: rgba(7, 83, 255, .10) !important;
+  background-image: none !important;
+  box-shadow: 0 0 0 1px rgba(143, 179, 255, .10), 0 0 10px rgba(7, 83, 255, .18) !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player .in-season-fa-ovr b,
+body.dark-mode.dashboard-mode .in-season-fa-player-cell .in-season-fa-ovr b {
+  color: #dce8ff !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-player .in-season-fa-ovr span,
+body.dark-mode.dashboard-mode .in-season-fa-player-cell .in-season-fa-ovr span {
+  color: #9fb2d8 !important;
+}
+
+/* Staff dark mode: remove the white fill from OVR badges. */
+body.dark-mode.dashboard-mode.staff-layout .staff-list-panel .staff-list-row b.staff-rating-badge,
+body.dark-mode.dashboard-mode.staff-layout .staff-list-panel b.staff-rating-badge,
+body.dark-mode.dashboard-mode .staff-list-panel .staff-list-row b.staff-rating-badge,
+body.dark-mode.dashboard-mode .staff-list-panel b.staff-rating-badge,
+html.dark-mode body.dashboard-mode .staff-list-panel .staff-list-row b.staff-rating-badge,
+html.dark-mode body.dashboard-mode .staff-list-panel b.staff-rating-badge {
+  border: 3px solid #15b77a !important;
+  outline: 0 !important;
+  color: #dff8ef !important;
+  background: rgba(21, 183, 122, .10) !important;
+  background-color: rgba(21, 183, 122, .10) !important;
+  background-image: none !important;
+  box-shadow: 0 0 0 1px rgba(21, 183, 122, .10), 0 0 10px rgba(21, 183, 122, .18) !important;
+}
+
+/* Staff dark mode: let empty space under side-card rows show the page background. */
+body.dark-mode.dashboard-mode.staff-layout :is(.staff-breakdown-panel, .staff-openings-panel) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout :is(
+  .staff-breakdown-panel > header,
+  .staff-openings-panel > header,
+  .staff-breakdown-row,
+  .staff-opening-row,
+  .staff-breakdown-panel > footer,
+  .staff-openings-panel > footer
+) {
+  border-color: rgba(104, 135, 194, .38) !important;
+  color: #edf4ff !important;
+  background-color: rgba(9, 15, 29, .92) !important;
+  background-image: linear-gradient(180deg, rgba(18, 27, 48, .94), rgba(9, 15, 29, .92)) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.staff-layout :is(.staff-office-layout, .staff-side-panels) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* Staff breakdown: the Analytics row should connect cleanly to the Total footer. */
+body.dashboard-mode.staff-layout .staff-breakdown-panel .staff-breakdown-row:last-of-type,
+body.dark-mode.dashboard-mode.staff-layout .staff-breakdown-panel .staff-breakdown-row:last-of-type {
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  clip-path: none !important;
+}
+
+/* Social Trending Topics: use one flat background color. */
+body.dark-mode.dashboard-mode.social-layout-page .social-trends,
+body.dark-mode.dashboard-mode.social-layout-page .social-trends header,
+body.dark-mode.dashboard-mode.social-layout-page .social-trends article {
+  background: #101827 !important;
+  background-color: #101827 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* Standings light mode: keep conference headers on the light table surface. */
+body.dashboard-mode:not(.dark-mode).standings-conference-layout .standings-table .standings-title {
+  border-bottom-color: rgba(202, 212, 231, .72) !important;
+  color: var(--navy) !important;
+  background-color: rgba(255, 255, 255, .94) !important;
+  background-image: linear-gradient(90deg, #ffffff, rgba(247, 249, 253, .78)) !important;
+  box-shadow: none !important;
+}
+
+body.dashboard-mode:not(.dark-mode).standings-conference-layout .standings-table .standings-title span {
+  color: var(--navy) !important;
+}
+
+body.dashboard-mode:not(.dark-mode).standings-conference-layout .standings-table .conference-logo {
+  border-color: rgba(6, 76, 255, .24) !important;
+  color: var(--blue) !important;
+  background-color: #ffffff !important;
+  background-image: linear-gradient(135deg, rgba(6, 76, 255, .1), rgba(255, 255, 255, .96)) !important;
+  box-shadow: inset 0 -3px 0 rgba(6, 76, 255, .12) !important;
+}
+
+body.dashboard-mode:not(.dark-mode).standings-conference-layout .standings-table .conference-logo-west {
+  border-color: rgba(215, 25, 63, .24) !important;
+  color: var(--red) !important;
+  background-image: linear-gradient(135deg, rgba(215, 25, 63, .1), rgba(255, 255, 255, .96)) !important;
+}
+
+/* Light mode: keep simulation action buttons on the light surface. */
+body.dashboard-mode:not(.dark-mode) .sim-controls :is(.btn, button),
+body.dashboard-mode:not(.dark-mode) .matchup-card .actions :is(.btn, button) {
+  border-color: rgba(6, 76, 255, .32) !important;
+  color: #071b60 !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 8px 18px rgba(9, 28, 88, .08) !important;
+}
+
+body.dashboard-mode:not(.dark-mode) .sim-controls :is(.btn, button):hover:not(:disabled),
+body.dashboard-mode:not(.dark-mode) .matchup-card .actions :is(.btn, button):hover:not(:disabled) {
+  border-color: rgba(7, 83, 255, .62) !important;
+  color: #0753ff !important;
+  background: #f6f9ff !important;
+  background-color: #f6f9ff !important;
+  box-shadow: 0 10px 20px rgba(7, 83, 255, .12) !important;
+}
+
+body.dashboard-mode:not(.dark-mode) .sim-controls :is(.btn, button):disabled,
+body.dashboard-mode:not(.dark-mode) .matchup-card .actions :is(.btn, button):disabled {
+  border-color: rgba(160, 174, 203, .42) !important;
+  color: #98a4bd !important;
+  background: #eef2f8 !important;
+  background-color: #eef2f8 !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* Standings light mode: inactive tabs should not use the dark navy button fill. */
+body.dashboard-mode:not(.dark-mode).standings-layout :is(.standings-tabs, .standings-view-toggle) button:not(.active) {
+  border-color: rgba(7, 31, 92, .22) !important;
+  color: #071b60 !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 7px 14px rgba(9, 28, 88, .08) !important;
+}
+
+body.dashboard-mode:not(.dark-mode).standings-layout :is(.standings-tabs, .standings-view-toggle) button:not(.active):hover {
+  border-color: rgba(7, 83, 255, .5) !important;
+  color: #0753ff !important;
+  background: #f6f9ff !important;
+  background-color: #f6f9ff !important;
+  box-shadow: 0 9px 18px rgba(7, 83, 255, .12) !important;
+}
+
+/* Staff light mode: staff hire buttons should use the light button surface. */
+body.dashboard-mode:not(.dark-mode) :is(.staff-market, .staff-card, .staff-candidate, .staff-opening-row) :is(.staff-hire-button, .reference-week-button, button[data-hire-staff]) {
+  border-color: rgba(6, 76, 255, .32) !important;
+  color: #071b60 !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 8px 18px rgba(9, 28, 88, .08) !important;
+  opacity: 1 !important;
+}
+
+body.dashboard-mode:not(.dark-mode) :is(.staff-market, .staff-card, .staff-candidate, .staff-opening-row) :is(.staff-hire-button, .reference-week-button, button[data-hire-staff]):hover:not(:disabled):not([aria-disabled="true"]) {
+  border-color: rgba(7, 83, 255, .62) !important;
+  color: #0753ff !important;
+  background: #f6f9ff !important;
+  background-color: #f6f9ff !important;
+  box-shadow: 0 10px 20px rgba(7, 83, 255, .12) !important;
+}
+
+body.dashboard-mode:not(.dark-mode) :is(.staff-market, .staff-card, .staff-candidate, .staff-opening-row) :is(.staff-hire-button, .reference-week-button, button[data-hire-staff]):is(:disabled, [aria-disabled="true"]) {
+  border-color: rgba(160, 174, 203, .42) !important;
+  color: #98a4bd !important;
+  background: #eef2f8 !important;
+  background-color: #eef2f8 !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* Dashboard light mode: the secondary sim hero button should not turn dark on hover. */
+body.dashboard-mode:not(.dark-mode) .reference-season-hero :is(.reference-week-button, .btn:not(.reference-primary)) {
+  border-color: rgba(6, 76, 255, .32) !important;
+  color: #071b60 !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 8px 18px rgba(9, 28, 88, .08) !important;
+  opacity: 1 !important;
+}
+
+body.dashboard-mode:not(.dark-mode) .reference-season-hero :is(.reference-week-button, .btn:not(.reference-primary)):hover:not(:disabled) {
+  border-color: rgba(7, 83, 255, .62) !important;
+  color: #0753ff !important;
+  background: #f6f9ff !important;
+  background-color: #f6f9ff !important;
+  background-image: none !important;
+  box-shadow: 0 10px 20px rgba(7, 83, 255, .12) !important;
+}
+
+/* Free agency dark mode: keep the roster-spots rule block solid. */
+body.dark-mode.dashboard-mode .in-season-fa-hero {
+  border-color: rgba(104, 135, 194, .48) !important;
+  color: #edf4ff !important;
+  background: #151e31 !important;
+  background-color: #151e31 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-hero .in-season-fa-rule {
+  border-color: rgba(104, 135, 194, .52) !important;
+  color: #edf4ff !important;
+  background: #10192b !important;
+  background-color: #10192b !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode .in-season-fa-hero::before,
+body.dark-mode.dashboard-mode .in-season-fa-hero::after,
+body.dark-mode.dashboard-mode .in-season-fa-hero .in-season-fa-rule::before,
+body.dark-mode.dashboard-mode .in-season-fa-hero .in-season-fa-rule::after {
+  display: none !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+body.dark-mode.dashboard-mode #page[data-page="offseason"] > .card.in-season-fa-hero,
+body.dark-mode.dashboard-mode #page[data-page="offseason"] .in-season-fa-hero,
+body.dark-mode.dashboard-mode .secondary-page[data-page="offseason"] .card.in-season-fa-hero {
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  isolation: isolate !important;
+  border-color: rgba(104, 135, 194, .48) !important;
+  color: #edf4ff !important;
+  background: #151e31 !important;
+  background-color: #151e31 !important;
+  background-image: none !important;
+  background-blend-mode: normal !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode #page[data-page="offseason"] .in-season-fa-hero > div:first-child {
+  background: #151e31 !important;
+  background-color: #151e31 !important;
+  background-image: none !important;
+}
+

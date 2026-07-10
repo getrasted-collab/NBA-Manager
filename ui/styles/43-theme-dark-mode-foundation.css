@@ -1,0 +1,175 @@
+﻿/* ===== Better dark mode: lighter navy, readable tables, less black ===== */
+
+body.dark-mode,
+body[data-theme="dark"],
+body.theme-dark {
+  --bg: #101827;
+  --panel: #1b2638;
+  --panel-soft: #202c41;
+  --panel-lift: #263550;
+  --stroke: #3b4a63;
+  --text: #f4f7ff;
+  --muted: #b8c5d8;
+  --dim: #8d9cb2;
+  background:
+    radial-gradient(circle at 85% 18%, rgba(65, 105, 225, .14), transparent 32%),
+    linear-gradient(135deg, #111a2b 0%, #172238 48%, #23182a 100%);
+}
+
+/* Main dark panels */
+body.dark-mode .workspace,
+body[data-theme="dark"] .workspace,
+body.theme-dark .workspace {
+  background:
+    radial-gradient(circle at 92% 12%, rgba(255, 255, 255, .045), transparent 24%),
+    #121b2c;
+}
+
+body.dark-mode .card,
+body.dark-mode .table-card,
+body.dark-mode .stats-table,
+body.dark-mode .standings-card,
+body.dark-mode .page-shell-header,
+body[data-theme="dark"] .card,
+body[data-theme="dark"] .table-card,
+body[data-theme="dark"] .stats-table,
+body[data-theme="dark"] .standings-card,
+body[data-theme="dark"] .page-shell-header,
+body.theme-dark .card,
+body.theme-dark .table-card,
+body.theme-dark .stats-table,
+body.theme-dark .standings-card,
+body.theme-dark .page-shell-header {
+  color: #f4f7ff;
+  background: #1c273a;
+  border-color: #3c4c68;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .22);
+}
+
+/* Tables in dark mode */
+body.dark-mode table,
+body[data-theme="dark"] table,
+body.theme-dark table {
+  background: #1b2638;
+  color: #f4f7ff;
+}
+
+body.dark-mode th,
+body[data-theme="dark"] th,
+body.theme-dark th {
+  color: #c7d3e6;
+  background: #141e30;
+  border-bottom-color: #40506a;
+}
+
+body.dark-mode td,
+body[data-theme="dark"] td,
+body.theme-dark td {
+  color: #f2f6ff;
+  background: #202b3f;
+  border-bottom-color: #3b4a63;
+}
+
+body.dark-mode tr:nth-child(even) td,
+body[data-theme="dark"] tr:nth-child(even) td,
+body.theme-dark tr:nth-child(even) td {
+  background: #243148;
+}
+
+body.dark-mode tr:hover td,
+body[data-theme="dark"] tr:hover td,
+body.theme-dark tr:hover td {
+  background: #2c3b57;
+}
+
+/* Top bar/sidebar dark mode */
+body.dark-mode .topbar,
+body[data-theme="dark"] .topbar,
+body.theme-dark .topbar {
+  background: linear-gradient(90deg, #142039, #101827);
+  border-bottom: 1px solid #33435f;
+}
+
+body.dark-mode .context-sidebar,
+body[data-theme="dark"] .context-sidebar,
+body.theme-dark .context-sidebar {
+  background: #121b2c;
+  border-right-color: #34445f;
+}
+
+body.dark-mode .context-nav button,
+body[data-theme="dark"] .context-nav button,
+body.theme-dark .context-nav button {
+  color: #c9d5e8;
+}
+
+body.dark-mode .context-nav button.active,
+body[data-theme="dark"] .context-nav button.active,
+body.theme-dark .context-nav button.active {
+  color: #ffffff;
+  background: #263a5e;
+  border-color: #4f6fa8;
+}
+
+/* Buttons / inputs */
+body.dark-mode button,
+body.dark-mode select,
+body.dark-mode input,
+body[data-theme="dark"] button,
+body[data-theme="dark"] select,
+body[data-theme="dark"] input,
+body.theme-dark button,
+body.theme-dark select,
+body.theme-dark input {
+  color: #f5f8ff;
+  border-color: #435674;
+}
+
+body.dark-mode select,
+body.dark-mode input,
+body[data-theme="dark"] select,
+body[data-theme="dark"] input,
+body.theme-dark select,
+body.theme-dark input {
+  background: #182337;
+}
+
+/* Keep team logos clean */
+body.dark-mode .team-logo,
+body[data-theme="dark"] .team-logo,
+body.theme-dark .team-logo {
+  background: #f8fafc;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+/* ===== Keep plus buttons identical in light and dark mode ===== */
+
+body.dark-mode .btn.plus,
+body.dark-mode .plus-button,
+body.dark-mode .add-button,
+body.dark-mode .icon-add,
+body.dark-mode button[aria-label*="Add"],
+body.dark-mode button[title*="Add"],
+body.dark-mode button[data-action*="add"],
+body.dark-mode button[class*="add"],
+body.dark-mode button[class*="plus"] {
+  background: #f3f6fb !important;
+  color: #0753ff !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Keeps the + itself blue */
+body.dark-mode .btn.plus *,
+body.dark-mode .plus-button *,
+body.dark-mode .add-button *,
+body.dark-mode .icon-add *,
+body.dark-mode button[aria-label*="Add"] *,
+body.dark-mode button[title*="Add"] *,
+body.dark-mode button[data-action*="add"] *,
+body.dark-mode button[class*="add"] *,
+body.dark-mode button[class*="plus"] * {
+  color: #0753ff !important;
+}
+

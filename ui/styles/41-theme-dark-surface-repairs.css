@@ -1,0 +1,842 @@
+﻿/* Dark mode surface repair for older page modules that still declared light backgrounds. */
+body.dark-mode.dashboard-mode {
+  --dm-page: rgba(8, 13, 26, .92);
+  --dm-panel: linear-gradient(180deg, rgba(18, 25, 45, .96), rgba(10, 16, 31, .94));
+  --dm-panel-flat: rgba(14, 20, 37, .95);
+  --dm-panel-soft: rgba(21, 29, 50, .88);
+  --dm-row: rgba(23, 31, 51, .72);
+  --dm-row-alt: rgba(29, 38, 61, .72);
+  --dm-border: rgba(140, 160, 204, .38);
+  --dm-muted: #aebadc;
+  --dm-text: #f6f8ff;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .reference-season-hero,
+  .reference-stat-grid article,
+  .reference-chart-panel,
+  .reference-leaders-panel,
+  .reference-upcoming,
+  .reference-management-grid > article,
+  .staff-market,
+  .staff-card,
+  .season-calendar,
+  .calendar-toolbar,
+  .game-center-grid > .card,
+  .standings-table,
+  .standings-table-card,
+  .standings-conference-card,
+  .standings-division-card,
+  .nba-cup-card,
+  .league-roster-browser,
+  .league-roster-table,
+  .roster-summary-card,
+  .rotation-lineup-card,
+  .gameplan-matchup-card,
+  .gameplan-summary-card,
+  .gameplan-card,
+  .gameplan-scout-card,
+  .gameplan-footer
+) {
+  border-color: var(--dm-border) !important;
+  color: var(--dm-text) !important;
+  background: var(--dm-panel) !important;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .26) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .reference-management-grid .metric-row,
+  .calendar-day,
+  .calendar-day.empty,
+  .standings-table tbody tr,
+  .standings-table td,
+  .league-roster-table tbody tr,
+  .league-roster-table td,
+  .rotation-lineup-row,
+  .game-summary,
+  .pregame-plan
+) {
+  border-color: rgba(140, 160, 204, .24) !important;
+  color: var(--dm-text) !important;
+  background: var(--dm-row) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .calendar-day:nth-child(even),
+  .standings-table tbody tr:nth-child(even),
+  .league-roster-table tbody tr:nth-child(even),
+  .rotation-lineup-row:nth-child(even)
+) {
+  background: var(--dm-row-alt) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .calendar-weekdays,
+  .calendar-weekdays span,
+  .standings-table thead,
+  .standings-table th,
+  .league-roster-table thead,
+  .league-roster-table th,
+  .rotation-lineup-columns,
+  .league-roster-browser > header,
+  .rotation-lineup-card > header,
+  .staff-market-head
+) {
+  border-color: var(--dm-border) !important;
+  color: #dce5ff !important;
+  background: rgba(8, 14, 28, .95) !important;
+}
+
+body.dark-mode.dashboard-mode .roster-team-grid button {
+  border-color: var(--dm-border) !important;
+  color: #dce5ff !important;
+  background: rgba(22, 30, 50, .9) !important;
+}
+
+body.dark-mode.dashboard-mode .roster-team-grid button.active {
+  border-color: rgba(110, 146, 255, .86) !important;
+  background: rgba(7, 83, 255, .28) !important;
+}
+
+body.dark-mode.dashboard-mode .roster-team-grid button span {
+  color: #eaf0ff !important;
+}
+
+body.dark-mode.dashboard-mode .calendar-game {
+  border-color: rgba(110, 146, 255, .62) !important;
+  color: #f8fbff !important;
+  background: rgba(31, 48, 84, .92) !important;
+}
+
+body.dark-mode.dashboard-mode .calendar-game.played {
+  color: #aebadc !important;
+  background: rgba(16, 23, 41, .8) !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout :is(
+  .gameplan-tabs button,
+  .gameplan-action-grid button,
+  .gameplan-pill-group button,
+  .gameplan-manage,
+  .gameplan-footer button,
+  .gameplan-actions button,
+  .action-center button
+) {
+  border-color: rgba(145, 165, 210, .55) !important;
+  color: #eaf0ff !important;
+  background: rgba(17, 25, 44, .94) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout :is(
+  .gameplan-tabs button.active,
+  .gameplan-action-grid button.active,
+  .gameplan-pill-group button.active
+) {
+  border-color: rgba(110, 146, 255, .9) !important;
+  color: #fff !important;
+  background: rgba(7, 83, 255, .38) !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout :is(
+  .gameplan-toggle,
+  .gameplan-scout-card article,
+  .matchup-assignments article,
+  .coach-recommendations article,
+  .opponent-threats article,
+  .action-center article,
+  .strategy-control,
+  .gameplan-range,
+  .gameplan-shot-bar
+) {
+  border-color: rgba(140, 160, 204, .24) !important;
+  color: #f6f8ff !important;
+  background: rgba(9, 15, 29, .42) !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout :is(
+  .gameplan-toggle span,
+  .gameplan-toggle small,
+  .gameplan-shot-bar small,
+  .gameplan-scout-card span,
+  .coach-recommendations span,
+  .opponent-threats span
+) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout .gameplan-summary-card::before {
+  background: rgba(113, 151, 255, .12) !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout .gameplan-summary-card.green::before {
+  background: rgba(52, 211, 153, .13) !important;
+}
+
+body.dark-mode.dashboard-mode.gameplan-layout .gameplan-summary-card.orange::before {
+  background: rgba(251, 191, 36, .12) !important;
+}
+
+body.dark-mode.dashboard-mode :is(input, select, textarea) {
+  border-color: rgba(145, 165, 210, .55) !important;
+  color: #f6f8ff !important;
+  background: rgba(7, 12, 24, .88) !important;
+}
+
+body.dark-mode.dashboard-mode select option {
+  color: #07112a !important;
+  background: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode input[type="range"] {
+  accent-color: #0753ff;
+}
+
+body.dark-mode.dashboard-mode button:not(.custom-scrollbar-arrow-top):not(.custom-scrollbar-arrow-bottom) {
+  color: #eef3ff !important;
+}
+
+body.dark-mode.dashboard-mode :is(.btn, .secondary-button, .icon-btn, .reference-primary) {
+  border-color: rgba(145, 165, 210, .55) !important;
+  color: #eef3ff !important;
+  background: rgba(19, 27, 48, .95) !important;
+}
+
+body.dark-mode.dashboard-mode :is(.btn.primary, .primary, .reference-primary) {
+  border-color: rgba(77, 125, 255, .9) !important;
+  color: #fff !important;
+  background: #0753ff !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .calendar-date,
+  .meta,
+  .metric-row span,
+  .reference-inbox-card p,
+  .reference-news-card p,
+  .reference-season-hero p,
+  .standings-table td small,
+  .league-roster-table td > small,
+  .rotation-lineup-card > header small
+) {
+  color: var(--dm-muted) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .reference-season-hero h2,
+  .reference-section-title,
+  .reference-page-title,
+  .calendar-toolbar .player-name,
+  .standings-title,
+  .league-roster-browser > header strong,
+  .rotation-lineup-card > header span,
+  .gameplan-page h1
+),
+body.dark-mode.dashboard-mode :is(
+  .metric-value,
+  .reference-stat-grid strong,
+  .reference-leaders-panel > div > b,
+  .standings-team-cell strong,
+  .league-roster-table td strong
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode .reference-stat-grid article:last-child {
+  border-bottom-color: #e11d48 !important;
+}
+
+body.dark-mode.dashboard-mode .reference-upcoming button {
+  border-color: var(--dm-border) !important;
+  color: #f8fbff !important;
+  background: linear-gradient(180deg, rgba(24, 34, 58, .95), rgba(13, 20, 38, .95)) !important;
+}
+
+/* Dark mode repair pass for the manager pages that still had light surfaces. */
+body.dark-mode.dashboard-mode :is(
+  .social-page,
+  .league-stats-page,
+  .awards-dashboard,
+  .league-history-dashboard,
+  .finance-dashboard,
+  .scouting-page,
+  .locker-room-page,
+  .player-dev-page,
+  .staff-page,
+  .in-season-free-agency,
+  .trade-machine-page,
+  .settings-page
+) {
+  color: var(--dm-text) !important;
+  background: transparent !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .social-page-header,
+  .league-stats-header,
+  .awards-header,
+  .league-history-header,
+  .finance-page-header,
+  .scouting-page-header,
+  .player-dev-header,
+  .locker-room-header,
+  .staff-page-title,
+  .in-season-fa-hero,
+  .trade-machine-page > header,
+  .settings-page > header
+) {
+  color: var(--dm-text) !important;
+  background: transparent !important;
+  border-color: rgba(145, 165, 205, .28) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .social-page,
+  .league-stats-page,
+  .awards-dashboard,
+  .league-history-dashboard,
+  .finance-dashboard,
+  .scouting-page,
+  .locker-room-page,
+  .player-dev-page,
+  .staff-page,
+  .in-season-free-agency,
+  .trade-machine-page,
+  .settings-page
+) :is(h1, h2, h3, h4, strong, b, th) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .social-page,
+  .league-stats-page,
+  .awards-dashboard,
+  .league-history-dashboard,
+  .finance-dashboard,
+  .scouting-page,
+  .locker-room-page,
+  .player-dev-page,
+  .staff-page,
+  .in-season-free-agency,
+  .trade-machine-page,
+  .settings-page
+) :is(p, small, span, dt, dd, li, td, label) {
+  color: #b8c4e3 !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .social-metrics,
+  .social-feed,
+  .social-summary,
+  .social-trends,
+  .social-post,
+  .social-game-card,
+  .social-video-card,
+  .league-stats-table-card,
+  .league-stats-action-center,
+  .league-stats-bottom-grid > *,
+  .league-stat-updates,
+  .league-stat-card,
+  .award-top-card,
+  .awards-race-table,
+  .award-feature-panel,
+  .awards-action-center,
+  .award-team-projection,
+  .award-rookie-ladder,
+  .award-news-panel,
+  .award-activity-strip,
+  .award-leaders-by-award,
+  .history-top-card,
+  .history-champions-card,
+  .history-dynasty-feature,
+  .history-dynasty-copy,
+  .history-action-center,
+  .history-leaders-card,
+  .history-award-legacy,
+  .history-franchise-titles,
+  .history-timeline-strip,
+  .finance-dash-metric,
+  .finance-cap-sheet,
+  .finance-cap-overview,
+  .finance-breakdown,
+  .finance-payroll-timeline,
+  .finance-owner-profile,
+  .finance-activity,
+  .finance-action-center,
+  .finance-advisor,
+  .finance-mini-list,
+  .finance-exceptions,
+  .finance-policy,
+  .finance-contracts,
+  .scouting-metric-card,
+  .scouting-draft-board,
+  .scouting-selected-panel,
+  .scouting-action-center,
+  .scouting-assignments,
+  .scouting-team-summary,
+  .scouting-staff-recs,
+  .scouting-comparison-widget,
+  .locker-metric-card,
+  .locker-panel,
+  .locker-leadership-panel,
+  .locker-factors-panel,
+  .locker-morale-panel,
+  .locker-groups-panel,
+  .locker-action-center,
+  .locker-advice-card,
+  .locker-quick-actions,
+  .locker-recent-events,
+  .player-dev-metrics > *,
+  .player-dev-tracker,
+  .player-dev-selected,
+  .player-dev-action-center,
+  .dev-mini-panel,
+  .player-dev-bottom-grid > *,
+  .staff-metric-card,
+  .staff-list-panel,
+  .staff-breakdown-panel,
+  .staff-openings-panel,
+  .in-season-fa-stat,
+  .in-season-waiver-strip,
+  .in-season-fa-market,
+  .trade-team-card,
+  .trade-team-panel,
+  .multi-trade-steps,
+  .multi-trade-analysis,
+  .settings-card,
+  .settings-panel,
+  .settings-section
+) {
+  background: var(--dm-panel) !important;
+  border-color: var(--dm-border) !important;
+  color: var(--dm-text) !important;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .24) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .social-feed > header,
+  .social-summary > header,
+  .social-trends > header,
+  .league-stats-table-card > header,
+  .league-stats-action-center > header,
+  .league-stats-bottom-grid > * > header,
+  .league-stat-updates > header,
+  .awards-race-table > header,
+  .award-feature-panel > header,
+  .awards-action-center > header,
+  .award-team-projection > header,
+  .award-rookie-ladder > header,
+  .award-news-panel > header,
+  .history-champions-card > header,
+  .history-action-center > header,
+  .history-leaders-card > header,
+  .history-award-legacy > header,
+  .history-franchise-titles > header,
+  .history-news-card > header,
+  .history-timeline-strip > header,
+  .finance-cap-sheet > header,
+  .finance-cap-overview > header,
+  .finance-breakdown > header,
+  .finance-payroll-timeline > header,
+  .finance-owner-profile > header,
+  .finance-activity > header,
+  .finance-action-center > header,
+  .finance-advisor > header,
+  .finance-mini-list > header,
+  .finance-exceptions > header,
+  .scouting-draft-board > header,
+  .scouting-board-head,
+  .scouting-action-center > header,
+  .scouting-assignments > header,
+  .scouting-team-summary > header,
+  .scouting-staff-recs > header,
+  .scouting-comparison-widget > header,
+  .locker-panel > header,
+  .locker-leadership-panel > header,
+  .locker-factors-panel > header,
+  .locker-morale-panel > header,
+  .locker-groups-panel > header,
+  .locker-action-center > header,
+  .locker-quick-actions > header,
+  .player-dev-tracker > header,
+  .player-dev-tracker-head,
+  .player-dev-selected > header,
+  .player-dev-action-center > header,
+  .dev-mini-panel > header,
+  .staff-list-panel > header,
+  .staff-list-head,
+  .staff-breakdown-panel > header,
+  .staff-openings-panel > header,
+  .in-season-fa-market > header,
+  .in-season-fa-list-head,
+  .trade-team-card > header,
+  .trade-team-panel > header,
+  .multi-trade-analysis > header,
+  thead,
+  th
+) {
+  background: linear-gradient(180deg, rgba(28, 37, 61, .98), rgba(13, 20, 38, .98)) !important;
+  border-color: var(--dm-border) !important;
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .social-tabs,
+  .league-stats-tabs,
+  .awards-tabs,
+  .league-history-tabs,
+  .scouting-tabs,
+  .locker-room-tabs,
+  .player-dev-tabs,
+  .staff-list-controls,
+  .in-season-fa-toolbar,
+  .settings-tabs
+) {
+  background: rgba(12, 18, 34, .62) !important;
+  border-color: rgba(145, 165, 205, .28) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .social-tabs button,
+  .league-stats-tabs button,
+  .awards-tabs button,
+  .league-history-tabs button,
+  .scouting-tabs button,
+  .locker-room-tabs button,
+  .player-dev-tabs button,
+  .in-season-fa-toolbar button,
+  .settings-tabs button,
+  .social-page button,
+  .league-stats-page button,
+  .awards-dashboard button,
+  .league-history-dashboard button,
+  .finance-dashboard button,
+  .scouting-page button,
+  .locker-room-page button,
+  .player-dev-page button,
+  .staff-page button,
+  .in-season-free-agency button,
+  .trade-machine-page button,
+  .settings-page button
+) {
+  color: #f8fbff !important;
+  background: linear-gradient(180deg, rgba(36, 47, 75, .96), rgba(17, 24, 43, .96)) !important;
+  border-color: rgba(158, 180, 232, .62) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .social-tabs button.active,
+  .league-stats-tabs button.active,
+  .awards-tabs button.active,
+  .league-history-tabs button.active,
+  .scouting-tabs button.active,
+  .locker-room-tabs button.active,
+  .player-dev-tabs button.active,
+  .settings-tabs button.active
+) {
+  color: #ffffff !important;
+  background: linear-gradient(180deg, #1266ff, #0b49c9) !important;
+  border-color: rgba(57, 128, 255, .95) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  input,
+  select,
+  textarea
+) {
+  color: #f8fbff !important;
+  background: rgba(11, 17, 31, .92) !important;
+  border-color: rgba(158, 180, 232, .56) !important;
+}
+
+body.dark-mode.dashboard-mode :is(input, select, textarea)::placeholder {
+  color: rgba(190, 202, 231, .7) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .social-post-body > header,
+  .social-post-actions,
+  .social-game-card aside,
+  .social-summary article,
+  .social-trends article,
+  .award-action-card,
+  .history-action-card,
+  .finance-action-center article,
+  .scouting-action-center article,
+  .locker-issue-list article,
+  .player-dev-action-card,
+  .staff-list-row,
+  .staff-opening-row,
+  .in-season-fa-player,
+  .in-season-fa-fit,
+  .trade-asset-row,
+  .settings-page label,
+  .settings-page .setting-row
+) {
+  background: rgba(18, 26, 45, .86) !important;
+  border-color: rgba(145, 165, 205, .36) !important;
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .league-stats-table-wrap,
+  .awards-table-wrap,
+  .history-table-wrap,
+  .finance-cap-sheet .finance-table-scroll,
+  .scouting-draft-board .scouting-board-table,
+  .player-dev-tracker .player-dev-tracker-list,
+  .staff-list-body,
+  .in-season-fa-list
+) {
+  background: rgba(10, 15, 29, .58) !important;
+  border-color: rgba(145, 165, 205, .28) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .league-stats-table-wrap tbody tr,
+  .awards-table-wrap tbody tr,
+  .history-table-wrap tbody tr,
+  .finance-cap-sheet tbody tr,
+  .scouting-draft-board tbody tr,
+  .staff-list-row,
+  .player-dev-tracker article,
+  .locker-leadership-panel article,
+  .locker-morale-panel article
+) {
+  background: rgba(18, 26, 45, .72) !important;
+  border-color: rgba(145, 165, 205, .28) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .league-stats-table-wrap tbody tr:nth-child(even),
+  .awards-table-wrap tbody tr:nth-child(even),
+  .history-table-wrap tbody tr:nth-child(even),
+  .finance-cap-sheet tbody tr:nth-child(even),
+  .scouting-draft-board tbody tr:nth-child(even)
+) {
+  background: rgba(26, 35, 57, .72) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .award-season-stats,
+  .award-feature-details,
+  .history-dynasty-stats,
+  .history-dynasty-players,
+  .finance-cap-overview-row,
+  .finance-timeline-chart,
+  .finance-breakdown-chart,
+  .finance-owner-meter,
+  .scouting-profile-chips > *,
+  .scouting-report-grid > *,
+  .scouting-fit-grid > *,
+  .locker-factor-row,
+  .locker-group-card,
+  .player-dev-plan,
+  .player-dev-traits > *,
+  .player-dev-attributes,
+  .staff-breakdown-row
+) {
+  background: rgba(11, 17, 31, .74) !important;
+  border-color: rgba(145, 165, 205, .32) !important;
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .social-metric,
+  .league-stats-top-grid > *,
+  .history-top-card,
+  .finance-dash-metric,
+  .scouting-metric-card,
+  .locker-metric-card,
+  .player-dev-metrics > *,
+  .staff-metric-card,
+  .in-season-fa-stat
+) {
+  background: linear-gradient(180deg, rgba(18, 27, 48, .98), rgba(9, 15, 29, .96)) !important;
+  color: #f8fbff !important;
+  border-color: rgba(145, 165, 205, .44) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .social-metric-value,
+  .league-stats-top-grid strong,
+  .award-top-card strong,
+  .history-top-card strong,
+  .finance-dash-metric strong,
+  .scouting-metric-card strong,
+  .locker-metric-card strong,
+  .player-dev-metrics strong,
+  .staff-metric-card strong
+) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .team-fit-card,
+  .fit-score-card,
+  .in-season-fa-fit
+) {
+  background: rgba(13, 20, 38, .88) !important;
+  border-color: rgba(145, 165, 205, .36) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .social-summary article::before,
+  .social-trends article::before
+) {
+  background: rgba(36, 52, 89, .95) !important;
+  color: #f8fbff !important;
+}
+
+/* Dark mode dashboard polish: keep secondary controls from becoming pale slabs. */
+body.dark-mode.dashboard-mode .reference-season-hero p b,
+body.dark-mode.dashboard-mode .team-hero-identity p b {
+  background: rgba(28, 42, 70, .94) !important;
+  color: #eaf1ff !important;
+  border: 1px solid rgba(139, 165, 220, .55) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .reference-season-hero .btn:not(.reference-primary),
+  .reference-management-grid .btn,
+  .sidebar-next-game .btn,
+  .staff-market .btn,
+  .staff-card .btn,
+  .action-card .btn,
+  .secondary-button
+) {
+  background: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  color: #edf4ff !important;
+  border-color: rgba(150, 174, 222, .58) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  .reference-season-hero .btn:not(.reference-primary),
+  .reference-management-grid .btn,
+  .sidebar-next-game .btn,
+  .staff-market .btn,
+  .staff-card .btn,
+  .action-card .btn,
+  .secondary-button
+):hover:not(:disabled) {
+  background: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
+  border-color: rgba(79, 139, 255, .85) !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode.dashboard-mode :is(button, .btn):disabled,
+body.dark-mode.dashboard-mode :is(.btn.disabled, .opening-continue.disabled) {
+  background: linear-gradient(180deg, rgba(44, 54, 75, .9), rgba(27, 35, 52, .9)) !important;
+  color: rgba(236, 243, 255, .76) !important;
+  border-color: rgba(151, 166, 194, .42) !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode.dashboard-mode .reference-upcoming .upcoming-card,
+body.dark-mode.dashboard-mode .reference-upcoming button.upcoming-card {
+  background:
+    linear-gradient(135deg, rgba(25, 36, 63, .98), rgba(11, 18, 34, .98)) !important;
+  color: #f1f6ff !important;
+  border-color: rgba(104, 135, 194, .55) !important;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, .22), inset 0 -4px 0 var(--blue) !important;
+}
+
+body.dark-mode.dashboard-mode .reference-upcoming .upcoming-card strong {
+  color: #4f8bff !important;
+}
+
+body.dark-mode.dashboard-mode .reference-upcoming .upcoming-card :is(span, small) {
+  color: rgba(226, 235, 255, .76) !important;
+}
+
+body.dark-mode.dashboard-mode .reference-upcoming .upcoming-card::after {
+  opacity: .16 !important;
+}
+
+body.dashboard-mode .reference-season-hero > div:last-child .btn:not(.reference-primary),
+body.dashboard-mode .reference-season-hero .reference-week-button,
+body.dark-mode.dashboard-mode .reference-season-hero > div:last-child .btn:not(.reference-primary),
+body.dark-mode.dashboard-mode .reference-season-hero .reference-week-button,
+body.dark-mode.dashboard-mode :is(.staff-market, .staff-candidate, .staff-opening-row) .reference-week-button {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dashboard-mode .reference-season-hero > div:last-child .btn:not(.reference-primary):hover,
+body.dashboard-mode .reference-season-hero .reference-week-button:hover,
+body.dark-mode.dashboard-mode .reference-season-hero > div:last-child .btn:not(.reference-primary):hover,
+body.dark-mode.dashboard-mode .reference-season-hero .reference-week-button:hover,
+body.dark-mode.dashboard-mode :is(.staff-market, .staff-candidate, .staff-opening-row) .reference-week-button:hover {
+  border-color: rgba(79, 139, 255, .85) !important;
+  color: #ffffff !important;
+  background: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
+}
+
+body.dark-mode.dashboard-mode :is(.staff-market, .staff-candidate, .staff-opening-row) .reference-week-button:disabled,
+body.dashboard-mode .sidebar-next-game .sidebar-sim-game-button,
+body.dark-mode.dashboard-mode .sidebar-next-game .sidebar-sim-game-button {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dashboard-mode .sidebar-next-game .sidebar-sim-game-button:hover,
+body.dark-mode.dashboard-mode .sidebar-next-game .sidebar-sim-game-button:hover {
+  border-color: rgba(79, 139, 255, .85) !important;
+  color: #ffffff !important;
+  background: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
+}
+
+body.dashboard-mode .context-sidebar .sidebar-next-game > button.btn,
+body.dashboard-mode .sidebar-next-game > button[data-action="go-games"],
+body.dashboard-mode .sidebar-next-game > button[data-sim-control="next"],
+body.dark-mode.dashboard-mode .context-sidebar .sidebar-next-game > button.btn,
+body.dark-mode.dashboard-mode .sidebar-next-game > button[data-action="go-games"],
+body.dark-mode.dashboard-mode .sidebar-next-game > button[data-sim-control="next"] {
+  border-color: rgba(150, 174, 222, .72) !important;
+  color: #edf4ff !important;
+  background-color: #131b2f !important;
+  background-image: linear-gradient(180deg, #243553, #111a2e) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04), 0 8px 18px rgba(0, 0, 0, .22) !important;
+  opacity: 1 !important;
+}
+
+body.dashboard-mode .context-sidebar .sidebar-next-game > button.btn:hover,
+body.dashboard-mode .sidebar-next-game > button[data-action="go-games"]:hover,
+body.dashboard-mode .sidebar-next-game > button[data-sim-control="next"]:hover,
+body.dark-mode.dashboard-mode .context-sidebar .sidebar-next-game > button.btn:hover,
+body.dark-mode.dashboard-mode .sidebar-next-game > button[data-action="go-games"]:hover,
+body.dark-mode.dashboard-mode .sidebar-next-game > button[data-sim-control="next"]:hover {
+  border-color: rgba(79, 139, 255, .95) !important;
+  color: #ffffff !important;
+  background-color: #1f3153 !important;
+  background-image: linear-gradient(180deg, #31476d, #172640) !important;
+}
+
+body.dark-mode :is(.staff-market, .staff-card, .staff-opening-row, .staff-candidate) .staff-hire-button:not(:disabled) {
+  border-color: rgba(150, 174, 222, .58) !important;
+  color: #edf4ff !important;
+  background-color: rgba(16, 24, 43, .98) !important;
+  background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
+  opacity: 1 !important;
+}
+
+body.dark-mode :is(.staff-market, .staff-card, .staff-opening-row, .staff-candidate) .staff-hire-button:disabled {
+  border-color: rgba(150, 174, 222, .35) !important;
+  color: rgba(226, 235, 255, .62) !important;
+  background-color: rgba(31, 42, 64, .92) !important;
+  background-image: linear-gradient(180deg, rgba(44, 54, 75, .92), rgba(27, 35, 52, .92)) !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+

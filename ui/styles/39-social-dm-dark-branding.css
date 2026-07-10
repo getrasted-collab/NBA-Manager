@@ -1,0 +1,77 @@
+﻿/* Social DM button: use a real speech-bubble icon instead of border-drawn shapes. */
+body.dashboard-mode.social-layout-page .social-quick-dms::before,
+body.dashboard-mode.social-layout-page .social-dms-button::before {
+  width: 46px !important;
+  height: 46px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Cpath d='M14 31.5C14 20.8 22.2 13 33.1 13C43.8 13 52 20.7 52 30.5C52 40.3 44.2 47 33.3 47H26.8L15.5 51L18.1 42.3C15.5 39.2 14 35.7 14 31.5Z' stroke='%23fff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+  transform: none !important;
+  content: "" !important;
+}
+
+body.dashboard-mode.social-layout-page .social-quick-dms::after,
+body.dashboard-mode.social-layout-page .social-dms-button::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Dark mode polish: cohesive broadcast-night surface without changing light mode. */
+body.dark-mode.dashboard-mode {
+  --navy: #f4f7ff;
+  --text: #f4f7ff;
+  --muted: #aebadc;
+  --dim: #8390b0;
+  --secondary-ink: #f4f7ff;
+  --secondary-muted: #aebadc;
+  --secondary-surface: rgba(16, 22, 39, .9);
+  --secondary-stroke: rgba(135, 154, 196, .38);
+  --dark-card: rgba(17, 24, 43, .9);
+  --dark-card-soft: rgba(13, 19, 36, .78);
+  --dark-border: rgba(136, 156, 200, .36);
+  color: #f4f7ff !important;
+}
+
+body.dark-mode.dashboard-mode .broadcast-shell {
+  background:
+    radial-gradient(circle at 17% 18%, rgba(35, 93, 255, .24), transparent 34%),
+    radial-gradient(circle at 93% 76%, rgba(225, 29, 72, .2), transparent 34%),
+    linear-gradient(90deg, rgba(4, 8, 18, .96), rgba(9, 14, 28, .86)),
+    url("../../assets/nba-manager-bg-og.png") !important;
+  background-position: center !important;
+  background-size: cover !important;
+}
+
+body.dark-mode.dashboard-mode :is(.workspace, .page, .dashboard-page, .page-shell, .page-shell-header) {
+  color: #f4f7ff !important;
+  background: transparent !important;
+}
+
+body.dark-mode.dashboard-mode .topbar {
+  border-bottom-color: rgba(130, 150, 192, .34) !important;
+  background: rgba(7, 11, 23, .86) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, .2) !important;
+}
+
+body.dark-mode.dashboard-mode :is(.brand-title, .page-shell-header h1, h1, h2, h3, strong, b),
+body.dark-mode.dashboard-mode .brand-title::before,
+body.dark-mode.dashboard-mode .brand-title::after {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode :is(.page-shell-header p, small, .muted-line, .meta-line, .card-label) {
+  color: #aebadc !important;
+}
+
+body.dark-mode.dashboard-mode :is(.career-date-pill, .topbar-team .menu-link, .theme-toggle-button) {
+  border-color: rgba(146, 166, 210, .55) !important;
+  color: #f4f7ff !important;
+  background: linear-gradient(180deg, rgba(24, 32, 55, .96), rgba(13, 19, 35, .96)) !important;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, .28) !important;
+}
+
+body.dark-mode.dashboard-mode .theme-toggle-button.active {
+  border-color: rgba(249, 199, 79, .6) !important;
+  background: linear-gradient(180deg, rgba(38, 32, 18, .96), rgba(19, 22, 35, .96)) !important;
+}
+

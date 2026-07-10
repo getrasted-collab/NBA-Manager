@@ -1,0 +1,1553 @@
+﻿/* Let the arena background show through the page canvas without changing cards. */
+body.dashboard-mode :is(.page, .social-page, .league-stats-page, .awards-dashboard, .league-history-dashboard, .scouting-page, .finance-dashboard, .gameplan-page) {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy {
+  grid-template-rows: 28px auto auto 62px minmax(102px, 1fr) auto minmax(44px, auto) 48px !important;
+  padding: 20px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy > span {
+  margin: -20px 0 10px -20px !important;
+  padding: 8px 14px !important;
+  font-size: 10px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy h2 {
+  font-size: 24px !important;
+  line-height: 1.05 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy p {
+  font-size: 11px !important;
+  line-height: 1.45 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-stats {
+  margin: 10px 0 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-stats article {
+  min-width: 0 !important;
+  padding: 8px 6px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-stats strong {
+  overflow: hidden !important;
+  font-size: 26px !important;
+  line-height: .95 !important;
+  text-overflow: clip !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-stats small {
+  display: block !important;
+  margin-top: 5px !important;
+  font-size: 7px !important;
+  line-height: 1.1 !important;
+  white-space: normal !important;
+}
+
+body.dashboard-mode.league-history-layout .history-key-people {
+  gap: 18px !important;
+  align-content: start !important;
+}
+
+body.dashboard-mode.league-history-layout .history-key-people b,
+body.dashboard-mode.league-history-layout .history-dynasty-copy h3 {
+  font-size: 11px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-key-people span {
+  gap: 8px !important;
+  margin: 0 12px 9px 0 !important;
+  font-size: 11px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-mini-shot {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy .text-link {
+  min-height: 48px !important;
+  padding: 0 16px !important;
+  font-size: 11px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy {
+  grid-template-rows: 26px auto auto 58px minmax(76px, 1fr) auto minmax(38px, auto) 42px !important;
+  gap: 0 !important;
+  padding: 18px 20px 18px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy > span {
+  margin: -18px 0 8px -20px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy .text-link {
+  float: none !important;
+  align-self: center !important;
+  justify-self: end !important;
+  min-height: 38px !important;
+  padding: 0 16px !important;
+  border-radius: 8px !important;
+  line-height: 1 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-action-center {
+  display: grid !important;
+  grid-template-rows: auto repeat(3, minmax(0, 1fr)) 42px !important;
+  gap: 9px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-action-card {
+  display: grid !important;
+  grid-template-rows: minmax(0, 1fr) auto !important;
+  align-content: stretch !important;
+  min-height: 0 !important;
+  margin-bottom: 0 !important;
+  height: 100% !important;
+}
+
+body.dashboard-mode.league-history-layout .history-action-card small {
+  line-height: 1.25 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-action-center > .text-link {
+  align-self: end !important;
+  min-height: 42px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-action-center {
+  grid-template-rows: auto !important;
+  align-content: start !important;
+  overflow-y: auto !important;
+  padding-bottom: 10px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-action-card {
+  grid-template-columns: 1fr !important;
+  grid-template-rows: auto 30px !important;
+  gap: 8px !important;
+  min-height: 92px !important;
+  height: auto !important;
+  padding: 10px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-action-card strong {
+  display: block !important;
+  font-size: 14px !important;
+  line-height: 1.1 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-action-card small {
+  display: block !important;
+  max-width: 100% !important;
+  margin-top: 5px !important;
+  font-size: 9px !important;
+  line-height: 1.3 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-action-card button {
+  width: 100% !important;
+  min-height: 30px !important;
+  align-self: end !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy {
+  grid-template-rows: 26px auto auto auto minmax(70px, 1fr) auto auto 46px !important;
+  padding-bottom: 22px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy .text-link {
+  align-self: end !important;
+  margin-bottom: 2px !important;
+  min-height: 36px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy {
+  grid-template-rows: 26px auto 20px 56px 76px 18px minmax(42px, auto) 38px !important;
+  gap: 4px !important;
+  padding: 18px 20px 16px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy h2 {
+  font-size: 21px !important;
+  line-height: 1.02 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy p {
+  margin: 0 !important;
+  font-size: 9px !important;
+  line-height: 1.35 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-stats {
+  margin: 4px 0 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-key-people {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.25fr) minmax(92px, .75fr) !important;
+  gap: 12px !important;
+  min-height: 72px !important;
+  margin: 0 !important;
+  align-content: start !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.league-history-layout .history-key-people > div:first-child {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 4px 8px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-key-people b {
+  grid-column: 1 / -1 !important;
+  margin: 0 0 2px !important;
+  font-size: 9px !important;
+  line-height: 1 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-key-people span {
+  gap: 5px !important;
+  margin: 0 !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  font-size: 9px !important;
+  line-height: 1.05 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.league-history-layout .history-mini-shot {
+  width: 18px !important;
+  height: 18px !important;
+  flex: 0 0 18px !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy h3 {
+  margin: 2px 0 0 !important;
+  font-size: 9px !important;
+  line-height: 1 !important;
+}
+
+body.dashboard-mode.league-history-layout .history-dynasty-copy .text-link {
+  min-height: 34px !important;
+  margin-bottom: 0 !important;
+}
+
+body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout) .page {
+  width: min(1460px, 100%) !important;
+  max-width: 1460px !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+body.dashboard-mode.social-layout-page .social-page,
+body.dashboard-mode.league-stats-layout .league-stats-page,
+body.dashboard-mode.awards-layout .awards-dashboard {
+  width: 100% !important;
+  max-width: 1460px !important;
+  justify-self: center !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-panel {
+  display: grid !important;
+  grid-template-rows: auto auto minmax(132px, 1fr) 48px !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-details {
+  grid-template-columns: 1.14fr 1fr .95fr !important;
+  gap: 16px !important;
+  padding: 14px 20px 10px !important;
+  align-items: start !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-details h3 {
+  margin-bottom: 9px !important;
+  font-size: 11px !important;
+  line-height: 1.15 !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-details p {
+  font-size: 11px !important;
+  line-height: 1.55 !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-details span {
+  grid-template-columns: minmax(112px, .86fr) minmax(90px, 1fr) !important;
+  gap: 10px !important;
+  margin-bottom: 8px !important;
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-details article {
+  grid-template-columns: 28px minmax(0, 1fr) !important;
+  gap: 8px !important;
+  padding: 8px 0 !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-details article b {
+  font-size: 15px !important;
+  line-height: 1.15 !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-details article small {
+  font-size: 9px !important;
+  line-height: 1.25 !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-details > div:nth-child(3) {
+  align-self: start !important;
+  max-height: 128px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-details > div:nth-child(3) article {
+  grid-template-columns: 20px minmax(0, 1fr) !important;
+  gap: 7px !important;
+  min-height: 42px !important;
+  padding: 5px 0 !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-details > div:nth-child(3) article:nth-of-type(n+3) {
+  display: none !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-details > div:nth-child(3) .award-feature-logo {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-details > div:nth-child(3) article b {
+  font-size: 13px !important;
+  line-height: 1.1 !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-details > div:nth-child(3) article small {
+  display: none !important;
+}
+
+body.dashboard-mode.awards-layout .award-feature-panel footer {
+  position: relative !important;
+  z-index: 3 !important;
+  min-height: 48px !important;
+  padding: 8px 20px !important;
+  background: #fff !important;
+  font-size: 12px !important;
+}
+
+body.dashboard-mode.awards-layout .awards-top-grid {
+  gap: 12px !important;
+}
+
+body.dashboard-mode.awards-layout .award-top-card {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) !important;
+  min-height: 132px !important;
+  padding: 14px 12px 46px !important;
+}
+
+body.dashboard-mode.awards-layout .award-top-card > span {
+  position: relative !important;
+  z-index: 2 !important;
+  min-height: 24px !important;
+  font-size: 10px !important;
+  line-height: 1.15 !important;
+  white-space: normal !important;
+}
+
+body.dashboard-mode.awards-layout .award-top-main {
+  position: relative !important;
+  z-index: 2 !important;
+  grid-template-columns: 24px 42px minmax(0, 1fr) 30px !important;
+  gap: 7px !important;
+  align-items: center !important;
+  margin-top: 8px !important;
+}
+
+body.dashboard-mode.awards-layout .award-card-logo {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+body.dashboard-mode.awards-layout .award-card-shot {
+  width: 42px !important;
+  height: 42px !important;
+}
+
+body.dashboard-mode.awards-layout .award-top-main b {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  font-size: 12px !important;
+  line-height: 1.1 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.awards-layout .award-top-main strong {
+  margin-top: 5px !important;
+  font-size: 28px !important;
+  line-height: .9 !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.awards-layout .award-top-main em {
+  align-self: center !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  text-align: right !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.awards-layout .award-spark {
+  right: 12px !important;
+  bottom: 8px !important;
+  left: 12px !important;
+  z-index: 1 !important;
+  height: 36px !important;
+  opacity: .92 !important;
+}
+
+body.dashboard-mode.awards-layout .awards-main-layout {
+  grid-template-columns: minmax(410px, .95fr) minmax(0, 1.45fr) minmax(252px, .64fr) !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap {
+  max-height: 386px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(7, 83, 255, .5) transparent !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap table {
+  table-layout: fixed !important;
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap th,
+body.dashboard-mode.awards-layout .awards-table-wrap td {
+  padding: 7px 7px !important;
+  overflow: hidden !important;
+  font-size: 10px !important;
+  text-overflow: ellipsis !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap tbody tr {
+  height: 32px !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap::-webkit-scrollbar-thumb {
+  border: 2px solid transparent !important;
+  border-radius: 999px !important;
+  background: rgba(7, 83, 255, .5) !important;
+  background-clip: padding-box !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap th:nth-child(1),
+body.dashboard-mode.awards-layout .awards-table-wrap td:nth-child(1) {
+  width: 38px !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap th:nth-child(2),
+body.dashboard-mode.awards-layout .awards-table-wrap td:nth-child(2) {
+  width: 132px !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap th:nth-child(3),
+body.dashboard-mode.awards-layout .awards-table-wrap td:nth-child(3) {
+  width: 60px !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap th:nth-child(4),
+body.dashboard-mode.awards-layout .awards-table-wrap td:nth-child(4),
+body.dashboard-mode.awards-layout .awards-table-wrap th:nth-child(5),
+body.dashboard-mode.awards-layout .awards-table-wrap td:nth-child(5),
+body.dashboard-mode.awards-layout .awards-table-wrap th:nth-child(6),
+body.dashboard-mode.awards-layout .awards-table-wrap td:nth-child(6) {
+  width: 48px !important;
+  text-align: center !important;
+}
+
+body.dashboard-mode.awards-layout .awards-table-wrap th:nth-child(7),
+body.dashboard-mode.awards-layout .awards-table-wrap td:nth-child(7) {
+  width: 92px !important;
+}
+
+body.dashboard-mode.awards-layout .award-player-cell {
+  display: grid !important;
+  grid-template-columns: 24px minmax(0, 1fr) !important;
+  gap: 7px !important;
+  align-items: center !important;
+  min-width: 0 !important;
+}
+
+body.dashboard-mode.awards-layout .award-player-cell b {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  font-size: 10px !important;
+  line-height: 1.1 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.awards-layout .award-table-logo {
+  width: 20px !important;
+  height: 20px !important;
+  margin-right: 4px !important;
+  vertical-align: middle !important;
+}
+
+body.dashboard-mode.awards-layout .award-table-shot {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+body.dashboard-mode.awards-layout .awards-action-center {
+  display: grid !important;
+  grid-template-rows: auto repeat(5, minmax(82px, auto)) !important;
+  gap: 9px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.awards-layout .award-action-card {
+  display: grid !important;
+  grid-template-rows: minmax(0, 1fr) 30px !important;
+  gap: 7px !important;
+  min-height: 82px !important;
+  margin-bottom: 0 !important;
+  padding: 10px !important;
+}
+
+body.dashboard-mode.awards-layout .award-action-card:nth-of-type(n+6) {
+  display: none !important;
+}
+
+body.dashboard-mode.awards-layout .award-action-card strong {
+  font-size: 12px !important;
+  line-height: 1.15 !important;
+}
+
+body.dashboard-mode.awards-layout .award-action-card small {
+  margin-top: 4px !important;
+  font-size: 9px !important;
+  line-height: 1.25 !important;
+}
+
+body.dashboard-mode.awards-layout .award-action-card footer {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 7px !important;
+}
+
+body.dashboard-mode.awards-layout .award-action-card footer button {
+  min-height: 30px !important;
+  padding: 4px 6px !important;
+  overflow: hidden !important;
+  font-size: 8px !important;
+  line-height: 1.1 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.awards-layout .awards-lower-grid {
+  min-height: 260px !important;
+  align-items: stretch !important;
+}
+
+body.dashboard-mode.awards-layout :is(.award-leaders-by-award, .award-team-projection, .award-rookie-ladder, .award-news-panel) {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) 44px !important;
+  min-height: 260px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.awards-layout .award-leaders-by-award > div {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  align-content: stretch !important;
+  gap: 8px !important;
+  padding: 0 10px 10px !important;
+}
+
+body.dashboard-mode.awards-layout .award-leaders-by-award article {
+  grid-template-columns: 34px minmax(0, 1fr) !important;
+  grid-template-rows: 15px minmax(34px, 1fr) 24px !important;
+  gap: 3px 7px !important;
+  min-height: 88px !important;
+  padding: 7px 6px !important;
+  align-items: center !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.awards-layout .award-leaders-by-award article .award-leader-shot {
+  grid-column: 1 !important;
+  grid-row: 1 / 3 !important;
+  align-self: center !important;
+}
+
+body.dashboard-mode.awards-layout .award-leaders-by-award article span {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  font-size: 7px !important;
+  line-height: 1 !important;
+  text-align: right !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.awards-layout .award-leaders-by-award article b {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  font-size: 9px !important;
+  line-height: 1.12 !important;
+  overflow-wrap: anywhere !important;
+}
+
+body.dashboard-mode.awards-layout .award-leaders-by-award article strong {
+  grid-column: 1 / -1 !important;
+  grid-row: 3 !important;
+  justify-self: end !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.awards-layout .award-rookie-ladder > div {
+  align-content: stretch !important;
+  gap: 0 !important;
+  padding: 0 12px 10px !important;
+}
+
+body.dashboard-mode.awards-layout .award-rookie-ladder article {
+  min-height: 38px !important;
+  padding: 5px 0 !important;
+}
+
+body.dashboard-mode.awards-layout .award-news-panel > div {
+  align-content: stretch !important;
+  gap: 9px !important;
+  padding: 0 10px 10px !important;
+}
+
+body.dashboard-mode.awards-layout .award-news-panel article {
+  min-height: 132px !important;
+  padding: 8px !important;
+}
+
+body.dashboard-mode.awards-layout .award-news-logo {
+  height: 54px !important;
+}
+
+body.dashboard-mode.awards-layout :is(.award-leaders-by-award, .award-team-projection, .award-rookie-ladder, .award-news-panel) > .text-link {
+  align-self: stretch !important;
+  min-height: 44px !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-stats-top-grid {
+  gap: 12px !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card {
+  display: grid !important;
+  grid-template-rows: 24px minmax(0, 1fr) !important;
+  min-height: 136px !important;
+  padding: 13px 12px 46px !important;
+  isolation: isolate !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-identity {
+  position: relative !important;
+  z-index: 2 !important;
+  min-height: 24px !important;
+  gap: 7px !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-logo,
+body.dashboard-mode.league-stats-layout .nba-chip {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-identity b {
+  font-size: 12px !important;
+  line-height: 1 !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card > div:nth-child(2) {
+  position: relative !important;
+  z-index: 2 !important;
+  min-width: 0 !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card span {
+  display: block !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  font-size: 8px !important;
+  line-height: 1.1 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card strong {
+  margin-top: 7px !important;
+  overflow: hidden !important;
+  font-size: 28px !important;
+  line-height: .9 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card small {
+  margin-top: 7px !important;
+  overflow: hidden !important;
+  font-size: 8px !important;
+  line-height: 1.1 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-stat-card em {
+  z-index: 3 !important;
+  top: 72px !important;
+  right: 12px !important;
+  font-size: 10px !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-mini-chart {
+  right: 12px !important;
+  bottom: 8px !important;
+  left: 12px !important;
+  z-index: 1 !important;
+  height: 38px !important;
+  opacity: .92 !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-efficiency-card {
+  grid-template-rows: minmax(0, 1fr) !important;
+  padding-bottom: 50px !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-efficiency-card > div:first-child {
+  position: relative !important;
+  z-index: 2 !important;
+  min-width: 0 !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-efficiency-card > div:nth-child(2) {
+  position: absolute !important;
+  right: 12px !important;
+  bottom: 8px !important;
+  left: 12px !important;
+  z-index: 1 !important;
+  height: 38px !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-efficiency-card strong {
+  margin-top: 9px !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-efficiency-card small {
+  margin-top: 8px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-post {
+  padding: 18px 22px 20px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-feed {
+  max-height: calc(100vh - 300px) !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+}
+
+body.dashboard-mode.social-layout-page .social-feed::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-feed::-webkit-scrollbar-track {
+  background: #edf2fa !important;
+  border-radius: 999px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-feed::-webkit-scrollbar-thumb {
+  background: #b9c6dc !important;
+  border-radius: 999px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-feed > header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 5 !important;
+}
+
+body.dashboard-mode.social-layout-page .social-post p {
+  margin-bottom: 14px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-game-card {
+  grid-template-columns: minmax(0, 1fr) 150px !important;
+  min-height: 300px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-game-art {
+  min-height: 300px !important;
+  padding: 30px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-game-logo {
+  width: 92px !important;
+  height: 92px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-game-art strong {
+  font-size: 58px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-game-card aside {
+  min-height: 300px !important;
+  padding: 22px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-video-card {
+  min-height: 300px !important;
+  aspect-ratio: 16 / 9 !important;
+}
+
+body.dashboard-mode.social-layout-page .social-video-logo {
+  width: 150px !important;
+  height: 150px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-video-card button {
+  width: 64px !important;
+  height: 64px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-post footer {
+  margin-top: 14px !important;
+}
+
+body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments {
+  display: grid !important;
+  grid-template-rows: auto repeat(3, minmax(54px, 1fr)) !important;
+  min-height: 238px !important;
+}
+
+body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments article {
+  grid-template-columns: 34px minmax(0, 1fr) 74px 58px !important;
+  gap: 9px !important;
+  min-height: 54px !important;
+  padding: 10px 4px !important;
+}
+
+body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments .scouting-mini-headshot {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments span {
+  min-width: 0 !important;
+}
+
+body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments strong,
+body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments small {
+  display: block !important;
+  overflow: hidden !important;
+  line-height: 1.15 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.staff-layout .staff-list-panel,
+body.dashboard-mode.staff-layout .staff-breakdown-panel,
+body.dashboard-mode.staff-layout .staff-openings-panel {
+  border-radius: 10px 10px 24px 24px !important;
+  overflow: hidden !important;
+  box-shadow: 0 12px 26px rgba(11, 35, 86, .08) !important;
+}
+
+body.dashboard-mode.staff-layout .staff-list-body {
+  align-content: start !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding-bottom: 14px !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(7, 83, 255, .5) transparent !important;
+}
+
+body.dashboard-mode.staff-layout .staff-list-body::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+body.dashboard-mode.staff-layout .staff-list-body::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+body.dashboard-mode.staff-layout .staff-list-body::-webkit-scrollbar-thumb {
+  border: 2px solid transparent !important;
+  border-radius: 999px !important;
+  background: rgba(7, 83, 255, .5) !important;
+  background-clip: padding-box !important;
+}
+
+body.dashboard-mode.staff-layout .staff-list-row:last-child,
+body.dashboard-mode.staff-layout .staff-opening-row:last-of-type,
+body.dashboard-mode.staff-layout .staff-breakdown-row:last-of-type,
+body.dashboard-mode.staff-layout .staff-list-panel > footer,
+body.dashboard-mode.staff-layout .staff-breakdown-panel > footer,
+body.dashboard-mode.staff-layout .staff-openings-panel > footer {
+  border-bottom-right-radius: 24px !important;
+  border-bottom-left-radius: 24px !important;
+}
+
+body.dashboard-mode.staff-layout .staff-openings-panel > footer {
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.staff-layout .staff-office-layout {
+  padding-bottom: 12px !important;
+}
+
+body.dashboard-mode.staff-layout .staff-list-panel,
+body.dashboard-mode.staff-layout .staff-openings-panel {
+  clip-path: inset(0 round 10px 10px 24px 24px) !important;
+}
+
+body.dashboard-mode.staff-layout .staff-openings-panel {
+  border-bottom-right-radius: 28px !important;
+  border-bottom-left-radius: 28px !important;
+  clip-path: inset(0 round 10px 10px 28px 28px) !important;
+  background-clip: padding-box !important;
+}
+
+body.dashboard-mode.staff-layout .staff-openings-panel > footer {
+  border-bottom-right-radius: 28px !important;
+  border-bottom-left-radius: 28px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.staff-layout .staff-side-panels {
+  padding-bottom: 18px !important;
+  overflow: visible !important;
+}
+
+body.dashboard-mode.staff-layout .staff-openings-panel {
+  align-self: stretch !important;
+  margin-bottom: 0 !important;
+  border-radius: 10px 10px 34px 34px !important;
+  clip-path: inset(0 round 10px 10px 34px 34px) !important;
+}
+
+body.dashboard-mode.staff-layout .staff-openings-panel > footer {
+  border-bottom-right-radius: 34px !important;
+  border-bottom-left-radius: 34px !important;
+  background: #fff !important;
+}
+
+body.dashboard-mode.staff-layout .staff-breakdown-row:last-of-type {
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+body.dashboard-mode.staff-layout .staff-side-panels {
+  grid-template-rows: minmax(0, .7fr) minmax(0, 1.3fr) !important;
+}
+
+body.dashboard-mode.staff-layout .staff-openings-panel {
+  grid-template-rows: 42px repeat(4, minmax(78px, 1fr)) 44px !important;
+}
+
+body.dashboard-mode.staff-layout .staff-opening-row {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 104px !important;
+  align-items: center !important;
+  gap: 14px !important;
+  min-height: 78px !important;
+  padding: 10px 16px !important;
+}
+
+body.dashboard-mode.staff-layout .staff-opening-row > div {
+  display: grid !important;
+  gap: 5px !important;
+  min-width: 0 !important;
+}
+
+body.dashboard-mode.staff-layout .staff-opening-row strong,
+body.dashboard-mode.staff-layout .staff-opening-row small {
+  display: block !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.staff-layout .staff-opening-row strong {
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+}
+
+body.dashboard-mode.staff-layout .staff-opening-row small {
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+  opacity: .78 !important;
+}
+
+body.dashboard-mode.staff-layout .staff-opening-row .btn {
+  justify-self: end !important;
+  min-width: 96px !important;
+  min-height: 36px !important;
+  padding: 7px 12px !important;
+  font-size: 10px !important;
+}
+
+body.dashboard-mode.awards-layout .awards-lower-grid {
+  grid-template-columns: 1.15fr .78fr 1.25fr !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-attributes > div {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px 22px !important;
+  padding: 16px 22px 18px !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-attributes span {
+  display: grid !important;
+  grid-template-columns: minmax(112px, 1fr) 92px !important;
+  align-items: center !important;
+  gap: 12px !important;
+  min-height: 24px !important;
+  overflow: hidden !important;
+  font-size: 11px !important;
+  line-height: 1.15 !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-attributes span i {
+  width: 92px !important;
+  min-width: 0 !important;
+  height: 8px !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-attributes em {
+  display: none !important;
+}
+
+body.dashboard-mode.finance-layout .finance-breakdown {
+  grid-template-columns: 94px minmax(0, 1fr) !important;
+  gap: 10px 14px !important;
+  align-content: stretch !important;
+  align-items: center !important;
+  min-height: 190px !important;
+  padding: 12px !important;
+}
+
+body.dashboard-mode.finance-layout .finance-breakdown header {
+  grid-column: 1 / -1 !important;
+}
+
+body.dashboard-mode.finance-layout .finance-donut {
+  width: 84px !important;
+  height: 84px !important;
+  justify-self: center !important;
+}
+
+body.dashboard-mode.finance-layout .finance-donut b {
+  font-size: 14px !important;
+  line-height: 1 !important;
+}
+
+body.dashboard-mode.finance-layout .finance-donut small {
+  font-size: 7px !important;
+  line-height: 1.1 !important;
+}
+
+body.dashboard-mode.finance-layout .finance-breakdown ul {
+  gap: 8px !important;
+}
+
+body.dashboard-mode.finance-layout .finance-breakdown li {
+  grid-template-columns: 12px minmax(0, 1fr) 58px !important;
+  gap: 7px !important;
+  font-size: 9px !important;
+  line-height: 1.15 !important;
+}
+
+body.dashboard-mode.finance-layout .finance-breakdown li span {
+  width: 11px !important;
+  height: 11px !important;
+}
+
+body.dashboard-mode.finance-layout .finance-breakdown .mini-action {
+  grid-column: 1 / -1 !important;
+  justify-self: start !important;
+  min-height: 28px !important;
+  padding: 5px 10px !important;
+  font-size: 9px !important;
+}
+
+body.dashboard-mode.finance-layout .finance-advisor {
+  min-height: 190px !important;
+  padding: 12px !important;
+}
+
+body.dashboard-mode.finance-layout .finance-advisor div {
+  display: grid !important;
+  grid-template-columns: 54px minmax(0, 1fr) !important;
+  gap: 14px !important;
+  align-items: center !important;
+  align-self: stretch !important;
+}
+
+body.dashboard-mode.finance-layout .finance-advisor div span {
+  width: 48px !important;
+  height: 48px !important;
+}
+
+body.dashboard-mode.finance-layout .finance-advisor p {
+  font-size: 13px !important;
+  line-height: 1.38 !important;
+  font-weight: 800 !important;
+}
+
+body.dashboard-mode.finance-layout .finance-advisor .mini-action {
+  min-height: 32px !important;
+  padding: 6px 12px !important;
+  font-size: 10px !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-overview {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) 38px !important;
+  min-height: 100% !important;
+  padding: 12px !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-overview > div {
+  display: grid !important;
+  align-content: stretch !important;
+  gap: 0 !important;
+  height: 100% !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-leaders-panel {
+  display: grid !important;
+  grid-template-rows: 42px minmax(152px, 1fr) 40px !important;
+  min-height: 236px !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-leader-grid {
+  align-content: stretch !important;
+  grid-template-rows: repeat(2, minmax(72px, 1fr)) !important;
+  min-height: 152px !important;
+  padding: 0 14px 10px !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-leader-grid article {
+  align-content: center !important;
+  min-height: 72px !important;
+  padding: 12px 8px !important;
+}
+
+body.dashboard-mode.league-stats-layout .league-leaders-panel .text-link {
+  align-self: stretch !important;
+  min-height: 40px !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet table {
+  table-layout: fixed !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td):nth-child(1) {
+  width: 40% !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td):nth-child(2) {
+  width: 10% !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td):nth-child(3) {
+  width: 15% !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td):nth-child(4) {
+  width: 7% !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td):nth-child(5) {
+  width: 10% !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td):nth-child(6) {
+  width: 5% !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td):nth-child(7) {
+  width: 13% !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet :is(th, td) {
+  padding-right: 6px !important;
+  padding-left: 6px !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet td:first-child {
+  display: table-cell !important;
+  min-width: 0 !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet td:first-child span {
+  display: inline-grid !important;
+  max-width: calc(100% - 30px) !important;
+  min-width: 0 !important;
+  vertical-align: middle !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet td:first-child strong {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet .finance-player-headshot {
+  margin-right: 7px !important;
+  vertical-align: middle !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet table {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet :is(thead, tbody, tr) {
+  display: table !important;
+  width: 100% !important;
+  table-layout: fixed !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet tbody {
+  display: block !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(7, 83, 255, .5) transparent !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet tbody tr:nth-child(n+10) {
+  display: table !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet tbody::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet tbody::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-sheet tbody::-webkit-scrollbar-thumb {
+  border: 2px solid transparent !important;
+  border-radius: 999px !important;
+  background: rgba(7, 83, 255, .5) !important;
+  background-clip: padding-box !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-selected > header {
+  grid-template-columns: 72px minmax(0, 1fr) !important;
+  gap: 10px !important;
+  padding-right: 12px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-selected > header aside {
+  display: none !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-selected > header aside span {
+  max-width: 100% !important;
+  overflow: visible !important;
+  font-size: 10px !important;
+  line-height: 1.1 !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-selected > header aside b {
+  justify-self: center !important;
+  font-size: 28px !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-traits {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  padding: 10px 12px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-traits span {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  padding: 9px 10px !important;
+  font-size: 9px !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-plan > div {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-plan article {
+  min-width: 0 !important;
+  min-height: 72px !important;
+  padding: 11px 13px !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-plan article strong,
+body.dashboard-mode.player-development-layout .player-dev-plan article small {
+  max-width: 100% !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-plan article strong {
+  font-size: 13px !important;
+  line-height: 1.12 !important;
+}
+
+body.dashboard-mode.player-development-layout .player-dev-plan article small {
+  display: block !important;
+  margin-top: 4px !important;
+  font-size: 9px !important;
+  line-height: 1.2 !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-overview article {
+  grid-template-columns: 84px minmax(0, 1fr) 64px !important;
+  gap: 8px !important;
+  min-height: 33px !important;
+  padding: 3px 0 !important;
+  align-items: center !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-overview article span,
+body.dashboard-mode.finance-layout .finance-cap-overview article strong {
+  font-size: 9px !important;
+  line-height: 1.15 !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-overview article i {
+  height: 9px !important;
+}
+
+body.dashboard-mode.finance-layout .finance-cap-overview .mini-action {
+  align-self: end !important;
+  justify-self: start !important;
+  min-height: 32px !important;
+  margin-top: 4px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-summary article {
+  grid-template-columns: 32px minmax(0, 1fr) 52px 68px !important;
+  gap: 9px !important;
+  min-height: 44px !important;
+  padding: 9px 0 !important;
+}
+
+body.dashboard-mode.social-layout-page .social-summary article i {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-summary article span {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 4px !important;
+  min-width: 0 !important;
+}
+
+body.dashboard-mode.social-layout-page .social-summary article strong,
+body.dashboard-mode.social-layout-page .social-summary article small {
+  overflow: hidden !important;
+  line-height: 1.1 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.social-layout-page .social-summary article strong {
+  flex: 0 1 auto !important;
+  font-size: 10px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-summary article small {
+  flex: 1 1 auto !important;
+  font-size: 9px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-summary article b {
+  justify-self: end !important;
+  font-size: 9px !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.social-layout-page .social-summary article em {
+  width: 68px !important;
+  height: 20px !important;
+  justify-self: end !important;
+}
+
+body.dashboard-mode.social-layout-page .social-dms {
+  min-height: 82px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-dms header {
+  align-items: center !important;
+}
+
+body.dashboard-mode.social-layout-page .social-dms-button {
+  position: relative !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  border: 1px solid rgba(255, 255, 255, .2) !important;
+  border-radius: 13px !important;
+  background: #050506 !important;
+  box-shadow: 0 0 0 1px rgba(7, 83, 255, .14), 0 10px 22px rgba(0, 0, 0, .22), 0 0 18px rgba(255, 255, 255, .18) !important;
+  cursor: pointer !important;
+}
+
+body.dashboard-mode.social-layout-page .social-dms-button::before {
+  width: 22px !important;
+  height: 16px !important;
+  border: 3px solid #fff !important;
+  border-radius: 999px !important;
+  content: "" !important;
+}
+
+body.dashboard-mode.social-layout-page .social-dms-button::after {
+  position: absolute !important;
+  left: 14px !important;
+  bottom: 12px !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-bottom: 3px solid #fff !important;
+  border-left: 3px solid #fff !important;
+  border-bottom-left-radius: 7px !important;
+  transform: rotate(-18deg) !important;
+  content: "" !important;
+}
+
+body.dashboard-mode.social-layout-page .social-quick-dms {
+  justify-self: end !important;
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  margin: -20px 12px 0 0 !important;
+  border-radius: 17px !important;
+  background: linear-gradient(145deg, #030304, #0b0c10) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 0 0 1px rgba(255, 255, 255, .28), 0 14px 30px rgba(0, 0, 0, .3), 0 0 22px rgba(255, 255, 255, .22) !important;
+}
+
+body.dashboard-mode.social-layout-page .social-quick-dms::before {
+  width: 31px !important;
+  height: 23px !important;
+  border-width: 3px !important;
+  border-radius: 14px !important;
+  transform: translateY(-1px) !important;
+}
+
+body.dashboard-mode.social-layout-page .social-quick-dms::after {
+  left: 19px !important;
+  bottom: 16px !important;
+  width: 10px !important;
+  height: 9px !important;
+  border-width: 0 0 3px 3px !important;
+  }
+
+body.dashboard-mode.social-layout-page .social-dms article {
+  display: grid !important;
+  grid-template-columns: 28px minmax(0, 1fr) 34px !important;
+  gap: 10px !important;
+  align-items: center !important;
+  min-height: 42px !important;
+  padding: 10px 0 !important;
+  border-top: 1px solid var(--social-stroke) !important;
+}
+
+body.dashboard-mode.social-layout-page .social-dms article > b {
+  display: grid !important;
+  place-items: center !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  color: #0753ff !important;
+  background: #eef4ff !important;
+  font-size: 10px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-dms article span {
+  display: grid !important;
+  min-width: 0 !important;
+  gap: 3px !important;
+}
+
+body.dashboard-mode.social-layout-page .social-dms article strong,
+body.dashboard-mode.social-layout-page .social-dms article small {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+body.dashboard-mode.social-layout-page .social-dms article strong {
+  color: var(--social-ink) !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+}
+
+body.dashboard-mode.social-layout-page .social-dms article small,
+body.dashboard-mode.social-layout-page .social-dms article em {
+  color: var(--social-muted) !important;
+  font-size: 9px !important;
+  font-style: normal !important;
+}
+

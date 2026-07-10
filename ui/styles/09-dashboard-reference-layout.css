@@ -1,0 +1,114 @@
+﻿/* Reference layout: compact header, single navigation rail, data-first dashboard. */
+body.dashboard-mode .broadcast-shell { grid-template-rows: 62px 1fr; }
+body.dashboard-mode .topbar { grid-template-columns: minmax(0, 1fr) auto; height: 62px; padding: 0 20px; border-top-width: 2px; }
+body.dashboard-mode .top-nav { display: none; }
+body.dashboard-mode .topbar-brand { gap: 9px; }
+body.dashboard-mode .league-mark { width: 32px; height: 32px; border-radius: 4px; font-size: 8px; }
+body.dashboard-mode .brand-title { font-size: 12px; letter-spacing: 1.5px; }
+body.dashboard-mode .brand-subtitle { font-size: 9px; }
+body.dashboard-mode .topbar-team { padding-left: 18px; }
+body.dashboard-mode .menu-link { border-radius: 4px; }
+body.dashboard-mode .main-shell { grid-template-columns: 218px minmax(0, 1fr); }
+body.dashboard-mode .context-sidebar { display: flex; flex-direction: column; padding: 10px 10px 14px; }
+body.dashboard-mode .context-heading { gap: 4px; padding: 0 8px 14px; }
+body.dashboard-mode .context-heading span { color: #69707b; font-size: 8px; }
+body.dashboard-mode .context-heading strong { font-size: 13px; }
+body.dashboard-mode .context-heading strong small { display: block; margin-top: 7px; color: #11d7a2; font-size: 9px; font-weight: 850; }
+body.dashboard-mode .context-nav { gap: 2px; padding-top: 10px; }
+body.dashboard-mode .context-nav button { display: grid; grid-template-columns: 20px 1fr auto; gap: 7px; min-height: 34px; padding: 0 9px; border-radius: 4px; color: #777e89; font-size: 10px; }
+body.dashboard-mode .context-nav button i { color: #68707c; font-size: 12px; font-style: normal; text-align: center; }
+body.dashboard-mode .context-nav button span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+body.dashboard-mode .context-nav button b { color: var(--dash-gold); font-size: 16px; }
+body.dashboard-mode .context-nav button.active { color: var(--dash-gold); background: #0a0b0d; border-color: transparent; box-shadow: none; }
+body.dashboard-mode .context-nav button.active i { color: var(--dash-gold); }
+.sidebar-nav-divider { display: block; margin: 10px 9px 4px; color: #4d535c; font-size: 7px; font-weight: 950; letter-spacing: 1.4px; text-transform: uppercase; }
+.sidebar-next-game { display: grid; gap: 6px; margin-top: auto; padding: 12px; border: 1px solid #30343c; border-radius: 5px; background: #171a20; }
+.sidebar-next-game:empty { display: none; }
+.sidebar-next-game > span { color: #737984; font-size: 7px; font-weight: 950; letter-spacing: 1.2px; }
+.sidebar-next-game > strong { color: #fff; font-size: 13px; }
+.sidebar-next-game > small { color: #707680; font-size: 8px; }
+.sidebar-next-game .btn { width: 100%; min-height: 29px; margin-top: 3px; color: #090a0c; background: #f5f5f5; border-color: #fff; font-size: 9px; }
+body.dashboard-mode .workspace { padding: 15px 24px 38px; }
+body.dashboard-mode .page { max-width: 1040px; margin: 0; }
+
+.reference-dashboard { display: grid; gap: 12px; color: #f4f4f2; }
+.reference-page-title { margin: 0 0 5px; font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; font-size: 22px; letter-spacing: .4px; }
+.logo-page-title { display: flex; align-items: center; gap: 12px; }
+.page-title-team-logo { width: 42px; height: 42px; object-fit: contain; filter: drop-shadow(0 6px 10px rgba(0,0,0,.34)); }
+.reference-season-hero { display: flex; align-items: center; justify-content: space-between; gap: 22px; min-height: 138px; padding: 20px; border: 1px solid #282c33; border-radius: 5px; background: #101217; }
+.reference-season-hero > div:first-child { display: flex; align-items: center; gap: 15px; }
+.reference-season-hero span { color: #c4c7cd; font-size: 8px; font-weight: 950; letter-spacing: 1.1px; text-transform: uppercase; }
+.reference-season-hero h2 { margin: 0; font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; font-size: 29px; line-height: 1; }
+.reference-season-hero p { display: flex; align-items: center; gap: 10px; margin: 0; color: #7a808a; font-size: 11px; }
+.reference-season-hero p strong { color: #10d8a1; font-size: 21px; }
+.reference-season-hero p b { padding: 5px 8px; border: 1px solid #0a6955; border-radius: 3px; color: #10d8a1; background: #052a22; font-size: 7px; letter-spacing: 1px; }
+.reference-season-hero > div:last-child { display: flex; gap: 8px; }
+.reference-primary { color: #090a0c !important; background: #f4f4f4 !important; border-color: #fff !important; }
+
+.reference-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.reference-stat-grid article { display: grid; gap: 9px; min-height: 118px; padding: 16px; border: 1px solid #2b2f37; border-radius: 4px; background: #111319; }
+.reference-stat-grid article.featured { border-color: #755316; background: #171610; }
+.reference-stat-grid span, .reference-stat-grid small { color: #737985; font-size: 8px; font-weight: 900; letter-spacing: 1.2px; }
+.reference-stat-grid strong { color: #f1f2f4; font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; font-size: 30px; line-height: 1; }
+.reference-stat-grid .featured strong { color: var(--dash-gold); }
+.reference-stat-grid small { letter-spacing: .6px; }
+
+.reference-analytics-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+.reference-chart-panel, .reference-leaders-panel, .reference-upcoming, .reference-management-grid > article { border: 1px solid #2b2f37; border-radius: 5px; background: #111319; }
+.reference-chart-panel { position: relative; min-height: 252px; padding: 18px 18px 16px 58px; }
+.reference-chart-panel header { position: absolute; top: 18px; left: 18px; right: 18px; display: flex; justify-content: space-between; }
+.reference-chart-panel header strong, .reference-leaders-panel header, .reference-upcoming header { font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; font-size: 13px; letter-spacing: .5px; }
+.reference-chart-panel header span { color: #777d87; font-size: 8px; font-weight: 900; letter-spacing: 1px; }
+.reference-chart-scale { position: absolute; top: 58px; bottom: 42px; left: 18px; display: flex; flex-direction: column; justify-content: space-between; color: #636973; font-size: 7px; }
+.reference-bars { position: absolute; inset: 58px 20px 28px 58px; display: grid; grid-template-columns: repeat(8, 1fr); align-items: end; gap: 18px; border-bottom: 1px solid #282c33; background: repeating-linear-gradient(to bottom, transparent 0 24%, rgba(255,255,255,.035) 25%); }
+.reference-bars > div { position: relative; display: flex; align-items: flex-end; justify-content: center; height: 100%; }
+.reference-bars i { width: min(28px, 70%); min-height: 5px; border: 1px solid #4b5260; border-radius: 3px 3px 0 0; background: #323844; transition: height .25s ease; }
+.reference-bars i.empty { border-style: dashed; background: #1c2027; opacity: .55; }
+.reference-bars span { position: absolute; bottom: -18px; color: #686e78; font-size: 7px; }
+.reference-bars b { position: absolute; top: -14px; color: #9da2aa; font-size: 7px; }
+.reference-leaders-panel { min-height: 252px; padding: 18px; }
+.reference-leaders-panel header { padding-bottom: 13px; }
+.reference-leaders-panel > div { display: flex; align-items: center; justify-content: space-between; min-height: 62px; border-top: 1px solid #292d34; }
+.reference-leaders-panel span { color: #69707b; font-size: 8px; }.reference-leaders-panel span strong { display: block; margin-top: 4px; color: #f1f2f3; font-size: 10px; }.reference-leaders-panel > div > b { font-family: Impact, sans-serif; font-size: 21px; }
+
+.reference-upcoming { padding: 17px 18px 20px; }
+.reference-upcoming header { margin-bottom: 14px; }
+.reference-upcoming > div { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.reference-upcoming button { position: relative; display: grid; grid-template-columns: 34px 1fr; align-items: center; gap: 3px 9px; min-height: 90px; padding: 12px; border: 1px solid #343944; border-radius: 4px; color: #fff; background: #1a1d24; text-align: left; cursor: pointer; }
+.reference-upcoming button:hover { border-color: var(--dash-gold); }.reference-upcoming button span, .reference-upcoming button small { color: #737985; font-size: 8px; }.reference-upcoming button strong { font-size: 15px; }
+.reference-upcoming button span, .reference-upcoming button strong, .reference-upcoming button small { grid-column: 2; }
+.upcoming-team-logo { grid-row: 1 / span 3; width: 34px; height: 34px; object-fit: contain; filter: drop-shadow(0 5px 8px rgba(0,0,0,.32)); }
+
+.reference-section-title { margin: 16px 0 0; color: #e4e5e7; font-family: Impact, sans-serif; font-size: 18px; letter-spacing: .8px; }
+.reference-management-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.reference-management-grid > article { min-width: 0; padding: 15px; }
+.reference-management-grid article > header { display: grid; gap: 5px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #292d34; }
+.reference-management-grid article > header span { color: var(--dash-gold); font-size: 7px; font-weight: 950; letter-spacing: 1.2px; }.reference-management-grid article > header strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }.reference-management-grid .metric-row { padding: 8px 0; }.reference-management-grid .metric-row span { font-size: 8px; }.reference-management-grid .metric-row strong { font-size: 9px; }
+.reference-management-grid article > .btn { width: 100%; margin-top: 10px; }
+.reference-management-grid article > p { margin: 0 0 14px; color: #858b95; font-size: 9px; line-height: 1.5; }
+.reference-rules { display: flex; flex-wrap: wrap; gap: 5px; }
+.reference-inbox-card p, .reference-news-card p { display: grid; grid-template-columns: 24px 1fr; gap: 8px; margin: 0; padding: 8px 0; border-bottom: 1px solid #292d34; color: #9b9fa7; font-size: 8px; line-height: 1.4; }.reference-inbox-card p b, .reference-news-card p b { color: #585e68; }
+.reference-dashboard > .staff-market { margin-top: 0; }
+
+@media (max-width: 1050px) {
+  body.dashboard-mode .main-shell { grid-template-columns: 190px minmax(0,1fr); }
+  .reference-stat-grid,
+  .reference-management-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 800px) {
+  body.dashboard-mode .main-shell { grid-template-columns: 1fr; }
+  body.dashboard-mode .context-sidebar { border-bottom: 1px solid #292d34; }
+  body.dashboard-mode .context-nav { display: flex; }
+  body.dashboard-mode .context-nav button { min-width: max-content; }
+  .sidebar-next-game { display: none; }
+  .reference-analytics-grid, .reference-management-grid { grid-template-columns: 1fr; }
+  .reference-upcoming > div { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .reference-season-hero { align-items: flex-start; flex-direction: column; }
+  .reference-stat-grid,
+  .reference-upcoming > div { grid-template-columns: 1fr; }
+}
+

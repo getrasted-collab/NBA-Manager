@@ -1,0 +1,70 @@
+﻿/* Reference-style rotation lineup */
+.rotation-lineup-card { margin-top: 12px; overflow: hidden; }
+.rotation-lineup-card > header { display: flex; align-items: center; justify-content: space-between; min-height: 42px; padding: 0 15px; border-bottom: 1px solid #292e36; background: #0d1015; }
+.rotation-lineup-card > header > div { display: flex; align-items: center; gap: 7px; }
+.rotation-lineup-card > header span { color: #f1f2f4; font-size: 11px; font-weight: 950; letter-spacing: .5px; }
+.rotation-lineup-card > header small { color: #6f7681; font-size: 9px; }
+.rotation-lineup-card > header strong { color: #8b929c; font-size: 7px; letter-spacing: 1px; }
+.rotation-lineup-columns, .rotation-lineup-row { display: grid; grid-template-columns: 64px minmax(190px,1fr) 48px 48px minmax(310px,2.3fr); align-items: center; }
+.rotation-lineup-columns { min-height: 34px; border-bottom: 1px solid #292e36; color: #707782; background: #11141a; font-size: 7px; font-weight: 950; letter-spacing: .8px; }
+.rotation-lineup-columns > span { padding: 0 11px; }
+.rotation-lineup-columns > div { display: flex; justify-content: space-between; padding: 0 17px 0 10px; }
+.rotation-lineup-columns > div b:last-child { color: #f05d68; }
+.rotation-lineup-row { min-height: 58px; border-bottom: 1px solid #252a32; background: #11141a; }
+.rotation-lineup-row:last-child { border-bottom: 0; }
+.rotation-lineup-row.in-rotation { background: linear-gradient(90deg,rgba(245,166,35,.035),#11141a 38%); }
+.rotation-lineup-row.unavailable { opacity: .58; }
+.rotation-position-cell { display: grid; grid-template-columns: 20px 1fr; align-items: center; gap: 2px; padding: 0 5px; }
+.rotation-drag-handle { display: grid; place-items: center; width: 20px; height: 30px; color: #555d69; cursor: grab; font-size: 17px; line-height: 1; transition: color .15s ease, transform .15s ease; user-select: none; }
+.rotation-drag-handle:hover { color: var(--dash-gold); transform: scale(1.08); }
+.rotation-drag-handle:active { cursor: grabbing; }
+.rotation-lineup-row { position: relative; transition: opacity .15s ease, transform .15s ease, background .15s ease; }
+.rotation-lineup-row.dragging { opacity: .32; }
+.rotation-lineup-row.drop-before::before, .rotation-lineup-row.drop-after::after { position: absolute; right: 8px; left: 8px; z-index: 4; height: 2px; border-radius: 99px; background: var(--dash-gold); box-shadow: 0 0 10px rgba(245,166,35,.55); content: ""; pointer-events: none; }
+.rotation-lineup-row.drop-before::before { top: -1px; }
+.rotation-lineup-row.drop-after::after { bottom: -1px; }
+.rotation-starter-control { display: grid; place-items: center; cursor: pointer; }
+.rotation-starter-control input { position: absolute; opacity: 0; pointer-events: none; }
+.rotation-starter-control span { display: grid; place-items: center; min-width: 28px; height: 26px; border-radius: 3px; color: #7a818b; font-size: 9px; font-weight: 950; }
+.rotation-starter-control input:checked + span { color: #090a0c; background: var(--dash-gold); }
+.rotation-player-identity { display: flex; align-items: center; gap: 9px; min-width: 0; padding: 5px 8px; }
+.rotation-player-headshot { width: 42px; height: 47px; flex: 0 0 42px; border-radius: 4px; background: #1a1e24; object-fit: cover; object-position: center top; }
+.rotation-player-identity > div { display: grid; grid-template-columns: auto auto; align-items: center; gap: 2px 7px; min-width: 0; }
+.rotation-player-identity strong { grid-column: 1 / -1; overflow: hidden; color: #e5e7ea; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.rotation-player-identity span { color: #68707b; font-size: 7px; }
+.rotation-active-control { cursor: pointer; }
+.rotation-active-control input { position: absolute; opacity: 0; pointer-events: none; }
+.rotation-active-control small { color: #565d67; font-size: 6px; font-weight: 950; }
+.rotation-active-control input:checked + small { color: #15d79f; }
+.rotation-player-ovr, .rotation-minute-value { padding: 0 8px; color: #dfe2e5; font-size: 10px; text-align: center; font-variant-numeric: tabular-nums; }
+.rotation-minute-value { color: #f4f5f6; font-weight: 900; }
+.rotation-slider-cell { position: relative; display: flex; align-items: center; min-width: 0; padding: 0 16px 0 10px; }
+.rotation-minute-slider { width: 100%; height: 18px; margin: 0; appearance: none; background: transparent; cursor: pointer; }
+.rotation-minute-slider::-webkit-slider-runnable-track { height: 7px; border-radius: 99px; background: linear-gradient(90deg,var(--team-primary) 0 var(--minute-pct),#2a2e35 var(--minute-pct) 100%); }
+.rotation-minute-slider::-webkit-slider-thumb { width: 16px; height: 16px; margin-top: -4.5px; appearance: none; border: 1px solid #aeb4bd; border-radius: 50%; background: #f7f7f6; box-shadow: 0 2px 8px rgba(0,0,0,.45); }
+.rotation-minute-slider::-moz-range-track { height: 7px; border-radius: 99px; background: #2a2e35; }
+.rotation-minute-slider::-moz-range-progress { height: 7px; border-radius: 99px; background: var(--team-primary); }
+.rotation-minute-slider::-moz-range-thumb { width: 16px; height: 16px; border: 1px solid #aeb4bd; border-radius: 50%; background: #f7f7f6; }
+.rotation-minute-slider:disabled { cursor: not-allowed; }
+.rotation-slider-cell > small { position: absolute; right: 18px; color: #f05d68; font-size: 6px; font-weight: 950; }
+
+@media (max-width: 760px) {
+  .rotation-lineup-card { overflow-x: auto; }
+  .rotation-lineup-card > header, .rotation-lineup-columns, .rotation-lineup-list { min-width: 760px; }
+}
+
+@media (max-width: 900px) {
+  .roster-team-grid { grid-template-columns: repeat(10,minmax(0,1fr)); }
+}
+
+@media (max-width: 600px) {
+  .league-roster-browser > header, .roster-team-hero, .roster-compliance-strip { align-items: flex-start; flex-direction: column; }
+  .roster-team-grid { grid-template-columns: repeat(5,minmax(0,1fr)); }
+  .roster-team-overall { justify-items: start; }
+}
+
+@media (max-width: 700px) {
+  .dashboard-player-headshot { opacity: .42; width: 58%; }
+  .roster-player-headshot { width: 34px; height: 34px; flex-basis: 34px; }
+}
+

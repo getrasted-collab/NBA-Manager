@@ -1,0 +1,102 @@
+﻿/* Staff office */
+.staff-page-hero { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px; background: linear-gradient(110deg, rgba(245,166,35,.09), transparent 44%), #11141a; }
+.staff-page-hero > div:first-child { display: grid; gap: 6px; }
+.staff-page-hero span, .staff-current-grid article > span, .staff-candidate-board > header span, .staff-hires > header span { color: var(--dash-gold); font-size: 7px; font-weight: 950; letter-spacing: 1.1px; }
+.staff-page-hero strong { font-family: Impact, Haettenschweiler, sans-serif; font-size: 25px; letter-spacing: .5px; text-transform: uppercase; }
+.staff-page-hero p { margin: 0; color: #858b95; font-size: 9px; }
+.staff-budget { display: grid; min-width: 175px; padding: 14px 17px; border: 1px solid rgba(245,166,35,.35); border-radius: 5px; background: rgba(245,166,35,.05); }
+.staff-budget b { color: #fff; font-family: Impact, sans-serif; font-size: 32px; font-weight: 500; }
+.staff-budget small { color: #737a84; font-size: 8px; }
+.staff-current-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 10px; }
+.staff-head-coach { grid-column: span 2; padding: 16px; }
+.staff-head-coach > strong { display: block; margin: 6px 0 3px; font-family: Impact, sans-serif; font-size: 22px; font-weight: 500; }
+.staff-head-coach > small { color: #747b85; font-size: 8px; }
+.staff-head-coach > div { display: grid; gap: 8px; margin-top: 14px; }
+.staff-rating-meter { display: grid; grid-template-columns: 76px 1fr 25px; align-items: center; gap: 8px; }
+.staff-rating-meter > span { color: #7d848e; font-size: 8px; }
+.staff-rating-meter > i, .staff-department > i { height: 4px; overflow: hidden; border-radius: 99px; background: #292e36; }
+.staff-rating-meter > i b, .staff-department > i b { display: block; height: 100%; background: var(--dash-gold); }
+.staff-rating-meter > strong { font-size: 9px; text-align: right; }
+.staff-department { display: grid; align-content: start; gap: 8px; padding: 15px; }
+.staff-department header { display: flex; align-items: center; justify-content: space-between; }
+.staff-department header span { color: #858c96; font-size: 8px; font-weight: 900; letter-spacing: .8px; }
+.staff-department header b { color: #fff; font-family: Impact, sans-serif; font-size: 25px; font-weight: 500; }
+.staff-department > strong { color: #15d79f; font-size: 8px; letter-spacing: .9px; }
+.staff-department p { min-height: 39px; margin: 0; color: #6f7681; font-size: 8px; line-height: 1.55; }
+.staff-candidate-board, .staff-hires { overflow: hidden; }
+.staff-candidate-board > header, .staff-hires > header { display: flex; align-items: center; justify-content: space-between; padding: 14px 17px; border-bottom: 1px solid #292e36; background: #0d1015; }
+.staff-candidate-board > header > div, .staff-hires > header > div { display: grid; gap: 3px; }
+.staff-candidate-board > header strong, .staff-hires > header strong { font-size: 13px; }
+.staff-candidate-board > header small, .staff-hires > header small { color: #68707b; font-size: 8px; }
+.staff-candidate-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+.staff-candidate { display: grid; grid-template-columns: 42px minmax(0,1fr) auto; align-items: center; gap: 10px; min-height: 68px; padding: 10px 14px; border-top: 1px solid #272c34; }
+.staff-candidate:nth-child(even) { border-left: 1px solid #272c34; }
+.staff-candidate-mark { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid #343a43; border-radius: 4px; color: var(--dash-gold); background: #191d23; font-size: 9px; font-weight: 950; }
+.staff-candidate > div:nth-child(2) { display: grid; gap: 2px; }
+.staff-candidate span, .staff-hires article span { color: var(--dash-gold); font-size: 7px; font-weight: 900; letter-spacing: .7px; }
+.staff-candidate strong, .staff-hires article strong { color: #e5e7e9; font-size: 10px; }
+.staff-candidate small, .staff-hires article small { color: #6e7580; font-size: 8px; }
+.staff-candidate .btn { min-width: 82px; font-size: 8px; }
+.staff-hires > div { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); }
+.staff-hires article { display: grid; gap: 3px; padding: 12px 15px; border-left: 1px solid #292e36; }
+.staff-hires article:first-child { border-left: 0; }
+
+@media (max-width: 900px) {
+  .staff-current-grid,
+  .staff-hires > div { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+
+@media (max-width: 620px) {
+  .staff-page-hero { align-items: stretch; flex-direction: column; }
+  .staff-current-grid, .staff-candidate-grid, .staff-hires > div { grid-template-columns: 1fr; }
+  .staff-head-coach { grid-column: auto; }
+  .staff-candidate:nth-child(even), .staff-hires article { border-left: 0; }
+}
+.simcast-live-box { overflow: hidden; }
+.simcast-live-box > header { display: flex; align-items: center; justify-content: space-between; padding: 14px 17px; border-bottom: 1px solid #292e36; background: #0d1015; }
+.simcast-live-box > header > div { display: grid; gap: 3px; }
+.simcast-live-box > header span { color: var(--dash-gold); font-size: 7px; font-weight: 950; letter-spacing: 1.2px; }
+.simcast-live-box > header strong { font-size: 13px; }
+.simcast-live-box > header small { color: #68707b; font-size: 8px; }
+.simcast-live-box-teams { display: grid; grid-template-columns: 1fr 1fr; }
+.simcast-live-team + .simcast-live-team { border-left: 1px solid #292e36; }
+.simcast-live-team-name { display: flex; align-items: center; gap: 8px; padding: 10px 13px; border-bottom: 1px solid #292e36; background: #141820; }
+.simcast-live-team-name strong { font-family: Impact, Haettenschweiler, sans-serif; font-size: 16px; letter-spacing: .7px; }
+.simcast-live-team-name span { margin-left: auto; color: #858c96; font-size: 8px; font-weight: 900; }
+.simcast-box-logo { width: 26px; height: 26px; object-fit: contain; }
+.simcast-box-scroll { overflow-x: auto; scrollbar-width: thin; scrollbar-color: #343a44 transparent; }
+.simcast-live-team table { width: 100%; min-width: 720px; border-collapse: collapse; font-size: 8px; }
+.simcast-live-team th { padding: 8px 9px; color: #666e79; background: #0e1116; font-size: 7px; letter-spacing: .7px; text-align: right; }
+.simcast-live-team th:first-child, .simcast-live-team td:first-child { text-align: left; }
+.simcast-live-team td { padding: 8px 9px; border-top: 1px solid #252a32; color: #aeb3bb; text-align: right; font-variant-numeric: tabular-nums; }
+.simcast-live-team td:first-child { display: grid; gap: 2px; min-width: 125px; }
+.simcast-live-team td strong { color: #e6e8eb; font-size: 9px; }
+.simcast-live-team td small { color: #626a75; font-size: 7px; }
+.simcast-live-team td b { color: var(--dash-gold); font-size: 10px; }
+.simcast-live-team tr.injured { background: rgba(220,65,65,.08); }
+.simcast-live-team tr.injured td small { color: #ed7777; }
+.simcast-live-team tr.fouled-out { opacity: .62; }
+
+@media (max-width: 900px) {
+  .simcast-scoreboard { grid-template-columns: 1fr 100px 1fr; padding: 18px 14px; }
+  .simcast-team, .simcast-team.home { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .simcast-team-logo { width: 52px; height: 52px; }
+  .simcast-team > b { grid-row: 1; font-size: 42px; }
+  .simcast-team.away > b { grid-row: auto; }
+  .simcast-team > div { display: none; }
+  .simcast-body { grid-template-columns: 1fr; }
+  .simcast-side-panel { grid-template-columns: 1fr 1fr; }
+  .simcast-live-box-teams { grid-template-columns: 1fr; }
+  .simcast-live-team + .simcast-live-team { border-top: 1px solid #292e36; border-left: 0; }
+  .simcast-coaching-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+  .simcast-scoreboard { grid-template-columns: 1fr 78px 1fr; }
+  .simcast-clock strong { font-size: 27px; }
+  .simcast-team-logo { width: 42px; height: 42px; }
+  .simcast-side-panel { grid-template-columns: 1fr; }
+  .simcast-controls { align-items: stretch; flex-direction: column; }
+  .simcast-strategy-controls, .simcast-substitution { grid-template-columns: 1fr; }
+}
+

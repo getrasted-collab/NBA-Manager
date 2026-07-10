@@ -1,0 +1,78 @@
+﻿/* Regular-season free-agent market */
+.in-season-fa-hero { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 126px; padding: 20px; background: linear-gradient(105deg,rgba(245,166,35,.07),transparent 44%),#111319 !important; }
+.in-season-fa-hero > div:first-child { display: grid; gap: 7px; }
+.in-season-fa-hero .player-name { font-size: 27px; text-transform: uppercase; }
+.in-season-fa-hero p { margin: 0; color: #7c828d; font-size: 10px; }
+.in-season-fa-rule { display: grid; gap: 6px; min-width: 260px; padding: 15px 17px; border: 1px solid #343943; border-radius: 4px; background: #171a20; text-align: right; }
+.in-season-fa-rule span { color: var(--dash-gold); font-size: 7px; font-weight: 950; letter-spacing: 1.1px; }
+.in-season-fa-rule strong { color: #f2f3f4; font-family: Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif; font-size: 23px; letter-spacing: .4px; }
+.in-season-fa-rule small { color: #777e89; font-size: 8px; }
+.in-season-fa-summary { margin: 0; }
+.in-season-waiver-strip { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 16px; border-color: rgba(240,93,104,.38) !important; background: linear-gradient(90deg,rgba(240,93,104,.06),transparent 48%),#111319 !important; }
+.in-season-waiver-strip > div:first-child { display: grid; gap: 4px; }
+.in-season-waiver-strip strong { color: #f1f2f4; font-size: 11px; }
+.in-season-waiver-strip small { color: #777e89; font-size: 8px; }
+.in-season-waiver-strip > div:last-child { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 7px; }
+.in-season-fa-market { overflow: hidden; }
+.in-season-fa-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 70px; padding: 13px 16px; border-bottom: 1px solid #2b2f37; background: #0d0f13; }
+.in-season-fa-toolbar > div:first-child { display: grid; gap: 5px; }
+.in-season-fa-toolbar .player-name { font-size: 18px; text-transform: uppercase; }
+.in-season-fa-controls { display: flex; align-items: center; gap: 7px; }
+.in-season-fa-controls input { width: 210px; }
+.in-season-fa-controls select { min-width: 112px; }
+.in-season-fa-list { display: grid; }
+.in-season-fa-player { display: grid; grid-template-columns: 68px minmax(220px,1fr) 112px auto; align-items: center; gap: 14px; min-height: 94px; padding: 10px 16px; border-bottom: 1px solid #292d34; background: #111319; }
+.in-season-fa-player:last-child { border-bottom: 0; }
+.in-season-fa-player:hover { background: #15181e; }
+.in-season-fa-portrait { position: relative; align-self: stretch; overflow: hidden; border: 1px solid #30343c; border-radius: 4px; background: radial-gradient(circle at 50% 80%,rgba(245,166,35,.15),transparent 58%),#191c23; }
+.in-season-fa-headshot { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
+.in-season-fa-portrait > b { position: absolute; right: 4px; bottom: 4px; display: grid; place-items: center; width: 25px; height: 25px; border-radius: 3px; color: #090a0c; background: var(--dash-gold); font-size: 10px; }
+.in-season-fa-identity { display: grid; gap: 5px; }
+.in-season-fa-identity > strong { color: #f1f2f4; font-size: 13px; }
+.in-season-fa-identity > span { color: #777e89; font-size: 8px; }
+.in-season-fa-identity .mini-action { width: max-content; }
+.in-season-fa-fit { display: grid; gap: 4px; padding-left: 14px; border-left: 1px solid #292d34; }
+.in-season-fa-fit span { color: #696f79; font-size: 7px; font-weight: 950; letter-spacing: 1px; }
+.in-season-fa-fit strong { color: #f1f2f4; font-family: Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif; font-size: 19px; font-weight: 500; }
+.in-season-fa-fit small { color: #10c995; font-size: 7px; }
+.in-season-fa-actions { display: flex; justify-content: flex-end; gap: 7px; }
+.in-season-fa-actions .btn { white-space: nowrap; }
+
+@media (max-width: 1080px) {
+  .in-season-fa-toolbar { align-items: flex-start; flex-direction: column; }
+  .in-season-fa-controls { width: 100%; flex-wrap: wrap; }
+  .in-season-fa-controls input { flex: 1 1 210px; }
+  .in-season-fa-player { grid-template-columns: 62px minmax(0,1fr) 100px; }
+  .in-season-fa-actions { grid-column: 2 / -1; justify-content: flex-start; }
+}
+
+@media (max-width: 720px) {
+  .in-season-fa-hero,
+  .in-season-waiver-strip { align-items: stretch; flex-direction: column; }
+  .in-season-waiver-strip > div:last-child { justify-content: flex-start; }
+  .in-season-fa-rule { min-width: 0; text-align: left; }
+  .in-season-fa-player { grid-template-columns: 58px minmax(0,1fr); }
+  .in-season-fa-fit { grid-column: 2; padding-left: 0; border-left: 0; }
+  .in-season-fa-actions { grid-column: 1 / -1; flex-wrap: wrap; }
+}
+
+@media (max-width: 980px) {
+  .secondary-page .grid-4 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .secondary-page :is(.finance-columns,.social-layout) { grid-template-columns: 1fr; }
+  .secondary-page :is(.staff-current-grid,.finance-year-grid) { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .secondary-page .staff-head-coach { grid-column: span 2; }
+}
+
+@media (max-width: 700px) {
+  .secondary-page { gap: 9px; }
+  .secondary-page > .page-title { font-size: 20px; }
+  .secondary-page .grid-2, .secondary-page .grid-3, .secondary-page .grid-4, .secondary-page :is(.staff-current-grid,.staff-candidate-grid,.staff-hires > div,.finance-year-grid) { grid-template-columns: 1fr; }
+  .secondary-page .staff-head-coach { grid-column: auto; }
+  .secondary-page :is(.calendar-toolbar,.trade-header,.strategy-hero,.locker-summary,.scouting-toolbar,.standings-header,.contract-office-header,.offseason-hero,.development-hero,.staff-page-hero,.finance-hero,.rotation-header,.roster-team-hero) { align-items: flex-start; flex-direction: column; min-height: 0; padding: 16px; }
+  .secondary-page .page-actions { justify-content: flex-start; margin: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .secondary-page *, .secondary-page *::before, .secondary-page *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
+

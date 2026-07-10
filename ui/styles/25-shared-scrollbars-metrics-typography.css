@@ -1,0 +1,1127 @@
+﻿/* NBA.com-style scrollbars: slim white rail, rounded gray thumb, arrow caps. */
+* {
+  scrollbar-color: #8c98b4 #ffffff;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-track {
+  border: 1px solid rgba(196, 207, 229, .62);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .85), 0 8px 18px rgba(9, 28, 88, .06);
+}
+
+::-webkit-scrollbar-thumb {
+  min-height: 58px;
+  min-width: 58px;
+  border: 4px solid rgba(255, 255, 255, .96);
+  border-radius: 999px;
+  background: #8c98b4;
+  background-clip: padding-box;
+  box-shadow: 0 2px 8px rgba(9, 28, 88, .14);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7482a2;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+::-webkit-scrollbar-button:single-button,
+::-webkit-scrollbar-button:vertical:start:decrement,
+::-webkit-scrollbar-button:vertical:end:increment,
+::-webkit-scrollbar-button:horizontal:start:decrement,
+::-webkit-scrollbar-button:horizontal:end:increment {
+  display: block;
+  width: 14px;
+  height: 18px;
+  border: 1px solid rgba(196, 207, 229, .7);
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, .98);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 7px 7px;
+  box-shadow: 0 4px 12px rgba(9, 28, 88, .08);
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement,
+::-webkit-scrollbar-button:vertical:start:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath d='M4 2 1.5 5.5h5L4 2z' fill='%23071a64'/%3E%3C/svg%3E");
+}
+
+::-webkit-scrollbar-button:single-button:vertical:increment,
+::-webkit-scrollbar-button:vertical:end:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath d='M4 6 1.5 2.5h5L4 6z' fill='%23071a64'/%3E%3C/svg%3E");
+}
+
+::-webkit-scrollbar-button:single-button:horizontal:decrement,
+::-webkit-scrollbar-button:horizontal:start:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath d='M2 4 5.5 1.5v5L2 4z' fill='%23071a64'/%3E%3C/svg%3E");
+}
+
+::-webkit-scrollbar-button:single-button:horizontal:increment,
+::-webkit-scrollbar-button:horizontal:end:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath d='M6 4 2.5 1.5v5L6 4z' fill='%23071a64'/%3E%3C/svg%3E");
+}
+
+body.dashboard-mode,
+body.dashboard-mode .workspace,
+body.dashboard-mode .context-nav,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div) {
+  scrollbar-color: #8c98b4 #ffffff;
+  scrollbar-width: thin;
+}
+
+body.dashboard-mode::-webkit-scrollbar,
+body.dashboard-mode .workspace::-webkit-scrollbar,
+body.dashboard-mode .context-nav::-webkit-scrollbar,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+body.dashboard-mode::-webkit-scrollbar-track,
+body.dashboard-mode .workspace::-webkit-scrollbar-track,
+body.dashboard-mode .context-nav::-webkit-scrollbar-track,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-track {
+  border: 1px solid rgba(196, 207, 229, .62);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .85), 0 8px 18px rgba(9, 28, 88, .06);
+}
+
+body.dashboard-mode::-webkit-scrollbar-thumb,
+body.dashboard-mode .workspace::-webkit-scrollbar-thumb,
+body.dashboard-mode .context-nav::-webkit-scrollbar-thumb,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-thumb {
+  min-height: 58px;
+  min-width: 58px;
+  border: 4px solid rgba(255, 255, 255, .96);
+  border-radius: 999px;
+  background: #8c98b4;
+  background-clip: padding-box;
+  box-shadow: 0 2px 8px rgba(9, 28, 88, .14);
+}
+
+body.dashboard-mode::-webkit-scrollbar-thumb:hover,
+body.dashboard-mode .workspace::-webkit-scrollbar-thumb:hover,
+body.dashboard-mode .context-nav::-webkit-scrollbar-thumb:hover,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-thumb:hover {
+  background: #7482a2;
+  background-clip: padding-box;
+}
+
+body.dashboard-mode::-webkit-scrollbar-button:single-button,
+body.dashboard-mode .workspace::-webkit-scrollbar-button:single-button,
+body.dashboard-mode .context-nav::-webkit-scrollbar-button:single-button,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-button:single-button,
+body.dashboard-mode::-webkit-scrollbar-button:vertical:start:decrement,
+body.dashboard-mode .workspace::-webkit-scrollbar-button:vertical:start:decrement,
+body.dashboard-mode .context-nav::-webkit-scrollbar-button:vertical:start:decrement,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-button:vertical:start:decrement,
+body.dashboard-mode::-webkit-scrollbar-button:vertical:end:increment,
+body.dashboard-mode .workspace::-webkit-scrollbar-button:vertical:end:increment,
+body.dashboard-mode .context-nav::-webkit-scrollbar-button:vertical:end:increment,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-button:vertical:end:increment {
+  display: block;
+  width: 14px;
+  height: 18px;
+  border: 1px solid rgba(196, 207, 229, .7);
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, .98);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 7px 7px;
+  box-shadow: 0 4px 12px rgba(9, 28, 88, .08);
+}
+
+body.dashboard-mode::-webkit-scrollbar-button:single-button:vertical:decrement,
+body.dashboard-mode .workspace::-webkit-scrollbar-button:single-button:vertical:decrement,
+body.dashboard-mode .context-nav::-webkit-scrollbar-button:single-button:vertical:decrement,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-button:single-button:vertical:decrement,
+body.dashboard-mode::-webkit-scrollbar-button:vertical:start:decrement,
+body.dashboard-mode .workspace::-webkit-scrollbar-button:vertical:start:decrement,
+body.dashboard-mode .context-nav::-webkit-scrollbar-button:vertical:start:decrement,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-button:vertical:start:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath d='M4 2 1.5 5.5h5L4 2z' fill='%23071a64'/%3E%3C/svg%3E");
+}
+
+body.dashboard-mode::-webkit-scrollbar-button:single-button:vertical:increment,
+body.dashboard-mode .workspace::-webkit-scrollbar-button:single-button:vertical:increment,
+body.dashboard-mode .context-nav::-webkit-scrollbar-button:single-button:vertical:increment,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-button:single-button:vertical:increment,
+body.dashboard-mode::-webkit-scrollbar-button:vertical:end:increment,
+body.dashboard-mode .workspace::-webkit-scrollbar-button:vertical:end:increment,
+body.dashboard-mode .context-nav::-webkit-scrollbar-button:vertical:end:increment,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-button:vertical:end:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath d='M4 6 1.5 2.5h5L4 6z' fill='%23071a64'/%3E%3C/svg%3E");
+}
+
+/* Reference metric cards: soft white NBA.com stat panels. */
+.reference-stat-grid {
+  gap: 14px;
+}
+
+.metric-card,
+.reference-stat-grid > article {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-height: 132px;
+  padding: 24px 24px 22px;
+  overflow: hidden;
+  border: 1px solid rgba(200, 211, 233, .76) !important;
+  border-radius: 12px;
+  color: var(--navy);
+  background: #ffffff !important;
+  box-shadow: 0 10px 24px rgba(9, 28, 88, .075) !important;
+}
+
+.metric-card::before,
+.reference-stat-grid > article::before {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--blue);
+  content: "";
+}
+
+.metric-card::after,
+.reference-stat-grid > article::after {
+  position: absolute;
+  right: -10px;
+  bottom: -10px;
+  width: 72px;
+  height: 50px;
+  border: 0;
+  background:
+    radial-gradient(ellipse at 78% 82%, rgba(6, 76, 255, .09), transparent 58%),
+    repeating-linear-gradient(135deg, rgba(6, 76, 255, .075) 0 1px, transparent 1px 11px);
+  opacity: .34;
+  transform: none;
+  content: "";
+  pointer-events: none;
+}
+
+.metric-card--red::before,
+.reference-stat-grid > article:last-child::before {
+  background: var(--red);
+}
+
+.metric-card--red::after,
+.reference-stat-grid > article:last-child::after {
+  background:
+    radial-gradient(ellipse at 78% 82%, rgba(215, 25, 63, .1), transparent 58%),
+    repeating-linear-gradient(135deg, rgba(215, 25, 63, .08) 0 1px, transparent 1px 11px);
+}
+
+.metric-label,
+.reference-stat-grid > article > span {
+  color: var(--navy);
+  font-family: var(--broadcast-font);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.15px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.metric-value,
+.reference-stat-grid > article > strong {
+  color: var(--navy);
+  font-family: var(--broadcast-heading);
+  margin-top: 4px;
+  font-size: clamp(29px, 2.35vw, 37px);
+  font-weight: 900;
+  letter-spacing: -.6px;
+  line-height: .95;
+}
+
+.metric-card--blue .metric-value,
+.reference-stat-grid > article:not(:last-child) > strong {
+  color: var(--blue);
+}
+
+.metric-card--red .metric-value,
+.reference-stat-grid > article:last-child > strong {
+  color: var(--red);
+}
+
+.metric-subtitle,
+.reference-stat-grid > article > small {
+  color: #1d2e67;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .85px;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+/* Final scrollbar correction: separate white pill rail with centered arrow caps. */
+::-webkit-scrollbar,
+body.dashboard-mode::-webkit-scrollbar,
+body.dashboard-mode .workspace::-webkit-scrollbar,
+body.dashboard-mode .context-nav::-webkit-scrollbar,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+::-webkit-scrollbar-track,
+body.dashboard-mode::-webkit-scrollbar-track,
+body.dashboard-mode .workspace::-webkit-scrollbar-track,
+body.dashboard-mode .context-nav::-webkit-scrollbar-track,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-track {
+  border: 1px solid rgba(201, 211, 230, .72) !important;
+  border-radius: 999px !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 20px rgba(9, 28, 88, .08) !important;
+}
+
+::-webkit-scrollbar-thumb,
+body.dashboard-mode::-webkit-scrollbar-thumb,
+body.dashboard-mode .workspace::-webkit-scrollbar-thumb,
+body.dashboard-mode .context-nav::-webkit-scrollbar-thumb,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-thumb {
+  min-height: 64px !important;
+  min-width: 64px !important;
+  border: 5px solid #ffffff !important;
+  border-radius: 999px !important;
+  background: #8794ad !important;
+  background-clip: padding-box !important;
+  box-shadow: none !important;
+}
+
+::-webkit-scrollbar-thumb:hover,
+body.dashboard-mode::-webkit-scrollbar-thumb:hover,
+body.dashboard-mode .workspace::-webkit-scrollbar-thumb:hover,
+body.dashboard-mode .context-nav::-webkit-scrollbar-thumb:hover,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-thumb:hover {
+  background: #74829d !important;
+  background-clip: padding-box !important;
+}
+
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-button:single-button,
+body.dashboard-mode::-webkit-scrollbar-button,
+body.dashboard-mode::-webkit-scrollbar-button:single-button,
+body.dashboard-mode .workspace::-webkit-scrollbar-button,
+body.dashboard-mode .workspace::-webkit-scrollbar-button:single-button,
+body.dashboard-mode .context-nav::-webkit-scrollbar-button,
+body.dashboard-mode .context-nav::-webkit-scrollbar-button:single-button,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-button,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-button:single-button {
+  display: block !important;
+  width: 16px !important;
+  height: 18px !important;
+  border: 1px solid rgba(201, 211, 230, .82) !important;
+  border-radius: 999px !important;
+  background-color: #ffffff !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 8px 8px !important;
+  box-shadow: 0 4px 12px rgba(9, 28, 88, .08) !important;
+}
+
+::-webkit-scrollbar-button:vertical:start:decrement,
+::-webkit-scrollbar-button:single-button:vertical:decrement,
+body.dashboard-mode::-webkit-scrollbar-button:vertical:start:decrement,
+body.dashboard-mode::-webkit-scrollbar-button:single-button:vertical:decrement,
+body.dashboard-mode .workspace::-webkit-scrollbar-button:vertical:start:decrement,
+body.dashboard-mode .workspace::-webkit-scrollbar-button:single-button:vertical:decrement,
+body.dashboard-mode .context-nav::-webkit-scrollbar-button:vertical:start:decrement,
+body.dashboard-mode .context-nav::-webkit-scrollbar-button:single-button:vertical:decrement,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-button:vertical:start:decrement,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background-color: #ffffff !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath d='M4 2 1.25 5.65h5.5L4 2z' fill='%23071a64'/%3E%3C/svg%3E") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 8px 8px !important;
+}
+
+::-webkit-scrollbar-button:vertical:end:increment,
+::-webkit-scrollbar-button:single-button:vertical:increment,
+body.dashboard-mode::-webkit-scrollbar-button:vertical:end:increment,
+body.dashboard-mode::-webkit-scrollbar-button:single-button:vertical:increment,
+body.dashboard-mode .workspace::-webkit-scrollbar-button:vertical:end:increment,
+body.dashboard-mode .workspace::-webkit-scrollbar-button:single-button:vertical:increment,
+body.dashboard-mode .context-nav::-webkit-scrollbar-button:vertical:end:increment,
+body.dashboard-mode .context-nav::-webkit-scrollbar-button:single-button:vertical:increment,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-button:vertical:end:increment,
+body.dashboard-mode :is(.table-card, .stats-table, .contract-table, .editor-table, .league-roster-table, .finance-contracts, .multi-trade-team-grid, .multi-trade-asset-picker > div)::-webkit-scrollbar-button:single-button:vertical:increment {
+  background-color: #ffffff !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath d='M4 6 1.25 2.35h5.5L4 6z' fill='%23071a64'/%3E%3C/svg%3E") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 8px 8px !important;
+}
+
+/* Custom overlay scrollbars replace native rails on primary app scrollers. */
+.custom-scrollbar-native {
+  scrollbar-width: none !important;
+}
+
+.custom-scrollbar-native::-webkit-scrollbar,
+.custom-scrollbar-native::-webkit-scrollbar-track,
+.custom-scrollbar-native::-webkit-scrollbar-thumb,
+.custom-scrollbar-native::-webkit-scrollbar-button {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+
+.custom-scrollbar-shell {
+  position: fixed;
+  z-index: 80;
+  display: grid;
+  grid-template-rows: 18px minmax(0, 1fr) 18px;
+  gap: 3px;
+  pointer-events: auto;
+}
+
+.custom-scrollbar-shell[hidden] {
+  display: none !important;
+}
+
+.custom-scrollbar-track {
+  position: relative;
+  width: 18px;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid rgba(200, 210, 229, .8);
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 10px 22px rgba(9, 28, 88, .09);
+}
+
+.custom-scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 6px;
+  min-height: 44px;
+  border-radius: 999px;
+  background: #8490aa;
+  box-shadow: 0 1px 4px rgba(9, 28, 88, .16);
+  transform: translateX(-50%);
+  will-change: transform, height;
+}
+
+.custom-scrollbar-arrow-top,
+.custom-scrollbar-arrow-bottom {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 1px solid rgba(200, 210, 229, .82);
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 5px 12px rgba(9, 28, 88, .08);
+  cursor: pointer;
+}
+
+.custom-scrollbar-arrow-top::before,
+.custom-scrollbar-arrow-bottom::before {
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 8px 8px;
+  content: "";
+}
+
+.custom-scrollbar-arrow-top::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath d='M4 2 1.25 5.65h5.5L4 2z' fill='%23071a64'/%3E%3C/svg%3E");
+}
+
+.custom-scrollbar-arrow-bottom::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath d='M4 6 1.25 2.35h5.5L4 6z' fill='%23071a64'/%3E%3C/svg%3E");
+}
+
+.custom-scrollbar-arrow-top:hover,
+.custom-scrollbar-arrow-bottom:hover {
+  border-color: rgba(178, 191, 216, .95);
+  background-color: #ffffff;
+}
+
+.custom-scrollbar-shell--context-nav {
+  opacity: .9;
+}
+
+.custom-scrollbar-shell--context-nav .custom-scrollbar-track,
+.custom-scrollbar-shell--context-nav .custom-scrollbar-arrow-top,
+.custom-scrollbar-shell--context-nav .custom-scrollbar-arrow-bottom {
+  width: 18px;
+}
+
+/* Custom overlay scrollbar hard overrides. Keep after all native scrollbar/button rules. */
+.custom-scrollbar-native,
+body.dashboard-mode .custom-scrollbar-native {
+  scrollbar-width: none !important;
+}
+
+.custom-scrollbar-native::-webkit-scrollbar,
+body.dashboard-mode .custom-scrollbar-native::-webkit-scrollbar,
+.custom-scrollbar-native::-webkit-scrollbar-track,
+body.dashboard-mode .custom-scrollbar-native::-webkit-scrollbar-track,
+.custom-scrollbar-native::-webkit-scrollbar-thumb,
+body.dashboard-mode .custom-scrollbar-native::-webkit-scrollbar-thumb,
+.custom-scrollbar-native::-webkit-scrollbar-button,
+body.dashboard-mode .custom-scrollbar-native::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+body.dashboard-mode .custom-scrollbar-shell :is(.custom-scrollbar-arrow-top, .custom-scrollbar-arrow-bottom),
+.custom-scrollbar-shell :is(.custom-scrollbar-arrow-top, .custom-scrollbar-arrow-bottom) {
+  display: grid !important;
+  place-items: center !important;
+  width: 18px !important;
+  min-width: 18px !important;
+  height: 18px !important;
+  min-height: 18px !important;
+  padding: 0 !important;
+  border: 1px solid rgba(200, 210, 229, .82) !important;
+  border-radius: 5px !important;
+  color: transparent !important;
+  background: #ffffff !important;
+  box-shadow: 0 5px 12px rgba(9, 28, 88, .08) !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  transform: none !important;
+}
+
+body.dashboard-mode .custom-scrollbar-shell--context-nav :is(.custom-scrollbar-arrow-top, .custom-scrollbar-arrow-bottom),
+.custom-scrollbar-shell--context-nav :is(.custom-scrollbar-arrow-top, .custom-scrollbar-arrow-bottom) {
+  width: 18px !important;
+  min-width: 18px !important;
+}
+
+body.dashboard-mode .custom-scrollbar-shell :is(.custom-scrollbar-arrow-top, .custom-scrollbar-arrow-bottom)::before,
+.custom-scrollbar-shell :is(.custom-scrollbar-arrow-top, .custom-scrollbar-arrow-bottom)::before {
+  width: 8px !important;
+  height: 8px !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 8px 8px !important;
+  content: "" !important;
+}
+
+/* Reference-style custom overlay rail: white pill, centered gray-blue thumb, tiny arrow caps. */
+body.dashboard-mode .custom-scrollbar-shell,
+.custom-scrollbar-shell {
+  display: grid !important;
+  grid-template-rows: 18px minmax(0, 1fr) 18px !important;
+  gap: 0 !important;
+  width: 18px !important;
+  padding: 1px 0 !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(202, 212, 231, .9) !important;
+  border-radius: 999px !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 18px rgba(9, 28, 88, .12) !important;
+}
+
+body.dashboard-mode .custom-scrollbar-track,
+.custom-scrollbar-track {
+  width: 100% !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+
+body.dashboard-mode .custom-scrollbar-thumb,
+.custom-scrollbar-thumb {
+  left: 50% !important;
+  width: 6px !important;
+  min-height: 46px !important;
+  border-radius: 999px !important;
+  background: #8793ad !important;
+  box-shadow: 0 1px 3px rgba(9, 28, 88, .16) !important;
+}
+
+body.dashboard-mode .custom-scrollbar-shell :is(.custom-scrollbar-arrow-top, .custom-scrollbar-arrow-bottom),
+.custom-scrollbar-shell :is(.custom-scrollbar-arrow-top, .custom-scrollbar-arrow-bottom) {
+  width: 100% !important;
+  min-width: 100% !important;
+  height: 18px !important;
+  min-height: 18px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background-color: #ffffff !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 8px 8px !important;
+  box-shadow: none !important;
+}
+
+body.dashboard-mode .custom-scrollbar-shell .custom-scrollbar-arrow-top,
+.custom-scrollbar-shell .custom-scrollbar-arrow-top {
+  border-bottom: 1px solid rgba(209, 218, 235, .72) !important;
+  border-radius: 999px 999px 5px 5px !important;
+}
+
+body.dashboard-mode .custom-scrollbar-shell .custom-scrollbar-arrow-bottom,
+.custom-scrollbar-shell .custom-scrollbar-arrow-bottom {
+  border-top: 1px solid rgba(209, 218, 235, .72) !important;
+  border-radius: 5px 5px 999px 999px !important;
+}
+
+/* Typography polish: clean sports broadcast type without arcade spacing. */
+:root {
+  --broadcast-font: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --broadcast-heading: "Oswald", "Bebas Neue", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --broadcast-number: "Inter", "Rajdhani", ui-sans-serif, system-ui, sans-serif;
+}
+
+body,
+body.dashboard-mode,
+body.dashboard-mode button,
+body.dashboard-mode select,
+body.dashboard-mode textarea,
+body.dashboard-mode input {
+  font-family: var(--broadcast-font) !important;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+body.dashboard-mode :is(.page-title, .reference-page-title, .reference-season-hero h2, .reference-section-title, .reference-chart-panel header strong, .reference-leaders-panel header, .reference-upcoming header, .card-title, .section-title, h1, h2, h3) {
+  font-family: var(--broadcast-heading) !important;
+  font-weight: 700 !important;
+  letter-spacing: .02em !important;
+  line-height: 1.05 !important;
+}
+
+body.dashboard-mode :is(.brand-title::before, .brand-title::after, .startup-copy h1, .opening-copy h1, .menu-page-heading h1, .save-archive-heading h1, .opening-menu .mode-card strong, .mode-number, .arena-player-mark, .save-archive-summary strong) {
+  font-family: var(--broadcast-heading) !important;
+  font-weight: 700 !important;
+  letter-spacing: .02em !important;
+}
+
+body.dashboard-mode :is(.context-heading strong, .player-name, .team-name, .roster-name, .free-agent-card strong, .award-leader strong, .award-team-list strong, .reference-leaders-panel span strong, .reference-management-grid article > header strong, .sidebar-next-game-matchup strong, .reference-upcoming button strong) {
+  font-family: var(--broadcast-font) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.25 !important;
+}
+
+body.dashboard-mode .context-nav button,
+body.dashboard-mode .context-nav button:not(.reference-primary):not(.primary-button) {
+  font-family: var(--broadcast-font) !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.3 !important;
+}
+
+body.dashboard-mode .context-nav button i {
+  font-family: var(--broadcast-font) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+}
+
+body.dashboard-mode :is(.metric-value, .reference-stat-grid > article > strong, .reference-season-hero p strong, .reference-leaders-panel > div > b, .reference-bars b, .metric-row strong, .award-leader b, .profile-badge, .morale-badge, .strategy-fit strong) {
+  font-family: var(--broadcast-number) !important;
+  font-weight: 800 !important;
+  letter-spacing: -.01em !important;
+  line-height: 1.05 !important;
+}
+
+body.dashboard-mode :is(.metric-card--blue .metric-value, .reference-stat-grid > article:not(:last-child) > strong, .reference-leaders-panel > div > b, .reference-season-hero p strong, .reference-upcoming button strong) {
+  color: #0647df !important;
+}
+
+body.dashboard-mode :is(.metric-label, .metric-subtitle, .reference-stat-grid > article > span, .reference-stat-grid > article > small, .reference-management-grid article > header span, .context-heading span, .sidebar-nav-divider, .reference-season-hero span, .reference-season-hero p b, .reference-leaders-panel span, .card-label, .opening-kicker, .startup-copy > span, .save-slot-copy span, .save-career-stats span, .arena-score-card span, .arena-score-card small) {
+  font-family: var(--broadcast-font) !important;
+  font-size: clamp(11px, .72vw, 12px) !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  line-height: 1.25 !important;
+  text-transform: uppercase;
+}
+
+body.dashboard-mode :is(.metric-label, .reference-stat-grid > article > span) {
+  letter-spacing: .075em !important;
+}
+
+body.dashboard-mode :is(.metric-subtitle, .reference-stat-grid > article > small) {
+  letter-spacing: .07em !important;
+  line-height: 1.25 !important;
+}
+
+body.dashboard-mode :is(.btn, .primary-button, .secondary-button, .danger-button, .reference-primary, button:not(.custom-scrollbar-arrow-top):not(.custom-scrollbar-arrow-bottom)) {
+  font-family: var(--broadcast-font) !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+  line-height: 1.25 !important;
+}
+
+body.dashboard-mode :is(p, small, td, th, li, label, .meta, .reference-chart-panel header span, .reference-bars span, .reference-upcoming button small, .sidebar-next-game-matchup small) {
+  font-family: var(--broadcast-font) !important;
+  font-weight: 500;
+  letter-spacing: 0 !important;
+  line-height: 1.35 !important;
+}
+
+body.dashboard-mode :is(th, .data-table th, .status-badge) {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  line-height: 1.25 !important;
+  text-transform: uppercase;
+}
+
+body.dashboard-mode .context-nav button,
+body.dashboard-mode .context-nav button span,
+body.dashboard-mode .context-nav button:not(.reference-primary):not(.primary-button) {
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.3 !important;
+}
+
+/* Sidebar returns to the native scrollbar; only the main workspace uses the custom overlay rail. */
+body.dashboard-mode .context-nav {
+  scrollbar-color: auto !important;
+  scrollbar-width: auto !important;
+}
+
+body.dashboard-mode .context-nav::-webkit-scrollbar,
+body.dashboard-mode .context-nav::-webkit-scrollbar-track,
+body.dashboard-mode .context-nav::-webkit-scrollbar-thumb,
+body.dashboard-mode .context-nav::-webkit-scrollbar-button {
+  all: revert !important;
+}
+
+/* Simple visible native sidebar scrollbar. */
+body.dashboard-mode .context-nav {
+  scrollbar-width: thin !important;
+  scrollbar-color: #8b96ad rgba(255, 255, 255, .72) !important;
+}
+
+body.dashboard-mode .context-nav::-webkit-scrollbar {
+  width: 9px !important;
+  height: 9px !important;
+}
+
+body.dashboard-mode .context-nav::-webkit-scrollbar-track {
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, .72) !important;
+}
+
+body.dashboard-mode .context-nav::-webkit-scrollbar-thumb {
+  min-height: 42px !important;
+  border: 2px solid rgba(255, 255, 255, .72) !important;
+  border-radius: 999px !important;
+  background: #8b96ad !important;
+  background-clip: padding-box !important;
+}
+
+body.dashboard-mode .context-nav::-webkit-scrollbar-thumb:hover {
+  background: #72809c !important;
+  background-clip: padding-box !important;
+}
+
+body.dashboard-mode .context-nav::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Locker Room uses the same sidebar and workspace scrollbar behavior as every other page. */
+@media (max-width: 1180px), (max-height: 819px) {
+  body.dashboard-mode.locker-room-layout .workspace {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: auto !important;
+  }
+}
+
+@media (min-width: 1181px) and (min-height: 820px) {
+  body.dashboard-mode.locker-room-layout .workspace {
+    height: calc(100vh - 74px) !important;
+    min-height: 0 !important;
+    overflow: auto !important;
+  }
+}
+
+body.dashboard-mode.locker-room-layout .workspace {
+  scrollbar-gutter: stable !important;
+}
+
+/* Final dark-surface cleanup: replace remaining black legacy panels with the NBA Manager light skin. */
+body.dashboard-mode :is(
+  .secondary-page,
+  .card,
+  .card-pad,
+  .table-card,
+  .stats-table,
+  .contract-table,
+  .editor-table,
+  .league-roster-table,
+  .finance-contracts,
+  .panel,
+  .strategy-control,
+  .pregame-plan,
+  .game-summary,
+  .scout-card,
+  .staff-card,
+  .award-leader,
+  .apron-rule-list > div,
+  .transaction-ledger,
+  .comparison-grid > div,
+  .automation-list label,
+  .opening-menu .mode-card,
+  .save-slot-card,
+  .save-archive-summary,
+  .team-select-menu .team-card,
+  .reference-dashboard .staff-card,
+  .finance-ledger,
+  .finance-policy,
+  .finance-commitments,
+  .roster-team-hero,
+  .roster-team-grid,
+  .roster-team-grid button,
+  .rotation-lineup-card,
+  .development-board,
+  .development-player,
+  .development-coach,
+  .staff-page-hero,
+  .staff-budget,
+  .staff-head-coach,
+  .staff-department,
+  .staff-candidate-board,
+  .staff-hires,
+  .staff-candidate,
+  .simcast-panel,
+  .simcast-feed-panel,
+  .simcast-side-panel,
+  .simcast-coaching,
+  .simcast-coaching-grid > div,
+  .simcast-live-box,
+  .simcast-live-team,
+  .simcast-live-team-name,
+  .simcast-clock,
+  .multi-trade-steps,
+  .multi-trade-team-panel,
+  .multi-trade-team-panel > header,
+  .multi-trade-team-panel > footer,
+  .multi-trade-analysis,
+  .multi-trade-analysis > header,
+  .multi-trade-analysis > footer,
+  .multi-trade-flow-block,
+  .multi-trade-asset,
+  .multi-trade-asset-picker,
+  .multi-trade-asset-picker > div > button,
+  .multi-trade-team-chips > span,
+  .in-season-fa-hero,
+  .in-season-waiver-strip,
+  .in-season-fa-toolbar,
+  .in-season-fa-player,
+  .in-season-fa-rule,
+  .in-season-fa-portrait,
+  .in-season-fa-fit
+) {
+  border-color: rgba(202, 212, 231, .78) !important;
+  color: var(--navy) !important;
+  background: rgba(255, 255, 255, .9) !important;
+  box-shadow: 0 12px 28px rgba(9, 28, 88, .07) !important;
+}
+
+body.dashboard-mode :is(
+  .secondary-page header,
+  .secondary-page .hero,
+  .finance-hero,
+  .development-hero,
+  .staff-page-hero,
+  .rotation-header,
+  .contract-office-header,
+  .offseason-hero,
+  .calendar-toolbar,
+  .trade-header,
+  .strategy-hero,
+  .locker-summary,
+  .scouting-toolbar,
+  .standings-header,
+  .roster-team-hero,
+  .league-roster-browser > header,
+  .development-board > header,
+  .staff-candidate-board > header,
+  .staff-hires > header,
+  .simcast-feed-panel > header,
+  .simcast-side-panel section,
+  .simcast-coaching > header,
+  .simcast-live-box > header
+) {
+  border-color: rgba(202, 212, 231, .7) !important;
+  color: var(--navy) !important;
+  background: linear-gradient(90deg, rgba(255, 255, 255, .96), rgba(244, 247, 252, .86)) !important;
+}
+
+body.dashboard-mode :is(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea,
+  .compact-select,
+  #global-player-search,
+  .strategy-control select,
+  .settings-field input,
+  .locker-actions select,
+  .simcast-coaching select
+) {
+  border-color: rgba(188, 200, 223, .95) !important;
+  color: var(--navy) !important;
+  background: #ffffff !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9) !important;
+}
+
+body.dashboard-mode :is(
+  th,
+  .simcast-live-team th,
+  .secondary-page th,
+  .rotation-lineup-columns,
+  .simcast-period-head,
+  .multi-trade-steps > div,
+  .multi-trade-team-panel > header,
+  .multi-trade-analysis > header,
+  .multi-trade-analysis > footer
+) {
+  border-color: rgba(202, 212, 231, .72) !important;
+  color: #4b5a85 !important;
+  background: #f3f6fb !important;
+}
+
+body.dashboard-mode :is(
+  td,
+  .simcast-live-team td,
+  .simcast-feed-row,
+  .metric-row,
+  .transaction-log-list > div,
+  .reference-management-grid .metric-row,
+  .staff-candidate,
+  .development-player,
+  .in-season-fa-player
+) {
+  border-color: rgba(202, 212, 231, .62) !important;
+  color: var(--navy) !important;
+  background: transparent !important;
+}
+
+body.dashboard-mode :is(
+  .btn,
+  .watch-btn,
+  .preset-chip,
+  .simcast-speed button,
+  .multi-trade-asset > button,
+  .multi-trade-asset-picker > div > button,
+  .multi-trade-team-chips button
+):not(.primary-button):not(.reference-primary):not(.danger-button) {
+  border-color: rgba(188, 200, 223, .95) !important;
+  color: var(--navy) !important;
+  background: rgba(255, 255, 255, .86) !important;
+  box-shadow: 0 6px 14px rgba(9, 28, 88, .055) !important;
+}
+
+body.dashboard-mode :is(
+  .player-name,
+  .team-name,
+  .roster-team-identity strong,
+  .simcast-team strong,
+  .simcast-team > b,
+  .simcast-feed-row > strong,
+  .simcast-feed-row p,
+  .simcast-period-strip > div > :first-child,
+  .simcast-live-team td strong,
+  .development-player-profile strong,
+  .development-rating b,
+  .staff-candidate strong,
+  .staff-hires article strong,
+  .finance-hero > div:first-child strong,
+  .finance-income b,
+  .finance-ledger header > b,
+  .finance-year-grid article > strong,
+  .in-season-fa-identity > strong,
+  .in-season-fa-rule strong,
+  .in-season-fa-fit strong,
+  .multi-trade-team-panel > footer strong,
+  .multi-trade-analysis > header strong
+) {
+  color: var(--navy) !important;
+}
+
+body.dashboard-mode :is(
+  small,
+  .meta,
+  .muted-line,
+  .empty-state,
+  .dashboard-empty,
+  .simcast-feed-empty,
+  .simcast-team span,
+  .simcast-team small,
+  .simcast-clock small,
+  .simcast-feed-row > b,
+  .simcast-feed-row > span,
+  .staff-candidate small,
+  .staff-hires article small,
+  .development-player-profile span,
+  .development-outlook small,
+  .finance-policy label > span,
+  .multi-trade-asset small,
+  .multi-trade-asset > b,
+  .multi-trade-team-panel > header span,
+  .multi-trade-team-panel > footer,
+  .in-season-fa-identity > span,
+  .in-season-fa-rule small,
+  .in-season-fa-fit small
+) {
+  color: var(--muted) !important;
+}
+
+body.dashboard-mode :is(
+  .simcast-progress,
+  .chemistry-meter,
+  .staff-rating-meter > i,
+  .staff-department > i
+) {
+  background: #e6ecf6 !important;
+}
+
+body.dashboard-mode :is(
+  .career-date-pill,
+  .season-calendar,
+  .calendar-day,
+  .trade-team-panel,
+  .trade-decision,
+  .locker-player,
+  .prospect-card,
+  .free-agent-card,
+  .award-card,
+  .history-season,
+  .contract-office-header,
+  .offseason-hero,
+  .standings-header,
+  .strategy-hero,
+  .trade-header,
+  .calendar-toolbar,
+  .locker-summary
+) {
+  border-color: rgba(202, 212, 231, .78) !important;
+  color: var(--navy) !important;
+  background: rgba(255, 255, 255, .9) !important;
+  box-shadow: 0 12px 28px rgba(9, 28, 88, .07) !important;
+}
+
+body.dashboard-mode .career-date-pill b,
+body.dashboard-mode .sidebar-next-game > strong,
+body.dashboard-mode .page-title {
+  color: var(--navy) !important;
+}
+
+body.dashboard-mode tr:hover td {
+  background: rgba(6, 76, 255, .045) !important;
+}
+
+body.dashboard-mode .btn:hover {
+  border-color: rgba(6, 76, 255, .42) !important;
+  color: var(--blue) !important;
+  background: rgba(6, 76, 255, .06) !important;
+}
+
+body.dashboard-mode .btn.primary,
+body.dashboard-mode .btn.primary:hover {
+  border-color: rgba(6, 76, 255, .72) !important;
+  color: #ffffff !important;
+  background: linear-gradient(180deg, #0d55ef, #063fcf) !important;
+}
+
+body.dashboard-mode .btn.danger,
+body.dashboard-mode .btn.danger:hover {
+  border-color: rgba(215, 25, 63, .58) !important;
+  color: var(--red) !important;
+  background: rgba(215, 25, 63, .07) !important;
+}
+
+/* Global text rendering correction: clean NBA.com typography, no arcade/blocky display fonts. */
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+}
+
+body,
+button,
+select,
+textarea,
+input,
+table {
+  font-family: var(--broadcast-font) !important;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+:is(h1, h2, h3, h4, .page-title, .reference-page-title, .reference-section-title, .section-title, .card-title, .startup-copy h1, .opening-copy h1, .menu-page-heading h1, .save-archive-heading h1, .reference-season-hero h2, .rotation-section-title, .opening-menu .mode-card strong, .arena-player-mark) {
+  font-family: var(--broadcast-heading) !important;
+  font-weight: 700 !important;
+  letter-spacing: .02em !important;
+  line-height: 1.08 !important;
+}
+
+:is(.metric-value, .reference-stat-grid > article > strong, .stat-value, .profile-badge, .mode-number, .save-archive-summary strong, .reference-season-hero p strong, .reference-leaders-panel > div > b, .social-sentiment b, .finance-income b, .finance-ledger header > b, .finance-year-grid article > strong, .roster-team-overall b, .simcast-team > b, .simcast-clock strong, .development-coach b, .staff-budget b, .staff-department header b) {
+  font-family: var(--broadcast-number) !important;
+  font-weight: 800 !important;
+  letter-spacing: -.01em !important;
+  line-height: 1.05 !important;
+}
+
+:is(.player-name, .team-name, .roster-team-identity strong, .simcast-team strong, .staff-page-hero strong, .staff-head-coach > strong, .development-hero strong, .finance-hero > div:first-child strong, .in-season-fa-rule strong, .in-season-fa-fit strong, .team-select-menu .team-card strong, .save-slot-copy strong, .opening-continue strong, .reference-management-grid article > header strong, .reference-leaders-panel span strong, .sidebar-next-game-matchup strong) {
+  font-family: var(--broadcast-font) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.25 !important;
+}
+
+:is(.metric-label, .metric-subtitle, .card-label, th, .status-badge, .sidebar-nav-divider, .context-heading span, .reference-season-hero span, .reference-stat-grid span, .reference-stat-grid small, .reference-management-grid article > header span, .startup-copy > span, .startup-progress span, .startup-progress b, .opening-kicker, .opening-season, .opening-continue span, .arena-score-card span, .arena-score-card small, .save-slot-card > header span, .save-slot-card > header b, .save-slot-copy span, .save-career-stats span, .finance-hero span, .finance-ledger header span, .finance-policy > div > span, .finance-policy label > span, .finance-policy-status > span, .finance-commitments header span, .roster-team-identity span, .roster-team-overall span, .roster-compliance-strip span, .simcast-topline, .simcast-team span, .simcast-team small, .simcast-clock span, .simcast-clock small, .development-hero span, .development-board > header span, .development-rating span, .development-focus > span, .staff-page-hero span, .staff-current-grid article > span, .staff-candidate-board > header span, .staff-hires > header span, .secondary-page th) {
+  font-family: var(--broadcast-font) !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  line-height: 1.25 !important;
+}
+
+:is(p, small, td, li, label, .meta, .brand-subtitle, .context-nav button, .context-nav button span, .reference-chart-panel header span, .reference-bars span, .reference-upcoming button span, .reference-upcoming button small, .sidebar-next-game-matchup small) {
+  font-family: var(--broadcast-font) !important;
+  font-weight: 500;
+  letter-spacing: 0 !important;
+  line-height: 1.35 !important;
+}
+
+:is(.startup-brand strong, .brand-title, .opening-logo, .career-date-pill b, .save-load-button, .opening-back, .btn, .primary-button, .secondary-button, .danger-button, .reference-primary) {
+  font-family: var(--broadcast-font) !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+}
+
+:is(h1, h2, h3, h4, p, span, strong, small, b, em, button, label, th, td, li, a, input, select, textarea) {
+  image-rendering: auto !important;
+}
+

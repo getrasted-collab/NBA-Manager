@@ -1,0 +1,35 @@
+﻿/* League roster browser */
+.league-roster-browser { overflow: hidden; }
+.league-roster-browser > header { display: flex; align-items: center; justify-content: space-between; padding: 14px 17px; border-bottom: 1px solid #292e36; background: #0d1015; }
+.league-roster-browser > header > div { display: grid; gap: 3px; }
+.league-roster-browser > header span, .roster-team-identity span, .roster-team-overall span, .roster-compliance-strip span { color: var(--dash-gold); font-size: 7px; font-weight: 950; letter-spacing: 1.1px; }
+.league-roster-browser > header strong { font-size: 13px; }
+.league-roster-browser > header small { color: #68707b; font-size: 8px; }
+.roster-team-grid { display: grid; grid-template-columns: repeat(15,minmax(0,1fr)); gap: 1px; background: #292e36; }
+.roster-team-grid button { display: grid; justify-items: center; gap: 3px; min-width: 0; min-height: 62px; padding: 7px 2px; border: 0; color: #727985; background: #13161b; cursor: pointer; transition: background .15s ease,color .15s ease; }
+.roster-team-grid button:hover { color: #fff; background: #1b1f26; }
+.roster-team-grid button.active { color: #08090b; background: var(--dash-gold); }
+.roster-team-grid button span { color: inherit; font-size: 7px; font-weight: 950; }
+.roster-browser-logo { width: 31px; height: 31px; object-fit: contain; }
+.roster-team-grid button.active .roster-browser-logo { filter: drop-shadow(0 2px 4px rgba(0,0,0,.25)); }
+.roster-team-hero { display: flex; align-items: center; justify-content: space-between; gap: 22px; padding: 18px 20px; background: linear-gradient(100deg,rgba(245,166,35,.06),transparent 44%),#11141a; }
+.roster-team-identity { display: flex; align-items: center; gap: 14px; }
+.roster-team-identity > div { display: grid; gap: 4px; }
+.roster-team-identity strong { font-family: Impact,Haettenschweiler,sans-serif; font-size: 25px; font-weight: 500; text-transform: uppercase; }
+.roster-team-identity small { color: #767d87; font-size: 8px; }
+.roster-team-hero-logo { width: 64px; height: 64px; object-fit: contain; }
+.roster-team-overall { display: grid; justify-items: end; }
+.roster-team-overall b { color: #fff; font-family: Impact,sans-serif; font-size: 37px; font-weight: 500; }
+.roster-compliance-strip { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 11px 15px; border-left: 3px solid #15d79f; }
+.roster-compliance-strip.invalid { border-left-color: #f05d68; }
+.roster-compliance-strip > div { display: grid; gap: 3px; }
+.roster-compliance-strip strong { font-size: 10px; }
+.roster-compliance-strip p { margin: 0; color: #777e89; font-size: 8px; }
+.league-roster-table table { min-width: 930px; }
+.league-roster-table td > small { display: block; margin-top: 3px; color: #68707b; font-size: 7px; }
+.league-roster-table th:last-child, .league-roster-table td:last-child { width: 76px; text-align: center; }
+.roster-waive-btn { min-width: 58px; min-height: 27px !important; border-color: rgba(240,93,104,.38) !important; color: #f47a84 !important; background: rgba(240,93,104,.06) !important; }
+.roster-waive-btn:hover { border-color: #f05d68 !important; color: #fff !important; background: rgba(240,93,104,.15) !important; }
+.roster-readonly-action { color: #4f555e; }
+.rotation-section-title { margin: 24px 0 10px; font-family: Impact,Haettenschweiler,sans-serif; font-size: 21px; font-weight: 500; letter-spacing: .5px; }
+

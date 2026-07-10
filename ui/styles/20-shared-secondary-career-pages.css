@@ -1,0 +1,63 @@
+﻿/* Unified secondary career pages */
+body.dashboard-mode .page-shell-header { display: none; }
+.secondary-page {
+  --secondary-surface: #111319;
+  --secondary-surface-raised: #171a20;
+  --secondary-surface-deep: #0d0f13;
+  --secondary-stroke: #2b2f37;
+  --secondary-muted: #777e89;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+.secondary-page > * { min-width: 0; }
+.secondary-page > .page-title { position: relative; margin: 0 0 4px; padding: 0 0 12px; border-bottom: 1px solid var(--secondary-stroke); line-height: 1; }
+.secondary-page > .page-title::after { position: absolute; bottom: -1px; left: 0; width: 42px; height: 2px; background: var(--dash-gold); content: ""; }
+.secondary-page .card { border-color: var(--secondary-stroke); border-radius: 5px; background: var(--secondary-surface); }
+.secondary-page .card-pad { padding: 16px 18px; }
+.secondary-page .wide-card { margin: 0; }
+.secondary-page .grid-2, .secondary-page .grid-3, .secondary-page .grid-4 { gap: 10px; margin: 0; }
+.secondary-page .stat-card { position: relative; display: grid; align-content: space-between; gap: 11px; min-height: 96px; padding: 15px 16px; overflow: hidden; }
+.secondary-page .stat-card::after { position: absolute; right: -20px; bottom: -32px; width: 76px; height: 76px; border: 1px solid rgba(245,166,35,.08); border-radius: 50%; content: ""; }
+.secondary-page .stat-card .card-label { color: var(--secondary-muted); font-size: 7px; font-weight: 950; letter-spacing: 1.15px; text-transform: uppercase; }
+.secondary-page .stat-card .stat-value { color: #f1f2f4; font-family: Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif; font-size: 26px; font-weight: 500; line-height: 1; }
+.secondary-page .stat-card:first-child { border-color: rgba(245,166,35,.38); background: linear-gradient(120deg,rgba(245,166,35,.07),transparent 55%),var(--secondary-surface); }
+.secondary-page .stat-card:first-child .stat-value { color: var(--dash-gold); }
+.secondary-page :is(.calendar-toolbar,.trade-header,.strategy-hero,.locker-summary,.scouting-toolbar,.standings-header,.contract-office-header,.offseason-hero,.development-hero,.staff-page-hero,.finance-hero,.rotation-header,.roster-team-hero) { min-height: 106px; margin: 0; padding: 18px 20px; border-color: var(--secondary-stroke); background: linear-gradient(105deg,rgba(245,166,35,.055),transparent 43%),var(--secondary-surface); }
+.secondary-page :is(.calendar-toolbar,.trade-header,.strategy-hero,.locker-summary,.scouting-toolbar,.standings-header,.contract-office-header,.offseason-hero,.development-hero,.staff-page-hero,.finance-hero,.rotation-header,.roster-team-hero) .player-name { margin-top: 4px; font-size: 24px; text-transform: uppercase; }
+.secondary-page :is(.locker-summary,.development-hero,.staff-page-hero,.finance-hero,.rotation-header) > .team-hero-identity,
+.reference-season-hero > .team-hero-identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.secondary-page :is(.locker-summary,.development-hero,.staff-page-hero,.finance-hero,.rotation-header) > .team-hero-identity > div,
+.reference-season-hero > .team-hero-identity > div {
+  display: grid;
+  gap: 5px;
+}
+.secondary-page :is(.development-board,.staff-candidate-board,.staff-hires,.finance-ledger,.finance-commitments,.rotation-lineup-card,.league-roster-browser,.social-feed) > header { min-height: 54px; padding: 12px 16px; border-bottom: 1px solid var(--secondary-stroke); background: var(--secondary-surface-deep); }
+.secondary-page .page-actions { display: flex; justify-content: flex-end; gap: 8px; margin: -50px 0 5px; }
+.secondary-page .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.secondary-page .btn, .secondary-page button, .secondary-page select, .secondary-page input, .secondary-page textarea { transition: border-color .15s ease,color .15s ease,background .15s ease,transform .15s ease; }
+.secondary-page .btn:active, .secondary-page button:active { transform: translateY(1px); }
+.secondary-page :is(.btn,button,select,input,textarea):focus-visible { outline: 2px solid rgba(245,166,35,.55); outline-offset: 2px; }
+.secondary-page :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),select,textarea) { min-height: 34px; border: 1px solid #343943; border-radius: 4px; color: #e7e8ea; background: var(--secondary-surface-deep); }
+.secondary-page textarea { min-height: 112px; padding: 10px; resize: vertical; }
+.secondary-page :is(input,select,textarea):focus { border-color: rgba(245,166,35,.72); }
+.secondary-page :is(.table-card,.stats-table,.contract-table,.editor-table,.league-roster-table,.finance-contracts) { margin: 0; overflow-x: auto; border-color: var(--secondary-stroke); scrollbar-color: #4a505b #111319; scrollbar-width: thin; }
+.secondary-page table { width: 100%; border-collapse: collapse; }
+.secondary-page th { height: 38px; padding: 0 12px; color: var(--secondary-muted); background: var(--secondary-surface-deep); font-size: 7px; font-weight: 950; letter-spacing: 1px; text-transform: uppercase; }
+.secondary-page td { min-height: 46px; padding: 10px 12px; }
+.secondary-page tbody tr:last-child td { border-bottom: 0; }
+.secondary-page tbody tr:hover td { background: var(--secondary-surface-raised); }
+.secondary-page :is(.ok,.positive) { color: #15d79f; }
+.secondary-page :is(.bad,.negative) { color: #f05d68; }
+.secondary-page :is(.muted-line,.empty-state,.dashboard-empty) { padding: 24px; border: 1px dashed #343943; border-radius: 4px; color: var(--secondary-muted); background: rgba(255,255,255,.012); text-align: center; }
+.secondary-page .metric-row { min-height: 34px; padding: 8px 0; }
+.secondary-page .metric-row:last-child { border-bottom: 0; }
+.secondary-page .card-label, .secondary-page label > span { font-weight: 900; text-transform: uppercase; }
+.secondary-page .section-grid { gap: 0; }
+.secondary-page[data-page="settings"] .automation-list, .secondary-page[data-page="god mode"] .editor-form { gap: 10px; }
+.secondary-page[data-page="social"] .social-layout, .secondary-page[data-page="staff"] .staff-current-grid, .secondary-page[data-page="finances"] .finance-columns { margin: 0; }
+

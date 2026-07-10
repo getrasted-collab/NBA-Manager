@@ -1,0 +1,182 @@
+﻿/* Brand logo asset: replace the text-only league chip with the supplied NBA mark. */
+.league-mark,
+body.dashboard-mode .league-mark,
+body.dark-mode.dashboard-mode .league-mark {
+  width: 38px !important;
+  height: 48px !important;
+  min-width: 38px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: transparent !important;
+  background: url("../../assets/nba-logo-white.png") center / contain no-repeat !important;
+  box-shadow: none !important;
+  font-size: 0 !important;
+  letter-spacing: 0 !important;
+}
+
+.startup-brand > span {
+  width: 34px !important;
+  height: 44px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: transparent !important;
+  background: url("../../assets/nba-logo-white.png") center / contain no-repeat !important;
+  box-shadow: none !important;
+  font-size: 0 !important;
+}
+
+
+body.dark-mode.dashboard-mode :is(
+  .card,
+  .page-context-card,
+  .context-sidebar,
+  .sidebar-next-game,
+  .staff-list-panel,
+  .staff-breakdown-panel,
+  .staff-openings-panel,
+  .player-dev-tracker,
+  .player-dev-action-card,
+  .locker-leadership-panel,
+  .locker-morale-panel,
+  .locker-issue-list,
+  .scouting-draft-board,
+  .scouting-selected-panel,
+  .scouting-action-center,
+  .scouting-assignments,
+  .scouting-team-summary,
+  .finance-cap-sheet,
+  .finance-action-center,
+  .finance-advisor,
+  .finance-breakdown,
+  .finance-owner-profile,
+  .finance-payroll-timeline,
+  .league-stats-table-card,
+  .league-action-card,
+  .award-action-center,
+  .history-action-center,
+  .social-post
+) {
+  border-color: var(--dark-border) !important;
+  color: #f4f7ff !important;
+  background: linear-gradient(180deg, rgba(20, 28, 49, .92), rgba(12, 18, 34, .9)) !important;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .26) !important;
+}
+
+body.dark-mode.dashboard-mode :is(.context-sidebar, .sidebar-next-game) {
+  background: linear-gradient(180deg, rgba(10, 15, 30, .94), rgba(6, 10, 21, .94)) !important;
+}
+
+body.dark-mode.dashboard-mode .context-nav button {
+  color: #d8e1ff !important;
+  background: transparent !important;
+}
+
+body.dark-mode.dashboard-mode .context-nav button.active {
+  color: #fff !important;
+  background: linear-gradient(90deg, rgba(7, 83, 255, .34), rgba(255, 255, 255, .04)) !important;
+}
+
+body.dark-mode.dashboard-mode :is(thead, th, .staff-list-head, .table-head) {
+  color: #d8e1ff !important;
+  border-color: rgba(136, 156, 200, .28) !important;
+  background: rgba(9, 15, 29, .62) !important;
+}
+
+body.dark-mode.dashboard-mode :is(table, tbody, tr, td, .staff-list-row, .staff-opening-row, .finance-cap-sheet tr) {
+  color: #f4f7ff !important;
+  border-color: rgba(136, 156, 200, .24) !important;
+}
+
+body.dark-mode.dashboard-mode :is(tbody tr, .staff-list-row, .staff-opening-row, .social-post, .award-action-card, .history-action-card, .league-action-card) {
+  background: rgba(9, 15, 29, .35) !important;
+}
+
+body.dark-mode.dashboard-mode :is(tbody tr:hover, .staff-list-row:hover) {
+  background: rgba(42, 78, 150, .22) !important;
+}
+
+body.dark-mode.dashboard-mode :is(input, select, textarea) {
+  border-color: rgba(148, 167, 210, .54) !important;
+  color: #f4f7ff !important;
+  background: rgba(9, 14, 28, .82) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .04) !important;
+}
+
+body.dark-mode.dashboard-mode :is(input, textarea)::placeholder {
+  color: #7784a6 !important;
+}
+
+body.dark-mode.dashboard-mode :is(.btn, .text-link, .mini-action, .action-button, .filter-button, .gameplan-toggle, .watch-btn) {
+  border-color: rgba(145, 165, 210, .5) !important;
+  color: #eaf0ff !important;
+  background: rgba(15, 22, 40, .86) !important;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .18) !important;
+}
+
+body.dark-mode.dashboard-mode :is(.btn:hover, .text-link:hover, .mini-action:hover, .action-button:hover, .filter-button:hover, .gameplan-toggle:hover) {
+  border-color: rgba(110, 146, 255, .82) !important;
+  background: rgba(27, 43, 79, .92) !important;
+}
+
+body.dark-mode.dashboard-mode :is(.primary, .active, .is-active, button.active) {
+  border-color: rgba(84, 124, 255, .82) !important;
+}
+
+body.dark-mode.dashboard-mode :is(.badge, .pill, .status-pill) {
+  color: #f8fbff !important;
+}
+
+body.dark-mode.dashboard-mode :is(.ok, .positive, .green, .status-active) {
+  color: #34d399 !important;
+}
+
+body.dark-mode.dashboard-mode :is(.danger, .negative, .red, .status-warning) {
+  color: #fb7185 !important;
+}
+
+body.dark-mode.dashboard-mode :is(.sparkline, .bar-rail, .metric-track, .progress-track, .finance-bar-track) {
+  background-color: rgba(226, 234, 248, .13) !important;
+}
+
+body.dark-mode.dashboard-mode :is(.social-game-card, .social-video-card, .award-top-card, .history-top-card, .league-stat-card, .scouting-metric-card) {
+  border-color: var(--dark-border) !important;
+  background: linear-gradient(180deg, rgba(22, 31, 54, .9), rgba(11, 17, 32, .88)) !important;
+}
+
+body.dark-mode.dashboard-mode :is(
+  [class*="action-card"],
+  [class*="metric-card"],
+  [class*="table-card"],
+  [class*="top-card"],
+  [class*="summary-card"],
+  [class*="panel"]
+) {
+  border-color: var(--dark-border) !important;
+  color: #f4f7ff !important;
+  background-color: rgba(16, 22, 39, .9) !important;
+}
+
+body.dark-mode.dashboard-mode .social-quick-dms {
+  background: #05070d !important;
+}
+
+body.dark-mode.dashboard-mode * {
+  scrollbar-color: rgba(106, 142, 255, .84) rgba(13, 20, 38, .78);
+}
+
+body.dark-mode.dashboard-mode *::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+body.dark-mode.dashboard-mode *::-webkit-scrollbar-track {
+  background: rgba(13, 20, 38, .78);
+  border-radius: 999px;
+}
+
+body.dark-mode.dashboard-mode *::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(13, 20, 38, .78);
+  border-radius: 999px;
+  background: rgba(106, 142, 255, .84);
+}
+
