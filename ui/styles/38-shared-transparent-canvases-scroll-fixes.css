@@ -1,4 +1,5 @@
-﻿/* Transparent page canvases: keep cards intact, let the arena background show through. */
+/* Ownership: shared-pages. Original cascade position preserved. */
+/* Transparent page canvases: keep cards intact, let the arena background show through. */
 body.dashboard-mode:is(
   .awards-layout,
   .league-stats-layout,
@@ -77,6 +78,7 @@ body.dashboard-mode .page:has(.rotation-page-title) > .rotation-page-title {
   box-shadow: none !important;
 }
 
+/* Ownership: awards. Original cascade position preserved. */
 /* Final scroll and floating-action corrections. Keep card sizes stable, but make hidden bottoms reachable. */
 body.dashboard-mode.awards-layout .awards-race-table {
   display: grid !important;
@@ -99,10 +101,12 @@ body.dashboard-mode.awards-layout .awards-race-table .text-link {
   z-index: 2 !important;
 }
 
+/* Ownership: social. Original cascade position preserved. */
 body.dashboard-mode.social-layout-page .social-quick-dms {
   margin: 142px 12px 0 auto !important;
 }
 
+/* Ownership: locker. Original cascade position preserved. */
 body.dashboard-mode.locker-room-layout .locker-leadership-panel,
 body.dashboard-mode.locker-room-layout .locker-morale-panel,
 body.dashboard-mode.locker-room-layout .locker-action-center > .locker-panel {
@@ -169,6 +173,7 @@ body.dashboard-mode.locker-room-layout .locker-issue-list {
   overscroll-behavior: contain !important;
 }
 
+/* Ownership: standings. Original cascade position preserved. */
 /* Taller standings table rhythm for the compact full-screen standings views. */
 body.dashboard-mode.standings-division-layout .standings-division-grid,
 body.dashboard-mode.standings-wildcard-layout .standings-conference-grid {
@@ -191,6 +196,7 @@ body.dashboard-mode.standings-cup-layout .nba-cup-table tbody tr {
   height: 66px !important;
 }
 
+/* Ownership: development. Original cascade position preserved. */
 /* Player development: hide the tracker scrollbar and let action buttons breathe. */
 body.dashboard-mode.player-development-layout .player-dev-tracker,
 body.dashboard-mode.player-development-layout .player-dev-tracker > div:last-child {
@@ -226,6 +232,7 @@ body.dashboard-mode.player-development-layout .player-dev-action-card .btn {
   font-size: 7px !important;
 }
 
+/* Ownership: awards. Original cascade position preserved. */
 /* Bottom-safe scroll lanes for awards and league-stats side panels. */
 body.dashboard-mode.awards-layout .awards-race-table {
   grid-template-rows: auto minmax(0, 386px) 38px !important;
@@ -242,6 +249,7 @@ body.dashboard-mode.awards-layout .awards-table-wrap table {
   margin-bottom: 34px !important;
 }
 
+/* Ownership: league-stats. Original cascade position preserved. */
 body.dashboard-mode.league-stats-layout .league-stats-action-center {
   padding-bottom: 32px !important;
   scroll-padding-bottom: 32px !important;
@@ -251,6 +259,7 @@ body.dashboard-mode.league-stats-layout .league-stats-action-center > :last-chil
   margin-bottom: 32px !important;
 }
 
+/* Ownership: scouting. Original cascade position preserved. */
 /* Scouting assignments: taller right-rail rows for cleaner names and status pills. */
 body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments {
   grid-template-rows: auto repeat(3, minmax(68px, 1fr)) !important;
@@ -268,6 +277,7 @@ body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments .
   height: 36px !important;
 }
 
+/* Ownership: locker. Original cascade position preserved. */
 /* Locker morale: keep the card title separate from the table labels. */
 body.dashboard-mode.locker-room-layout .locker-morale-panel {
   grid-template-rows: 42px 24px minmax(0, 1fr) !important;
@@ -291,6 +301,7 @@ body.dashboard-mode.locker-room-layout .locker-morale-panel > div {
   order: 3 !important;
 }
 
+/* Ownership: development. Original cascade position preserved. */
 /* Player development action alerts: restore text-left, headshot-right layout. */
 body.dashboard-mode.player-development-layout .player-dev-action-card article {
   grid-template-columns: minmax(0, 1fr) 46px !important;
@@ -338,6 +349,7 @@ body.dashboard-mode.player-development-layout .player-dev-action-card article di
   margin-top: 6px !important;
 }
 
+/* Ownership: locker. Original cascade position preserved. */
 /* Locker action center: keep buttons inside each alert card while preserving outer card size. */
 body.dashboard-mode.locker-room-layout .locker-issue-list {
   gap: 9px !important;
@@ -511,6 +523,7 @@ body.dashboard-mode.locker-room-layout .locker-morale-panel > div::-webkit-scrol
 
 }
 
+/* Ownership: development. Original cascade position preserved. */
 /* Player development tracker: visible internal scroll for longer player lists. */
 body.dashboard-mode.player-development-layout .player-dev-tracker {
   display: grid !important;
@@ -547,6 +560,7 @@ body.dashboard-mode.player-development-layout .player-dev-tracker > div:last-chi
   background-clip: padding-box !important;
 }
 
+/* Ownership: locker. Original cascade position preserved. */
 /* Locker right rail: shorten Action Center so the full rail fits without clipping. */
 body.dashboard-mode.locker-room-layout .locker-action-center {
   grid-template-rows: 470px auto auto !important;
@@ -617,6 +631,7 @@ body.dashboard-mode.locker-room-layout .locker-morale-panel > div::after {
   text-align: center !important;
 }
 
+/* Ownership: standings. Original cascade position preserved. */
 /* NBA Cup standings: remove the extra empty tail under the rows. */
 body.dashboard-mode.standings-cup-layout .nba-cup-card {
   align-self: start !important;
@@ -636,6 +651,7 @@ body.dashboard-mode.standings-cup-layout .nba-cup-table {
   min-height: 0 !important;
 }
 
+/* Ownership: locker. Original cascade position preserved. */
 /* Player Morale: compact columns so the table fits the narrow card cleanly. */
 body.dashboard-mode.locker-room-layout .locker-morale-panel::before,
 body.dashboard-mode.locker-room-layout .locker-morale-panel article {
@@ -704,6 +720,7 @@ body.dashboard-mode.locker-room-layout .locker-morale-panel > div {
   scrollbar-color: #0753ff rgba(218, 228, 246, .9) !important;
 }
 
+/* Ownership: social. Original cascade position preserved. */
 /* Social DM button: larger icon with a clean rounded shadow. */
 body.dashboard-mode.social-layout-page .social-quick-dms {
   width: 70px !important;
@@ -770,6 +787,7 @@ body.dashboard-mode.social-layout-page .social-quick-dms {
   margin: 14px 12px 0 auto !important;
 }
 
+/* Ownership: staff. Original cascade position preserved. */
 /* Staff list: remove the blank white strip under the final row. */
 body.dashboard-mode.staff-layout .staff-list-body {
   padding-bottom: 0 !important;
@@ -824,6 +842,7 @@ body.dashboard-mode.staff-layout .staff-breakdown-row:last-of-type {
   border-bottom-left-radius: 10px !important;
 }
 
+/* Ownership: scouting. Original cascade position preserved. */
 /* Scouting assignments: give the right-rail assignment list more height. */
 body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments {
   grid-template-rows: auto repeat(3, minmax(78px, 1fr)) !important;
@@ -841,6 +860,7 @@ body.dashboard-mode.scouting-layout .scouting-right-rail .scouting-assignments .
   height: 40px !important;
 }
 
+/* Ownership: social. Original cascade position preserved. */
 /* Social DM button: larger and nudged lower. */
 body.dashboard-mode.social-layout-page .social-quick-dms {
   width: 82px !important;
@@ -866,6 +886,7 @@ body.dashboard-mode.social-layout-page .social-quick-dms::after {
   height: 12px !important;
 }
 
+/* Ownership: staff. Original cascade position preserved. */
 /* Staff list: keep the final row fully reachable without the old empty footer strip. */
 body.dashboard-mode.staff-layout .staff-list-body {
   padding-bottom: 18px !important;
@@ -892,12 +913,14 @@ body.dashboard-mode.staff-layout .staff-openings-panel > footer {
   overflow: hidden !important;
 }
 
+/* Ownership: social. Original cascade position preserved. */
 /* Social DM button: remove the visible drop-shadow patch. */
 body.dashboard-mode.social-layout-page .social-quick-dms {
   box-shadow: none !important;
   filter: none !important;
 }
 
+/* Ownership: staff. Original cascade position preserved. */
 /* Staff list: show the rounded card bottom and let the last row clear it. */
 body.dashboard-mode.staff-layout .staff-office-layout {
   padding-bottom: 24px !important;
@@ -937,6 +960,7 @@ body.dashboard-mode.staff-layout .staff-openings-panel > footer {
   background: transparent !important;
 }
 
+/* Ownership: locker. Original cascade position preserved. */
 /* Locker right rail: let gaps between cards show the page background in dark mode. */
 body.dark-mode.dashboard-mode.locker-room-layout .locker-action-center {
   background: transparent !important;
@@ -946,11 +970,13 @@ body.dark-mode.dashboard-mode.locker-room-layout .locker-action-center {
   overflow: visible !important;
 }
 
+/* Ownership: staff. Original cascade position preserved. */
 body.dashboard-mode.staff-layout .staff-openings-panel > footer {
   border-bottom-right-radius: 10px !important;
   border-bottom-left-radius: 10px !important;
 }
 
+/* Ownership: social. Original cascade position preserved. */
 /* Social DM icon: match the simpler rounded chat outline reference. */
 body.dashboard-mode.social-layout-page .social-quick-dms,
 body.dashboard-mode.social-layout-page .social-dms-button {
@@ -983,6 +1009,7 @@ body.dashboard-mode.social-layout-page .social-dms-button::after {
   content: "" !important;
 }
 
+/* Ownership: staff. Original cascade position preserved. */
 /* Staff list: trim the extra bottom strip while keeping the final row reachable. */
 body.dashboard-mode.staff-layout .staff-list-body {
   padding-bottom: 8px !important;
@@ -993,11 +1020,13 @@ body.dashboard-mode.staff-layout .staff-list-row:last-child {
   margin-bottom: 0 !important;
 }
 
+/* Ownership: shell. Original cascade position preserved. */
 /* Topbar dark-mode toggle beside the week pill and close button. */
 body.dashboard-mode .topbar-team {
   gap: 8px !important;
 }
 
+/* Ownership: shared-controls. Original cascade position preserved. */
 body.dashboard-mode .theme-toggle-button {
   position: relative !important;
   display: grid !important;
@@ -1038,6 +1067,7 @@ body.dashboard-mode .theme-toggle-button.active::before {
     -6px -6px 0 -5px #f9c74f !important;
 }
 
+/* Ownership: shared-theme. Original cascade position preserved. */
 body.dark-mode.dashboard-mode {
   --navy: #edf3ff;
   --secondary-ink: #edf3ff;
@@ -1047,6 +1077,7 @@ body.dark-mode.dashboard-mode {
   color: #edf3ff !important;
 }
 
+/* Ownership: shell. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .broadcast-shell {
   background:
     linear-gradient(90deg, rgba(5, 8, 18, .9), rgba(14, 18, 35, .72)),
@@ -1084,4 +1115,3 @@ body.dark-mode.dashboard-mode .context-sidebar {
   color: #edf3ff !important;
   background: rgba(15, 20, 35, .82) !important;
 }
-

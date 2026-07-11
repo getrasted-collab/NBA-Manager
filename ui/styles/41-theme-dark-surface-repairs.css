@@ -1,4 +1,5 @@
-﻿/* Dark mode surface repair for older page modules that still declared light backgrounds. */
+/* Ownership: shared-theme. Original cascade position preserved. */
+/* Dark mode surface repair for older page modules that still declared light backgrounds. */
 body.dark-mode.dashboard-mode {
   --dm-page: rgba(8, 13, 26, .92);
   --dm-panel: linear-gradient(180deg, rgba(18, 25, 45, .96), rgba(10, 16, 31, .94));
@@ -20,6 +21,7 @@ body.dark-mode.dashboard-mode {
   --text-secondary-dark: var(--dm-muted);
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dark-mode.dashboard-mode :is(
   .reference-season-hero,
   .reference-stat-grid article,
@@ -96,6 +98,7 @@ body.dark-mode.dashboard-mode :is(
   background: rgba(8, 14, 28, .95) !important;
 }
 
+/* Ownership: roster. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .roster-team-grid button {
   border-color: var(--dm-border) !important;
   color: #dce5ff !important;
@@ -111,6 +114,7 @@ body.dark-mode.dashboard-mode .roster-team-grid button span {
   color: #eaf0ff !important;
 }
 
+/* Ownership: shared-theme. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .calendar-game {
   border-color: rgba(110, 146, 255, .62) !important;
   color: #f8fbff !important;
@@ -122,6 +126,7 @@ body.dark-mode.dashboard-mode .calendar-game.played {
   background: rgba(16, 23, 41, .8) !important;
 }
 
+/* Ownership: gameplan. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.gameplan-layout :is(
   .gameplan-tabs button,
   .gameplan-action-grid button,
@@ -186,6 +191,7 @@ body.dark-mode.dashboard-mode.gameplan-layout .gameplan-summary-card.orange::bef
   background: rgba(251, 191, 36, .12) !important;
 }
 
+/* Ownership: shared-controls. Original cascade position preserved. */
 body.dark-mode.dashboard-mode :is(input, select, textarea) {
   border-color: rgba(145, 165, 210, .55) !important;
   color: var(--dm-text) !important;
@@ -201,10 +207,12 @@ body.dark-mode.dashboard-mode input[type="range"] {
   accent-color: #0753ff;
 }
 
+/* Ownership: shared-scroll. Original cascade position preserved. */
 body.dark-mode.dashboard-mode button:not(.custom-scrollbar-arrow-top):not(.custom-scrollbar-arrow-bottom) {
   color: #eef3ff !important;
 }
 
+/* Ownership: shared-controls. Original cascade position preserved. */
 body.dark-mode.dashboard-mode :is(.btn, .secondary-button, .icon-btn, .reference-primary) {
   border-color: rgba(145, 165, 210, .55) !important;
   color: #eef3ff !important;
@@ -217,6 +225,7 @@ body.dark-mode.dashboard-mode :is(.btn.primary, .primary, .reference-primary) {
   background: #0753ff !important;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dark-mode.dashboard-mode :is(
   .calendar-date,
   .meta,
@@ -251,16 +260,19 @@ body.dark-mode.dashboard-mode :is(
   color: #f8fbff !important;
 }
 
+/* Ownership: shared-theme. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .reference-stat-grid article:last-child {
   border-bottom-color: #e11d48 !important;
 }
 
+/* Ownership: shared-controls. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .reference-upcoming button {
   border-color: var(--dm-border) !important;
   color: #f8fbff !important;
   background: linear-gradient(180deg, rgba(24, 34, 58, .95), rgba(13, 20, 38, .95)) !important;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 /* Dark mode repair pass for the manager pages that still had light surfaces. */
 body.dark-mode.dashboard-mode :is(
   .social-page,
@@ -548,6 +560,7 @@ body.dark-mode.dashboard-mode :is(
   border-color: rgba(57, 128, 255, .95) !important;
 }
 
+/* Ownership: shared-controls. Original cascade position preserved. */
 body.dark-mode.dashboard-mode :is(
   input,
   select,
@@ -562,6 +575,7 @@ body.dark-mode.dashboard-mode :is(input, select, textarea)::placeholder {
   color: rgba(190, 202, 231, .7) !important;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dark-mode.dashboard-mode :is(
   .social-post-body > header,
   .social-post-actions,
@@ -680,6 +694,7 @@ body.dark-mode.dashboard-mode :is(
   color: #f8fbff !important;
 }
 
+/* Ownership: free-agency. Original cascade position preserved. */
 body.dark-mode.dashboard-mode :is(
   .team-fit-card,
   .fit-score-card,
@@ -689,6 +704,7 @@ body.dark-mode.dashboard-mode :is(
   border-color: rgba(145, 165, 205, .36) !important;
 }
 
+/* Ownership: social. Original cascade position preserved. */
 body.dark-mode.dashboard-mode :is(
   .social-summary article::before,
   .social-trends article::before
@@ -697,6 +713,7 @@ body.dark-mode.dashboard-mode :is(
   color: #f8fbff !important;
 }
 
+/* Ownership: dashboard. Original cascade position preserved. */
 /* Dark mode dashboard polish: keep secondary controls from becoming pale slabs. */
 body.dark-mode.dashboard-mode .reference-season-hero p b,
 body.dark-mode.dashboard-mode .team-hero-identity p b {
@@ -706,6 +723,7 @@ body.dark-mode.dashboard-mode .team-hero-identity p b {
   box-shadow: none !important;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dark-mode.dashboard-mode :is(
   .reference-season-hero .btn:not(.reference-primary),
   .reference-management-grid .btn,
@@ -736,6 +754,7 @@ body.dark-mode.dashboard-mode :is(
   color: #ffffff !important;
 }
 
+/* Ownership: shared-controls. Original cascade position preserved. */
 body.dark-mode.dashboard-mode :is(button, .btn):disabled,
 body.dark-mode.dashboard-mode :is(.btn.disabled, .opening-continue.disabled) {
   background: linear-gradient(180deg, rgba(44, 54, 75, .9), rgba(27, 35, 52, .9)) !important;
@@ -754,6 +773,7 @@ body.dark-mode.dashboard-mode .reference-upcoming button.upcoming-card {
   box-shadow: 0 14px 28px rgba(0, 0, 0, .22), inset 0 -4px 0 var(--blue) !important;
 }
 
+/* Ownership: shared-theme. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .reference-upcoming .upcoming-card strong {
   color: #4f8bff !important;
 }
@@ -766,6 +786,7 @@ body.dark-mode.dashboard-mode .reference-upcoming .upcoming-card::after {
   opacity: .16 !important;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dashboard-mode .reference-season-hero > div:last-child .btn:not(.reference-primary),
 body.dashboard-mode .reference-season-hero .reference-week-button,
 body.dark-mode.dashboard-mode .reference-season-hero > div:last-child .btn:not(.reference-primary),
@@ -788,6 +809,7 @@ body.dark-mode.dashboard-mode :is(.staff-market, .staff-candidate, .staff-openin
   background: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
 }
 
+/* Ownership: staff. Original cascade position preserved. */
 body.dark-mode.dashboard-mode :is(.staff-market, .staff-candidate, .staff-opening-row) .reference-week-button:disabled,
 body.dashboard-mode .sidebar-next-game .sidebar-sim-game-button,
 body.dark-mode.dashboard-mode .sidebar-next-game .sidebar-sim-game-button {
@@ -798,6 +820,7 @@ body.dark-mode.dashboard-mode .sidebar-next-game .sidebar-sim-game-button {
   opacity: 1 !important;
 }
 
+/* Ownership: shell. Original cascade position preserved. */
 body.dashboard-mode .sidebar-next-game .sidebar-sim-game-button:hover,
 body.dark-mode.dashboard-mode .sidebar-next-game .sidebar-sim-game-button:hover {
   border-color: rgba(79, 139, 255, .85) !important;
@@ -805,6 +828,7 @@ body.dark-mode.dashboard-mode .sidebar-next-game .sidebar-sim-game-button:hover 
   background: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
 }
 
+/* Ownership: dashboard. Original cascade position preserved. */
 body.dashboard-mode .context-sidebar .sidebar-next-game > button.btn,
 body.dashboard-mode .sidebar-next-game > button[data-action="go-games"],
 body.dashboard-mode .sidebar-next-game > button[data-sim-control="next"],
@@ -831,6 +855,7 @@ body.dark-mode.dashboard-mode .sidebar-next-game > button[data-sim-control="next
   background-image: linear-gradient(180deg, #31476d, #172640) !important;
 }
 
+/* Ownership: staff. Original cascade position preserved. */
 body.dark-mode :is(.staff-market, .staff-card, .staff-opening-row, .staff-candidate) .staff-hire-button:not(:disabled) {
   border-color: rgba(150, 174, 222, .58) !important;
   color: #edf4ff !important;
@@ -848,4 +873,3 @@ body.dark-mode :is(.staff-market, .staff-card, .staff-opening-row, .staff-candid
   box-shadow: none !important;
   opacity: 1 !important;
 }
-

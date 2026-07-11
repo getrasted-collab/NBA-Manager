@@ -1,3 +1,4 @@
+/* Ownership: gameplan. Original cascade position preserved. */
 /* Gameplan and league-history layout refinements retained at cascade slot 35. */
 body.dashboard-mode.gameplan-layout .workspace {
   padding: 18px 22px 22px !important;
@@ -271,6 +272,7 @@ body.dashboard-mode.gameplan-layout .gameplan-lower-grid .gameplan-card {
   min-height: 224px !important;
 }
 
+/* Ownership: history. Original cascade position preserved. */
 body.dashboard-mode.league-history-layout .league-history-dashboard {
   grid-template-rows: auto 100px 34px minmax(282px, 1fr) 226px 124px !important;
 }
@@ -294,12 +296,14 @@ body.dashboard-mode.league-history-layout .league-history-lower-grid {
   min-height: 226px !important;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dashboard-mode.league-history-layout .league-history-lower-grid > :is(section, article),
 body.dashboard-mode.league-history-layout :is(.history-leaders-card, .history-award-legacy, .history-franchise-titles, .history-news-card) {
   min-height: 218px !important;
   overflow: hidden !important;
 }
 
+/* Ownership: history. Original cascade position preserved. */
 body.dashboard-mode.league-history-layout .history-table-wrap {
   max-height: 248px !important;
 }
@@ -368,6 +372,7 @@ body.dashboard-mode.league-history-layout .history-leaders-card strong {
   white-space: nowrap !important;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dashboard-mode.league-history-layout .history-award-columns {
   grid-template-columns: 1fr 1fr !important;
   min-height: 154px !important;
@@ -420,6 +425,7 @@ body.dashboard-mode.league-history-layout .history-award-columns article:nth-chi
   -webkit-line-clamp: 2 !important;
 }
 
+/* Ownership: history. Original cascade position preserved. */
 body.dashboard-mode.league-history-layout .league-history-lower-grid {
   grid-template-columns: 1.08fr 1.16fr .92fr !important;
 }
@@ -671,4 +677,3 @@ body.dashboard-mode.league-history-layout .history-dynasty-bg {
 body.dashboard-mode.league-history-layout .history-dynasty-player {
   z-index: 3 !important;
 }
-

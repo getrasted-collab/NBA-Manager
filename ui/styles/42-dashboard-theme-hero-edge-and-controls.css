@@ -1,9 +1,11 @@
-﻿/* Dashboard hero edge fix: keep the sim actions on the card surface at every width. */
+/* Ownership: shell. Original cascade position preserved. */
+/* Dashboard hero edge fix: keep the sim actions on the card surface at every width. */
 body.dashboard-mode .page {
   width: 100%;
   max-width: none;
 }
 
+/* Ownership: dashboard. Original cascade position preserved. */
 body.dashboard-mode .reference-dashboard {
   width: min(1320px, 100%);
 }
@@ -33,6 +35,7 @@ body.dashboard-mode .reference-season-hero > div:last-child {
   }
 }
 
+/* Ownership: staff. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .staff-market .staff-card > button.btn,
 body.dark-mode.dashboard-mode .staff-market .staff-card > button.btn:disabled,
 body.dark-mode.staff-layout .staff-market .staff-card > button.btn,
@@ -136,6 +139,7 @@ button.staff-market-button:hover,
   background-image: linear-gradient(180deg, rgba(49, 70, 111, .98), rgba(22, 34, 62, .98)) !important;
 }
 
+/* Ownership: dashboard. Original cascade position preserved. */
 body.dashboard-mode .sim-controls .btn,
 body.dashboard-mode .sim-controls button[data-sim-control],
 body.dashboard-mode .matchup-card .actions .btn,
@@ -148,6 +152,7 @@ body.dashboard-mode .matchup-card .actions button {
   opacity: 1 !important;
 }
 
+/* Ownership: staff. Original cascade position preserved. */
 body.dashboard-mode .sim-controls .btn:hover,
 body.dashboard-mode .sim-controls button[data-sim-control]:hover,
 body.dashboard-mode .matchup-card .actions .btn:hover:not(:disabled),
@@ -164,6 +169,7 @@ button.staff-market-button:hover {
   transform: translateY(-1px);
 }
 
+/* Ownership: standings. Original cascade position preserved. */
 body.dashboard-mode .standings-tabs button:not(.active),
 body.dashboard-mode .standings-view-toggle button:not(.active) {
   border-color: rgba(150, 174, 222, .58) !important;
@@ -268,6 +274,7 @@ body.dashboard-mode.standings-cup-layout .nba-cup-table .standings-team-cell str
   color: #edf4ff !important;
 }
 
+/* Ownership: roster. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .league-roster-browser {
   border-color: rgba(104, 135, 194, .42) !important;
   color: #edf4ff !important;
@@ -337,6 +344,7 @@ body.dark-mode.dashboard-mode .league-roster-table button.roster-waive-btn.btn.d
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .055), 0 0 12px rgba(240, 93, 104, .18) !important;
 }
 
+/* Ownership: shared. Original cascade position preserved. */
 html.dark-mode,
 body.dark-mode.start-mode {
   background: #050914 !important;
@@ -433,6 +441,7 @@ body.dark-mode .startup-ball {
   box-shadow: 0 24px 60px rgba(0, 0, 0, .26) !important;
 }
 
+/* Ownership: shell. Original cascade position preserved. */
 body.dark-mode.start-mode :is(.broadcast-shell, .main-shell, .workspace, .page) {
   color: #edf4ff !important;
   background: transparent !important;
@@ -444,10 +453,12 @@ body.dark-mode.start-mode .workspace {
     linear-gradient(90deg, rgba(140, 160, 204, .045) 1px, transparent 1px) !important;
 }
 
+/* Ownership: shared. Original cascade position preserved. */
 body.dark-mode.start-mode .opening-header {
   border-bottom-color: rgba(104, 135, 194, .38) !important;
 }
 
+/* Ownership: shared-controls. Original cascade position preserved. */
 body.dark-mode.start-mode :is(
   .opening-copy,
   .arena-visual,
@@ -531,6 +542,7 @@ body.dark-mode.start-mode :is(.opening-continue, .save-load-button, .empty-save-
   box-shadow: 0 14px 28px rgba(6, 76, 255, .22) !important;
 }
 
+/* Ownership: shared. Original cascade position preserved. */
 body.dark-mode.start-mode .opening-continue.disabled,
 body.dark-mode.start-mode .opening-continue:disabled {
   border-color: rgba(150, 174, 222, .38) !important;
@@ -558,6 +570,7 @@ body.dark-mode.start-mode .arena-score-card {
   background: rgba(10, 16, 32, .88) !important;
 }
 
+/* Ownership: rotation. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .rotation-position-select select,
 body.dark-mode.dashboard-mode .rotation-lineup-card .rotation-position-select select,
 body.dark-mode.dashboard-mode select[data-rotation-position],
@@ -610,6 +623,7 @@ body.dark-mode.dashboard-mode .rotation-footer button[data-action="rotation-save
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), 0 0 12px rgba(79, 139, 255, .18) !important;
 }
 
+/* Ownership: shell. Original cascade position preserved. */
 body.dark-mode.start-mode,
 body.dark-mode.start-mode .broadcast-shell,
 body.dark-mode.start-mode .main-shell,
@@ -642,10 +656,12 @@ body.dark-mode.start-mode .workspace {
   background-size: 44px 44px, 44px 44px, cover, cover, cover !important;
 }
 
+/* Ownership: shared. Original cascade position preserved. */
 body.dark-mode.start-mode .start-menu {
   box-shadow: inset 0 0 0 1px rgba(104, 135, 194, .12) !important;
 }
 
+/* Ownership: shared-controls. Original cascade position preserved. */
 body.dark-mode.start-mode .opening-header,
 body.dark-mode.start-mode .save-archive-heading,
 body.dark-mode.start-mode .team-select-heading {
@@ -653,6 +669,7 @@ body.dark-mode.start-mode .team-select-heading {
   background-image: linear-gradient(180deg, rgba(18, 27, 48, .92), rgba(8, 13, 26, .92)) !important;
 }
 
+/* Ownership: rotation. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .rotation-total,
 body.dark-mode.dashboard-mode .rotation-lineup-card .rotation-total,
 body.dark-mode.dashboard-mode .rotation-total.valid {
@@ -719,6 +736,7 @@ body.dark-mode.dashboard-mode .rotation-lineup-row:nth-child(even) {
   background-image: linear-gradient(90deg, rgba(79, 139, 255, .06), rgba(18, 27, 48, .78) 42%) !important;
 }
 
+/* Ownership: gameplan. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.gameplan-layout .gameplan-page select,
 body.dark-mode.dashboard-mode.gameplan-layout .strategy-control select,
 body.dark-mode.dashboard-mode.gameplan-layout select[data-plan-field],
@@ -785,6 +803,7 @@ body.dark-mode.dashboard-mode.gameplan-layout .opponent-threats em {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .035) !important;
 }
 
+/* Ownership: trade. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .page:has(.trade-page-title) :is(
   .multi-trade-steps,
   .multi-trade-team-picker,
@@ -1069,6 +1088,7 @@ body.dark-mode.dashboard-mode :is(
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
 }
 
+/* Ownership: free-agency. Original cascade position preserved. */
 body.dark-mode.dashboard-mode :is(
   .in-season-fa-hero,
   .in-season-fa-stat,
@@ -1214,6 +1234,7 @@ body.dark-mode.dashboard-mode .in-season-fa-actions .btn.primary {
   box-shadow: 0 8px 18px rgba(6, 76, 255, .22) !important;
 }
 
+/* Ownership: locker. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.locker-room-layout :is(
   .locker-metric-card,
   .locker-panel,
@@ -1359,6 +1380,7 @@ body.dark-mode.dashboard-mode.locker-room-layout .locker-morale-panel > div::aft
   box-shadow: none !important;
 }
 
+/* Ownership: development. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.player-development-layout :is(
   .player-dev-selected,
   .player-dev-plan,
@@ -1453,6 +1475,7 @@ body.dark-mode.dashboard-mode.player-development-layout .player-dev-chart div {
   background-image: linear-gradient(180deg, rgba(18, 27, 48, .9), rgba(9, 15, 29, .96)) !important;
 }
 
+/* Ownership: staff. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.staff-layout :is(
   .staff-list-panel,
   .staff-openings-panel,
@@ -1627,6 +1650,7 @@ body.dark-mode.dashboard-mode.scouting-layout :is(
   background-image: linear-gradient(180deg, rgba(24, 34, 58, .96), rgba(13, 20, 38, .96)) !important;
 }
 
+/* Ownership: scouting. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.scouting-layout .scouting-page :is(input, select) {
   appearance: none !important;
   -webkit-appearance: none !important;
@@ -1672,6 +1696,7 @@ body.dark-mode.dashboard-mode.scouting-layout :is(
   box-shadow: 0 8px 18px rgba(6, 76, 255, .22) !important;
 }
 
+/* Ownership: staff. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.scouting-layout :is(
   .scouting-selected-panel > header strong,
   .scouting-profile-chips b,
@@ -1706,6 +1731,7 @@ body.dark-mode.dashboard-mode.scouting-layout :is(
   color: #b8c4e3 !important;
 }
 
+/* Ownership: scouting. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.scouting-layout .scouting-compare-head {
   border-color: rgba(104, 135, 194, .34) !important;
   color: #edf4ff !important;
@@ -1719,6 +1745,7 @@ body.dark-mode.dashboard-mode.scouting-layout .scouting-assignments article em {
   background-color: rgba(20, 76, 54, .42) !important;
 }
 
+/* Ownership: awards. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.awards-layout :is(
   .awards-race-table,
   .award-feature-panel,
@@ -1841,6 +1868,7 @@ body.dark-mode.dashboard-mode.awards-layout :is(
   box-shadow: 0 8px 18px rgba(6, 76, 255, .22) !important;
 }
 
+/* Ownership: league-stats. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.league-stats-layout :is(
   .league-leader-grid article,
   .league-stat-updates article,
@@ -1893,6 +1921,7 @@ body.dark-mode.dashboard-mode.league-stats-layout :is(
   opacity: 1 !important;
 }
 
+/* Ownership: history. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.league-history-layout .history-timeline-strip article {
   border-color: rgba(104, 135, 194, .34) !important;
   color: #edf4ff !important;
@@ -1909,6 +1938,7 @@ body.dark-mode.dashboard-mode.league-history-layout .history-timeline-strip arti
   color: #b8c4e3 !important;
 }
 
+/* Ownership: staff. Original cascade position preserved. */
 body.dark-mode :is(.staff-page, .staff-list-panel) .staff-rating-badge,
 html.dark-mode body :is(.staff-page, .staff-list-panel) .staff-rating-badge {
   border: 2px solid #00c878 !important;
@@ -1919,6 +1949,7 @@ html.dark-mode body :is(.staff-page, .staff-list-panel) .staff-rating-badge {
   box-shadow: none !important;
 }
 
+/* Ownership: scouting. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.scouting-layout :is(
   .scouting-metrics,
   .scouting-tabs,
@@ -1984,6 +2015,7 @@ body.dark-mode.dashboard-mode.scouting-layout .scouting-draft-board button[data-
   color: #20f0a0 !important;
 }
 
+/* Ownership: finance. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.finance-layout :is(
   .finance-header-policy,
   .finance-header-policy select,
@@ -2083,6 +2115,7 @@ body.dark-mode.dashboard-mode.finance-layout .finance-cap-sheet td small {
   color: #b8c4e3 !important;
 }
 
+/* Ownership: social. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.social-layout-page :is(
   .social-trends article > b,
   .social-summary article i,
@@ -2121,6 +2154,7 @@ body.dark-mode.dashboard-mode.social-layout-page :is(
   box-shadow: 0 8px 18px rgba(6, 76, 255, .22) !important;
 }
 
+/* Ownership: awards. Original cascade position preserved. */
 body.dark-mode.dashboard-mode :is(
   .history-champions-card,
   .awards-race-table,
@@ -2162,6 +2196,7 @@ body.dark-mode.dashboard-mode :is(
   color: #b8c4e3 !important;
 }
 
+/* Ownership: league-stats. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.league-stats-layout .league-action-card > span {
   border: 1px solid rgba(104, 135, 194, .38) !important;
   color: #edf4ff !important;
@@ -2170,6 +2205,7 @@ body.dark-mode.dashboard-mode.league-stats-layout .league-action-card > span {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
 }
 
+/* Ownership: free-agency. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .in-season-fa-player {
   background-color: rgba(13, 20, 38, .96) !important;
   background-image: linear-gradient(180deg, rgba(18, 27, 48, .96), rgba(13, 20, 38, .96)) !important;
@@ -2259,6 +2295,7 @@ body.dark-mode.dashboard-mode .in-season-fa-fit li {
   color: #b8c4e3 !important;
 }
 
+/* Ownership: locker. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.locker-room-layout .locker-issue-list article.high {
   border-color: rgba(215, 25, 63, .38) !important;
   background-color: rgba(215, 25, 63, .055) !important;
@@ -2345,6 +2382,7 @@ body.dark-mode.dashboard-mode.locker-room-layout .locker-recent-events b.negativ
   background-image: none !important;
 }
 
+/* Ownership: staff. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.staff-layout .staff-rating-badge,
 body.dark-mode :is(.staff-page, .staff-list-panel) .staff-rating-badge,
 html.dark-mode body :is(.staff-page, .staff-list-panel) .staff-rating-badge {
@@ -2359,6 +2397,7 @@ body.dark-mode.dashboard-mode.staff-layout .staff-list-row .ok {
   color: #15d79f !important;
 }
 
+/* Ownership: scouting. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.scouting-layout .scouting-action-center article {
   border-color: rgba(104, 135, 194, .38) !important;
   border-left-color: #e21c3d !important;
@@ -2393,6 +2432,7 @@ body.dark-mode.dashboard-mode.scouting-layout .scouting-action-center article sp
   color: #e21c3d !important;
 }
 
+/* Ownership: finance. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.finance-layout .finance-action-center article.red {
   border-color: rgba(104, 135, 194, .38) !important;
   border-left-color: #e21c3d !important;
@@ -2438,6 +2478,7 @@ body.dark-mode.dashboard-mode.finance-layout .finance-action-center article > i 
   box-shadow: none !important;
 }
 
+/* Ownership: awards. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.awards-layout .awards-action-center .award-action-card {
   border-color: rgba(104, 135, 194, .38) !important;
   border-left-color: #0753ff !important;
@@ -2483,6 +2524,7 @@ body.dark-mode.dashboard-mode.awards-layout .awards-action-center .award-action-
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
 }
 
+/* Ownership: social. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.social-layout-page .social-metrics,
 body.dark-mode.dashboard-mode.social-layout-page .social-summary {
   border-color: rgba(104, 135, 194, .38) !important;
@@ -2581,6 +2623,7 @@ body.dark-mode.dashboard-mode.social-layout-page .social-summary article:nth-of-
   background-color: #ff0000 !important;
 }
 
+/* Ownership: league-stats. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.league-stats-layout .league-stats-action-center .league-action-card {
   border-color: rgba(104, 135, 194, .38) !important;
   border-left-color: #0753ff !important;
@@ -2629,6 +2672,7 @@ body.dark-mode.dashboard-mode.league-stats-layout .league-stats-action-center .l
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important;
 }
 
+/* Ownership: staff. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.staff-layout .staff-list-panel .staff-list-row b.staff-rating-badge,
 body.dark-mode.dashboard-mode.staff-layout .staff-list-panel b.staff-rating-badge {
   border: 3px solid #15b77a !important;
@@ -2652,6 +2696,7 @@ html.dark-mode body.dashboard-mode .staff-list-panel b.staff-rating-badge {
   box-shadow: none !important;
 }
 
+/* Ownership: locker. Original cascade position preserved. */
 body.dark-mode.dashboard-mode.locker-room-layout .locker-factors-panel article::before {
   border-color: transparent !important;
   color: #0753ff !important;
@@ -2664,6 +2709,7 @@ body.dark-mode.dashboard-mode.locker-room-layout .locker-leadership-panel articl
   color: #009b5b !important;
 }
 
+/* Ownership: free-agency. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .in-season-fa-player .in-season-fa-ovr {
   border: 2px solid #0753ff !important;
   color: #0753ff !important;
@@ -2710,6 +2756,7 @@ body.dark-mode.dashboard-mode .in-season-free-agency .in-season-fa-player-cell .
   font-size: 6px !important;
 }
 
+/* Ownership: trade. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .multi-trade-team-popover-backdrop {
   background: rgba(3, 7, 18, .62) !important;
 }
@@ -2755,6 +2802,7 @@ body.dark-mode.dashboard-mode .multi-trade-team-select-card > div > button:hover
   background-color: rgba(22, 34, 62, .98) !important;
 }
 
+/* Ownership: dashboard. Original cascade position preserved. */
 body.dark-mode.dashboard-mode .reference-bars {
   border-bottom-color: rgba(188, 202, 234, .34) !important;
   background:
@@ -2775,5 +2823,3 @@ body.dark-mode.dashboard-mode .reference-bars span,
 body.dark-mode.dashboard-mode .reference-bars b {
   color: #f8fbff !important;
 }
-
-

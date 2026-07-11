@@ -1,4 +1,5 @@
-﻿/* League Stats and Awards content pass: closer to the concept panels without sidebar changes. */
+/* Ownership: shared-pages. Original cascade position preserved. */
+/* League Stats and Awards content pass: closer to the concept panels without sidebar changes. */
 body.dashboard-mode.league-stats-layout :is(.league-stats-header, .league-stats-top-grid, .league-stats-content, .league-stats-bottom-grid, .league-stat-updates),
 body.dashboard-mode.awards-layout :is(.awards-header, .awards-top-grid, .awards-main-layout, .awards-lower-grid, .award-activity-strip) {
   max-width: 100%;
@@ -20,12 +21,14 @@ body.dashboard-mode.awards-layout .awards-actions button {
   box-shadow: 0 5px 14px rgba(11, 35, 86, .06);
 }
 
+/* Ownership: awards. Original cascade position preserved. */
 body.dashboard-mode.awards-layout .awards-actions .primary {
   border-color: #0753ff;
   color: #fff;
   background: linear-gradient(180deg, #1264ff, #0753ff);
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dashboard-mode.league-stats-layout .league-stats-actions .icon-button,
 body.dashboard-mode.awards-layout .awards-actions .icon-button {
   width: 38px;
@@ -68,10 +71,12 @@ body.dashboard-mode.awards-layout .award-top-card.rookie::before {
   background: #7b4df2;
 }
 
+/* Ownership: league-stats. Original cascade position preserved. */
 body.dashboard-mode.league-stats-layout .league-stat-identity {
   min-height: 38px;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dashboard-mode.league-stats-layout .league-stat-identity b,
 body.dashboard-mode.awards-layout .award-top-main b {
   color: #11265f;
@@ -79,10 +84,12 @@ body.dashboard-mode.awards-layout .award-top-main b {
   font-weight: 900;
 }
 
+/* Ownership: league-stats. Original cascade position preserved. */
 body.dashboard-mode.league-stats-layout .league-stat-card > div:nth-child(2) {
   min-width: 0;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dashboard-mode.league-stats-layout .league-stat-card strong,
 body.dashboard-mode.awards-layout .award-top-main strong {
   letter-spacing: 0;
@@ -160,6 +167,7 @@ body.dashboard-mode.awards-layout .award-action-card {
   background: linear-gradient(180deg, #ffffff, #fbfdff);
 }
 
+/* Ownership: league-stats. Original cascade position preserved. */
 body.dashboard-mode.league-stats-layout .league-action-card span {
   justify-self: start;
   padding: 3px 7px;
@@ -169,6 +177,7 @@ body.dashboard-mode.league-stats-layout .league-action-card span {
   font-size: 8px;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dashboard-mode.league-stats-layout .league-action-card strong,
 body.dashboard-mode.awards-layout .award-action-card strong {
   color: #11265f;
@@ -201,6 +210,7 @@ body.dashboard-mode.awards-layout .award-news-panel article {
   background: linear-gradient(180deg, #ffffff, #fbfdff);
 }
 
+/* Ownership: awards. Original cascade position preserved. */
 body.dashboard-mode.awards-layout .award-feature-panel {
   background:
     linear-gradient(90deg, rgba(7, 83, 255, .045), transparent 34%),
@@ -244,6 +254,7 @@ body.dashboard-mode.awards-layout .award-activity-strip {
   border-radius: 8px;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 @media (max-width: 1380px) {
   body.dashboard-mode.league-stats-layout .league-stats-top-grid,
   body.dashboard-mode.awards-layout .awards-top-grid {
@@ -262,6 +273,7 @@ body.dashboard-mode.awards-layout .award-activity-strip {
   }
 }
 
+/* Ownership: social. Original cascade position preserved. */
 /* Social content pass: richer feed/media cards and clearer analytics rail. */
 body.dashboard-mode.social-layout-page .social-page {
   position: relative;
@@ -560,6 +572,7 @@ body.dashboard-mode.social-layout-page .social-media article > b {
   }
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 /* Finances and Scouting content pass: sharper operational panels and report surfaces. */
 body.dashboard-mode.finance-layout :is(.finance-page-header, .finance-top-metrics, .finance-main-grid, .finance-lower-grid, .finance-dashboard-policy),
 body.dashboard-mode.scouting-layout :is(.scouting-page-header, .scouting-metrics, .scouting-tabs, .scouting-board-layout) {
@@ -608,11 +621,13 @@ body.dashboard-mode.scouting-layout .scouting-metric-card.green::before {
   background: #0a9b5b;
 }
 
+/* Ownership: finance. Original cascade position preserved. */
 body.dashboard-mode.finance-layout .finance-dash-metric.red::before,
 body.dashboard-mode.finance-layout .finance-apron-metric::before {
   background: #d61f43;
 }
 
+/* Ownership: scouting. Original cascade position preserved. */
 body.dashboard-mode.scouting-layout .scouting-metric-card.orange::before {
   background: #ff8a00;
 }
@@ -621,6 +636,7 @@ body.dashboard-mode.scouting-layout .scouting-metric-card.purple::before {
   background: #7b4df2;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dashboard-mode.finance-layout :is(.finance-cap-sheet, .finance-cap-overview, .finance-payroll-timeline, .finance-breakdown, .finance-owner-profile, .finance-activity, .finance-action-center, .finance-advisor, .finance-mini-list, .finance-exceptions),
 body.dashboard-mode.scouting-layout :is(.scouting-draft-board, .scouting-selected-panel, .scouting-action-center, .scouting-assignments, .scouting-team-summary, .scouting-coverage-map, .scouting-staff-recs, .scouting-comparison-widget) {
   border-color: #d8e3f4;
@@ -635,6 +651,7 @@ body.dashboard-mode.scouting-layout :is(.scouting-draft-board header, .scouting-
   border-bottom: 1px solid #edf2fa;
 }
 
+/* Ownership: finance. Original cascade position preserved. */
 body.dashboard-mode.finance-layout .finance-cap-sheet {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
@@ -645,6 +662,7 @@ body.dashboard-mode.finance-layout .finance-cap-sheet table {
   border-spacing: 0;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dashboard-mode.finance-layout .finance-cap-sheet tbody tr,
 body.dashboard-mode.scouting-layout .scouting-draft-board button[data-view-player] {
   transition: background .16s ease, box-shadow .16s ease;
@@ -656,26 +674,31 @@ body.dashboard-mode.scouting-layout .scouting-draft-board button[data-view-playe
   box-shadow: inset 3px 0 0 #0753ff;
 }
 
+/* Ownership: finance. Original cascade position preserved. */
 body.dashboard-mode.finance-layout .finance-cap-sheet td:first-child {
   min-width: 190px;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dashboard-mode.finance-layout .finance-player-headshot,
 body.dashboard-mode.scouting-layout :is(.scouting-row-headshot, .scouting-selected-headshot, .scouting-action-headshot, .scouting-mini-headshot) {
   background: #edf3ff;
   box-shadow: inset 0 0 0 1px rgba(7, 83, 255, .08), 0 5px 12px rgba(11, 35, 86, .055);
 }
 
+/* Ownership: finance. Original cascade position preserved. */
 body.dashboard-mode.finance-layout .finance-cap-overview article {
   min-height: 25px;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dashboard-mode.finance-layout .finance-cap-overview article i,
 body.dashboard-mode.finance-layout .finance-dash-metric i,
 body.dashboard-mode.scouting-layout .scouting-metric-card i {
   background: #edf2fa;
 }
 
+/* Ownership: finance. Original cascade position preserved. */
 body.dashboard-mode.finance-layout .finance-bars {
   position: relative;
   border: 1px solid #edf2fa;
@@ -700,6 +723,7 @@ body.dashboard-mode.finance-layout .finance-owner-score {
   box-shadow: 0 8px 18px rgba(11, 35, 86, .07);
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dashboard-mode.finance-layout .finance-breakdown li,
 body.dashboard-mode.finance-layout :is(.finance-mini-list article, .finance-exceptions article, .finance-activity article),
 body.dashboard-mode.scouting-layout :is(.scouting-assignments article, .scouting-staff-recs article, .scouting-comparison-widget article) {
@@ -738,6 +762,7 @@ body.dashboard-mode.scouting-layout .scouting-next-steps .btn.primary {
   background: #0753ff;
 }
 
+/* Ownership: finance. Original cascade position preserved. */
 body.dashboard-mode.finance-layout .finance-advisor {
   background:
     linear-gradient(135deg, rgba(7, 83, 255, .065), transparent 55%),
@@ -761,6 +786,7 @@ body.dashboard-mode.finance-layout .finance-advisor div span {
   box-shadow: inset 0 0 0 1px #d8e3f4;
 }
 
+/* Ownership: scouting. Original cascade position preserved. */
 body.dashboard-mode.scouting-layout .scouting-draft-board input {
   border-color: #d8e3f4;
   background: #fbfdff;
@@ -840,6 +866,7 @@ body.dashboard-mode.scouting-layout .scouting-compare-head {
   background: #fbfdff;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 @media (max-width: 1380px) {
   body.dashboard-mode.finance-layout .finance-top-metrics {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
@@ -1188,4 +1215,3 @@ body.dashboard-mode.scouting-layout .scouting-compare-head {
     display: block !important;
   }
 }
-

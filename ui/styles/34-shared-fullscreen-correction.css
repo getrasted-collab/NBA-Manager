@@ -1,4 +1,5 @@
-﻿/* Full-screen correction: keep enlarged top blocks without breaking the dashboard fit. */
+/* Ownership: shared-pages. Original cascade position preserved. */
+/* Full-screen correction: keep enlarged top blocks without breaking the dashboard fit. */
 @media (min-width: 1400px) and (min-height: 760px) {
   body.dashboard-mode:is(.scouting-layout, .finance-layout) .workspace {
     height: calc(100vh - 76px) !important;
@@ -778,6 +779,7 @@ body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout
   background: transparent !important;
 }
 
+/* Ownership: gameplan. Original cascade position preserved. */
 body.dashboard-mode.gameplan-layout .workspace {
 
   padding: 12px 22px 14px !important;
@@ -1068,6 +1070,7 @@ body.dashboard-mode.gameplan-layout .gameplan-footer .primary {
   min-width: 220px !important;
 }
 
+/* Ownership: standings. Original cascade position preserved. */
 body.dashboard-mode.standings-division-layout .standings-division-grid,
 body.dashboard-mode.standings-wildcard-layout .standings-conference-grid {
   max-height: calc(100vh - 196px) !important;
@@ -1102,6 +1105,7 @@ body.dashboard-mode:is(.standings-division-layout, .standings-wildcard-layout) .
   flex-basis: 22px !important;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout, .league-history-layout, .scouting-layout, .finance-layout) .broadcast-shell {
   grid-template-rows: 76px minmax(0, 1fr) !important;
 }
@@ -1137,6 +1141,7 @@ body.dashboard-mode:is(.locker-room-layout, .player-development-layout, .staff-l
   display: none !important;
 }
 
+/* Ownership: history. Original cascade position preserved. */
 body.dashboard-mode.league-history-layout .league-history-dashboard {
   grid-template-rows: auto 114px 34px minmax(0, 1fr) 128px 108px !important;
 }
@@ -1200,4 +1205,3 @@ body.dashboard-mode.league-history-layout .history-top-card em {
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
 }
-

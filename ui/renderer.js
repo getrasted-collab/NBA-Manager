@@ -131,6 +131,7 @@ const defaultSave = {
   leagueEvolution: [],
   watchlist: [],
   notifications: [],
+  social: createSocialState(),
   automation: createAutomationSettings(),
   saveDiagnostics: { version: 1, lastAutosave: null },
   ratingsVersion: 1,
@@ -179,6 +180,30 @@ let inSeasonFaSort = "overall";
 let inSeasonFaSortDirection = "desc";
 let standingsView = "standings";
 let standingsScope = "conference";
+let socialActiveTab = "for-you";
+let selectedSocialConversationId = null;
+let socialMessagesDrawerOpen = false;
+let selectedSocialPostId = null;
+let socialVisiblePostCache = new Map();
+let selectedSocialAccountId = null;
+let socialFeedRefreshKey = 0;
+let socialNotificationFilter = "all";
+
+function closeSocialMessagesDrawer(afterClose = null) {
+  const drawer = document.querySelector(".social-message-drawer");
+  if (!drawer || !socialMessagesDrawerOpen) {
+    socialMessagesDrawerOpen = false;
+    if (afterClose) afterClose();
+    else render();
+    return;
+  }
+  drawer.classList.add("closing");
+  window.setTimeout(() => {
+    socialMessagesDrawerOpen = false;
+    if (afterClose) afterClose();
+    else render();
+  }, 250);
+}
 
 function team(id, city, name, abbr, conf, wins, losses, payroll, roster, defense, matchup, pace) {
   return { id, teamId: nbaTeamIdsBySlug[id] || null, city, name, abbr, conf, wins, losses, payroll, roster, defense, matchup, pace };
@@ -988,14 +1013,31 @@ function socialPage() {
   const posts = leaguePosts.length ? leaguePosts : fallbackPosts;
   const trends = ["Trade Market", `${selectedTeam.abbr} Basketball`, "Award Watch", "Rookie Ladder", "Power Rankings"];
   const socialPosts = [
-    { source: `${selectedTeam.city} ${selectedTeam.name}`, handle: `@${selectedTeam.abbr}`, time: "2h", text: `Huge win in ${opponent ? opponent.city : "front of the fans"}! Great team effort from start to finish. #TrueTo${selectedTeam.city.replace(/\s+/g, "")}`, type: "game" },
-    { source: star.name, handle: `@${star.name.replace(/\s+/g, "")}`, time: "4h", text: "Locked in. Ready for the next one. #believe", player: star, type: "player" },
-    { source: "NBA", handle: "@NBA", time: "6h", text: `Top plays from last night's ${selectedTeam.name} action.`, type: "video" }
+    { id:`fallback-team-${selectedTeam.id}`, source: `${selectedTeam.city} ${selectedTeam.name}`, handle: `@${selectedTeam.abbr}`, time: "2h", text: `Huge win in ${opponent ? opponent.city : "front of the fans"}! Great team effort from start to finish. #TrueTo${selectedTeam.city.replace(/\s+/g, "")}`, type: "game", teamId:selectedTeam.id },
+    { id:`fallback-player-${star.id}`, source: star.name, handle: `@${star.name.replace(/\s+/g, "")}`, time: "4h", text: "Locked in. Ready for the next one. #believe", player: star, playerId:star.id, type: "player" },
+    { id:`fallback-nba-${selectedTeam.id}`, source: "NBA", handle: "@NBA", time: "6h", text: `Top plays from last night's ${selectedTeam.name} action.`, type: "video" }
   ].concat(posts.slice(0, 2).map((post) => ({ ...post, type: "text" })));
+  const savedSocialPosts = save.social.posts.map((post) => ({
+    id: post.id,
+    accountId: post.accountId || null,
+    source: post.source || post.authorName || `${selectedTeam.city} ${selectedTeam.name}`,
+    handle: post.handle || post.authorHandle || `@${selectedTeam.abbr}`,
+    time: post.time || "Recently",
+    text: post.text || "",
+    type: post.type || "text",
+    player: post.playerId ? save.players.find((player) => player.id === post.playerId) : null,
+    teamId: post.teamId || null,
+    playerId: post.playerId || null,
+    gameId: post.gameId || null,
+    transactionId: post.transactionId || null,
+    mentions: Array.isArray(post.mentions) ? post.mentions : []
+  }));
+  const allSocialPosts = [...savedSocialPosts].reverse().concat(socialPosts).map((post,index) => ({ ...post,id:post.id || `feed-${socialEventKey(`${post.handle}-${post.text}-${index}`)}` }));
+  socialVisiblePostCache = new Map(allSocialPosts.map((post) => [post.id,post]));
   const socialTrends = [`#TrueTo${selectedTeam.city.replace(/\s+/g, "")}`, star.name, `${selectedTeam.name} Win`, opponent?.city || trends[0]];
   return `
     <section class="social-page">
-      <header class="social-page-header"><div><h1>SOCIAL</h1><p>Manage your team's brand, engage with fans, and track your online presence.</p></div><div><button class="btn primary">Create Post</button><button class="btn" aria-label="More social actions">...</button></div></header>
+      <header class="social-page-header"><div><h1>SOCIAL</h1><p>Manage your team's brand, engage with fans, and track your online presence.</p></div><div><button class="btn" data-social-refresh="true">Refresh Feed</button><button class="btn primary">Create Post</button><button class="btn" aria-label="More social actions">...</button></div></header>
       <section class="social-metrics">
         ${socialMetricCard("Total Followers", `${followers}M`, "5.2%", "blue")}
         ${socialMetricCard("Engagement Rate", `${engagement}%`, "1.1%", "red")}
@@ -1004,15 +1046,17 @@ function socialPage() {
       </section>
       <section class="social-layout">
         <main class="social-feed">
-          <header><nav class="social-tabs"><button class="active">For You</button><button>Team Feed</button><button>Mentions</button><button>Direct Messages</button><button>Sentiment</button><button>Publish Schedule</button></nav></header>
-          ${socialPosts.map((post, index) => socialPost(post, index, selectedTeam, opponent)).join("")}
+          <header><nav class="social-tabs">${[["for-you","For You"],["team","Team Feed"],["mentions",`Notifications${save.social.notifications.some((item)=>!item.read) ? ` (${save.social.notifications.filter((item)=>!item.read).length})` : ""}`],["messages","Direct Messages"],["sentiment","Sentiment"],["schedule","Publish Schedule"]].map(([id,label]) => `<button class="${socialActiveTab === id ? "active" : ""}" data-social-tab="${id}">${label}</button>`).join("")}</nav></header>
+          ${socialTabContent(socialActiveTab, allSocialPosts, selectedTeam, opponent, star)}
         </main>
         <aside class="social-sidebar">
-          <section class="social-summary"><header><strong>Team Social Summary</strong><span>Last 7 Days</span></header>${socialPlatformRows(followers)}</section>
+          ${socialMessagesDrawerOpen ? socialMessagesDrawer(selectedTeam, star) : `<section class="social-summary"><header><strong>Team Social Summary</strong><span>Last 7 Days</span></header>${socialPlatformRows(followers)}</section>`}
           <section class="social-trends"><header><strong>Trending Topics</strong><button class="mini-action">View All</button></header>${socialTrends.map((trend, index) => `<article><b>${index + 1}</b><span><strong>${escapeHtml(trend)}</strong><small>Trending in ${index ? "NBA" : selectedTeam.city}</small></span><em>^</em></article>`).join("")}</section>
-          <button class="social-dms-button social-quick-dms" aria-label="Open direct messages"></button>
+          ${socialActiveTab === "messages" ? "" : '<button class="social-dms-button social-quick-dms" aria-label="Open direct messages"></button>'}
         </aside>
       </section>
+      ${socialPostConversationModal()}
+      ${socialAccountProfileModal()}
     </section>
   `;
   return `
@@ -1040,15 +1084,22 @@ function socialMetricCard(label, value, change, tone) {
 }
 
 function socialPost(post, index, team, opponent) {
-  const avatar = post.player ? playerHeadshot(post.player, "social-post-avatar-img") : post.source === "NBA" ? '<span class="social-post-nba">NBA</span>' : teamLogo(team, "social-post-team-logo");
+  const postId = post.id || `feed-${socialEventKey(`${post.handle}-${post.text}-${index}`)}`;
+  const account = post.accountId ? socialAccount(post.accountId) : null;
+  const avatar = post.player ? playerHeadshot(post.player, "social-post-avatar-img") : post.playerId ? playerHeadshot(save.players.find((player) => player.id === post.playerId), "social-post-avatar-img") : post.teamId ? teamLogo(post.teamId, "social-post-team-logo") : post.source === "NBA" ? '<span class="social-post-nba">NBA</span>' : account ? `<span class="social-post-account-avatar">${escapeHtml(account.name.split(/\s+/).map((word) => word[0]).join("").slice(0,3))}</span>` : teamLogo(team, "social-post-team-logo");
   const media = post.type === "game" ? socialGameMedia(team, opponent) : post.type === "video" ? socialVideoMedia(team) : "";
+  const interactions = save.social.interactions;
+  const liked = interactions.likedPostIds.includes(postId), reposted = interactions.repostedPostIds.includes(postId), bookmarked = interactions.bookmarkedPostIds.includes(postId);
+  const seed = parseInt(socialEventKey(postId),36) || 1;
+  const replyCount = save.social.replies.filter((reply) => reply.postId === postId).length + 12 + seed % 180;
+  const repostCount = 35 + seed % 900 + (reposted ? 1 : 0), likeCount = 120 + seed % 7200 + (liked ? 1 : 0), views = 12 + seed % 880;
   return `<article class="social-post social-post-${escapeHtml(post.type || "text")}">
     <div class="social-avatar">${avatar}</div>
     <div class="social-post-body">
-      <header><strong>${escapeHtml(post.source)}</strong><i></i><span>${escapeHtml(post.handle)} - ${escapeHtml(post.time)}</span><button aria-label="More post actions">...</button></header>
+      <header><button class="social-post-author" data-social-profile="${escapeHtml(post.accountId || (post.teamId ? `team-${post.teamId}` : post.playerId ? `player-${post.playerId}` : post.source === "NBA" ? "league-nba" : ""))}"><strong>${escapeHtml(post.source)}</strong></button>${account?.verified || post.verified ? "<i></i>" : ""}<span>${escapeHtml(post.handle)} · ${escapeHtml(post.time)}</span></header>
       <p>${escapeHtml(post.text)}</p>
       ${media}
-      <footer><button>128</button><button>342</button><button>${(2.1 - index * .3).toFixed(1)}K</button><button>${84 - index * 12}K</button><button>Save</button></footer>
+      <footer><button data-social-post-action="reply" data-social-post-id="${escapeHtml(postId)}" title="Reply"><b>&#9711;</b> ${replyCount}</button><button class="${reposted ? "active repost" : ""}" data-social-post-action="repost" data-social-post-id="${escapeHtml(postId)}" title="Repost"><b>&#8645;</b> ${repostCount}</button><button class="${liked ? "active like" : ""}" data-social-post-action="like" data-social-post-id="${escapeHtml(postId)}" title="Like"><b>&#9825;</b> ${likeCount}</button><button data-social-post-action="view" data-social-post-id="${escapeHtml(postId)}" title="View post"><b>&#9615;</b> ${views}K</button><button data-social-post-action="share" data-social-post-id="${escapeHtml(postId)}" title="Share"><b>&#8679;</b></button></footer>
     </div>
   </article>`;
 }
@@ -1077,6 +1128,93 @@ function socialDmRows(star, team) {
     ["Fan Relations", "Three high-priority fan messages.", "1h"]
   ];
   return rows.map(([sender, note, time], index) => `<article><b>${index + 1}</b><span><strong>${escapeHtml(sender)}</strong><small>${escapeHtml(note)}</small></span><em>${escapeHtml(time)}</em></article>`).join("");
+}
+
+function socialMessagesDrawer(team, star) {
+  if (!socialMessagesDrawerOpen) return "";
+  const conversations = ensureSocialMessageConversations(star, team);
+  return `<aside class="social-message-drawer">
+      <div class="social-message-header"><strong>Chat</strong><div><button aria-label="Message filters">All⌄</button><button aria-label="New message">♧＋</button><button data-social-drawer-fullscreen="true" aria-label="Open full messages">↗</button><button data-social-drawer-close="true" aria-label="Collapse messages">⌄</button></div></div>
+    <label class="social-message-search"><span>⌕</span><input id="social-drawer-search" placeholder="Search" style="color:#edf4ff!important;background:#202c41!important;background-image:none!important;border:0!important"></label>
+    <div class="social-message-list">${conversations.map((conversation) => {
+      const latest = (conversation.messages || []).at(-1);
+      const player = conversation.playerId ? save.players.find((item) => item.id === conversation.playerId) : null;
+      return `<button class="social-message-row" data-social-drawer-conversation="${escapeHtml(conversation.id)}" data-social-drawer-search="${escapeHtml(normalizeText(`${conversation.participantName} ${latest?.text || ""}`))}"><span class="social-message-avatar">${player ? playerHeadshot(player,"social-message-avatar-img") : `<b>${escapeHtml((conversation.participantName || "DM").split(/\s+/).map((word) => word[0]).join("").slice(0,2))}</b>`}</span><span><strong>${escapeHtml(conversation.participantName)}</strong><small>${escapeHtml(latest?.sender === "team" ? `You: ${latest.text}` : latest?.text || "Open conversation")}</small></span><em>${escapeHtml(latest?.time || "now")}</em>${conversation.read === false ? "<i></i>" : ""}</button>`;
+    }).join("")}</div>
+  </aside>`;
+}
+
+function socialTabContent(tab, posts, team, opponent, star) {
+  if (tab === "team") {
+    const teamPosts = posts.filter((post) => post.teamId === team.id || post.handle === `@${team.abbr}` || normalizeText(post.source) === normalizeText(`${team.city} ${team.name}`));
+    return socialPostList(teamPosts, team, opponent, "No team posts have been published yet.");
+  }
+  if (tab === "mentions") {
+    return socialNotificationsTab();
+  }
+  if (tab === "messages") return socialMessagesTab(star, team);
+  if (tab === "sentiment") return socialSentimentTab(team);
+  if (tab === "schedule") return socialScheduleTab();
+  return socialPostList(posts, team, opponent, "Your feed is quiet.");
+}
+
+function socialPostList(posts, team, opponent, emptyMessage) {
+  return posts.length ? posts.map((post, index) => socialPost(post, index, team, opponent)).join("") : `<section class="social-media"><header><strong>${escapeHtml(emptyMessage)}</strong></header></section>`;
+}
+
+function socialMessagesTab(star, team) {
+  const conversations = ensureSocialMessageConversations(star, team);
+  const selected = conversations.find((item) => item.id === selectedSocialConversationId) || conversations[0];
+  selectedSocialConversationId = selected?.id || null;
+  const selectedPlayer = selected?.playerId ? save.players.find((player) => player.id === selected.playerId) : null;
+  return `<section class="social-messages-shell">
+    <aside class="social-message-inbox">
+      <div class="social-message-header"><strong>Chat</strong><div><button aria-label="Message filters">All⌄</button><button aria-label="Message requests">✉</button><button aria-label="New message">＋</button></div></div>
+      <label class="social-message-search"><span>⌕</span><input id="social-message-search" placeholder="Search Direct Messages" style="color:#edf4ff!important;background:#202c41!important;background-image:none!important;border:0!important"></label>
+      <div class="social-message-list">${conversations.map((conversation) => {
+        const messages = Array.isArray(conversation.messages) ? conversation.messages : [];
+        const latest = messages.at(-1);
+        const player = conversation.playerId ? save.players.find((item) => item.id === conversation.playerId) : null;
+        return `<button class="social-message-row ${conversation.id === selected.id ? "active" : ""}" data-social-conversation="${escapeHtml(conversation.id)}" data-social-conversation-search="${escapeHtml(normalizeText(`${conversation.participantName} ${latest?.text || ""}`))}"><span class="social-message-avatar">${player ? playerHeadshot(player,"social-message-avatar-img") : `<b>${escapeHtml((conversation.participantName || "DM").split(/\s+/).map((word) => word[0]).join("").slice(0,2))}</b>`}</span><span><strong>${escapeHtml(conversation.participantName || "Conversation")}</strong><small>${escapeHtml(latest?.sender === "team" ? `You: ${latest.text}` : latest?.text || conversation.preview || "Open conversation")}</small></span><em>${escapeHtml(latest?.time || conversation.updatedAt || "now")}</em>${conversation.read === false ? "<i></i>" : ""}</button>`;
+      }).join("")}</div>
+    </aside>
+    <section class="social-message-thread">
+      <div class="social-message-header"><div class="social-message-avatar">${selectedPlayer ? playerHeadshot(selectedPlayer,"social-message-avatar-img") : `<b>${escapeHtml((selected?.participantName || "DM").slice(0,2))}</b>`}</div><strong>${escapeHtml(selected?.participantName || "Direct Messages")}</strong><div><button aria-label="Start audio call">⌕</button><button aria-label="Start video call">▣</button><button aria-label="Conversation details">•••</button></div></div>
+      <div class="social-message-history">${(selected?.messages || []).map((message) => `<div class="social-message-bubble ${message.sender === "team" ? "outgoing" : "incoming"}"><span>${escapeHtml(message.text)}</span><small>${escapeHtml(message.time || "")}</small></div>`).join("")}</div>
+      <footer><button aria-label="Add attachment">＋</button><button aria-label="Add GIF">GIF</button><button aria-label="Add emoji">☺</button><input id="social-message-input" placeholder="Message" maxlength="500" style="color:#edf4ff!important;background:#202c41!important;background-image:none!important;border:1px solid rgba(150,174,222,.25)!important"><button data-social-send-message="${escapeHtml(selected?.id || "")}" aria-label="Send message">➤</button></footer>
+    </section>
+  </section>`;
+}
+
+function ensureSocialMessageConversations(star, team) {
+  if (save.social.conversations.length) return save.social.conversations;
+  save.social.conversations = [
+    { id:"dm-player", participantName:star.name, playerId:star.id, read:false, messages:[{ id:"dm-1", sender:"contact", text:"Can we talk about how the team wants me represented publicly?", time:"2m" }] },
+    { id:"dm-pr", participantName:`${team.city} PR`, read:true, messages:[{ id:"dm-2", sender:"contact", text:"The sponsor post draft is ready for your approval.", time:"18m" }] },
+    { id:"dm-fans", participantName:"Fan Relations", read:true, messages:[{ id:"dm-3", sender:"contact", text:"We have three high-priority fan messages to review.", time:"1h" }] }
+  ];
+  return save.social.conversations;
+}
+
+function socialSentimentTab(team) {
+  const metrics = save.social.metrics;
+  const sentiment = Math.round(metrics.sentiment);
+  const label = sentiment >= 70 ? "Positive" : sentiment >= 45 ? "Mixed" : "Negative";
+  const history = metrics.history.slice(-6).reverse();
+  const positiveDriver=(metrics.drivers||[]).filter((item)=>Number(item.delta)>0).sort((a,b)=>b.delta-a.delta)[0],negativeDriver=(metrics.drivers||[]).filter((item)=>Number(item.delta)<0).sort((a,b)=>a.delta-b.delta)[0];
+  return `<section class="social-media"><div class="social-sentiment-header"><strong>${escapeHtml(team.abbr)} Fan Sentiment: ${label}</strong><span>${sentiment}% positive</span></div><div class="social-sentiment-drivers"><article><b>+</b><div><strong>Top positive driver</strong><small>${escapeHtml(positiveDriver?.label||"No recent positive driver")}</small></div><em>${positiveDriver?`+${positiveDriver.delta}`:"—"}</em></article><article><b>−</b><div><strong>Top negative driver</strong><small>${escapeHtml(negativeDriver?.label||"No recent negative driver")}</small></div><em>${negativeDriver?.delta??"—"}</em></article></div>${history.length ? history.map((item) => `<article><b>${Math.round(Number(item.value) || 0)}</b><div><strong>${escapeHtml(item.label || item.reason || "Sentiment update")}</strong><small>${escapeHtml(item.detail || "Career event")}</small></div><em>${Number(item.delta)>0?"+":""}${escapeHtml(item.delta??"")} · ${escapeHtml(item.date || "")}</em></article>`).join("") : '<article><b>65</b><div><strong>Baseline fan confidence</strong><small>Future career events will be recorded here.</small></div><em>Current</em></article>'}</section>`;
+}
+
+function socialScheduleTab() {
+  const scheduled=save.social.scheduledPosts.filter((item)=>item.status!=="cancelled"),pending=scheduled.filter((item)=>item.status!=="published"),suggestions=socialScheduleSuggestions();
+  return `<section class="social-publish-schedule"><div class="social-schedule-header"><div><strong>Publish Schedule</strong><span>${pending.length} upcoming · ${scheduled.filter((item)=>item.status==="published").length} published</span></div><label><input type="checkbox" id="social-approval-toggle" ${save.automation.socialApproval?"checked":""}> Require approval before auto-publishing</label></div><section class="social-schedule-composer"><textarea id="social-schedule-text" maxlength="280" placeholder="Write a post to schedule"></textarea><div><select id="social-schedule-type"><option value="team">Team update</option><option value="game">Game promotion</option><option value="injury">Injury update</option><option value="transaction">Transaction</option><option value="community">Community</option></select><input id="social-schedule-date" type="date" min="${escapeHtml(currentLeagueDate())}" value="${escapeHtml(currentLeagueDate())}"><button data-social-schedule-create="true">Schedule post</button></div></section><section class="social-schedule-suggestions"><strong>Suggested opportunities</strong>${suggestions.map((item)=>`<button data-social-schedule-suggestion="true" data-suggestion-text="${escapeHtml(item.text)}" data-suggestion-date="${escapeHtml(item.date)}" data-suggestion-type="${escapeHtml(item.type)}"><span>${escapeHtml(item.label)}</span><small>${escapeHtml(item.date)}</small></button>`).join("")||'<div class="muted-line">No upcoming opportunities.</div>'}</section><div class="social-schedule-list">${scheduled.length?scheduled.slice().sort((a,b)=>String(a.publishAt).localeCompare(String(b.publishAt))).map((item)=>`<article class="${escapeHtml(item.status||"scheduled")}"><b><span>${escapeHtml(String(item.publishAt||"TBD").slice(5,7))}</span>${escapeHtml(String(item.publishAt||"--").slice(8,10))}</b><div><strong>${escapeHtml(item.type||"Scheduled post")}</strong><small>${escapeHtml(item.text)}</small><em>${escapeHtml(item.status||"scheduled")}</em></div>${item.status==="published"?'<span>Published</span>':`<div class="social-schedule-actions"><button data-social-schedule-publish="${escapeHtml(item.id)}">Publish now</button><button data-social-schedule-edit="${escapeHtml(item.id)}">Edit</button><button data-social-schedule-cancel="${escapeHtml(item.id)}">Cancel</button></div>`}</article>`).join(""):'<div class="muted-line">No posts scheduled yet.</div>'}</div></section>`;
+}
+
+function socialScheduleSuggestions() {
+  const team=activeTeam(),suggestions=[];
+  (save.schedule||[]).filter((game)=>!game.played&&(game.home===team.id||game.away===team.id)).slice(0,3).forEach((game)=>{const opponent=getTeam(game.home===team.id?game.away:game.home);suggestions.push({label:`Game day vs ${opponent?.abbr||"TBD"}`,date:game.date,type:"game",text:`Game day. ${team.abbr} ${game.home===team.id?"hosts":"visits"} ${opponent?.abbr||"the opposition"}.`});});
+  teamPlayers(team.id).filter((player)=>player.injury>0).slice(0,2).forEach((player)=>suggestions.push({label:`Injury update: ${player.name}`,date:currentLeagueDate(),type:"injury",text:`Medical update: ${player.name} remains unavailable and will continue to be evaluated.`}));
+  return suggestions;
 }
 
 function dashboardReferencePage() {
@@ -3876,7 +4014,397 @@ function createLeagueRules(season) {
 }
 
 function createAutomationSettings() {
-  return { scouting: false, rotations: false, minorSignings: false, qualifyingOffers: false, rosterCompliance: false, stopForInjury: true, stopForTradeOffer: true, stopForComplaint: true };
+  return { scouting: false, rotations: false, minorSignings: false, qualifyingOffers: false, rosterCompliance: false, socialApproval: false, stopForInjury: true, stopForTradeOffer: true, stopForComplaint: true };
+}
+
+function createSocialState() {
+  return {
+    version: 2,
+    accounts: [],
+    posts: [],
+    scheduledPosts: [],
+    drafts: [],
+    replies: [],
+    interactions: { likedPostIds: [], repostedPostIds: [], bookmarkedPostIds: [] },
+    metrics: { followers: 0, impressions: 0, engagements: 0, sentiment: 65, history: [], sentimentEventIds: [], drivers: [] },
+    notifications: [],
+    conversations: [],
+    followingAccountIds: ["media-shams", "media-espn", "league-nba"],
+    processedEventIds: [],
+    nextPostId: 1,
+    nextMessageId: 1
+  };
+}
+
+function socialNotificationsTab() {
+  const filtered = save.social.notifications.filter((item) => socialNotificationFilter === "all" || socialNotificationFilter === "verified" && item.verified || socialNotificationFilter === "mentions" && item.type === "mention");
+  return `<section class="social-notifications-panel"><div class="social-notifications-header"><nav>${[["all","All"],["verified","Verified"],["mentions","Mentions"]].map(([id,label]) => `<button class="${socialNotificationFilter === id ? "active" : ""}" data-social-notification-filter="${id}">${label}</button>`).join("")}</nav><button data-social-notifications-read="true">Mark all read</button></div><div class="social-notification-list">${filtered.length ? filtered.map((item) => `<button class="social-notification-row ${item.read ? "" : "unread"}" data-social-notification="${escapeHtml(item.id)}" data-social-notification-post="${escapeHtml(item.postId || "")}"><i>${item.type === "mention" ? "@" : item.type === "reply" ? "↩" : item.type === "message" ? "✉" : "★"}</i><span><strong>${escapeHtml(item.source || "NBA Social")}</strong><p>${escapeHtml(item.text)}</p><small>${escapeHtml(item.createdAt || "Recently")}</small></span>${item.read ? "" : "<b></b>"}</button>`).join("") : '<div class="muted-line">No notifications in this category.</div>'}</div></section>`;
+}
+
+function socialAccountProfileModal() {
+  if (!selectedSocialAccountId) return "";
+  const account = socialAccount(selectedSocialAccountId);
+  if (!account) { selectedSocialAccountId = null; return ""; }
+  const followed = save.social.followingAccountIds.includes(account.id);
+  const posts = save.social.posts.filter((post) => post.accountId === account.id).slice(-8).reverse();
+  return `<div class="social-post-modal-backdrop" data-close-social-profile="true"><section class="social-account-profile" role="dialog" aria-label="${escapeHtml(account.name)} profile"><div class="social-dialog-header"><button data-close-social-profile="true">&#8592;</button><strong>Profile</strong></div><div class="social-account-banner"></div><section><div class="social-account-avatar">${escapeHtml(account.name.split(/\s+/).map((word)=>word[0]).join("").slice(0,2))}</div><button data-social-follow-account="${escapeHtml(account.id)}">${followed ? "Following" : "Follow"}</button><h2>${escapeHtml(account.name)} ${account.verified ? "✓" : ""}</h2><span>${escapeHtml(account.handle)}</span><p>${escapeHtml(account.style)} coverage · ${account.simulated ? "Fictional career simulation content" : "NBA Social"}</p><small>${Number(account.followers || 0).toLocaleString()} followers · ${account.reliability}% reliability</small></section><div class="social-account-posts">${posts.length ? posts.map((post,index)=>socialPost(post,index,activeTeam(),null)).join("") : '<div class="muted-line">No recent posts.</div>'}</div></section></div>`;
+}
+
+function socialPostConversationModal() {
+  if (!selectedSocialPostId) return "";
+  const post = socialVisiblePostCache.get(selectedSocialPostId) || save.social.posts.find((item) => item.id === selectedSocialPostId);
+  if (!post) { selectedSocialPostId = null; return ""; }
+  const replies = save.social.replies.filter((reply) => reply.postId === selectedSocialPostId);
+  const relatedActions = `${post.playerId ? `<button data-view-player="${escapeHtml(post.playerId)}">View Player</button>` : ""}${post.gameId ? `<button data-social-open-game="${escapeHtml(post.gameId)}">View Game</button>` : ""}${post.transactionId ? `<button data-social-open-transaction="${escapeHtml(post.transactionId)}">View Transaction</button>` : ""}`;
+  return `<div class="social-post-modal-backdrop" data-close-social-post="true"><section class="social-post-conversation" role="dialog" aria-label="Post conversation"><div class="social-dialog-header"><button data-close-social-post="true">&#8592;</button><strong>Post</strong></div><article><strong>${escapeHtml(post.source || post.authorName || "NBA Social")}</strong><small>${escapeHtml(post.handle || "")}</small><p>${escapeHtml(post.text || "")}</p>${relatedActions ? `<div class="social-post-related-actions">${relatedActions}</div>` : ""}</article><div class="social-reply-list">${replies.map((reply) => `<article><strong>${escapeHtml(reply.authorName || activeTeam().abbr)}</strong><small>${escapeHtml(reply.time || "now")}</small><p>${escapeHtml(reply.text)}</p></article>`).join("") || '<div class="muted-line">No replies yet.</div>'}</div><footer>${teamLogo(activeTeam(),"social-reply-avatar")}<input id="social-reply-input" maxlength="280" placeholder="Post your reply" style="color:#edf4ff!important;background:#202c41!important;background-image:none!important;border:1px solid rgba(150,174,222,.26)!important"><button data-social-submit-reply="${escapeHtml(selectedSocialPostId)}">Reply</button></footer></section></div>`;
+}
+
+function createSocialAccountEcosystem(teams = [], players = []) {
+  const national = [
+    ["media-shams","Shams Charania","@ShamsCharania","reporter",true,"breaking",98,9600000,["transactions","injuries","contracts"]],
+    ["media-espn","ESPN","@espn","network",true,"broadcast",94,56000000,["games","highlights","debate"]],
+    ["media-espn-nba","NBA on ESPN","@ESPNNBA","network",true,"analysis",93,8700000,["games","rankings","transactions"]],
+    ["media-sportscenter","SportsCenter","@SportsCenter","network",true,"viral",91,43000000,["highlights","milestones","scores"]],
+    ["media-espn-stats","ESPN Stats & Info","@ESPNStatsInfo","stats",true,"statistical",97,1900000,["records","milestones","history"]],
+    ["league-nba","NBA","@NBA","league",true,"official",100,48000000,["games","players","league"]],
+    ["league-comms","NBA Communications","@NBAPR","league",true,"formal",100,780000,["awards","rules","schedules"]],
+    ["media-athletic","The Athletic NBA","@TheAthleticNBA","publication",true,"longform",92,1100000,["analysis","front-office","features"]],
+    ["media-bleacher","Bleacher Report","@BleacherReport","publication",true,"viral",82,19000000,["highlights","reactions","culture"]],
+    ["media-tnt","NBA on TNT","@NBAonTNT","network",true,"personality",89,5400000,["games","debate","playoffs"]]
+  ].map(([id,name,handle,category,verified,style,reliability,followers,topics]) => ({ id,name,handle,category,verified,style,reliability,followers,topics,simulated:true }));
+  const teamAccounts = teams.flatMap((team, index) => {
+    const cityKey = team.city.replace(/\s+/g, "");
+    const reporterFirst = ["Alex","Jordan","Taylor","Morgan","Casey","Riley"][index % 6];
+    const reporterLast = ["Reed","Lewis","Grant","Bennett","Ward"][index % 5];
+    return [
+      { id:`team-${team.id}`,name:`${team.city} ${team.name}`,handle:`@${team.abbr}`,category:"team",verified:true,style:"official",reliability:100,followers:Math.round(650000 + teamRating(team) * 17000),topics:[team.id,"games","roster"],teamId:team.id,simulated:true },
+      { id:`reporter-${team.id}`,name:`${reporterFirst} ${reporterLast}`,handle:`@${cityKey}Hoops`,category:"local-reporter",verified:true,style:"local-insider",reliability:84,followers:42000 + index * 3700,topics:[team.id,"transactions","injuries"],teamId:team.id,simulated:true },
+      { id:`fans-${team.id}`,name:`${team.abbr} Fan Zone`,handle:`@${team.abbr}FanZone`,category:"fan",verified:false,style:"reactive",reliability:48,followers:18000 + index * 1900,topics:[team.id,"games","rumors"],teamId:team.id,simulated:true }
+    ];
+  });
+  const playerAccounts = teams.flatMap((team) => players.filter((player) => player.teamId === team.id).sort((a,b) => b.ovr - a.ovr).slice(0,3).map((player) => ({
+    id:`player-${player.id}`,name:player.name,handle:`@${player.name.replace(/[^a-z0-9]/gi,"").slice(0,18)}`,category:"player",verified:player.ovr >= 78,style:player.personality || "personal",reliability:88,followers:Math.round(40000 + Math.max(0,player.ovr - 65) ** 2 * 6400),topics:[team.id,player.id,"players"],teamId:team.id,playerId:player.id,simulated:true
+  })));
+  return [...national,...teamAccounts,...playerAccounts];
+}
+
+function syncSocialAccounts(state, teams, players) {
+  const generated = createSocialAccountEcosystem(teams, players);
+  const existing = new Map((state.accounts || []).map((account) => [account.id,account]));
+  const next = generated.map((account) => ({ ...account, ...(existing.get(account.id) || {}), ...account }));
+  const custom = (state.accounts || []).filter((account) => !generated.some((item) => item.id === account.id));
+  const changed = JSON.stringify(state.accounts || []) !== JSON.stringify([...next,...custom]);
+  state.accounts = [...next,...custom];
+  state.followingAccountIds = [...new Set(state.followingAccountIds.filter((id) => state.accounts.some((account) => account.id === id)))];
+  return changed;
+}
+
+function normalizeSocialState(candidate) {
+  const fallback = createSocialState();
+  const source = candidate && typeof candidate === "object" && !Array.isArray(candidate) ? candidate : {};
+  const interactions = source.interactions && typeof source.interactions === "object" ? source.interactions : {};
+  const metrics = source.metrics && typeof source.metrics === "object" ? source.metrics : {};
+  const arrays = (value) => Array.isArray(value) ? value : [];
+  return {
+    ...fallback,
+    ...source,
+    version: 2,
+    accounts: arrays(source.accounts),
+    posts: arrays(source.posts),
+    scheduledPosts: arrays(source.scheduledPosts),
+    drafts: arrays(source.drafts),
+    replies: arrays(source.replies),
+    interactions: {
+      likedPostIds: arrays(interactions.likedPostIds),
+      repostedPostIds: arrays(interactions.repostedPostIds),
+      bookmarkedPostIds: arrays(interactions.bookmarkedPostIds)
+    },
+    metrics: {
+      followers: Math.max(0, Number(metrics.followers) || 0),
+      impressions: Math.max(0, Number(metrics.impressions) || 0),
+      engagements: Math.max(0, Number(metrics.engagements) || 0),
+      sentiment: clampNumber(metrics.sentiment ?? 65, 0, 100),
+      history: arrays(metrics.history),
+      sentimentEventIds: arrays(metrics.sentimentEventIds),
+      drivers: arrays(metrics.drivers)
+    },
+    notifications: arrays(source.notifications),
+    conversations: arrays(source.conversations),
+    followingAccountIds: Array.isArray(source.followingAccountIds) && source.followingAccountIds.length ? source.followingAccountIds : fallback.followingAccountIds,
+    processedEventIds: arrays(source.processedEventIds),
+    nextPostId: Math.max(1, Math.floor(Number(source.nextPostId) || 1)),
+    nextMessageId: Math.max(1, Math.floor(Number(source.nextMessageId) || 1))
+  };
+}
+
+function socialAccount(accountId) {
+  return save.social?.accounts?.find((account) => account.id === accountId) || null;
+}
+
+function socialEventKey(value) {
+  let hash = 2166136261;
+  for (const character of String(value)) {
+    hash ^= character.charCodeAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0).toString(36);
+}
+
+function addSocialEventPost(eventId, accountId, text, type = "news", importance = 1, related = {}) {
+  if (!eventId || save.social.processedEventIds.includes(eventId)) return false;
+  const account = socialAccount(accountId) || socialAccount("league-nba");
+  if (!account) return false;
+  const post = {
+    id: `social-post-${save.social.nextPostId++}`,
+    eventId,
+    accountId: account.id,
+    source: account.name,
+    handle: account.handle,
+    verified: account.verified,
+    teamId: related.teamId || account.teamId || null,
+    playerId: related.playerId || account.playerId || null,
+    gameId: related.gameId || null,
+    transactionId: related.transactionId || null,
+    mentions: related.mentions || [],
+    text,
+    type,
+    importance,
+    createdAt: related.date || currentLeagueDate(),
+    time: "Recently",
+    engagementSeed: socialEventKey(`${eventId}-${accountId}`),
+    storyId: related.storyId || eventId,
+    sequenceIndex: Number(related.sequenceIndex || 0),
+    replyToEventId: related.replyToEventId || null,
+    simulated: true
+  };
+  save.social.posts.push(post);
+  save.social.processedEventIds.push(eventId);
+  save.social.notifications.unshift({ id:`social-notification-${eventId}`, type:"post", postId:post.id, text:`${account.name} posted about ${related.label || "a league event"}.`, read:false, createdAt:post.createdAt });
+  return true;
+}
+
+function addSocialStorySequence(storyId, beats, related = {}) {
+  let changed = false;
+  beats.forEach((beat, index) => {
+    changed = addSocialEventPost(`${storyId}-${beat.id || index}`, beat.accountId, beat.text, beat.type || related.type || "news", beat.importance || related.importance || 1, {
+      ...related,
+      ...(beat.related || {}),
+      storyId,
+      sequenceIndex:index,
+      replyToEventId:index ? `${storyId}-${beats[index - 1].id || index - 1}` : null
+    }) || changed;
+  });
+  return changed;
+}
+
+function socialTeamsInText(text) {
+  const normalized = normalizeText(text);
+  return save.teams.filter((team) => [team.city,team.name,`${team.city} ${team.name}`,team.abbr].some((term) => normalized.includes(normalizeText(term))));
+}
+
+function socialPlayerInText(text) {
+  const normalized = normalizeText(text);
+  return save.players.filter((player) => player.teamId && player.name.length >= 5 && normalized.includes(normalizeText(player.name))).sort((a,b) => b.name.length - a.name.length)[0] || null;
+}
+
+function processSocialStorySequences() {
+  let changed = false;
+  const userTeam = activeTeam();
+  const results = [...(save.results || []), ...(save.leagueResults || [])].filter((result, index, list) => list.findIndex((item) => (item.gameId || item.id) === (result.gameId || result.id)) === index);
+  results.filter((result) => result.home === userTeam.id || result.away === userTeam.id).forEach((result) => {
+    const gameId=result.gameId||result.id||socialEventKey(JSON.stringify(result)), home=getTeam(result.home), away=getTeam(result.away);
+    const homeScore=Number(result.homeScore??result.scoreHome??0),awayScore=Number(result.awayScore??result.scoreAway??0),margin=Math.abs(homeScore-awayScore);
+    const winner=homeScore>=awayScore?home:away,loser=winner?.id===home?.id?away:home;
+    const lines=[...(result.playerStats?.home||[]),...(result.playerStats?.away||[])];
+    const standout=[...lines].sort((a,b)=>Number(b.pts||0)-Number(a.pts||0))[0];
+    const player=save.players.find((item)=>item.id===standout?.playerId);
+    const beats=[
+      {id:"official",accountId:`team-${winner?.id}`,text:`FINAL: ${winner?.abbr} ${Math.max(homeScore,awayScore)}, ${loser?.abbr} ${Math.min(homeScore,awayScore)}.`,type:"game",importance:1},
+      {id:"espn",accountId:"media-espn-nba",text:`${winner?.name} ${margin<=3?"held on in a thriller against":margin>=20?"made a statement against":"picked up a win over"} the ${loser?.name}.`,type:"analysis",importance:margin<=3||margin>=20?2:1}
+    ];
+    if (margin <= 3 || margin >= 20) beats.push({id:"local",accountId:`reporter-${userTeam.id}`,text:`The biggest story from ${userTeam.abbr}-${winner?.id===userTeam.id?"win":"loss"}: ${margin<=3?"late-game execution decided it.":"the margin reflected control from the opening minutes."}`,type:"reaction",importance:2});
+    if (player && Number(standout.pts||0)>=30) beats.push({id:"player",accountId:`player-${player.id}`,text:`${winner?.id===player.teamId?"Great team win. On to the next one.":"We will learn from it and get back to work."}`,type:"player-reaction",importance:1,related:{playerId:player.id,teamId:player.teamId,mentions:[player.name]}});
+    beats.push({id:"fans",accountId:`fans-${userTeam.id}`,text:`${winner?.id===userTeam.id?"That is the energy we needed.":"Tough one. The response in the next game matters."} #${userTeam.abbr}`,type:"fan-reaction",importance:1});
+    changed=addSocialStorySequence(`story-game-${gameId}`,beats,{gameId,teamId:userTeam.id,date:result.date,label:"a game story"})||changed;
+  });
+  (save.transactionLog||[]).forEach((transaction,index)=>{
+    const text=transaction.text||transaction.description||String(transaction);
+    if (!/trade|signed|extension|draft|coach|waiv|released/i.test(text)) return;
+    const key=transaction.id||socialEventKey(`${transaction.date||""}-${text}-${index}`),teams=socialTeamsInText(text),primaryTeam=teams[0]||userTeam,player=socialPlayerInText(text);
+    const beats=[
+      {id:"rumor",accountId:`reporter-${primaryTeam.id}`,text:`League sources have been monitoring a developing situation involving the ${primaryTeam.name}.`,type:"rumor",importance:1},
+      {id:"breaking",accountId:"media-shams",text:`Sources: ${text}`,type:"breaking",importance:3},
+      {id:"analysis",accountId:"media-espn-nba",text:`Breaking down the impact: ${text}`,type:"analysis",importance:2},
+      {id:"official",accountId:`team-${primaryTeam.id}`,text, type:"official",importance:2}
+    ];
+    if(player&&socialAccount(`player-${player.id}`)) beats.push({id:"player",accountId:`player-${player.id}`,text:"Grateful for the opportunity. Ready for what comes next.",type:"player-reaction",importance:1,related:{playerId:player.id,teamId:player.teamId,mentions:[player.name]}});
+    changed=addSocialStorySequence(`story-transaction-${key}`,beats,{transactionId:transaction.id||null,date:transaction.date,teamId:primaryTeam.id,label:"a transaction story"})||changed;
+  });
+  save.players.filter((player)=>player.injury>0).forEach((player)=>{
+    const key=`${save.season}-${player.id}-${socialEventKey(player.injuryType||"injury")}`;
+    const beats=[
+      {id:"breaking",accountId:"media-shams",text:`${player.name} is expected to miss ${player.injury} game${player.injury===1?"":"s"} with ${player.injuryType||"an injury"}.`,type:"breaking",importance:player.ovr>=85?3:2},
+      {id:"official",accountId:`team-${player.teamId}`,text:`Medical update: ${player.name} will be unavailable and evaluated as recovery progresses.`,type:"injury",importance:2},
+      {id:"espn",accountId:"media-espn-nba",text:`What ${player.name}'s absence means for the ${teamName(player.teamId)} rotation.`,type:"analysis",importance:player.ovr>=85?3:1}
+    ];
+    changed=addSocialStorySequence(`story-injury-${key}`,beats,{playerId:player.id,teamId:player.teamId,label:"an injury story",mentions:[player.name]})||changed;
+  });
+  (save.leagueHistory||[]).forEach((season)=>{
+    if(!season.championId)return;
+    const champion=getTeam(season.championId),star=bestPlayer(season.championId);
+    const beats=[
+      {id:"final",accountId:"media-espn",text:`THE ${champion.name.toUpperCase()} ARE NBA CHAMPIONS.`,type:"championship",importance:5},
+      {id:"official",accountId:`team-${champion.id}`,text:"WORLD CHAMPIONS.",type:"championship",importance:5},
+      {id:"league",accountId:"league-nba",text:`Congratulations to the ${champion.city} ${champion.name}, NBA champions.`,type:"championship",importance:5},
+      {id:"stats",accountId:"media-espn-stats",text:`The ${champion.name} completed their championship run and added another title to league history.`,type:"milestone",importance:4},
+      {id:"player",accountId:`player-${star.id}`,text:"Champions forever. This is for everyone who believed in us.",type:"player-reaction",importance:4,related:{playerId:star.id}},
+      {id:"fans",accountId:`fans-${champion.id}`,text:`WE DID IT. THE ${champion.name.toUpperCase()} ARE CHAMPIONS!`,type:"fan-reaction",importance:4}
+    ];
+    changed=addSocialStorySequence(`story-champion-${season.season}-${champion.id}`,beats,{teamId:champion.id,label:"the championship story"})||changed;
+  });
+  return changed;
+}
+
+function syncSocialNotifications() {
+  let changed = false;
+  const team = activeTeam(), players = teamPlayers(team.id), teamTerms = [team.city,team.name,team.abbr,`@${team.abbr}`,...players.map((player)=>player.name)].map((term)=>normalizeText(term));
+  const existing = new Set(save.social.notifications.map((item)=>item.id));
+  const add = (notification) => {
+    if (existing.has(notification.id)) return;
+    save.social.notifications.unshift({ read:false,createdAt:currentLeagueDate(),...notification });
+    existing.add(notification.id); changed = true;
+  };
+  save.social.posts.forEach((post) => {
+    const account = socialAccount(post.accountId), authoredByTeam = post.accountId === `team-${team.id}`;
+    const searchable = normalizeText(`${post.text || ""} ${(post.mentions || []).join(" ")}`);
+    const mentioned = !authoredByTeam && teamTerms.some((term)=>term && searchable.includes(term));
+    if (mentioned) add({ id:`notification-mention-${post.id}`,type:"mention",postId:post.id,source:account?.name || post.source || "NBA Social",verified:Boolean(account?.verified),text:`${account?.name || post.source || "An account"} mentioned ${team.abbr} or one of your players.` });
+    if (Number(post.importance || 0) >= 3 && !authoredByTeam) add({ id:`notification-major-${post.id}`,type:"coverage",postId:post.id,source:account?.name || post.source || "League coverage",verified:Boolean(account?.verified),text:post.text || "A major league story is developing." });
+    if (save.social.followingAccountIds.includes(post.accountId) && !authoredByTeam) add({ id:`notification-following-${post.id}`,type:"following",postId:post.id,source:account?.name || post.source || "Followed account",verified:Boolean(account?.verified),text:`New post: ${post.text || "Open to view."}` });
+  });
+  save.social.replies.forEach((reply) => {
+    const parent = save.social.posts.find((post)=>post.id===reply.postId);
+    if (parent?.accountId === `team-${team.id}` && reply.teamId !== team.id) add({ id:`notification-reply-${reply.id}`,type:"reply",postId:reply.postId,source:reply.authorName || "NBA Social",verified:false,text:`${reply.authorName || "Someone"} replied to your post.` });
+  });
+  save.social.conversations.filter((conversation)=>conversation.read===false).forEach((conversation) => {
+    const latest=(conversation.messages||[]).at(-1);
+    add({ id:`notification-message-${conversation.id}-${latest?.id || "latest"}`,type:"message",conversationId:conversation.id,source:conversation.participantName || "Direct Message",verified:false,text:latest?.text || "You have a new direct message." });
+  });
+  if (save.social.notifications.length > 1000) save.social.notifications = save.social.notifications.slice(0,1000);
+  return changed;
+}
+
+function processSocialSentiment() {
+  let changed = false;
+  const metrics = save.social.metrics, team = activeTeam();
+  const apply = (eventId, delta, label, detail, date = currentLeagueDate()) => {
+    if (!eventId || metrics.sentimentEventIds.includes(eventId)) return;
+    const before = Number(metrics.sentiment || 65);
+    metrics.sentiment = clampNumber(before + delta, 0, 100);
+    metrics.sentimentEventIds.push(eventId);
+    metrics.history.push({ id:eventId,date,label,detail,delta,value:metrics.sentiment });
+    changed = true;
+  };
+  const results=[...(save.results||[]),...(save.leagueResults||[])].filter((result,index,list)=>list.findIndex((item)=>(item.gameId||item.id)===(result.gameId||result.id))===index);
+  results.filter((result)=>result.home===team.id||result.away===team.id).forEach((result)=>{
+    const id=result.gameId||result.id||socialEventKey(JSON.stringify(result)),homeScore=Number(result.homeScore??result.scoreHome??0),awayScore=Number(result.awayScore??result.scoreAway??0);
+    const won=result.home===team.id?homeScore>awayScore:awayScore>homeScore,margin=Math.abs(homeScore-awayScore),playoff=/playoff|final/i.test(`${result.phase||""} ${save.phase||""}`);
+    const delta=(won ? 2 : -2)+(margin >= 20 ? (won ? 1 : -1) : 0)+(margin <= 3 ? (won ? 0.5 : -0.5) : 0)+(playoff ? (won ? 2 : -2) : 0);
+    apply(`sentiment-game-${id}`,delta,won?"Game victory":"Game loss",`${won?"Fans responded positively to":"Fan confidence fell after"} the ${margin}-point ${won?"win":"loss"}.`,result.date);
+  });
+  (save.transactionLog||[]).forEach((transaction,index)=>{
+    const text=transaction.text||transaction.description||String(transaction),normalized=normalizeText(text);
+    if (![team.city,team.name,team.abbr].some((term)=>normalized.includes(normalizeText(term)))) return;
+    const key=transaction.id||socialEventKey(`${transaction.date||""}-${text}-${index}`);
+    let delta=0,label="Roster transaction";
+    if(/signed|extension|acquired|draft/i.test(text)){delta=1.5;label="Roster addition";}
+    if(/waiv|released|traded/i.test(text)){delta=-.5;label="Roster change";}
+    apply(`sentiment-transaction-${key}`,delta,label,text,transaction.date);
+  });
+  teamPlayers(team.id).forEach((player)=>{
+    const injuryKey=`sentiment-injury-${save.season}-${player.id}-${socialEventKey(player.injuryType||"injury")}`;
+    if(player.injury>0) apply(injuryKey,player.ovr>=88?-4:player.ovr>=80?-2.5:-1,`${player.name} injured`,`${player.name} is expected to miss ${player.injury} games.`);
+    else if(metrics.sentimentEventIds.includes(injuryKey)) apply(`sentiment-return-${save.season}-${player.id}`,player.ovr>=88?3:1.5,`${player.name} returns`,"Fans welcomed the player's return to availability.");
+    const concern=player.dissatisfaction;
+    if(Number(concern?.level||0)>0) apply(`sentiment-complaint-${save.season}-${player.id}-${concern.level}`,-Math.min(3,Number(concern.level)),`${player.name} dissatisfaction`,concern.reason||"A locker-room concern became public.");
+  });
+  (save.leagueHistory||[]).forEach((season)=>{
+    if(season.championId===team.id) apply(`sentiment-title-${season.season}`,12,"NBA championship","Winning the title created a major surge in fan confidence.");
+    [["mvpId","MVP"],["dpoyId","Defensive Player of the Year"],["rookieId","Rookie of the Year"]].forEach(([field,label])=>{const player=save.players.find((item)=>item.id===season[field]);if(player?.teamId===team.id)apply(`sentiment-award-${season.season}-${field}`,4,`${label} winner`,`${player.name} won ${label}.`);});
+  });
+  metrics.history=metrics.history.slice(-120);
+  metrics.sentimentEventIds=metrics.sentimentEventIds.slice(-4000);
+  metrics.drivers=metrics.history.slice(-30).sort((a,b)=>Math.abs(Number(b.delta||0))-Math.abs(Number(a.delta||0))).slice(0,6);
+  return changed;
+}
+
+function publishScheduledSocialPost(item, publishedAt = currentLeagueDate()) {
+  if (!item || item.status === "published" || item.status === "cancelled") return false;
+  const team=activeTeam(),account=socialAccount(`team-${team.id}`);
+  save.social.posts.push({ id:`social-post-${save.social.nextPostId++}`,accountId:account?.id||`team-${team.id}`,source:account?.name||`${team.city} ${team.name}`,handle:account?.handle||`@${team.abbr}`,verified:true,teamId:team.id,text:item.text,type:item.type||"team",mentions:item.mentions||[],time:"Recently",createdAt:publishedAt,scheduledPostId:item.id,simulated:true });
+  item.status="published"; item.publishedAt=publishedAt;
+  save.social.notifications.unshift({ id:`notification-scheduled-${item.id}`,type:"published",source:`${team.city} ${team.name}`,text:`Scheduled post published: ${item.text}`,read:false,createdAt:publishedAt });
+  return true;
+}
+
+function processScheduledSocialPosts() {
+  let changed=false;
+  (save.social.scheduledPosts||[]).filter((item)=>item.status!=="published"&&item.status!=="cancelled"&&item.publishAt&&item.publishAt<=currentLeagueDate()).forEach((item)=>{
+    if(save.automation?.socialApproval){if(item.status!=="awaiting-approval"){item.status="awaiting-approval";changed=true;}return;}
+    changed=publishScheduledSocialPost(item,item.publishAt)||changed;
+  });
+  return changed;
+}
+
+function processSocialCareerEvents() {
+  let changed = false;
+  const userTeam = activeTeam();
+  const allResults = [...(save.results || []), ...(save.leagueResults || [])];
+  const uniqueResults = allResults.filter((result, index, list) => list.findIndex((item) => (item.gameId || item.id) === (result.gameId || result.id)) === index);
+  uniqueResults.filter((result) => result.home === userTeam.id || result.away === userTeam.id).forEach((result) => {
+    const gameId = result.gameId || result.id || socialEventKey(JSON.stringify(result));
+    const home = getTeam(result.home), away = getTeam(result.away);
+    const homeScore = Number(result.homeScore ?? result.scoreHome ?? 0), awayScore = Number(result.awayScore ?? result.scoreAway ?? 0);
+    const winner = homeScore >= awayScore ? home : away;
+    const loser = winner?.id === home?.id ? away : home;
+    const margin = Math.abs(homeScore - awayScore);
+    const accountId = winner?.id === userTeam.id ? `team-${userTeam.id}` : "media-espn-nba";
+    const text = `${winner?.city || "The winning team"} ${winner?.name || ""} ${margin >= 20 ? "rolled past" : margin <= 3 ? "survived" : "defeated"} the ${loser?.name || "opposition"}, ${Math.max(homeScore,awayScore)}-${Math.min(homeScore,awayScore)}.`;
+    changed = addSocialEventPost(`game-${gameId}`, accountId, text, "game", margin >= 20 || margin <= 3 ? 2 : 1, { gameId, teamId:userTeam.id, date:result.date, label:"the latest game", mentions:[userTeam.abbr] }) || changed;
+    const lines = [...(result.playerStats?.home || []), ...(result.playerStats?.away || [])];
+    const standout = [...lines].sort((a,b) => Number(b.pts || 0) - Number(a.pts || 0))[0];
+    if (standout && Number(standout.pts || 0) >= 40) {
+      const player = save.players.find((item) => item.id === standout.playerId);
+      changed = addSocialEventPost(`performance-${gameId}-${standout.playerId}`, "media-espn-stats", `${player?.name || standout.name || "A league star"} finished with ${standout.pts} points${standout.reb ? `, ${standout.reb} rebounds` : ""}${standout.ast ? ` and ${standout.ast} assists` : ""}.`, "milestone", Number(standout.pts) >= 50 ? 3 : 2, { gameId, playerId:standout.playerId, teamId:player?.teamId, date:result.date, label:"a standout performance", mentions:[player?.name].filter(Boolean) }) || changed;
+    }
+  });
+  (save.transactionLog || []).forEach((transaction, index) => {
+    const text = transaction.text || transaction.description || String(transaction);
+    const eventId = `transaction-${transaction.id || socialEventKey(`${transaction.date || ""}-${text}-${index}`)}`;
+    const major = /trade|extension|signed|draft|coach|waiv|released/i.test(text);
+    changed = addSocialEventPost(eventId, major ? "media-shams" : "league-comms", text, "transaction", /trade|draft|coach/i.test(text) ? 3 : 2, { transactionId:transaction.id || null, date:transaction.date, label:"a transaction" }) || changed;
+  });
+  save.players.filter((player) => player.injury > 0).forEach((player) => {
+    const eventId = `injury-${save.season}-${player.id}-${socialEventKey(player.injuryType || "injury")}`;
+    changed = addSocialEventPost(eventId, "media-shams", `${player.name} is expected to miss approximately ${player.injury} game${player.injury === 1 ? "" : "s"} with ${player.injuryType || "an injury"}, sources say.`, "injury", player.ovr >= 85 ? 3 : 2, { playerId:player.id, teamId:player.teamId, label:"an injury update", mentions:[player.name,teamAbbr(player.teamId)] }) || changed;
+  });
+  save.players.filter((player) => player.injury <= 0).forEach((player) => {
+    const injuryPrefix = `injury-${save.season}-${player.id}-`;
+    if (!save.social.processedEventIds.some((id) => id.startsWith(injuryPrefix))) return;
+    changed = addSocialEventPost(`return-${save.season}-${player.id}`, `team-${player.teamId}`, `${player.name} has been cleared to return to basketball activities.`, "injury-return", player.ovr >= 85 ? 2 : 1, { playerId:player.id, teamId:player.teamId, label:"a player return", mentions:[player.name] }) || changed;
+  });
+  (save.leagueHistory || []).forEach((season) => {
+    if (season.championId) changed = addSocialEventPost(`champion-${season.season}-${season.championId}`, "league-nba", `The ${teamName(season.championId)} are the ${season.season} NBA champions.`, "championship", 5, { teamId:season.championId, label:"the NBA championship" }) || changed;
+    [["mvpId","MVP"],["dpoyId","Defensive Player of the Year"],["rookieId","Rookie of the Year"],["sixthManId","Sixth Man of the Year"],["mipId","Most Improved Player"]].forEach(([field,label]) => {
+      const playerId = season[field];
+      const player = save.players.find((item) => item.id === playerId);
+      if (player) changed = addSocialEventPost(`award-${season.season}-${field}-${playerId}`, "league-nba", `${player.name} has been named ${season.season} ${label}.`, "award", label === "MVP" ? 4 : 3, { playerId,teamId:player.teamId,label,mentions:[player.name] }) || changed;
+    });
+  });
+  if (save.social.processedEventIds.length > 8000) save.social.processedEventIds = save.social.processedEventIds.slice(-8000);
+  if (save.social.posts.length > 3000) save.social.posts = save.social.posts.slice(-3000);
+  if (save.social.notifications.length > 1000) save.social.notifications = save.social.notifications.slice(0,1000);
+  return changed;
 }
 
 function coachingProfile(teamId) {
@@ -3909,7 +4437,17 @@ function ensureCareerSystems() {
   if (!Array.isArray(save.leagueEvolution)) { save.leagueEvolution = []; changed = true; }
   if (!Array.isArray(save.watchlist)) { save.watchlist = []; changed = true; }
   if (!Array.isArray(save.notifications)) { save.notifications = []; changed = true; }
+  const normalizedSocial = normalizeSocialState(save.social);
+  if (!save.social || JSON.stringify(save.social) !== JSON.stringify(normalizedSocial)) changed = true;
+  save.social = normalizedSocial;
+  if (syncSocialAccounts(save.social, save.teams, save.players)) changed = true;
+  if (processSocialCareerEvents()) changed = true;
+  if (processSocialStorySequences()) changed = true;
+  if (syncSocialNotifications()) changed = true;
+  if (processSocialSentiment()) changed = true;
+  if (processScheduledSocialPosts()) changed = true;
   if (!save.automation) { save.automation = createAutomationSettings(); changed = true; }
+  if (typeof save.automation.socialApproval !== "boolean") { save.automation.socialApproval = false; changed = true; }
   if (!save.saveDiagnostics) { save.saveDiagnostics = { version: 1, lastAutosave: null }; changed = true; }
   save.teams.forEach((team) => {
     if (!save.teamStrategies[team.id]) { save.teamStrategies[team.id] = { timeline: "balanced", need: "depth", aggression: 50 }; changed = true; }
@@ -5926,6 +6464,125 @@ function playerAwards(playerId) {
 }
 
 function attachActions() {
+  document.querySelector("#social-approval-toggle")?.addEventListener("change", async (event)=>{save.automation.socialApproval=event.currentTarget.checked;await persist();});
+  document.querySelectorAll("[data-social-schedule-suggestion]").forEach((button)=>button.addEventListener("click",()=>{const text=document.querySelector("#social-schedule-text"),date=document.querySelector("#social-schedule-date"),type=document.querySelector("#social-schedule-type");if(text)text.value=button.dataset.suggestionText||"";if(date)date.value=button.dataset.suggestionDate||currentLeagueDate();if(type)type.value=button.dataset.suggestionType||"team";}));
+  document.querySelector("[data-social-schedule-create]")?.addEventListener("click",async()=>{const text=document.querySelector("#social-schedule-text")?.value.trim(),publishAt=document.querySelector("#social-schedule-date")?.value,type=document.querySelector("#social-schedule-type")?.value||"team";if(!text||!publishAt)return;save.social.scheduledPosts.push({id:`scheduled-${Date.now()}-${save.social.nextPostId++}`,text,publishAt,type,status:"scheduled",createdAt:currentLeagueDate()});await persist();render();});
+  document.querySelectorAll("[data-social-schedule-publish]").forEach((button)=>button.addEventListener("click",async()=>{const item=save.social.scheduledPosts.find((entry)=>entry.id===button.dataset.socialSchedulePublish);if(publishScheduledSocialPost(item)){await persist();render();}}));
+  document.querySelectorAll("[data-social-schedule-cancel]").forEach((button)=>button.addEventListener("click",async()=>{const item=save.social.scheduledPosts.find((entry)=>entry.id===button.dataset.socialScheduleCancel);if(item){item.status="cancelled";await persist();render();}}));
+  document.querySelectorAll("[data-social-schedule-edit]").forEach((button)=>button.addEventListener("click",async()=>{const item=save.social.scheduledPosts.find((entry)=>entry.id===button.dataset.socialScheduleEdit);if(!item)return;const text=window.prompt("Edit scheduled post",item.text);if(text===null)return;const date=window.prompt("Publish date (YYYY-MM-DD)",item.publishAt);if(date===null)return;item.text=text.trim()||item.text;item.publishAt=/^\d{4}-\d{2}-\d{2}$/.test(date)?date:item.publishAt;item.status="scheduled";await persist();render();}));
+  document.querySelectorAll("[data-social-notification-filter]").forEach((button) => button.addEventListener("click", () => { socialNotificationFilter = button.dataset.socialNotificationFilter; render(); }));
+  document.querySelector("[data-social-notifications-read]")?.addEventListener("click", async () => { save.social.notifications.forEach((item)=>{item.read=true;}); await persist(); render(); });
+  document.querySelectorAll("[data-social-notification]").forEach((button) => button.addEventListener("click", async () => {
+    const notification = save.social.notifications.find((item)=>item.id===button.dataset.socialNotification);
+    if (!notification) return;
+    notification.read = true;
+    if (notification.postId) selectedSocialPostId = notification.postId;
+    if (notification.conversationId) { selectedSocialConversationId=notification.conversationId; socialActiveTab="messages"; }
+    await persist(); render();
+  }));
+  document.querySelector("[data-social-refresh]")?.addEventListener("click", async () => {
+    socialFeedRefreshKey += 1;
+    const changed = processSocialCareerEvents() | processSocialStorySequences();
+    if (changed) await persist();
+    render();
+  });
+  document.querySelectorAll("[data-social-profile]").forEach((button) => button.addEventListener("click", (event) => {
+    event.stopPropagation();
+    if (!button.dataset.socialProfile) return;
+    selectedSocialAccountId = button.dataset.socialProfile;
+    render();
+  }));
+  document.querySelectorAll("[data-close-social-profile]").forEach((element) => element.addEventListener("click", (event) => {
+    if (element.classList.contains("social-post-modal-backdrop") && event.target !== element) return;
+    selectedSocialAccountId = null;
+    render();
+  }));
+  document.querySelector("[data-social-follow-account]")?.addEventListener("click", async (event) => {
+    const id = event.currentTarget.dataset.socialFollowAccount;
+    save.social.followingAccountIds = save.social.followingAccountIds.includes(id) ? save.social.followingAccountIds.filter((item)=>item!==id) : [...save.social.followingAccountIds,id];
+    await persist(); render();
+  });
+  document.querySelectorAll("[data-social-post-action]").forEach((button) => button.addEventListener("click", async () => {
+    const postId = button.dataset.socialPostId, action = button.dataset.socialPostAction, interactions = save.social.interactions;
+    const toggle = (key) => { interactions[key] = interactions[key].includes(postId) ? interactions[key].filter((id) => id !== postId) : [...interactions[key],postId]; };
+    if (action === "like") toggle("likedPostIds");
+    if (action === "repost") toggle("repostedPostIds");
+    if (action === "bookmark") toggle("bookmarkedPostIds");
+    if (action === "reply" || action === "view") selectedSocialPostId = postId;
+    if (action === "share") {
+      const post = socialVisiblePostCache.get(postId);
+      try { await navigator.clipboard.writeText(`${post?.source || "NBA Social"}: ${post?.text || ""}`); save.messages.push("Post copied to clipboard."); }
+      catch { save.messages.push("Post ready to share."); }
+    }
+    if (["like","repost","bookmark"].includes(action)) await persist();
+    render();
+  }));
+  document.querySelectorAll("[data-close-social-post]").forEach((element) => element.addEventListener("click", (event) => {
+    if (element.classList.contains("social-post-modal-backdrop") && event.target !== element) return;
+    selectedSocialPostId = null;
+    render();
+  }));
+  const submitSocialReply = async () => {
+    const input = document.querySelector("#social-reply-input"), text = input?.value.trim();
+    if (!text || !selectedSocialPostId) return;
+    save.social.replies.push({ id:`social-reply-${save.social.nextPostId++}`,postId:selectedSocialPostId,authorName:`${activeTeam().city} ${activeTeam().name}`,authorHandle:`@${activeTeam().abbr}`,teamId:activeTeam().id,text,time:"now",createdAt:currentLeagueDate() });
+    await persist();
+    render();
+  };
+  document.querySelector("[data-social-submit-reply]")?.addEventListener("click", submitSocialReply);
+  document.querySelector("#social-reply-input")?.addEventListener("keydown", (event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); submitSocialReply(); } });
+  document.querySelector("[data-social-open-game]")?.addEventListener("click", (event) => { selectedGameId = event.currentTarget.dataset.socialOpenGame; selectedSocialPostId = null; active = "play"; render(); });
+  document.querySelector("[data-social-open-transaction]")?.addEventListener("click", (event) => { selectedTransactionId = event.currentTarget.dataset.socialOpenTransaction; selectedSocialPostId = null; active = "transactions"; render(); });
+  document.querySelectorAll("[data-social-tab]").forEach((button) => button.addEventListener("click", () => {
+    socialActiveTab = button.dataset.socialTab || "for-you";
+    if (socialActiveTab === "mentions") {
+      save.social.notifications.forEach((item)=>{ if(item.type === "mention") item.read=true; });
+      persist();
+    }
+    if (socialActiveTab === "messages" && socialMessagesDrawerOpen) closeSocialMessagesDrawer(render);
+    else render();
+  }));
+  document.querySelector(".social-quick-dms")?.addEventListener("click", () => {
+    if (socialMessagesDrawerOpen) closeSocialMessagesDrawer();
+    else { socialMessagesDrawerOpen = true; render(); }
+  });
+  document.querySelector("[data-social-drawer-close]")?.addEventListener("click", () => closeSocialMessagesDrawer());
+  document.querySelector("[data-social-drawer-fullscreen]")?.addEventListener("click", () => closeSocialMessagesDrawer(() => { socialActiveTab = "messages"; render(); }));
+  document.querySelectorAll("[data-social-drawer-conversation]").forEach((button) => button.addEventListener("click", async () => {
+    selectedSocialConversationId = button.dataset.socialDrawerConversation;
+    const conversation = save.social.conversations.find((item) => item.id === selectedSocialConversationId);
+    if (conversation) conversation.read = true;
+    await persist();
+    closeSocialMessagesDrawer(() => { socialActiveTab = "messages"; render(); });
+  }));
+  document.querySelector("#social-drawer-search")?.addEventListener("input", (event) => {
+    const query = normalizeText(event.currentTarget.value);
+    document.querySelectorAll("[data-social-drawer-conversation]").forEach((row) => { row.hidden = query && !row.dataset.socialDrawerSearch.includes(query); });
+  });
+  document.querySelectorAll("[data-social-conversation]").forEach((button) => button.addEventListener("click", async () => {
+    selectedSocialConversationId = button.dataset.socialConversation;
+    const conversation = save.social.conversations.find((item) => item.id === selectedSocialConversationId);
+    if (conversation) conversation.read = true;
+    await persist();
+    render();
+  }));
+  document.querySelector("#social-message-search")?.addEventListener("input", (event) => {
+    const query = normalizeText(event.currentTarget.value);
+    document.querySelectorAll("[data-social-conversation]").forEach((row) => { row.hidden = query && !row.dataset.socialConversationSearch.includes(query); });
+  });
+  const sendSocialMessage = async () => {
+    const input = document.querySelector("#social-message-input");
+    const text = input?.value.trim();
+    const conversation = save.social.conversations.find((item) => item.id === selectedSocialConversationId);
+    if (!text || !conversation) return;
+    conversation.messages.push({ id:`message-${save.social.nextMessageId++}`, sender:"team", text, time:"now" });
+    conversation.updatedAt = currentLeagueDate();
+    conversation.read = true;
+    await persist();
+    render();
+  };
+  document.querySelector("[data-social-send-message]")?.addEventListener("click", sendSocialMessage);
+  document.querySelector("#social-message-input")?.addEventListener("keydown", (event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); sendSocialMessage(); } });
   document.querySelectorAll("[data-action]").forEach((button) => {
     button.addEventListener("click", async () => {
       const action = button.dataset.action;
@@ -6238,6 +6895,7 @@ function attachActions() {
 
   document.querySelectorAll("[data-view-player]").forEach((button) => button.addEventListener("click", (event) => {
     event.stopPropagation();
+    if (button.closest(".social-post-conversation")) selectedSocialPostId = null;
     selectedPlayerCardId = button.dataset.viewPlayer;
     render();
   }));
@@ -7749,6 +8407,7 @@ function normalizeSave(candidate) {
     results: candidate.results || [],
     leagueSchedule: candidate.leagueSchedule || [],
     leagueResults: candidate.leagueResults || [],
+    social: normalizeSocialState(candidate.social),
     ratingsVersion: 1,
     freeAgentPoolVersion: 1,
     messages: candidate.messages || []

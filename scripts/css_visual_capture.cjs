@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, session } = require("electron");
 const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
@@ -9,6 +9,7 @@ const ROUTES = (process.argv[3] || "start,team-select,saves").split(",");
 app.setPath("userData", fs.mkdtempSync(path.join(os.tmpdir(), "nba-manager-visual-")));
 
 app.whenReady().then(async () => {
+  session.defaultSession.webRequest.onBeforeRequest({ urls: ["http://*/*", "https://*/*"] }, (_details, callback) => callback({ cancel: true }));
   ipcMain.handle("save:read", () => null);
   ipcMain.handle("save:write", () => null);
   ipcMain.handle("slots:list", () => []);
@@ -23,7 +24,17 @@ app.whenReady().then(async () => {
   await window.webContents.executeJavaScript("new Promise(resolve => setTimeout(resolve, 2200))");
   for (const route of ROUTES) {
     await window.webContents.executeJavaScript(`active=${JSON.stringify(route)};render()`);
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await window.webContents.executeJavaScript(`Promise.race([
+      Promise.all([
+        document.fonts?.ready || Promise.resolve(),
+        ...[...document.images].map(image => image.complete ? Promise.resolve() : new Promise(resolve => {
+          image.addEventListener('load', resolve, { once: true });
+          image.addEventListener('error', resolve, { once: true });
+        }))
+      ]),
+      new Promise(resolve => setTimeout(resolve, 1800))
+    ]).then(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))`);
+    await new Promise((resolve) => setTimeout(resolve, 120));
     fs.writeFileSync(path.join(OUTPUT, `${route}.png`), (await window.webContents.capturePage()).toPNG());
   }
   window.destroy();

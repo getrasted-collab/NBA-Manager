@@ -1,4 +1,5 @@
-﻿/* Final shell normalization: keep the dashboard sidebar the same size on every page. */
+/* Ownership: shell. Original cascade position preserved. */
+/* Final shell normalization: keep the dashboard sidebar the same size on every page. */
 body.dashboard-mode {
   --app-sidebar-width: 280px;
 }
@@ -18,6 +19,7 @@ body.dashboard-mode .app-sidebar {
   overflow: hidden !important;
 }
 
+/* Ownership: shared. Original cascade position preserved. */
 body.dashboard-mode .context-nav {
   flex: 1 !important;
   min-height: 0 !important;
@@ -25,6 +27,7 @@ body.dashboard-mode .context-nav {
   overflow-y: auto !important;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 body.dashboard-mode:is(.locker-room-layout, .player-development-layout) .workspace {
   min-width: 0 !important;
   overflow-x: hidden !important;
@@ -36,6 +39,7 @@ body.dashboard-mode:is(.locker-room-layout, .player-development-layout) .page {
   min-width: 0 !important;
 }
 
+/* Ownership: development. Original cascade position preserved. */
 body.dashboard-mode.player-development-layout .player-dev-page,
 body.dashboard-mode.player-development-layout .player-dev-layout,
 body.dashboard-mode.player-development-layout .player-dev-bottom-grid {
@@ -47,6 +51,7 @@ body.dashboard-mode.player-development-layout .player-dev-layout {
   grid-template-columns: minmax(0, .78fr) minmax(0, 1.34fr) minmax(0, .88fr) !important;
 }
 
+/* Ownership: shell. Original cascade position preserved. */
 @media (max-width: 800px) {
   body.dashboard-mode .main-shell {
     grid-template-columns: 1fr !important;
@@ -62,6 +67,7 @@ body.dashboard-mode.player-development-layout .player-dev-layout {
   }
 }
 
+/* Ownership: finance. Original cascade position preserved. */
 /* Finances fullscreen fit: page-only expansion, shared sidebar unchanged. */
 body.dashboard-mode.finance-layout .main-shell {
   width: 100% !important;
@@ -258,6 +264,7 @@ body.dashboard-mode.finance-layout .finance-dashboard-policy {
   }
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 /* Scouting/Finances fullscreen correction: keep the shared sidebar, but stop these pages from running too wide. */
 body.dashboard-mode:is(.scouting-layout, .finance-layout) .main-shell {
   width: min(1680px, calc(100% - 28px)) !important;
@@ -284,6 +291,7 @@ body.dashboard-mode.finance-layout .finance-dashboard {
   justify-self: center !important;
 }
 
+/* Ownership: scouting. Original cascade position preserved. */
 body.dashboard-mode.scouting-layout .scouting-board-layout {
   position: relative !important;
   grid-template-columns: minmax(280px, .9fr) minmax(380px, 1.16fr) !important;
@@ -317,6 +325,7 @@ body.dashboard-mode.scouting-layout .scouting-right-rail {
   align-self: start !important;
 }
 
+/* Ownership: finance. Original cascade position preserved. */
 body.dashboard-mode.finance-layout .finance-top-metrics {
   grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
   gap: 8px !important;
@@ -380,6 +389,7 @@ body.dashboard-mode.finance-layout .finance-exceptions {
   padding: 10px !important;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 @media (min-width: 1400px) and (min-height: 850px) {
   body.dashboard-mode.finance-layout .finance-dashboard {
     gap: 8px !important;
@@ -397,6 +407,7 @@ body.dashboard-mode.finance-layout .finance-exceptions {
   }
 }
 
+/* Ownership: scouting. Original cascade position preserved. */
 @media (max-width: 1180px) {
   body.dashboard-mode.scouting-layout .scouting-board-layout {
     padding-right: 0 !important;
@@ -419,6 +430,7 @@ body.dashboard-mode.finance-layout .finance-exceptions {
   }
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 /* Fullscreen fit for league/community pages. Sidebar dimensions intentionally unchanged. */
 body.dashboard-mode:is(.social-layout-page, .league-stats-layout, .awards-layout) .main-shell {
   width: min(1760px, calc(100% - 28px)) !important;
@@ -460,6 +472,7 @@ body.dashboard-mode.awards-layout .awards-header {
   margin-bottom: 0;
 }
 
+/* Ownership: social. Original cascade position preserved. */
 /* Social page fullscreen fit */
 body.dashboard-mode.social-layout-page .social-metrics {
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
@@ -582,6 +595,7 @@ body.dashboard-mode.social-layout-page .social-media article {
   grid-template-columns: 36px minmax(0, 1fr) auto;
 }
 
+/* Ownership: league-stats. Original cascade position preserved. */
 /* League Stats fullscreen fit */
 body.dashboard-mode.league-stats-layout .league-stats-top-grid {
   grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
@@ -696,6 +710,7 @@ body.dashboard-mode.league-stats-layout .league-update-logo {
   height: 38px;
 }
 
+/* Ownership: awards. Original cascade position preserved. */
 /* Awards fullscreen fit */
 body.dashboard-mode.awards-layout .awards-top-grid {
   grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
@@ -849,6 +864,7 @@ body.dashboard-mode.awards-layout .award-activity-strip {
   padding: 9px 12px;
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 @media (max-width: 1180px) {
   body.dashboard-mode.social-layout-page .social-metrics,
   body.dashboard-mode.league-stats-layout .league-stats-top-grid,
@@ -1383,6 +1399,7 @@ body.dashboard-mode.awards-layout .award-activity-strip article {
   }
 }
 
+/* Ownership: history. Original cascade position preserved. */
 /* League History cleanup: compact reference-style layout without horizontal blowout. */
 body.dashboard-mode.league-history-layout .main-shell {
   width: min(1760px, calc(100% - 28px)) !important;
@@ -1596,6 +1613,7 @@ body.dashboard-mode.league-history-layout .history-timeline-strip > div {
   }
 }
 
+/* Ownership: shared-pages. Original cascade position preserved. */
 /* Fullscreen no-page-scroll pass for scouting, finances, and league history. */
 @media (min-width: 1400px) and (min-height: 760px) {
   body.dashboard-mode:is(.scouting-layout, .finance-layout, .league-history-layout) .main-shell {
@@ -2156,4 +2174,3 @@ body.dashboard-mode.league-history-layout .history-timeline-strip > div {
     height: 0 !important;
   }
 }
-
