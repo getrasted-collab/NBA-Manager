@@ -2530,7 +2530,7 @@ body.game-ui-upgrade
 .reference-upcoming
 .upcoming-game-card
 .upcoming-matchup > span > small {
-  transform: translate(0px, 20px) !important;
+  transform: translate(0px, 25px) !important;
 }
 
 body.game-ui-upgrade
@@ -2567,21 +2567,66 @@ button.upcoming-game-card
   opacity: 1 !important;
 }
 
-/* Remove the gray strip/shadow below Upcoming cards */
 body.game-ui-upgrade
 .reference-upcoming
-.upcoming-card {
-  box-shadow: none !important;
-  filter: none !important;
+.upcoming-game-card
+.upcoming-matchup
+.upcoming-team-logo {
+  width: 76px !important;
+  height: 76px !important;
 }
 
 body.game-ui-upgrade
 .reference-upcoming
-.upcoming-card::before,
+.upcoming-game-card
+.upcoming-matchup {
+  column-gap: 24px !important;
+}
+
 body.game-ui-upgrade
 .reference-upcoming
-.upcoming-card::after {
-  box-shadow: none !important;
-  filter: none !important;
-  background: transparent !important;
+.upcoming-game-card
+.upcoming-matchup
+.upcoming-team-logo {
+  transform: translateX(-10px) !important;
+}
+
+/* Move AT / VS left */
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+.upcoming-matchup > i {
+  transform: translateX(-5px) !important;
+}
+
+/* Move both records left */
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+.upcoming-matchup > span > small {
+  transform: translateX(-10px) !important;
+}
+
+/* Move records farther down */
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+.upcoming-matchup > span > small {
+  transform: translate(-10px, 25px) !important;
+}
+
+/* Make AT / VS larger */
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+.upcoming-matchup > i {
+  font-size: 15px !important;
+  font-weight: 900 !important;
+}
+
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+> .upcoming-card-detail {
+  transform: translateY(4px) !important;
 }
