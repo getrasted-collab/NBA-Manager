@@ -2560,7 +2560,28 @@ body.game-ui-upgrade
 
 body.game-ui-upgrade
 .reference-upcoming
-.upcoming-game-card
-.upcoming-card-detail {
-  color: #3478ff !important;
+button.upcoming-game-card
+> small.upcoming-card-detail {
+  color: #4f8bff !important;
+  -webkit-text-fill-color: #4f8bff !important;
+  opacity: 1 !important;
+}
+
+/* Remove the gray strip/shadow below Upcoming cards */
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-card {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-card::before,
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-card::after {
+  box-shadow: none !important;
+  filter: none !important;
+  background: transparent !important;
 }
