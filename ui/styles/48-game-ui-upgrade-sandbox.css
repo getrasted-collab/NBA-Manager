@@ -2294,7 +2294,7 @@ body.game-ui-upgrade
   margin: 0 !important;
   padding: 0 !important;
 
-  transform: translateY(40px) !important;
+ transform: translateY(20px) !important;
 }
 
 /* Hide team abbreviations */
@@ -2352,7 +2352,7 @@ body.game-ui-upgrade
   justify-self: center !important;
 
   width: 42px !important;
-  margin: 40px 0 0 !important;
+margin: 22px 0 0 !important;
 
   color: #fff !important;
   font-size: 15px !important;
@@ -2373,5 +2373,5 @@ button.upcoming-game-card
   -webkit-text-fill-color: #4f8bff !important;
   opacity: 1 !important;
 
-  transform: translateY(4px) !important;
+transform: translateY(-5px) !important;
 }
