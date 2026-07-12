@@ -2115,3 +2115,18 @@ body.game-ui-upgrade .reference-upcoming .upcoming-event-card > em {
   margin: 0;
   line-height: 14px;
 }
+
+/* Move the Trade Eligible text to the right */
+body.game-ui-upgrade .command-card--operations > header > strong {
+  transform: translateX(25px);
+}
+
+body.game-ui-upgrade .command-card--operations .operations-deadline > p {
+  box-sizing: border-box;
+  padding-left: 25px;
+}
+
+body.game-ui-upgrade .command-card--operations .operations-deadline > p > b {
+  display: block;
+  margin-left: -25px;
+}

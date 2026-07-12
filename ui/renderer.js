@@ -1384,7 +1384,7 @@ function dashboardUpcomingItems(selectedTeam) {
   return [...mixed, ...fill];
 }
 
-function renderDashboardUpcomingCard(item) {
+return `<button class="upcoming-card upcoming-event-card upcoming-event-${escapeHtml(item.eventType)}" data-action="${item.action}"><span class="upcoming-card-topline">${formatShortDate(item.date)}<b>${escapeHtml(badge)}</b></span><span class="upcoming-event-summary"><span style="display:block; transform:translateX(25px);"><strong>${escapeHtml(item.label)}</strong><small class="upcoming-card-detail">${escapeHtml(item.detail)}</small></span></span><em>${item.eventType === "deadline" ? "REVIEW DEADLINE" : item.eventType === "all-star" ? "VIEW EVENT" : "LEAGUE CALENDAR"} &rarr;</em></button>`;
   if (item.type === "game") {
     const home = item.venue === "vs";
     const teamAbbr = escapeHtml(item.team?.abbr || "USER");
