@@ -2524,3 +2524,43 @@ body.game-ui-upgrade
 .upcoming-matchup > span {
   transform: translateY(40px) !important;
 }
+
+/* Move records slightly down and left */
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+.upcoming-matchup > span > small {
+  transform: translate(0px, 20px) !important;
+}
+
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+.upcoming-matchup > i {
+  transform: translateX(0px) !important;
+}
+
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+.upcoming-matchup
+.upcoming-team-logo {
+  width: 66px !important;
+  height: 66px !important;
+}
+
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+.upcoming-matchup > i {
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+}
+
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+.upcoming-card-detail {
+  color: #3478ff !important;
+}
