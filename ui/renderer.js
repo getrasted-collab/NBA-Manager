@@ -1297,7 +1297,7 @@ function dashboardReferencePage() {
       <h1 class="reference-page-title">DASHBOARD</h1>
 
       <section class="reference-season-hero panel-card selected-card vertical-slice-hero">
-        <div class="team-hero-identity">${teamLogo(selectedTeam, "page-hero-logo reference-hero-logo")}<div><span>${save.season}-${String(save.season + 1).slice(-2)} REGULAR SEASON &middot; ${escapeHtml(save.phase)}</span><h2>${escapeHtml(selectedTeam.city)} ${escapeHtml(selectedTeam.name)}</h2><p><strong>${selectedTeam.wins}-${selectedTeam.losses}</strong> ${escapeHtml(selectedTeam.conf)} Conference <b>${selectedTeam.wins >= selectedTeam.losses ? "PLAYOFF HUNT" : "BUILDING"}</b></p></div></div>
+        <div class="team-hero-identity">${teamLogo(selectedTeam, "page-hero-logo reference-hero-logo")}<div><span>${save.season}-${String(save.season + 1).slice(-2)} REGULAR SEASON &middot; ${escapeHtml(save.phase)}</span><h2>${escapeHtml(selectedTeam.city)} ${escapeHtml(selectedTeam.name)}</h2><p><strong>${selectedTeam.wins}-${selectedTeam.losses}</strong> ${escapeHtml(selectedTeam.conf)} Conference <b>${selectedTeam.wins >= selectedTeam.losses ? "PLAYOFF HUNT" : "BUILDING"}</b></p></div></div>${teamLogo(selectedTeam, "reference-hero-watermark")}
         ${nextGame && nextOpponent ? `<div class="dashboard-next-matchup"><span>NEXT MATCHUP · ${formatShortDate(nextGame.date)}</span><div>${teamLogo(selectedTeam, "dashboard-matchup-logo")}<b>${escapeHtml(selectedTeam.abbr)}</b><i>${nextGame.home === selectedTeam.id ? "VS" : "AT"}</i><b>${escapeHtml(nextOpponent.abbr)}</b>${teamLogo(nextOpponent, "dashboard-matchup-logo")}</div><small>${nextGame.home === selectedTeam.id ? "HOME" : "AWAY"} · ${escapeHtml(nextOpponent.city)} ${escapeHtml(nextOpponent.name)}</small></div>` : '<div class="dashboard-next-matchup"><span>SEASON STATUS</span><b>COMPLETE</b></div>'}
         <div><button class="btn reference-primary" data-action="go-games">▷ SIM NEXT</button><button class="btn reference-week-button" data-sim-control="week">▷ SIM WEEK</button></div>
       </section>
@@ -6218,7 +6218,7 @@ function rotationManagementPanel() {
   return `
     <h2 class="rotation-section-title">LINEUP &amp; MINUTES</h2>
     <section class="card rotation-header">
-      <div class="team-hero-identity">${teamLogo(team, "page-hero-logo")}<div>
+      <div class="team-hero-identity">${teamLogo(team, "page-hero-logo")}<div> 
         <div class="card-label">rotation and minutes</div>
         <div class="player-name">${escapeHtml(team.city)} ${escapeHtml(team.name)}</div>
         <div class="meta">Drag players into the first five spots to set starters, assign positions, allocate 240 minutes, and keep a legal active list.</div>
