@@ -2499,4 +2499,35 @@ body.game-ui-upgrade
   margin: 0 !important;
   object-fit: contain !important;
   z-index: 6 !important;
+
+  filter:
+  drop-shadow(0 4px 8px rgba(0, 0, 0, 0.55))
+  drop-shadow(0 0 14px rgba(79, 139, 255, 0.35)) !important;
+
+}
+
+
+/* Align league-operation text consistently */
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-event-card {
+  text-align: left !important;
+}
+
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-event-card
+.upcoming-card-detail,
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-event-card
+.upcoming-event-category,
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-event-card
+.upcoming-event-title {
+  width: 100% !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  text-align: left !important;
 }
