@@ -2130,3 +2130,36 @@ body.game-ui-upgrade .command-card--operations .operations-deadline > p > b {
   display: block;
   margin-left: -25px;
 }
+
+body.game-ui-upgrade .upcoming-event-copy {
+  display: block;
+  width: calc(100% - 25px);
+  transform: translate(75px, 12px);
+  text-align: right;
+}
+
+body.game-ui-upgrade .upcoming-event-copy strong,
+body.game-ui-upgrade .upcoming-event-copy .upcoming-card-detail {
+  display: block;
+  text-align: right;
+}
+
+body.game-ui-upgrade .upcoming-event-copy strong {
+  font-size: 54px;
+  line-height: 0.9;
+}
+
+body.game-ui-upgrade .upcoming-event-copy .upcoming-card-detail {
+  margin-top: 10px;
+  font-size: 39px;
+  line-height: 1.35;
+}
+
+body.game-ui-upgrade .upcoming-event-card .upcoming-card-topline {
+  font-size: 11px;
+}
+
+body.game-ui-upgrade .upcoming-event-card .upcoming-card-topline b {
+  padding: 4px 10px;
+  font-size: 8px;
+}

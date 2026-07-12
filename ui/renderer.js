@@ -1384,25 +1384,26 @@ function dashboardUpcomingItems(selectedTeam) {
   return [...mixed, ...fill];
 }
 
-return `<button class="upcoming-card upcoming-event-card upcoming-event-${escapeHtml(item.eventType)}" data-action="${item.action}"><span class="upcoming-card-topline">${formatShortDate(item.date)}<b>${escapeHtml(badge)}</b></span><span class="upcoming-event-summary"><span style="display:block; transform:translateX(25px);"><strong>${escapeHtml(item.label)}</strong><small class="upcoming-card-detail">${escapeHtml(item.detail)}</small></span></span><em>${item.eventType === "deadline" ? "REVIEW DEADLINE" : item.eventType === "all-star" ? "VIEW EVENT" : "LEAGUE CALENDAR"} &rarr;</em></button>`;
+function renderDashboardUpcomingCard(item) {
   if (item.type === "game") {
     const home = item.venue === "vs";
     const teamAbbr = escapeHtml(item.team?.abbr || "USER");
     const opponentAbbr = escapeHtml(item.opponent?.abbr || "TBD");
-    const opponentPlace = escapeHtml(item.opponent?.city || item.opponent?.name || opponentAbbr);
+    const opponentPlace = escapeHtml(
+      item.opponent?.city || item.opponent?.name || opponentAbbr
+    );
+
     return `<button class="upcoming-card upcoming-game-card" data-action="${item.action}"><span class="upcoming-card-topline">${formatShortDate(item.date)}<b>${home ? "HOME" : "AWAY"}</b></span><span class="upcoming-matchup"><span><b>${teamAbbr}</b>${teamLogo(item.team, "upcoming-team-logo")}<small>${item.team?.wins || 0}-${item.team?.losses || 0}</small></span><i>${home ? "VS" : "AT"}</i><span><b>${opponentAbbr}</b>${teamLogo(item.opponent, "upcoming-team-logo")}<small>${item.opponent?.wins || 0}-${item.opponent?.losses || 0}</small></span></span><strong class="upcoming-matchup-label">${teamAbbr} ${home ? "vs" : "at"} ${opponentAbbr}</strong><small class="upcoming-card-detail">${home ? "Home" : "Away"} &middot; ${opponentPlace}</small><em>OPEN MATCHUP &rarr;</em></button>`;
   }
-  {
-    const badge = item.eventType === "all-star" ? "NBA · ALL-STAR" : item.eventType === "deadline" ? "NBA · DEADLINE" : "NBA · LEAGUE";
-    return `<button class="upcoming-card upcoming-event-card upcoming-event-${escapeHtml(item.eventType)}" data-action="${item.action}"><span class="upcoming-card-topline">${formatShortDate(item.date)}<b>${escapeHtml(badge)}</b></span><span class="upcoming-event-summary"><span><strong>${escapeHtml(item.label)}</strong><small class="upcoming-card-detail">${escapeHtml(item.detail)}</small></span></span><em>${item.eventType === "deadline" ? "REVIEW DEADLINE" : item.eventType === "all-star" ? "VIEW EVENT" : "LEAGUE CALENDAR"} &rarr;</em></button>`;
-  }
-  /* Legacy markup retained below for easy rollback. */
-  if (false) {
-    return `<button class="upcoming-card upcoming-game-card" data-action="${item.action}"><span class="upcoming-card-topline">${formatShortDate(item.date)}<b>${home ? "HOME" : "AWAY"}</b></span><span class="upcoming-matchup"><span>${teamLogo(item.team, "upcoming-team-logo")}<b>${escapeHtml(item.team?.abbr || "USER")}</b><small>${item.team?.wins || 0}-${item.team?.losses || 0}</small></span><i>${home ? "VS" : "AT"}</i><span>${teamLogo(item.opponent, "upcoming-team-logo")}<b>${escapeHtml(item.opponent?.abbr || "TBD")}</b><small>${item.opponent?.wins || 0}-${item.opponent?.losses || 0}</small></span></span><small class="upcoming-card-detail">${home ? `${escapeHtml(item.opponent?.city || "")} comes to ${escapeHtml(item.team?.city || "")}` : `${escapeHtml(item.team?.city || "")} at ${escapeHtml(item.opponent?.city || "")}`}</small><em>OPEN MATCHUP →</em></button>`;
-  }
-  const category = item.eventType === "all-star" ? "All-Star" : item.eventType === "deadline" ? "Deadline" : "League";
-  const icon = item.eventType === "all-star" ? "AS" : item.eventType === "deadline" ? "TD" : "NBA";
-  return `<button class="upcoming-card upcoming-event-card upcoming-event-${escapeHtml(item.eventType)}" data-action="${item.action}"><span class="upcoming-card-topline">${formatShortDate(item.date)}<b>${escapeHtml(category)}</b></span><span class="upcoming-event-summary"><span class="upcoming-event-icon">${escapeHtml(icon)}</span><span><strong>${escapeHtml(item.label)}</strong><small class="upcoming-card-detail">${escapeHtml(item.detail)}</small></span></span><em>${item.eventType === "deadline" ? "REVIEW DEADLINE" : item.eventType === "all-star" ? "VIEW EVENT" : "LEAGUE CALENDAR"} →</em></button>`;
+
+  const badge =
+    item.eventType === "all-star"
+      ? "NBA · ALL-STAR"
+      : item.eventType === "deadline"
+        ? "NBA · DEADLINE"
+        : "NBA · LEAGUE";
+
+ return `<button class="upcoming-card upcoming-event-card upcoming-event-${escapeHtml(item.eventType)}" data-action="${item.action}"><span class="upcoming-card-topline">${formatShortDate(item.date)}<b>${escapeHtml(badge)}</b></span><span class="upcoming-event-summary"><span class="upcoming-event-copy"><strong>${escapeHtml(item.label)}</strong><small class="upcoming-card-detail">${escapeHtml(item.detail)}</small></span></span>${item.eventType === "deadline" ? "<em>REVIEW DEADLINE &rarr;</em>" : item.eventType === "all-star" ? "<em>VIEW EVENT &rarr;</em>" : ""}</button>`;
 }
 
 function staffMarketPanel() {
