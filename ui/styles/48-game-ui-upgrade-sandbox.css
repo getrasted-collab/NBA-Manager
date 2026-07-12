@@ -2243,286 +2243,61 @@ body.game-ui-upgrade
   display: none !important;
 }
 
-/* Final Upcoming matchup layout: TEAM | AT/VS | TEAM */
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup {
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr) !important;
-  align-items: center !important;
-  justify-items: stretch !important;
-  width: 100% !important;
-  height: 82px !important;
-  margin: 12px 0 0 !important;
-  padding: 0 8px !important;
-  gap: 4px !important;
-  overflow: visible !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > span {
-  display: grid !important;
-  grid-template-rows: 18px 42px 14px !important;
-  justify-items: center !important;
-  align-items: center !important;
-  width: 100% !important;
-  min-width: 0 !important;
-  height: 78px !important;
-  margin: 0 !important;
-  gap: 2px !important;
-  overflow: visible !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > span:first-child {
-  display: grid !important;
-  grid-column: 1 !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > i {
-  position: static !important;
-  display: block !important;
-  grid-column: 2 !important;
-  align-self: center !important;
-  width: 32px !important;
-  margin: 0 !important;
-  color: #3478ff !important;
-  font-size: 11px !important;
-  font-style: normal !important;
-  font-weight: 900 !important;
-  text-align: center !important;
-  transform: none !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > span:last-child {
-  display: grid !important;
-  grid-column: 3 !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > span > b {
-  display: block !important;
-  height: auto !important;
-  font-size: 13px !important;
-  line-height: 18px !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup
-.upcoming-team-logo {
-  display: block !important;
-  width: 40px !important;
-  height: 40px !important;
-  margin: 0 !important;
-  object-fit: contain !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > span > small {
-  display: block !important;
-  height: auto !important;
-  font-size: 9px !important;
-  line-height: 14px !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup {
-  display: grid !important;
-  grid-template-columns: 1fr 34px 1fr !important;
-  align-items: center !important;
-  width: 100% !important;
-  gap: 8px !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > span {
-  display: grid !important;
-  grid-template-rows: 18px 54px 14px !important;
-  justify-items: center !important;
-  align-items: center !important;
-  height: auto !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > i {
-  position: static !important;
-  grid-column: 2 !important;
-  align-self: center !important;
-  justify-self: center !important;
-  width: auto !important;
-  margin: 18px 0 0 !important;
-  transform: none !important;
-  font-size: 12px !important;
-  font-style: normal !important;
-  font-weight: 900 !important;
-  text-align: center !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup
-.upcoming-team-logo {
-  width: 54px !important;
-  height: 54px !important;
-  margin: 0 !important;
-  object-fit: contain !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > span > b {
-  font-size: 13px !important;
-  line-height: 18px !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > span > small {
-  font-size: 9px !important;
-  line-height: 14px !important;
-}
-
-/* Center Upcoming matchup and place AT/VS between logos */
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup {
-  display: grid !important;
-  grid-template-columns: 64px 32px 64px !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: max-content !important;
-  max-width: 100% !important;
-  height: 82px !important;
-  margin: 12px auto 0 !important;
-  padding: 0 !important;
-  gap: 8px !important;
-  overflow: visible !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > span {
-  display: grid !important;
-  grid-template-rows: 18px 54px 14px !important;
-  justify-items: center !important;
-  align-items: center !important;
-  width: 64px !important;
-  height: 86px !important;
-  margin: 0 !important;
-  gap: 2px !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > span:first-child {
-  grid-column: 1 !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > i {
-  position: static !important;
-  grid-column: 2 !important;
-  align-self: center !important;
-  justify-self: center !important;
-  width: 32px !important;
-  margin: 18px 0 0 !important;
-  transform: none !important;
-  color: #3478ff !important;
-  font-size: 11px !important;
-  font-style: normal !important;
-  font-weight: 900 !important;
-  line-height: 1 !important;
-  text-align: center !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > span:last-child {
-  grid-column: 3 !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup .upcoming-team-logo {
-  display: block !important;
-  width: 54px !important;
-  height: 54px !important;
-  margin: 0 !important;
-  object-fit: contain !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > span > b {
-  height: 18px !important;
-  font-size: 13px !important;
-  line-height: 18px !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup > span > small {
-  height: 14px !important;
-  font-size: 9px !important;
-  line-height: 14px !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup {
-  transform: translateX(88px) !important;
-}
-
 /* =========================================================
-   LOCKED UPCOMING CARD LAYOUT
+   UPCOMING GAME CARDS — FINAL CONSOLIDATED LAYOUT
    ========================================================= */
 
-/* Move the full matchup group into its final horizontal position */
+/* Hide duplicated matchup label such as DET vs GSW */
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+.upcoming-matchup-label {
+  display: none !important;
+}
+
+/* Matchup container */
 body.game-ui-upgrade
 .reference-upcoming
 .upcoming-game-card
 .upcoming-matchup {
-  transform: translateX(88px) !important;
+  display: grid !important;
+  grid-template-columns: 76px 42px 76px !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: max-content !important;
+  max-width: 100% !important;
+  height: 112px !important;
+
+  margin: 0 auto !important;
+  padding: 0 !important;
   column-gap: 24px !important;
+
+  overflow: visible !important;
+  transform: translateX(88px) !important;
 }
 
-/* Hide DET / TOR / GSW abbreviations above the logos */
+/* Each team column */
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+.upcoming-matchup > span {
+  display: grid !important;
+  grid-template-rows: 76px 14px !important;
+  justify-items: center !important;
+  align-items: center !important;
+
+  width: 76px !important;
+  min-width: 76px !important;
+  height: 112px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: translateY(40px) !important;
+}
+
+/* Hide team abbreviations */
 body.game-ui-upgrade
 .reference-upcoming
 .upcoming-game-card
@@ -2530,51 +2305,66 @@ body.game-ui-upgrade
   display: none !important;
 }
 
-/* Move both team columns down */
+/* Logos */
 body.game-ui-upgrade
 .reference-upcoming
 .upcoming-game-card
-.upcoming-matchup > span {
-  transform: translateY(40px) !important;
-}
-
-/* Final logo size and position */
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-game-card
-.upcoming-matchup
 .upcoming-team-logo {
+  display: block !important;
+
   width: 76px !important;
   height: 76px !important;
+
   margin: 0 !important;
   object-fit: contain !important;
+
   transform: translateX(-10px) !important;
 }
 
-/* Final record position */
+/* Records */
 body.game-ui-upgrade
 .reference-upcoming
 .upcoming-game-card
 .upcoming-matchup > span > small {
+  display: block !important;
+
+  width: 76px !important;
   height: 14px !important;
+
+  margin: 0 !important;
+
   font-size: 9px !important;
   line-height: 14px !important;
+  text-align: center !important;
+
   transform: translate(-10px, 25px) !important;
 }
 
-/* Final AT / VS appearance and position */
+/* AT / VS */
 body.game-ui-upgrade
 .reference-upcoming
 .upcoming-game-card
 .upcoming-matchup > i {
+  position: static !important;
+
+  grid-column: 2 !important;
+  align-self: center !important;
+  justify-self: center !important;
+
+  width: 42px !important;
+  margin: 40px 0 0 !important;
+
   color: #fff !important;
   font-size: 15px !important;
   font-style: normal !important;
   font-weight: 900 !important;
+  line-height: 1 !important;
+  text-align: center !important;
+
   transform: translateX(-5px) !important;
 }
 
-/* Blue home/away location text */
+/* Bottom location line */
 body.game-ui-upgrade
 .reference-upcoming
 button.upcoming-game-card
@@ -2582,5 +2372,6 @@ button.upcoming-game-card
   color: #4f8bff !important;
   -webkit-text-fill-color: #4f8bff !important;
   opacity: 1 !important;
+
   transform: translateY(4px) !important;
 }
