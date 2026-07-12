@@ -2501,3 +2501,10 @@ body.game-ui-upgrade
   font-size: 9px !important;
   line-height: 14px !important;
 }
+
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+.upcoming-matchup {
+  transform: translateX(88px) !important;
+}
