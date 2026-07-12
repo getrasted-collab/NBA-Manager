@@ -2384,42 +2384,49 @@ body.game-ui-upgrade .ovr-badge {
   text-shadow: none !important;
 }
 
-/* Large subtle team-logo watermark behind the dashboard hero text */
-body.game-ui-upgrade
-.reference-season-hero {
-  position: relative !important;
-  overflow: hidden !important;
-  isolation: isolate !important;
-}
-
-body.game-ui-upgrade
-.reference-season-hero
-.team-hero-identity {
-  position: relative !important;
-  z-index: 2 !important;
-}
-
 body.game-ui-upgrade
 .reference-season-hero
 .reference-hero-watermark {
   position: absolute !important;
   z-index: 1 !important;
 
-  left: 250px !important;
-  top: 68px !important;
+  left: 20px !important;
+  top: 18px !important;
 
-  width: 230px !important;
-  height: 230px !important;
+  width: 430px !important;
+  height: 180px !important;
 
   object-fit: contain !important;
-  opacity: 0.09 !important;
+  opacity: 0.1 !important;
 
   filter:
-    grayscale(20%)
-    saturate(70%)
-    blur(0.3px) !important;
+    grayscale(15%)
+    saturate(75%)
+    blur(0.2px) !important;
 
-  transform: rotate(-8deg) !important;
+  transform: rotate(-6deg) !important;
+  pointer-events: none !important;
+  user-select: none !important;
+}body.game-ui-upgrade
+.reference-season-hero
+.reference-hero-watermark {
+  position: absolute !important;
+  z-index: 1 !important;
+
+  left: -250px !important;
+  top: -150px !important;
+
+  width: 820px !important;
+  height: 520px !important;
+
+  object-fit: contain !important;
+  opacity: 0.1 !important;
+
+  filter:
+    grayscale(10%)
+    saturate(80%) !important;
+
+  transform: none !important;
   pointer-events: none !important;
   user-select: none !important;
 }
