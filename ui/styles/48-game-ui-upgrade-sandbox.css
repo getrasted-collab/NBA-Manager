@@ -2337,7 +2337,7 @@ body.game-ui-upgrade
   line-height: 14px !important;
   text-align: center !important;
 
-  transform: translate(-10px, 25px) !important;
+  transform: translate(-10px, -5px) !important;
 }
 
 /* AT / VS */
@@ -2355,13 +2355,13 @@ body.game-ui-upgrade
 margin: 22px 0 0 !important;
 
   color: #fff !important;
-  font-size: 15px !important;
+  font-size: 20px !important;
   font-style: normal !important;
   font-weight: 900 !important;
   line-height: 1 !important;
   text-align: center !important;
 
-  transform: translateX(-5px) !important;
+  transform: translateX(-10px) !important;
 }
 
 /* Bottom location line */
@@ -2373,5 +2373,5 @@ button.upcoming-game-card
   -webkit-text-fill-color: #4f8bff !important;
   opacity: 1 !important;
 
-transform: translateY(-5px) !important;
+transform: translateY(1px) !important;
 }
