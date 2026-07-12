@@ -2507,27 +2507,3 @@ body.game-ui-upgrade
 }
 
 
-/* Align league-operation text consistently */
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-event-card {
-  text-align: left !important;
-}
-
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-event-card
-.upcoming-card-detail,
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-event-card
-.upcoming-event-category,
-body.game-ui-upgrade
-.reference-upcoming
-.upcoming-event-card
-.upcoming-event-title {
-  width: 100% !important;
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-  text-align: left !important;
-}
