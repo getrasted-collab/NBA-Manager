@@ -2508,3 +2508,19 @@ body.game-ui-upgrade
 .upcoming-matchup {
   transform: translateX(88px) !important;
 }
+
+/* Hide team abbreviations above the Upcoming logos */
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+.upcoming-matchup > span > b {
+  display: none !important;
+}
+
+/* Move Upcoming team logos and records down */
+body.game-ui-upgrade
+.reference-upcoming
+.upcoming-game-card
+.upcoming-matchup > span {
+  transform: translateY(40px) !important;
+}
