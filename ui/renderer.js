@@ -188,6 +188,7 @@ let socialVisiblePostCache = new Map();
 let selectedSocialAccountId = null;
 let socialFeedRefreshKey = 0;
 let socialNotificationFilter = "all";
+let socialCreatePostOpen = false;
 
 function closeSocialMessagesDrawer(afterClose = null) {
   const drawer = document.querySelector(".social-message-drawer");
@@ -279,6 +280,7 @@ function render() {
   applyThemeMode();
   document.body.classList.toggle("start-mode", active === "start" || active === "team-select" || active === "saves");
   document.body.classList.toggle("dashboard-mode", active !== "start" && active !== "team-select" && active !== "saves");
+  document.body.classList.toggle("game-ui-upgrade", active !== "start" && active !== "team-select" && active !== "saves");
   document.body.classList.toggle("locker-room-layout", active === "locker");
   document.body.classList.toggle("player-development-layout", active === "development");
   document.body.classList.toggle("staff-layout", active === "staff");
@@ -332,6 +334,7 @@ function render() {
   page.innerHTML += playerDetailModal();
   lockPinnedDarkButtonStyles();
   lockPinnedDarkFormStyles();
+  lockVerticalSliceControlStyles();
   attachActions();
   if (pageChanged) {
     const workspace = document.querySelector(".workspace");
@@ -1037,7 +1040,7 @@ function socialPage() {
   const socialTrends = [`#TrueTo${selectedTeam.city.replace(/\s+/g, "")}`, star.name, `${selectedTeam.name} Win`, opponent?.city || trends[0]];
   return `
     <section class="social-page">
-      <header class="social-page-header"><div><h1>SOCIAL</h1><p>Manage your team's brand, engage with fans, and track your online presence.</p></div><div><button class="btn" data-social-refresh="true">Refresh Feed</button><button class="btn primary">Create Post</button><button class="btn" aria-label="More social actions">...</button></div></header>
+      <header class="social-page-header"><div><h1>SOCIAL</h1><p>Manage your team's brand, engage with fans, and track your online presence.</p></div><div><button class="btn" data-social-refresh="true">Refresh Feed</button><button class="btn primary" data-social-create-post="true">Create Post</button><button class="btn" aria-label="More social actions">...</button></div></header>
       <section class="social-metrics">
         ${socialMetricCard("Total Followers", `${followers}M`, "5.2%", "blue")}
         ${socialMetricCard("Engagement Rate", `${engagement}%`, "1.1%", "red")}
@@ -1057,6 +1060,7 @@ function socialPage() {
       </section>
       ${socialPostConversationModal()}
       ${socialAccountProfileModal()}
+      ${socialCreatePostModal()}
     </section>
   `;
   return `
@@ -1087,7 +1091,8 @@ function socialPost(post, index, team, opponent) {
   const postId = post.id || `feed-${socialEventKey(`${post.handle}-${post.text}-${index}`)}`;
   const account = post.accountId ? socialAccount(post.accountId) : null;
   const avatar = post.player ? playerHeadshot(post.player, "social-post-avatar-img") : post.playerId ? playerHeadshot(save.players.find((player) => player.id === post.playerId), "social-post-avatar-img") : post.teamId ? teamLogo(post.teamId, "social-post-team-logo") : post.source === "NBA" ? '<span class="social-post-nba">NBA</span>' : account ? `<span class="social-post-account-avatar">${escapeHtml(account.name.split(/\s+/).map((word) => word[0]).join("").slice(0,3))}</span>` : teamLogo(team, "social-post-team-logo");
-  const media = post.type === "game" ? socialGameMedia(team, opponent) : post.type === "video" ? socialVideoMedia(team) : "";
+  const gifUrl = safeSocialMediaUrl(post.gifUrl);
+  const media = gifUrl ? `<img class="social-post-gif" src="${escapeHtml(gifUrl)}" alt="Post GIF" loading="lazy">` : post.type === "game" ? socialGameMedia(team, opponent) : post.type === "video" ? socialVideoMedia(team) : "";
   const interactions = save.social.interactions;
   const liked = interactions.likedPostIds.includes(postId), reposted = interactions.repostedPostIds.includes(postId), bookmarked = interactions.bookmarkedPostIds.includes(postId);
   const seed = parseInt(socialEventKey(postId),36) || 1;
@@ -1205,9 +1210,48 @@ function socialSentimentTab(team) {
   return `<section class="social-media"><div class="social-sentiment-header"><strong>${escapeHtml(team.abbr)} Fan Sentiment: ${label}</strong><span>${sentiment}% positive</span></div><div class="social-sentiment-drivers"><article><b>+</b><div><strong>Top positive driver</strong><small>${escapeHtml(positiveDriver?.label||"No recent positive driver")}</small></div><em>${positiveDriver?`+${positiveDriver.delta}`:"—"}</em></article><article><b>−</b><div><strong>Top negative driver</strong><small>${escapeHtml(negativeDriver?.label||"No recent negative driver")}</small></div><em>${negativeDriver?.delta??"—"}</em></article></div>${history.length ? history.map((item) => `<article><b>${Math.round(Number(item.value) || 0)}</b><div><strong>${escapeHtml(item.label || item.reason || "Sentiment update")}</strong><small>${escapeHtml(item.detail || "Career event")}</small></div><em>${Number(item.delta)>0?"+":""}${escapeHtml(item.delta??"")} · ${escapeHtml(item.date || "")}</em></article>`).join("") : '<article><b>65</b><div><strong>Baseline fan confidence</strong><small>Future career events will be recorded here.</small></div><em>Current</em></article>'}</section>`;
 }
 
+function lockVerticalSliceControlStyles() {
+  if (!document.body.classList.contains("game-ui-upgrade")) return;
+  const setImportant = (element, styles) => Object.entries(styles).forEach(([property, value]) => element.style.setProperty(property, value, "important"));
+  const base = {
+    "border-color": "rgba(174, 194, 231, .42)",
+    color: "#f4f7fc",
+    "background-color": "#141f33",
+    "background-image": "linear-gradient(180deg, #1a2941, #141f33)",
+    "box-shadow": "none",
+    opacity: "1"
+  };
+  const activeStyle = {
+    "border-color": "color-mix(in srgb, var(--team-primary) 70%, #ffffff)",
+    color: "var(--team-contrast, #ffffff)",
+    "background-color": "var(--team-primary)",
+    "background-image": "linear-gradient(180deg, color-mix(in srgb, var(--team-primary) 82%, #ffffff), var(--team-primary))",
+    "box-shadow": "0 8px 18px color-mix(in srgb, var(--team-primary) 30%, transparent)",
+    opacity: "1"
+  };
+  const disabledStyle = {
+    "border-color": "rgba(147, 166, 201, .14)",
+    color: "#5f6d85",
+    "background-color": "#0a101d",
+    "background-image": "none",
+    "box-shadow": "none",
+    opacity: ".62"
+  };
+  document.querySelectorAll(".simcast-coaching select, .simcast-coaching button, .simcast-controls button").forEach((control) => {
+    const activeControl = control.classList.contains("active") || control.classList.contains("primary");
+    setImportant(control, control.disabled ? disabledStyle : activeControl ? activeStyle : base);
+  });
+}
+
+function safeSocialMediaUrl(value) {
+  const url=String(value||"").trim();
+  if(!url)return "";
+  return /^(https?:\/\/|\.\/|assets\/)/i.test(url)?url:"";
+}
+
 function socialScheduleTab() {
   const scheduled=save.social.scheduledPosts.filter((item)=>item.status!=="cancelled"),pending=scheduled.filter((item)=>item.status!=="published"),suggestions=socialScheduleSuggestions();
-  return `<section class="social-publish-schedule"><div class="social-schedule-header"><div><strong>Publish Schedule</strong><span>${pending.length} upcoming · ${scheduled.filter((item)=>item.status==="published").length} published</span></div><label><input type="checkbox" id="social-approval-toggle" ${save.automation.socialApproval?"checked":""}> Require approval before auto-publishing</label></div><section class="social-schedule-composer"><textarea id="social-schedule-text" maxlength="280" placeholder="Write a post to schedule"></textarea><div><select id="social-schedule-type"><option value="team">Team update</option><option value="game">Game promotion</option><option value="injury">Injury update</option><option value="transaction">Transaction</option><option value="community">Community</option></select><input id="social-schedule-date" type="date" min="${escapeHtml(currentLeagueDate())}" value="${escapeHtml(currentLeagueDate())}"><button data-social-schedule-create="true">Schedule post</button></div></section><section class="social-schedule-suggestions"><strong>Suggested opportunities</strong>${suggestions.map((item)=>`<button data-social-schedule-suggestion="true" data-suggestion-text="${escapeHtml(item.text)}" data-suggestion-date="${escapeHtml(item.date)}" data-suggestion-type="${escapeHtml(item.type)}"><span>${escapeHtml(item.label)}</span><small>${escapeHtml(item.date)}</small></button>`).join("")||'<div class="muted-line">No upcoming opportunities.</div>'}</section><div class="social-schedule-list">${scheduled.length?scheduled.slice().sort((a,b)=>String(a.publishAt).localeCompare(String(b.publishAt))).map((item)=>`<article class="${escapeHtml(item.status||"scheduled")}"><b><span>${escapeHtml(String(item.publishAt||"TBD").slice(5,7))}</span>${escapeHtml(String(item.publishAt||"--").slice(8,10))}</b><div><strong>${escapeHtml(item.type||"Scheduled post")}</strong><small>${escapeHtml(item.text)}</small><em>${escapeHtml(item.status||"scheduled")}</em></div>${item.status==="published"?'<span>Published</span>':`<div class="social-schedule-actions"><button data-social-schedule-publish="${escapeHtml(item.id)}">Publish now</button><button data-social-schedule-edit="${escapeHtml(item.id)}">Edit</button><button data-social-schedule-cancel="${escapeHtml(item.id)}">Cancel</button></div>`}</article>`).join(""):'<div class="muted-line">No posts scheduled yet.</div>'}</div></section>`;
+  return `<section class="social-publish-schedule"><div class="social-schedule-header"><div><strong>Publish Schedule</strong><span>${pending.length} upcoming · ${scheduled.filter((item)=>item.status==="published").length} published</span></div><label><input type="checkbox" id="social-approval-toggle" ${save.automation.socialApproval?"checked":""}> Require approval before auto-publishing</label></div><section class="social-schedule-composer"><textarea id="social-schedule-text" maxlength="280" placeholder="Write a post to schedule" style="color:#edf4ff!important;background:#202c41!important;background-image:none!important;border:1px solid rgba(150,174,222,.24)!important"></textarea><div><select id="social-schedule-type" style="color:#edf4ff!important;background:#263550!important;background-image:none!important;border:1px solid rgba(150,174,222,.28)!important"><option value="team">Team update</option><option value="game">Game promotion</option><option value="injury">Injury update</option><option value="transaction">Transaction</option><option value="community">Community</option></select><input id="social-schedule-date" type="date" min="${escapeHtml(currentLeagueDate())}" value="${escapeHtml(currentLeagueDate())}" style="color:#edf4ff!important;background:#263550!important;background-image:none!important;border:1px solid rgba(150,174,222,.28)!important"><button data-social-schedule-create="true">Schedule post</button></div></section><section class="social-schedule-suggestions"><strong>Suggested opportunities</strong>${suggestions.map((item)=>`<button data-social-schedule-suggestion="true" data-suggestion-text="${escapeHtml(item.text)}" data-suggestion-date="${escapeHtml(item.date)}" data-suggestion-type="${escapeHtml(item.type)}"><span>${escapeHtml(item.label)}</span><small>${escapeHtml(item.date)}</small></button>`).join("")||'<div class="muted-line">No upcoming opportunities.</div>'}</section><div class="social-schedule-list">${scheduled.length?scheduled.slice().sort((a,b)=>String(a.publishAt).localeCompare(String(b.publishAt))).map((item)=>`<article class="${escapeHtml(item.status||"scheduled")}"><b><span>${escapeHtml(String(item.publishAt||"TBD").slice(5,7))}</span>${escapeHtml(String(item.publishAt||"--").slice(8,10))}</b><div><strong>${escapeHtml(item.type||"Scheduled post")}</strong><small>${escapeHtml(item.text)}</small><em>${escapeHtml(item.status||"scheduled")}</em></div>${item.status==="published"?'<span>Published</span>':`<div class="social-schedule-actions"><button data-social-schedule-publish="${escapeHtml(item.id)}">Publish now</button><button data-social-schedule-edit="${escapeHtml(item.id)}">Edit</button><button data-social-schedule-cancel="${escapeHtml(item.id)}">Cancel</button></div>`}</article>`).join(""):'<div class="muted-line">No posts scheduled yet.</div>'}</div></section>`;
 }
 
 function socialScheduleSuggestions() {
@@ -1222,12 +1266,15 @@ function dashboardReferencePage() {
   const players = teamPlayers(selectedTeam.id);
   const upcomingItems = dashboardUpcomingItems(selectedTeam).slice(0, 4);
   const recentGames = save.results.slice(-8);
+  const nextGame = (save.schedule || []).find((game) => !game.played);
+  const nextOpponent = nextGame ? getTeam(nextGame.home === selectedTeam.id ? nextGame.away : nextGame.home) : null;
   const rating = teamRating(selectedTeam);
   const offensiveRating = (105 + (rating - 75) * .65).toFixed(1);
   const defensiveRating = (116 - (rating - 75) * .42).toFixed(1);
   const netRating = (Number(offensiveRating) - Number(defensiveRating)).toFixed(1);
   const rosterRules = rosterRuleStatus(selectedTeam.id);
   const nextDeadline = nextTransactionEvent();
+  const deadlineDays = nextDeadline ? Math.max(0, Math.ceil((new Date(`${nextDeadline.date}T00:00:00`) - new Date(`${currentLeagueDate()}T00:00:00`)) / 86400000)) : 0;
   const transactionState = transactionRuleState();
   const needs = rosterNeeds(selectedTeam);
   const last = save.results.at(-1);
@@ -1239,31 +1286,38 @@ function dashboardReferencePage() {
   const assistLeader = leader("assists");
   const teamPoints = recentGames.map((game) => game.home === selectedTeam.id ? game.homeScore : game.awayScore);
   const averagePoints = teamPoints.length ? Math.round(teamPoints.reduce((sum, points) => sum + points, 0) / teamPoints.length) : 0;
+  const recentFive = teamPoints.slice(-5);
+  const earlierGames = teamPoints.slice(0, Math.max(0, teamPoints.length - recentFive.length));
+  const recentFiveAverage = recentFive.length ? recentFive.reduce((sum, points) => sum + points, 0) / recentFive.length : Number(offensiveRating);
+  const earlierAverage = earlierGames.length ? earlierGames.reduce((sum, points) => sum + points, 0) / earlierGames.length : Number(offensiveRating);
+  const offenseTrend = recentFiveAverage - earlierAverage;
+  const recentWins = recentGames.filter((game) => teamWonResult(selectedTeam.id, game)).length;
   return `
     <section class="reference-dashboard dashboard-test-page">
       <h1 class="reference-page-title">DASHBOARD</h1>
 
-      <section class="reference-season-hero panel-card selected-card">
+      <section class="reference-season-hero panel-card selected-card vertical-slice-hero">
         <div class="team-hero-identity">${teamLogo(selectedTeam, "page-hero-logo reference-hero-logo")}<div><span>${save.season}-${String(save.season + 1).slice(-2)} REGULAR SEASON &middot; ${escapeHtml(save.phase)}</span><h2>${escapeHtml(selectedTeam.city)} ${escapeHtml(selectedTeam.name)}</h2><p><strong>${selectedTeam.wins}-${selectedTeam.losses}</strong> ${escapeHtml(selectedTeam.conf)} Conference <b>${selectedTeam.wins >= selectedTeam.losses ? "PLAYOFF HUNT" : "BUILDING"}</b></p></div></div>
+        ${nextGame && nextOpponent ? `<div class="dashboard-next-matchup"><span>NEXT MATCHUP · ${formatShortDate(nextGame.date)}</span><div>${teamLogo(selectedTeam, "dashboard-matchup-logo")}<b>${escapeHtml(selectedTeam.abbr)}</b><i>${nextGame.home === selectedTeam.id ? "VS" : "AT"}</i><b>${escapeHtml(nextOpponent.abbr)}</b>${teamLogo(nextOpponent, "dashboard-matchup-logo")}</div><small>${nextGame.home === selectedTeam.id ? "HOME" : "AWAY"} · ${escapeHtml(nextOpponent.city)} ${escapeHtml(nextOpponent.name)}</small></div>` : '<div class="dashboard-next-matchup"><span>SEASON STATUS</span><b>COMPLETE</b></div>'}
         <div><button class="btn reference-primary" data-action="go-games">▷ SIM NEXT</button><button class="btn reference-week-button" data-sim-control="week">▷ SIM WEEK</button></div>
       </section>
 
       <section class="reference-stat-grid">
-        <article class="metric-card metric-card--blue featured"><span class="metric-label">OFFENSIVE RTG</span><strong class="metric-value">${offensiveRating}</strong><small class="metric-subtitle">${Number(offensiveRating) >= 110 ? "+ VS AVG" : "DEVELOPING"}</small></article>
-        <article class="metric-card metric-card--blue"><span class="metric-label">DEFENSIVE RTG</span><strong class="metric-value">${defensiveRating}</strong><small class="metric-subtitle">${Number(defensiveRating) <= 110 ? "TOP LEAGUE DEFENSE" : "ROOM TO IMPROVE"}</small></article>
-        <article class="metric-card metric-card--blue"><span class="metric-label">NET RATING</span><strong class="metric-value">${Number(netRating) >= 0 ? "+" : ""}${netRating}</strong><small class="metric-subtitle">${selectedTeam.conf} CONFERENCE</small></article>
-        <article><span>CAP USED</span><strong>$${selectedTeam.payroll}M</strong><small>${escapeHtml(payrollStatus(selectedTeam))} · ${rosterRules.standard}/15</small></article>
+        <article class="metric-card metric-card--blue featured dashboard-metric dashboard-metric--offense"><span class="metric-label">OFFENSIVE RTG</span><strong class="metric-value">${offensiveRating}</strong><small class="metric-subtitle">${Number(offensiveRating) >= 110 ? "EST. TOP-12 NBA" : "DEVELOPING"}</small><em class="metric-trend ${offenseTrend >= 0 ? "positive" : "negative"}">${offenseTrend >= 0 ? "+" : ""}${offenseTrend.toFixed(1)} over last five</em></article>
+        <article class="metric-card metric-card--blue dashboard-metric dashboard-metric--defense"><span class="metric-label">DEFENSIVE RTG</span><strong class="metric-value">${defensiveRating}</strong><small class="metric-subtitle">${Number(defensiveRating) <= 110 ? "TOP LEAGUE DEFENSE" : "ROOM TO IMPROVE"}</small><em class="metric-trend ${Number(defensiveRating) <= 110 ? "positive" : "warning"}">${Number(defensiveRating) <= 110 ? "Holding below target" : "Above 110 target"}</em></article>
+        <article class="metric-card metric-card--blue dashboard-metric dashboard-metric--net"><span class="metric-label">NET RATING</span><strong class="metric-value">${Number(netRating) >= 0 ? "+" : ""}${netRating}</strong><small class="metric-subtitle">${selectedTeam.conf} CONFERENCE</small><em class="metric-trend ${Number(netRating) >= 0 ? "positive" : "negative"}">${Number(netRating) >= 0 ? "Winning profile" : "Negative margin"}</em></article>
+        <article class="dashboard-metric dashboard-metric--cap"><span>CAP USED</span><strong>$${selectedTeam.payroll}M</strong><small>${escapeHtml(payrollStatus(selectedTeam))} · ${rosterRules.standard}/15</small><em class="metric-trend ${Number(selectedTeam.payroll) <= 175 ? "positive" : "negative"}">${Number(selectedTeam.payroll) <= 175 ? "Flexible position" : "Tax pressure"}</em></article>
       </section>
 
       <section class="reference-analytics-grid">
         <article class="reference-chart-panel panel-card">
-          <header><strong>LAST 8 GAMES</strong><span>AVG ${averagePoints || "--"} PTS</span></header>
+          <header><div><strong>LAST 8 GAMES</strong><small>${recentGames.length ? `${recentWins}-${recentGames.length - recentWins} RECENT FORM` : "SEASON START"}</small></div><span>AVG <b>${averagePoints || "--"}</b> PTS</span></header>
           <div class="reference-chart-scale"><span>135</span><span>118</span><span>101</span><span>84</span></div>
-          <div class="reference-bars">${Array.from({ length: 8 }, (_, index) => { const points = teamPoints[index] || 0; const height = points ? Math.max(18, Math.min(96, (points / 140) * 100)) : 5; return `<div><i style="height:${height}%" class="${points ? "" : "empty"}"></i><span>G${index + 1}</span><b>${points || ""}</b></div>`; }).join("")}</div>
+          <div class="reference-bars">${Array.from({ length: 8 }, (_, index) => { const game = recentGames[index]; const points = teamPoints[index] || 0; const height = points ? Math.max(18, Math.min(96, (points / 140) * 100)) : 5; const won = game ? teamWonResult(selectedTeam.id, game) : false; return `<div class="${game ? won ? "win" : "loss" : "future"}"><i style="height:${height}%" class="${points ? "" : "empty"}"></i><span>${game ? won ? "W" : "L" : `G${index + 1}`}</span><b>${points || "—"}</b><small>${game ? escapeHtml(getTeam(game.home === selectedTeam.id ? game.away : game.home)?.abbr || "") : ""}</small></div>`; }).join("")}</div>
         </article>
         <article class="reference-leaders-panel panel-card data-table">
           <header>TEAM LEADERS</header>
-          ${[["PTS", scoringLeader, "points"], ["REB", reboundLeader, "rebounds"], ["AST", assistLeader, "assists"]].map(([label, item, field]) => `<div><span>${label}<strong>${escapeHtml(item.player.name)}</strong></span><b>${statPerGame(item.stats[field], item.stats.games)}</b></div>`).join("")}
+          ${[["PTS", scoringLeader, "points"], ["REB", reboundLeader, "rebounds"], ["AST", assistLeader, "assists"]].map(([label, item, field], index) => `<button class="dashboard-leader-row leader-${field}" data-view-player="${item.player.id}"><i>0${index + 1}</i>${playerHeadshot(item.player, "dashboard-leader-headshot")}<span>${label}<strong>${escapeHtml(item.player.name)}</strong><small>${escapeHtml(item.player.pos)} · ${item.player.ovr} OVR · VIEW PROFILE</small></span><b>${statPerGame(item.stats[field], item.stats.games)}<small>PER GAME</small></b></button>`).join("")}
         </article>
       </section>
 
@@ -1274,12 +1328,12 @@ function dashboardReferencePage() {
 
       <h2 class="reference-section-title">COMMAND CENTER</h2>
       <section class="reference-management-grid command-center-cards">
-        <article class="action-card"><header><span>GM CAREER</span><strong>FRANCHISE STATUS</strong></header>${metric("Owner Approval", `${save.gmCareer?.approval || 60}%`)}${metric("Seasons", save.gmCareer?.seasons || 0)}${metric("Playoff Trips", save.gmCareer?.playoffTrips || 0)}${metric("Championships", save.gmCareer?.titles || 0)}${metric("League Compliance", `${leagueComplianceCount(save.season)}/30 legal`)}</article>
-        <article class="action-card"><header><span>COACHING STAFF</span><strong>${escapeHtml(coachingProfile(selectedTeam.id).name || "Head Coach")}</strong></header>${metric("Identity", coachingProfile(selectedTeam.id).style)}${metric("Tactics", coachingProfile(selectedTeam.id).tactics)}${metric("Development", coachingProfile(selectedTeam.id).development)}${metric("Medical", coachingProfile(selectedTeam.id).medical)}<button class="btn staff-market-button" data-action="open-staff-market" style="border-color: rgba(150, 174, 222, .58) !important; color: #edf4ff !important; background-color: rgba(16, 24, 43, .98) !important; background-image: linear-gradient(180deg, rgba(35, 48, 76, .98), rgba(16, 24, 43, .98)) !important; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03) !important; opacity: 1 !important;">STAFF MARKET</button></article>
-        <article class="action-card danger-accent"><header><span>ROSTER NEEDS</span><strong>TEAM BUILDING</strong></header>${metric("Best Player", `${needs.best.name} (${needs.best.ovr})`)}${metric("Weakest Group", needs.weakest)}${metric("Highest Potential", `${needs.potential.name} (${needs.potential.pot})`)}${metric("Age Risk", `${needs.oldest.name} (${needs.oldest.age})`)}</article>
-        <article><header><span>LEAGUE OPERATIONS</span><strong>${nextDeadline ? escapeHtml(nextDeadline.label) : "YEAR COMPLETE"}</strong></header><p>${nextDeadline ? `${formatGameDate(nextDeadline.date)} · ${escapeHtml(nextDeadline.description)}` : "No remaining transaction deadlines."}</p><div class="reference-rules">${rulePill("Trades", transactionState.tradesOpen ? "Open" : "Closed", transactionState.tradesOpen)}${rulePill("10-Day", transactionState.tenDayContracts ? "Allowed" : "Locked", transactionState.tenDayContracts)}${rulePill("Roster", rosterRules.valid ? "Legal" : "Illegal", rosterRules.valid)}</div></article>
-        <article class="action-card reference-inbox-card data-table"><header><span>FRONT OFFICE</span><strong>INBOX</strong></header><div>${inbox.map((message, index) => `<p><b>${String(index + 1).padStart(2, "0")}</b>${escapeHtml(message)}</p>`).join("")}</div></article>
-        <article class="action-card reference-news-card data-table"><header><span>LEAGUE</span><strong>NEWS WIRE</strong></header><div>${(save.transactionLog || []).slice(-5).reverse().map((item) => `<p><b>${escapeHtml(item.type || "NEWS")}</b>${escapeHtml(item.text)}</p>`).join("") || '<p>League activity will appear here.</p>'}</div></article>
+        <article class="action-card command-card command-card--career"><header><span>GM CAREER</span><strong>FRANCHISE STATUS</strong></header><div class="command-approval"><span>OWNER APPROVAL</span><strong>${save.gmCareer?.approval || 60}%</strong><i><b style="width:${save.gmCareer?.approval || 60}%"></b></i></div><div class="career-stat-grid">${commandStat("Seasons", save.gmCareer?.seasons || 0)}${commandStat("Playoff Trips", save.gmCareer?.playoffTrips || 0)}${commandStat("Championships", save.gmCareer?.titles || 0)}</div><div class="command-status good"><span>LEAGUE COMPLIANCE</span><strong>${leagueComplianceCount(save.season)}/30 LEGAL</strong></div></article>
+        <article class="action-card command-card--coaching"><header><span>COACHING STAFF</span><strong>${escapeHtml(coachingProfile(selectedTeam.id).name || "Head Coach")}</strong></header><div class="coach-identity"><span>IDENTITY</span><strong>${escapeHtml(coachingProfile(selectedTeam.id).style)}</strong></div>${commandRating("Tactics", coachingProfile(selectedTeam.id).tactics)}${commandRating("Development", coachingProfile(selectedTeam.id).development)}${commandRating("Medical", coachingProfile(selectedTeam.id).medical)}<button class="btn staff-market-button" data-action="open-staff-market">VIEW STAFF MARKET</button></article>
+        <article class="action-card danger-accent command-card command-card--roster"><header><span>ROSTER NEEDS</span><strong>TEAM BUILDING</strong></header><div class="roster-command-grid"><div class="good">${playerHeadshot(needs.best, "roster-command-headshot")}<span>BEST PLAYER</span><strong>${escapeHtml(needs.best.name)}</strong><b>${needs.best.ovr} OVR</b></div><div class="urgent"><i>!</i><span>WEAKEST GROUP</span><strong>${escapeHtml(needs.weakest)}</strong><b>PRIORITY</b></div><div class="info">${playerHeadshot(needs.potential, "roster-command-headshot")}<span>HIGHEST POTENTIAL</span><strong>${escapeHtml(needs.potential.name)}</strong><b>${needs.potential.pot} POT</b></div><div class="warning">${playerHeadshot(needs.oldest, "roster-command-headshot")}<span>AGE RISK</span><strong>${escapeHtml(needs.oldest.name)}</strong><b>AGE ${needs.oldest.age}</b></div></div></article>
+        <article class="command-card--operations"><header><span>LEAGUE OPERATIONS</span><strong>${nextDeadline ? escapeHtml(nextDeadline.label) : "YEAR COMPLETE"}</strong></header><section class="operations-deadline"><div><strong>${nextDeadline ? deadlineDays : "—"}</strong><span>${nextDeadline ? "DAYS REMAINING" : "SEASON COMPLETE"}</span></div><p><b>${nextDeadline ? formatShortDate(nextDeadline.date) : "DONE"}</b>${nextDeadline ? escapeHtml(nextDeadline.description) : "No remaining transaction deadlines."}</p></section><div class="operations-progress"><span>LEAGUE CALENDAR</span><i><b style="width:${nextDeadline ? Math.max(8, Math.min(92, 100 - deadlineDays / 2)) : 100}%"></b></i><small>${nextDeadline ? "Next mandatory league checkpoint" : "All checkpoints complete"}</small></div><div class="reference-rules">${rulePill("Trades", transactionState.tradesOpen ? "Open" : "Closed", transactionState.tradesOpen)}${rulePill("10-Day", transactionState.tenDayContracts ? "Allowed" : "Locked", transactionState.tenDayContracts)}${rulePill("Roster", rosterRules.valid ? "Legal" : "Illegal", rosterRules.valid)}</div></article>
+        <article class="action-card reference-inbox-card data-table"><header><span>FRONT OFFICE</span><strong>INBOX</strong></header><div>${inbox.map((message, index) => { const tone = /need|roster/i.test(message) ? "roster" : /cap|tax/i.test(message) ? "cap" : /deadline|eligible/i.test(message) ? "deadline" : /goal|complete/i.test(message) ? "goal" : "result"; const label = tone === "roster" ? "ROSTER" : tone === "cap" ? "CAP" : tone === "deadline" ? "DEADLINE" : tone === "goal" ? "GOAL" : "RESULT"; const icon = tone === "roster" ? "R" : tone === "cap" ? "$" : tone === "deadline" ? "!" : tone === "goal" ? "✓" : "W"; return `<p class="inbox-${tone}"><i>${icon}</i><b>${label}</b><span>${escapeHtml(message)}<small>${index === 0 ? "LATEST UPDATE" : `${index + 1} ITEMS AGO`}</small></span></p>`; }).join("")}</div></article>
+        <article class="action-card reference-news-card data-table"><header><span>LEAGUE</span><strong>NEWS WIRE</strong></header><div>${(save.transactionLog || []).slice(-5).reverse().map((item, index) => { const type = String(item.type || "NEWS"); const tone = /injury|medical/i.test(`${type} ${item.text}`) ? "injury" : /extension|sign|trade|waive|transaction/i.test(`${type} ${item.text}`) ? "transaction" : "league"; return `<p class="news-${tone}"><i>${tone === "injury" ? "+" : tone === "transaction" ? "↔" : "N"}</i><b>${escapeHtml(type)}</b><span>${escapeHtml(item.text)}<small>${item.date ? formatShortDate(item.date) : index === 0 ? "LATEST UPDATE" : "LEAGUE WIRE"}</small></span></p>`; }).join("") || '<p class="news-league"><i>N</i><b>NEWS</b><span>League activity will appear here.</span></p>'}</div></article>
       </section>
       ${staffMarketPanel()}
     </section>
@@ -1296,6 +1350,7 @@ function dashboardUpcomingItems(selectedTeam) {
       return {
         type: "game",
         date: game.date,
+        team: selectedTeam,
         opponent,
         venue: game.home === selectedTeam.id ? "vs" : "@",
         label: `${game.home === selectedTeam.id ? "vs" : "@"} ${opponent?.abbr || "TBD"}`,
@@ -1331,17 +1386,29 @@ function dashboardUpcomingItems(selectedTeam) {
 
 function renderDashboardUpcomingCard(item) {
   if (item.type === "game") {
-    return `<button class="upcoming-card upcoming-game-card" data-action="${item.action}">${teamLogo(item.opponent, "upcoming-team-logo")}<span>${formatShortDate(item.date)}</span><strong>${escapeHtml(item.label)}</strong><small>${escapeHtml(item.detail)}</small></button>`;
+    const home = item.venue === "vs";
+    const teamAbbr = escapeHtml(item.team?.abbr || "USER");
+    const opponentAbbr = escapeHtml(item.opponent?.abbr || "TBD");
+    const opponentPlace = escapeHtml(item.opponent?.city || item.opponent?.name || opponentAbbr);
+    return `<button class="upcoming-card upcoming-game-card" data-action="${item.action}"><span class="upcoming-card-topline">${formatShortDate(item.date)}<b>${home ? "HOME" : "AWAY"}</b></span><span class="upcoming-matchup"><span><b>${teamAbbr}</b>${teamLogo(item.team, "upcoming-team-logo")}<small>${item.team?.wins || 0}-${item.team?.losses || 0}</small></span><i>${home ? "VS" : "AT"}</i><span><b>${opponentAbbr}</b>${teamLogo(item.opponent, "upcoming-team-logo")}<small>${item.opponent?.wins || 0}-${item.opponent?.losses || 0}</small></span></span><strong class="upcoming-matchup-label">${teamAbbr} ${home ? "vs" : "at"} ${opponentAbbr}</strong><small class="upcoming-card-detail">${home ? "Home" : "Away"} &middot; ${opponentPlace}</small><em>OPEN MATCHUP &rarr;</em></button>`;
+  }
+  {
+    const badge = item.eventType === "all-star" ? "NBA · ALL-STAR" : item.eventType === "deadline" ? "NBA · DEADLINE" : "NBA · LEAGUE";
+    return `<button class="upcoming-card upcoming-event-card upcoming-event-${escapeHtml(item.eventType)}" data-action="${item.action}"><span class="upcoming-card-topline">${formatShortDate(item.date)}<b>${escapeHtml(badge)}</b></span><span class="upcoming-event-summary"><span><strong>${escapeHtml(item.label)}</strong><small class="upcoming-card-detail">${escapeHtml(item.detail)}</small></span></span><em>${item.eventType === "deadline" ? "REVIEW DEADLINE" : item.eventType === "all-star" ? "VIEW EVENT" : "LEAGUE CALENDAR"} &rarr;</em></button>`;
+  }
+  /* Legacy markup retained below for easy rollback. */
+  if (false) {
+    return `<button class="upcoming-card upcoming-game-card" data-action="${item.action}"><span class="upcoming-card-topline">${formatShortDate(item.date)}<b>${home ? "HOME" : "AWAY"}</b></span><span class="upcoming-matchup"><span>${teamLogo(item.team, "upcoming-team-logo")}<b>${escapeHtml(item.team?.abbr || "USER")}</b><small>${item.team?.wins || 0}-${item.team?.losses || 0}</small></span><i>${home ? "VS" : "AT"}</i><span>${teamLogo(item.opponent, "upcoming-team-logo")}<b>${escapeHtml(item.opponent?.abbr || "TBD")}</b><small>${item.opponent?.wins || 0}-${item.opponent?.losses || 0}</small></span></span><small class="upcoming-card-detail">${home ? `${escapeHtml(item.opponent?.city || "")} comes to ${escapeHtml(item.team?.city || "")}` : `${escapeHtml(item.team?.city || "")} at ${escapeHtml(item.opponent?.city || "")}`}</small><em>OPEN MATCHUP →</em></button>`;
   }
   const category = item.eventType === "all-star" ? "All-Star" : item.eventType === "deadline" ? "Deadline" : "League";
   const icon = item.eventType === "all-star" ? "AS" : item.eventType === "deadline" ? "TD" : "NBA";
-  return `<button class="upcoming-card upcoming-event-card upcoming-event-${escapeHtml(item.eventType)}" data-action="${item.action}"><span class="upcoming-event-icon">${escapeHtml(icon)}</span><span>${formatShortDate(item.date)} · ${escapeHtml(category)}</span><strong>${escapeHtml(item.label)}</strong><small>${escapeHtml(item.detail)}</small></button>`;
+  return `<button class="upcoming-card upcoming-event-card upcoming-event-${escapeHtml(item.eventType)}" data-action="${item.action}"><span class="upcoming-card-topline">${formatShortDate(item.date)}<b>${escapeHtml(category)}</b></span><span class="upcoming-event-summary"><span class="upcoming-event-icon">${escapeHtml(icon)}</span><span><strong>${escapeHtml(item.label)}</strong><small class="upcoming-card-detail">${escapeHtml(item.detail)}</small></span></span><em>${item.eventType === "deadline" ? "REVIEW DEADLINE" : item.eventType === "all-star" ? "VIEW EVENT" : "LEAGUE CALENDAR"} →</em></button>`;
 }
 
 function staffMarketPanel() {
   const budget = save.gmCareer?.finances?.staffBudget || 18;
   const candidates = (save.staffMarket || []).filter((staff) => staff.available).slice(0, 4);
-  return `<section class="card wide-card staff-market"><div class="staff-market-head"><div><div class="card-label">staff market</div><div class="player-name">Specialists Available</div><div class="meta">Annual staff budget: $${budget.toFixed(1)}M</div></div></div><div class="staff-grid">${candidates.map((staff) => { const affordable = Number(staff.salary) <= budget; return `<div class="staff-card"><span>${escapeHtml(staff.specialty)}</span><strong>${escapeHtml(staff.name)}</strong><small>${staff.rating} rating - $${staff.salary}M</small><button class="btn staff-hire-button reference-week-button${affordable ? "" : " staff-hire-unavailable"}" data-hire-staff="${staff.id}" ${affordable ? "" : 'aria-disabled="true"'}>${affordable ? "Hire" : "Over Budget"}</button></div>`; }).join("") || '<div class="muted-line">No staff candidates are currently available.</div>'}</div></section>`;
+  return `<section class="card wide-card staff-market command-staff-market"><div class="staff-market-head"><div><div class="card-label">staff market</div><div class="player-name">Specialists Available</div><div class="meta">Annual staff budget: $${budget.toFixed(1)}M</div></div><div class="staff-market-summary"><strong>${candidates.length}</strong><span>AVAILABLE</span></div></div><div class="staff-grid">${candidates.map((staff) => { const affordable = Number(staff.salary) <= budget; const fit = staff.rating >= 85 ? "ELITE" : staff.rating >= 75 ? "STRONG" : "SOLID"; return `<div class="staff-card upgraded-staff-card"><header><span>${escapeHtml(staff.specialty)}</span><b>${fit}</b></header><div class="staff-candidate-main"><div class="staff-rating-ring"><strong>${staff.rating}</strong><small>OVR</small></div><div><strong>${escapeHtml(staff.name)}</strong><span>$${staff.salary}M ANNUAL</span><small>${affordable ? "WITHIN BUDGET" : "OVER BUDGET"}</small></div></div><div class="staff-rating-bar"><i><b style="width:${staff.rating}%"></b></i><span>${staff.rating >= 80 ? "HIGH IMPACT" : "DEVELOPMENT VALUE"}</span></div><button class="btn staff-hire-button reference-week-button${affordable ? "" : " staff-hire-unavailable"}" data-hire-staff="${staff.id}" ${affordable ? "" : 'aria-disabled="true"'}>${affordable ? `HIRE ${escapeHtml(staff.specialty)}` : "OVER BUDGET"}</button></div>`; }).join("") || '<div class="muted-line">No staff candidates are currently available.</div>'}</div></section>`;
 }
 
 function legacyStaffPage() {
@@ -4050,6 +4117,13 @@ function socialAccountProfileModal() {
   return `<div class="social-post-modal-backdrop" data-close-social-profile="true"><section class="social-account-profile" role="dialog" aria-label="${escapeHtml(account.name)} profile"><div class="social-dialog-header"><button data-close-social-profile="true">&#8592;</button><strong>Profile</strong></div><div class="social-account-banner"></div><section><div class="social-account-avatar">${escapeHtml(account.name.split(/\s+/).map((word)=>word[0]).join("").slice(0,2))}</div><button data-social-follow-account="${escapeHtml(account.id)}">${followed ? "Following" : "Follow"}</button><h2>${escapeHtml(account.name)} ${account.verified ? "✓" : ""}</h2><span>${escapeHtml(account.handle)}</span><p>${escapeHtml(account.style)} coverage · ${account.simulated ? "Fictional career simulation content" : "NBA Social"}</p><small>${Number(account.followers || 0).toLocaleString()} followers · ${account.reliability}% reliability</small></section><div class="social-account-posts">${posts.length ? posts.map((post,index)=>socialPost(post,index,activeTeam(),null)).join("") : '<div class="muted-line">No recent posts.</div>'}</div></section></div>`;
 }
 
+function socialCreatePostModal() {
+  if (!socialCreatePostOpen) return "";
+  const team=activeTeam(),players=teamPlayers(team.id).sort((a,b)=>b.ovr-a.ovr),games=(save.schedule||[]).filter((game)=>!game.played&&(game.home===team.id||game.away===team.id)).slice(0,12);
+  const fieldStyle="color:#edf4ff!important;background:#263550!important;background-image:none!important;border:1px solid rgba(150,174,222,.25)!important";
+  return `<div class="social-post-modal-backdrop" data-close-social-create="true"><section class="social-create-post" role="dialog" aria-label="Create post"><div class="social-dialog-header"><button data-close-social-create="true">&#10005;</button><strong>Create Post</strong></div><div class="social-create-body">${teamLogo(team,"social-create-avatar")}<div><textarea id="social-create-text" maxlength="280" placeholder="What do you want to share?" style="color:#edf4ff!important;background:#202c41!important;background-image:none!important;border:1px solid rgba(150,174,222,.24)!important"></textarea><div class="social-create-count"><span id="social-create-count">0</span>/280</div><div class="social-create-fields"><label><span>Category</span><select id="social-create-type" style="${fieldStyle}"><option value="team">Team update</option><option value="game">Game promotion</option><option value="player">Player spotlight</option><option value="transaction">Announcement</option><option value="community">Community</option></select></label><label><span>Tone</span><select id="social-create-tone" style="${fieldStyle}"><option value="professional">Professional</option><option value="energetic">Energetic</option><option value="supportive">Supportive</option><option value="confident">Confident</option></select></label><label><span>Player</span><select id="social-create-player" style="${fieldStyle}"><option value="">No player attached</option>${players.map((player)=>`<option value="${escapeHtml(player.id)}">${escapeHtml(player.name)}</option>`).join("")}</select></label><label><span>Game</span><select id="social-create-game" style="${fieldStyle}"><option value="">No game attached</option>${games.map((game)=>{const opponent=getTeam(game.home===team.id?game.away:game.home);return `<option value="${escapeHtml(game.id)}">${escapeHtml(game.date)} vs ${escapeHtml(opponent?.abbr||"TBD")}</option>`;}).join("")}</select></label><label class="wide"><span>GIF asset path or approved URL</span><input id="social-create-gif" placeholder="Optional" style="${fieldStyle}"></label><label><span>Publish</span><select id="social-create-mode" style="${fieldStyle}"><option value="now">Publish now</option><option value="schedule">Schedule</option></select></label><label id="social-create-date-label" hidden><span>Date</span><input id="social-create-date" type="date" min="${escapeHtml(currentLeagueDate())}" value="${escapeHtml(currentLeagueDate())}" style="${fieldStyle}"></label></div><section id="social-create-preview" class="social-create-preview"><small>Preview</small><p>Your post preview will appear here.</p></section></div></div><footer><button data-close-social-create="true">Cancel</button><button data-social-create-preview="true">Preview</button><button class="primary" data-social-create-submit="true">Publish</button></footer></section></div>`;
+}
+
 function socialPostConversationModal() {
   if (!selectedSocialPostId) return "";
   const post = socialVisiblePostCache.get(selectedSocialPostId) || save.social.posts.find((item) => item.id === selectedSocialPostId);
@@ -4341,7 +4415,7 @@ function processSocialSentiment() {
 function publishScheduledSocialPost(item, publishedAt = currentLeagueDate()) {
   if (!item || item.status === "published" || item.status === "cancelled") return false;
   const team=activeTeam(),account=socialAccount(`team-${team.id}`);
-  save.social.posts.push({ id:`social-post-${save.social.nextPostId++}`,accountId:account?.id||`team-${team.id}`,source:account?.name||`${team.city} ${team.name}`,handle:account?.handle||`@${team.abbr}`,verified:true,teamId:team.id,text:item.text,type:item.type||"team",mentions:item.mentions||[],time:"Recently",createdAt:publishedAt,scheduledPostId:item.id,simulated:true });
+  save.social.posts.push({ id:`social-post-${save.social.nextPostId++}`,accountId:account?.id||`team-${team.id}`,source:account?.name||`${team.city} ${team.name}`,handle:account?.handle||`@${team.abbr}`,verified:true,teamId:team.id,playerId:item.playerId||null,gameId:item.gameId||null,text:item.text,type:item.type||"team",tone:item.tone||"professional",gifUrl:item.gifUrl||null,mentions:item.mentions||[],time:"Recently",createdAt:publishedAt,scheduledPostId:item.id,simulated:true });
   item.status="published"; item.publishedAt=publishedAt;
   save.social.notifications.unshift({ id:`notification-scheduled-${item.id}`,type:"published",source:`${team.city} ${team.name}`,text:`Scheduled post published: ${item.text}`,read:false,createdAt:publishedAt });
   return true;
@@ -6358,6 +6432,15 @@ function metric(label, value) {
   return `<div class="metric-row"><span>${label}</span><strong>${value}</strong></div>`;
 }
 
+function commandStat(label, value) {
+  return `<div><span>${escapeHtml(label)}</span><strong>${value}</strong></div>`;
+}
+
+function commandRating(label, value) {
+  const rating = Math.max(0, Math.min(100, Number(value || 0)));
+  return `<div class="command-rating"><span>${escapeHtml(label)}</span><strong>${rating}</strong><i><b style="width:${rating}%"></b></i></div>`;
+}
+
 function playerDetailModal() {
   if (!selectedPlayerCardId) return "";
   const player = save.players.find((candidate) => candidate.id === selectedPlayerCardId);
@@ -6367,18 +6450,25 @@ function playerDetailModal() {
   const awards = playerAwards(player.id);
   const draft = player.draftInfo || {};
   const contract = player.contract || {};
+  const fatigue = Math.max(0, Math.min(100, 100 - Number(player.stamina || 75)));
+  const moraleTone = Number(player.morale || 80) >= 75 ? "high" : Number(player.morale || 80) >= 55 ? "neutral" : "low";
+  const healthLabel = Number(player.injury || 0) > 0 ? `${player.injury} games` : "Available";
   return `<div class="player-modal-backdrop" data-close-player-card="true">
-    <section class="player-detail-card" role="dialog" aria-label="${escapeHtml(player.name)} player card">
+    <section class="player-detail-card vertical-slice-player-card" role="dialog" aria-label="${escapeHtml(player.name)} player card">
       <button class="player-card-close" data-close-player-card="true" aria-label="Close player card">x</button>
       <header class="player-card-hero">
         <div class="player-card-avatar">${playerHeadshot(player, "player-card-headshot")}</div>
         <div>
           <div class="card-label">${escapeHtml(teamName(player.teamId) || "Free Agent")} - ${escapeHtml(player.archetype || "Player")}</div>
           <h2>${escapeHtml(player.name)}</h2>
-          <div class="meta">${escapeHtml(player.pos)} - Age ${player.age} - ${player.ovr} OVR / ${player.pot} POT - Morale ${player.morale}</div>
+          <div class="meta">${escapeHtml(player.pos)} · Age ${player.age} · ${player.ovr} OVR / ${player.pot} POT</div>
+          <div class="player-profile-status"><span class="is-morale-${moraleTone}">MORALE ${player.morale}</span><span class="${player.injury ? "is-injury" : "is-available"}">${escapeHtml(healthLabel)}</span><span class="is-fatigue">FATIGUE ${fatigue}%</span></div>
         </div>
         <div class="player-card-overall"><span>OVR</span><strong>${player.ovr}</strong></div>
       </header>
+      <section class="player-attribute-strip">
+        ${[["3PT", player.three], ["MID", player.mid], ["RIM", player.rim], ["PASS", player.pass], ["DEF", player.def], ["STA", player.stamina]].map(([label, value]) => `<div><span>${label}</span><strong>${Number(value || 0)}</strong><i><b style="width:${Math.max(0, Math.min(100, Number(value || 0)))}%"></b></i></div>`).join("")}
+      </section>
       <section class="player-card-tabs">
         ${playerCardSection("season stats", [
           ["GP", season.games],
@@ -6410,6 +6500,7 @@ function playerDetailModal() {
         <article class="player-card-panel"><div class="card-label">team history</div>${(player.teamHistory || []).length ? player.teamHistory.map((item) => `<div class="player-card-line"><strong>${escapeHtml(teamName(item.teamId))}</strong><span>${item.fromSeason}${item.toSeason && item.toSeason !== item.fromSeason ? `-${item.toSeason}` : ""} - ${escapeHtml(item.reason || "Roster")}</span></div>`).join("") : '<div class="muted-line">No team history recorded.</div>'}</article>
         <article class="player-card-panel"><div class="card-label">draft information</div>${metric("Draft", draft.year ? `${draft.year} Round ${draft.round || "-"} Pick ${draft.pick || "-"}` : "Undrafted / Imported")}${metric("Team", draft.teamId ? escapeHtml(teamName(draft.teamId)) : "Not recorded")}${metric("Origin", escapeHtml(draft.origin || player.college || "Unknown"))}</article>
       </section>
+      <footer class="player-profile-actions"><button class="player-action-button" data-nav-shortcut="rotation">ADJUST ROLE</button><button class="player-action-button primary" data-nav-shortcut="trade">EXPLORE TRADE</button></footer>
     </section>
   </div>`;
 }
@@ -6464,6 +6555,20 @@ function playerAwards(playerId) {
 }
 
 function attachActions() {
+  document.querySelector("[data-social-create-post]")?.addEventListener("click",()=>{socialCreatePostOpen=true;render();});
+  document.querySelectorAll("[data-close-social-create]").forEach((element)=>element.addEventListener("click",(event)=>{if(element.classList.contains("social-post-modal-backdrop")&&event.target!==element)return;socialCreatePostOpen=false;render();}));
+  const socialCreateText=document.querySelector("#social-create-text");
+  socialCreateText?.addEventListener("input",()=>{const count=document.querySelector("#social-create-count");if(count)count.textContent=String(socialCreateText.value.length);});
+  document.querySelector("#social-create-mode")?.addEventListener("change",(event)=>{const label=document.querySelector("#social-create-date-label");if(label)label.hidden=event.currentTarget.value!=="schedule";});
+  const renderSocialCreatePreview=()=>{const target=document.querySelector("#social-create-preview"),text=document.querySelector("#social-create-text")?.value.trim(),playerId=document.querySelector("#social-create-player")?.value,player=save.players.find((item)=>item.id===playerId);if(target)target.innerHTML=`<small>Preview</small><strong>${escapeHtml(`${activeTeam().city} ${activeTeam().name}`)}</strong><p>${escapeHtml(text||"Your post preview will appear here.")}</p>${player?`<span>Featuring ${escapeHtml(player.name)}</span>`:""}`;};
+  document.querySelector("[data-social-create-preview]")?.addEventListener("click",renderSocialCreatePreview);
+  document.querySelector("[data-social-create-submit]")?.addEventListener("click",async()=>{
+    const text=document.querySelector("#social-create-text")?.value.trim(); if(!text)return;
+    const team=activeTeam(),account=socialAccount(`team-${team.id}`),type=document.querySelector("#social-create-type")?.value||"team",tone=document.querySelector("#social-create-tone")?.value||"professional",playerId=document.querySelector("#social-create-player")?.value||null,gameId=document.querySelector("#social-create-game")?.value||null,gifUrl=safeSocialMediaUrl(document.querySelector("#social-create-gif")?.value),mode=document.querySelector("#social-create-mode")?.value||"now",publishAt=document.querySelector("#social-create-date")?.value||currentLeagueDate(),player=save.players.find((item)=>item.id===playerId),mentions=player?[player.name]:[];
+    if(mode==="schedule")save.social.scheduledPosts.push({id:`scheduled-${Date.now()}-${save.social.nextPostId++}`,text,type,tone,playerId,gameId,gifUrl,mentions,publishAt,status:"scheduled",createdAt:currentLeagueDate()});
+    else save.social.posts.push({id:`social-post-${save.social.nextPostId++}`,accountId:account?.id||`team-${team.id}`,source:account?.name||`${team.city} ${team.name}`,handle:account?.handle||`@${team.abbr}`,verified:true,teamId:team.id,playerId,gameId,text,type,tone,gifUrl,mentions,time:"now",createdAt:currentLeagueDate(),simulated:true});
+    socialCreatePostOpen=false;await persist();render();
+  });
   document.querySelector("#social-approval-toggle")?.addEventListener("change", async (event)=>{save.automation.socialApproval=event.currentTarget.checked;await persist();});
   document.querySelectorAll("[data-social-schedule-suggestion]").forEach((button)=>button.addEventListener("click",()=>{const text=document.querySelector("#social-schedule-text"),date=document.querySelector("#social-schedule-date"),type=document.querySelector("#social-schedule-type");if(text)text.value=button.dataset.suggestionText||"";if(date)date.value=button.dataset.suggestionDate||currentLeagueDate();if(type)type.value=button.dataset.suggestionType||"team";}));
   document.querySelector("[data-social-schedule-create]")?.addEventListener("click",async()=>{const text=document.querySelector("#social-schedule-text")?.value.trim(),publishAt=document.querySelector("#social-schedule-date")?.value,type=document.querySelector("#social-schedule-type")?.value||"team";if(!text||!publishAt)return;save.social.scheduledPosts.push({id:`scheduled-${Date.now()}-${save.social.nextPostId++}`,text,publishAt,type,status:"scheduled",createdAt:currentLeagueDate()});await persist();render();});
@@ -6823,6 +6928,7 @@ function attachActions() {
   }));
 
   document.querySelectorAll("[data-nav-shortcut]").forEach((button) => button.addEventListener("click", () => {
+    selectedPlayerCardId = null;
     active = button.dataset.navShortcut;
     render();
   }));

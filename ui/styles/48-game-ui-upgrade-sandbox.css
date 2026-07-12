@@ -1,0 +1,2117 @@
+/*
+ * Opt-in UI upgrade sandbox.
+ *
+ * Phase 1 intentionally contains no visual overrides. Future vertical-slice
+ * experiments must be scoped beneath `body.game-ui-upgrade` so the current
+ * application remains the default and legacy styles stay intact.
+ */
+
+body.game-ui-upgrade {
+  --game-ui-upgrade-enabled: 1;
+
+  /* Typography */
+  --game-font-display: "Bebas Neue", "Arial Narrow", Impact, sans-serif;
+  --game-font-heading: "Rajdhani", "Arial Narrow", sans-serif;
+  --game-font-body: Inter, "Segoe UI", sans-serif;
+  --game-font-numeric: "Rajdhani", Inter, sans-serif;
+
+  /* Navy/charcoal surface ladder */
+  --game-bg-deep: #070b14;
+  --game-bg: #0a101d;
+  --game-surface-1: #0f1727;
+  --game-surface-2: #141f33;
+  --game-surface-3: #1a2941;
+  --game-surface-glass: rgba(17, 27, 45, .88);
+  --game-surface-hover: #203250;
+  --game-overlay: rgba(3, 7, 15, .78);
+
+  /* Content and borders */
+  --game-text: #f4f7fc;
+  --game-text-soft: #c4cee0;
+  --game-text-muted: #8795ad;
+  --game-text-dim: #5f6d85;
+  --game-border-subtle: rgba(147, 166, 201, .14);
+  --game-border: rgba(147, 166, 201, .25);
+  --game-border-strong: rgba(174, 194, 231, .42);
+  --game-focus: #78a7ff;
+
+  /* Team identity: these inherit the existing live team theme. */
+  --game-team: var(--team-primary);
+  --game-team-secondary: var(--team-secondary);
+  --game-team-soft: color-mix(in srgb, var(--team-primary) 20%, var(--game-surface-2));
+  --game-team-border: color-mix(in srgb, var(--team-primary) 56%, var(--game-border));
+  --game-team-glow: color-mix(in srgb, var(--team-primary) 34%, transparent);
+
+  /* Semantic game states */
+  --game-success: #35d07f;
+  --game-success-soft: rgba(53, 208, 127, .13);
+  --game-warning: #f3b33d;
+  --game-warning-soft: rgba(243, 179, 61, .14);
+  --game-danger: #ff5d6c;
+  --game-danger-soft: rgba(255, 93, 108, .14);
+  --game-info: #5d9dff;
+  --game-info-soft: rgba(93, 157, 255, .14);
+  --game-injury: #ff626f;
+  --game-fatigue: #f1a942;
+  --game-morale-high: #32d583;
+  --game-morale-neutral: #7f91ae;
+  --game-morale-low: #ff8b55;
+
+  /* Spacing and sizing */
+  --game-space-1: 4px;
+  --game-space-2: 8px;
+  --game-space-3: 12px;
+  --game-space-4: 16px;
+  --game-space-5: 20px;
+  --game-space-6: 24px;
+  --game-space-8: 32px;
+  --game-space-10: 40px;
+  --game-control-sm: 30px;
+  --game-control-md: 38px;
+  --game-control-lg: 46px;
+
+  /* Corners, borders, and elevation */
+  --game-radius-xs: 3px;
+  --game-radius-sm: 5px;
+  --game-radius-md: 8px;
+  --game-radius-lg: 12px;
+  --game-radius-xl: 18px;
+  --game-radius-pill: 999px;
+  --game-shadow-low: 0 5px 14px rgba(0, 0, 0, .18);
+  --game-shadow-card: 0 14px 34px rgba(0, 0, 0, .28);
+  --game-shadow-high: 0 24px 64px rgba(0, 0, 0, .44);
+  --game-shadow-team: 0 0 0 1px var(--game-team-border), 0 14px 34px var(--game-team-glow);
+
+  /* Motion */
+  --game-ease: cubic-bezier(.2, .8, .2, 1);
+  --game-duration-fast: 120ms;
+  --game-duration: 180ms;
+  --game-duration-reveal: 360ms;
+}
+
+/* Foundation primitives. These classes are intentionally opt-in. */
+body.game-ui-upgrade :is(.game-display, .game-title) {
+  margin: 10px 0 10px 10px;
+  color: var(--game-text);
+  font-family: var(--game-font-display);
+  font-weight: 400;
+  letter-spacing: .025em;
+  line-height: .92;
+  text-transform: uppercase;
+}
+
+body.game-ui-upgrade .game-heading {
+  margin: 0;
+  color: var(--game-text);
+  font-family: var(--game-font-heading);
+  font-weight: 800;
+  letter-spacing: .035em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+body.game-ui-upgrade :is(.game-body, .game-control) {
+  font-family: var(--game-font-body);
+}
+
+body.game-ui-upgrade :is(.game-stat, .game-score, .game-currency) {
+  font-family: var(--game-font-numeric);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: 800;
+}
+
+body.game-ui-upgrade .game-card {
+  position: relative;
+  border: 1px solid var(--game-border);
+  border-radius: var(--game-radius-md);
+  color: var(--game-text);
+  background: linear-gradient(145deg, var(--game-surface-2), var(--game-surface-1));
+  box-shadow: var(--game-shadow-card);
+}
+
+body.game-ui-upgrade .game-card:is(:hover, :focus-within),
+body.game-ui-upgrade .game-card.is-selected {
+  border-color: var(--game-team-border);
+}
+
+body.game-ui-upgrade .game-card.is-selected {
+  box-shadow: inset 3px 0 0 var(--game-team), var(--game-shadow-team);
+}
+
+body.game-ui-upgrade .game-card.is-disabled {
+  filter: saturate(.45);
+  opacity: .48;
+  pointer-events: none;
+}
+
+body.game-ui-upgrade :is(.game-button, .game-tab) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--game-space-2);
+  min-height: var(--game-control-md);
+  padding: 0 var(--game-space-4);
+  border: 1px solid var(--game-border);
+  border-radius: var(--game-radius-sm);
+  color: var(--game-text-soft);
+  background: linear-gradient(180deg, var(--game-surface-3), var(--game-surface-2));
+  box-shadow: var(--game-shadow-low);
+  font-family: var(--game-font-heading);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .075em;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform var(--game-duration-fast) var(--game-ease), border-color var(--game-duration) ease, color var(--game-duration) ease, background var(--game-duration) ease, box-shadow var(--game-duration) ease;
+}
+
+body.game-ui-upgrade :is(.game-button, .game-tab):hover:not(:disabled) {
+  border-color: var(--game-border-strong);
+  color: #fff;
+  background: linear-gradient(180deg, var(--game-surface-hover), var(--game-surface-2));
+  transform: translateY(-1px);
+}
+
+body.game-ui-upgrade :is(.game-button, .game-tab):focus-visible {
+  outline: 2px solid var(--game-focus);
+  outline-offset: 2px;
+}
+
+body.game-ui-upgrade :is(.game-button, .game-tab):active:not(:disabled),
+body.game-ui-upgrade :is(.game-button, .game-tab).is-active {
+  transform: translateY(0);
+}
+
+body.game-ui-upgrade .game-button.is-primary,
+body.game-ui-upgrade .game-tab.is-active {
+  border-color: color-mix(in srgb, var(--game-team) 75%, #fff);
+  color: var(--team-contrast, #fff);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 82%, #fff), var(--game-team));
+  box-shadow: 0 10px 24px var(--game-team-glow);
+}
+
+body.game-ui-upgrade .game-button.is-danger {
+  border-color: color-mix(in srgb, var(--game-danger) 72%, transparent);
+  color: #fff;
+  background: linear-gradient(180deg, #e84d5c, #b72f3d);
+}
+
+body.game-ui-upgrade :is(.game-button, .game-tab):disabled,
+body.game-ui-upgrade :is(.game-button, .game-tab).is-disabled {
+  border-color: var(--game-border-subtle);
+  color: var(--game-text-dim);
+  background: var(--game-surface-1);
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: .58;
+}
+
+body.game-ui-upgrade .game-tabs {
+  display: flex;
+  align-items: center;
+  gap: var(--game-space-1);
+  border-bottom: 1px solid var(--game-border);
+}
+
+body.game-ui-upgrade .game-tab {
+  min-height: var(--game-control-sm);
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body.game-ui-upgrade .game-tab.is-active {
+  border-bottom-color: var(--game-team-secondary);
+  color: #fff;
+  background: var(--game-team-soft);
+  box-shadow: none;
+}
+
+body.game-ui-upgrade .game-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--game-text-soft);
+  font-family: var(--game-font-body);
+  font-size: 12px;
+}
+
+body.game-ui-upgrade .game-table th {
+  height: 34px;
+  border-bottom: 1px solid var(--game-border-strong);
+  color: var(--game-text-muted);
+  background: rgba(4, 9, 18, .36);
+  font-family: var(--game-font-heading);
+  font-size: 10px;
+  letter-spacing: .09em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+body.game-ui-upgrade .game-table :is(th, td) { padding: var(--game-space-2) var(--game-space-3); }
+body.game-ui-upgrade .game-table td { border-bottom: 1px solid var(--game-border-subtle); }
+body.game-ui-upgrade .game-table tbody tr { transition: background var(--game-duration-fast) ease; }
+body.game-ui-upgrade .game-table tbody tr:hover { background: var(--game-team-soft); }
+body.game-ui-upgrade .game-table .is-numeric { font-family: var(--game-font-numeric); font-variant-numeric: tabular-nums; text-align: right; }
+
+body.game-ui-upgrade :is(.game-badge, .game-status) {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 22px;
+  padding: 0 8px;
+  border: 1px solid var(--game-border);
+  border-radius: var(--game-radius-pill);
+  color: var(--game-text-soft);
+  background: var(--game-surface-2);
+  font-family: var(--game-font-heading);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+body.game-ui-upgrade .game-status::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+}
+
+body.game-ui-upgrade :is(.game-status.is-success, .game-status.is-morale-high) { border-color: rgba(53, 208, 127, .38); color: var(--game-success); background: var(--game-success-soft); }
+body.game-ui-upgrade :is(.game-status.is-warning, .game-status.is-fatigue) { border-color: rgba(243, 179, 61, .4); color: var(--game-warning); background: var(--game-warning-soft); }
+body.game-ui-upgrade :is(.game-status.is-danger, .game-status.is-injury) { border-color: rgba(255, 93, 108, .42); color: var(--game-danger); background: var(--game-danger-soft); }
+body.game-ui-upgrade .game-status.is-info { border-color: rgba(93, 157, 255, .4); color: var(--game-info); background: var(--game-info-soft); }
+body.game-ui-upgrade .game-status.is-morale-neutral { color: var(--game-morale-neutral); }
+body.game-ui-upgrade .game-status.is-morale-low { border-color: rgba(255, 139, 85, .4); color: var(--game-morale-low); background: rgba(255, 139, 85, .13); }
+
+body.game-ui-upgrade .game-alert {
+  display: grid;
+  grid-template-columns: 4px minmax(0, 1fr);
+  gap: var(--game-space-3);
+  padding: var(--game-space-3) var(--game-space-4);
+  border: 1px solid var(--game-border);
+  border-radius: var(--game-radius-md);
+  color: var(--game-text-soft);
+  background: var(--game-surface-1);
+}
+
+body.game-ui-upgrade .game-alert::before { border-radius: var(--game-radius-pill); background: var(--game-info); content: ""; }
+body.game-ui-upgrade .game-alert.is-success::before { background: var(--game-success); }
+body.game-ui-upgrade .game-alert.is-warning::before { background: var(--game-warning); }
+body.game-ui-upgrade .game-alert.is-danger::before { background: var(--game-danger); }
+
+body.game-ui-upgrade [data-game-tooltip] { position: relative; }
+body.game-ui-upgrade [data-game-tooltip]::after {
+  position: absolute;
+  z-index: 100;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  width: max-content;
+  max-width: 240px;
+  padding: 7px 9px;
+  border: 1px solid var(--game-border);
+  border-radius: var(--game-radius-sm);
+  color: var(--game-text);
+  background: #070c16;
+  box-shadow: var(--game-shadow-high);
+  font-family: var(--game-font-body);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 4px);
+  transition: opacity var(--game-duration-fast) ease, transform var(--game-duration-fast) var(--game-ease);
+  content: attr(data-game-tooltip);
+}
+
+body.game-ui-upgrade [data-game-tooltip]:is(:hover, :focus-visible)::after { opacity: 1; transform: translate(-50%, 0); }
+
+body.game-ui-upgrade .is-loading { position: relative; color: transparent !important; pointer-events: none; }
+body.game-ui-upgrade .is-loading::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 15px;
+  height: 15px;
+  margin: -8px;
+  border: 2px solid rgba(255, 255, 255, .28);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: game-ui-spin .72s linear infinite;
+  content: "";
+}
+
+body.game-ui-upgrade .game-skeleton {
+  overflow: hidden;
+  border-radius: var(--game-radius-sm);
+  color: transparent !important;
+  background: var(--game-surface-2);
+}
+
+body.game-ui-upgrade .game-skeleton::after {
+  display: block;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .07), transparent);
+  animation: game-ui-shimmer 1.25s ease-in-out infinite;
+  content: "";
+}
+
+@keyframes game-ui-spin { to { transform: rotate(360deg); } }
+@keyframes game-ui-shimmer { from { transform: translateX(-120%); } to { transform: translateX(280%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  body.game-ui-upgrade *,
+  body.game-ui-upgrade *::before,
+  body.game-ui-upgrade *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* Phase 3: shared career shell. Page content remains under legacy ownership. */
+body.game-ui-upgrade.dashboard-mode {
+  color: var(--game-text);
+  background: var(--game-bg-deep);
+}
+
+body.game-ui-upgrade.dashboard-mode .broadcast-shell {
+  grid-template-rows: 70px minmax(0, 1fr);
+  background:
+    radial-gradient(circle at 82% -15%, var(--game-team-glow), transparent 30%),
+    linear-gradient(135deg, var(--game-bg-deep), var(--game-bg) 58%, #0d1422);
+}
+
+body.game-ui-upgrade.dashboard-mode .topbar {
+  position: relative;
+  z-index: 20;
+  grid-template-columns: 224px minmax(0, 1fr) auto auto;
+  gap: 10px;
+  min-height: 70px;
+  padding: 0 24px;
+  border: 0;
+  border-bottom: 1px solid var(--game-border);
+  color: var(--game-text);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, .025), transparent 30%),
+    rgba(7, 12, 22, .97);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .3);
+  backdrop-filter: blur(16px);
+}
+
+body.game-ui-upgrade.dashboard-mode .topbar::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--game-team), var(--game-team-secondary) 24%, transparent 62%);
+  opacity: .76;
+  content: "";
+}
+
+body.game-ui-upgrade.dashboard-mode .topbar-brand {
+  min-width: 224px;
+  gap: 10px;
+}
+
+body.game-ui-upgrade.dashboard-mode .league-mark {
+  width: 34px;
+  height: 42px;
+  border: 1px solid var(--game-team-border);
+  border-radius: var(--game-radius-sm);
+  color: var(--team-contrast, #fff);
+  background: linear-gradient(155deg, color-mix(in srgb, var(--game-team) 85%, #fff), var(--game-team));
+  box-shadow: 0 8px 22px var(--game-team-glow);
+  font-family: var(--game-font-heading);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+body.game-ui-upgrade.dashboard-mode .brand-title {
+  color: var(--game-text);
+  font-family: var(--game-font-heading);
+  font-size: 0;
+  font-weight: 800;
+  letter-spacing: .055em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+body.game-ui-upgrade.dashboard-mode .brand-title::before {
+  color: var(--game-text);
+  font-size: 18px;
+  content: "NBA";
+}
+
+body.game-ui-upgrade.dashboard-mode .brand-title::after {
+  margin-left: 5px;
+  color: var(--game-team-secondary);
+  font-size: 16px;
+  content: "MANAGER";
+}
+
+body.game-ui-upgrade.dashboard-mode .brand-subtitle {
+  display: block;
+  margin-top: 4px;
+  color: var(--game-text-muted);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+body.game-ui-upgrade.dashboard-mode .top-nav {
+  display: flex;
+  align-self: stretch;
+  gap: 2px;
+  min-width: 0;
+  padding: 0 8px;
+}
+
+body.game-ui-upgrade.dashboard-mode .top-nav button {
+  position: relative;
+  min-height: 100%;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 0;
+  color: #aab7cc;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--game-font-heading);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: color var(--game-duration) ease, background var(--game-duration) ease;
+}
+
+body.game-ui-upgrade.dashboard-mode .top-nav button::after {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  left: 10px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--game-team-secondary);
+  opacity: 0;
+  transform: scaleX(.4);
+  transition: opacity var(--game-duration) ease, transform var(--game-duration) var(--game-ease);
+  content: "";
+}
+
+body.game-ui-upgrade.dashboard-mode .top-nav button:is(:hover, :focus-visible) {
+  color: var(--game-text);
+  background: rgba(255, 255, 255, .035);
+}
+
+body.game-ui-upgrade.dashboard-mode .top-nav button.active {
+  color: #fff;
+  background: linear-gradient(180deg, transparent, var(--game-team-soft));
+}
+
+body.game-ui-upgrade.dashboard-mode .top-nav button.active::after { opacity: 1; transform: scaleX(1); }
+
+body.game-ui-upgrade.dashboard-mode :is(.top-nav button, .menu-link, .theme-toggle-button, .context-nav button, .sidebar-next-game button):focus-visible {
+  outline: 2px solid var(--game-focus);
+  outline-offset: -2px;
+}
+
+body.game-ui-upgrade.dashboard-mode .career-date-pill {
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid var(--game-border);
+  border-radius: var(--game-radius-sm);
+  color: var(--game-text-soft);
+  background: var(--game-surface-1);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .025);
+  font-family: var(--game-font-numeric);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .055em;
+}
+
+body.game-ui-upgrade.dashboard-mode .career-date-pill :is(span, strong, b) { color: var(--game-text); }
+body.game-ui-upgrade.dashboard-mode .career-date-pill i { background: var(--game-team-secondary); box-shadow: 0 0 8px var(--game-team-glow); }
+
+body.game-ui-upgrade.dashboard-mode .topbar-team {
+  gap: 8px;
+  margin-left: 8px;
+  padding-left: 12px;
+  border-left: 1px solid var(--game-border-subtle);
+}
+
+body.game-ui-upgrade.dashboard-mode .topbar-team .menu-link,
+body.game-ui-upgrade.dashboard-mode .theme-toggle-button {
+  min-height: 34px;
+  border: 1px solid var(--game-border);
+  border-radius: var(--game-radius-sm);
+  color: var(--game-text-soft);
+  background: linear-gradient(180deg, var(--game-surface-2), var(--game-surface-1));
+  box-shadow: none;
+  font-family: var(--game-font-heading);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+}
+
+body.game-ui-upgrade.dashboard-mode .topbar-team .menu-link:hover,
+body.game-ui-upgrade.dashboard-mode .theme-toggle-button:hover {
+  border-color: var(--game-team-border);
+  color: #fff;
+  background: var(--game-surface-hover);
+}
+
+body.game-ui-upgrade.dashboard-mode .main-shell {
+  grid-template-columns: 254px minmax(0, 1fr);
+  gap: 14px;
+  min-height: 0;
+  padding: 12px 16px 16px;
+  background: transparent;
+}
+
+body.game-ui-upgrade.dashboard-mode .context-sidebar {
+  position: relative;
+  z-index: 10;
+  gap: 10px;
+  min-height: 0;
+  padding: 16px 14px 14px;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--game-border);
+  border-radius: var(--game-radius-lg);
+  color: var(--game-text);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .025), transparent 30%),
+    rgba(10, 16, 29, .98);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .3), inset 0 1px rgba(255, 255, 255, .035);
+}
+
+body.game-ui-upgrade.dashboard-mode .context-heading {
+  min-height: 64px;
+  padding: 4px 8px 13px;
+  border-bottom: 1px solid var(--game-border-subtle);
+}
+
+body.game-ui-upgrade.dashboard-mode .context-heading strong {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--game-text);
+  font-family: var(--game-font-heading);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .03em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+body.game-ui-upgrade.dashboard-mode .context-heading small {
+  display: block;
+  margin-top: 4px;
+  color: var(--game-text-muted);
+  font-family: var(--game-font-numeric);
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+
+body.game-ui-upgrade.dashboard-mode .context-team-logo {
+  width: 40px;
+  height: 40px;
+  padding: 4px;
+  border: 1px solid var(--game-team-border);
+  border-radius: var(--game-radius-md);
+  background: var(--game-team-soft);
+  object-fit: contain;
+}
+
+body.game-ui-upgrade.dashboard-mode .context-nav {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 0;
+  padding-right: 2px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body.game-ui-upgrade.dashboard-mode .context-nav button {
+  position: relative;
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 10px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: var(--game-radius-sm);
+  color: #a7b5cb;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--game-font-body);
+  font-size: 10px;
+  font-weight: 650;
+  text-align: left;
+  transition: border-color var(--game-duration-fast) ease, color var(--game-duration-fast) ease, background var(--game-duration-fast) ease, transform var(--game-duration-fast) var(--game-ease);
+}
+
+body.game-ui-upgrade.dashboard-mode .context-nav button i {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  color: #74849e;
+  font-family: var(--game-font-heading);
+  font-size: 11px;
+  font-style: normal;
+}
+
+body.game-ui-upgrade.dashboard-mode .context-nav button:hover {
+  border-color: var(--game-border-subtle);
+  color: var(--game-text);
+  background: rgba(255, 255, 255, .055);
+  transform: translateX(2px);
+}
+
+body.game-ui-upgrade.dashboard-mode .context-nav button.active {
+  border-color: var(--game-team-border);
+  color: #fff;
+  background: linear-gradient(90deg, var(--game-team-soft), rgba(255, 255, 255, .055));
+  box-shadow: inset 3px 0 0 var(--game-team-secondary);
+}
+
+body.game-ui-upgrade.dashboard-mode .context-nav button.active i { color: var(--game-team-secondary); }
+body.game-ui-upgrade.dashboard-mode .context-nav button.active b { color: var(--game-team-secondary); }
+
+body.game-ui-upgrade.dashboard-mode .sidebar-nav-divider {
+  margin: 8px 8px 3px;
+  color: var(--game-text-dim);
+  font-family: var(--game-font-heading);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game {
+  display: grid;
+  gap: 8px;
+  min-height: 130px;
+  margin-top: 2px;
+  padding: 12px;
+  overflow: hidden;
+  border: 1px solid var(--game-team-border);
+  border-radius: var(--game-radius-md);
+  color: var(--game-text);
+  background:
+    linear-gradient(145deg, var(--game-team-soft), transparent 58%),
+    var(--game-surface-1);
+  box-shadow: var(--game-shadow-low);
+}
+
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game::after {
+  position: absolute;
+  right: -35px;
+  bottom: -45px;
+  width: 110px;
+  height: 110px;
+  border: 18px solid var(--game-team-glow);
+  border-radius: 50%;
+  opacity: .4;
+  content: "";
+}
+
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game > span {
+  color: var(--game-team-secondary);
+  font-family: var(--game-font-heading);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-matchup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-matchup strong {
+  color: var(--game-text);
+  font-family: var(--game-font-display);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: .035em;
+  line-height: 1;
+}
+
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-matchup small {
+  display: block;
+  margin-top: 3px;
+  color: var(--game-text-muted);
+  font-family: var(--game-font-body);
+  font-size: 8px;
+  font-weight: 650;
+}
+
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game .sidebar-sim-game-button {
+  position: relative;
+  z-index: 1;
+  min-height: 34px;
+  margin-top: 0;
+  border: 1px solid color-mix(in srgb, var(--game-team) 72%, #fff) !important;
+  border-radius: var(--game-radius-sm);
+  color: var(--team-contrast, #fff) !important;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 82%, #fff), var(--game-team)) !important;
+  box-shadow: 0 9px 20px var(--game-team-glow) !important;
+  font-family: var(--game-font-heading);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+}
+
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game .sidebar-sim-game-button:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+
+body.game-ui-upgrade.dashboard-mode .workspace {
+  min-width: 0;
+  padding: 2px 6px 14px 8px;
+  background:
+    linear-gradient(rgba(136, 159, 198, .025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(136, 159, 198, .025) 1px, transparent 1px),
+    radial-gradient(circle at 100% 0, var(--game-team-glow), transparent 27%),
+    var(--game-bg);
+  background-size: 64px 64px, 64px 64px, auto, auto;
+}
+
+body.game-ui-upgrade.dashboard-mode .page-shell-header {
+  border-color: var(--game-border);
+  color: var(--game-text);
+  background: linear-gradient(100deg, rgba(15, 23, 39, .97), rgba(10, 16, 29, .92));
+  box-shadow: var(--game-shadow-low);
+}
+
+body.game-ui-upgrade.dashboard-mode .page-shell-header h1 {
+  color: var(--game-text);
+  font-family: var(--game-font-display);
+  font-weight: 400;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+}
+
+body.game-ui-upgrade.dashboard-mode .page-shell-header :is(.breadcrumb, p, span) { color: var(--game-text-muted); }
+
+body.game-ui-upgrade.dashboard-mode :is(.workspace, .context-nav) {
+  scrollbar-color: var(--game-border-strong) transparent;
+}
+
+body.game-ui-upgrade.dashboard-mode :is(.workspace, .context-nav)::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: var(--game-radius-pill);
+  background: var(--game-border-strong);
+  background-clip: padding-box;
+}
+
+@media (max-width: 1180px) {
+  body.game-ui-upgrade.dashboard-mode .main-shell { grid-template-columns: 224px minmax(0, 1fr); }
+  body.game-ui-upgrade.dashboard-mode .topbar { grid-template-columns: 176px minmax(0, 1fr) auto auto; }
+  body.game-ui-upgrade.dashboard-mode .topbar-brand { min-width: 176px; }
+  body.game-ui-upgrade.dashboard-mode .top-nav button { padding: 0 7px; font-size: 9px; }
+}
+
+/* Phase 4 vertical slice: dashboard, player profile, and game result. */
+body.game-ui-upgrade .reference-dashboard {
+  --slice-card: linear-gradient(155deg, rgba(23, 34, 55, .98), rgba(11, 18, 31, .98));
+}
+
+body.game-ui-upgrade .reference-dashboard .reference-page-title { color: var(--game-text); }
+
+body.game-ui-upgrade .vertical-slice-hero {
+  grid-template-columns: minmax(340px, 1fr) minmax(245px, .55fr) auto;
+  min-height: 150px;
+  border: 1px solid var(--game-team-border);
+  color: var(--game-text) !important;
+  background:
+    radial-gradient(circle at 70% 50%, var(--game-team-glow), transparent 30%),
+    linear-gradient(115deg, var(--game-surface-2), var(--game-bg) 70%) !important;
+  box-shadow: var(--game-shadow-card);
+}
+
+body.game-ui-upgrade .vertical-slice-hero :is(h2, p, span, strong) { color: var(--game-text) !important; }
+body.game-ui-upgrade .vertical-slice-hero p { color: var(--game-text-soft) !important; }
+body.game-ui-upgrade .vertical-slice-hero p > strong { color: var(--game-team-secondary) !important; }
+
+body.game-ui-upgrade .dashboard-next-matchup {
+  display: grid;
+  align-content: center;
+  gap: 7px;
+  min-height: 94px;
+  padding: 12px 18px;
+  border-right: 1px solid var(--game-border-subtle);
+  border-left: 1px solid var(--game-border-subtle);
+  text-align: center;
+}
+
+body.game-ui-upgrade .dashboard-next-matchup > span,
+body.game-ui-upgrade .dashboard-next-matchup > small {
+  color: var(--game-text-muted);
+  font-family: var(--game-font-heading);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .1em;
+}
+
+body.game-ui-upgrade .dashboard-next-matchup > div { display: flex; align-items: center; justify-content: center; gap: 9px; }
+body.game-ui-upgrade .dashboard-next-matchup b { font-family: var(--game-font-display); font-size: 25px; font-weight: 400; }
+body.game-ui-upgrade .dashboard-next-matchup i { color: #ffffff(--game-team-secondary); font-family: var(--game-font-heading); font-size: 10px; font-style: normal; font-weight: 800; }
+body.game-ui-upgrade .dashboard-matchup-logo { width: 35px; height: 35px; object-fit: contain; }
+
+body.game-ui-upgrade .reference-dashboard :is(.reference-stat-grid > article, .panel-card, .action-card) {
+  border-color: var(--game-border);
+}
+
+body.game-ui-upgrade .reference-leaders-panel .dashboard-leader-row {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  align-items: center;
+  width: 100%;
+  min-height: 68px;
+  margin-top: 7px;
+  padding: 9px 12px;
+  border: 1px solid var(--game-border) !important;
+  border-radius: var(--game-radius-sm);
+  color: var(--game-text) !important;
+  background: linear-gradient(100deg, var(--game-surface-2), rgba(11, 18, 31, .96)) !important;
+  text-align: left;
+  cursor: pointer;
+  transition: padding var(--game-duration-fast) var(--game-ease), background var(--game-duration-fast) ease;
+}
+
+body.game-ui-upgrade .reference-leaders-panel { padding: 18px 18px 16px; }
+body.game-ui-upgrade .reference-leaders-panel > header { margin-bottom: 10px; font-size: 18px; letter-spacing: .045em; }
+body.game-ui-upgrade .reference-leaders-panel .dashboard-leader-row { grid-template-columns: 50px minmax(0,1fr) auto; min-height: 80px; margin-top: 9px; padding: 10px 13px; border-radius: var(--game-radius-md); }
+body.game-ui-upgrade .dashboard-leader-headshot { width: 46px; height: 46px; border-width: 2px; box-shadow: 0 8px 18px rgba(0,0,0,.34), 0 0 0 3px color-mix(in srgb, var(--game-team) 10%, transparent); }
+body.game-ui-upgrade .dashboard-leader-row span { align-content: center; }
+body.game-ui-upgrade .dashboard-leader-row span { color: var(--game-team-secondary) !important; font-family: var(--game-font-heading); font-size: 10px; font-weight: 800; letter-spacing: .09em; }
+body.game-ui-upgrade .dashboard-leader-row span > strong { margin-top: 4px; font-size: 15px; letter-spacing: .025em; }
+body.game-ui-upgrade .dashboard-leader-row > b { min-width: 66px; font-size: 38px; line-height: .9; }
+body.game-ui-upgrade .dashboard-leader-row small { margin-top: 5px; font-size: 8px; }
+body.game-ui-upgrade .reference-leaders-panel .dashboard-leader-row { --leader-color: var(--game-info); grid-template-columns: 24px 52px minmax(0,1fr) auto; min-height: 86px; padding: 11px 14px 11px 10px; border-left: 3px solid var(--leader-color) !important; background: linear-gradient(100deg, color-mix(in srgb, var(--leader-color) 9%, var(--game-surface-2)), var(--game-surface-1)) !important; }
+body.game-ui-upgrade .reference-leaders-panel .leader-points { --leader-color: var(--game-danger); }
+body.game-ui-upgrade .reference-leaders-panel .leader-rebounds { --leader-color: var(--game-success); }
+body.game-ui-upgrade .reference-leaders-panel .leader-assists { --leader-color: #9a7cff; }
+body.game-ui-upgrade .dashboard-leader-row > i { align-self: start; color: var(--leader-color); font-family: var(--game-font-heading); font-size: 8px; font-style: normal; font-weight: 800; letter-spacing: .05em; }
+body.game-ui-upgrade .dashboard-leader-row .dashboard-leader-headshot { width: 50px; height: 50px; border-color: color-mix(in srgb, var(--leader-color) 65%, #fff); box-shadow: 0 8px 20px rgba(0,0,0,.34), 0 0 0 3px color-mix(in srgb, var(--leader-color) 12%, transparent); }
+body.game-ui-upgrade .dashboard-leader-row > span { color: var(--leader-color) !important; }
+body.game-ui-upgrade .dashboard-leader-row > span > small { color: var(--game-text-muted) !important; opacity: 1; }
+body.game-ui-upgrade .dashboard-leader-row > b { display: grid; justify-items: end; color: var(--game-text) !important; }
+body.game-ui-upgrade .dashboard-leader-row > b > small { margin-top: 2px; color: var(--leader-color) !important; font-family: var(--game-font-heading); font-size: 7px; font-weight: 800; letter-spacing: .08em; opacity: 1; }
+body.game-ui-upgrade .reference-leaders-panel .dashboard-leader-row:hover { border-color: color-mix(in srgb, var(--leader-color) 60%, var(--game-border)) !important; background: linear-gradient(100deg, color-mix(in srgb, var(--leader-color) 16%, var(--game-surface-2)), var(--game-surface-1)) !important; }
+body.game-ui-upgrade .reference-leaders-panel .dashboard-leader-row,
+body.game-ui-upgrade .reference-leaders-panel :is(.leader-points, .leader-rebounds, .leader-assists) {
+  --leader-color: var(--game-team) !important;
+  grid-template-columns: 52px minmax(0,1fr) auto;
+}
+body.game-ui-upgrade .dashboard-leader-row > i { display: none; }
+
+body.game-ui-upgrade .reference-leaders-panel .dashboard-leader-row:hover { border-color: var(--game-team-border) !important; background: linear-gradient(100deg, var(--game-team-soft), var(--game-surface-1)) !important; transform: translateX(2px); }
+body.game-ui-upgrade .dashboard-leader-row span { display: grid; }
+body.game-ui-upgrade .dashboard-leader-row :is(span, strong, b) { color: var(--game-text) !important; }
+body.game-ui-upgrade .dashboard-leader-row span { position: relative; padding-left: 0; }
+body.game-ui-upgrade .dashboard-leader-headshot { width: 34px; height: 34px; border: 2px solid var(--game-team-border); border-radius: 50%; background: var(--game-team-soft); box-shadow: 0 5px 12px rgba(0,0,0,.28); object-fit: cover; object-position: center top; }
+body.game-ui-upgrade .dashboard-leader-row span > strong { margin-top: 3px; font-family: var(--game-font-heading); font-size: 12px; letter-spacing: .035em; }
+body.game-ui-upgrade .dashboard-leader-row > b { min-width: 52px; color: var(--game-team-secondary) !important; font-family: var(--game-font-display); font-size: 30px; font-weight: 400; text-align: right; }
+body.game-ui-upgrade .dashboard-leader-row small { margin-top: 3px; color: var(--game-text-muted) !important; font-size: 7px; letter-spacing: .08em; opacity: 0; transition: opacity var(--game-duration-fast) ease; }
+body.game-ui-upgrade .dashboard-leader-row:hover small { opacity: 1; }
+
+body.game-ui-upgrade:has(.player-modal-backdrop) .custom-scrollbar-shell { display: none !important; }
+
+body.game-ui-upgrade .player-modal-backdrop {
+  align-items: stretch;
+  justify-content: flex-end;
+  padding: 0;
+  background: rgba(2, 6, 13, .76);
+  backdrop-filter: blur(8px);
+}
+
+body.game-ui-upgrade .vertical-slice-player-card {
+  display: flex;
+  flex-direction: column;
+  width: min(920px, 94vw);
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  padding: 22px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 0;
+  border-left: 1px solid var(--game-team-border);
+  border-radius: 0;
+  color: var(--game-text);
+  background:
+    radial-gradient(circle at 85% 4%, var(--game-team-glow), transparent 24%),
+    linear-gradient(155deg, var(--game-surface-2), var(--game-bg-deep));
+  box-shadow: -24px 0 70px rgba(0, 0, 0, .48);
+  animation: vertical-slice-drawer-in var(--game-duration-reveal) var(--game-ease);
+}
+
+body.game-ui-upgrade .vertical-slice-player-card :is(h2, strong) { color: var(--game-text); }
+body.game-ui-upgrade .vertical-slice-player-card :is(.meta, .card-label, span, .muted-line) { color: var(--game-text-muted); }
+body.game-ui-upgrade .vertical-slice-player-card .player-card-hero { border-color: var(--game-border); background: rgba(7, 12, 22, .38); }
+body.game-ui-upgrade .vertical-slice-player-card .player-card-overall { border-color: var(--game-team-border); background: var(--game-team-soft); }
+body.game-ui-upgrade .vertical-slice-player-card .player-card-overall strong { color: var(--game-team-secondary); font-family: var(--game-font-display); font-size: 52px; }
+body.game-ui-upgrade .vertical-slice-player-card .player-card-panel { border-color: var(--game-border); background: rgba(15, 23, 39, .72); box-shadow: none; }
+body.game-ui-upgrade .vertical-slice-player-card :is(.player-card-tabs, .player-card-grid) { width: 100%; min-width: 0; }
+body.game-ui-upgrade .vertical-slice-player-card .player-card-tabs { grid-template-columns: 1.05fr 1fr 1.2fr; }
+body.game-ui-upgrade .vertical-slice-player-card .player-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+body.game-ui-upgrade .vertical-slice-player-card .player-card-panel { min-width: 0; overflow: hidden; }
+body.game-ui-upgrade .vertical-slice-player-card .player-card-stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+body.game-ui-upgrade .vertical-slice-player-card .player-card-stat-grid > div { min-width: 0; padding: 9px 6px; }
+body.game-ui-upgrade .vertical-slice-player-card .player-card-stat-grid strong { overflow-wrap: anywhere; font-size: clamp(14px, 1.5vw, 19px); }
+
+body.game-ui-upgrade .player-profile-status { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+body.game-ui-upgrade .player-profile-status span { padding: 5px 8px; border: 1px solid var(--game-border); border-radius: var(--game-radius-pill); font-family: var(--game-font-heading); font-size: 8px; font-weight: 800; letter-spacing: .07em; }
+body.game-ui-upgrade .player-profile-status .is-morale-high,
+body.game-ui-upgrade .player-profile-status .is-available { border-color: rgba(53,208,127,.35); color: var(--game-success); background: var(--game-success-soft); }
+body.game-ui-upgrade .player-profile-status .is-morale-neutral { color: var(--game-morale-neutral); }
+body.game-ui-upgrade .player-profile-status .is-morale-low,
+body.game-ui-upgrade .player-profile-status .is-injury { border-color: rgba(255,93,108,.4); color: var(--game-danger); background: var(--game-danger-soft); }
+body.game-ui-upgrade .player-profile-status .is-fatigue { border-color: rgba(243,179,61,.36); color: var(--game-warning); background: var(--game-warning-soft); }
+
+body.game-ui-upgrade .player-attribute-strip { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 12px 0; }
+body.game-ui-upgrade .player-attribute-strip > div { display: grid; gap: 4px; padding: 9px; border: 1px solid var(--game-border); border-radius: var(--game-radius-sm); background: rgba(7,12,22,.46); }
+body.game-ui-upgrade .player-attribute-strip span { font-family: var(--game-font-heading); font-size: 8px; font-weight: 800; }
+body.game-ui-upgrade .player-attribute-strip strong { font-family: var(--game-font-numeric); font-size: 20px; }
+body.game-ui-upgrade .player-attribute-strip i { height: 3px; overflow: hidden; border-radius: 3px; background: var(--game-surface-3); }
+body.game-ui-upgrade .player-attribute-strip i b { display: block; height: 100%; background: linear-gradient(90deg, var(--game-team), var(--game-team-secondary)); }
+body.game-ui-upgrade .player-profile-actions { position: sticky; bottom: -22px; display: flex; flex: 0 0 auto; justify-content: flex-end; gap: 8px; width: calc(100% + 44px); min-height: 66px; margin: auto -22px -22px; padding: 14px 22px; border-top: 1px solid var(--game-border); background: rgba(7,12,22,.96); backdrop-filter: blur(12px); }
+body.game-ui-upgrade .player-profile-actions .player-action-button { min-height: 38px; padding: 0 18px; border: 1px solid var(--game-border-strong); border-radius: var(--game-radius-sm); color: var(--game-text); background: linear-gradient(180deg, var(--game-surface-3), var(--game-surface-2)); font-family: var(--game-font-heading); font-size: 10px; font-weight: 800; letter-spacing: .075em; cursor: pointer; }
+body.game-ui-upgrade .player-profile-actions .player-action-button:hover { border-color: var(--game-team-border); filter: brightness(1.15); transform: translateY(-1px); }
+body.game-ui-upgrade .player-profile-actions .player-action-button.primary { border-color: var(--game-team-border); color: var(--team-contrast, #fff); background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 82%, #fff), var(--game-team)); box-shadow: 0 8px 20px var(--game-team-glow); }
+body.game-ui-upgrade .player-profile-actions .btn { border-color: var(--game-border-strong) !important; color: var(--game-text) !important; background: linear-gradient(180deg, var(--game-surface-3), var(--game-surface-2)) !important; opacity: 1 !important; }
+body.game-ui-upgrade .player-profile-actions .btn.primary { border-color: var(--game-team-border) !important; background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 82%, #fff), var(--game-team)) !important; }
+
+body.game-ui-upgrade .matchup-card:has(+ .box-score-panel),
+body.game-ui-upgrade .matchup-card:has(.game-summary) {
+  overflow: hidden;
+  border-color: var(--game-team-border);
+  background: radial-gradient(circle at 50% 0, var(--game-team-glow), transparent 38%), var(--game-surface-1);
+  box-shadow: var(--game-shadow-team);
+}
+
+body.game-ui-upgrade .matchup-card:has(.game-summary) .matchup-teams strong { color: var(--game-text); font-family: var(--game-font-display); font-size: 56px; }
+body.game-ui-upgrade .matchup-card:has(.game-summary) .card-label { color: var(--game-team-secondary); letter-spacing: .14em; }
+body.game-ui-upgrade .matchup-card:has(.game-summary) .game-summary { border-color: var(--game-border); background: rgba(7,12,22,.56); }
+body.game-ui-upgrade .box-score-panel { border-color: var(--game-border); background: var(--game-surface-1); box-shadow: var(--game-shadow-card); }
+body.game-ui-upgrade .box-score-panel :is(.box-score-heading, .box-score-team-name, th, td) { border-color: var(--game-border); }
+body.game-ui-upgrade .box-score-panel table { font-variant-numeric: tabular-nums; }
+
+body.game-ui-upgrade .simcast-scoreboard { border-color: var(--game-team-border); background: radial-gradient(circle at 50% 50%, var(--game-team-glow), transparent 38%), var(--game-surface-1); box-shadow: var(--game-shadow-team); }
+body.game-ui-upgrade .simcast-scoreboard .simcast-team > b { font-family: var(--game-font-display); font-size: 64px; }
+body.game-ui-upgrade .simcast-clock strong { color: var(--game-team-secondary); font-family: var(--game-font-numeric); }
+
+body.game-ui-upgrade .simcast-shell :is(
+  .simcast-scoreboard,
+  .simcast-period-strip,
+  .simcast-feed-panel,
+  .simcast-comparison,
+  .simcast-leaders,
+  .simcast-coaching,
+  .simcast-live-box,
+  .simcast-controls
+) {
+  border-color: var(--game-border) !important;
+  color: var(--game-text) !important;
+  background-color: var(--game-surface-1) !important;
+  background-image: linear-gradient(155deg, rgba(22, 32, 52, .98), rgba(10, 16, 29, .98)) !important;
+  box-shadow: var(--game-shadow-card) !important;
+}
+
+body.game-ui-upgrade .simcast-shell :is(.simcast-feed-panel > header, .simcast-coaching > header, .simcast-live-box > header) {
+  border-color: var(--game-border) !important;
+  color: var(--game-text) !important;
+  background: rgba(7, 12, 22, .66) !important;
+}
+
+body.game-ui-upgrade .simcast-shell :is(.simcast-feed-panel, .simcast-coaching, .simcast-live-box, .simcast-controls) :is(span, strong, small, label) {
+  color: var(--game-text-soft) !important;
+}
+
+body.game-ui-upgrade .simcast-shell .simcast-clock {
+  border: 1px solid var(--game-team-border) !important;
+  color: var(--game-text) !important;
+  background: rgba(7, 12, 22, .9) !important;
+}
+
+body.game-ui-upgrade .simcast-shell .simcast-clock strong { color: var(--game-team-secondary) !important; }
+body.game-ui-upgrade .simcast-shell .simcast-feed-row { border-color: var(--game-border) !important; color: var(--game-text-soft) !important; background: rgba(12, 19, 33, .82) !important; }
+body.game-ui-upgrade .simcast-shell .simcast-feed-row p { color: var(--game-text) !important; }
+body.game-ui-upgrade .simcast-shell .simcast-coaching-grid { color: var(--game-text); background: transparent !important; }
+body.game-ui-upgrade .simcast-shell :is(select, .simcast-coaching .btn, .simcast-controls button) { border-color: var(--game-border-strong) !important; color: var(--game-text) !important; background: var(--game-surface-2) !important; }
+
+/* High-specificity repairs for legacy light-mode declarations in SimCast. */
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-coaching-grid > div {
+  border-color: var(--game-border) !important;
+  color: var(--game-text) !important;
+  background-color: var(--game-surface-1) !important;
+  background-image: linear-gradient(180deg, rgba(22, 32, 52, .96), rgba(12, 19, 33, .98)) !important;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-coaching :is(select, button),
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls :is(button, .btn) {
+  border: 1px solid var(--game-border-strong) !important;
+  color: var(--game-text) !important;
+  background-color: var(--game-surface-2) !important;
+  background-image: linear-gradient(180deg, var(--game-surface-3), var(--game-surface-2)) !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls button.active,
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls .btn.primary {
+  border-color: var(--game-team-border) !important;
+  color: var(--team-contrast, #fff) !important;
+  background-color: var(--game-team) !important;
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 82%, #fff), var(--game-team)) !important;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell :is(.simcast-coaching, .simcast-controls) button:disabled {
+  border-color: var(--game-border-subtle) !important;
+  color: var(--game-text-dim) !important;
+  background-color: var(--game-bg) !important;
+  background-image: none !important;
+  opacity: .62 !important;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-clock {
+  min-width: 190px;
+  padding: 12px 24px;
+  border-color: var(--game-team-border) !important;
+  border-width: 1px 1px 3px !important;
+  border-radius: var(--game-radius-md);
+  background-color: #070c16 !important;
+  background-image: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--game-team) 22%, transparent), #070c16 72%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.025), 0 12px 28px rgba(0,0,0,.3) !important;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-scoreboard {
+  grid-template-columns: minmax(300px, 1fr) 220px minmax(300px, 1fr);
+  gap: 34px;
+  min-height: 210px;
+  padding: 28px 42px;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team {
+  min-width: 0;
+  gap: 18px;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team.away {
+  grid-template-columns: 78px minmax(130px, 1fr) 108px;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team.home {
+  grid-template-columns: 108px minmax(130px, 1fr) 78px;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team > b {
+  min-width: 108px;
+  color: #fff !important;
+  font-family: var(--game-font-display);
+  font-size: clamp(58px, 5.4vw, 82px);
+  line-height: .85;
+  text-align: center;
+  text-shadow: 0 8px 24px rgba(0,0,0,.38);
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team strong {
+  color: var(--game-text) !important;
+  font-family: var(--game-font-heading);
+  font-size: clamp(22px, 2vw, 32px);
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team-logo {
+  width: 78px;
+  height: 78px;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-clock :is(span, small) { color: var(--game-text-soft) !important; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-clock span { font-family: var(--game-font-heading); font-size: 10px; letter-spacing: .14em; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-clock strong { color: #fff !important; font-family: var(--game-font-numeric); font-size: 48px; line-height: .9; text-shadow: 0 0 20px rgba(255,255,255,.15); }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-clock small { margin-top: 3px; font-size: 7px; letter-spacing: .08em; }
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip {
+  display: grid;
+  justify-content: stretch;
+  padding: 14px 18px 16px;
+  border-radius: var(--game-radius-md);
+  background: linear-gradient(180deg, var(--game-surface-2), var(--game-surface-1)) !important;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div {
+  width: 100%;
+  min-width: 0;
+  max-width: 980px;
+  margin: 0 auto;
+  border-right: 1px solid var(--game-border);
+  border-left: 1px solid var(--game-border);
+  background: rgba(7, 12, 22, .5);
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > * {
+  display: grid;
+  place-items: center;
+  width: auto;
+  min-height: 28px;
+  flex: 1 1 72px;
+  border-right: 1px solid var(--game-border-subtle);
+  color: var(--game-text-soft) !important;
+  background: transparent !important;
+  font-family: var(--game-font-numeric);
+  font-size: 11px;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > :first-child {
+  position: static;
+  width: 132px;
+  flex: 0 0 132px;
+  justify-items: start;
+  padding-left: 14px;
+  color: var(--game-text) !important;
+  background: var(--game-surface-1) !important;
+  font-family: var(--game-font-heading);
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > :last-child {
+  width: 104px;
+  flex: 0 0 104px;
+  color: var(--game-team-secondary) !important;
+  background: var(--game-team-soft) !important;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-head {
+  border-color: var(--game-border) !important;
+  background: rgba(7, 12, 22, .72) !important;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-head > * {
+  min-height: 23px !important;
+  color: var(--game-text-muted) !important;
+  font-family: var(--game-font-heading) !important;
+  font-size: 8px !important;
+  letter-spacing: .1em;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div:not(.simcast-period-head) {
+  min-height: 48px;
+  border-bottom: 1px solid var(--game-border-subtle);
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div:not(.simcast-period-head) > :first-child {
+  color: #fff !important;
+  font-size: 13px;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div:not(.simcast-period-head) b {
+  font-size: 15px;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip b.live {
+  color: #fff !important;
+  background: var(--game-team) !important;
+  box-shadow: inset 0 0 0 1px var(--game-team-border);
+}
+
+@media (max-width: 1050px) {
+  body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-scoreboard { grid-template-columns: minmax(220px, 1fr) 170px minmax(220px, 1fr); gap: 14px; padding: 22px 20px; }
+  body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team.away { grid-template-columns: 58px minmax(80px, 1fr) 80px; }
+  body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team.home { grid-template-columns: 80px minmax(80px, 1fr) 58px; }
+  body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team-logo { width: 58px; height: 58px; }
+  body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team > b { min-width: 80px; font-size: 56px; }
+  body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-clock { min-width: 160px; }
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-live-team-name {
+  border-color: var(--game-border) !important;
+  color: var(--game-text) !important;
+  background: var(--game-surface-2) !important;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-live-team-name :is(strong, span) { color: var(--game-text-soft) !important; }
+
+body.game-ui-upgrade.dashboard-mode .vertical-slice-player-card .player-profile-actions button {
+  border: 1px solid var(--game-border-strong) !important;
+  color: var(--game-text) !important;
+  background-color: var(--game-surface-2) !important;
+  background-image: linear-gradient(180deg, var(--game-surface-3), var(--game-surface-2)) !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+body.game-ui-upgrade.dashboard-mode .vertical-slice-player-card .player-profile-actions button.primary {
+  border-color: var(--game-team-border) !important;
+  background-color: var(--game-team) !important;
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 82%, #fff), var(--game-team)) !important;
+}
+
+body.game-ui-upgrade.dashboard-mode .vertical-slice-player-card .player-card-close {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--game-border-strong) !important;
+  border-radius: var(--game-radius-sm) !important;
+  color: var(--game-text) !important;
+  background-color: var(--game-surface-2) !important;
+  background-image: linear-gradient(180deg, var(--game-surface-3), var(--game-surface-2)) !important;
+  box-shadow: var(--game-shadow-low) !important;
+  font-family: var(--game-font-body);
+  font-size: 0;
+}
+
+body.game-ui-upgrade.dashboard-mode .vertical-slice-player-card .player-card-close::after { font-size: 18px; line-height: 1; content: "×"; }
+
+@keyframes vertical-slice-drawer-in { from { opacity: 0; transform: translateX(36px); } to { opacity: 1; transform: translateX(0); } }
+
+@media (max-width: 1220px) {
+  body.game-ui-upgrade .vertical-slice-hero { grid-template-columns: minmax(310px, 1fr) auto; }
+  body.game-ui-upgrade .dashboard-next-matchup { display: none; }
+}
+
+/* Command Center focused upgrade. */
+body.game-ui-upgrade .command-center-cards { gap: 14px; }
+body.game-ui-upgrade .command-center-cards > article {
+  position: relative;
+  min-height: 270px;
+  padding: 18px;
+  overflow: hidden;
+  border: 1px solid var(--game-border) !important;
+  border-radius: var(--game-radius-lg);
+  background: linear-gradient(150deg, rgba(22,33,54,.98), rgba(10,16,29,.98)) !important;
+  box-shadow: var(--game-shadow-card);
+}
+body.game-ui-upgrade .command-center-cards > article::after { position: absolute; right: -38px; bottom: -48px; width: 120px; height: 120px; border: 18px solid var(--command-accent, var(--game-team-glow)); border-radius: 50%; opacity: .12; content: ""; pointer-events: none; }
+body.game-ui-upgrade .command-center-cards > article:nth-child(1) { --command-color: var(--game-info); --command-accent: rgba(93,157,255,.5); }
+body.game-ui-upgrade .command-center-cards > article:nth-child(2) { --command-color: #8b7cff; --command-accent: rgba(139,124,255,.5); }
+body.game-ui-upgrade .command-center-cards > article:nth-child(3) { --command-color: var(--game-danger); --command-accent: rgba(255,93,108,.5); }
+body.game-ui-upgrade .command-center-cards > article:nth-child(4) { --command-color: var(--game-warning); --command-accent: rgba(243,179,61,.5); }
+body.game-ui-upgrade .command-center-cards > article:nth-child(5) { --command-color: #49c6e5; --command-accent: rgba(73,198,229,.5); }
+body.game-ui-upgrade .command-center-cards > article:nth-child(6) { --command-color: var(--game-success); --command-accent: rgba(53,208,127,.5); }
+body.game-ui-upgrade .command-center-cards article > header { grid-template-columns: 44px minmax(0,1fr); grid-template-rows: auto auto; column-gap: 12px; min-height: 52px; margin: -2px 0 13px; padding: 0 0 13px; border-color: var(--game-border) !important; }
+body.game-ui-upgrade .command-center-cards article > header::before { grid-row: 1 / 3; align-self: center; width: 38px; height: 38px; border: 1px solid color-mix(in srgb, var(--command-color) 48%, transparent); color: var(--command-color) !important; background: color-mix(in srgb, var(--command-color) 13%, transparent) !important; box-shadow: 0 0 18px color-mix(in srgb, var(--command-color) 12%, transparent); }
+body.game-ui-upgrade .command-center-cards article > header span { color: var(--command-color) !important; font-size: 8px; letter-spacing: .12em; }
+body.game-ui-upgrade .command-center-cards article > header strong { color: var(--game-text) !important; font-size: 16px; }
+body.game-ui-upgrade .command-center-cards .metric-row { position: relative; min-height: 34px; padding: 8px 0; border-color: var(--game-border-subtle) !important; }
+body.game-ui-upgrade .command-center-cards .metric-row span { color: var(--game-text-muted) !important; font-size: 9px; }
+body.game-ui-upgrade .command-center-cards .metric-row strong { color: var(--game-text) !important; font-family: var(--game-font-numeric); font-size: 11px; }
+body.game-ui-upgrade .command-card--career .metric-row:first-of-type { display: grid; grid-template-columns: 1fr auto; }
+body.game-ui-upgrade .command-card--career .metric-row:first-of-type::after { grid-column: 1 / -1; height: 5px; margin-top: 7px; overflow: hidden; border-radius: 5px; background: linear-gradient(90deg, var(--command-color) 60%, var(--game-surface-3) 60%); content: ""; }
+body.game-ui-upgrade .command-card--roster .metric-row:nth-of-type(2) { margin: 5px -8px; padding: 9px 8px; border: 1px solid rgba(255,93,108,.28); border-radius: var(--game-radius-sm); background: var(--game-danger-soft); }
+body.game-ui-upgrade .command-approval { display: grid; grid-template-columns: 1fr auto; gap: 7px; padding: 11px 12px; border: 1px solid var(--game-border); border-radius: var(--game-radius-md); background: rgba(7,12,22,.45); }
+body.game-ui-upgrade .command-approval span { color: var(--game-text-muted); font-family: var(--game-font-heading); font-size: 8px; font-weight: 800; letter-spacing: .08em; }
+body.game-ui-upgrade .command-approval strong { color: var(--game-info); font-family: var(--game-font-numeric); font-size: 18px; }
+body.game-ui-upgrade .command-approval i { grid-column: 1 / -1; height: 6px; overflow: hidden; border-radius: 6px; background: var(--game-surface-3); }
+body.game-ui-upgrade .command-approval i b { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--game-info), #7eb1ff); box-shadow: 0 0 12px rgba(93,157,255,.35); }
+body.game-ui-upgrade .career-stat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin-top: 8px; }
+body.game-ui-upgrade .career-stat-grid > div { display: grid; gap: 5px; padding: 10px 8px; border: 1px solid var(--game-border-subtle); border-radius: var(--game-radius-sm); background: rgba(7,12,22,.34); text-align: center; }
+body.game-ui-upgrade .career-stat-grid span { color: var(--game-text-muted); font-family: var(--game-font-heading); font-size: 7px; letter-spacing: .05em; }
+body.game-ui-upgrade .career-stat-grid strong { color: var(--game-text); font-family: var(--game-font-display); font-size: 24px; font-weight: 400; }
+body.game-ui-upgrade .command-status { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; padding: 9px 10px; border: 1px solid rgba(53,208,127,.28); border-radius: var(--game-radius-sm); background: var(--game-success-soft); }
+body.game-ui-upgrade .command-status span { color: var(--game-text-muted); font-size: 7px; }
+body.game-ui-upgrade .command-status strong { color: var(--game-success); font-size: 9px; }
+body.game-ui-upgrade .coach-identity { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; padding: 9px 10px; border: 1px solid rgba(139,124,255,.26); border-radius: var(--game-radius-sm); background: rgba(139,124,255,.09); }
+body.game-ui-upgrade .coach-identity span { color: var(--game-text-muted); font-size: 8px; }
+body.game-ui-upgrade .coach-identity strong { color: #a99cff; font-family: var(--game-font-heading); font-size: 11px; text-transform: uppercase; }
+body.game-ui-upgrade .command-rating { display: grid; grid-template-columns: 1fr auto; gap: 5px; margin-top: 7px; }
+body.game-ui-upgrade .command-rating span { color: var(--game-text-muted); font-size: 8px; }
+body.game-ui-upgrade .command-rating strong { color: var(--game-text); font-family: var(--game-font-numeric); font-size: 10px; }
+body.game-ui-upgrade .command-rating i { grid-column: 1 / -1; height: 5px; overflow: hidden; border-radius: 5px; background: var(--game-surface-3); }
+body.game-ui-upgrade .command-rating i b { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #796cff, #b0a6ff); }
+body.game-ui-upgrade .command-card--coaching .staff-market-button { min-height: 34px; margin-top: 10px !important; }
+body.game-ui-upgrade .roster-command-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+body.game-ui-upgrade .roster-command-grid > div { display: grid; gap: 4px; min-height: 76px; padding: 10px; border: 1px solid var(--game-border); border-radius: var(--game-radius-sm); background: rgba(7,12,22,.42); }
+body.game-ui-upgrade .roster-command-grid span { color: var(--game-text-muted); font-size: 7px; letter-spacing: .06em; }
+body.game-ui-upgrade .roster-command-grid strong { overflow: hidden; color: var(--game-text); font-family: var(--game-font-heading); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+body.game-ui-upgrade .roster-command-grid b { align-self: end; width: max-content; padding: 3px 6px; border-radius: var(--game-radius-pill); font-size: 7px; }
+body.game-ui-upgrade .roster-command-grid .good b { color: var(--game-success); background: var(--game-success-soft); }
+body.game-ui-upgrade .roster-command-grid .urgent { border-color: rgba(255,93,108,.3); background: var(--game-danger-soft); }
+body.game-ui-upgrade .roster-command-grid .urgent b { color: var(--game-danger); background: rgba(255,93,108,.12); }
+body.game-ui-upgrade .roster-command-grid .info b { color: var(--game-info); background: var(--game-info-soft); }
+body.game-ui-upgrade .roster-command-grid .warning b { color: var(--game-warning); background: var(--game-warning-soft); }
+body.game-ui-upgrade .roster-command-grid > div { grid-template-columns: 38px minmax(0,1fr); grid-template-rows: auto auto auto; column-gap: 9px; min-height: 92px; padding: 11px; }
+body.game-ui-upgrade .roster-command-grid .roster-command-headshot,
+body.game-ui-upgrade .roster-command-grid > div > i { grid-column: 1; grid-row: 1 / 4; align-self: center; width: 36px; height: 36px; border: 2px solid var(--game-border-strong); border-radius: 50%; background: var(--game-surface-2); object-fit: cover; object-position: center top; }
+body.game-ui-upgrade .roster-command-grid > div > i { display: grid; place-items: center; color: var(--game-danger); background: var(--game-danger-soft); font-family: var(--game-font-heading); font-size: 18px; font-style: normal; font-weight: 800; }
+body.game-ui-upgrade .roster-command-grid > div > span { grid-column: 2; grid-row: 1; align-self: end; }
+body.game-ui-upgrade .roster-command-grid > div > strong { grid-column: 2; grid-row: 2; align-self: center; font-size: 12px; }
+body.game-ui-upgrade .roster-command-grid > div > b { grid-column: 2; grid-row: 3; align-self: start; }
+body.game-ui-upgrade .roster-command-grid .good { border-color: rgba(53,208,127,.28); background: linear-gradient(120deg, rgba(53,208,127,.08), rgba(7,12,22,.42)); }
+body.game-ui-upgrade .roster-command-grid .info { border-color: rgba(93,157,255,.28); background: linear-gradient(120deg, rgba(93,157,255,.08), rgba(7,12,22,.42)); }
+body.game-ui-upgrade .roster-command-grid .warning { border-color: rgba(243,179,61,.28); background: linear-gradient(120deg, rgba(243,179,61,.08), rgba(7,12,22,.42)); }
+body.game-ui-upgrade .command-center-cards > article:nth-child(4) { display: grid; align-content: start; }
+body.game-ui-upgrade .command-center-cards > article:nth-child(4) > p { margin: 0 0 12px; padding: 11px 12px; border: 1px solid rgba(243,179,61,.25); border-radius: var(--game-radius-sm); color: var(--game-text-soft); background: var(--game-warning-soft); line-height: 1.45; }
+body.game-ui-upgrade .command-center-cards .reference-rules { margin-top: 4px; }
+body.game-ui-upgrade .command-center-cards .rule-pill { min-height: 54px; padding: 9px; border-radius: var(--game-radius-sm); }
+body.game-ui-upgrade .command-card--operations { align-content: start !important; }
+body.game-ui-upgrade .operations-deadline { display: grid; grid-template-columns: 88px minmax(0,1fr); gap: 12px; margin-bottom: 12px; }
+body.game-ui-upgrade .operations-deadline > div { display: grid; place-items: center; align-content: center; min-height: 86px; padding: 9px; border: 1px solid rgba(243,179,61,.32); border-radius: var(--game-radius-md); background: var(--game-warning-soft); text-align: center; }
+body.game-ui-upgrade .operations-deadline > div strong { color: var(--game-warning); font-family: var(--game-font-display); font-size: 38px; font-weight: 400; line-height: .85; }
+body.game-ui-upgrade .operations-deadline > div span { margin-top: 6px; color: var(--game-text-muted); font-family: var(--game-font-heading); font-size: 7px; font-weight: 800; letter-spacing: .08em; }
+body.game-ui-upgrade .operations-deadline > p { display: grid; align-content: center; gap: 7px; min-height: 86px; margin: 0 !important; padding: 11px 12px !important; }
+body.game-ui-upgrade .operations-deadline > p b { width: max-content; padding: 4px 7px; border-radius: var(--game-radius-pill); color: var(--game-warning); background: rgba(243,179,61,.12); font-family: var(--game-font-heading); font-size: 8px; letter-spacing: .06em; }
+body.game-ui-upgrade .operations-progress { display: grid; grid-template-columns: 1fr auto; gap: 6px; margin-bottom: 12px; padding: 10px; border: 1px solid var(--game-border-subtle); border-radius: var(--game-radius-sm); background: rgba(7,12,22,.4); }
+body.game-ui-upgrade .operations-progress > span { color: var(--game-text-muted); font-family: var(--game-font-heading); font-size: 7px; font-weight: 800; letter-spacing: .08em; }
+body.game-ui-upgrade .operations-progress > i { grid-column: 1 / -1; height: 5px; overflow: hidden; border-radius: 5px; background: var(--game-surface-3); }
+body.game-ui-upgrade .operations-progress > i b { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--game-warning), #ffd27a); }
+body.game-ui-upgrade .operations-progress > small { grid-column: 1 / -1; color: var(--game-text-dim); font-size: 7px; }
+body.game-ui-upgrade .command-card--operations .reference-rules { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin-top: 0; }
+body.game-ui-upgrade .command-card--operations .rule-pill { display: grid; place-items: center; align-content: center; gap: 5px; min-height: 62px; text-align: center; }
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) > div { display: grid; gap: 6px; }
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) p { grid-template-columns: 62px minmax(0,1fr); align-items: start; gap: 10px; margin: 0; padding: 9px 10px; border: 1px solid var(--game-border-subtle); border-radius: var(--game-radius-sm); color: var(--game-text-soft); background: rgba(7,12,22,.42); font-size: 9px; }
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) p b { width: max-content; padding: 4px 6px; border: 1px solid color-mix(in srgb, var(--command-color) 38%, transparent); border-radius: var(--game-radius-pill); color: var(--command-color) !important; background: color-mix(in srgb, var(--command-color) 10%, transparent); font-size: 7px; letter-spacing: .05em; }
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) p:first-child { border-color: color-mix(in srgb, var(--command-color) 40%, var(--game-border)); background: color-mix(in srgb, var(--command-color) 8%, var(--game-surface-1)); }
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) p {
+  position: relative;
+  grid-template-columns: 64px minmax(0,1fr) auto;
+  align-items: center;
+  min-height: 48px;
+  padding: 9px 11px 9px 14px;
+  overflow: hidden;
+  border-color: var(--game-border) !important;
+  background: linear-gradient(100deg, rgba(15,23,39,.92), rgba(8,14,25,.9)) !important;
+  box-shadow: inset 3px 0 0 var(--feed-color, var(--command-color));
+  transition: border-color var(--game-duration-fast) ease, background var(--game-duration-fast) ease, transform var(--game-duration-fast) var(--game-ease);
+}
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) p:hover { border-color: color-mix(in srgb, var(--feed-color, var(--command-color)) 48%, var(--game-border)) !important; background: color-mix(in srgb, var(--feed-color, var(--command-color)) 8%, var(--game-surface-1)) !important; transform: translateX(2px); }
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) p:nth-child(1) { --feed-color: var(--game-info); }
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) p:nth-child(2) { --feed-color: var(--game-warning); }
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) p:nth-child(3) { --feed-color: #9a7cff; }
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) p:nth-child(4) { --feed-color: var(--game-danger); }
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) p:nth-child(5) { --feed-color: var(--game-success); }
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) p b {
+  display: inline-grid;
+  place-items: center;
+  min-width: 48px;
+  min-height: 23px;
+  padding: 4px 7px;
+  border-color: color-mix(in srgb, var(--feed-color, var(--command-color)) 48%, transparent) !important;
+  color: var(--feed-color, var(--command-color)) !important;
+  background: color-mix(in srgb, var(--feed-color, var(--command-color)) 12%, transparent) !important;
+  font-family: var(--game-font-heading);
+  font-size: 8px;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+}
+body.game-ui-upgrade .reference-inbox-card p b { min-width: 28px; width: 28px; height: 28px; border-radius: 50%; font-family: var(--game-font-numeric); font-size: 9px; }
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) p:first-child::after {
+  align-self: start;
+  padding: 3px 6px;
+  border-radius: var(--game-radius-pill);
+  color: var(--game-info);
+  background: var(--game-info-soft);
+  font-family: var(--game-font-heading);
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  content: "LATEST";
+}
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) p::before { position: absolute; top: 50%; right: 10px; width: 4px; height: 4px; border-radius: 50%; background: var(--feed-color, var(--command-color)); opacity: .65; transform: translateY(-50%); content: ""; }
+body.game-ui-upgrade :is(.reference-inbox-card, .reference-news-card) p:first-child::before { display: none; }
+
+body.game-ui-upgrade .reference-news-card p { --news-color: var(--game-info); grid-template-columns: 34px 64px minmax(0,1fr) auto; min-height: 58px; padding: 9px 11px; box-shadow: inset 3px 0 0 var(--news-color); }
+body.game-ui-upgrade .reference-news-card p.news-injury { --news-color: var(--game-danger); background: linear-gradient(100deg, rgba(48,17,29,.82), rgba(8,14,25,.92)) !important; }
+body.game-ui-upgrade .reference-news-card p.news-transaction { --news-color: var(--game-success); background: linear-gradient(100deg, rgba(11,42,34,.72), rgba(8,14,25,.92)) !important; }
+body.game-ui-upgrade .reference-news-card p.news-league { --news-color: var(--game-info); }
+body.game-ui-upgrade .reference-news-card p > i { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid color-mix(in srgb, var(--news-color) 48%, transparent); border-radius: 50%; color: var(--news-color); background: color-mix(in srgb, var(--news-color) 12%, transparent); font-family: var(--game-font-heading); font-size: 12px; font-style: normal; font-weight: 800; }
+body.game-ui-upgrade .reference-news-card p > b { border-color: color-mix(in srgb, var(--news-color) 46%, transparent) !important; color: var(--news-color) !important; background: color-mix(in srgb, var(--news-color) 10%, transparent) !important; }
+body.game-ui-upgrade .reference-news-card p > span { display: grid; gap: 4px; color: var(--game-text-soft); font-size: 9px; line-height: 1.4; }
+body.game-ui-upgrade .reference-news-card p > span small { color: var(--game-text-dim); font-family: var(--game-font-heading); font-size: 7px; font-weight: 800; letter-spacing: .08em; }
+body.game-ui-upgrade .reference-news-card p::before { background: var(--news-color); }
+
+body.game-ui-upgrade .reference-inbox-card p { --inbox-color: var(--game-info); grid-template-columns: 34px 64px minmax(0,1fr) auto; min-height: 58px; padding: 9px 11px; box-shadow: inset 3px 0 0 var(--inbox-color); }
+body.game-ui-upgrade .reference-inbox-card p.inbox-result { --inbox-color: var(--game-info); }
+body.game-ui-upgrade .reference-inbox-card p.inbox-roster { --inbox-color: var(--game-warning); }
+body.game-ui-upgrade .reference-inbox-card p.inbox-cap { --inbox-color: #9a7cff; }
+body.game-ui-upgrade .reference-inbox-card p.inbox-deadline { --inbox-color: var(--game-danger); background: linear-gradient(100deg, rgba(48,17,29,.82), rgba(8,14,25,.92)) !important; }
+body.game-ui-upgrade .reference-inbox-card p.inbox-goal { --inbox-color: var(--game-success); background: linear-gradient(100deg, rgba(11,42,34,.72), rgba(8,14,25,.92)) !important; }
+body.game-ui-upgrade .reference-inbox-card p > i { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid color-mix(in srgb, var(--inbox-color) 48%, transparent); border-radius: 50%; color: var(--inbox-color); background: color-mix(in srgb, var(--inbox-color) 12%, transparent); font-family: var(--game-font-heading); font-size: 11px; font-style: normal; font-weight: 800; }
+body.game-ui-upgrade .reference-inbox-card p > b { width: max-content; min-width: 0; height: auto; padding: 4px 7px; border-color: color-mix(in srgb, var(--inbox-color) 46%, transparent) !important; border-radius: var(--game-radius-pill); color: var(--inbox-color) !important; background: color-mix(in srgb, var(--inbox-color) 10%, transparent) !important; font-family: var(--game-font-heading); font-size: 7px; }
+body.game-ui-upgrade .reference-inbox-card p > span { display: grid; gap: 4px; color: var(--game-text-soft); font-size: 9px; line-height: 1.4; }
+body.game-ui-upgrade .reference-inbox-card p > span small { color: var(--game-text-dim); font-family: var(--game-font-heading); font-size: 7px; font-weight: 800; letter-spacing: .08em; }
+body.game-ui-upgrade .reference-inbox-card p::before { background: var(--inbox-color); }
+body.game-ui-upgrade .command-staff-market,
+body.game-ui-upgrade .reference-dashboard > .staff-market { margin-top: 14px; padding: 0; overflow: hidden; border: 1px solid var(--game-border); border-radius: var(--game-radius-lg); background: linear-gradient(145deg, var(--game-surface-2), var(--game-bg)); box-shadow: var(--game-shadow-card); }
+body.game-ui-upgrade .reference-dashboard .staff-market-head { padding: 17px 20px; border-bottom: 1px solid var(--game-border); background: rgba(7,12,22,.45); }
+body.game-ui-upgrade .reference-dashboard .staff-grid { gap: 10px; padding: 14px; }
+body.game-ui-upgrade .reference-dashboard .staff-card { position: relative; display: grid; grid-template-rows: auto auto 1fr auto; gap: 7px; min-height: 150px; padding: 14px; border: 1px solid var(--game-border); border-radius: var(--game-radius-md); background: rgba(15,23,39,.86); }
+body.game-ui-upgrade .reference-dashboard .staff-card > span { color: var(--game-team-secondary); font-family: var(--game-font-heading); font-size: 8px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+body.game-ui-upgrade .reference-dashboard .staff-card > strong { color: var(--game-text); font-family: var(--game-font-heading); font-size: 15px; }
+body.game-ui-upgrade .reference-dashboard .staff-card > small { color: var(--game-text-muted); font-size: 9px; }
+body.game-ui-upgrade .reference-dashboard .staff-card::after { align-self: end; width: calc(var(--staff-rating, 75) * 1%); height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--game-team), var(--game-team-secondary)); content: ""; }
+body.game-ui-upgrade .reference-dashboard .staff-card .staff-hire-button { min-height: 36px; border-color: var(--game-team-border) !important; color: var(--game-text) !important; background: linear-gradient(180deg, var(--game-surface-3), var(--game-surface-2)) !important; }
+body.game-ui-upgrade .staff-market-summary { display: grid; place-items: center; min-width: 72px; padding: 8px 12px; border: 1px solid var(--game-team-border); border-radius: var(--game-radius-md); background: var(--game-team-soft); }
+body.game-ui-upgrade .staff-market-summary strong { color: var(--game-team-secondary); font-family: var(--game-font-display); font-size: 26px; font-weight: 400; line-height: .9; }
+body.game-ui-upgrade .staff-market-summary span { color: var(--game-text-muted); font-family: var(--game-font-heading); font-size: 7px; font-weight: 800; letter-spacing: .08em; }
+body.game-ui-upgrade .reference-dashboard .upgraded-staff-card { display: grid; grid-template-rows: auto 1fr auto auto; gap: 10px; min-height: 210px; padding: 14px; }
+body.game-ui-upgrade .upgraded-staff-card > header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+body.game-ui-upgrade .upgraded-staff-card > header span { color: var(--game-team-secondary); font-family: var(--game-font-heading); font-size: 8px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+body.game-ui-upgrade .upgraded-staff-card > header b { padding: 4px 7px; border-radius: var(--game-radius-pill); color: var(--game-success); background: var(--game-success-soft); font-family: var(--game-font-heading); font-size: 7px; letter-spacing: .06em; }
+body.game-ui-upgrade .staff-candidate-main { display: grid; grid-template-columns: 58px minmax(0,1fr); align-items: center; gap: 11px; }
+body.game-ui-upgrade .staff-rating-ring { display: grid; place-items: center; align-content: center; width: 56px; height: 56px; border: 2px solid var(--game-team-border); border-radius: 50%; background: radial-gradient(circle, var(--game-team-soft), var(--game-surface-1)); }
+body.game-ui-upgrade .staff-rating-ring strong { color: var(--game-text); font-family: var(--game-font-display); font-size: 25px; font-weight: 400; line-height: .85; }
+body.game-ui-upgrade .staff-rating-ring small { color: var(--game-text-muted); font-size: 7px; }
+body.game-ui-upgrade .staff-candidate-main > div:last-child { display: grid; gap: 4px; }
+body.game-ui-upgrade .staff-candidate-main > div:last-child > strong { color: var(--game-text); font-family: var(--game-font-heading); font-size: 14px; }
+body.game-ui-upgrade .staff-candidate-main > div:last-child > span { color: var(--game-text-soft); font-family: var(--game-font-numeric); font-size: 10px; }
+body.game-ui-upgrade .staff-candidate-main > div:last-child > small { color: var(--game-success); font-size: 7px; letter-spacing: .05em; }
+body.game-ui-upgrade .staff-rating-bar { display: grid; grid-template-columns: 1fr auto; gap: 6px; }
+body.game-ui-upgrade .staff-rating-bar i { grid-column: 1 / -1; height: 5px; overflow: hidden; border-radius: 5px; background: var(--game-surface-3); }
+body.game-ui-upgrade .staff-rating-bar i b { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--game-team), var(--game-team-secondary)); }
+body.game-ui-upgrade .staff-rating-bar span { color: var(--game-text-muted); font-family: var(--game-font-heading); font-size: 7px; font-weight: 800; letter-spacing: .07em; }
+body.game-ui-upgrade .upgraded-staff-card::after { display: none !important; }
+body.game-ui-upgrade .upgraded-staff-card .staff-hire-button { min-height: 38px !important; font-size: 9px; letter-spacing: .07em; }
+
+/* Recent-form chart. */
+body.game-ui-upgrade .reference-chart-panel { padding: 18px 20px 16px; border-color: var(--game-border) !important; background: linear-gradient(150deg, var(--game-surface-2), var(--game-surface-1)) !important; }
+body.game-ui-upgrade .reference-chart-panel > header { align-items: flex-start; margin-bottom: 12px; }
+body.game-ui-upgrade .reference-chart-panel > header > div { display: grid; gap: 4px; }
+body.game-ui-upgrade .reference-chart-panel > header strong { color: var(--game-text) !important; font-size: 20px; }
+body.game-ui-upgrade .reference-chart-panel > header small { color: var(--game-text-muted); font-family: var(--game-font-heading); font-size: 8px; font-weight: 800; letter-spacing: .09em; }
+body.game-ui-upgrade .reference-chart-panel > header > span { padding: 6px 9px; border: 1px solid var(--game-border); border-radius: var(--game-radius-pill); color: var(--game-text-muted) !important; background: rgba(7,12,22,.45); font-family: var(--game-font-heading); font-size: 8px; }
+body.game-ui-upgrade .reference-chart-panel > header > span b { color: var(--game-team-secondary); font-family: var(--game-font-numeric); font-size: 12px; }
+body.game-ui-upgrade .reference-chart-panel .reference-bars { padding-top: 18px; }
+body.game-ui-upgrade .reference-chart-panel .reference-bars > div { position: relative; gap: 4px; }
+body.game-ui-upgrade .reference-chart-panel .reference-bars i { border: 1px solid rgba(255,255,255,.08); border-radius: 5px 5px 2px 2px; background: linear-gradient(180deg, color-mix(in srgb, var(--bar-color, var(--game-info)) 78%, #fff), var(--bar-color, var(--game-info))) !important; box-shadow: 0 8px 18px color-mix(in srgb, var(--bar-color, var(--game-info)) 18%, transparent); }
+body.game-ui-upgrade .reference-chart-panel .reference-bars .win { --bar-color: var(--game-success); }
+body.game-ui-upgrade .reference-chart-panel .reference-bars .loss { --bar-color: var(--game-danger); }
+body.game-ui-upgrade .reference-chart-panel .reference-bars .future { --bar-color: var(--game-text-dim); opacity: .38; }
+body.game-ui-upgrade .reference-chart-panel .reference-bars > div > b { top: -18px; color: var(--game-text) !important; font-family: var(--game-font-numeric); font-size: 10px; }
+body.game-ui-upgrade .reference-chart-panel .reference-bars > div > span { display: grid; place-items: center; width: 20px; height: 20px; margin: 0 auto; border-radius: 50%; color: var(--bar-color, var(--game-text-soft)) !important; background: color-mix(in srgb, var(--bar-color, var(--game-info)) 12%, transparent); font-family: var(--game-font-heading); font-size: 8px; font-weight: 800; }
+body.game-ui-upgrade .reference-chart-panel .reference-bars > div > span { left: 50% !important; right: auto !important; margin: 0 !important; transform: translateX(-50%); }
+body.game-ui-upgrade .reference-chart-panel .reference-bars > div > small { min-height: 9px; color: var(--game-text-muted); font-family: var(--game-font-heading); font-size: 7px; font-weight: 800; letter-spacing: .05em; }
+
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric { --metric-color: var(--game-info); position: relative; display: grid; grid-template-columns: minmax(0,1fr) 34px; grid-template-rows: auto auto auto auto; gap: 5px 10px; min-height: 150px; padding: 17px 18px 14px; overflow: hidden; border: 1px solid var(--game-border) !important; border-bottom: 3px solid var(--metric-color) !important; border-radius: var(--game-radius-md); color: var(--game-text) !important; background: linear-gradient(145deg, color-mix(in srgb, var(--metric-color) 7%, var(--game-surface-2)), var(--game-surface-1)) !important; box-shadow: var(--game-shadow-low); }
+body.game-ui-upgrade .dashboard-metric--offense { --metric-color: #5d9dff !important; }
+body.game-ui-upgrade .dashboard-metric--defense { --metric-color: #35d07f !important; }
+body.game-ui-upgrade .dashboard-metric--net { --metric-color: #9a7cff !important; }
+body.game-ui-upgrade .dashboard-metric--cap { --metric-color: #f3b33d !important; }
+body.game-ui-upgrade .dashboard-metric::before { grid-column: 2; grid-row: 1 / 3; display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid color-mix(in srgb, var(--metric-color) 45%, transparent); border-radius: var(--game-radius-sm); color: var(--metric-color); background: color-mix(in srgb, var(--metric-color) 11%, transparent); font-family: var(--game-font-heading); font-size: 15px; font-weight: 800; content: "•"; }
+body.game-ui-upgrade .dashboard-metric--offense::before { content: "↗"; }
+body.game-ui-upgrade .dashboard-metric--defense::before { content: "◆"; }
+body.game-ui-upgrade .dashboard-metric--net::before { content: "±"; }
+body.game-ui-upgrade .dashboard-metric--cap::before { content: "$"; }
+body.game-ui-upgrade .dashboard-metric :is(.metric-label, > span:first-of-type) { align-self: end; color: var(--game-text-muted) !important; font-family: var(--game-font-heading); font-size: 9px; font-weight: 800; letter-spacing: .1em; }
+body.game-ui-upgrade .dashboard-metric :is(.metric-value, > strong) { align-self: start; margin: 2px 0 5px; color: var(--game-text) !important; font-family: var(--game-font-numeric); font-size: clamp(31px,2.7vw,42px); line-height: .9; }
+body.game-ui-upgrade .dashboard-metric :is(.metric-subtitle, > small) { grid-column: 1 / -1; color: var(--metric-color) !important; font-family: var(--game-font-heading); font-size: 8px; font-weight: 800; letter-spacing: .08em; }
+body.game-ui-upgrade .dashboard-metric .metric-trend { grid-column: 1 / -1; align-self: end; width: max-content; max-width: 100%; margin-top: 4px; padding: 4px 7px; border-radius: var(--game-radius-pill); font-family: var(--game-font-body); font-size: 8px; font-style: normal; font-weight: 700; }
+body.game-ui-upgrade .metric-trend.positive { color: var(--game-success); background: var(--game-success-soft); }
+body.game-ui-upgrade .metric-trend.negative { color: var(--game-danger); background: var(--game-danger-soft); }
+body.game-ui-upgrade .metric-trend.warning { color: var(--game-warning); background: var(--game-warning-soft); }
+
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric {
+  grid-template-columns: minmax(0,1fr) 52px !important;
+  grid-template-rows: 24px 54px 19px 27px !important;
+  min-height: 172px !important;
+  padding: 20px 20px 17px !important;
+  box-shadow: inset 0 -4px 0 var(--metric-color), var(--game-shadow-low) !important;
+}
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric::before {
+  grid-column: 2 !important;
+  grid-row: 1 / 3 !important;
+  align-self: center;
+  justify-self: end;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--game-radius-md);
+  font-family: var(--game-font-heading);
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric .metric-label,
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric > span:first-of-type {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  align-self: end;
+}
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric .metric-value,
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric > strong {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  align-self: center;
+  justify-self: start;
+  width: 100%;
+  margin: 0 !important;
+  overflow: visible !important;
+  font-size: clamp(38px,3vw,48px) !important;
+  line-height: 1 !important;
+  text-align: left !important;
+  white-space: nowrap;
+}
+body.game-ui-upgrade .dashboard-metric--offense::before { content: "OFF" !important; }
+body.game-ui-upgrade .dashboard-metric--defense::before { content: "DEF" !important; }
+body.game-ui-upgrade .dashboard-metric--net::before { content: "NET" !important; }
+body.game-ui-upgrade .dashboard-metric--cap::before { content: "CAP" !important; }
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric .metric-label,
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric > span:first-of-type { font-size: 10px !important; }
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric .metric-subtitle,
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric > small { font-size: 9px !important; }
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric .metric-trend { padding: 5px 8px; font-size: 9px; }
+
+/* Final metric-card fit: compact symbol icons and explicit semantic strips. */
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric {
+  grid-template-columns: minmax(0,1fr) 40px !important;
+  grid-template-rows: 21px 45px 17px 24px !important;
+  min-height: 150px !important;
+  padding: 17px 18px 15px !important;
+  border-bottom: 4px solid var(--metric-color) !important;
+  box-shadow: var(--game-shadow-low) !important;
+}
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .dashboard-metric::before {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: var(--game-radius-sm) !important;
+  font-family: var(--game-font-heading) !important;
+  font-size: 21px !important;
+  letter-spacing: 0 !important;
+  transform: translateX(-20px);
+}
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .dashboard-metric--offense::before { content: "↗" !important; }
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .dashboard-metric--defense::before { content: "◆" !important; }
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .dashboard-metric--net::before { content: "±" !important; }
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .dashboard-metric--cap::before { content: "$" !important; }
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric .metric-value,
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric > strong {
+  max-width: 100%;
+  overflow: hidden !important;
+  font-size: clamp(34px,2.75vw,44px) !important;
+  text-overflow: clip;
+}
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric--cap .metric-value,
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric--cap > strong {
+  font-size: clamp(31px,2.45vw,40px) !important;
+}
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric .metric-subtitle,
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric > small {
+  grid-column: 1 / -1 !important;
+  grid-row: 3 !important;
+  align-self: center;
+}
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric .metric-trend {
+  grid-column: 1 / -1 !important;
+  grid-row: 4 !important;
+  align-self: start;
+  margin-top: 1px;
+}
+
+body.game-ui-upgrade .reference-upcoming > div { gap: 12px; }
+body.game-ui-upgrade .reference-upcoming .upcoming-card { display: flex !important; flex-direction: column; align-items: stretch !important; gap: 6px !important; height: 158px !important; min-height: 158px !important; max-height: 158px !important; padding: 12px 13px !important; overflow: hidden; border: 1px solid var(--game-border) !important; border-radius: var(--game-radius-md) !important; color: var(--game-text) !important; background: linear-gradient(150deg, var(--game-surface-2), var(--game-surface-1)) !important; box-shadow: var(--game-shadow-low); transition: transform var(--game-duration) var(--game-ease), border-color var(--game-duration) ease, box-shadow var(--game-duration) ease; }
+body.game-ui-upgrade .reference-upcoming .upcoming-card :is(span, strong, small, b, i, em) { grid-column: auto !important; }
+body.game-ui-upgrade .reference-upcoming .upcoming-card:hover { border-color: var(--game-team-border) !important; box-shadow: var(--game-shadow-team); transform: translateY(-3px); }
+body.game-ui-upgrade .upcoming-card-topline { display: flex !important; align-items: center; justify-content: flex-start !important; justify-self: stretch !important; width: 100% !important; color: var(--game-text-muted) !important; font-family: var(--game-font-heading); font-size: 9px !important; font-weight: 800; letter-spacing: .09em; text-align: left !important; }
+body.game-ui-upgrade .upcoming-card-topline > b { margin-left: auto; }
+body.game-ui-upgrade .upcoming-card-topline b { padding: 4px 7px; border: 1px solid var(--game-border); border-radius: var(--game-radius-pill); color: var(--game-text-soft); background: rgba(7,12,22,.5); font-size: 7px; }
+body.game-ui-upgrade .upcoming-matchup { display: grid !important; grid-template-columns: 64px 28px 64px; align-items: center; justify-content: center; gap: 12px; width: 100%; min-height: 72px; transform: none; }
+body.game-ui-upgrade .upcoming-matchup > span { display: grid !important; grid-template-columns: 64px; grid-template-rows: auto 44px auto; align-items: center; justify-items: center; gap: 2px; width: 64px; min-width: 64px; color: var(--game-text) !important; text-align: center; }
+body.game-ui-upgrade .upcoming-matchup > span:last-child { justify-content: center; text-align: center; }
+body.game-ui-upgrade .upcoming-matchup .upcoming-team-logo { grid-column: 1; grid-row: 2; width: 44px; height: 44px; object-fit: contain; }
+body.game-ui-upgrade .upcoming-matchup > span > b { grid-column: 1; grid-row: 1; }
+body.game-ui-upgrade .upcoming-matchup > span > small { grid-column: 1; grid-row: 3; }
+body.game-ui-upgrade .upcoming-matchup b { color: var(--game-text) !important; font-family: var(--game-font-display); font-size: 22px; font-weight: 400; line-height: 1; }
+body.game-ui-upgrade .upcoming-matchup small { color: var(--game-text-soft) !important; font-family: var(--game-font-numeric); font-size: 10px !important; }
+body.game-ui-upgrade .upcoming-matchup > i { color: var(--game-team-secondary); font-family: var(--game-font-heading); font-size: 12px; font-style: normal; font-weight: 800; text-align: center; }
+body.game-ui-upgrade .reference-upcoming .upcoming-card > strong { overflow: hidden; color: var(--game-text) !important; font-family: var(--game-font-heading); font-size: 12px !important; line-height: 1.05; text-overflow: ellipsis; white-space: nowrap; }
+body.game-ui-upgrade .reference-upcoming .upcoming-card-detail { display: block; min-height: 12px; overflow: hidden; color: var(--game-text-soft) !important; font-size: 8px !important; line-height: 1.3; text-align: center; text-overflow: ellipsis; white-space: nowrap !important; }
+body.game-ui-upgrade .reference-upcoming .upcoming-card > em { margin-top: auto; color: var(--game-team-secondary) !important; font-family: var(--game-font-heading); font-size: 8px; font-style: normal; font-weight: 800; letter-spacing: .08em; line-height: 1; text-align: center; opacity: 1; }
+body.game-ui-upgrade .reference-upcoming .upcoming-card:hover > em { opacity: 1; }
+body.game-ui-upgrade .reference-upcoming .upcoming-event-card { border-top: 3px solid var(--game-info) !important; }
+body.game-ui-upgrade .reference-upcoming .upcoming-event-deadline { border-top-color: var(--game-danger) !important; background: linear-gradient(150deg, rgba(52,20,31,.96), var(--game-surface-1)) !important; }
+body.game-ui-upgrade .reference-upcoming .upcoming-event-transaction { border-top-color: var(--game-warning) !important; }
+body.game-ui-upgrade .reference-upcoming .upcoming-event-all-star { border-top-color: #9a7cff !important; }
+body.game-ui-upgrade .reference-upcoming .upcoming-event-icon { display: grid !important; place-items: center; width: 34px !important; height: 34px !important; border: 1px solid var(--game-team-border); border-radius: 50%; color: var(--game-team-secondary) !important; background: var(--game-team-soft); font-family: var(--game-font-heading); font-size: 8px !important; font-weight: 800; }
+body.game-ui-upgrade .upcoming-game-card { text-align: center !important; }
+body.game-ui-upgrade .upcoming-game-card .upcoming-card-detail { margin-top: 1px; text-align: center; }
+body.game-ui-upgrade .upcoming-event-summary { display: flex !important; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 72px; text-align: center; }
+body.game-ui-upgrade .upcoming-event-summary > span:last-child { display: grid !important; gap: 4px; width: 100%; min-width: 0; }
+body.game-ui-upgrade .upcoming-event-summary strong { overflow: visible; color: var(--game-text) !important; font-family: var(--game-font-heading); font-size: 13px; text-align: center; text-overflow: clip; white-space: normal; }
+body.game-ui-upgrade .upcoming-event-summary .upcoming-card-detail { display: block; overflow: hidden; text-align: center; text-overflow: ellipsis; white-space: nowrap !important; }
+body.game-ui-upgrade .reference-upcoming .upcoming-event-icon { width: 38px !important; height: 38px !important; }
+
+/* Keep each recent-form bar, opponent label, and W/L badge on one centerline. */
+body.game-ui-upgrade .reference-chart-panel .reference-bars {
+  left: 52px !important;
+  right: 20px !important;
+}
+body.game-ui-upgrade .reference-chart-panel .reference-bars > div {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+body.game-ui-upgrade .reference-chart-panel .reference-bars > div > i { margin-inline: auto; }
+body.game-ui-upgrade .reference-chart-panel .reference-bars > div > :is(span, small, b) {
+  left: 50% !important;
+  right: auto !important;
+  width: max-content;
+  text-align: center;
+  transform: translateX(-50%) !important;
+}
+body.game-ui-upgrade .reference-chart-panel .reference-bars > div > small {
+  position: absolute;
+  bottom: 2px;
+  pointer-events: none;
+}
+
+body.game-ui-upgrade .reference-leaders-panel .dashboard-leader-headshot {
+  transform: translateX(-5px);
+}
+
+body.game-ui-upgrade .reference-chart-panel .reference-bars > div > small {
+  color: #ffffff !important;
+  font-size: 9px !important;
+  font-weight: 800;
+  letter-spacing: .06em;
+}
+
+/* Compact, collision-free Upcoming cards. */
+body.game-ui-upgrade .reference-upcoming > div {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-card {
+  height: 166px !important;
+  min-height: 166px !important;
+  max-height: 166px !important;
+  padding: 11px 14px 10px !important;
+  border-bottom: 4px solid var(--game-info) !important;
+}
+body.game-ui-upgrade .upcoming-card-topline {
+  min-height: 22px;
+  align-items: flex-start;
+}
+body.game-ui-upgrade .upcoming-card-topline > b {
+  max-width: 50%;
+  padding: 4px 7px !important;
+  overflow: hidden;
+  font-size: 6px !important;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+body.game-ui-upgrade .upcoming-game-card .upcoming-matchup {
+  grid-template-columns: minmax(58px, 1fr) 22px minmax(58px, 1fr);
+  gap: 6px;
+  min-height: 68px;
+}
+body.game-ui-upgrade .upcoming-game-card .upcoming-matchup > span {
+  grid-template-columns: 1fr;
+  grid-template-rows: 17px 38px 15px;
+  width: 100%;
+  min-width: 0;
+}
+body.game-ui-upgrade .upcoming-game-card .upcoming-matchup > span > b {
+  width: 100%;
+  font-size: 17px;
+  text-align: center;
+}
+body.game-ui-upgrade .upcoming-game-card .upcoming-matchup .upcoming-team-logo {
+  width: 38px;
+  height: 38px;
+}
+body.game-ui-upgrade .upcoming-game-card .upcoming-matchup > span > small {
+  display: block;
+  width: 100%;
+  overflow: visible;
+  color: #fff !important;
+  font-size: 9px !important;
+  line-height: 15px !important;
+  text-align: center;
+  text-overflow: clip;
+  white-space: nowrap !important;
+}
+body.game-ui-upgrade .upcoming-matchup-label {
+  display: block !important;
+  width: 100%;
+  overflow: visible !important;
+  font-size: 10px !important;
+  line-height: 1.1 !important;
+  text-align: center;
+  text-overflow: clip !important;
+  white-space: nowrap !important;
+}
+body.game-ui-upgrade .upcoming-game-card .upcoming-card-detail {
+  margin: 0;
+  color: var(--game-text-muted) !important;
+  font-size: 8px !important;
+}
+body.game-ui-upgrade .upcoming-event-summary {
+  min-height: 84px;
+  padding-inline: 4px;
+}
+body.game-ui-upgrade .upcoming-event-summary > span {
+  width: 100%;
+}
+body.game-ui-upgrade .upcoming-event-summary strong {
+  font-size: clamp(15px, 1.45vw, 20px) !important;
+  line-height: .95 !important;
+}
+body.game-ui-upgrade .upcoming-event-summary .upcoming-card-detail {
+  display: -webkit-box !important;
+  min-height: 22px;
+  margin-top: 7px;
+  overflow: hidden;
+  font-size: 8px !important;
+  line-height: 1.35 !important;
+  text-overflow: clip;
+  white-space: normal !important;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-event-deadline { border-bottom-color: var(--game-danger) !important; }
+body.game-ui-upgrade .reference-upcoming .upcoming-event-transaction { border-bottom-color: var(--game-warning) !important; }
+body.game-ui-upgrade .reference-upcoming .upcoming-event-all-star { border-bottom-color: #9a7cff !important; }
+
+@media (max-width: 1050px) {
+  body.game-ui-upgrade .reference-upcoming > div { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 680px) {
+  body.game-ui-upgrade .reference-upcoming > div { grid-template-columns: 1fr; }
+}
+
+/* Broadcast-style season command banner. */
+body.game-ui-upgrade .reference-dashboard .vertical-slice-hero {
+  position: relative;
+  grid-template-columns: minmax(430px, 1.15fr) minmax(270px, .58fr) 230px;
+  min-height: 164px;
+  padding: 18px 22px !important;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--game-team) 38%, var(--game-border)) !important;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--game-team) 7%, transparent), transparent 34%),
+    radial-gradient(circle at 72% 45%, var(--game-team-glow), transparent 28%),
+    linear-gradient(120deg, var(--game-surface-2), var(--game-bg) 76%) !important;
+  box-shadow: 0 16px 34px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.035);
+}
+body.game-ui-upgrade .reference-dashboard .vertical-slice-hero::after {
+  content: "";
+  position: absolute;
+  right: -70px;
+  bottom: -115px;
+  width: 310px;
+  height: 190px;
+  border: 28px solid color-mix(in srgb, var(--game-team) 9%, transparent);
+  border-radius: 50%;
+  pointer-events: none;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 116px;
+  align-items: center;
+  gap: 22px;
+  min-width: 0;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity > div { grid-column: 1; grid-row: 1; }
+body.game-ui-upgrade .vertical-slice-hero .reference-hero-logo {
+  grid-column: 2;
+  grid-row: 1;
+  width: 105px;
+  height: 105px;
+  filter: drop-shadow(0 14px 17px rgba(0,0,0,.38));
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity span {
+  color: var(--game-text-muted) !important;
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity h2 {
+  margin: 7px 0 6px;
+  font-size: clamp(38px, 3.2vw, 53px);
+  line-height: .92;
+  text-shadow: 0 5px 16px rgba(0,0,0,.28);
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity p {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-family: var(--game-font-heading);
+  font-size: 13px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity p > strong {
+  font-family: var(--game-font-display);
+  font-size: 30px;
+  line-height: 1;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity p > b {
+  padding: 7px 11px;
+  border: 1px solid var(--game-team-border);
+  border-radius: var(--game-radius-pill);
+  color: var(--game-team-secondary);
+  background: var(--game-team-soft);
+  font-size: 8px;
+  letter-spacing: .1em;
+}
+body.game-ui-upgrade .vertical-slice-hero .dashboard-next-matchup {
+  position: relative;
+  gap: 9px;
+  min-height: 116px;
+  padding: 13px 20px;
+  border: 1px solid var(--game-border-subtle);
+  border-radius: var(--game-radius-md);
+  background: rgba(5,10,20,.34);
+  box-shadow: inset 0 1px rgba(255,255,255,.025);
+}
+body.game-ui-upgrade .dashboard-next-matchup > span { color: #fff !important; font-size: 10px; }
+body.game-ui-upgrade .dashboard-next-matchup > div { gap: 11px; }
+body.game-ui-upgrade .dashboard-next-matchup b { font-size: 29px; }
+body.game-ui-upgrade .dashboard-next-matchup i {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--game-team-border);
+  border-radius: 50%;
+  background: var(--game-team-soft);
+}
+body.game-ui-upgrade .dashboard-matchup-logo { width: 40px; height: 40px; }
+body.game-ui-upgrade .vertical-slice-hero > div:last-child {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: center;
+  gap: 10px;
+}
+body.game-ui-upgrade .vertical-slice-hero > div:last-child > button {
+  width: 100%;
+  min-height: 42px;
+  border-radius: 7px !important;
+  font-size: 9px !important;
+  letter-spacing: .1em;
+}
+body.game-ui-upgrade .vertical-slice-hero > div:last-child > .reference-primary {
+  box-shadow: 0 9px 22px color-mix(in srgb, var(--game-info) 25%, transparent);
+}
+
+@media (max-width: 1180px) {
+  body.game-ui-upgrade .reference-dashboard .vertical-slice-hero { grid-template-columns: minmax(360px, 1fr) minmax(235px, .62fr) 180px; }
+  body.game-ui-upgrade .vertical-slice-hero .team-hero-identity { grid-template-columns: minmax(0,1fr) 84px; gap: 12px; }
+  body.game-ui-upgrade .vertical-slice-hero .reference-hero-logo { width: 80px; height: 80px; }
+}
+
+body.game-ui-upgrade .reference-upcoming .upcoming-event-summary {
+  min-height: 76px;
+  max-height: 76px;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-event-summary .upcoming-card-detail {
+  display: block !important;
+  height: 24px;
+  min-height: 24px;
+  margin-top: 6px;
+  overflow: hidden;
+  font-size: 7.5px !important;
+  line-height: 12px !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+  -webkit-line-clamp: unset;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-event-card > em {
+  margin-top: 5px;
+}
+
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card > em {
+  display: none !important;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card .upcoming-card-detail {
+  flex: 0 0 15px;
+  min-height: 15px;
+  margin-top: 1px;
+  padding-bottom: 4px;
+  overflow: visible;
+  line-height: 11px !important;
+  text-overflow: clip;
+  white-space: nowrap !important;
+}
+
+/* Isolate card sections so content changes cannot push neighboring sections. */
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 22px 72px 14px 15px;
+  align-content: start;
+  gap: 3px !important;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card > :is(.upcoming-card-topline, .upcoming-matchup, .upcoming-matchup-label, .upcoming-card-detail) {
+  grid-column: 1 !important;
+  width: 100%;
+  min-width: 0;
+}
+body.game-ui-upgrade .upcoming-game-card .upcoming-card-topline {
+  grid-row: 1;
+  min-height: 0;
+}
+body.game-ui-upgrade .upcoming-game-card .upcoming-matchup {
+  grid-row: 2;
+  height: 72px;
+  min-height: 72px;
+  margin: 0;
+}
+body.game-ui-upgrade .upcoming-game-card .upcoming-matchup > span {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2px;
+  height: 72px;
+}
+body.game-ui-upgrade .upcoming-game-card .upcoming-matchup > span > b,
+body.game-ui-upgrade .upcoming-game-card .upcoming-matchup > span > .upcoming-team-logo,
+body.game-ui-upgrade .upcoming-game-card .upcoming-matchup > span > small {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  flex: 0 0 auto;
+}
+body.game-ui-upgrade .upcoming-game-card .upcoming-matchup > span > b {
+  height: 17px;
+  line-height: 17px;
+}
+body.game-ui-upgrade .upcoming-game-card .upcoming-matchup > span > .upcoming-team-logo {
+  width: 36px;
+  height: 36px;
+}
+body.game-ui-upgrade .upcoming-game-card .upcoming-matchup > span > small {
+  height: 13px;
+  line-height: 13px !important;
+}
+body.game-ui-upgrade .upcoming-game-card .upcoming-matchup-label {
+  grid-row: 3;
+  height: 14px;
+  margin: 0;
+  line-height: 14px !important;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card .upcoming-card-detail {
+  grid-row: 4;
+  height: 15px;
+  min-height: 15px;
+  margin: 0;
+  padding: 0;
+  line-height: 15px !important;
+}
+
+body.game-ui-upgrade .reference-upcoming .upcoming-event-card {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 22px 104px 14px;
+  align-content: start;
+  gap: 3px !important;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-event-card > :is(.upcoming-card-topline, .upcoming-event-summary, em) {
+  grid-column: 1 !important;
+  width: 100%;
+  min-width: 0;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-event-card { position: relative; }
+body.game-ui-upgrade .reference-upcoming .upcoming-event-card .upcoming-card-topline > b {
+  position: absolute;
+  top: 11px;
+  right: 14px;
+  margin: 0;
+}
+
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card { position: relative; }
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card .upcoming-card-topline {
+  position: absolute;
+  top: -5px;
+  left: -2px;
+  right: 14px;
+  z-index: 2;
+  display: block !important;
+  width: auto;
+  height: 20px;
+  text-align: left !important;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card .upcoming-card-topline > b {
+  position: absolute;
+  top: 0;
+  right: -50px;
+  margin: 0;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card .upcoming-matchup {
+  margin-top: 20px;
+}
+
+body.game-ui-upgrade .reference-upcoming .upcoming-event-card .upcoming-card-topline > b {
+  position: absolute !important;
+  top: 0px !important;
+  right: -65px !important;
+  left: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card .upcoming-matchup {
+  position: relative;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card .upcoming-matchup > i {
+  position: absolute !important;
+  top: 31px;
+  left: 50% !important;
+  z-index: 2;
+  width: 24px;
+  margin: 0;
+  transform: translateX(-50%) !important;
+  text-align: center;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card .upcoming-matchup > span:first-child {
+  grid-column: 1 !important;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card .upcoming-matchup > span:last-child {
+  grid-column: 3 !important;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card .upcoming-team-logo {
+  display: block;
+  flex: 0 0 38px;
+  width: 38px !important;
+  height: 38px !important;
+  margin: 0 auto;
+  object-fit: contain;
+}
+body.game-ui-upgrade .upcoming-event-card .upcoming-card-topline { grid-row: 1; min-height: 0; }
+body.game-ui-upgrade .reference-upcoming .upcoming-event-card .upcoming-event-summary {
+  grid-row: 2;
+  height: 104px;
+  min-height: 104px;
+  max-height: 104px;
+  margin: 0;
+  padding: 8px 4px 0;
+}
+body.game-ui-upgrade .reference-upcoming .upcoming-event-card > em {
+  grid-row: 3;
+  height: 14px;
+  margin: 0;
+  line-height: 14px;
+}
