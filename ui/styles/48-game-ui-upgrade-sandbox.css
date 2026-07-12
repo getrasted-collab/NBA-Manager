@@ -2423,10 +2423,80 @@ body.game-ui-upgrade
   opacity: 0.1 !important;
 
   filter:
-    grayscale(10%)
-    saturate(80%) !important;
+  brightness(1.35)
+  contrast(1.15)
+  drop-shadow(0 0 18px rgba(79, 139, 255, 0.18)) !important;
 
   transform: none !important;
   pointer-events: none !important;
   user-select: none !important;
+}
+
+body.game-ui-upgrade
+.reference-season-hero
+.team-hero-identity {
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+body.game-ui-upgrade
+.reference-season-hero
+.team-hero-identity h2,
+body.game-ui-upgrade
+.reference-season-hero
+.team-hero-identity span,
+body.game-ui-upgrade
+.reference-season-hero
+.team-hero-identity p,
+body.game-ui-upgrade
+.reference-season-hero
+.team-hero-identity strong,
+body.game-ui-upgrade
+.reference-season-hero
+.team-hero-identity b {
+  position: relative !important;
+  z-index: 6 !important;
+  text-shadow:
+    0 2px 3px rgba(5, 10, 20, 0.95),
+    0 0 10px rgba(5, 10, 20, 0.8) !important;
+}
+
+body.game-ui-upgrade
+.reference-season-hero
+.reference-hero-watermark {
+  z-index: 0 !important;
+  opacity: 0.09 !important;
+}
+
+body.game-ui-upgrade
+.reference-season-hero
+.team-hero-identity span,
+body.game-ui-upgrade
+.reference-season-hero
+.team-hero-identity p {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+body.game-ui-upgrade
+.reference-season-hero
+.team-hero-identity p > strong {
+  color: #0753ff !important;
+  -webkit-text-fill-color: #0753ff !important;
+}
+
+body.game-ui-upgrade
+.reference-season-hero
+.reference-hero-logo {
+  position: absolute !important;
+  left: -195px !important;
+  top: 12px !important;
+
+  width: 110px !important;
+  height: 110px !important;
+
+  margin: 0 !important;
+  object-fit: contain !important;
+  z-index: 6 !important;
 }
