@@ -2155,11 +2155,19 @@ body.game-ui-upgrade .upcoming-event-copy .upcoming-card-detail {
   line-height: 1.35;
 }
 
-body.game-ui-upgrade .upcoming-event-card .upcoming-card-topline {
-  font-size: 11px;
+body.game-ui-upgrade
+  .upcoming-card.upcoming-event-card
+  > .upcoming-card-topline
+  > b {
+  width: auto !important;
+  min-width: max-content !important;
+  max-width: none !important;
+  padding: 6px 14px !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  flex-shrink: 0 !important;
 }
 
-body.game-ui-upgrade .upcoming-event-card .upcoming-card-topline b {
-  padding: 4px 10px;
-  font-size: 8px;
-}
