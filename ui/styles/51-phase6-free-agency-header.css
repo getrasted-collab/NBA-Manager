@@ -103,7 +103,7 @@ body.game-ui-upgrade.dark-mode.dashboard-mode .in-season-waiver-strip .btn:hover
   padding:7px 10px !important;
   border:1px solid rgba(220,82,101,.58) !important;
   border-radius:9px !important;
-  color:#f7f8ff !important;
+  color: #ff5d6c !important;
   background:radial-gradient(circle at 0 50%,rgba(219,66,89,.18),transparent 35%),linear-gradient(145deg,#472332,#251824) !important;
   box-shadow:0 8px 17px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.07) !important;
   text-align:left !important;
@@ -190,4 +190,13 @@ body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .in-season-negotiate:d
 
 @media (max-width:900px) {
   body.game-ui-upgrade.dark-mode.dashboard-mode .in-season-fa-summary { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+}
+
+.in-season-waiver-strip .in-season-waive-button,
+.in-season-waiver-strip .in-season-waive-button > span strong {
+  color: #ff5d6c !important;
+}
+
+.in-season-waiver-button > em {
+  color: #ff5d6c !important;
 }

@@ -11,7 +11,15 @@ body.game-ui-upgrade.dashboard-mode .in-season-fa-player:hover { border-color:rg
 body.game-ui-upgrade.dashboard-mode .in-season-fa-player > * { border-color:var(--phase6-border) !important; }
 
 body.game-ui-upgrade.dashboard-mode .in-season-fa-portrait { overflow:hidden; border:1px solid rgba(93,157,255,.45) !important; border-radius:10px !important; background:radial-gradient(circle at 50% 30%,#31496d,#172844 66%,#0b1525) !important; box-shadow:0 8px 16px rgba(0,0,0,.32),0 0 0 3px rgba(93,157,255,.06); }
-body.game-ui-upgrade.dashboard-mode .in-season-fa-headshot { background:transparent !important; }   width: 112% !important;   height: 112% !important;  max-width: none !important;  object-fit: cover !important;  object-position: center 18% !important;  transform: translate(-5%, -4%); {}
+body.game-ui-upgrade.dashboard-mode .in-season-fa-headshot {
+  width: 112% !important;
+  height: 112% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  object-position: center 18% !important;
+  transform: translate(-5%, -4%);
+  background: transparent !important;
+}
 body.game-ui-upgrade.dashboard-mode .in-season-fa-ovr { border-color:rgba(93,157,255,.6) !important; background:linear-gradient(145deg,#245fbd,#163a78) !important; box-shadow:0 6px 13px rgba(16,69,155,.28),inset 0 1px rgba(255,255,255,.14); }
 body.game-ui-upgrade.dashboard-mode .in-season-fa-identity strong { color:#fff !important; font:800 14px/1.1 var(--phase6-font-heading) !important; }
 body.game-ui-upgrade.dashboard-mode .in-season-fa-identity > span { color:var(--phase6-text-soft) !important; }
@@ -120,3 +128,7 @@ body.game-ui-upgrade.dashboard-mode .in-season-fa-stat-filter button.active::aft
   body.game-ui-upgrade.dashboard-mode .in-season-fa-search-field { grid-column:1 / -1; }
 }
 @media (max-width:900px) { body.game-ui-upgrade.dashboard-mode .in-season-fa-player { min-width:1060px; } body.game-ui-upgrade.dashboard-mode .in-season-fa-list-head { min-width:1060px; } }
+
+body.game-ui-upgrade.dashboard-mode .in-season-fa-player {
+  border-radius: 0 !important;
+}
