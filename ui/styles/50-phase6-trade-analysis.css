@@ -1,0 +1,654 @@
+/* Phase 6 trade review: decision-first hierarchy and actionable rule feedback. */
+body.game-ui-upgrade .multi-trade-steps {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto !important;
+  min-height: 78px;
+  border-color: var(--phase6-border) !important;
+  background: linear-gradient(180deg, #121d31, #0b1424) !important;
+  box-shadow: 0 14px 28px rgba(0,0,0,.3), inset 0 1px rgba(255,255,255,.07) !important;
+}
+body.game-ui-upgrade .multi-trade-steps > div {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: 44px minmax(0,1fr) !important;
+  align-items: center;
+  gap: 12px !important;
+  min-width: 0;
+  padding: 13px 20px !important;
+  border-right: 1px solid var(--phase6-border) !important;
+  background: transparent !important;
+}
+body.game-ui-upgrade .multi-trade-steps > div::after {
+  position: absolute; right: -1px; bottom: 0; left: 0; height: 2px; content: "";
+  background: rgba(116,141,184,.16);
+}
+body.game-ui-upgrade .multi-trade-steps > div.active {
+  background: linear-gradient(100deg, color-mix(in srgb, var(--phase6-blue) 12%, transparent), transparent 78%) !important;
+}
+body.game-ui-upgrade .multi-trade-steps > div.active::after {
+  background: linear-gradient(90deg, var(--phase6-blue), color-mix(in srgb, var(--phase6-blue) 24%, transparent));
+  box-shadow: 0 0 12px rgba(93,157,255,.55);
+}
+body.game-ui-upgrade .multi-trade-steps > div > b {
+  display: grid !important; place-items: center; width: 40px !important; height: 40px !important;
+  border: 1px solid rgba(116,141,184,.54) !important; border-radius: 50% !important;
+  color: var(--phase6-text-soft) !important; background: linear-gradient(145deg,#1c2d49,#13213a) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.1), 0 6px 12px rgba(0,0,0,.22) !important;
+}
+body.game-ui-upgrade .multi-trade-steps > div > b > span { font: 800 14px/1 var(--phase6-font-numeric); }
+body.game-ui-upgrade .multi-trade-steps > div.active > b {
+  border-color: #8dc0ff !important; color: #fff !important;
+  background: linear-gradient(145deg,#2b8aff,#0758e9) !important;
+  box-shadow: 0 0 0 4px rgba(43,138,255,.12), 0 8px 18px rgba(0,82,220,.36), inset 0 1px rgba(255,255,255,.28) !important;
+}
+body.game-ui-upgrade .multi-trade-steps > div > span { display: grid !important; grid-template-columns: auto 1fr; align-items: baseline; column-gap: 7px; row-gap: 3px; min-width: 0; }
+body.game-ui-upgrade .multi-trade-steps > div > span > em { color: var(--phase6-text-muted); font: 800 8px/1 var(--phase6-font-heading); letter-spacing: .12em; }
+body.game-ui-upgrade .multi-trade-steps > div > span > strong { color: var(--phase6-text-soft) !important; font: 800 13px/1 var(--phase6-font-heading) !important; letter-spacing: .08em !important; }
+body.game-ui-upgrade .multi-trade-steps > div.active > span > em,
+body.game-ui-upgrade .multi-trade-steps > div.active > span > strong { color: #8fc2ff !important; }
+body.game-ui-upgrade .multi-trade-steps > div > span > small { grid-column: 1 / -1; overflow: hidden; color: var(--phase6-text-muted) !important; font-size: 9px !important; text-overflow: ellipsis; white-space: nowrap; }
+body.game-ui-upgrade .multi-trade-steps > .btn { align-self: center; min-width: 112px; min-height: 38px; margin: 0 14px; border-color: var(--phase6-button-border) !important; color: var(--phase6-text-soft) !important; background: var(--phase6-button-bg) !important; }
+
+body.game-ui-upgrade .multi-trade-team-popover { align-items: center; padding: 24px; }
+body.game-ui-upgrade .multi-trade-team-popover-backdrop { background: rgba(3,8,17,.76); backdrop-filter: blur(8px); }
+body.game-ui-upgrade .multi-trade-team-select-card { width: min(820px,100%); max-height: min(780px,calc(100vh - 48px)); border-color: var(--phase6-border) !important; border-top-color: var(--phase6-card-border-top) !important; border-radius: var(--phase6-radius-card) !important; background: var(--phase6-card-background) !important; box-shadow: 0 32px 80px rgba(0,0,0,.6), 0 0 48px rgba(50,91,170,.12) !important; }
+body.game-ui-upgrade .multi-trade-team-select-card > header { position: relative; min-height: 88px; padding: 16px 20px; border-bottom-color: var(--phase6-border) !important; background: linear-gradient(105deg,#17243b,#101a2d) !important; }
+body.game-ui-upgrade .multi-trade-team-select-card > header::after { position: absolute; right: 18%; bottom: 0; left: 0; height: 1px; content: ""; background: linear-gradient(90deg,var(--phase6-gold),var(--phase6-purple),transparent); }
+body.game-ui-upgrade .multi-trade-team-select-card > header div { gap: 3px; }
+body.game-ui-upgrade .multi-trade-picker-title { display: flex !important; align-items: center; gap: 12px !important; }
+body.game-ui-upgrade .multi-trade-picker-title > i { display: grid; place-items: center; width: 40px; height: 40px; overflow: hidden; border: 1px solid rgba(93,157,255,.5); border-radius: 10px; background: linear-gradient(145deg,#234b82,#162b4c); box-shadow: 0 8px 18px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.12); }
+body.game-ui-upgrade .multi-trade-picker-title > i > img { display: block; width: 24px; height: 30px; object-fit: contain; filter: drop-shadow(0 3px 5px rgba(0,0,0,.3)); }
+body.game-ui-upgrade .multi-trade-team-select-card > header > aside { display: grid; justify-items: end; gap: 3px; margin-left: auto; padding-right: 4px; }
+body.game-ui-upgrade .multi-trade-team-select-card > header > aside > span { color: var(--phase6-text-muted) !important; font: 800 7px/1 var(--phase6-font-heading); letter-spacing: .12em; }
+body.game-ui-upgrade .multi-trade-team-select-card > header > aside > b { color: var(--phase6-text) !important; font: 800 20px/1 var(--phase6-font-numeric); }
+body.game-ui-upgrade .multi-trade-team-select-card > header > aside > b > small { color: var(--phase6-text-muted); font-size: 10px; }
+body.game-ui-upgrade .multi-trade-team-select-card > header span { color: var(--phase6-blue) !important; font: 800 9px/1 var(--phase6-font-heading); letter-spacing: .14em; }
+body.game-ui-upgrade .multi-trade-team-select-card > header strong { color: var(--phase6-text) !important; font: 800 22px/1.1 var(--phase6-font-heading); }
+body.game-ui-upgrade .multi-trade-team-select-card > header small { color: var(--phase6-text-muted); font-size: 9px; }
+body.game-ui-upgrade .multi-trade-team-select-card > header button { width: 38px; height: 38px; border-color: var(--phase6-button-border); color: var(--phase6-text-soft); background: var(--phase6-button-bg); box-shadow: var(--phase6-shadow-control); font-size: 18px; transition: border-color 150ms ease, color 150ms ease, transform 150ms ease; }
+body.game-ui-upgrade .multi-trade-team-select-card > header button:hover { border-color: var(--phase6-red); color: #fff; transform: rotate(4deg); }
+body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-picker-tools { display: grid; grid-template-columns: minmax(240px,1fr) auto auto; align-items: center; gap: 14px; max-height: none; overflow: visible; padding: 12px 16px; border-bottom: 1px solid var(--phase6-border); background: rgba(7,13,24,.62); }
+body.game-ui-upgrade .multi-trade-picker-tools label { display: flex; align-items: center; gap: 9px; width: min(420px,70%); height: 38px; padding: 0 12px; border: 1px solid var(--phase6-button-border); border-radius: 8px; color: var(--phase6-text-muted); background: #0b1424; box-shadow: inset 0 2px 5px rgba(0,0,0,.25); }
+body.game-ui-upgrade .multi-trade-picker-tools label:focus-within { border-color: var(--phase6-blue); box-shadow: 0 0 0 3px rgba(93,157,255,.12), inset 0 2px 5px rgba(0,0,0,.25); }
+body.game-ui-upgrade .multi-trade-picker-tools input { min-width: 0; width: 100%; border: 0; outline: 0; color: var(--phase6-text); background: transparent; font: 600 10px/1 var(--phase6-font-body); }
+body.game-ui-upgrade .multi-trade-picker-tools input::placeholder { color: var(--phase6-text-muted); }
+body.game-ui-upgrade.dashboard-mode .multi-trade-team-select-card .multi-trade-picker-tools input,
+body.game-ui-upgrade.dashboard-mode .multi-trade-team-select-card .multi-trade-picker-tools input[type="search"] {
+  appearance: none !important;
+  width: 100% !important;
+  min-height: 34px !important;
+  margin: 0 !important;
+  padding: 0 2px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  color: var(--phase6-text) !important;
+  -webkit-text-fill-color: var(--phase6-text) !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+body.game-ui-upgrade.dashboard-mode .multi-trade-team-select-card .multi-trade-picker-tools input::placeholder {
+  color: var(--phase6-text-muted) !important;
+  -webkit-text-fill-color: var(--phase6-text-muted) !important;
+  opacity: 1 !important;
+}
+body.game-ui-upgrade .multi-trade-conference-filters { display: flex !important; gap: 4px !important; padding: 3px; border: 1px solid var(--phase6-border); border-radius: 8px; background: #0b1424; }
+body.game-ui-upgrade .multi-trade-conference-filters button { min-width: 48px; min-height: 28px; padding: 0 9px; border: 0; border-radius: 6px; color: var(--phase6-text-muted); background: transparent; font: 800 8px/1 var(--phase6-font-heading); text-transform: uppercase; cursor: pointer; }
+body.game-ui-upgrade .multi-trade-conference-filters button:hover { color: var(--phase6-text); background: rgba(93,157,255,.1); }
+body.game-ui-upgrade .multi-trade-conference-filters button.active { color: #fff; background: linear-gradient(145deg,#337dff,#1157d7); box-shadow: 0 5px 12px rgba(17,87,215,.24),inset 0 1px rgba(255,255,255,.18); }
+body.game-ui-upgrade .multi-trade-picker-tools > span { display: flex; align-items: baseline; gap: 5px; color: var(--phase6-text-muted); font: 700 9px/1 var(--phase6-font-heading); text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
+body.game-ui-upgrade .multi-trade-picker-tools > span b { color: var(--phase6-text); font: 800 18px/1 var(--phase6-font-numeric); }
+body.game-ui-upgrade .multi-trade-picker-tools > span small { color: var(--phase6-text-muted); font-size: 7px; }
+body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-team-options { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; max-height: min(570px,calc(100vh - 190px)); overflow-y: auto; padding: 12px; }
+body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-team-options > button { position: relative; grid-template-columns: 48px minmax(0,1fr) auto; min-height: 72px; padding: 9px 12px; border: 1px solid var(--phase6-border); border-left: 3px solid var(--picker-team); border-radius: 9px; color: var(--phase6-text); background: linear-gradient(110deg,color-mix(in srgb,var(--picker-team) 8%,#16223a),#111b2e 62%); box-shadow: inset 0 1px rgba(255,255,255,.045); transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease, transform 150ms ease; }
+body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-team-options > button:hover,
+body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-team-options > button:focus-visible { border-color: color-mix(in srgb,var(--picker-team) 70%,#fff); background: linear-gradient(110deg,color-mix(in srgb,var(--picker-team) 18%,#182640),#14213a 68%); box-shadow: 0 9px 18px rgba(0,0,0,.25), inset 0 1px rgba(255,255,255,.08); outline: 0; transform: translateY(-1px); }
+body.game-ui-upgrade .multi-trade-select-logo { width: 42px !important; height: 42px !important; filter: drop-shadow(0 5px 7px rgba(0,0,0,.35)); }
+body.game-ui-upgrade .multi-trade-team-options button > span { display: grid; gap: 2px; }
+body.game-ui-upgrade .multi-trade-team-options button > span em { color: color-mix(in srgb,var(--picker-team) 54%,#b8c9e6); font: 800 7px/1 var(--phase6-font-heading); letter-spacing: .1em; }
+body.game-ui-upgrade .multi-trade-team-options button > span strong { color: var(--phase6-text) !important; font: 800 12px/1.15 var(--phase6-font-heading); }
+body.game-ui-upgrade .multi-trade-team-options button > span small { display: flex; align-items: center; gap: 6px; color: var(--phase6-text-muted) !important; font-size: 8px; }
+body.game-ui-upgrade .multi-trade-team-options button > span small b { color: var(--phase6-text-soft) !important; font-size: 9px; }
+body.game-ui-upgrade .multi-trade-team-options button > span small i { width: 3px; height: 3px; border-radius: 50%; background: var(--phase6-text-muted); }
+body.game-ui-upgrade .multi-trade-team-options button > aside { display: grid; justify-items: end; gap: 4px; }
+body.game-ui-upgrade .multi-trade-team-options button > aside > b { color: var(--phase6-text-soft) !important; font: 800 11px/1 var(--phase6-font-heading); letter-spacing: .08em; }
+body.game-ui-upgrade .multi-trade-team-options button > aside > small { padding: 3px 5px; border-radius: 4px; font: 800 7px/1 var(--phase6-font-heading); text-transform: uppercase; }
+body.game-ui-upgrade .multi-trade-team-options button > aside > small.tax { color: #ffc2c8; background: rgba(255,93,108,.12); }
+body.game-ui-upgrade .multi-trade-team-options button > aside > small.flexible { color: #baf4d4; background: rgba(53,208,127,.11); }
+body.game-ui-upgrade .multi-trade-team-options button > aside > i { color: var(--phase6-blue); font-size: 14px; opacity: 0; transform: translateX(-5px); transition: opacity 150ms ease, transform 150ms ease; }
+body.game-ui-upgrade .multi-trade-team-options button:hover > aside > i,
+body.game-ui-upgrade .multi-trade-team-options button:focus-visible > aside > i { opacity: 1; transform: translateX(0); }
+body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-picker-empty { display: grid; place-items: center; gap: 4px; min-height: 180px; padding: 30px; text-align: center; }
+body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-picker-empty[hidden] { display: none; }
+body.game-ui-upgrade .multi-trade-picker-empty strong { color: var(--phase6-text); font: 800 16px/1 var(--phase6-font-heading); }
+body.game-ui-upgrade .multi-trade-picker-empty small { color: var(--phase6-text-muted); font-size: 9px; }
+
+body.game-ui-upgrade .multi-trade-analysis {
+  isolation: isolate;
+  border-color: var(--phase6-border) !important;
+  border-top-color: var(--phase6-card-border-top) !important;
+  border-bottom-color: var(--phase6-card-border-bottom) !important;
+  border-radius: var(--phase6-radius-card) !important;
+  color: var(--phase6-text) !important;
+  background: var(--phase6-card-background) !important;
+  box-shadow: var(--phase6-shadow-card), inset 0 1px rgba(255,255,255,.08) !important;
+}
+
+body.game-ui-upgrade .multi-trade-analysis > header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 104px !important;
+  padding: 20px 24px !important;
+  border-bottom: 1px solid var(--phase6-border) !important;
+  background: linear-gradient(105deg, rgba(20,31,51,.98), rgba(13,22,40,.96)) !important;
+}
+
+body.game-ui-upgrade .trade-analysis-heading { display: flex; align-items: center; gap: 14px; min-width: 0; }
+body.game-ui-upgrade .trade-analysis-heading > div { display: grid; gap: 3px; }
+body.game-ui-upgrade .trade-analysis-state {
+  display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px;
+  border: 1px solid color-mix(in srgb, var(--phase6-red) 65%, #fff);
+  border-radius: 50%; color: #fff; background: color-mix(in srgb, var(--phase6-red) 24%, #111a2c);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--phase6-red) 9%, transparent), inset 0 1px rgba(255,255,255,.14);
+  font: 800 20px/1 var(--phase6-font-heading);
+}
+body.game-ui-upgrade .multi-trade-analysis.valid .trade-analysis-state {
+  border-color: color-mix(in srgb, var(--phase6-green) 70%, #fff); background: color-mix(in srgb, var(--phase6-green) 22%, #111a2c);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--phase6-green) 9%, transparent), inset 0 1px rgba(255,255,255,.14);
+}
+body.game-ui-upgrade .multi-trade-analysis .card-label { color: var(--phase6-text-muted) !important; font-size: 9px !important; }
+body.game-ui-upgrade .multi-trade-analysis > header strong { color: var(--phase6-text) !important; font: 800 20px/1.1 var(--phase6-font-heading) !important; }
+body.game-ui-upgrade .multi-trade-analysis > header small { color: var(--phase6-text-muted) !important; font-size: 10px !important; }
+
+body.game-ui-upgrade .trade-analysis-progress { display: grid; gap: 7px; width: min(220px, 28%); margin-left: auto; }
+body.game-ui-upgrade .trade-analysis-progress > span { color: var(--phase6-text-soft) !important; font: 700 10px/1 var(--phase6-font-heading); text-align: right; text-transform: uppercase; letter-spacing: .08em; }
+body.game-ui-upgrade .trade-analysis-progress > span b { color: #fff; font-size: 16px; }
+body.game-ui-upgrade .trade-analysis-progress > i { overflow: hidden; height: 5px; border-radius: 9px; background: rgba(4,9,17,.72); box-shadow: inset 0 1px 2px rgba(0,0,0,.5); }
+body.game-ui-upgrade .trade-analysis-progress > i > b { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--phase6-purple), var(--phase6-blue)); box-shadow: 0 0 10px rgba(93,157,255,.5); }
+
+body.game-ui-upgrade .multi-trade-impact-grid { gap:1px;border-bottom-color:var(--phase6-border) !important;background:rgba(91,124,181,.3); }
+body.game-ui-upgrade .multi-trade-impact-grid article { position:relative;min-height:112px !important;padding:18px 22px !important;overflow:hidden;border:0 !important;border-right:1px solid var(--phase6-border) !important;background:radial-gradient(circle at 8% 110%,rgba(79,139,255,.12),transparent 30%),linear-gradient(145deg,rgba(19,33,57,.99),rgba(8,16,30,.99)) !important;box-shadow:inset 0 1px rgba(255,255,255,.05); }
+body.game-ui-upgrade .multi-trade-impact-grid article.positive { box-shadow:inset 4px 0 var(--phase6-green),inset 0 1px rgba(255,255,255,.05); }
+body.game-ui-upgrade .multi-trade-impact-grid article.negative { box-shadow:inset 4px 0 var(--phase6-red),inset 0 1px rgba(255,255,255,.05); }
+body.game-ui-upgrade .multi-trade-impact-grid article::after { position:absolute;right:-30px;bottom:-52px;width:130px;height:100px;border:1px solid rgba(255,255,255,.035);border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,.04),transparent);content:"";pointer-events:none;transform:rotate(-18deg); }
+body.game-ui-upgrade .multi-trade-impact-logo { width:52px !important;height:52px !important;filter:drop-shadow(0 8px 12px rgba(0,0,0,.38)); }
+body.game-ui-upgrade .multi-trade-impact-grid span,
+body.game-ui-upgrade .multi-trade-impact-grid small { color: var(--phase6-text-muted) !important; }
+body.game-ui-upgrade .multi-trade-impact-grid span { font-size:9px !important;letter-spacing:.13em !important; }
+body.game-ui-upgrade .multi-trade-impact-grid strong { margin:5px 0 4px;color:var(--phase6-text) !important;font-size:28px !important;text-shadow:0 5px 14px rgba(0,0,0,.34); }
+body.game-ui-upgrade .multi-trade-impact-grid strong.ok { color:var(--phase6-green) !important;text-shadow:0 0 16px rgba(53,208,127,.15); }
+body.game-ui-upgrade .multi-trade-impact-grid strong.bad { color:var(--phase6-red) !important;text-shadow:0 0 16px rgba(255,93,108,.14); }
+body.game-ui-upgrade .multi-trade-impact-grid small { display:inline-flex;align-items:center;min-height:21px;padding:0 7px;border:1px solid rgba(111,139,191,.23);border-radius:999px;background:rgba(7,14,27,.52);font-size:8px !important;letter-spacing:.045em; }
+
+body.game-ui-upgrade .multi-trade-receiving-grid { gap:10px;padding:12px 14px 14px !important;border-top:0 !important;background:rgba(7,12,22,.64); }
+body.game-ui-upgrade .multi-trade-receiving-card { overflow:hidden;border-color:rgba(111,139,191,.36) !important;border-radius:10px !important;background:linear-gradient(160deg,#101c31,#091322) !important;box-shadow:0 12px 25px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.045); }
+body.game-ui-upgrade .multi-trade-receiving-card > header { grid-template-columns:58px minmax(0,1fr) auto !important;gap:11px !important;min-height:72px !important;padding:10px 13px !important;border-bottom-color:rgba(111,139,191,.3) !important;background:radial-gradient(circle at 4% 50%,rgba(79,139,255,.13),transparent 28%),linear-gradient(180deg,#1b2c49,#111c30) !important;box-shadow:inset 3px 0 var(--phase6-blue),inset 0 1px rgba(255,255,255,.055); }
+body.game-ui-upgrade .multi-trade-receiving-card > header span { color: var(--phase6-text-muted) !important; }
+body.game-ui-upgrade .multi-trade-receiving-card > header strong { color:var(--phase6-text) !important;font-size:13px !important; }
+body.game-ui-upgrade .multi-trade-receiving-card > header b { min-width:78px;padding:7px 9px;border:1px solid rgba(53,208,127,.3);border-radius:7px;color:#c3f7da !important;background:rgba(53,208,127,.09);font-size:12px !important;text-align:center; }
+
+/* Future draft picks */
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-asset-picker > div > button:has(.multi-trade-pick-mark) {
+  grid-template-columns:54px minmax(0,1fr) auto !important;
+  min-height:72px !important;
+  padding:8px 13px 8px 9px !important;
+  border-color:rgba(65,125,235,.38) !important;
+  background:radial-gradient(circle at 3% 50%,rgba(23,105,255,.16),transparent 27%),linear-gradient(135deg,#172844 0%,#0c172b 72%) !important;
+  box-shadow:0 8px 18px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.055) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-asset-picker > div > button:has(.multi-trade-pick-mark):hover:not(:disabled) {
+  border-color:rgba(93,150,255,.78) !important;
+  background:radial-gradient(circle at 3% 50%,rgba(23,105,255,.25),transparent 30%),linear-gradient(135deg,#20385e 0%,#101e36 72%) !important;
+  box-shadow:0 12px 24px rgba(0,0,0,.3),0 0 0 1px rgba(79,139,255,.1),inset 0 1px rgba(255,255,255,.08) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-pick-mark {
+  position:relative;
+  width:42px !important;
+  height:50px !important;
+  border:1px solid rgba(93,150,255,.7) !important;
+  border-radius:7px !important;
+  color:#fff !important;
+  background:linear-gradient(155deg,#1769ff,#07378f) !important;
+  box-shadow:0 7px 14px rgba(0,66,190,.3),inset 0 1px rgba(255,255,255,.25) !important;
+  font-size:9px !important;
+  letter-spacing:.04em;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-pick-mark::before {
+  content:"PICK";
+  position:absolute;
+  top:7px;
+  color:#aecdff;
+  font-size:5px;
+  font-weight:900;
+  letter-spacing:.16em;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) button:has(.multi-trade-pick-mark) > span:not(.multi-trade-pick-mark) {
+  gap:5px !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) button:has(.multi-trade-pick-mark) strong {
+  color:#f4f7ff !important;
+  font-size:12px !important;
+  letter-spacing:.015em;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) button:has(.multi-trade-pick-mark) small {
+  color:#8fa6ca !important;
+  font-size:8px !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) button.selected .multi-trade-pick-mark {
+  border-color:#9fc1ff !important;
+  background:linear-gradient(155deg,#2f7cff,#0753df) !important;
+  box-shadow:0 0 0 3px rgba(79,139,255,.14),0 8px 16px rgba(0,66,190,.36),inset 0 1px rgba(255,255,255,.3) !important;
+}
+body.game-ui-upgrade .multi-trade-receiving-card > div { min-height:64px;padding:10px !important; }
+body.game-ui-upgrade .multi-trade-receiving-card .multi-trade-asset { min-height:62px !important;border-color:rgba(111,139,191,.3) !important;border-radius:8px !important;background:linear-gradient(145deg,rgba(27,44,72,.9),rgba(13,24,43,.98)) !important;box-shadow:0 8px 16px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.045) !important; }
+body.game-ui-upgrade .multi-trade-receiving-card .multi-trade-player-headshot { width:44px !important;height:44px !important;border-color:rgba(88,145,244,.55) !important;border-radius:7px !important;background:radial-gradient(circle at 50% 25%,#31598f 0%,#182f52 52%,#0a172a 100%) !important;box-shadow:inset 0 1px rgba(255,255,255,.12),0 6px 12px rgba(0,0,0,.28) !important; }
+body.game-ui-upgrade .multi-trade-receiving-card .multi-trade-asset strong { color:#fff !important;font-size:12px !important; }
+body.game-ui-upgrade .multi-trade-receiving-card .multi-trade-asset > b { padding:5px 7px;border:1px solid rgba(111,139,191,.25);border-radius:999px;color:#a9b9d3 !important;background:rgba(7,14,27,.46);font-size:8px !important;letter-spacing:.08em; }
+body.game-ui-upgrade .multi-trade-empty { color: var(--phase6-text-muted) !important; }
+
+body.game-ui-upgrade .trade-rule-section { padding: 14px 18px 16px; background: rgba(7,12,22,.64); }
+body.game-ui-upgrade.dashboard-mode .multi-trade-analysis .trade-rule-section > header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px;
+  min-height: 68px !important;
+  margin: 0 0 10px !important;
+  padding: 10px 12px !important;
+  border: 1px solid rgba(255,93,108,.28) !important;
+  border-left: 4px solid var(--phase6-red) !important;
+  border-radius: 9px !important;
+  color: var(--phase6-text) !important;
+  background: radial-gradient(circle at 5% 120%,rgba(255,93,108,.14),transparent 30%),linear-gradient(105deg,rgba(47,24,38,.9),rgba(15,24,42,.96)) !important;
+  box-shadow: 0 10px 22px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.05) !important;
+}
+body.game-ui-upgrade .trade-rule-section > header::before { display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;border:1px solid rgba(255,93,108,.5);border-radius:9px;color:#ffdce0;background:rgba(255,93,108,.13);box-shadow:0 0 0 5px rgba(255,93,108,.06),inset 0 1px rgba(255,255,255,.08);content:"!";font:800 17px/1 var(--phase6-font-heading); }
+body.game-ui-upgrade .trade-rule-section > header div { display: grid; flex:1; gap: 4px; }
+body.game-ui-upgrade .trade-rule-section > header span { color:#fff; font: 800 12px/1 var(--phase6-font-heading); letter-spacing: .11em; }
+body.game-ui-upgrade .trade-rule-section > header small { color: var(--phase6-text-soft); font-size: 9px; }
+body.game-ui-upgrade .trade-rule-section > header b { display:grid;place-items:center;min-width:58px;height:34px;padding:0 10px;border:1px solid rgba(255,93,108,.42);border-radius:999px;color:#ffdce0;background:rgba(255,93,108,.1);font:800 16px/1 var(--phase6-font-numeric); }
+body.game-ui-upgrade .multi-trade-analysis.valid .trade-rule-section > header { border-color:rgba(53,208,127,.3) !important;border-left-color:var(--phase6-green) !important;background:radial-gradient(circle at 5% 120%,rgba(53,208,127,.16),transparent 30%),linear-gradient(105deg,rgba(17,49,40,.9),rgba(14,25,42,.96)) !important;box-shadow:0 10px 22px rgba(0,0,0,.22),0 0 0 1px rgba(53,208,127,.05),inset 0 1px rgba(255,255,255,.06) !important; }
+body.game-ui-upgrade .multi-trade-analysis.valid .trade-rule-section > header::before { border-color:rgba(53,208,127,.55);color:#c3f7da;background:rgba(53,208,127,.14);box-shadow:0 0 0 5px rgba(53,208,127,.07),0 0 14px rgba(53,208,127,.14),inset 0 1px rgba(255,255,255,.09);content:"✓"; }
+body.game-ui-upgrade .multi-trade-analysis.valid .trade-rule-section > header b { border-color:rgba(53,208,127,.42);color:#c3f7da;background:rgba(53,208,127,.1); }
+body.game-ui-upgrade .multi-trade-analysis .trade-rule-list { display: grid; gap: 7px; max-height: 190px !important; padding: 0 !important; }
+body.game-ui-upgrade .multi-trade-analysis .trade-rule {
+  display: grid; grid-template-columns: 42px minmax(0,1fr); align-items: center; gap: 12px; min-height: 52px;
+  padding: 8px 12px; border: 1px solid rgba(255,93,108,.25); border-radius: 8px; color: var(--phase6-text-soft) !important;
+  background: linear-gradient(90deg,rgba(255,93,108,.09),rgba(20,31,51,.78)); box-shadow: inset 3px 0 var(--phase6-red);
+}
+body.game-ui-upgrade .multi-trade-analysis .trade-rule.ok { border-color: rgba(53,208,127,.24); background: linear-gradient(90deg,rgba(53,208,127,.08),rgba(20,31,51,.78)); box-shadow: inset 3px 0 var(--phase6-green); }
+body.game-ui-upgrade .multi-trade-analysis .trade-rule > span { display: grid; place-items: center; min-width: 34px; height: 28px; border: 1px solid rgba(255,93,108,.45); border-radius: 6px; color: #ffd9dd; background: rgba(255,93,108,.13); font: 800 10px/1 var(--phase6-font-heading); }
+body.game-ui-upgrade .multi-trade-analysis .trade-rule.ok > span { border-color: rgba(53,208,127,.46); color: #baf4d4; background: rgba(53,208,127,.12); }
+body.game-ui-upgrade .multi-trade-analysis .trade-rule > div { display: grid; gap: 2px; }
+body.game-ui-upgrade .multi-trade-analysis .trade-rule strong { color: var(--phase6-text); font: 800 10px/1 var(--phase6-font-heading); text-transform: uppercase; letter-spacing: .06em; }
+body.game-ui-upgrade .multi-trade-analysis .trade-rule small { color: var(--phase6-text-soft); font-size: 10px; }
+
+body.game-ui-upgrade .multi-trade-analysis > footer { align-items: center; justify-content: space-between; gap: 24px; min-height: 84px !important; padding: 14px 24px !important; border-top-color: var(--phase6-border) !important; background: linear-gradient(180deg,#121d31,#0d1628) !important; }
+body.game-ui-upgrade .trade-submit-status { display: flex; align-items: center; gap: 11px; min-width: 0; }
+body.game-ui-upgrade .trade-submit-status > span { display: grid; place-items: center; flex: 0 0 34px; width: 34px; height: 34px; border: 1px solid rgba(255,93,108,.48); border-radius: 8px; color: #ffdce0; background: rgba(255,93,108,.12); box-shadow: inset 0 1px rgba(255,255,255,.08); font: 800 15px/1 var(--phase6-font-heading); }
+body.game-ui-upgrade .trade-submit-status.ready > span { border-color: rgba(53,208,127,.52); color: #c3f7da; background: rgba(53,208,127,.13); }
+body.game-ui-upgrade .trade-submit-status > div { display: grid; gap: 3px; }
+body.game-ui-upgrade .trade-submit-status strong { color: var(--phase6-text) !important; font: 800 12px/1 var(--phase6-font-heading); text-transform: uppercase; letter-spacing: .055em; }
+body.game-ui-upgrade .trade-submit-status small { color: var(--phase6-text-muted) !important; font-size: 9px; line-height: 1.25; }
+body.game-ui-upgrade .trade-analysis-actions { display: flex; align-items: center; gap: 10px; }
+body.game-ui-upgrade .multi-trade-analysis > footer .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px !important; border-color: var(--phase6-button-border) !important; color: var(--phase6-text) !important; background: var(--phase6-button-bg) !important; font: 800 11px/1 var(--phase6-font-heading); letter-spacing: .025em; }
+body.game-ui-upgrade .trade-analysis-actions .btn { min-width: 150px; border-radius: 8px !important; text-transform: uppercase; letter-spacing: .075em !important; box-shadow: 0 8px 17px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.055) !important; transition:transform .15s ease,border-color .15s ease,filter .15s ease,box-shadow .15s ease !important; }
+body.game-ui-upgrade .trade-analysis-actions .btn:first-child { border-color:rgba(132,157,205,.45) !important;color:#cbd7eb !important;background:linear-gradient(180deg,#22334f,#142139) !important; }
+body.game-ui-upgrade .trade-analysis-actions .btn:first-child:hover { transform:translateY(-2px);border-color:rgba(79,139,255,.72) !important;color:#fff !important;filter:brightness(1.1);box-shadow:0 11px 22px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.08) !important; }
+body.game-ui-upgrade .multi-trade-analysis > footer .btn.primary:not(:disabled) { border-color: var(--phase6-button-primary-border) !important; background: var(--phase6-button-primary-bg) !important; }
+body.game-ui-upgrade .multi-trade-analysis > footer .trade-submit-button:not(:disabled) {
+  border-color: #67e7a5 !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #35d07f, #168c55) !important;
+  box-shadow: 0 10px 22px rgba(53,208,127,.24), inset 0 1px rgba(255,255,255,.2), inset 0 -2px rgba(0,0,0,.18) !important;
+}
+body.game-ui-upgrade .multi-trade-analysis > footer .trade-submit-button:not(:disabled):hover {
+  border-color: #9af1c4 !important;
+  background: linear-gradient(135deg, #45dc8d, #1aa463) !important;
+  box-shadow: 0 13px 26px rgba(53,208,127,.32), inset 0 1px rgba(255,255,255,.24), inset 0 -2px rgba(0,0,0,.16) !important;
+}
+body.game-ui-upgrade button[data-action="trade-submit"]:not(:disabled) {
+  border-color:#67e7a5 !important;
+  color:#fff !important;
+  background:linear-gradient(180deg,#35d07f 0%,#168c55 100%) !important;
+  box-shadow:0 9px 20px rgba(32,196,111,.28),inset 0 1px rgba(255,255,255,.24),inset 0 -2px rgba(0,0,0,.16) !important;
+}
+body.game-ui-upgrade button[data-action="trade-submit"]:not(:disabled):hover,
+body.game-ui-upgrade button[data-action="trade-submit"]:not(:disabled):focus-visible {
+  border-color:#a6f4cb !important;
+  background:linear-gradient(180deg,#49df91 0%,#1b9f62 100%) !important;
+  box-shadow:0 12px 25px rgba(32,196,111,.38),0 0 0 3px rgba(53,208,127,.14),inset 0 1px rgba(255,255,255,.28) !important;
+}
+body.game-ui-upgrade .multi-trade-analysis > footer .btn:focus-visible { outline: 2px solid var(--phase6-blue); outline-offset: 3px; }
+body.game-ui-upgrade .multi-trade-analysis > footer .btn:disabled { border-color: rgba(135,149,173,.3) !important; color: #78869d !important; background: repeating-linear-gradient(135deg,rgba(255,255,255,.018) 0,rgba(255,255,255,.018) 5px,transparent 5px,transparent 10px),linear-gradient(180deg,#182235,#111927) !important; box-shadow: inset 0 1px rgba(255,255,255,.035) !important; opacity: 1; cursor: not-allowed; filter: none; }
+body.game-ui-upgrade .multi-trade-analysis > footer .trade-submit-button:disabled {
+  border-color: rgba(255,93,108,.62) !important;
+  color: #ffd9dd !important;
+  background: repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 5px,transparent 5px,transparent 10px),linear-gradient(180deg,#6f2432,#471925) !important;
+  box-shadow: 0 8px 18px rgba(112,24,42,.2),inset 0 1px rgba(255,255,255,.09),inset 0 -2px rgba(0,0,0,.2) !important;
+}
+
+body.game-ui-upgrade .multi-trade-asset-picker > div { gap: 7px !important; padding: 8px 10px 12px !important; }
+body.game-ui-upgrade .multi-trade-asset-picker > div > button {
+  position: relative; grid-template-columns: 48px minmax(0,1fr) auto !important; gap: 11px !important;
+  min-height: 66px !important; padding: 7px 10px !important; overflow: hidden;
+  border: 1px solid var(--phase6-border) !important; border-radius: 9px !important;
+  color: var(--phase6-text) !important; background: linear-gradient(105deg,#17243b,#101a2d 72%) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.045),0 5px 12px rgba(0,0,0,.16);
+  transition: border-color 150ms ease,background 150ms ease,box-shadow 150ms ease,transform 150ms ease;
+}
+body.game-ui-upgrade .multi-trade-asset-picker > div > button::before { position: absolute; inset: 0 auto 0 0; width: 3px; content: ""; background: var(--phase6-blue); opacity: .38; transition: opacity 150ms ease,box-shadow 150ms ease; }
+body.game-ui-upgrade .multi-trade-asset-picker > div > button:hover,
+body.game-ui-upgrade .multi-trade-asset-picker > div > button:focus-visible { border-color: rgba(93,157,255,.68) !important; color: #fff !important; background: linear-gradient(105deg,rgba(36,70,121,.94),#14223a 72%) !important; box-shadow: 0 9px 18px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.08) !important; outline: 0; transform: translateY(-1px); }
+body.game-ui-upgrade .multi-trade-asset-picker > div > button:hover::before,
+body.game-ui-upgrade .multi-trade-asset-picker > div > button:focus-visible::before { opacity: 1; box-shadow: 0 0 12px var(--phase6-blue); }
+body.game-ui-upgrade .multi-trade-asset-picker > div > button.selected { border-color: rgba(53,208,127,.66) !important; color: #fff !important; background: linear-gradient(105deg,rgba(25,93,66,.68),#14233a 72%) !important; box-shadow: 0 8px 18px rgba(15,92,57,.2),inset 0 1px rgba(255,255,255,.08) !important; }
+body.game-ui-upgrade .multi-trade-asset-picker > div > button.selected::before { background: var(--phase6-green); opacity: 1; box-shadow: 0 0 12px rgba(53,208,127,.5); }
+body.game-ui-upgrade .multi-trade-asset-picker > div > button:disabled { opacity: .46; cursor: not-allowed; filter: saturate(.4); }
+body.game-ui-upgrade .multi-trade-picker-headshot { width: 46px !important; height: 50px !important; border: 1px solid rgba(93,157,255,.44) !important; border-radius: 9px !important; background: radial-gradient(circle at 50% 30%,#31496d,#172844 64%,#0c1728) !important; box-shadow: 0 6px 12px rgba(0,0,0,.32),inset 0 1px rgba(255,255,255,.09); object-fit: cover; object-position: center top; }
+body.game-ui-upgrade .multi-trade-picker-copy { display: grid !important; gap: 5px !important; min-width: 0; }
+body.game-ui-upgrade .multi-trade-picker-copy strong { overflow: hidden; color: var(--phase6-text) !important; font: 800 12px/1.1 var(--phase6-font-heading) !important; text-overflow: ellipsis; white-space: nowrap; }
+body.game-ui-upgrade .multi-trade-picker-copy small { width: max-content; padding: 3px 6px; border: 1px solid rgba(154,124,255,.3); border-radius: 4px; color: #c9baff !important; background: rgba(154,124,255,.09); font: 800 7px/1 var(--phase6-font-heading) !important; }
+body.game-ui-upgrade .multi-trade-picker-meta { display: grid !important; grid-template-columns: auto 26px; align-items: center; justify-items: end; gap: 3px 8px; }
+body.game-ui-upgrade .multi-trade-picker-meta em { color: var(--phase6-gold) !important; font: 800 10px/1 var(--phase6-font-numeric); }
+body.game-ui-upgrade .multi-trade-picker-meta b { color: var(--phase6-text-soft) !important; font: 800 10px/1 var(--phase6-font-numeric); }
+body.game-ui-upgrade .multi-trade-picker-meta::after { display: grid; grid-column: 2; grid-row: 1 / span 2; place-items: center; width: 25px; height: 25px; border: 1px solid rgba(93,157,255,.36); border-radius: 6px; color: #a9ceff; background: rgba(93,157,255,.1); content: "+"; font: 800 14px/1 var(--phase6-font-heading); }
+body.game-ui-upgrade button.selected .multi-trade-picker-meta::after { border-color: rgba(53,208,127,.5); color: #baf4d4; background: rgba(53,208,127,.13); content: "\2713"; }
+body.game-ui-upgrade .multi-trade-player-option .multi-trade-picker-headshot { position: relative; z-index: 1; width: 48px !important; height: 54px !important; border: 2px solid rgba(93,157,255,.48) !important; border-radius: 10px !important; background: radial-gradient(circle at 50% 28%,#385276,#1c2e4c 62%,#0d1829) !important; box-shadow: 0 7px 14px rgba(0,0,0,.36),0 0 0 3px rgba(93,157,255,.06),inset 0 1px rgba(255,255,255,.08); }
+body.game-ui-upgrade .multi-trade-player-option:hover .multi-trade-picker-headshot,
+body.game-ui-upgrade .multi-trade-player-option:focus-visible .multi-trade-picker-headshot { border-color: rgba(141,192,255,.82) !important; box-shadow: 0 9px 18px rgba(0,0,0,.36),0 0 0 3px rgba(93,157,255,.13); }
+body.game-ui-upgrade .multi-trade-player-option.selected .multi-trade-picker-headshot { border-color: rgba(103,231,165,.82) !important; box-shadow: 0 9px 18px rgba(0,0,0,.34),0 0 0 3px rgba(53,208,127,.12); }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-player-option .multi-trade-picker-headshot,
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-asset .multi-trade-player-headshot {
+  border-color: rgba(93,157,255,.52) !important;
+  background: radial-gradient(circle at 50% 28%,#385276,#1c2e4c 62%,#0d1829) !important;
+  box-shadow: 0 7px 14px rgba(0,0,0,.36),0 0 0 3px rgba(93,157,255,.07),inset 0 1px rgba(255,255,255,.08) !important;
+}
+
+body.game-ui-upgrade .multi-trade-asset-picker > div > .multi-trade-pick-option { grid-template-columns: 48px minmax(0,1fr) 26px !important; min-height: 68px !important; border-left-color: rgba(243,179,61,.52) !important; background: linear-gradient(105deg,rgba(70,51,19,.36),#111b2e 70%) !important; }
+body.game-ui-upgrade .multi-trade-asset-picker > div > .multi-trade-pick-option::before { background: var(--phase6-gold); }
+body.game-ui-upgrade .multi-trade-asset-picker > div > .multi-trade-pick-option:hover,
+body.game-ui-upgrade .multi-trade-asset-picker > div > .multi-trade-pick-option:focus-visible { border-color: rgba(243,179,61,.7) !important; background: linear-gradient(105deg,rgba(108,75,20,.52),#17223a 72%) !important; }
+body.game-ui-upgrade .multi-trade-pick-option > .multi-trade-pick-mark { display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 4px !important; width: 46px !important; min-width: 46px !important; height: 54px !important; padding: 0 !important; border: 1px solid rgba(243,179,61,.58) !important; border-radius: 9px !important; color: #fff !important; background: linear-gradient(150deg,#bc7b12,#6e4308) !important; box-shadow: 0 7px 14px rgba(0,0,0,.3),inset 0 1px rgba(255,255,255,.19),inset 0 -2px rgba(0,0,0,.2) !important; line-height: 1 !important; }
+body.game-ui-upgrade .multi-trade-pick-option > .multi-trade-pick-mark > small { display: block !important; position: static !important; margin: 0 !important; padding: 0 !important; color: #ffe2a7 !important; font-family: var(--phase6-font-numeric) !important; font-size: 9px !important; font-style: normal !important; font-weight: 800 !important; line-height: 1 !important; letter-spacing: .02em !important; text-decoration: none !important; }
+body.game-ui-upgrade .multi-trade-pick-option > .multi-trade-pick-mark > b { display: block !important; position: static !important; margin: 0 !important; padding: 0 !important; color: #fff !important; font-family: var(--phase6-font-numeric) !important; font-size: 16px !important; font-style: normal !important; font-weight: 800 !important; line-height: 1 !important; letter-spacing: 0 !important; text-decoration: none !important; text-shadow: 0 2px 5px rgba(0,0,0,.25); }
+body.game-ui-upgrade .multi-trade-pick-copy { display: grid !important; gap: 2px !important; min-width: 0; }
+body.game-ui-upgrade .multi-trade-pick-copy em { color: var(--phase6-gold) !important; font: 800 7px/1 var(--phase6-font-heading); letter-spacing: .1em; }
+body.game-ui-upgrade .multi-trade-pick-copy strong { overflow: hidden; color: var(--phase6-text) !important; font: 800 11px/1.15 var(--phase6-font-heading) !important; text-overflow: ellipsis; white-space: nowrap; }
+body.game-ui-upgrade .multi-trade-pick-copy small { color: var(--phase6-text-muted) !important; font-size: 8px !important; }
+body.game-ui-upgrade .multi-trade-pick-action { display: grid !important; place-items: center; width: 25px; height: 25px; border: 1px solid rgba(243,179,61,.4); border-radius: 6px; color: #ffe0a2 !important; background: rgba(243,179,61,.1); font: 800 14px/1 var(--phase6-font-heading); }
+body.game-ui-upgrade .multi-trade-pick-option.selected { border-color: rgba(53,208,127,.66) !important; background: linear-gradient(105deg,rgba(25,93,66,.6),#14233a 72%) !important; }
+body.game-ui-upgrade .multi-trade-pick-option.selected::before { background: var(--phase6-green) !important; }
+body.game-ui-upgrade .multi-trade-pick-option.selected .multi-trade-pick-mark { border-color: rgba(103,231,165,.7) !important; background: linear-gradient(150deg,#239b62,#12603d) !important; }
+body.game-ui-upgrade .multi-trade-pick-option.selected .multi-trade-pick-action { border-color: rgba(53,208,127,.5); color: #baf4d4 !important; background: rgba(53,208,127,.13); }
+
+body.game-ui-upgrade.dashboard-mode .multi-trade-asset select,
+body.game-ui-upgrade.dashboard-mode .multi-trade-flow-block select {
+  appearance: none !important;
+  min-width: 92px !important;
+  min-height: 34px !important;
+  padding: 0 10px !important;
+  border: 1px solid rgba(93,157,255,.42) !important;
+  border-radius: 7px !important;
+  color: var(--phase6-text-soft) !important;
+  -webkit-text-fill-color: var(--phase6-text-soft) !important;
+  background-color: #111d31 !important;
+  background-image: linear-gradient(180deg,#1a2941,#111b2e) !important;
+  background-position: 0 0 !important;
+  background-size: 100% 100% !important;
+  background-repeat: no-repeat !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.06),0 5px 10px rgba(0,0,0,.16) !important;
+  font: 800 9px/1 var(--phase6-font-heading) !important;
+  text-align: center !important;
+  text-align-last: center !important;
+  cursor: pointer;
+}
+body.game-ui-upgrade.dashboard-mode .multi-trade-asset select:hover,
+body.game-ui-upgrade.dashboard-mode .multi-trade-asset select:focus-visible,
+body.game-ui-upgrade.dashboard-mode .multi-trade-flow-block select:hover,
+body.game-ui-upgrade.dashboard-mode .multi-trade-flow-block select:focus-visible {
+  border-color: var(--phase6-blue) !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 3px rgba(93,157,255,.11),inset 0 1px rgba(255,255,255,.08),0 7px 14px rgba(0,0,0,.2) !important;
+}
+body.game-ui-upgrade.dashboard-mode .multi-trade-asset select option,
+body.game-ui-upgrade.dashboard-mode .multi-trade-flow-block select option { color: #eef4ff !important; background: #111b2e !important; }
+body.game-ui-upgrade.dashboard-mode .multi-trade-asset > button,
+body.game-ui-upgrade.dashboard-mode .multi-trade-team-chips button {
+  border-color: rgba(255,93,108,.36) !important;
+  color: #ffc5cb !important;
+  background: linear-gradient(180deg,rgba(111,36,50,.86),rgba(65,24,34,.94)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.07) !important;
+}
+body.game-ui-upgrade.dashboard-mode .multi-trade-asset > button:hover,
+body.game-ui-upgrade.dashboard-mode .multi-trade-team-chips button:hover { border-color: var(--phase6-red) !important; color: #fff !important; background: linear-gradient(180deg,#9b3043,#641f2e) !important; }
+
+@media (max-width: 760px) {
+  body.game-ui-upgrade .multi-trade-steps { grid-template-columns: 1fr !important; }
+  body.game-ui-upgrade .multi-trade-steps > div { border-right: 0 !important; border-bottom: 1px solid var(--phase6-border) !important; }
+  body.game-ui-upgrade .multi-trade-steps > .btn { width: calc(100% - 28px); margin: 12px 14px; }
+  body.game-ui-upgrade .multi-trade-team-popover { padding: 10px; }
+  body.game-ui-upgrade .multi-trade-team-select-card { max-height: calc(100vh - 20px); }
+  body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-team-options { grid-template-columns: 1fr; }
+  body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-picker-tools { align-items: stretch; flex-direction: column; }
+  body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-picker-tools { display: flex; }
+  body.game-ui-upgrade .multi-trade-picker-tools label { width: 100%; }
+  body.game-ui-upgrade .multi-trade-conference-filters button { flex: 1; }
+  body.game-ui-upgrade .multi-trade-team-select-card > header > aside { display: none; }
+  body.game-ui-upgrade .multi-trade-analysis > header { align-items: flex-start; flex-direction: column; }
+  body.game-ui-upgrade .trade-analysis-progress { width: 100%; margin-left: 0; }
+  body.game-ui-upgrade .trade-analysis-progress > span { text-align: left; }
+  body.game-ui-upgrade .multi-trade-analysis > footer { align-items: stretch; flex-direction: column; }
+  body.game-ui-upgrade .trade-analysis-actions { width: 100%; }
+  body.game-ui-upgrade .multi-trade-analysis > footer .btn { flex: 1; min-width: 120px !important; }
+}
+
+/* Final submission-state lock: keep these last so generic button themes cannot override them. */
+button.trade-submit-button[data-action="trade-submit"]:not(:disabled) {
+  border:1px solid #68e9a7 !important;
+  color:#fff !important;
+  background:#1cad68 linear-gradient(180deg,#38d783 0%,#14834e 100%) !important;
+  box-shadow:0 9px 20px rgba(29,190,105,.3),inset 0 1px rgba(255,255,255,.26),inset 0 -2px rgba(0,0,0,.18) !important;
+  opacity:1 !important;
+  cursor:pointer !important;
+}
+button.trade-submit-button[data-action="trade-submit"]:not(:disabled):hover,
+button.trade-submit-button[data-action="trade-submit"]:not(:disabled):focus-visible {
+  border-color:#b1f6d2 !important;
+  color:#fff !important;
+  background:#29c979 linear-gradient(180deg,#50e398 0%,#199b5d 100%) !important;
+  box-shadow:0 12px 25px rgba(29,190,105,.4),0 0 0 3px rgba(53,208,127,.16),inset 0 1px rgba(255,255,255,.3) !important;
+  outline:0 !important;
+  transform:translateY(-1px);
+}
+button.trade-submit-button[data-action="trade-submit"]:disabled {
+  border:1px solid #e45c69 !important;
+  color:#ffe5e8 !important;
+  background:#a92f3d linear-gradient(180deg,#c94a58 0%,#7d202d 100%) !important;
+  box-shadow:0 8px 18px rgba(181,49,64,.25),inset 0 1px rgba(255,255,255,.16),inset 0 -2px rgba(0,0,0,.2) !important;
+  opacity:1 !important;
+  cursor:not-allowed !important;
+  filter:none !important;
+}
+
+/* Clean draft-badge type hierarchy. */
+body.game-ui-upgrade .multi-trade-pick-option > .multi-trade-pick-mark::before {
+  content:none !important;
+  display:none !important;
+}
+body.game-ui-upgrade .multi-trade-pick-option > .multi-trade-pick-mark > small {
+  display:block !important;
+  position:static !important;
+  color:#bcd4ff !important;
+  font-family:var(--phase6-font-body),sans-serif !important;
+  font-size:8px !important;
+  font-weight:800 !important;
+  line-height:1 !important;
+  letter-spacing:.08em !important;
+  text-shadow:none !important;
+}
+body.game-ui-upgrade .multi-trade-pick-option > .multi-trade-pick-mark > b {
+  display:block !important;
+  position:static !important;
+  color:#fff !important;
+  font-family:var(--phase6-font-heading),sans-serif !important;
+  font-size:15px !important;
+  font-weight:900 !important;
+  line-height:1 !important;
+  letter-spacing:.035em !important;
+  text-shadow:0 2px 5px rgba(0,0,0,.32) !important;
+}
+
+/* Trade asset remove control */
+.multi-trade-asset > button.multi-trade-remove-asset[data-remove-trade-asset] {
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  flex:0 0 28px !important;
+  width:28px !important;
+  min-width:28px !important;
+  max-width:28px !important;
+  height:28px !important;
+  min-height:28px !important;
+  margin:0 1px 0 2px !important;
+  padding:0 0 2px !important;
+  overflow:hidden !important;
+  border:1px solid rgba(255,93,108,.52) !important;
+  border-radius:7px !important;
+  color:#ffd8dd !important;
+  background:linear-gradient(180deg,#8e3040,#541e2a) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.1),0 5px 10px rgba(0,0,0,.2) !important;
+  font-family:Arial,sans-serif !important;
+  font-size:17px !important;
+  font-weight:700 !important;
+  line-height:1 !important;
+  text-align:center !important;
+  cursor:pointer !important;
+}
+.multi-trade-asset > button.multi-trade-remove-asset[data-remove-trade-asset]:hover,
+.multi-trade-asset > button.multi-trade-remove-asset[data-remove-trade-asset]:focus-visible {
+  border-color:#ff8490 !important;
+  color:#fff !important;
+  background:linear-gradient(180deg,#bd4053,#772536) !important;
+  box-shadow:0 0 0 3px rgba(255,93,108,.12),0 7px 13px rgba(0,0,0,.25) !important;
+  outline:0 !important;
+}
+
+/* Franchise picker cards */
+body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-team-options {
+  gap:10px !important;
+  padding:14px !important;
+  background:linear-gradient(180deg,rgba(5,12,24,.74),rgba(8,16,30,.9)) !important;
+}
+body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-team-options > button {
+  isolation:isolate;
+  grid-template-columns:58px minmax(0,1fr) 74px !important;
+  gap:12px !important;
+  min-height:84px !important;
+  padding:10px 12px !important;
+  overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--picker-team) 38%,#56709e) !important;
+  border-left:4px solid var(--picker-team) !important;
+  border-radius:11px !important;
+  background:radial-gradient(circle at 8% 50%,color-mix(in srgb,var(--picker-team) 22%,transparent),transparent 34%),linear-gradient(120deg,#1a2944 0%,#111c31 62%,#0c1628 100%) !important;
+  box-shadow:0 8px 18px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.065),inset 0 -1px rgba(0,0,0,.3) !important;
+}
+body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-team-options > button::after {
+  position:absolute;
+  z-index:-1;
+  inset:-45% auto -45% -8%;
+  width:32%;
+  border-radius:50%;
+  background:var(--picker-team);
+  content:"";
+  opacity:.08;
+  filter:blur(22px);
+  transition:opacity .16s ease,width .16s ease;
+}
+body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-team-options > button:hover,
+body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-team-options > button:focus-visible {
+  border-color:color-mix(in srgb,var(--picker-team) 68%,#b8d0ff) !important;
+  background:radial-gradient(circle at 8% 50%,color-mix(in srgb,var(--picker-team) 30%,transparent),transparent 38%),linear-gradient(120deg,#223756 0%,#15253f 62%,#0f1c31 100%) !important;
+  box-shadow:0 13px 25px rgba(0,0,0,.32),0 0 0 1px color-mix(in srgb,var(--picker-team) 22%,transparent),inset 0 1px rgba(255,255,255,.09) !important;
+  transform:translateY(-2px) !important;
+}
+body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-team-options > button:hover::after,
+body.game-ui-upgrade .multi-trade-team-select-card > .multi-trade-team-options > button:focus-visible::after { width:42%;opacity:.14; }
+body.game-ui-upgrade .multi-trade-team-select-card .multi-trade-select-logo {
+  width:52px !important;
+  height:52px !important;
+  object-fit:contain;
+  filter:drop-shadow(0 7px 8px rgba(0,0,0,.42)) !important;
+  transition:transform .16s ease,filter .16s ease;
+}
+body.game-ui-upgrade .multi-trade-team-options > button:hover .multi-trade-select-logo { transform:scale(1.06);filter:drop-shadow(0 9px 10px rgba(0,0,0,.48)) !important; }
+body.game-ui-upgrade .multi-trade-team-options button > span { gap:4px !important; }
+body.game-ui-upgrade .multi-trade-team-options button > span em { color:color-mix(in srgb,var(--picker-team) 65%,#c7d8f4) !important;font-size:7px !important;letter-spacing:.14em !important; }
+body.game-ui-upgrade .multi-trade-team-options button > span strong { color:#f7f9ff !important;font-size:13px !important;line-height:1.05 !important; }
+body.game-ui-upgrade .multi-trade-team-options button > span small { color:#90a5c7 !important;font-size:8px !important; }
+body.game-ui-upgrade .multi-trade-team-options button > aside { align-self:stretch;align-content:space-between; }
+body.game-ui-upgrade .multi-trade-team-options button > aside > b { color:#f5f8ff !important;font-size:12px !important; }
+body.game-ui-upgrade .multi-trade-team-options button > aside > small { padding:5px 7px !important;border:1px solid transparent;border-radius:999px !important; }
+body.game-ui-upgrade .multi-trade-team-options button > aside > small.tax { border-color:rgba(255,93,108,.25); }
+body.game-ui-upgrade .multi-trade-team-options button > aside > small.flexible { border-color:rgba(53,208,127,.22); }
+
+/* Team picker close control */
+button[data-action="trade-close-team-picker"]:not(.multi-trade-team-popover-backdrop) {
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  flex:0 0 34px !important;
+  width:34px !important;
+  min-width:34px !important;
+  max-width:34px !important;
+  height:34px !important;
+  min-height:34px !important;
+  margin:0 !important;
+  padding:0 0 2px !important;
+  overflow:hidden !important;
+  border:1px solid rgba(255,93,108,.46) !important;
+  border-radius:8px !important;
+  color:#ffd8dd !important;
+  background:linear-gradient(180deg,#843040,#4d1d29) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.1),0 6px 12px rgba(0,0,0,.22) !important;
+  font-family:Arial,sans-serif !important;
+  font-size:18px !important;
+  font-weight:700 !important;
+  line-height:1 !important;
+  cursor:pointer !important;
+}
+button[data-action="trade-close-team-picker"]:not(.multi-trade-team-popover-backdrop):hover,
+button[data-action="trade-close-team-picker"]:not(.multi-trade-team-popover-backdrop):focus-visible {
+  border-color:#ff8793 !important;
+  color:#fff !important;
+  background:linear-gradient(180deg,#b94152,#702536) !important;
+  box-shadow:0 0 0 3px rgba(255,93,108,.12),0 8px 15px rgba(0,0,0,.28) !important;
+  outline:0 !important;
+  transform:none !important;
+}
+
+/* Destructive reset action */
+button[data-action="trade-reset"] {
+  border:1px solid #df5968 !important;
+  color:#ffe6e9 !important;
+  background:#8d2d3d linear-gradient(180deg,#a83a4b 0%,#5d202d 100%) !important;
+  background-image:linear-gradient(180deg,#a83a4b 0%,#5d202d 100%) !important;
+  box-shadow:0 8px 17px rgba(157,42,60,.24),inset 0 1px rgba(255,255,255,.14),inset 0 -2px rgba(0,0,0,.18) !important;
+  opacity:1 !important;
+  -webkit-appearance:none !important;
+  appearance:none !important;
+}
+button[data-action="trade-reset"]:hover,
+button[data-action="trade-reset"]:focus-visible {
+  border-color:#ff8995 !important;
+  color:#fff !important;
+  background:#b73b4e linear-gradient(180deg,#c94b5d 0%,#792638 100%) !important;
+  background-image:linear-gradient(180deg,#c94b5d 0%,#792638 100%) !important;
+  box-shadow:0 11px 22px rgba(174,47,66,.34),0 0 0 3px rgba(255,93,108,.13),inset 0 1px rgba(255,255,255,.18) !important;
+  outline:0 !important;
+  transform:translateY(-1px);
+}

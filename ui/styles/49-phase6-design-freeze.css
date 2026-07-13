@@ -1,0 +1,2933 @@
+/*
+ * Phase 6 approved design-system freeze.
+ *
+ * New screens should consume these tokens and primitives. Changes to this
+ * file are system-wide design decisions; screen-specific experiments belong
+ * in their owning stylesheet and must not redefine the frozen tokens.
+ */
+
+body.game-ui-upgrade {
+  /* Core colors */
+  --phase6-bg-deep: #070b14;
+  --phase6-bg: #0a101d;
+  --phase6-surface-1: #0f1727;
+  --phase6-surface-2: #141f33;
+  --phase6-surface-3: #1a2941;
+  --phase6-surface-hover: #203250;
+  --phase6-text: #f4f7fc;
+  --phase6-text-soft: #c4cee0;
+  --phase6-text-muted: #8795ad;
+  --phase6-border: rgba(147, 166, 201, .25);
+  --phase6-border-strong: rgba(174, 194, 231, .42);
+  --phase6-blue: #5d9dff;
+  --phase6-green: #35d07f;
+  --phase6-gold: #f3b33d;
+  --phase6-red: #ff5d6c;
+  --phase6-purple: #9a7cff;
+
+  /* Typography */
+  --phase6-font-display: "Bebas Neue", "Arial Narrow", Impact, sans-serif;
+  --phase6-font-heading: "Rajdhani", "Arial Narrow", sans-serif;
+  --phase6-font-body: Inter, "Segoe UI", sans-serif;
+  --phase6-font-numeric: "Rajdhani", Inter, sans-serif;
+  --phase6-type-label: 8px;
+  --phase6-type-body: 10px;
+  --phase6-type-heading: 16px;
+  --phase6-type-display: 32px;
+
+  /* Card depth */
+  --phase6-radius-card: 12px;
+  --phase6-radius-control: 8px;
+  --phase6-shadow-card: 0 22px 44px rgba(0, 0, 0, .46), 0 8px 18px rgba(0, 0, 0, .28);
+  --phase6-shadow-control: 0 8px 18px rgba(0, 0, 0, .24), inset 0 1px rgba(255, 255, 255, .07);
+  --phase6-shadow-hover: 0 16px 30px rgba(0, 0, 0, .38), 0 5px 14px var(--game-team-glow);
+  --phase6-card-background: linear-gradient(180deg, #141f35, #0d1628 72%, #09111f);
+  --phase6-card-border-top: rgba(177, 197, 230, .48);
+  --phase6-card-border-bottom: rgba(39, 55, 84, .9);
+
+  /* Buttons */
+  --phase6-button-height: 38px;
+  --phase6-button-bg: linear-gradient(180deg, #1a2941, #111b2e);
+  --phase6-button-border: rgba(116, 141, 184, .42);
+  --phase6-button-primary-bg: linear-gradient(135deg, color-mix(in srgb, var(--game-team, var(--phase6-purple)) 82%, #fff), var(--game-team, var(--phase6-purple)));
+  --phase6-button-primary-border: color-mix(in srgb, var(--game-team, var(--phase6-purple)) 65%, #fff);
+
+  /* Navigation */
+  --phase6-nav-active-bg: linear-gradient(100deg, #292044, #211b3b 62%, #17162d);
+  --phase6-nav-active-border: rgba(132, 103, 220, .42);
+  --phase6-nav-icon: #f3b33d;
+  --phase6-nav-arrow: #2478ff;
+
+  /* Patterns */
+  --phase6-pattern-dot: color-mix(in srgb, var(--game-team-secondary) 18%, transparent);
+  --phase6-pattern-glow: color-mix(in srgb, var(--game-team) 10%, transparent);
+  --phase6-pattern-opacity: .32;
+
+  /* Scrollbars */
+  --phase6-scrollbar-size: 5px;
+  --phase6-scrollbar-thumb: color-mix(in srgb, var(--game-team) 28%, #53617a);
+  --phase6-scrollbar-thumb-hover: color-mix(in srgb, var(--game-team) 42%, #687894);
+  --phase6-scrollbar-track: rgba(4, 9, 17, .2);
+
+  /* Preserve the established game aliases. */
+  --game-bg-deep: var(--phase6-bg-deep);
+  --game-bg: var(--phase6-bg);
+  --game-surface-1: var(--phase6-surface-1);
+  --game-surface-2: var(--phase6-surface-2);
+  --game-surface-3: var(--phase6-surface-3);
+  --game-surface-hover: var(--phase6-surface-hover);
+  --game-text: var(--phase6-text);
+  --game-text-soft: var(--phase6-text-soft);
+  --game-text-muted: var(--phase6-text-muted);
+  --game-border: var(--phase6-border);
+  --game-border-strong: var(--phase6-border-strong);
+  --game-font-display: var(--phase6-font-display);
+  --game-font-heading: var(--phase6-font-heading);
+  --game-font-body: var(--phase6-font-body);
+  --game-font-numeric: var(--phase6-font-numeric);
+}
+
+/* Approved reusable Phase 6 primitives. */
+body.game-ui-upgrade .phase6-screen {
+  display: grid;
+  min-width: 0;
+  gap: 12px;
+}
+
+body.game-ui-upgrade .phase6-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--phase6-border);
+  border-top-color: var(--phase6-card-border-top);
+  border-bottom-color: var(--phase6-card-border-bottom);
+  border-radius: var(--phase6-radius-card);
+  color: var(--phase6-text);
+  background: var(--phase6-card-background);
+  box-shadow: var(--phase6-shadow-card), inset 0 1px rgba(255, 255, 255, .11);
+}
+
+body.game-ui-upgrade .phase6-table-card {
+  overflow: auto;
+  border-color: var(--phase6-border) !important;
+  background: linear-gradient(180deg, #111b2f, #0a1221) !important;
+  box-shadow: var(--phase6-shadow-card), inset 0 1px rgba(255, 255, 255, .06) !important;
+}
+
+body.game-ui-upgrade .phase6-table-card thead {
+  background: linear-gradient(180deg, #1a2941, #121d31);
+}
+
+body.game-ui-upgrade .phase6-table-card table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+body.game-ui-upgrade .phase6-table-card th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  height: 44px;
+  border-top: 1px solid rgba(255, 255, 255, .06) !important;
+  border-bottom: 1px solid rgba(154, 124, 255, .34) !important;
+  color: var(--phase6-text-soft) !important;
+  background: linear-gradient(180deg, #1a2941, #111b2e) !important;
+  font-size: 9px !important;
+  letter-spacing: .12em !important;
+}
+
+body.game-ui-upgrade .phase6-table-card td {
+  border-bottom: 1px solid rgba(116, 141, 184, .2) !important;
+  color: var(--phase6-text-soft) !important;
+  background: rgba(20, 31, 51, .68) !important;
+}
+
+body.game-ui-upgrade .phase6-table-card tbody tr:nth-child(even) td {
+  background: rgba(15, 24, 41, .84) !important;
+}
+
+body.game-ui-upgrade .phase6-table-card tbody tr {
+  transition: background 150ms ease, box-shadow 150ms ease;
+}
+
+body.game-ui-upgrade .phase6-table-card tbody tr:hover {
+  background: color-mix(in srgb, var(--game-team, var(--phase6-blue)) 8%, transparent);
+  box-shadow: inset 3px 0 var(--game-team, var(--phase6-blue));
+}
+
+body.game-ui-upgrade .phase6-table-card tbody tr:hover td {
+  background: color-mix(in srgb, var(--game-team, var(--phase6-blue)) 10%, #152139) !important;
+}
+
+body.game-ui-upgrade .phase6-table-card .roster-player-cell {
+  gap: 12px;
+}
+
+body.game-ui-upgrade .phase6-table-card .roster-player-headshot {
+  width: 54px !important;
+  height: 54px !important;
+  border: 2px solid color-mix(in srgb, var(--game-team, var(--phase6-purple)) 58%, #fff) !important;
+  border-radius: 50% !important;
+  background: linear-gradient(145deg, #243654, #101a2d) !important;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, .34), 0 0 0 3px color-mix(in srgb, var(--game-team, var(--phase6-purple)) 10%, transparent);
+  object-fit: cover;
+  object-position: center top;
+}
+
+body.game-ui-upgrade .phase6-table-card .roster-player-cell strong {
+  color: #fff !important;
+  font-size: 13px !important;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, .3);
+}
+
+body.game-ui-upgrade .phase6-table-card .roster-player-cell small {
+  color: var(--phase6-text-muted) !important;
+}
+
+body.game-ui-upgrade .phase6-table-card .roster-player-cell .mini-action {
+  min-height: 26px !important;
+  padding: 4px 10px !important;
+  border: 1px solid rgba(93, 157, 255, .34) !important;
+  border-radius: 6px !important;
+  color: #dce9ff !important;
+  background: linear-gradient(180deg, rgba(32, 50, 80, .9), rgba(15, 26, 46, .94)) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .05) !important;
+}
+
+body.game-ui-upgrade .phase6-table-card .roster-player-cell .mini-action:hover {
+  border-color: var(--phase6-blue) !important;
+  color: #fff !important;
+  background: linear-gradient(180deg, #244b83, #17335c) !important;
+  transform: translateY(-1px);
+}
+
+body.game-ui-upgrade .phase6-table-card td:nth-child(5) > strong {
+  display: inline-grid;
+  place-items: center;
+  min-width: 38px;
+  min-height: 30px;
+  border: 1px solid rgba(154, 124, 255, .42);
+  border-radius: 7px;
+  color: #fff !important;
+  background: linear-gradient(145deg, #352458, #201a3b);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .08), 0 6px 12px rgba(0, 0, 0, .2);
+}
+
+body.game-ui-upgrade .phase6-table-card td > .ok,
+body.game-ui-upgrade .phase6-table-card td > .bad {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 4px 9px;
+  border: 1px solid color-mix(in srgb, currentColor 36%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, currentColor 10%, transparent) !important;
+  font-size: 9px !important;
+  font-weight: 900;
+}
+
+body.game-ui-upgrade .phase6-table-card .roster-waive-btn {
+  min-width: 72px;
+  min-height: 32px !important;
+  border: 1px solid rgba(255, 93, 108, .58) !important;
+  border-bottom: 3px solid #ff5d6c !important;
+  border-radius: 7px !important;
+  color: #fff !important;
+  background: linear-gradient(180deg, #75253a, #461827) !important;
+  box-shadow: 0 7px 14px rgba(92, 18, 40, .25), inset 0 1px rgba(255, 255, 255, .08) !important;
+}
+
+body.game-ui-upgrade .phase6-table-card .roster-waive-btn:hover {
+  background: linear-gradient(180deg, #963048, #5d1d30) !important;
+  transform: translateY(-1px);
+}
+
+body.game-ui-upgrade .phase6-card--accent::before {
+  position: absolute;
+  top: 0;
+  right: 18%;
+  left: 0;
+  z-index: 3;
+  height: 3px;
+  border-radius: var(--phase6-radius-card) 0 3px 0;
+  background: linear-gradient(90deg, var(--game-team-secondary), var(--game-team), transparent);
+  box-shadow: 0 0 12px var(--game-team-glow);
+  content: "";
+  pointer-events: none;
+}
+
+body.game-ui-upgrade .phase6-card--accent {
+  border: 1px solid var(--phase6-border) !important;
+  background: var(--phase6-card-background) !important;
+  box-shadow: var(--phase6-shadow-card), inset 0 1px rgba(255, 255, 255, .11) !important;
+}
+
+body.game-ui-upgrade .phase6-card--hero {
+  border-color: color-mix(in srgb, var(--game-team) 36%, var(--phase6-border)) !important;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, .055), transparent 28%),
+    radial-gradient(circle at 76% 30%, color-mix(in srgb, var(--game-team) 13%, transparent), transparent 30%),
+    linear-gradient(145deg, color-mix(in srgb, var(--game-team) 8%, #111b30), #090f1c 72%) !important;
+  box-shadow:
+    0 22px 44px rgba(0, 0, 0, .4),
+    0 7px 20px color-mix(in srgb, var(--game-team) 11%, transparent),
+    inset 0 1px rgba(255, 255, 255, .11),
+    inset 0 -22px 38px rgba(0, 0, 0, .12) !important;
+}
+
+body.game-ui-upgrade .phase6-button {
+  min-height: var(--phase6-button-height);
+  border: 1px solid var(--phase6-button-border) !important;
+  border-radius: var(--phase6-radius-control);
+  color: var(--phase6-text) !important;
+  background: var(--phase6-button-bg) !important;
+  box-shadow: var(--phase6-shadow-control) !important;
+  font-family: var(--phase6-font-heading);
+  font-weight: 900;
+  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+}
+
+body.game-ui-upgrade .phase6-button:hover { filter: brightness(1.1); transform: translateY(-1px); }
+body.game-ui-upgrade .phase6-button.primary {
+  border-color: var(--phase6-button-primary-border) !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  background: var(--phase6-button-primary-bg) !important;
+  box-shadow: 0 10px 22px var(--game-team-glow, rgba(154, 124, 255, .26)), inset 0 1px rgba(255, 255, 255, .15) !important;
+  opacity: 1 !important;
+}
+
+body.game-ui-upgrade.dashboard-mode .phase6-button.phase6-button--team.primary {
+  border-color: color-mix(in srgb, var(--side-primary, var(--phase6-purple)) 66%, #fff) !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--side-primary, var(--phase6-purple)) 82%, #fff), var(--side-primary, var(--phase6-purple))) !important;
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--side-primary, var(--phase6-purple)) 28%, transparent), inset 0 1px rgba(255, 255, 255, .15) !important;
+}
+
+body.game-ui-upgrade .phase6-nav-item.active {
+  border: 1px solid var(--phase6-nav-active-border) !important;
+  border-left: 1px solid var(--phase6-nav-active-border) !important;
+  background: var(--phase6-nav-active-bg) !important;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .24), 0 3px 12px rgba(102, 72, 196, .14), inset 0 1px rgba(255, 255, 255, .07) !important;
+}
+body.game-ui-upgrade .phase6-nav-item.active i {
+  color: var(--phase6-nav-icon) !important;
+  text-shadow: 0 0 8px rgba(243, 179, 61, .25);
+}
+body.game-ui-upgrade .phase6-nav-item.active b {
+  color: var(--phase6-nav-arrow) !important;
+  text-shadow: 0 0 9px rgba(36, 120, 255, .32);
+}
+
+body.game-ui-upgrade .phase6-pattern-host { position: relative; isolation: isolate; }
+body.game-ui-upgrade .phase6-pattern-host::before {
+  position: absolute;
+  right: -38px;
+  bottom: 112px;
+  z-index: -1;
+  width: 184px;
+  height: 250px;
+  background:
+    radial-gradient(circle, var(--phase6-pattern-dot) 0 1.2px, transparent 1.45px) 0 0 / 13px 13px,
+    radial-gradient(circle at 75% 58%, var(--phase6-pattern-glow), transparent 58%);
+  clip-path: polygon(32% 0, 100% 0, 100% 100%, 4% 100%, 20% 68%);
+  -webkit-mask-image: linear-gradient(145deg, transparent 2%, #000 38%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(145deg, transparent 2%, #000 38%, #000 78%, transparent 100%);
+  opacity: var(--phase6-pattern-opacity);
+  content: "";
+  pointer-events: none;
+}
+
+body.game-ui-upgrade .phase6-pattern-dots {
+  background-image:
+    radial-gradient(circle, var(--phase6-pattern-dot) 0 1.2px, transparent 1.45px),
+    radial-gradient(circle at 75% 58%, var(--phase6-pattern-glow), transparent 58%);
+  background-size: 13px 13px, auto;
+  opacity: var(--phase6-pattern-opacity);
+}
+
+body.game-ui-upgrade .phase6-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--phase6-scrollbar-thumb) transparent;
+}
+body.game-ui-upgrade .phase6-scroll::-webkit-scrollbar { width: var(--phase6-scrollbar-size); height: var(--phase6-scrollbar-size); }
+body.game-ui-upgrade .phase6-scroll::-webkit-scrollbar-track {
+  margin-block: 7px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--phase6-scrollbar-track);
+  box-shadow: none;
+}
+body.game-ui-upgrade .phase6-scroll::-webkit-scrollbar-thumb {
+  min-height: 48px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--phase6-scrollbar-thumb);
+  box-shadow: none;
+}
+body.game-ui-upgrade .phase6-scroll::-webkit-scrollbar-thumb:hover { background: var(--phase6-scrollbar-thumb-hover); }
+
+/* Approved sidebar scrollbar reference. Keep this stronger than legacy themed scrollbar rules. */
+body.game-ui-upgrade.dashboard-mode .context-sidebar .context-nav.phase6-scroll {
+  padding-right: 6px !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: var(--phase6-scrollbar-thumb) transparent !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-sidebar .context-nav.phase6-scroll::-webkit-scrollbar {
+  width: var(--phase6-scrollbar-size) !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-sidebar .context-nav.phase6-scroll::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-sidebar .context-nav.phase6-scroll::-webkit-scrollbar-track {
+  margin-block: 7px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-sidebar .context-nav.phase6-scroll::-webkit-scrollbar-thumb {
+  min-height: 48px;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: var(--phase6-scrollbar-thumb) !important;
+  box-shadow: none !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-sidebar .context-nav.phase6-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--phase6-scrollbar-thumb-hover) !important;
+}
+
+/* Phase 6 roster directory: individual franchise branding with broadcast depth. */
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen > .roster-page-title {
+  display: none !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-roster-directory-shell {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--game-team) 48%, var(--phase6-border));
+  border-radius: 13px;
+  background: #09111f;
+  box-shadow: 0 28px 54px rgba(0, 0, 0, .48), 0 8px 26px var(--game-team-glow), inset 0 1px rgba(255, 255, 255, .08);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-roster-directory-shell::before {
+  position: absolute;
+  z-index: 5;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--game-team-secondary), var(--game-team) 48%, transparent 90%);
+  box-shadow: 0 0 16px var(--game-team-glow);
+  content: "";
+  pointer-events: none;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-roster-directory-shell > .phase6-directory-card,
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-roster-directory-shell > .phase6-team-hero {
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-roster-directory-shell > .phase6-directory-card {
+  border-bottom: 1px solid color-mix(in srgb, var(--game-team-secondary) 38%, var(--phase6-border)) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-roster-directory-shell > .phase6-team-hero {
+  border-bottom: 4px solid var(--game-team-secondary) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-directory-card {
+  position: relative;
+  overflow: hidden !important;
+  padding-bottom: 14px;
+  border-color: color-mix(in srgb, var(--game-team) 36%, var(--phase6-border)) !important;
+  background:
+    radial-gradient(circle at 92% -10%, color-mix(in srgb, var(--game-team) 14%, transparent), transparent 29%),
+    linear-gradient(180deg, #17243c, #0c1526 64%, #080f1d) !important;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, .44), 0 7px 22px color-mix(in srgb, var(--game-team) 9%, transparent), inset 0 1px rgba(255, 255, 255, .09) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-directory-card::after {
+  position: absolute;
+  right: -44px;
+  bottom: -74px;
+  width: 260px;
+  height: 180px;
+  border: 22px solid color-mix(in srgb, var(--game-team-secondary) 6%, transparent);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  transform: rotate(-18deg);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-directory-card > header {
+  position: relative;
+  z-index: 1;
+  min-height: 82px !important;
+  padding: 17px 22px 14px !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--game-team) 25%, var(--phase6-border)) !important;
+  color: var(--phase6-text) !important;
+  background: linear-gradient(100deg, color-mix(in srgb, var(--game-team) 10%, rgba(18, 30, 51, .94)), rgba(9, 17, 31, .7)) !important;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .2), inset 0 1px rgba(255, 255, 255, .04);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-directory-card > header::before {
+  position: absolute;
+  left: 22px;
+  bottom: -1px;
+  width: 150px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--game-team-secondary), var(--game-team), transparent);
+  box-shadow: 0 0 12px var(--game-team-glow);
+  content: "";
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-directory-card > header span {
+  color: color-mix(in srgb, var(--game-team-secondary) 78%, #fff) !important;
+  font-size: 9px !important;
+  letter-spacing: .14em !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-directory-card > header strong {
+  display: block;
+  margin-top: 3px;
+  color: #fff !important;
+  font-family: var(--phase6-font-display) !important;
+  font-size: 29px !important;
+  line-height: 1 !important;
+  letter-spacing: .035em !important;
+  text-shadow: 0 7px 16px rgba(0, 0, 0, .42);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-directory-card > header small {
+  padding: 7px 10px;
+  border: 1px solid rgba(148, 170, 209, .22);
+  border-radius: 999px;
+  color: var(--phase6-text-soft) !important;
+  background: rgba(7, 13, 25, .42);
+  font-size: 9px !important;
+  letter-spacing: .045em;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-grid {
+  position: relative;
+  z-index: 1;
+  gap: 8px !important;
+  padding: 12px 14px 0 !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-grid button {
+  position: relative;
+  min-height: 82px !important;
+  padding: 9px 5px 8px !important;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--directory-primary) 26%, rgba(147, 166, 201, .3)) !important;
+  border-radius: 9px !important;
+  color: #dfe8f7 !important;
+  background:
+    radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--directory-primary) 12%, transparent), transparent 45%),
+    linear-gradient(155deg, #1a2942, #101a2d 70%, #0b1322) !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, .25), inset 0 1px rgba(255, 255, 255, .06) !important;
+  transition: transform 150ms ease, border-color 150ms ease, background 150ms ease, box-shadow 150ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-grid button::after {
+  position: absolute;
+  inset: auto 8px 0;
+  height: 2px;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(90deg, var(--directory-secondary), var(--directory-primary));
+  opacity: .36;
+  content: "";
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-grid button:hover {
+  border-color: color-mix(in srgb, var(--directory-primary) 68%, #fff) !important;
+  color: #fff !important;
+  background:
+    radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--directory-primary) 24%, transparent), transparent 48%),
+    linear-gradient(155deg, color-mix(in srgb, var(--directory-primary) 12%, #223350), #101a2d 72%) !important;
+  box-shadow: 0 13px 23px rgba(0, 0, 0, .34), 0 4px 15px color-mix(in srgb, var(--directory-primary) 19%, transparent), inset 0 1px rgba(255, 255, 255, .1) !important;
+  transform: translateY(-3px) scale(1.02);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-grid button:hover::after,
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-grid button.active::after {
+  height: 3px;
+  opacity: 1;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-grid button.active {
+  border-color: color-mix(in srgb, var(--directory-primary) 60%, #fff) !important;
+  color: #fff !important;
+  background:
+    radial-gradient(circle at 50% 16%, color-mix(in srgb, var(--directory-secondary) 22%, transparent), transparent 46%),
+    linear-gradient(150deg, color-mix(in srgb, var(--directory-primary) 32%, #233451), color-mix(in srgb, var(--directory-primary) 12%, #101a2d)) !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--directory-primary) 28%, transparent), 0 14px 25px rgba(0, 0, 0, .38), 0 5px 18px color-mix(in srgb, var(--directory-primary) 26%, transparent), inset 0 1px rgba(255, 255, 255, .13) !important;
+  transform: translateY(-2px);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-grid .roster-browser-logo {
+  width: 38px !important;
+  height: 38px !important;
+  object-fit: contain;
+  filter: drop-shadow(0 7px 7px rgba(0, 0, 0, .42)) drop-shadow(0 0 6px color-mix(in srgb, var(--directory-primary) 25%, transparent));
+  transition: transform 150ms ease, filter 150ms ease;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-grid button:hover .roster-browser-logo,
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-grid button.active .roster-browser-logo {
+  transform: scale(1.12);
+  filter: drop-shadow(0 8px 9px rgba(0, 0, 0, .5)) drop-shadow(0 0 9px color-mix(in srgb, var(--directory-primary) 40%, transparent));
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-grid button span {
+  position: relative;
+  z-index: 1;
+  color: inherit !important;
+  font-family: var(--phase6-font-heading) !important;
+  font-size: 11px !important;
+  font-weight: 850 !important;
+  letter-spacing: .08em !important;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, .48);
+}
+
+/* Roster overview: branded hero, broadcast metrics, and decisive compliance state. */
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-team-hero {
+  position: relative;
+  min-height: 146px !important;
+  padding: 24px 28px !important;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--game-team) 56%, var(--phase6-border)) !important;
+  border-bottom: 4px solid var(--game-team-secondary) !important;
+  color: var(--phase6-text) !important;
+  background:
+    radial-gradient(circle at 88% 22%, color-mix(in srgb, var(--game-team-secondary) 15%, transparent), transparent 27%),
+    linear-gradient(105deg, color-mix(in srgb, var(--game-team) 27%, #15213a), color-mix(in srgb, var(--game-team-secondary) 9%, #0b1425) 60%, #080f1c) !important;
+  box-shadow: 0 24px 46px rgba(0, 0, 0, .42), 0 8px 24px var(--game-team-glow), inset 0 1px rgba(255, 255, 255, .1) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-team-hero::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--game-team-secondary), var(--game-team) 50%, transparent 88%);
+  box-shadow: 0 0 16px var(--game-team-glow);
+  content: "";
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .phase6-team-hero::after {
+  right: -40px !important;
+  bottom: -92px !important;
+  width: 320px !important;
+  height: 240px !important;
+  border: 28px solid color-mix(in srgb, var(--game-team) 8%, transparent) !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  transform: rotate(-18deg);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-identity {
+  position: relative;
+  z-index: 1;
+  gap: 22px !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-hero-logo {
+  width: 88px !important;
+  height: 88px !important;
+  object-fit: contain;
+  filter: drop-shadow(0 13px 15px rgba(0, 0, 0, .48)) drop-shadow(0 0 13px var(--game-team-glow));
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-identity span {
+  color: color-mix(in srgb, var(--game-team-secondary) 78%, #fff) !important;
+  font-size: 9px !important;
+  letter-spacing: .14em !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-identity strong {
+  color: #fff !important;
+  font-family: var(--phase6-font-display) !important;
+  font-size: clamp(36px, 3.4vw, 50px) !important;
+  line-height: .98 !important;
+  letter-spacing: .025em !important;
+  text-shadow: 0 8px 18px rgba(0, 0, 0, .5);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-identity small {
+  display: inline-flex;
+  margin-top: 7px;
+  padding: 4px 8px;
+  border: 1px solid color-mix(in srgb, var(--game-team) 38%, var(--phase6-border));
+  border-radius: 999px;
+  color: var(--phase6-text-soft) !important;
+  background: rgba(5, 10, 20, .4);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-overall {
+  position: relative;
+  z-index: 1;
+  display: grid !important;
+  place-items: center !important;
+  align-content: center !important;
+  gap: 3px;
+  min-width: 112px;
+  min-height: 88px;
+  padding: 13px 16px 11px;
+  border: 1px solid color-mix(in srgb, var(--game-team-secondary) 45%, var(--phase6-border));
+  border-bottom: 3px solid var(--game-team-secondary);
+  border-radius: 11px;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--game-team) 19%, #192640), rgba(8, 15, 28, .9));
+  box-shadow: 0 13px 26px rgba(0, 0, 0, .38), 0 5px 16px var(--game-team-glow), inset 0 1px rgba(255, 255, 255, .08);
+  text-align: center !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-overall span {
+  color: color-mix(in srgb, var(--game-team-secondary) 76%, #fff) !important;
+  font-size: 8px !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-team-overall b {
+  color: #fff !important;
+  font-size: 50px !important;
+  text-shadow: 0 0 18px var(--game-team-glow), 0 7px 14px rgba(0, 0, 0, .44);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-view-summary {
+  gap: 12px !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-view-summary .phase6-stat-card {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 54px;
+  grid-template-rows: auto 1fr;
+  min-height: 122px !important;
+  padding: 18px 20px !important;
+  border-radius: 12px !important;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-view-summary .phase6-stat-card:hover {
+  border-color: color-mix(in srgb, var(--phase6-stat-color) 65%, var(--phase6-border)) !important;
+  box-shadow: 0 18px 33px rgba(0, 0, 0, .4), 0 5px 17px color-mix(in srgb, var(--phase6-stat-color) 15%, transparent), inset 0 1px rgba(255, 255, 255, .09) !important;
+  transform: translateY(-3px);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-view-summary .phase6-stat-card::before {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border: 1px solid color-mix(in srgb, var(--phase6-stat-color) 55%, transparent);
+  border-radius: 11px;
+  color: #fff;
+  background: color-mix(in srgb, var(--phase6-stat-color) 18%, #0b1425);
+  box-shadow: 0 9px 18px color-mix(in srgb, var(--phase6-stat-color) 16%, transparent), inset 0 1px rgba(255, 255, 255, .1);
+  font-family: var(--phase6-font-heading);
+  font-size: 18px;
+  font-weight: 850;
+  content: "PLY";
+  transform: none;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-view-summary .phase6-stat-card:nth-child(2)::before { content: "AGE"; font-size: 14px; }
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-view-summary .phase6-stat-card:nth-child(3)::before { content: "$"; font-size: 24px; }
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-view-summary .phase6-stat-card:nth-child(4)::before { content: "EXP"; font-size: 14px; }
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-view-summary .phase6-stat-card::after {
+  right: -28px !important;
+  bottom: -38px !important;
+  width: 104px !important;
+  height: 90px !important;
+  border: 15px solid color-mix(in srgb, var(--phase6-stat-color) 10%, transparent) !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-view-summary .card-label {
+  color: color-mix(in srgb, var(--phase6-stat-color) 72%, #fff) !important;
+  font-size: 9px !important;
+  letter-spacing: .13em !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-view-summary .stat-value {
+  align-self: end;
+  color: #fff !important;
+  font-size: 34px !important;
+  text-shadow: 0 6px 16px rgba(0, 0, 0, .4);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-compliance-strip {
+  position: relative;
+  min-height: 84px !important;
+  padding: 16px 22px 16px 78px !important;
+  overflow: hidden;
+  border: 1px solid rgba(53, 208, 127, .3) !important;
+  border-left: 4px solid var(--phase6-green) !important;
+  border-radius: 11px !important;
+  color: var(--phase6-text) !important;
+  background:
+    radial-gradient(circle at 8% 130%, rgba(53, 208, 127, .14), transparent 30%),
+    linear-gradient(105deg, #102435, #0a1425 62%, #0d1729) !important;
+  box-shadow: 0 16px 31px rgba(0, 0, 0, .36), 0 5px 16px rgba(53, 208, 127, .08), inset 0 1px rgba(255, 255, 255, .06) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-compliance-strip::before {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(53, 208, 127, .5);
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(145deg, #28d982, #117a4c);
+  box-shadow: 0 0 0 5px rgba(53, 208, 127, .08), 0 8px 17px rgba(0, 0, 0, .3);
+  content: "✓";
+  transform: translateY(-50%);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-compliance-strip.invalid {
+  border-color: rgba(255, 93, 108, .34) !important;
+  border-left-color: var(--phase6-red) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-compliance-strip.invalid::before {
+  border-color: rgba(255, 93, 108, .5);
+  background: linear-gradient(145deg, #ff6477, #a91f3b);
+  box-shadow: 0 0 0 5px rgba(255, 93, 108, .08), 0 8px 17px rgba(0, 0, 0, .3);
+  content: "!";
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-compliance-strip span {
+  color: var(--phase6-green) !important;
+  font-size: 9px !important;
+  letter-spacing: .13em !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-compliance-strip.invalid span { color: var(--phase6-red) !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-compliance-strip strong {
+  color: #fff !important;
+  font-family: var(--phase6-font-display) !important;
+  font-size: 25px !important;
+  letter-spacing: .035em !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .roster-compliance-strip p {
+  position: relative;
+  z-index: 1;
+  padding: 7px 10px;
+  border: 1px solid rgba(147, 166, 201, .2);
+  border-radius: 999px;
+  color: var(--phase6-text-soft) !important;
+  background: rgba(6, 12, 23, .42);
+  font-size: 9px !important;
+  letter-spacing: .045em;
+}
+
+/* Roster table surface: layered arena depth instead of a single flat navy fill. */
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .league-roster-table {
+  position: relative;
+  border-color: color-mix(in srgb, var(--game-team) 38%, var(--phase6-border)) !important;
+  background:
+    radial-gradient(circle at 4% 4%, color-mix(in srgb, var(--game-team) 13%, transparent), transparent 25%),
+    radial-gradient(circle at 96% 96%, color-mix(in srgb, var(--game-team-secondary) 8%, transparent), transparent 28%),
+    linear-gradient(180deg, #121e33, #080f1d) !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, .46), 0 7px 23px color-mix(in srgb, var(--game-team) 9%, transparent), inset 0 1px rgba(255, 255, 255, .08) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .league-roster-table thead,
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .league-roster-table thead tr {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 10%, #1c2a44), #111b2f) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .league-roster-table th {
+  height: 48px !important;
+  border-bottom: 2px solid color-mix(in srgb, var(--game-team) 52%, var(--phase6-border)) !important;
+  color: #e5edf9 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .league-roster-table tbody tr {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 4%, #18253d), #111c30) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .league-roster-table tbody tr td {
+  border-top: 1px solid rgba(255, 255, 255, .025) !important;
+  border-bottom-color: rgba(105, 128, 168, .24) !important;
+  background: transparent !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .018), inset 0 -1px rgba(0, 0, 0, .16);
+  transition: background 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .league-roster-table tbody tr:nth-child(even) {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team-secondary) 3%, #142038), #0d1728) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .league-roster-table tbody tr td:first-child {
+  border-left: 3px solid color-mix(in srgb, var(--game-team) 34%, transparent) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .league-roster-table tbody tr:hover {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 18%, #213451), color-mix(in srgb, var(--game-team-secondary) 5%, #111d32)) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .league-roster-table tbody tr:hover td {
+  border-top-color: color-mix(in srgb, var(--game-team) 28%, transparent) !important;
+  border-bottom-color: color-mix(in srgb, var(--game-team) 36%, var(--phase6-border)) !important;
+  background: transparent !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .055), inset 0 -1px rgba(0, 0, 0, .22);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .league-roster-table tbody tr:hover td:first-child {
+  border-left-color: var(--game-team-secondary) !important;
+  box-shadow: none !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .league-roster-table .mini-action {
+  border-color: color-mix(in srgb, var(--game-team) 42%, var(--phase6-border)) !important;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 13%, #213451), #101b30) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .league-roster-table .mini-action:hover {
+  border-color: color-mix(in srgb, var(--game-team) 72%, #fff) !important;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 42%, #2b4264), var(--game-team)) !important;
+  box-shadow: 0 7px 15px var(--game-team-glow), inset 0 1px rgba(255, 255, 255, .13) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-roster-screen .league-roster-table td:nth-child(5) > strong {
+  border-color: color-mix(in srgb, var(--game-team) 50%, var(--phase6-border)) !important;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--game-team) 30%, #332552), color-mix(in srgb, var(--game-team-secondary) 8%, #18162d)) !important;
+  box-shadow: 0 7px 14px rgba(0, 0, 0, .28), 0 3px 10px var(--game-team-glow), inset 0 1px rgba(255, 255, 255, .08) !important;
+}
+
+body.game-ui-upgrade .phase6-stat-card {
+  --phase6-stat-color: var(--phase6-blue);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--phase6-stat-color) 34%, var(--phase6-border)) !important;
+  border-bottom: 3px solid var(--phase6-stat-color) !important;
+  background: radial-gradient(circle at 92% 112%, color-mix(in srgb, var(--phase6-stat-color) 15%, transparent), transparent 34%), linear-gradient(145deg, color-mix(in srgb, var(--phase6-stat-color) 7%, #141f35), #0b1425 74%) !important;
+  box-shadow: 0 13px 25px rgba(0, 0, 0, .3), inset 0 1px rgba(255, 255, 255, .07) !important;
+}
+body.game-ui-upgrade .phase6-stat-card::after {
+  position: absolute;
+  right: 16px;
+  bottom: 15px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid color-mix(in srgb, var(--phase6-stat-color) 32%, transparent);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--phase6-stat-color) 8%, transparent);
+  content: "";
+  transform: rotate(-8deg);
+}
+body.game-ui-upgrade .phase6-stat-card .card-label { color: color-mix(in srgb, var(--phase6-stat-color) 72%, #fff) !important; }
+body.game-ui-upgrade .phase6-stat-card .stat-value { position: relative; z-index: 1; color: #fff !important; }
+body.game-ui-upgrade .phase6-stat-card--green { --phase6-stat-color: var(--phase6-green); }
+body.game-ui-upgrade .phase6-stat-card--gold { --phase6-stat-color: var(--phase6-gold); }
+body.game-ui-upgrade .phase6-stat-card--red { --phase6-stat-color: var(--phase6-red); }
+body.game-ui-upgrade .phase6-stat-card--purple { --phase6-stat-color: var(--phase6-purple); }
+
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-hero {
+  position: relative;
+  min-height: 154px !important;
+  padding: 25px 30px !important;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--game-team) 58%, var(--phase6-border)) !important;
+  color: var(--phase6-text) !important;
+  background:
+    linear-gradient(105deg, color-mix(in srgb, var(--game-team) 28%, #101a2d), color-mix(in srgb, var(--game-team-secondary) 11%, #09111f) 58%, #07101d 82%),
+    radial-gradient(circle at 88% 30%, var(--game-team-glow), transparent 34%) !important;
+  box-shadow: var(--phase6-shadow-card), 0 8px 28px var(--game-team-glow), inset 0 1px rgba(255, 255, 255, .12) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-hero::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--game-team-secondary), var(--game-team) 48%, transparent 88%);
+  box-shadow: 0 0 16px var(--game-team-glow);
+  content: "";
+  pointer-events: none;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-hero::after {
+  position: absolute;
+  top: -62px;
+  right: -18px;
+  width: 330px;
+  height: 250px;
+  border: 28px solid color-mix(in srgb, var(--game-team, var(--phase6-purple)) 8%, transparent);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  transform: rotate(-16deg);
+  z-index: 0;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-hero .team-hero-identity { position: relative; z-index: 2; }
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-hero .rotation-hero-watermark {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: -22px;
+  width: 390px;
+  height: 230px;
+  display: grid;
+  place-items: center;
+  opacity: .085;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-hero .rotation-hero-watermark-logo {
+  width: 360px !important;
+  height: 215px !important;
+  object-fit: contain;
+  filter: saturate(1.15) drop-shadow(0 18px 24px rgba(0, 0, 0, .5)) drop-shadow(0 0 18px var(--game-team-glow));
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-hero .page-hero-logo {
+  width: 88px !important;
+  height: 88px !important;
+  flex-basis: 88px !important;
+  filter: drop-shadow(0 12px 16px rgba(0, 0, 0, .42)) drop-shadow(0 0 14px var(--game-team-glow));
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-hero .card-label { color: color-mix(in srgb, var(--game-team-secondary) 76%, #fff) !important; font-size: 9px !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-hero .player-name {
+  color: #fff !important;
+  font-family: var(--phase6-font-display) !important;
+  font-size: clamp(34px, 3.2vw, 48px) !important;
+  text-shadow: 0 7px 18px rgba(0, 0, 0, .5) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-hero .meta { max-width: 720px; color: var(--phase6-text-soft) !important; font-size: 12px !important; }
+
+body.game-ui-upgrade.dashboard-mode .phase6-matchup-plan {
+  min-height: 148px !important;
+  padding: 18px 20px !important;
+  position: relative;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--game-team) 38%, var(--phase6-border)) !important;
+  color: var(--phase6-text) !important;
+  background:
+    radial-gradient(circle at 100% 120%, color-mix(in srgb, var(--game-team-secondary) 16%, transparent), transparent 36%),
+    linear-gradient(115deg, color-mix(in srgb, var(--game-team) 14%, #141f35), #0a1221 66%) !important;
+  box-shadow: 0 17px 32px rgba(0, 0, 0, .34), 0 5px 20px color-mix(in srgb, var(--game-team) 8%, transparent), inset 0 1px rgba(255, 255, 255, .07) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-matchup-plan > * {
+  min-height: 104px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--game-team) 22%, rgba(116, 141, 184, .22));
+  border-radius: 9px;
+  background: rgba(7, 13, 25, .38);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, .32), 0 3px 10px color-mix(in srgb, var(--game-team) 8%, transparent), inset 0 1px rgba(255, 255, 255, .055);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-matchup-plan .rotation-matchup-main {
+  border-left: 3px solid var(--game-team-secondary);
+  background: linear-gradient(115deg, color-mix(in srgb, var(--game-team-secondary) 12%, rgba(7, 13, 25, .64)), rgba(7, 13, 25, .36));
+}
+body.game-ui-upgrade.dashboard-mode .phase6-matchup-plan .rotation-matchup-opponent {
+  border-left: 3px solid var(--game-team);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-matchup-plan .card-label { color: color-mix(in srgb, var(--game-team-secondary) 78%, #fff) !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-matchup-plan .player-name,
+body.game-ui-upgrade.dashboard-mode .phase6-matchup-plan .rotation-matchup-opponent strong { color: #fff !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-matchup-plan :is(.meta, small, p) { color: var(--phase6-text-soft) !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-matchup-plan .rotation-opponent-logo { width: 52px !important; height: 52px !important; filter: drop-shadow(0 8px 11px rgba(0, 0, 0, .36)); }
+body.game-ui-upgrade.dashboard-mode .phase6-matchup-plan .strategy-fit {
+  min-width: 112px !important;
+  align-content: center;
+  justify-items: center !important;
+  border-color: color-mix(in srgb, var(--game-team) 48%, var(--phase6-border));
+  border-bottom: 3px solid var(--game-team-secondary);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--game-team) 22%, #17243a), color-mix(in srgb, var(--game-team-secondary) 9%, #0d182b));
+  box-shadow: 0 12px 24px rgba(0, 0, 0, .36), 0 5px 16px var(--game-team-glow), inset 0 1px rgba(255, 255, 255, .08);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-matchup-plan .strategy-fit span { color: var(--phase6-text-muted) !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-matchup-plan .strategy-fit strong { color: #fff !important; font-size: 38px !important; text-shadow: 0 0 18px var(--game-team-glow); }
+
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-lineup-card {
+  border-color: var(--phase6-border) !important;
+  color: var(--phase6-text) !important;
+  background:
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--game-team, var(--phase6-purple)) 8%, transparent), transparent 24%),
+    linear-gradient(180deg, #121d32, #09111f) !important;
+  box-shadow: var(--phase6-shadow-card), inset 0 1px rgba(255, 255, 255, .08) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-lineup-card > header {
+  min-height: 68px !important;
+  border-bottom-color: rgba(154, 124, 255, .32) !important;
+  color: var(--phase6-text) !important;
+  background: linear-gradient(100deg, color-mix(in srgb, var(--game-team, var(--phase6-purple)) 11%, #17243c), #0d1729 72%) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-lineup-card > header span { color: #fff !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-lineup-card > header :is(small, strong) { color: var(--phase6-text-muted) !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-lineup-columns {
+  min-height: 44px !important;
+  border-bottom-color: rgba(116, 141, 184, .26) !important;
+  color: var(--phase6-text-muted) !important;
+  background: linear-gradient(180deg, #18263f, #111c30) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-lineup-columns > div b { color: var(--phase6-text-muted) !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-lineup-columns > div b:last-child { color: var(--phase6-gold) !important; }
+
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-lineup-row {
+  position: relative;
+  min-height: 102px !important;
+  border-bottom: 1px solid rgba(116, 141, 184, .2) !important;
+  color: var(--phase6-text) !important;
+  background: linear-gradient(90deg, rgba(20, 31, 52, .96), rgba(13, 22, 38, .94)) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .018);
+  transition: background 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-lineup-row:nth-child(even) {
+  background: linear-gradient(90deg, rgba(17, 27, 46, .98), rgba(10, 18, 33, .96)) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-lineup-row.starter-slot {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--game-team) 14%, #15223a), #0d1729 44%) !important;
+  box-shadow: inset 3px 0 var(--game-team);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-lineup-row:hover {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--game-team, var(--phase6-purple)) 14%, #192944), #111d32) !important;
+  box-shadow: inset 4px 0 var(--game-team, var(--phase6-purple)), 0 8px 18px rgba(0, 0, 0, .16);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-drag-handle { color: #66789a !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-drag-handle:hover { color: var(--phase6-gold) !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-slot-lock span {
+  min-width: 38px;
+  height: 36px;
+  border-color: rgba(93, 157, 255, .3);
+  border-radius: 8px;
+  color: #b9c8e0;
+  background: linear-gradient(145deg, #1b2b47, #101a2e);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .06), 0 7px 14px rgba(0, 0, 0, .2);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-slot-lock.locked span {
+  border-color: color-mix(in srgb, var(--game-team) 72%, #fff);
+  border-bottom: 3px solid var(--game-team-secondary);
+  color: #fff;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--game-team) 78%, #fff), var(--game-team));
+  box-shadow: 0 7px 16px var(--game-team-glow), inset 0 1px rgba(255, 255, 255, .15);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-player-headshot {
+  width: 58px !important;
+  height: 58px !important;
+  flex-basis: 58px !important;
+  border: 2px solid color-mix(in srgb, var(--game-team, var(--phase6-purple)) 52%, #fff) !important;
+  border-radius: 50% !important;
+  background: #17243a !important;
+  box-shadow: 0 9px 16px rgba(0, 0, 0, .32), 0 0 0 3px color-mix(in srgb, var(--game-team, var(--phase6-purple)) 9%, transparent);
+  object-fit: cover;
+  object-position: center top;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-player-identity strong { color: #fff !important; font-size: 14px !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-player-identity > div > span { color: var(--phase6-text-muted) !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-active-control small {
+  display: inline-flex;
+  padding: 3px 7px;
+  border: 1px solid rgba(53, 208, 127, .3);
+  border-radius: 999px;
+  color: var(--phase6-green) !important;
+  background: rgba(53, 208, 127, .08);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-position-select span { color: var(--phase6-text-muted) !important; font-size: 8px !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-position-select select {
+  min-height: 31px !important;
+  padding: 0 26px 0 9px !important;
+  border: 1px solid rgba(116, 141, 184, .42) !important;
+  border-radius: 7px !important;
+  color: #eaf1fc !important;
+  background: linear-gradient(180deg, #1b2a45, #111b2f) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .05) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-position-select select:focus {
+  border-color: var(--phase6-blue) !important;
+  box-shadow: 0 0 0 2px rgba(36, 120, 255, .18) !important;
+  outline: none;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-position-select select:disabled {
+  border-color: rgba(93, 157, 255, .42) !important;
+  color: #bcd7ff !important;
+  background: linear-gradient(180deg, #18335d, #122542) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen :is(.rotation-player-ovr, .rotation-minute-value) {
+  display: inline-grid;
+  place-items: center;
+  min-width: 42px;
+  min-height: 34px;
+  border: 1px solid rgba(154, 124, 255, .32);
+  border-radius: 7px;
+  color: #fff !important;
+  background: linear-gradient(145deg, #2d2349, #19172e);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .06);
+  font-size: 16px !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-player-ovr {
+  width: calc(100% - 4px);
+  justify-self: start;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-minute-value {
+  width: calc(100% - 4px);
+  justify-self: end;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-minute-slider { height: 28px !important; cursor: pointer; }
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-minute-slider::-webkit-slider-runnable-track {
+  height: 10px !important;
+  border: 1px solid rgba(116, 141, 184, .42) !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, var(--game-team) 0, var(--game-team-secondary) var(--minute-pct), #17243a var(--minute-pct), #17243a 100%) !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .34), 0 0 0 3px color-mix(in srgb, var(--game-team) 7%, transparent);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-minute-slider::-webkit-slider-thumb {
+  width: 22px !important;
+  height: 22px !important;
+  margin-top: -7px !important;
+  border: 3px solid color-mix(in srgb, var(--game-team-secondary) 46%, #fff) !important;
+  background: var(--game-team) !important;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--game-team) 20%, transparent), 0 5px 11px rgba(0, 0, 0, .34) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-minute-slider:focus-visible { outline: 2px solid color-mix(in srgb, var(--game-team) 72%, #fff); outline-offset: 4px; border-radius: 999px; }
+
+/* Rotation summary: compact broadcast tiles with clear category identity. */
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-summary {
+  gap: 12px !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen > :is(.rotation-page-title, .rotation-section-title) {
+  display: none !important;
+}
+body.game-ui-upgrade.dashboard-mode .standings-topbar:has(> .page-title) {
+  display: none !important;
+}
+
+/* The hidden page title removes one grid child; give the standings cards the freed row. */
+body.game-ui-upgrade.dashboard-mode.standings-fit-layout .page {
+  grid-template-rows: auto auto minmax(0, 1fr) !important;
+}
+
+/* Secondary standings views do not render the scope toolbar. */
+body.game-ui-upgrade.dashboard-mode:is(.standings-wildcard-layout, .standings-cup-layout) .page {
+  grid-template-rows: auto minmax(0, 1fr) !important;
+}
+
+/* Power Rankings and Streaks should use the full standings canvas. */
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-wide-table {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box;
+}
+
+/* Display the team marks directly instead of placing them inside white badges. */
+body.game-ui-upgrade.dashboard-mode.standings-layout .page .standings-team-cell {
+  grid-template-columns: 38px minmax(0, 1fr) !important;
+  gap: 9px !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout .page .standings-team-cell .standings-team-logo {
+  width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, .3)) !important;
+  flex: 0 0 34px !important;
+  object-fit: contain;
+}
+
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-conference-grid {
+  height: 100% !important;
+  max-height: none !important;
+  align-self: stretch !important;
+}
+
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table {
+  height: 100% !important;
+}
+
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table {
+  border-color: rgba(113, 140, 193, .38) !important;
+  border-radius: 12px !important;
+  background: linear-gradient(155deg, rgba(18, 30, 53, .98), rgba(9, 17, 31, .99)) !important;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, .3), inset 0 1px rgba(255, 255, 255, .055) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table:first-child {
+  border-top-color: rgba(61, 132, 255, .72) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table:last-child {
+  border-top-color: rgba(255, 77, 96, .66) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table:first-child .standings-title {
+  background: radial-gradient(circle at 8% 50%, rgba(49, 121, 255, .19), transparent 28%), linear-gradient(90deg, rgba(20, 39, 71, .98), rgba(12, 22, 39, .98)) !important;
+  box-shadow: inset 3px 0 #347cff, inset 0 -1px rgba(105, 150, 231, .28) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table:last-child .standings-title {
+  background: radial-gradient(circle at 8% 50%, rgba(255, 65, 85, .16), transparent 28%), linear-gradient(90deg, rgba(53, 28, 40, .98), rgba(15, 22, 37, .98)) !important;
+  box-shadow: inset 3px 0 #ff415d, inset 0 -1px rgba(224, 91, 112, .24) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-title {
+  min-height: 50px !important;
+  padding: 7px 14px !important;
+  color: #fff !important;
+  font-family: var(--phase6-font-heading) !important;
+  font-size: 16px !important;
+  letter-spacing: .035em !important;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, .42);
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .conference-logo {
+  width: 36px !important;
+  height: 36px !important;
+  padding: 3px !important;
+  border: 1px solid rgba(255, 255, 255, .16) !important;
+  border-radius: 9px !important;
+  background: rgba(4, 11, 22, .58) !important;
+  box-shadow: 0 7px 15px rgba(0, 0, 0, .3), inset 0 1px rgba(255, 255, 255, .08) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .conference-logo img {
+  width: 30px !important;
+  height: 30px !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table table {
+  width: 100% !important;
+  table-layout: fixed !important;
+  background: transparent !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table th:first-child,
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table td:first-child { width: 38px !important; }
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table th:nth-child(2),
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table td:nth-child(2) { width: 142px !important; }
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table thead tr {
+  height: 34px !important;
+  background: rgba(7, 14, 27, .76) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table th {
+  padding: 4px 6px !important;
+  color: #8fa2c5 !important;
+  font-size: 8px !important;
+  font-weight: 850 !important;
+  letter-spacing: .075em !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table tbody tr {
+  height: 34px !important;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--standing-primary) 7%, transparent), transparent 22%),
+    linear-gradient(180deg, rgba(23, 36, 61, .9), rgba(15, 27, 48, .92)) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .025), inset 0 -1px rgba(0, 0, 0, .22) !important;
+  transition: background 140ms ease, box-shadow 140ms ease, filter 140ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table tbody tr:nth-child(even) {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--standing-primary) 6%, transparent), transparent 22%),
+    linear-gradient(180deg, rgba(17, 29, 51, .94), rgba(11, 21, 39, .95)) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table tbody tr:hover {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--standing-primary) 18%, transparent), transparent 36%),
+    linear-gradient(180deg, rgba(38, 57, 91, .98), rgba(22, 38, 66, .98)) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .07), inset 0 -1px color-mix(in srgb, var(--standing-primary) 25%, transparent), 0 7px 16px rgba(0, 0, 0, .16) !important;
+  filter: brightness(1.08);
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table td {
+  padding: 3px 6px !important;
+  border-bottom-color: rgba(111, 136, 179, .19) !important;
+  color: #eaf1ff !important;
+  font-size: 9px !important;
+  font-weight: 750 !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-team-cell {
+  grid-template-columns: 29px minmax(0, 1fr) !important;
+  gap: 8px !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-team-logo {
+  width: 27px !important;
+  height: 27px !important;
+  padding: 3px !important;
+  flex-basis: 27px !important;
+  border: 1px solid rgba(255, 255, 255, .13) !important;
+  border-radius: 50% !important;
+  background: rgba(245, 248, 255, .96) !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--standing-primary) 38%, transparent), 0 4px 9px rgba(0, 0, 0, .36) !important;
+  filter: none;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-team-cell strong {
+  color: #fff !important;
+  font-size: 10px !important;
+  letter-spacing: .06em !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-team-cell small {
+  display: block;
+  overflow: hidden;
+  margin-top: 1px;
+  color: #8191af;
+  font-size: 7px;
+  font-weight: 700;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table tr.active-standing {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--standing-primary) 25%, transparent), color-mix(in srgb, var(--standing-secondary) 9%, transparent)),
+    linear-gradient(180deg, rgba(35, 43, 70, .98), rgba(20, 29, 51, .98)) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--standing-secondary) 38%, transparent), inset 4px 0 var(--standing-secondary) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table tr.playoff-seed td:first-child {
+  border-left: 4px solid #2876ff !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table tr.playin-seed td:first-child {
+  border-left: 4px solid #ff365b !important;
+}
+
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table tbody td:first-child {
+  position: relative;
+  isolation: isolate;
+  color: #fff !important;
+  font-weight: 900 !important;
+  text-align: center;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table tbody td:first-child::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgba(141, 164, 208, .25);
+  border-radius: 7px;
+  background: linear-gradient(145deg, rgba(48, 66, 102, .55), rgba(16, 27, 47, .72));
+  box-shadow: inset 0 1px rgba(255, 255, 255, .06);
+  content: "";
+  transform: translate(-50%, -50%);
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table tbody td:nth-child(3) {
+  color: #65dfa4 !important;
+  text-shadow: 0 0 12px rgba(53, 208, 127, .18);
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table tbody td:nth-child(4) {
+  color: #ff8294 !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table tbody td:nth-child(5) {
+  color: #fff !important;
+  font-weight: 900 !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table tbody td:last-child.ok {
+  color: #43db91 !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-conference-layout .standings-table tbody td:last-child.bad {
+  color: #ff667d !important;
+}
+
+/* League, power and streak tables share the upgraded full-width standings surface. */
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) {
+  overflow: hidden !important;
+  border: 1px solid rgba(110, 137, 189, .42) !important;
+  border-top-color: rgba(79, 139, 255, .72) !important;
+  border-radius: 13px !important;
+  background: linear-gradient(155deg, rgba(18, 30, 53, .99), rgba(8, 16, 30, .99)) !important;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, .32), inset 0 1px rgba(255, 255, 255, .055) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) .standings-title {
+  position: relative;
+  min-height: 58px !important;
+  padding: 10px 20px 10px 64px !important;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(101, 139, 211, .28) !important;
+  color: #fff !important;
+  background:
+    linear-gradient(105deg, rgba(34, 72, 139, .2), transparent 38%),
+    linear-gradient(180deg, rgba(20, 34, 59, .99), rgba(11, 20, 36, .99)) !important;
+  box-shadow: inset 4px 0 #347cff, inset 0 1px rgba(255, 255, 255, .06) !important;
+  font-family: var(--phase6-font-heading) !important;
+  font-size: 20px !important;
+  letter-spacing: .04em !important;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, .42);
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) .standings-title::before {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(92, 147, 255, .52);
+  border-radius: 9px;
+  color: #8ab4ff;
+  background: linear-gradient(145deg, rgba(35, 96, 219, .28), rgba(9, 32, 76, .62));
+  box-shadow: 0 7px 16px rgba(0, 0, 0, .27), inset 0 1px rgba(255, 255, 255, .09);
+  font-family: var(--phase6-font-heading);
+  font-size: 15px;
+  content: "◆";
+  transform: translateY(-50%);
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout .power-rankings-table .standings-title::before { content: "↗"; }
+body.game-ui-upgrade.dashboard-mode.standings-layout .streaks-rankings-table .standings-title::before {
+  border-color: rgba(255, 119, 64, .54);
+  color: #ff9a60;
+  background: linear-gradient(145deg, rgba(204, 68, 30, .3), rgba(83, 25, 19, .58));
+  content: "▲";
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) table {
+  width: 100% !important;
+  table-layout: fixed !important;
+  background: transparent !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) th:first-child,
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) td:first-child { width: 62px !important; }
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) th:nth-child(2),
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) td:nth-child(2) { width: 285px !important; }
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) thead tr {
+  height: 40px !important;
+  background: rgba(6, 13, 26, .82) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) th {
+  color: #8fa4cb !important;
+  font-size: 9px !important;
+  font-weight: 900 !important;
+  letter-spacing: .09em !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) tbody tr {
+  height: 46px !important;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--standing-primary) 7%, transparent), transparent 28%),
+    linear-gradient(180deg, rgba(24, 37, 62, .92), rgba(15, 27, 48, .94)) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .025), inset 0 -1px rgba(0, 0, 0, .24) !important;
+  transition: background 140ms ease, filter 140ms ease, box-shadow 140ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) tbody tr:nth-child(even) {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--standing-primary) 6%, transparent), transparent 28%),
+    linear-gradient(180deg, rgba(18, 31, 54, .96), rgba(11, 22, 40, .97)) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) tbody tr:hover {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--standing-primary) 19%, transparent), transparent 42%),
+    linear-gradient(180deg, rgba(39, 59, 94, .98), rgba(22, 39, 67, .98)) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .07), inset 0 -1px color-mix(in srgb, var(--standing-primary) 28%, transparent), 0 8px 18px rgba(0, 0, 0, .17) !important;
+  filter: brightness(1.07);
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) td {
+  padding: 5px 12px !important;
+  border-bottom-color: rgba(108, 134, 178, .2) !important;
+  color: #eaf1ff !important;
+  font-size: 10px !important;
+  font-weight: 760 !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) .standings-team-cell {
+  grid-template-columns: 36px minmax(0, 1fr) !important;
+  gap: 11px !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) .standings-team-logo {
+  width: 34px !important;
+  height: 34px !important;
+  padding: 4px !important;
+  flex-basis: 34px !important;
+  border: 1px solid rgba(255, 255, 255, .15) !important;
+  border-radius: 50% !important;
+  background: #f7f9ff !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--standing-primary) 40%, transparent), 0 5px 11px rgba(0, 0, 0, .34) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) .standings-team-cell strong {
+  color: #fff !important;
+  font-size: 11px !important;
+  letter-spacing: .055em !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) .standings-team-cell small {
+  display: block;
+  margin-top: 2px;
+  overflow: hidden;
+  color: #8293b2;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) tbody td:first-child {
+  color: #fff !important;
+  font-family: var(--phase6-font-heading) !important;
+  font-size: 13px !important;
+  text-align: center;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) tbody td:nth-child(3) { color: #62dfa1 !important; }
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) tbody td:nth-child(4) { color: #ff8193 !important; }
+body.game-ui-upgrade.dashboard-mode.standings-layout .power-rankings-table tbody td:nth-child(5) {
+  color: #80abff !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) td.ok {
+  color: #42dd91 !important;
+  font-weight: 900 !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) td.bad {
+  color: #ff667d !important;
+  font-weight: 900 !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-wide-table, .standings-grid > .standings-table:only-child) tr.active-standing {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--standing-primary) 25%, transparent), color-mix(in srgb, var(--standing-secondary) 8%, transparent)),
+    linear-gradient(180deg, rgba(37, 46, 74, .98), rgba(20, 30, 52, .98)) !important;
+  box-shadow: inset 4px 0 var(--standing-secondary), inset 0 0 0 1px color-mix(in srgb, var(--standing-secondary) 34%, transparent) !important;
+}
+
+/* Phase 6 gameplan: approved team-branded control-room treatment. */
+body.game-ui-upgrade.dashboard-mode .trade-page-title {
+  display: none !important;
+}
+
+/* Trade Machine: elevate the workflow and selected-team strip. */
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-steps {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(91, 132, 211, .42) !important;
+  border-radius: 12px !important;
+  background:
+    linear-gradient(110deg, transparent 72%, rgba(32, 93, 210, .08) 72%, rgba(32, 93, 210, .08) 82%, transparent 82%),
+    radial-gradient(circle at 8% -70%, rgba(47, 108, 255, .22), transparent 34%),
+    linear-gradient(180deg, rgba(19, 32, 55, .99), rgba(8, 16, 30, .99)) !important;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, .3), inset 0 2px rgba(79, 139, 255, .4), inset 0 1px rgba(255, 255, 255, .06) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-steps > div {
+  position: relative;
+  border-right-color: rgba(111, 139, 191, .3) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-steps > div > b {
+  width: 38px !important;
+  height: 38px !important;
+  flex-basis: 38px !important;
+  border-color: rgba(111, 150, 225, .48) !important;
+  color: #b9cae8 !important;
+  background: linear-gradient(145deg, rgba(35, 55, 91, .92), rgba(15, 27, 49, .98)) !important;
+  box-shadow: 0 7px 14px rgba(0, 0, 0, .25), inset 0 1px rgba(255, 255, 255, .07) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-steps > div.active > b {
+  border-color: #66a0ff !important;
+  color: #fff !important;
+  background: linear-gradient(145deg, #2380ff, #0753ff) !important;
+  box-shadow: 0 0 0 5px rgba(7, 83, 255, .1), 0 9px 20px rgba(7, 83, 255, .34), inset 0 1px rgba(255, 255, 255, .24) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-steps > div strong { color: #f1f6ff !important; letter-spacing: .105em !important; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-steps > div.active strong { color: #6fa3ff !important; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-steps > div small { margin-top: 4px; color: #9aacc9 !important; font-size: 10px !important; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-steps > .btn {
+  min-width: 132px !important;
+  border-color: rgba(132, 157, 205, .46) !important;
+  border-radius: 7px !important;
+  color: #dce6f8 !important;
+  background: linear-gradient(180deg, rgba(31, 48, 78, .98), rgba(15, 27, 48, .99)) !important;
+  box-shadow: 0 8px 17px rgba(0, 0, 0, .24), inset 0 1px rgba(255, 255, 255, .06) !important;
+  transition: transform 150ms ease, border-color 150ms ease, filter 150ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-steps > .btn:hover { transform: translateY(-2px); border-color: rgba(79, 139, 255, .72) !important; filter: brightness(1.1); }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-picker {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(91, 132, 211, .38) !important;
+  border-left: 4px solid #1769ff !important;
+  border-radius: 11px !important;
+  background: radial-gradient(circle at 4% 130%, rgba(47, 108, 255, .17), transparent 28%), linear-gradient(145deg, rgba(18, 31, 54, .98), rgba(8, 16, 30, .99)) !important;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, .25), inset 0 1px rgba(255, 255, 255, .055) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-picker > div:first-child span { color: #6fa3ff !important; letter-spacing: .14em !important; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-picker > div:first-child strong { margin-top: 5px; color: #fff !important; font-size: 15px !important; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-chips > span {
+  min-height: 48px !important;
+  padding: 7px 13px !important;
+  border-color: rgba(79, 139, 255, .4) !important;
+  border-radius: 8px !important;
+  background: linear-gradient(145deg, rgba(29, 48, 80, .96), rgba(13, 25, 45, .99)) !important;
+  box-shadow: 0 8px 17px rgba(0, 0, 0, .23), inset 0 1px rgba(255, 255, 255, .06) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-chip-logo { width: 34px !important; height: 34px !important; filter: drop-shadow(0 5px 8px rgba(0, 0, 0, .34)); }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-chips b { color: #fff !important; font-size: 13px !important; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-chips small { color: #7facff !important; letter-spacing: .08em; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-grid {
+  gap: 12px !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-panel {
+  border-color: rgba(91, 132, 211, .38) !important;
+  border-radius: 12px !important;
+  background: linear-gradient(160deg, rgba(17, 30, 52, .99), rgba(7, 15, 29, .99)) !important;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, .3), inset 0 1px rgba(255, 255, 255, .05) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-panel > header {
+  min-height: 88px !important;
+  border-bottom-color: rgba(111, 139, 191, .32) !important;
+  background: radial-gradient(circle at 5% 50%, rgba(47, 108, 255, .14), transparent 28%), linear-gradient(180deg, rgba(24, 39, 65, .99), rgba(12, 23, 42, .99)) !important;
+  box-shadow: inset 4px 0 #1769ff, inset 0 1px rgba(255, 255, 255, .06) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-logo {
+  width: 54px !important;
+  height: 54px !important;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, .36)) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-panel > header strong { color: #fff !important; font-size: 16px !important; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-panel > header span { color: #9aacc9 !important; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-panel > header aside {
+  min-width: 82px;
+  padding: 8px 10px;
+  border: 1px solid rgba(111, 139, 191, .26);
+  border-radius: 8px;
+  background: rgba(6, 13, 26, .5);
+  text-align: right;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-panel > header aside small { color: #7facff !important; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-panel > header aside b { color: #35d07f !important; font-size: 15px !important; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-flow-block {
+  min-height: 92px;
+  border-bottom-color: rgba(111, 139, 191, .25) !important;
+  background: radial-gradient(circle at 100% 100%, rgba(47, 108, 255, .08), transparent 28%) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-flow-block > div:first-child span,
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-flow-block > div:first-child b { color: #6fa3ff !important; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-empty {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  border: 1px dashed rgba(111, 139, 191, .24);
+  border-radius: 7px;
+  color: #7184a6 !important;
+  background: rgba(7, 14, 27, .32);
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-asset-picker {
+  border-bottom-color: rgba(111, 139, 191, .25) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-asset-picker > summary {
+  color: #7facff !important;
+  background: linear-gradient(90deg, rgba(20, 36, 62, .72), rgba(9, 18, 34, .35)) !important;
+  transition: color 150ms ease, background 150ms ease, padding-left 150ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-asset-picker > summary:hover {
+  padding-left: 20px !important;
+  color: #fff !important;
+  background: linear-gradient(90deg, rgba(31, 54, 90, .9), rgba(12, 24, 44, .54)) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-panel > footer {
+  border-top-color: rgba(111, 139, 191, .28) !important;
+  color: #8fa1be !important;
+  background: linear-gradient(180deg, rgba(18, 31, 53, .98), rgba(9, 17, 31, .99)) !important;
+  box-shadow: inset 0 -3px #ffbd24;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-team-panel > footer strong { color: #fff !important; font-size: 15px !important; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-add-team-empty {
+  border: 1px dashed rgba(79, 139, 255, .52) !important;
+  background: radial-gradient(circle at 50% 58%, rgba(47, 108, 255, .1), transparent 34%), linear-gradient(160deg, rgba(15, 28, 49, .9), rgba(7, 14, 27, .94)) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-add-team-empty > header { box-shadow: inset 4px 0 rgba(79, 139, 255, .55), inset 0 1px rgba(255, 255, 255, .05) !important; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-add-team-mark {
+  border-color: rgba(79, 139, 255, .58) !important;
+  color: #fff !important;
+  background: linear-gradient(145deg, rgba(37, 71, 126, .92), rgba(15, 31, 59, .98)) !important;
+  box-shadow: 0 0 0 6px rgba(7, 83, 255, .08), 0 8px 18px rgba(0, 0, 0, .28) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-empty-body {
+  display: grid !important;
+  place-items: center;
+  align-content: center;
+  gap: 7px;
+  min-height: 210px;
+  padding: 24px;
+  text-align: center;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-empty-body > span { color: #6fa3ff; font-size: 8px; font-weight: 900; letter-spacing: .15em; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-empty-body > strong { color: #fff !important; font-size: 19px !important; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-empty-body > small { max-width: 280px; color: #91a3c1 !important; font-size: 10px !important; line-height: 1.4; }
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-empty-body > button {
+  min-width: 142px;
+  min-height: 38px;
+  margin-top: 6px;
+  border: 1px solid #66a0ff;
+  border-radius: 7px;
+  color: #fff;
+  background: linear-gradient(145deg, #2380ff, #0753ff);
+  box-shadow: 0 9px 20px rgba(7, 83, 255, .28), inset 0 1px rgba(255, 255, 255, .22);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-asset-picker[open] > summary {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  color: #fff !important;
+  background: linear-gradient(90deg, rgba(31, 56, 94, .99), rgba(13, 26, 48, .99)) !important;
+  box-shadow: inset 3px 0 #1769ff, 0 7px 14px rgba(0, 0, 0, .2) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-asset-picker > div {
+  gap: 7px !important;
+  padding: 10px 12px 12px !important;
+  background: linear-gradient(180deg, rgba(6, 13, 26, .72), rgba(9, 17, 31, .54));
+  scrollbar-color: #6282bb #0b1425;
+  scrollbar-width: thin;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-asset-picker > div > button {
+  grid-template-columns: 48px minmax(0, 1fr) auto !important;
+  gap: 11px !important;
+  min-height: 64px !important;
+  padding: 8px 11px !important;
+  overflow: hidden;
+  border-color: rgba(111, 139, 191, .3) !important;
+  border-radius: 8px !important;
+  color: #eaf1ff !important;
+  background: linear-gradient(145deg, rgba(24, 40, 67, .92), rgba(12, 23, 42, .98)) !important;
+  box-shadow: 0 7px 14px rgba(0, 0, 0, .18), inset 0 1px rgba(255, 255, 255, .04) !important;
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease, box-shadow 140ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-asset-picker > div > button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(79, 139, 255, .62) !important;
+  background: linear-gradient(145deg, rgba(34, 55, 90, .98), rgba(16, 29, 52, .99)) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .25), inset 0 1px rgba(255, 255, 255, .065) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-asset-picker > div > button.selected {
+  border-color: #5d96ff !important;
+  background: radial-gradient(circle at 0 50%, rgba(79, 139, 255, .18), transparent 30%), linear-gradient(145deg, rgba(34, 57, 96, .99), rgba(17, 31, 56, .99)) !important;
+  box-shadow: inset 4px 0 #1769ff, 0 9px 18px rgba(7, 83, 255, .14), inset 0 1px rgba(255, 255, 255, .07) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-picker-headshot {
+  width: 46px !important;
+  height: 46px !important;
+  border: 1px solid rgba(160, 180, 217, .42) !important;
+  border-radius: 8px !important;
+  background: linear-gradient(180deg, #edf3fc, #aebdd4) !important;
+  box-shadow: 0 6px 11px rgba(0, 0, 0, .28) !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-picker-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  text-align: left;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-picker-copy strong {
+  overflow: hidden;
+  color: #fff !important;
+  font-size: 12px !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-picker-copy small {
+  color: #90a2c0 !important;
+  font-size: 9px !important;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-picker-meta {
+  display: grid;
+  justify-items: end;
+  gap: 5px;
+  min-width: 76px;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-picker-meta em {
+  padding: 4px 7px;
+  border: 1px solid rgba(79, 139, 255, .32);
+  border-radius: 999px;
+  color: #91b7ff;
+  background: rgba(7, 83, 255, .1);
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: .06em;
+}
+body.game-ui-upgrade.dashboard-mode .page:has(.trade-page-title) .multi-trade-picker-meta b {
+  color: #fff !important;
+  font-size: 10px !important;
+}
+
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen {
+  --gameplan-surface: rgba(11, 20, 37, .97);
+  --gameplan-surface-raised: rgba(18, 31, 54, .97);
+  --gameplan-border: rgba(111, 139, 191, .34);
+  color: #eef4ff !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-header {
+  min-height: 66px !important;
+  padding: 10px 16px 10px 20px !important;
+  border: 1px solid var(--gameplan-border);
+  border-left: 4px solid var(--game-team-secondary);
+  border-radius: 12px;
+  background:
+    linear-gradient(110deg, color-mix(in srgb, var(--game-team) 12%, transparent), transparent 38%),
+    linear-gradient(180deg, rgba(19, 32, 55, .98), rgba(9, 17, 31, .99)) !important;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, .27), inset 0 1px rgba(255, 255, 255, .06) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-header:has(> .gameplan-actions:only-child) {
+  justify-content: flex-end !important;
+  min-height: 56px !important;
+  padding-left: 16px !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-header .page-title {
+  color: #fff !important;
+  font-size: 30px !important;
+  letter-spacing: .035em !important;
+  text-shadow: 0 5px 16px rgba(0, 0, 0, .42);
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-header p {
+  color: #91a1bd !important;
+  font-size: 10px !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(.gameplan-actions button, .gameplan-tabs button, .gameplan-action-grid button, .gameplan-pill-group button, .gameplan-manage, .gameplan-footer button, .action-center footer button) {
+  min-height: 36px !important;
+  border: 1px solid rgba(126, 153, 205, .42) !important;
+  border-radius: 7px !important;
+  color: #dce6fa !important;
+  background-color: #111d32 !important;
+  background-image: linear-gradient(180deg, rgba(31, 47, 76, .98), rgba(14, 25, 44, .99)) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .055), 0 6px 13px rgba(0, 0, 0, .18) !important;
+  font-weight: 850 !important;
+  letter-spacing: .025em;
+  transition: transform 150ms ease, filter 150ms ease, border-color 150ms ease, box-shadow 150ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(.gameplan-actions button, .gameplan-tabs button, .gameplan-action-grid button, .gameplan-pill-group button, .gameplan-manage, .gameplan-footer button, .action-center footer button):hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--game-team-secondary) 64%, #8ea8dc) !important;
+  filter: brightness(1.1);
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(button.primary, .gameplan-tabs button.active, .gameplan-action-grid button.active, .gameplan-pill-group button.active) {
+  border-color: color-mix(in srgb, var(--game-team) 68%, #fff) !important;
+  color: #fff !important;
+  background-color: var(--game-team) !important;
+  background-image: linear-gradient(135deg, color-mix(in srgb, var(--game-team) 84%, #fff), color-mix(in srgb, var(--game-team) 78%, #000)) !important;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--game-team) 28%, transparent), inset 0 1px rgba(255, 255, 255, .2) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-grid { gap: 11px !important; }
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(.gameplan-matchup-card, .gameplan-summary-card) {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--gameplan-border) !important;
+  border-radius: 12px !important;
+  background:
+    radial-gradient(circle at 105% 120%, color-mix(in srgb, var(--game-team) 13%, transparent), transparent 39%),
+    linear-gradient(145deg, rgba(21, 35, 60, .98), rgba(9, 17, 31, .99)) !important;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, .26), inset 0 1px rgba(255, 255, 255, .055) !important;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(.gameplan-matchup-card, .gameplan-summary-card):hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--game-team-secondary) 48%, var(--gameplan-border)) !important;
+  box-shadow: 0 18px 34px rgba(0, 0, 0, .31), 0 0 0 1px color-mix(in srgb, var(--game-team) 12%, transparent), inset 0 1px rgba(255, 255, 255, .07) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-matchup-card {
+  border-bottom: 3px solid var(--game-team-secondary) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-team-logo {
+  width: 58px !important;
+  height: 58px !important;
+  filter: drop-shadow(0 7px 10px rgba(0, 0, 0, .36));
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card::before {
+  border: 1px solid color-mix(in srgb, currentColor 32%, transparent);
+  background: color-mix(in srgb, currentColor 13%, #101c31) !important;
+  box-shadow: 0 0 0 6px color-mix(in srgb, currentColor 5%, transparent), inset 0 1px rgba(255, 255, 255, .08) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card {
+  border-bottom-width: 3px !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card.blue {
+  border-bottom-color: #4f8bff !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card.green {
+  border-bottom-color: #35d07f !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card.orange {
+  border-bottom-color: #ffad42 !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card::before {
+  display: grid !important;
+  place-items: center;
+  color: currentColor;
+  font-family: var(--phase6-font-heading);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .02em;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card.blue::before { content: "OFF"; }
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card.green::before { content: "DEF"; }
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card.orange::before { content: "PACE"; font-size: 10px; }
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card.blue { color: #6fa3ff !important; }
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card.green { color: #4bda91 !important; }
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card.orange { color: #ffb654 !important; }
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card strong {
+  margin-top: 4px;
+  font-size: 21px !important;
+  line-height: 1 !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card small {
+  max-width: 210px;
+  line-height: 1.3 !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-matchup-card {
+  background:
+    radial-gradient(circle at 14% 120%, color-mix(in srgb, var(--game-team-secondary) 17%, transparent), transparent 38%),
+    radial-gradient(circle at 92% -20%, color-mix(in srgb, var(--game-team) 17%, transparent), transparent 34%),
+    linear-gradient(145deg, rgba(18, 31, 54, .99), rgba(8, 15, 29, .99)) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-matchup-card > div {
+  justify-content: flex-start !important;
+  gap: 12px !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-matchup-card > div > b {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(138, 160, 202, .35);
+  border-radius: 50%;
+  color: #9fb0cc;
+  background: rgba(6, 13, 26, .72);
+  font-size: 9px;
+  font-style: normal;
+  text-transform: uppercase;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-team-logo {
+  width: 46px !important;
+  height: 46px !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-matchup-card strong {
+  font-size: 22px !important;
+  letter-spacing: .025em;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(.gameplan-matchup-card, .gameplan-summary-card) {
+  isolation: isolate;
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, .34),
+    0 5px 12px rgba(0, 0, 0, .24),
+    inset 0 1px rgba(255, 255, 255, .09),
+    inset 0 -1px rgba(0, 0, 0, .34) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card.blue {
+  background:
+    radial-gradient(circle at 8% 48%, rgba(79, 139, 255, .18), transparent 31%),
+    linear-gradient(135deg, rgba(25, 43, 75, .99), rgba(9, 18, 34, .99) 68%) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card.green {
+  background:
+    radial-gradient(circle at 8% 48%, rgba(53, 208, 127, .16), transparent 31%),
+    linear-gradient(135deg, rgba(20, 53, 57, .99), rgba(9, 20, 33, .99) 68%) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-summary-card.orange {
+  background:
+    radial-gradient(circle at 8% 48%, rgba(255, 173, 66, .17), transparent 31%),
+    linear-gradient(135deg, rgba(57, 43, 35, .99), rgba(12, 20, 33, .99) 68%) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(.gameplan-matchup-card, .gameplan-summary-card)::after {
+  position: absolute;
+  z-index: 0;
+  top: -36px;
+  right: -28px;
+  width: 145px;
+  height: 105px;
+  border: 1px solid rgba(255, 255, 255, .04);
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .055), transparent 64%);
+  content: "";
+  pointer-events: none;
+  transform: rotate(-16deg);
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(.gameplan-matchup-card, .gameplan-summary-card):hover {
+  transform: translateY(-4px) scale(1.008);
+  box-shadow:
+    0 24px 44px rgba(0, 0, 0, .4),
+    0 8px 18px color-mix(in srgb, currentColor 11%, transparent),
+    inset 0 1px rgba(255, 255, 255, .12),
+    inset 0 -1px rgba(0, 0, 0, .3) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(.gameplan-matchup-card > span, .gameplan-summary-card span) {
+  color: #8fa1c1 !important;
+  letter-spacing: .08em !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(.gameplan-matchup-card strong, .gameplan-summary-card strong) {
+  color: #fff !important;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, .4);
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(.gameplan-matchup-card small, .gameplan-summary-card small) { color: #91a2be !important; }
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-tabs {
+  position: relative;
+  gap: 5px !important;
+  padding: 6px !important;
+  overflow-x: auto;
+  border: 1px solid rgba(111, 139, 191, .38) !important;
+  border-radius: 11px !important;
+  background: radial-gradient(circle at 12% -80%, color-mix(in srgb, var(--game-team) 18%, transparent), transparent 34%), linear-gradient(180deg, rgba(18, 31, 53, .99), rgba(7, 14, 27, .99)) !important;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, .28), inset 0 2px color-mix(in srgb, var(--game-team-secondary) 28%, transparent), inset 0 1px rgba(255, 255, 255, .055) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-tabs button {
+  position: relative;
+  min-height: 37px !important;
+  height: 36px !important;
+  overflow: hidden;
+  border-color: rgba(111, 139, 191, .3) !important;
+  border-radius: 7px !important;
+  color: #aebdda !important;
+  background: linear-gradient(180deg, rgba(27, 43, 70, .94), rgba(13, 24, 44, .98)) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .045) !important;
+  letter-spacing: .055em !important;
+  transition: transform 150ms ease, color 150ms ease, border-color 150ms ease, background 150ms ease, box-shadow 150ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-tabs button:hover:not(.active) {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--game-team-secondary) 48%, #758bb5) !important;
+  color: #fff !important;
+  background: linear-gradient(180deg, rgba(38, 58, 91, .98), rgba(17, 31, 54, .99)) !important;
+  box-shadow: 0 7px 14px rgba(0, 0, 0, .2), inset 0 1px rgba(255, 255, 255, .07) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-tabs button.active {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--game-team) 64%, #fff) !important;
+  color: #fff !important;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--game-team) 86%, #fff), color-mix(in srgb, var(--game-team) 76%, #000)) !important;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--game-team) 30%, transparent), inset 0 1px rgba(255, 255, 255, .22), inset 0 -2px rgba(0, 0, 0, .18) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-tabs button.active::after {
+  position: absolute;
+  right: 12px;
+  bottom: -1px;
+  left: 12px;
+  height: 2px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--game-team-secondary) 72%, #fff);
+  box-shadow: 0 0 9px color-mix(in srgb, var(--game-team-secondary) 42%, transparent);
+  content: "";
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-tabs button { position: relative; }
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--gameplan-border) !important;
+  border-radius: 11px !important;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--game-team) 5%, transparent), transparent 32%),
+    linear-gradient(160deg, var(--gameplan-surface-raised), var(--gameplan-surface)) !important;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, .24), inset 0 1px rgba(255, 255, 255, .05) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-card::after {
+  position: absolute;
+  right: -34px;
+  bottom: -58px;
+  width: 125px;
+  height: 90px;
+  border: 1px solid color-mix(in srgb, var(--game-team-secondary) 14%, transparent);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  transform: rotate(-18deg);
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(.gameplan-card header h2, .gameplan-scout-card header strong, .gameplan-action-column > span, .gameplan-pill-group > span, .strategy-control > span, .gameplan-range > span, .gameplan-shot-bar > span) {
+  color: #a9b9d4 !important;
+  font-weight: 900 !important;
+  letter-spacing: .075em !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(select, .strategy-control select) {
+  min-height: 36px !important;
+  border: 1px solid rgba(129, 157, 209, .46) !important;
+  border-radius: 7px !important;
+  color: #f0f5ff !important;
+  background-color: #111e34 !important;
+  background-image: linear-gradient(180deg, #1b2c49, #101b30) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .05), 0 6px 12px rgba(0, 0, 0, .16) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen input[type="range"] { accent-color: var(--game-team-secondary) !important; }
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-shot-bar i {
+  height: 8px !important;
+  border: 1px solid rgba(117, 144, 195, .25);
+  background: #091326 !important;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, .45);
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-shot-bar i b {
+  background: linear-gradient(90deg, var(--game-team), var(--game-team-secondary)) !important;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--game-team) 35%, transparent);
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-scout-card {
+  border-color: color-mix(in srgb, var(--game-team-secondary) 28%, var(--gameplan-border)) !important;
+  background: rgba(7, 15, 29, .58) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-scout-card article {
+  padding: 7px 9px !important;
+  border-left-width: 3px !important;
+  background: rgba(24, 37, 60, .48);
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(.action-center article, .opponent-threats article, .matchup-assignments article, .coach-recommendations article) {
+  border: 1px solid rgba(111, 139, 191, .24) !important;
+  border-radius: 8px !important;
+  background: linear-gradient(160deg, rgba(25, 39, 65, .76), rgba(12, 22, 40, .82)) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .035) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .action-center {
+  counter-reset: gameplan-action;
+  gap: 8px !important;
+  padding: 10px 14px 10px 10px !important;
+  scrollbar-gutter: stable;
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--game-team) 10%, transparent), transparent 28%),
+    linear-gradient(160deg, var(--gameplan-surface-raised), var(--gameplan-surface)) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .action-center > header {
+  position: sticky;
+  top: -10px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 42px;
+  margin: -10px 0 2px -10px !important;
+  padding: 0 12px 0 15px;
+  border-bottom: 1px solid rgba(111, 139, 191, .28);
+  border-radius: 10px 0 0 0;
+  background:
+    linear-gradient(110deg, color-mix(in srgb, var(--game-team) 12%, transparent), transparent 48%),
+    linear-gradient(180deg, rgba(24, 40, 67, .99), rgba(11, 21, 39, .99));
+  box-shadow: inset 4px 0 var(--game-team-secondary), inset 0 1px rgba(255, 255, 255, .06), 0 7px 14px rgba(0, 0, 0, .18);
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .action-center > header h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  margin: 0;
+  color: #edf4ff !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  letter-spacing: .095em !important;
+  white-space: nowrap;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .action-center > header h2::before {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: #35d07f;
+  box-shadow: 0 0 0 4px rgba(53, 208, 127, .09), 0 0 10px rgba(53, 208, 127, .42);
+  content: "";
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .action-center > header::after {
+  flex: 0 0 auto;
+  padding: 4px 7px;
+  border: 1px solid rgba(79, 139, 255, .35);
+  border-radius: 999px;
+  color: #83afff;
+  background: rgba(7, 83, 255, .1);
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  content: "LIVE";
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .action-center article {
+  position: relative;
+  counter-increment: gameplan-action;
+  gap: 9px !important;
+  margin: 0 !important;
+  padding: 12px 10px 10px 42px !important;
+  overflow: hidden;
+  border-color: rgba(111, 139, 191, .3) !important;
+  background: linear-gradient(145deg, rgba(25, 41, 68, .9), rgba(12, 23, 42, .96)) !important;
+  transition: transform 150ms ease, border-color 150ms ease, background 150ms ease, box-shadow 150ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .action-center article::before {
+  position: absolute;
+  left: 10px;
+  top: 11px;
+  display: grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  border: 1px solid color-mix(in srgb, var(--game-team-secondary) 52%, #7588ad);
+  border-radius: 6px;
+  color: #fff;
+  background: color-mix(in srgb, var(--game-team) 35%, #101c31);
+  font-family: var(--phase6-font-heading);
+  font-size: 9px;
+  font-weight: 900;
+  content: "0" counter(gameplan-action);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .25);
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .action-center article:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--game-team-secondary) 52%, #768dbb) !important;
+  background: linear-gradient(145deg, rgba(33, 52, 84, .96), rgba(16, 29, 50, .98)) !important;
+  box-shadow: 0 9px 18px rgba(0, 0, 0, .22), inset 0 1px rgba(255, 255, 255, .05) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .action-center article b {
+  color: #fff !important;
+  font-size: 10px !important;
+  letter-spacing: .015em;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .action-center article span {
+  display: block;
+  margin-top: 3px;
+  color: #93a5c4 !important;
+  font-size: 9px !important;
+  line-height: 1.3;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .action-center article footer {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .action-center article footer button {
+  min-height: 34px !important;
+  padding: 5px 7px !important;
+  font-size: 8px !important;
+  line-height: 1.05;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .action-center article footer button:first-child {
+  border-color: color-mix(in srgb, var(--game-team) 68%, #fff) !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--game-team) 84%, #fff), color-mix(in srgb, var(--game-team) 78%, #000)) !important;
+  box-shadow: 0 6px 13px color-mix(in srgb, var(--game-team) 22%, transparent) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .action-center article footer button:last-child {
+  color: #c5d2e8 !important;
+  background: linear-gradient(180deg, rgba(32, 49, 78, .92), rgba(17, 29, 51, .98)) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-threat-shot {
+  border: 1px solid color-mix(in srgb, var(--game-team-secondary) 46%, #8899bc);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .3);
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-footer {
+  min-height: 68px !important;
+  border: 1px solid rgba(111, 139, 191, .36) !important;
+  border-bottom: 3px solid var(--game-team-secondary) !important;
+  border-radius: 11px !important;
+  background:
+    linear-gradient(100deg, color-mix(in srgb, var(--game-team) 8%, transparent), transparent 45%),
+    linear-gradient(180deg, rgba(18, 31, 53, .98), rgba(8, 16, 30, .99)) !important;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, .28), inset 0 1px rgba(255, 255, 255, .05) !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-footer b {
+  border-color: #35d07f !important;
+  color: #fff !important;
+  background: rgba(18, 68, 48, .42);
+  box-shadow: 0 0 0 5px rgba(53, 208, 127, .07), 0 7px 15px rgba(0, 0, 0, .24);
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-footer span { color: #fff !important; }
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-footer small { color: #8fa1be !important; }
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-footer .gameplan-coach-plan {
+  min-width: 128px !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-footer .gameplan-save-shortcut {
+  flex: 0 0 42px;
+  width: 42px !important;
+  min-width: 42px !important;
+  padding: 0 !important;
+}
+
+/* Gameplan must flow vertically; the legacy viewport grid was clipping upgraded controls. */
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .workspace {
+  height: calc(100vh - 76px) !important;
+  max-height: calc(100vh - 76px) !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .page {
+  height: auto !important;
+  max-height: none !important;
+  min-height: calc(100vh - 108px) !important;
+  overflow: visible !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen {
+  display: grid !important;
+  grid-template-rows: auto auto auto auto auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-main-layout {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-main {
+  grid-template-rows: auto auto auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-rail {
+  grid-template-rows: auto auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen :is(.gameplan-offense-card, .gameplan-lower-grid, .gameplan-lower-grid .gameplan-card) {
+  min-height: 0 !important;
+}
+body.game-ui-upgrade.dashboard-mode.gameplan-layout .phase6-gameplan-screen .gameplan-footer {
+  position: relative !important;
+  inset: auto !important;
+  z-index: 1;
+}
+
+/* Standings navigation: compact broadcast controls based on the approved system. */
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-tabs {
+  position: relative;
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  min-height: 58px !important;
+  padding: 8px 190px 8px 86px !important;
+  overflow-x: auto;
+  border: 1px solid rgba(116, 139, 184, .28) !important;
+  border-bottom-color: rgba(116, 139, 184, .28) !important;
+  border-radius: 12px 12px 8px 8px !important;
+  isolation: isolate;
+  background:
+    linear-gradient(110deg, transparent 72%, rgba(32, 93, 210, .07) 72%, rgba(32, 93, 210, .07) 82%, transparent 82%),
+    radial-gradient(circle at 14% -35%, rgba(47, 108, 255, .2), transparent 38%),
+    linear-gradient(180deg, rgba(20, 33, 57, .99), rgba(9, 16, 30, .99)) !important;
+  box-shadow: 0 15px 32px rgba(0, 0, 0, .3), inset 0 2px rgba(87, 139, 255, .44), inset 0 1px rgba(255, 255, 255, .06) !important;
+  scrollbar-width: none;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-tabs::-webkit-scrollbar { display: none; }
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-tabs::before,
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-toolbar::before {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  min-width: 54px;
+  height: 25px;
+  border: 1px solid rgba(79, 139, 255, .42);
+  border-radius: 999px;
+  color: #7eaeff;
+  background: rgba(7, 83, 255, .1);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .13em;
+  content: "VIEW";
+  transform: translateY(-50%);
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-tabs::after {
+  position: absolute;
+  right: 17px;
+  top: 50%;
+  color: #7183a4;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: .13em;
+  content: "REGULAR SEASON · LIVE TABLE";
+  transform: translateY(-50%);
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-tabs button {
+  position: relative;
+  flex: 0 0 auto;
+  min-height: 40px !important;
+  padding: 0 18px !important;
+  border: 1px solid rgba(132, 157, 205, .3) !important;
+  border-radius: 7px !important;
+  color: #c8d3ea !important;
+  background-color: #111c31 !important;
+  background-image: linear-gradient(180deg, rgba(29, 44, 71, .96), rgba(14, 24, 43, .98)) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .045) !important;
+  font-size: 11px !important;
+  font-weight: 850 !important;
+  letter-spacing: .025em;
+  transition: transform 150ms ease, border-color 150ms ease, filter 150ms ease, box-shadow 150ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-tabs button:hover:not(.active) {
+  transform: translateY(-1px);
+  border-color: rgba(86, 137, 255, .62) !important;
+  color: #fff !important;
+  filter: brightness(1.1);
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-tabs button.active {
+  border-color: #4f8bff !important;
+  color: #fff !important;
+  background-color: #0753ff !important;
+  background-image: linear-gradient(180deg, #1769ff, #0644d2) !important;
+  box-shadow: 0 7px 18px rgba(7, 83, 255, .28), inset 0 1px rgba(255, 255, 255, .2) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-tabs button.active::after {
+  position: absolute;
+  right: 10px;
+  bottom: -1px;
+  left: 10px;
+  height: 2px;
+  border-radius: 2px;
+  background: #8cb4ff;
+  content: "";
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-toolbar {
+  position: relative;
+  display: flex !important;
+  align-items: center !important;
+  min-height: 50px !important;
+  margin-top: 6px !important;
+  padding: 6px 190px 6px 86px !important;
+  border: 1px solid rgba(116, 139, 184, .28) !important;
+  border-top-color: rgba(87, 139, 255, .44) !important;
+  border-radius: 8px 8px 12px 12px;
+  isolation: isolate;
+  background:
+    linear-gradient(110deg, transparent 76%, rgba(32, 93, 210, .07) 76%, rgba(32, 93, 210, .07) 85%, transparent 85%),
+    radial-gradient(circle at 14% -35%, rgba(47, 108, 255, .16), transparent 38%),
+    linear-gradient(180deg, rgba(20, 33, 57, .99), rgba(9, 16, 30, .99)) !important;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, .22), inset 0 2px rgba(87, 139, 255, .44), inset 0 1px rgba(255, 255, 255, .06) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-toolbar::before {
+  border-color: rgba(79, 139, 255, .42);
+  color: #7eaeff;
+  background: rgba(7, 83, 255, .1);
+  content: "SCOPE";
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-toolbar::after {
+  position: absolute;
+  right: 17px;
+  top: 50%;
+  color: #7183a4;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: .13em;
+  content: "30 TEAMS · 2 CONFERENCES";
+  transform: translateY(-50%);
+}
+
+/* NBA Cup: elevate the tournament status into a broadcast-style banner. */
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-heading {
+  position: relative;
+  min-height: 84px !important;
+  padding: 14px 20px 14px 24px !important;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(79, 139, 255, .42) !important;
+  border-left: 4px solid #1769ff !important;
+  background:
+    linear-gradient(110deg, transparent 68%, rgba(32, 93, 210, .11) 68%, rgba(32, 93, 210, .11) 78%, transparent 78%),
+    radial-gradient(circle at 8% -70%, rgba(47, 108, 255, .3), transparent 43%),
+    linear-gradient(180deg, rgba(20, 35, 61, .99), rgba(9, 17, 32, .99)) !important;
+  box-shadow: inset 0 2px rgba(87, 139, 255, .38), inset 0 -1px rgba(255, 255, 255, .04) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-heading .card-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 0 9px;
+  border: 1px solid rgba(79, 139, 255, .46);
+  border-radius: 999px;
+  color: #8cb4ff !important;
+  background: rgba(7, 83, 255, .14);
+  letter-spacing: .14em !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-heading .player-name {
+  margin-top: 6px !important;
+  color: #fff !important;
+  font-size: 24px !important;
+  line-height: 1 !important;
+  letter-spacing: .015em;
+  text-shadow: 0 5px 16px rgba(0, 0, 0, .34);
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-heading .meta {
+  margin-top: 7px !important;
+  color: #9fb0cd !important;
+  font-size: 10px !important;
+  letter-spacing: .025em;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-heading .standings-legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 1px solid rgba(116, 139, 184, .28);
+  border-radius: 8px;
+  color: #cbd7ed !important;
+  background: rgba(7, 14, 27, .62);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .04);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .035em;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-heading .standings-legend :is(.playoff-dot, .playin-dot) {
+  width: 9px;
+  height: 9px;
+  margin-left: 4px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .04);
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-grid {
+  gap: 1px;
+  background: rgba(92, 124, 181, .34);
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table {
+  background: linear-gradient(180deg, rgba(14, 25, 45, .99), rgba(8, 15, 28, .99)) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table:first-child {
+  border-right: 0 !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table .standings-title {
+  min-height: 62px !important;
+  padding: 9px 16px !important;
+  gap: 12px !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  letter-spacing: .04em;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table:first-child .standings-title {
+  background: radial-gradient(circle at 5% 50%, rgba(42, 119, 255, .22), transparent 30%), linear-gradient(90deg, rgba(18, 42, 77, .99), rgba(10, 20, 37, .99)) !important;
+  box-shadow: inset 4px 0 #2876ff, inset 0 -1px rgba(79, 139, 255, .35) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table:last-child .standings-title {
+  background: radial-gradient(circle at 5% 50%, rgba(255, 54, 91, .18), transparent 30%), linear-gradient(90deg, rgba(61, 25, 42, .99), rgba(15, 20, 35, .99)) !important;
+  box-shadow: inset 4px 0 #ff365b, inset 0 -1px rgba(255, 75, 107, .3) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table .conference-logo {
+  width: 42px !important;
+  height: 42px !important;
+  padding: 3px !important;
+  border-color: rgba(255, 255, 255, .18) !important;
+  background: rgba(5, 11, 22, .52) !important;
+  box-shadow: 0 7px 15px rgba(0, 0, 0, .3), inset 0 1px rgba(255, 255, 255, .06) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table .conference-logo img {
+  width: 34px !important;
+  height: 34px !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table table {
+  width: 100% !important;
+  table-layout: fixed !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table :is(th, td):first-child { width: 46px !important; }
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table :is(th, td):nth-child(2) { width: auto !important; }
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table :is(th, td):nth-child(n+3) { width: 62px !important; }
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table thead tr {
+  height: 38px !important;
+  background: rgba(5, 12, 24, .9) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table th {
+  color: #8fa2c5 !important;
+  font-size: 8px !important;
+  letter-spacing: .12em !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table tbody tr {
+  background: rgba(19, 32, 55, .82) !important;
+  transition: background 140ms ease, box-shadow 140ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table tbody tr:nth-child(even) {
+  background: rgba(13, 24, 43, .94) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table tbody tr:hover {
+  background: rgba(34, 53, 86, .96) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .04), inset 0 -1px rgba(255, 255, 255, .03) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table td {
+  color: #eaf1ff !important;
+  font-size: 10px !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table td:first-child {
+  color: #9fb0cc !important;
+  font-weight: 900 !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-cup-layout .nba-cup-table .standings-team-cell strong {
+  overflow: visible;
+  color: #fff !important;
+  font-size: 10px !important;
+  text-overflow: clip;
+}
+
+/* Wild Card: turn the two conference races into a focused play-in board. */
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-conference-grid {
+  gap: 10px !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table {
+  overflow: hidden !important;
+  border-color: rgba(104, 135, 194, .38) !important;
+  border-radius: 11px !important;
+  background: linear-gradient(180deg, rgba(14, 25, 45, .99), rgba(8, 15, 28, .99)) !important;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, .28), inset 0 1px rgba(255, 255, 255, .045) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table .standings-title {
+  min-height: 58px !important;
+  padding: 8px 14px !important;
+  gap: 11px !important;
+  color: #fff !important;
+  font-size: 15px !important;
+  letter-spacing: .045em;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table:first-child .standings-title {
+  background: radial-gradient(circle at 6% 50%, rgba(42, 119, 255, .2), transparent 32%), linear-gradient(90deg, rgba(18, 42, 77, .99), rgba(10, 20, 37, .99)) !important;
+  box-shadow: inset 4px 0 #2876ff, inset 0 -1px rgba(79, 139, 255, .34) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table:last-child .standings-title {
+  background: radial-gradient(circle at 6% 50%, rgba(255, 54, 91, .17), transparent 32%), linear-gradient(90deg, rgba(61, 25, 42, .99), rgba(15, 20, 35, .99)) !important;
+  box-shadow: inset 4px 0 #ff365b, inset 0 -1px rgba(255, 75, 107, .28) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-title .conference-logo {
+  width: 40px !important;
+  height: 40px !important;
+  padding: 3px !important;
+  border-color: rgba(255, 255, 255, .16) !important;
+  background: rgba(5, 11, 22, .5) !important;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .28), inset 0 1px rgba(255, 255, 255, .06) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-title .conference-logo img {
+  width: 32px !important;
+  height: 32px !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table table {
+  width: 100% !important;
+  table-layout: fixed !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table :is(th, td):first-child { width: 48px !important; }
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table :is(th, td):nth-child(2) { width: auto !important; }
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table :is(th, td):nth-child(n+3) { width: 58px !important; }
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table thead tr {
+  height: 38px !important;
+  background: rgba(5, 12, 24, .9) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table th {
+  color: #8fa2c5 !important;
+  font-size: 8px !important;
+  letter-spacing: .11em !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table tbody tr {
+  height: 68px !important;
+  background: rgba(19, 32, 55, .82) !important;
+  transition: background 140ms ease, box-shadow 140ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table tbody tr:nth-child(even) {
+  background: rgba(13, 24, 43, .94) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table tbody tr:hover {
+  background: rgba(34, 53, 86, .96) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table tbody tr:hover > td {
+  background-color: rgba(34, 53, 86, .96) !important;
+  background-image: none !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .045), inset 0 -1px rgba(255, 255, 255, .025) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table tbody tr.playin-seed:hover > td:first-child {
+  border-left-color: #ff5573 !important;
+  box-shadow: inset 5px 0 rgba(255, 54, 91, .22), inset 0 1px rgba(255, 255, 255, .045), inset 0 -1px rgba(255, 255, 255, .025) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table td {
+  color: #eaf1ff !important;
+  font-size: 10px !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table td:first-child {
+  color: #aebddd !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table tr.playin-seed td:first-child {
+  border-left: 4px solid #ff365b !important;
+  color: #fff !important;
+  background: linear-gradient(90deg, rgba(255, 54, 91, .13), transparent) !important;
+}
+body.game-ui-upgrade.dashboard-mode.standings-wildcard-layout .standings-table .standings-team-cell strong {
+  overflow: visible;
+  color: #fff !important;
+  font-size: 10px !important;
+  text-overflow: clip;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-view-toggle { gap: 6px !important; }
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-view-toggle button {
+  min-width: 98px;
+  min-height: 36px !important;
+  padding: 0 15px !important;
+  border: 1px solid rgba(132, 157, 205, .32) !important;
+  border-radius: 6px !important;
+  color: #b9c7e1 !important;
+  background-color: #101a2d !important;
+  background-image: linear-gradient(180deg, #1a2942, #101a2d) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .04) !important;
+  font-size: 10px !important;
+  font-weight: 850 !important;
+  letter-spacing: .035em;
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-view-toggle button:hover:not(.active) {
+  border-color: rgba(79, 139, 255, .66) !important;
+  color: #fff !important;
+  filter: brightness(1.1);
+}
+body.game-ui-upgrade.dashboard-mode.standings-layout .standings-view-toggle button.active {
+  border-color: #4f8bff !important;
+  color: #fff !important;
+  background-color: #0753ff !important;
+  background-image: linear-gradient(180deg, #1769ff, #0644d2) !important;
+  box-shadow: 0 6px 15px rgba(7, 83, 255, .24), inset 0 1px rgba(255, 255, 255, .18) !important;
+}
+@media (max-width: 760px) {
+  body.game-ui-upgrade.dashboard-mode.standings-layout .standings-tabs {
+    align-items: stretch !important;
+    padding-right: 8px !important;
+  }
+  body.game-ui-upgrade.dashboard-mode.standings-layout .standings-toolbar { padding-right: 8px !important; }
+  body.game-ui-upgrade.dashboard-mode.standings-layout :is(.standings-tabs, .standings-toolbar)::after { display: none; }
+  body.game-ui-upgrade.dashboard-mode.standings-layout .standings-view-toggle button { min-width: 88px; }
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-summary .phase6-stat-card {
+  display: grid !important;
+  grid-template-columns: 52px minmax(0, 1fr) !important;
+  grid-template-rows: auto 1fr !important;
+  column-gap: 15px !important;
+  min-height: 118px !important;
+  padding: 18px 20px !important;
+  border-radius: 12px !important;
+  isolation: isolate;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-summary .phase6-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--phase6-stat-color) 62%, var(--phase6-border)) !important;
+  box-shadow: 0 18px 34px rgba(0, 0, 0, .36), 0 0 20px color-mix(in srgb, var(--phase6-stat-color) 12%, transparent), inset 0 1px rgba(255, 255, 255, .09) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-summary .phase6-stat-card::before {
+  grid-row: 1 / 3;
+  display: grid !important;
+  place-items: center;
+  width: 50px !important;
+  height: 50px !important;
+  margin: 0 !important;
+  border: 1px solid color-mix(in srgb, var(--phase6-stat-color) 58%, transparent);
+  border-radius: 11px !important;
+  color: #fff !important;
+  background: color-mix(in srgb, var(--phase6-stat-color) 18%, #0b1425) !important;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--phase6-stat-color) 16%, transparent), inset 0 1px rgba(255, 255, 255, .1);
+  font-family: var(--broadcast-number) !important;
+  font-size: 19px !important;
+  line-height: 1 !important;
+  content: "RTG" !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-summary .phase6-stat-card:nth-child(2)::before { content: "✓" !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-summary .phase6-stat-card:nth-child(3)::before { content: "15" !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-summary .phase6-stat-card:nth-child(4)::before { content: "18" !important; }
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-summary .phase6-stat-card::after {
+  right: -20px !important;
+  bottom: -30px !important;
+  width: 112px !important;
+  height: 86px !important;
+  border: 14px solid color-mix(in srgb, var(--phase6-stat-color) 11%, transparent) !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  transform: rotate(-18deg) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-summary .card-label {
+  align-self: end;
+  color: color-mix(in srgb, var(--phase6-stat-color) 68%, #fff) !important;
+  font-size: 9px !important;
+  letter-spacing: .13em !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-summary .stat-value {
+  align-self: start;
+  margin-top: 5px;
+  font-size: 31px !important;
+  line-height: 1 !important;
+  text-shadow: 0 5px 18px rgba(0, 0, 0, .35);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-summary .stat-value .ok {
+  color: var(--phase6-green) !important;
+  text-transform: uppercase;
+  text-shadow: 0 0 18px rgba(53, 208, 127, .18);
+}
+
+/* Rotation actions: make validity and the primary next step immediately obvious. */
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer.phase6-card {
+  position: relative;
+  min-height: 92px !important;
+  padding: 18px 20px 18px 78px !important;
+  overflow: hidden;
+  border-color: rgba(53, 208, 127, .3) !important;
+  border-left: 4px solid var(--phase6-green) !important;
+  background:
+    radial-gradient(circle at 10% 120%, rgba(53, 208, 127, .13), transparent 30%),
+    linear-gradient(105deg, rgba(17, 35, 49, .98), rgba(10, 18, 33, .98) 58%, rgba(21, 29, 49, .98)) !important;
+  box-shadow: var(--phase6-shadow-card), inset 0 1px rgba(255, 255, 255, .07) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer.phase6-card::before {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(53, 208, 127, .5);
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(145deg, #24c978, #10794b);
+  box-shadow: 0 0 0 5px rgba(53, 208, 127, .08), 0 8px 18px rgba(0, 0, 0, .28);
+  content: "✓";
+  transform: translateY(-50%);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer #rotation-message {
+  color: #fff !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  letter-spacing: .015em;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer #rotation-message::after {
+  display: block;
+  margin-top: 4px;
+  color: var(--phase6-text-muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  content: "240 minutes assigned · lineup eligible";
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer:has(#rotation-message.bad) {
+  border-color: rgba(255, 87, 112, .34) !important;
+  border-left-color: var(--phase6-red) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer:has(#rotation-message.bad)::before {
+  border-color: rgba(255, 87, 112, .55);
+  background: linear-gradient(145deg, #ff5770, #a91f3b);
+  box-shadow: 0 0 0 5px rgba(255, 87, 112, .08), 0 8px 18px rgba(0, 0, 0, .28);
+  content: "!";
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer #rotation-message.bad::after {
+  content: "Resolve the lineup issue before saving";
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer .actions {
+  gap: 10px !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 43px !important;
+  padding-inline: 20px !important;
+  border-radius: 8px !important;
+  font-weight: 850 !important;
+  letter-spacing: .035em;
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease, filter 150ms ease !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer button::before {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 6px;
+  background: rgba(5, 10, 20, .24);
+  font-family: var(--phase6-font-heading);
+  font-size: 13px;
+  font-weight: 900;
+  content: "↻";
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer button:hover {
+  transform: translateY(-2px);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer button:active {
+  transform: translateY(0) scale(.98);
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer button[data-action="rotation-save"] {
+  border-color: #55dfa0 !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  background-color: #15945a !important;
+  background-image: linear-gradient(135deg, #35d07f, #15945a) !important;
+  box-shadow: 0 10px 22px rgba(53, 208, 127, .24), inset 0 1px rgba(255, 255, 255, .2), inset 0 -2px rgba(0, 0, 0, .2) !important;
+  opacity: 1 !important;
+}
+
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer button[data-action="rotation-save"]:is(:disabled, [aria-disabled="true"]) {
+  cursor: default !important;
+  border-color: #42c98d !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  background-color: #117f4d !important;
+  background-image: linear-gradient(135deg, #2bbf73, #117f4d) !important;
+  box-shadow: 0 8px 18px rgba(53, 208, 127, .2), inset 0 1px rgba(255, 255, 255, .16) !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer button[data-action="rotation-save"]::before {
+  border-color: rgba(255, 255, 255, .28);
+  color: #fff;
+  background: rgba(5, 50, 31, .28);
+  content: "✓";
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer button[data-action="rotation-save"]:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 14px 28px rgba(53, 208, 127, .3), 0 0 0 1px rgba(53, 208, 127, .34), inset 0 1px rgba(255, 255, 255, .23) !important;
+}
+
+/* Keep the rotation commit action green even when a lighter page wrapper wins the cascade. */
+.rotation-footer button[data-action="rotation-save"] {
+  border-color: #55dfa0 !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  background-color: #15945a !important;
+  background-image: linear-gradient(135deg, #35d07f, #15945a) !important;
+  box-shadow: 0 10px 22px rgba(53, 208, 127, .24), inset 0 1px rgba(255, 255, 255, .2), inset 0 -2px rgba(0, 0, 0, .2) !important;
+  opacity: 1 !important;
+}
+.rotation-footer button[data-action="rotation-save"]:hover:not(:disabled) {
+  border-color: #6de8ad !important;
+  background-color: #18a664 !important;
+  background-image: linear-gradient(135deg, #45dc8d, #18a664) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer button[data-action="rotation-reset"] {
+  border-color: rgba(154, 174, 211, .42) !important;
+  background: linear-gradient(180deg, #1b2941, #101a2d) !important;
+  box-shadow: 0 9px 18px rgba(0, 0, 0, .3), inset 0 1px rgba(255, 255, 255, .07) !important;
+}
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen .rotation-footer button[data-action="rotation-reset"]:hover {
+  border-color: color-mix(in srgb, var(--game-team-secondary) 52%, var(--phase6-border)) !important;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team-secondary) 9%, #253651), #121e33) !important;
+  box-shadow: 0 12px 23px rgba(0, 0, 0, .34), 0 4px 13px color-mix(in srgb, var(--game-team-secondary) 12%, transparent), inset 0 1px rgba(255, 255, 255, .09) !important;
+}
+
+/* Rotation canvas: let the approved arena background show between the cards. */
+body.game-ui-upgrade.dark-mode.dashboard-mode .page:has(.phase6-rotation-screen),
+body.game-ui-upgrade.dashboard-mode .phase6-rotation-screen {
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.game-ui-upgrade .phase6-button { transition: none; }
+}

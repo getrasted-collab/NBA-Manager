@@ -800,7 +800,7 @@ body.dashboard-mode.gameplan-layout .page {
 
 body.dashboard-mode.gameplan-layout .gameplan-page {
   display: grid !important;
-  grid-template-rows: 38px 98px 34px minmax(0, 1fr) 56px !important;
+  grid-template-rows: 98px 48px minmax(0, 1fr) 56px !important;
   gap: 7px !important;
 
   overflow: hidden !important;

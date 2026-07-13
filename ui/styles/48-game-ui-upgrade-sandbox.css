@@ -89,6 +89,23 @@ body.game-ui-upgrade {
   --game-duration-reveal: 360ms;
 }
 
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric.dashboard-metric--offense {
+  background: linear-gradient(135deg, #172b4d 0%, #101b31 52%, #09111f 100%) !important;
+  box-shadow: inset 0 1px rgba(132,184,255,.18), 0 12px 28px rgba(0,0,0,.32) !important;
+}
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric.dashboard-metric--defense {
+  background: linear-gradient(135deg, #12372f 0%, #102820 48%, #091713 100%) !important;
+  box-shadow: inset 0 1px rgba(105,235,176,.16), 0 12px 28px rgba(0,0,0,.32) !important;
+}
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric.dashboard-metric--net {
+  background: linear-gradient(135deg, #29234a 0%, #1d1937 50%, #100e20 100%) !important;
+  box-shadow: inset 0 1px rgba(184,163,255,.17), 0 12px 28px rgba(0,0,0,.32) !important;
+}
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric.dashboard-metric--cap {
+  background: linear-gradient(135deg, #3b2c12 0%, #29200f 48%, #171208 100%) !important;
+  box-shadow: inset 0 1px rgba(255,210,103,.17), 0 12px 28px rgba(0,0,0,.32) !important;
+}
+
 /* Foundation primitives. These classes are intentionally opt-in. */
 body.game-ui-upgrade :is(.game-display, .game-title) {
   margin: 10px 0 10px 10px;
@@ -637,6 +654,51 @@ body.game-ui-upgrade.dashboard-mode .context-team-logo {
   object-fit: contain;
 }
 
+/* Stronger franchise identity at the top of the context rail. */
+body.game-ui-upgrade.dashboard-mode .context-heading {
+  position: relative;
+  min-height: 76px;
+  padding: 8px 9px 13px;
+  overflow: hidden;
+  background: linear-gradient(105deg, color-mix(in srgb, var(--game-team) 13%, transparent), transparent 68%);
+}
+body.game-ui-upgrade.dashboard-mode .context-heading::after {
+  position: absolute;
+  right: -28px;
+  bottom: -34px;
+  width: 88px;
+  height: 64px;
+  border: 1px solid var(--game-team-border);
+  border-radius: 50%;
+  opacity: .28;
+  content: "";
+}
+body.game-ui-upgrade.dashboard-mode .context-heading strong { gap: 12px; }
+body.game-ui-upgrade.dashboard-mode .context-heading strong > span { display: grid; gap: 2px; min-width: 0; }
+body.game-ui-upgrade.dashboard-mode .context-heading strong > span > em {
+  color: var(--game-team-secondary);
+  font-family: var(--game-font-body);
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: .18em;
+  line-height: 1;
+}
+body.game-ui-upgrade.dashboard-mode .context-team-logo {
+  width: 48px;
+  height: 48px;
+  padding: 5px;
+  border-color: color-mix(in srgb, var(--game-team) 52%, var(--game-border));
+  background: linear-gradient(145deg, color-mix(in srgb, var(--game-team) 20%, #17223a), #0a1220);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .28), inset 0 1px rgba(255, 255, 255, .06);
+}
+body.game-ui-upgrade.dashboard-mode .context-heading small { display: flex; align-items: center; gap: 7px; margin-top: 3px; }
+body.game-ui-upgrade.dashboard-mode .context-heading small > i { color: var(--game-text-muted); font-style: normal; font-size: 7px; }
+body.game-ui-upgrade.dashboard-mode .context-record { padding: 3px 6px; border-radius: var(--game-radius-pill); font-size: 8px; }
+body.game-ui-upgrade.dashboard-mode .context-record.winning { color: var(--game-success); background: var(--game-success-soft); }
+body.game-ui-upgrade.dashboard-mode .context-record.losing { color: var(--game-danger); background: var(--game-danger-soft); }
+body.game-ui-upgrade.dashboard-mode .context-record.even { color: var(--game-warning); background: var(--game-warning-soft); }
+
 body.game-ui-upgrade.dashboard-mode .context-nav {
   display: flex;
   flex: 1;
@@ -685,16 +747,6 @@ body.game-ui-upgrade.dashboard-mode .context-nav button:hover {
   background: rgba(255, 255, 255, .055);
   transform: translateX(2px);
 }
-
-body.game-ui-upgrade.dashboard-mode .context-nav button.active {
-  border-color: var(--game-team-border);
-  color: #fff;
-  background: linear-gradient(90deg, var(--game-team-soft), rgba(255, 255, 255, .055));
-  box-shadow: inset 3px 0 0 var(--game-team-secondary);
-}
-
-body.game-ui-upgrade.dashboard-mode .context-nav button.active i { color: var(--game-team-secondary); }
-body.game-ui-upgrade.dashboard-mode .context-nav button.active b { color: var(--game-team-secondary); }
 
 body.game-ui-upgrade.dashboard-mode .sidebar-nav-divider {
   margin: 8px 8px 3px;
@@ -777,11 +829,7 @@ body.game-ui-upgrade.dashboard-mode .sidebar-next-game .sidebar-sim-game-button 
   z-index: 1;
   min-height: 34px;
   margin-top: 0;
-  border: 1px solid color-mix(in srgb, var(--game-team) 72%, #fff) !important;
   border-radius: var(--game-radius-sm);
-  color: var(--team-contrast, #fff) !important;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 82%, #fff), var(--game-team)) !important;
-  box-shadow: 0 9px 20px var(--game-team-glow) !important;
   font-family: var(--game-font-heading);
   font-size: 10px;
   font-weight: 800;
@@ -793,6 +841,74 @@ body.game-ui-upgrade.dashboard-mode .sidebar-next-game .sidebar-sim-game-button:
   filter: brightness(1.12);
   transform: translateY(-1px);
 }
+
+/* Compact broadcast upgrade for the sidebar's next matchup. */
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game {
+  position: relative;
+  gap: 9px;
+  min-height: 142px;
+  padding: 12px;
+  border-color: color-mix(in srgb, var(--game-team) 42%, var(--game-border)) !important;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--game-team) 12%, #0b1424), #090f1c 68%) !important;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game::after {
+  right: -26px;
+  bottom: -54px;
+  width: 126px;
+  height: 126px;
+  border-width: 14px;
+  opacity: .26;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game > span > i {
+  padding: 3px 6px;
+  border: 1px solid var(--game-border);
+  border-radius: var(--game-radius-pill);
+  color: var(--game-text-muted);
+  background: rgba(5, 10, 19, .52);
+  font-size: 6px;
+  font-style: normal;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-matchup {
+  position: relative;
+  z-index: 1;
+  min-height: 52px;
+  padding: 7px 9px;
+  border: 1px solid color-mix(in srgb, var(--side-primary) 34%, var(--game-border));
+  border-left: 3px solid var(--side-primary);
+  border-radius: 8px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--side-primary) 15%, #101a2d), rgba(8, 14, 25, .68));
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-logo {
+  width: 44px;
+  height: 44px;
+  filter: drop-shadow(0 7px 10px rgba(0, 0, 0, .4));
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-matchup small {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-matchup small b {
+  padding: 2px 5px;
+  border-radius: var(--game-radius-pill);
+  color: var(--side-secondary);
+  background: color-mix(in srgb, var(--side-primary) 16%, transparent);
+  font-family: var(--game-font-numeric);
+  font-size: 7px;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game .sidebar-sim-game-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 37px;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game .sidebar-sim-game-button span { font-size: 16px; line-height: 0; }
 
 body.game-ui-upgrade.dashboard-mode .workspace {
   min-width: 0;
@@ -1695,6 +1811,34 @@ body.game-ui-upgrade .reference-chart-panel .reference-bars > div > small {
   letter-spacing: .06em;
 }
 
+body.game-ui-upgrade .reference-chart-panel .recent-opponent-logo {
+  display: block;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,.35));
+}
+
+/* Metric-card surface upgrade only; layout and content remain unchanged. */
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric {
+  background:
+    radial-gradient(circle at 86% 18%, color-mix(in srgb, var(--metric-color) 15%, transparent), transparent 34%),
+    linear-gradient(145deg, color-mix(in srgb, var(--metric-color) 9%, #121b30), #0a1120 72%) !important;
+  box-shadow:
+    0 12px 25px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.055),
+    inset 0 -18px 34px rgba(0,0,0,.12);
+  transition: border-color var(--game-duration) ease, box-shadow var(--game-duration) ease, transform var(--game-duration) var(--game-ease);
+}
+body.game-ui-upgrade .reference-stat-grid .dashboard-metric:hover {
+  border-color: color-mix(in srgb, var(--metric-color) 48%, var(--game-border)) !important;
+  box-shadow:
+    0 16px 30px rgba(0,0,0,.34),
+    0 0 20px color-mix(in srgb, var(--metric-color) 10%, transparent),
+    inset 0 1px 0 rgba(255,255,255,.07);
+  transform: translateY(-2px);
+}
+
 /* Compact, collision-free Upcoming cards. */
 body.game-ui-upgrade .reference-upcoming > div {
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2100,6 +2244,118 @@ body.game-ui-upgrade .reference-upcoming .upcoming-game-card .upcoming-team-logo
   margin: 0 auto;
   object-fit: contain;
 }
+
+/* Keep long franchise names from running through the hero logo. */
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity h2 {
+  max-width: 100%;
+  font-size: clamp(32px, 2.45vw, 42px);
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+body.game-ui-upgrade .vertical-slice-hero .reference-hero-logo {
+  position: relative;
+  z-index: 2;
+  justify-self: end;
+  margin-left: 14px;
+}
+
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity {
+  position: relative;
+  display: block;
+  padding-right: 112px;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity > div {
+  width: 100%;
+  min-width: 0;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity h2 {
+  font-size: clamp(29px, 2.15vw, 37px);
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity .reference-hero-logo {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  width: 92px;
+  height: 92px;
+  margin: 0;
+  transform: translateY(-50%);
+}
+
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  padding-right: 0;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity > div {
+  flex: 0 1 auto;
+  width: auto;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity .reference-hero-logo {
+  position: static;
+  flex: 0 0 82px;
+  width: 82px;
+  height: 82px;
+  transform: none;
+}
+
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity {
+  display: grid;
+  grid-template-columns: max-content 82px;
+  justify-content: start;
+  gap: 8px;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity > div {
+  grid-column: 1;
+  grid-row: 1;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity .reference-hero-logo {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: start;
+}
+
+body.game-ui-upgrade .vertical-slice-hero .reference-hero-watermark {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1;
+}
+
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity .reference-hero-logo {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  overflow: visible;
+}
+
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity {
+  display: block;
+  padding-right: 0;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity > div {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity h2 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: max-content;
+  max-width: 100%;
+}
+body.game-ui-upgrade .vertical-slice-hero .reference-title-logo {
+  display: inline-block !important;
+  flex: 0 0 82px;
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+  vertical-align: middle;
+  filter: drop-shadow(0 7px 9px rgba(0,0,0,.35));
+}
+
 body.game-ui-upgrade .upcoming-event-card .upcoming-card-topline { grid-row: 1; min-height: 0; }
 body.game-ui-upgrade .reference-upcoming .upcoming-event-card .upcoming-event-summary {
   grid-row: 2;
@@ -2118,7 +2374,12 @@ body.game-ui-upgrade .reference-upcoming .upcoming-event-card > em {
 
 /* Move the Trade Eligible text to the right */
 body.game-ui-upgrade .command-card--operations > header > strong {
-  transform: translateX(25px);
+  transform: none;
+  width: 190px !important;
+  max-width: 190px !important;
+  line-height: 1.12;
+  text-wrap: balance;
+  white-space: normal !important;
 }
 
 body.game-ui-upgrade .command-card--operations .operations-deadline > p {
@@ -2128,7 +2389,15 @@ body.game-ui-upgrade .command-card--operations .operations-deadline > p {
 
 body.game-ui-upgrade .command-card--operations .operations-deadline > p > b {
   display: block;
-  margin-left: -25px;
+  width: max-content;
+  min-width: 58px;
+  margin: 0 0 8px;
+  padding: 6px 11px;
+  border: 1px solid color-mix(in srgb, var(--game-warning) 42%, transparent);
+  border-radius: var(--game-radius-pill);
+  font-size: 9px;
+  line-height: 1;
+  text-align: center;
 }
 
 body.game-ui-upgrade .upcoming-event-copy {
@@ -2147,6 +2416,59 @@ body.game-ui-upgrade .upcoming-event-copy .upcoming-card-detail {
 body.game-ui-upgrade .upcoming-event-copy strong {
   font-size: 54px;
   line-height: 0.9;
+}
+
+body.game-ui-upgrade .upcoming-extension-card .upcoming-event-copy {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: auto;
+  width: max-content;
+  max-width: calc(100% - 20px);
+  margin: 0;
+  transform: translateY(-34%);
+  text-align: right;
+}
+body.game-ui-upgrade .upcoming-extension-card .upcoming-event-copy strong,
+body.game-ui-upgrade .upcoming-extension-card .upcoming-event-copy .upcoming-card-detail {
+  text-align: right !important;
+}
+
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card .upcoming-matchup {
+  transform: translateY(4px);
+}
+
+/* Replace the repeated command-card circles with angular broadcast accents. */
+body.game-ui-upgrade .command-center-cards > article::after {
+  right: -1px;
+  bottom: -1px;
+  width: 132px;
+  height: 72px;
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, #fff, #fff) 86px 18px / 31px 3px no-repeat,
+    linear-gradient(90deg, #fff, #fff) 94px 28px / 23px 3px no-repeat,
+    linear-gradient(90deg, #fff, #fff) 102px 38px / 15px 3px no-repeat,
+    linear-gradient(135deg, color-mix(in srgb, var(--command-color) 42%, transparent), color-mix(in srgb, var(--command-color) 78%, #07101f));
+  clip-path: polygon(42% 0, 100% 0, 100% 100%, 0 100%);
+  opacity: .82;
+  filter: drop-shadow(-4px -3px 9px color-mix(in srgb, var(--command-color) 22%, transparent));
+}
+
+body.game-ui-upgrade .reference-upcoming .upcoming-card::before {
+  position: absolute;
+  left: -10px;
+  bottom: -8px;
+  width: 148px;
+  height: 82px;
+  background:
+    repeating-linear-gradient(125deg, transparent 0 10px, color-mix(in srgb, var(--game-team-secondary) 22%, transparent) 10px 12px, transparent 12px 22px),
+    linear-gradient(110deg, color-mix(in srgb, var(--game-team) 18%, transparent), transparent 72%);
+  clip-path: polygon(0 28%, 26% 0, 100% 100%, 0 100%);
+  opacity: .62;
+  content: "";
+  pointer-events: none;
 }
 
 body.game-ui-upgrade .upcoming-event-copy .upcoming-card-detail {
@@ -2417,7 +2739,7 @@ body.game-ui-upgrade
   top: -150px !important;
 
   width: 820px !important;
-  height: 520px !important;
+  height: clamp(590px, 64vh, 680px) !important;
 
   object-fit: contain !important;
   opacity: 0.1 !important;
@@ -2506,4 +2828,2690 @@ body.game-ui-upgrade
 
 }
 
+/* Final metric surfaces: intentionally last so legacy dashboard themes cannot flatten them. */
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric--offense { background: linear-gradient(135deg, #19345d, #101d35 55%, #09111f) !important; }
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric--defense { background: linear-gradient(135deg, #144337, #102a23 55%, #091713) !important; }
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric--net { background: linear-gradient(135deg, #30285a, #201a3c 55%, #100e20) !important; }
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric--cap { background: linear-gradient(135deg, #493615, #2d230f 55%, #171208) !important; }
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric {
+  box-shadow: inset 0 1px rgba(255,255,255,.11), inset 0 -26px 42px rgba(0,0,0,.18), 0 13px 28px rgba(0,0,0,.34) !important;
+}
 
+/* Subtle color, energetic silhouette for Command Center corner accents. */
+body.game-ui-upgrade .command-center-cards > article::after {
+  right: -24px;
+  bottom: -24px;
+  width: 148px;
+  height: 88px;
+  border: 0;
+  border-radius: 0;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 13px, rgba(255,255,255,.2) 13px 15px, transparent 15px 27px),
+    linear-gradient(135deg, color-mix(in srgb, var(--command-color) 82%, #fff), var(--command-color));
+  clip-path: polygon(38% 18%, 100% 0, 100% 100%, 0 100%, 27% 70%, 9% 70%, 43% 37%, 27% 37%);
+  opacity: .27;
+  filter: drop-shadow(-3px -3px 7px color-mix(in srgb, var(--command-color) 22%, transparent));
+}
+
+/* Staff Market header: stronger front-office hierarchy. */
+body.game-ui-upgrade .reference-dashboard .command-staff-market .staff-market-head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 74px;
+  padding: 11px 20px 10px;
+  overflow: hidden;
+  border-bottom: 1px solid color-mix(in srgb, var(--game-team) 32%, var(--game-border)) !important;
+  background:
+    linear-gradient(105deg, color-mix(in srgb, var(--game-team) 13%, #101a2d), #09111f 68%) !important;
+}
+body.game-ui-upgrade .reference-dashboard .command-staff-market .staff-market-head::after {
+  position: absolute;
+  right: 18px;
+  bottom: -40px;
+  width: 180px;
+  height: 78px;
+  background: repeating-linear-gradient(135deg, transparent 0 13px, color-mix(in srgb, var(--game-team) 16%, transparent) 13px 15px, transparent 15px 27px);
+  transform: skewX(-18deg);
+  content: "";
+  pointer-events: none;
+}
+body.game-ui-upgrade .command-staff-market .staff-market-head > div:first-child {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 5px;
+}
+body.game-ui-upgrade .command-staff-market .staff-market-head .card-label {
+  width: max-content;
+  padding: 4px 8px;
+  border: 1px solid var(--game-team-border);
+  border-radius: var(--game-radius-pill);
+  color: var(--game-team-secondary) !important;
+  background: var(--game-team-soft);
+  font-size: 7px;
+  letter-spacing: .14em;
+}
+body.game-ui-upgrade .command-staff-market .staff-market-head .player-name {
+  color: var(--game-text) !important;
+  font-family: var(--game-font-display);
+  font-size: 23px;
+  font-weight: 400;
+  letter-spacing: .025em;
+  line-height: 1;
+}
+body.game-ui-upgrade .command-staff-market .staff-market-head .meta {
+  color: var(--game-text-soft) !important;
+  font-size: 9px;
+}
+body.game-ui-upgrade .command-staff-market .staff-market-summary {
+  position: relative;
+  z-index: 1;
+  min-width: 88px;
+  min-height: 50px;
+  border-color: color-mix(in srgb, var(--game-team) 48%, var(--game-border));
+  background: linear-gradient(145deg, color-mix(in srgb, var(--game-team) 20%, #101a2d), #0a1221);
+  box-shadow: 0 9px 20px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.06);
+}
+body.game-ui-upgrade .command-staff-market .staff-market-summary strong { font-size: 27px; }
+
+body.game-ui-upgrade .vertical-slice-hero .team-hero-identity h2 .reference-title-logo {
+  flex: 0 0 124px !important;
+  width: 124px !important;
+  height: 124px !important;
+}
+
+body.game-ui-upgrade .command-center-cards article > header {
+  position: relative;
+  margin: -5px -6px 14px !important;
+  padding: 10px 11px 12px !important;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--command-color) 24%, var(--game-border)) !important;
+  border-left: 3px solid var(--command-color) !important;
+  border-radius: var(--game-radius-sm);
+  background: linear-gradient(100deg, color-mix(in srgb, var(--command-color) 13%, var(--game-surface-2)), rgba(7,12,22,.28)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.035);
+}
+body.game-ui-upgrade .command-center-cards article > header::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 96px;
+  height: 100%;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--command-color) 42%, transparent) 0 1.2px, transparent 1.4px) 0 0 / 10px 10px,
+    radial-gradient(circle at 100% 50%, color-mix(in srgb, var(--command-color) 15%, transparent), transparent 72%);
+  clip-path: none;
+  opacity: .38;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 58%);
+  mask-image: linear-gradient(90deg, transparent, #000 58%);
+  content: "";
+  pointer-events: none;
+}
+
+body.game-ui-upgrade .reference-season-hero .team-hero-identity p > strong.team-record-winning {
+  color: var(--game-success) !important;
+  -webkit-text-fill-color: var(--game-success) !important;
+}
+body.game-ui-upgrade .reference-season-hero .team-hero-identity p > strong.team-record-losing {
+  color: var(--game-danger) !important;
+  -webkit-text-fill-color: var(--game-danger) !important;
+}
+body.game-ui-upgrade .reference-season-hero .team-hero-identity p > strong.team-record-even {
+  color: var(--game-warning) !important;
+  -webkit-text-fill-color: var(--game-warning) !important;
+}
+
+/* Light SimCast broadcast upgrade; structure and simulation behavior unchanged. */
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-scoreboard {
+  min-height: 190px; padding: 24px 36px;
+  border-color: color-mix(in srgb, var(--game-team) 38%, var(--game-border)) !important;
+  background: linear-gradient(90deg, var(--game-team-soft), transparent 34%, transparent 66%, color-mix(in srgb, var(--game-team-secondary) 7%, transparent)), radial-gradient(circle at 50% 52%, var(--game-team-glow), transparent 30%), #070d19 !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.045), 0 16px 34px rgba(0,0,0,.34) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team { gap: 12px; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team-logo { width: 92px; height: 92px; filter: drop-shadow(0 12px 15px rgba(0,0,0,.38)); }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team > b { font-size: clamp(72px, 6.4vw, 98px); text-shadow: 0 10px 25px rgba(0,0,0,.42), 0 0 18px rgba(255,255,255,.08); }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team strong { line-height: .92; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-clock { min-width: 210px; padding: 15px 20px; border: 1px solid color-mix(in srgb, var(--game-team-secondary) 48%, var(--game-border)) !important; border-bottom: 4px solid var(--game-team-secondary) !important; background: linear-gradient(160deg, color-mix(in srgb, var(--game-team-secondary) 10%, #11172a), #070c16) !important; box-shadow: 0 13px 26px rgba(0,0,0,.36), inset 0 1px rgba(255,255,255,.05); }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-clock strong { font-size: 55px; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-clock small { width: max-content; margin: 7px auto 0; padding: 4px 8px; border-radius: var(--game-radius-pill); background: var(--game-team-soft); }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip { padding: 10px 16px 13px; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div { max-width: none; }
+
+body.game-ui-upgrade .simcast-feed-panel { min-height: 430px; }
+body.game-ui-upgrade .simcast-feed-row { min-height: 47px; padding: 8px 12px !important; border-left-width: 3px !important; transition: background var(--game-duration-fast) ease; }
+body.game-ui-upgrade .simcast-feed-row:first-child { border-left-color: var(--game-team-secondary) !important; background: linear-gradient(90deg, var(--game-team-soft), #0c1321) !important; box-shadow: inset 0 1px var(--game-team-border); }
+body.game-ui-upgrade .simcast-feed-row:hover { background: rgba(255,255,255,.035) !important; }
+
+body.game-ui-upgrade .simcast-comparison .simcast-stat-row { min-height: 40px; padding: 7px 6px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.018), transparent); }
+body.game-ui-upgrade .simcast-comparison .simcast-stat-row b { font-size: 13px; }
+body.game-ui-upgrade .simcast-comparison .simcast-stat-row span { color: var(--game-text-muted) !important; }
+body.game-ui-upgrade .simcast-leaders > div { min-height: 70px; padding: 9px 8px; border-left: 3px solid var(--game-team); background: linear-gradient(90deg, var(--game-team-soft), transparent); transition: background var(--game-duration) ease, transform var(--game-duration-fast) ease; }
+body.game-ui-upgrade .simcast-leaders > div:hover { background: color-mix(in srgb, var(--game-team) 15%, transparent); transform: translateX(2px); }
+body.game-ui-upgrade .simcast-leader-headshot { width: 48px !important; height: 48px !important; object-fit: cover; object-position: center top; }
+
+body.game-ui-upgrade .simcast-coaching-grid { gap: 0; }
+body.game-ui-upgrade :is(.simcast-strategy-controls, .simcast-lineup-presets, .simcast-substitution) { padding: 15px !important; }
+body.game-ui-upgrade .simcast-lineup-presets button:hover { border-color: var(--game-team-border) !important; background: var(--game-team-soft) !important; }
+body.game-ui-upgrade .simcast-substitution { background: linear-gradient(90deg, rgba(255,255,255,.018), transparent); }
+body.game-ui-upgrade .simcast-substitution button[data-simcast-coach="substitute"] { box-shadow: 0 8px 18px var(--game-team-glow); }
+
+body.game-ui-upgrade .simcast-live-team-name { min-height: 52px; padding: 8px 13px !important; }
+body.game-ui-upgrade .simcast-box-logo { width: 34px !important; height: 34px !important; }
+body.game-ui-upgrade .simcast-live-team tbody tr:nth-child(even) { background: rgba(255,255,255,.022); }
+body.game-ui-upgrade .simcast-live-team tbody tr:hover { background: var(--game-team-soft); }
+body.game-ui-upgrade .simcast-live-team tbody td:nth-child(6) b { color: var(--game-team-secondary); font-size: 12px; }
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls { position: sticky; bottom: 8px; z-index: 12; border-color: var(--game-team-border) !important; background: rgba(7,12,22,.96) !important; box-shadow: 0 -8px 28px rgba(0,0,0,.36); }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls button.active { box-shadow: 0 0 0 1px var(--game-team-secondary), 0 0 18px var(--game-team-glow) !important; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls button[data-simcast-action="finish"] { border-color: rgba(255,93,108,.55) !important; background: linear-gradient(135deg, #8d2340, #5e1730) !important; box-shadow: 0 8px 20px rgba(255,42,91,.18); }
+
+@media (max-width: 980px) {
+  body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-scoreboard { grid-template-columns: 1fr 170px 1fr; gap: 12px; padding: 20px 14px; }
+  body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team-logo { width: 62px; height: 62px; }
+  body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team > b { font-size: 58px; }
+  body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-clock { min-width: 160px; }
+  body.game-ui-upgrade .simcast-coaching-grid, body.game-ui-upgrade .simcast-live-box-teams { grid-template-columns: 1fr; }
+}
+
+body.game-ui-upgrade .reference-upcoming .upcoming-game-card .upcoming-matchup > i {
+  display: grid !important;
+  place-items: center;
+  width: 30px !important;
+  height: 30px;
+  border: 1px solid color-mix(in srgb, var(--game-team-secondary) 55%, var(--game-border));
+  border-radius: 50%;
+  color: #fff !important;
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--game-team) 24%, #17233b), #09111f 72%);
+  box-shadow: 0 7px 15px rgba(0,0,0,.3), 0 0 12px var(--game-team-glow);
+  font-family: var(--game-font-heading);
+  font-size: 9px !important;
+  font-weight: 900;
+  letter-spacing: .05em;
+}
+
+/* Full-width SimCast quarter summary bar. */
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip {
+  padding: 12px 14px 14px;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--game-team-secondary) 24%, var(--game-border)) !important;
+  background: linear-gradient(110deg, color-mix(in srgb, var(--game-team) 7%, #111b2f), #09111f 72%) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.04), 0 10px 24px rgba(0,0,0,.24);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div {
+  display: flex !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  border-right: 1px solid var(--game-border) !important;
+  border-left: 1px solid var(--game-border) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > * {
+  flex: 1 1 0 !important;
+  min-width: 58px;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > :first-child {
+  flex: 0 0 210px !important;
+  width: 210px !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > :last-child {
+  flex: 0 0 118px !important;
+  width: 118px !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div:not(.simcast-period-head) {
+  min-height: 58px;
+  transition: background var(--game-duration-fast) ease;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div:not(.simcast-period-head):hover { background: rgba(255,255,255,.025); }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div.leading {
+  background: linear-gradient(90deg, var(--game-team-soft), transparent 42%);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-team {
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start !important;
+  gap: 11px;
+  padding-left: 14px !important;
+}
+body.game-ui-upgrade .simcast-period-logo { width: 38px; height: 38px; object-fit: contain; filter: drop-shadow(0 6px 8px rgba(0,0,0,.3)); }
+body.game-ui-upgrade .simcast-period-team > span { display: grid; justify-items: start; gap: 2px; }
+body.game-ui-upgrade .simcast-period-team > span > b { color: #fff !important; font-family: var(--game-font-heading); font-size: 14px !important; }
+body.game-ui-upgrade .simcast-period-team > span > small { color: var(--game-text-muted) !important; font-family: var(--game-font-numeric); font-size: 8px; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div.leading > :last-child {
+  color: #fff !important;
+  background: linear-gradient(135deg, var(--game-team), color-mix(in srgb, var(--game-team) 68%, #111a2d)) !important;
+  box-shadow: inset 3px 0 var(--game-team-secondary);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-head > :first-child { color: var(--game-team-secondary) !important; }
+
+@media (max-width: 900px) {
+  body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > :first-child { flex-basis: 145px !important; width: 145px !important; }
+  body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > :last-child { flex-basis: 76px !important; width: 76px !important; }
+  body.game-ui-upgrade .simcast-period-logo { width: 30px; height: 30px; }
+}
+
+/* Staff action button upgrade. */
+body.game-ui-upgrade .command-staff-market .staff-hire-button,
+body.game-ui-upgrade .command-center-cards .staff-market-button {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 9px 38px 9px 15px !important;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--game-team) 58%, var(--game-border)) !important;
+  border-radius: 7px !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--game-team) 48%, #17243d), color-mix(in srgb, var(--game-team) 22%, #0b1426)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.08), 0 8px 18px rgba(0,0,0,.25);
+  font-family: var(--game-font-heading) !important;
+  font-size: 9px !important;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: transform var(--game-duration-fast) ease, border-color var(--game-duration-fast) ease, box-shadow var(--game-duration-fast) ease, filter var(--game-duration-fast) ease;
+}
+body.game-ui-upgrade .command-staff-market .staff-hire-button::after,
+body.game-ui-upgrade .command-center-cards .staff-market-button::after {
+  position: absolute;
+  top: 50%;
+  right: 13px;
+  display: grid;
+  place-items: center;
+  width: 21px;
+  height: 21px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  font-size: 12px;
+  transform: translateY(-50%);
+  content: "›";
+}
+body.game-ui-upgrade .command-staff-market .staff-hire-button::before,
+body.game-ui-upgrade .command-center-cards .staff-market-button::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--game-team-secondary);
+  content: "";
+}
+body.game-ui-upgrade .command-staff-market .staff-hire-button:hover,
+body.game-ui-upgrade .command-center-cards .staff-market-button:hover {
+  border-color: var(--game-team-secondary) !important;
+  box-shadow: 0 10px 24px var(--game-team-glow), inset 0 1px rgba(255,255,255,.12);
+  filter: brightness(1.12);
+  transform: translateY(-2px);
+}
+body.game-ui-upgrade .command-staff-market .staff-hire-button:active,
+body.game-ui-upgrade .command-center-cards .staff-market-button:active { transform: translateY(0) scale(.99); }
+
+body.game-ui-upgrade .command-staff-market .staff-hire-button,
+body.game-ui-upgrade .command-center-cards .staff-market-button {
+  justify-content: flex-start;
+  padding: 10px 15px !important;
+  border: 1px solid color-mix(in srgb, var(--game-team) 34%, var(--game-border)) !important;
+  border-bottom: 3px solid var(--game-team) !important;
+  border-radius: 6px !important;
+  background: linear-gradient(180deg, rgba(30,43,70,.86), rgba(12,20,36,.96)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.055), 0 7px 14px rgba(0,0,0,.2);
+  letter-spacing: .095em;
+  text-align: left;
+}
+body.game-ui-upgrade .command-staff-market .staff-hire-button::before,
+body.game-ui-upgrade .command-center-cards .staff-market-button::before,
+body.game-ui-upgrade .command-staff-market .staff-hire-button::after,
+body.game-ui-upgrade .command-center-cards .staff-market-button::after { display: none; }
+body.game-ui-upgrade .command-staff-market .staff-hire-button:hover,
+body.game-ui-upgrade .command-center-cards .staff-market-button:hover {
+  border-color: color-mix(in srgb, var(--game-team) 62%, #fff) !important;
+  border-bottom-color: var(--game-team-secondary) !important;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 18%, #22304d), #101a2d) !important;
+  box-shadow: 0 9px 20px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.08);
+  filter: none;
+  transform: translateY(-1px);
+}
+
+/* SimCast scoreboard depth and broadcast hierarchy. */
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-scoreboard {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-scoreboard::before,
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-scoreboard::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  width: 38%;
+  opacity: .45;
+  content: "";
+  pointer-events: none;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-scoreboard::before {
+  left: 0;
+  background: linear-gradient(100deg, color-mix(in srgb, var(--game-team) 24%, transparent), transparent 82%);
+  clip-path: polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-scoreboard::after {
+  right: 0;
+  background: linear-gradient(260deg, color-mix(in srgb, var(--game-team-secondary) 17%, transparent), transparent 82%);
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 12% 100%, 0 50%);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team {
+  min-height: 126px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255,255,255,.045);
+  border-radius: var(--game-radius-md);
+  background: linear-gradient(135deg, rgba(255,255,255,.026), rgba(7,12,22,.15));
+  box-shadow: inset 0 1px rgba(255,255,255,.025);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team.away { border-left: 3px solid var(--game-team); }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team.home { border-right: 3px solid var(--game-team-secondary); }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team > div {
+  display: grid;
+  min-width: 0;
+  align-content: center;
+  gap: 4px;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team-name {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  white-space: nowrap;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team-name.is-long {
+  font-size: clamp(18px, 1.55vw, 25px) !important;
+  letter-spacing: -.015em !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team-name.is-extra-long {
+  font-size: clamp(16px, 1.35vw, 22px) !important;
+  letter-spacing: -.025em !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team > div > span {
+  color: var(--game-text-muted) !important;
+  font-family: var(--game-font-heading);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team > div > small {
+  width: max-content;
+  padding: 4px 8px;
+  border: 1px solid var(--game-border);
+  border-radius: var(--game-radius-pill);
+  color: var(--game-text-soft) !important;
+  background: rgba(5,10,19,.5);
+  font-family: var(--game-font-numeric);
+  font-size: 8px;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team.home > div > small { justify-self: end; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team > b {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 104px;
+  border: 1px solid rgba(255,255,255,.05);
+  border-bottom: 4px solid var(--game-team);
+  border-radius: 9px;
+  background: linear-gradient(180deg, rgba(24,35,58,.78), rgba(7,12,22,.72));
+  box-shadow: 0 12px 24px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.05);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team.home > b { border-bottom-color: var(--game-team-secondary); }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team-logo { transition: transform var(--game-duration) var(--game-ease), filter var(--game-duration) ease; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team:hover .simcast-team-logo { transform: scale(1.06); filter: drop-shadow(0 14px 18px rgba(0,0,0,.42)); }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team > b.score-digits-2 {
+  font-size: clamp(52px, 4.5vw, 70px) !important;
+  letter-spacing: -.045em;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team > b.score-digits-3 {
+  font-size: clamp(42px, 3.7vw, 58px) !important;
+  letter-spacing: -.065em;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-clock {
+  position: relative;
+  overflow: hidden;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-clock::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--game-team-secondary), transparent);
+  content: "";
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-clock span {
+  width: max-content;
+  margin: 0 auto;
+  padding: 3px 8px;
+  border-radius: var(--game-radius-pill);
+  color: var(--game-warning) !important;
+  background: var(--game-warning-soft);
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip {
+  display: block !important;
+  width: 100%;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div {
+  box-sizing: border-box;
+  display: flex !important;
+  width: 100% !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > * {
+  flex: 1 1 0 !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > :first-child,
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > :last-child {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > :first-child { flex: 1.5 1 210px !important; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > :last-child { flex: .8 1 110px !important; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div:not(.simcast-period-head) > b {
+  min-height: 58px;
+  font-size: 18px;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-head > * {
+  min-height: 28px !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip b.future {
+  color: var(--game-text-dim) !important;
+  background: rgba(255,255,255,.012) !important;
+  font-size: 13px !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip .simcast-margin {
+  font-family: var(--game-font-numeric);
+  font-size: 14px !important;
+}
+body.game-ui-upgrade .simcast-margin.positive { color: var(--game-success) !important; background: var(--game-success-soft) !important; }
+body.game-ui-upgrade .simcast-margin.negative { color: var(--game-danger) !important; background: var(--game-danger-soft) !important; }
+body.game-ui-upgrade .simcast-margin.even { color: var(--game-warning) !important; background: var(--game-warning-soft) !important; }
+
+body.game-ui-upgrade .simcast-shell .simcast-progress {
+  display: none !important;
+}
+
+/* Unified SimCast insight rail. */
+body.game-ui-upgrade .simcast-side-panel {
+  gap: 0 !important;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--game-team) 25%, var(--game-border));
+  border-radius: var(--game-radius-md);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--game-team) 6%, #121b30), #09111f 70%);
+  box-shadow: 0 14px 28px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.035);
+}
+body.game-ui-upgrade .simcast-side-panel > :is(.simcast-comparison, .simcast-leaders) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-comparison {
+  padding: 18px 16px 15px;
+  border-bottom: 1px solid var(--game-border) !important;
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders { padding: 16px; }
+body.game-ui-upgrade .simcast-side-panel > section > span:first-child {
+  color: var(--game-team-secondary) !important;
+  font-size: 7px;
+  letter-spacing: .14em;
+}
+body.game-ui-upgrade .simcast-side-panel > section > strong {
+  display: block;
+  margin-top: 5px;
+  color: #fff !important;
+  font-size: 16px;
+  letter-spacing: .045em;
+}
+body.game-ui-upgrade .simcast-comparison-teams {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  margin: 13px 0 5px;
+  padding: 9px 10px;
+  border: 1px solid var(--game-border);
+  border-radius: var(--game-radius-sm);
+  background: rgba(5,10,19,.48);
+}
+body.game-ui-upgrade .simcast-comparison-teams > b {
+  color: #fff !important;
+  font-family: var(--game-font-heading);
+  font-size: 13px;
+}
+body.game-ui-upgrade .simcast-comparison-teams > b:last-child { text-align: right; }
+body.game-ui-upgrade .simcast-comparison-teams > span {
+  padding: 3px 6px;
+  border-radius: var(--game-radius-pill);
+  color: var(--game-success) !important;
+  background: var(--game-success-soft);
+  font-family: var(--game-font-heading);
+  font-size: 6px;
+  font-weight: 800;
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-stat-row {
+  grid-template-columns: 1fr 1.35fr 1fr;
+  min-height: 39px;
+  margin: 0;
+  padding: 7px 9px;
+  border-bottom: 1px solid var(--game-border-subtle);
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-stat-row:nth-child(even) { background: rgba(255,255,255,.018); }
+body.game-ui-upgrade .simcast-side-panel .simcast-stat-row b:first-child { color: var(--game-info) !important; }
+body.game-ui-upgrade .simcast-side-panel .simcast-stat-row b:last-child { color: var(--game-team-secondary) !important; text-align: right; }
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders > div {
+  margin-top: 8px;
+  border: 1px solid var(--game-border-subtle);
+  border-left: 3px solid var(--game-team);
+  border-radius: var(--game-radius-sm);
+}
+
+/* Let Game Feed end with its content instead of leaving a large empty floor. */
+body.game-ui-upgrade .simcast-body { align-items: start; }
+body.game-ui-upgrade .simcast-feed-panel {
+  align-self: start;
+  min-height: 0 !important;
+  height: auto !important;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--game-team) 25%, var(--game-border)) !important;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--game-team) 5%, #111a2d), #09111f 72%) !important;
+  box-shadow: 0 14px 28px rgba(0,0,0,.27), inset 0 1px rgba(255,255,255,.03);
+}
+body.game-ui-upgrade .simcast-feed-panel > header {
+  min-height: 64px;
+  padding: 13px 16px !important;
+  border-bottom: 1px solid var(--game-team-border) !important;
+  background: linear-gradient(90deg, var(--game-team-soft), rgba(7,12,22,.25)) !important;
+}
+body.game-ui-upgrade .simcast-feed-panel > header strong { font-size: 17px; letter-spacing: .045em; }
+body.game-ui-upgrade .simcast-feed-panel > header > small {
+  padding: 4px 8px;
+  border: 1px solid var(--game-border);
+  border-radius: var(--game-radius-pill);
+  color: var(--game-success) !important;
+  background: var(--game-success-soft);
+}
+body.game-ui-upgrade .simcast-feed {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: 430px;
+  overflow-y: auto;
+}
+body.game-ui-upgrade .simcast-feed-row:last-child { border-bottom: 0 !important; }
+body.game-ui-upgrade .simcast-feed-row:first-child::after {
+  position: absolute;
+  top: 5px;
+  right: 58px;
+  padding: 2px 5px;
+  border-radius: var(--game-radius-pill);
+  color: var(--game-team-secondary);
+  background: var(--game-team-soft);
+  font-family: var(--game-font-heading);
+  font-size: 6px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  content: "LATEST";
+}
+
+/* SimCast coaching command deck. */
+body.game-ui-upgrade .simcast-coaching {
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--game-team) 28%, var(--game-border)) !important;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--game-team) 5%, #111a2d), #09111f 76%) !important;
+  box-shadow: 0 13px 28px rgba(0,0,0,.27), inset 0 1px rgba(255,255,255,.035);
+}
+body.game-ui-upgrade .simcast-coaching > header {
+  min-height: 66px;
+  padding: 12px 16px !important;
+  border-bottom: 1px solid var(--game-team-border) !important;
+  background: linear-gradient(90deg, var(--game-team-soft), rgba(7,12,22,.2)) !important;
+}
+body.game-ui-upgrade .simcast-coaching > header strong { font-size: 18px; letter-spacing: .045em; }
+body.game-ui-upgrade .simcast-coaching > header button[data-simcast-coach="timeout"] {
+  min-width: 112px;
+  min-height: 38px;
+  border-color: rgba(243,179,61,.48) !important;
+  color: var(--game-warning) !important;
+  background: var(--game-warning-soft) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.04);
+}
+body.game-ui-upgrade .simcast-coaching-grid {
+  display: grid;
+  grid-template-columns: minmax(360px, 1.15fr) minmax(230px, .62fr) minmax(460px, 1.3fr);
+  gap: 10px !important;
+  padding: 10px;
+  background: rgba(5,10,19,.22);
+}
+body.game-ui-upgrade :is(.simcast-strategy-controls, .simcast-lineup-presets, .simcast-substitution) {
+  position: relative;
+  border: 1px solid var(--game-border) !important;
+  border-radius: var(--game-radius-md);
+  background: linear-gradient(160deg, rgba(28,41,67,.58), rgba(9,16,29,.76)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.035);
+}
+body.game-ui-upgrade .simcast-strategy-controls::before,
+body.game-ui-upgrade .simcast-substitution::before {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  color: var(--game-team-secondary);
+  font-family: var(--game-font-heading);
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  content: "GAME PLAN";
+}
+body.game-ui-upgrade .simcast-substitution::before { content: "PERSONNEL CHANGE"; }
+body.game-ui-upgrade .simcast-strategy-controls,
+body.game-ui-upgrade .simcast-substitution { padding-top: 30px !important; }
+body.game-ui-upgrade .simcast-strategy-controls label > span,
+body.game-ui-upgrade .simcast-substitution label > span,
+body.game-ui-upgrade .simcast-lineup-presets > span {
+  color: var(--game-text-muted) !important;
+  font-size: 7px;
+  letter-spacing: .11em;
+}
+body.game-ui-upgrade .simcast-coaching select {
+  min-height: 38px;
+  border-radius: 7px !important;
+  background-color: #101a2d !important;
+}
+body.game-ui-upgrade .simcast-coaching select:hover,
+body.game-ui-upgrade .simcast-coaching select:focus {
+  border-color: var(--game-team-border) !important;
+  box-shadow: 0 0 0 2px var(--game-team-soft);
+}
+body.game-ui-upgrade .simcast-lineup-presets {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-content: center;
+  gap: 8px;
+}
+body.game-ui-upgrade .simcast-lineup-presets > span { grid-column: 1 / -1; }
+body.game-ui-upgrade .simcast-lineup-presets button {
+  min-height: 38px;
+  border-bottom: 3px solid color-mix(in srgb, var(--game-team) 48%, transparent) !important;
+  border-radius: 7px !important;
+}
+body.game-ui-upgrade .simcast-substitution {
+  display: grid;
+  grid-template-columns: minmax(150px,1fr) minmax(150px,1fr) 104px;
+  align-items: end;
+  gap: 10px;
+}
+body.game-ui-upgrade .simcast-substitution button[data-simcast-coach="substitute"] {
+  min-height: 38px;
+  border: 1px solid color-mix(in srgb, var(--game-team) 62%, #fff) !important;
+  border-radius: 7px !important;
+  background: linear-gradient(135deg, var(--game-team), color-mix(in srgb, var(--game-team) 62%, #111a2d)) !important;
+}
+
+@media (max-width: 1100px) {
+  body.game-ui-upgrade .simcast-coaching-grid { grid-template-columns: 1fr 1fr; }
+  body.game-ui-upgrade .simcast-substitution { grid-column: 1 / -1; }
+}
+
+/* Live box score broadcast table. */
+body.game-ui-upgrade .simcast-live-box {
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--game-team) 28%, var(--game-border)) !important;
+  background: linear-gradient(155deg, color-mix(in srgb, var(--game-team) 4%, #111a2d), #09111f 74%) !important;
+  box-shadow: 0 14px 30px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.035);
+}
+body.game-ui-upgrade .simcast-live-box > header {
+  min-height: 64px;
+  padding: 12px 16px !important;
+  border-bottom: 1px solid var(--game-team-border) !important;
+  background: linear-gradient(90deg, var(--game-team-soft), rgba(7,12,22,.22)) !important;
+}
+body.game-ui-upgrade .simcast-live-box > header strong { font-size: 18px; letter-spacing: .045em; }
+body.game-ui-upgrade .simcast-live-box > header > small {
+  padding: 4px 8px;
+  border-radius: var(--game-radius-pill);
+  color: var(--game-success) !important;
+  background: var(--game-success-soft);
+}
+body.game-ui-upgrade .simcast-live-box-teams { gap: 2px; background: var(--game-team-border); }
+body.game-ui-upgrade .simcast-live-team { background: #0c1424; }
+body.game-ui-upgrade .simcast-live-team-name {
+  display: grid;
+  grid-template-columns: 40px auto auto 1fr;
+  gap: 9px;
+  min-height: 58px;
+  border-bottom: 1px solid var(--game-border);
+  background: linear-gradient(100deg, color-mix(in srgb, var(--game-team) 12%, #17233a), #111a2d) !important;
+}
+body.game-ui-upgrade .simcast-live-team-name > strong { font-size: 17px; }
+body.game-ui-upgrade .simcast-live-team-name > small {
+  padding: 3px 6px;
+  border: 1px solid var(--game-border);
+  border-radius: var(--game-radius-pill);
+  color: var(--game-text-muted) !important;
+  font-family: var(--game-font-numeric);
+  font-size: 7px;
+}
+body.game-ui-upgrade .simcast-live-team-name > span {
+  justify-self: end;
+  padding: 6px 9px;
+  border-radius: var(--game-radius-sm);
+  color: var(--game-team-secondary) !important;
+  background: var(--game-team-soft);
+  font-family: var(--game-font-numeric);
+  font-weight: 800;
+}
+body.game-ui-upgrade .simcast-box-scroll { max-height: 420px; }
+body.game-ui-upgrade .simcast-live-team thead { position: sticky; top: 0; z-index: 3; }
+body.game-ui-upgrade .simcast-live-team thead th {
+  height: 34px;
+  color: var(--game-text-muted) !important;
+  background: #0a111f !important;
+  box-shadow: inset 0 -1px var(--game-border);
+}
+body.game-ui-upgrade .simcast-live-team tbody tr { position: relative; transition: background var(--game-duration-fast) ease; }
+body.game-ui-upgrade .simcast-live-team tbody tr.on-court { box-shadow: inset 3px 0 var(--game-info); }
+body.game-ui-upgrade .simcast-live-team tbody tr.team-leader { background: linear-gradient(90deg, color-mix(in srgb, var(--game-team) 12%, transparent), transparent) !important; }
+body.game-ui-upgrade .simcast-live-team tbody tr.team-leader td:first-child strong { color: var(--game-team-secondary) !important; }
+body.game-ui-upgrade .simcast-live-team tbody td { height: 42px; }
+body.game-ui-upgrade .simcast-live-team tbody td:first-child { min-width: 146px; }
+body.game-ui-upgrade .simcast-live-team tbody td:first-child strong { font-size: 9px; }
+body.game-ui-upgrade .simcast-live-team tbody td:first-child small { color: var(--game-text-dim) !important; font-size: 6px; letter-spacing: .08em; }
+body.game-ui-upgrade .simcast-live-team tbody td:nth-child(6) {
+  background: color-mix(in srgb, var(--game-team) 5%, transparent);
+}
+body.game-ui-upgrade .simcast-live-team tbody td:last-child { font-family: var(--game-font-numeric); font-weight: 800; }
+
+/* SimCast broadcast control dock. */
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 76px;
+  margin-top: 12px;
+  padding: 11px 14px !important;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--game-team) 35%, var(--game-border)) !important;
+  border-top: 3px solid var(--game-team) !important;
+  border-radius: var(--game-radius-md);
+  background: linear-gradient(180deg, rgba(18,29,49,.98), rgba(7,12,22,.98)) !important;
+  box-shadow: 0 -10px 28px rgba(0,0,0,.4), inset 0 1px rgba(255,255,255,.055);
+  backdrop-filter: blur(14px);
+}
+body.game-ui-upgrade .simcast-controls::before {
+  position: absolute;
+  right: 42%;
+  bottom: -26px;
+  width: 140px;
+  height: 70px;
+  background: repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, var(--game-team) 10%, transparent) 14px 16px, transparent 16px 28px);
+  content: "";
+  pointer-events: none;
+}
+body.game-ui-upgrade .simcast-speed,
+body.game-ui-upgrade .simcast-controls .actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px;
+  border: 1px solid var(--game-border);
+  border-radius: 9px;
+  background: rgba(5,10,19,.48);
+}
+body.game-ui-upgrade .simcast-speed > span {
+  padding: 0 8px;
+  color: var(--game-text-muted) !important;
+  font-family: var(--game-font-heading);
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: .13em;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-speed button {
+  min-width: 58px;
+  min-height: 40px;
+  border-radius: 7px !important;
+  font-family: var(--game-font-numeric);
+  font-size: 11px !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-speed button.active {
+  border-color: color-mix(in srgb, var(--game-team) 70%, #fff) !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, var(--game-team), color-mix(in srgb, var(--game-team) 62%, #111a2d)) !important;
+  box-shadow: 0 0 0 1px var(--game-team-secondary), 0 0 20px var(--game-team-glow) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls .actions button {
+  min-height: 40px;
+  padding-inline: 17px !important;
+  border-radius: 7px !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls button[data-simcast-action="pause"] {
+  border-color: color-mix(in srgb, var(--game-warning) 44%, var(--game-border)) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls button[data-simcast-action="next-period"] {
+  border-color: color-mix(in srgb, var(--game-info) 48%, var(--game-border)) !important;
+  background: linear-gradient(180deg, rgba(30,52,86,.8), rgba(13,25,45,.9)) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls button:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.1); }
+
+@media (max-width: 850px) {
+  body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls { align-items: stretch; flex-direction: column; }
+  body.game-ui-upgrade .simcast-speed, body.game-ui-upgrade .simcast-controls .actions { justify-content: center; flex-wrap: wrap; }
+}
+
+/* True 50/50 live box-score split. */
+body.game-ui-upgrade .simcast-live-box-teams {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 0 !important;
+  background: transparent !important;
+}
+body.game-ui-upgrade .simcast-live-box-teams::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 5;
+  width: 3px;
+  background: linear-gradient(180deg, var(--game-team-secondary), var(--game-team), var(--game-team-secondary));
+  box-shadow: 0 0 14px var(--game-team-glow);
+  transform: translateX(-50%);
+  content: "";
+  pointer-events: none;
+}
+body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team {
+  width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team:first-child {
+  background: linear-gradient(120deg, color-mix(in srgb, var(--game-team) 7%, #0c1424), #0c1424 60%) !important;
+}
+body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team:last-child {
+  background: linear-gradient(240deg, color-mix(in srgb, var(--game-team-secondary) 7%, #0c1424), #0c1424 60%) !important;
+}
+body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team:first-child .simcast-live-team-name {
+  border-bottom: 3px solid var(--game-team) !important;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--game-team) 18%, #17233a), #111a2d) !important;
+}
+body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team:last-child .simcast-live-team-name {
+  border-bottom: 3px solid var(--game-team-secondary) !important;
+  background: linear-gradient(270deg, color-mix(in srgb, var(--game-team-secondary) 14%, #17233a), #111a2d) !important;
+}
+body.game-ui-upgrade .simcast-live-team .simcast-box-scroll {
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+body.game-ui-upgrade .simcast-live-team table {
+  width: 100%;
+  min-width: 680px;
+  table-layout: fixed;
+}
+body.game-ui-upgrade .simcast-live-team th:first-child,
+body.game-ui-upgrade .simcast-live-team td:first-child { width: 160px; }
+body.game-ui-upgrade .simcast-live-team th:not(:first-child),
+body.game-ui-upgrade .simcast-live-team td:not(:first-child) { width: 43px; text-align: center; }
+body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team:first-child tbody tr.on-court { box-shadow: inset 3px 0 var(--game-team); }
+body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team:last-child tbody tr.on-court { box-shadow: inset -3px 0 var(--game-team-secondary); }
+
+@media (max-width: 880px) {
+  body.game-ui-upgrade .simcast-live-box-teams { grid-template-columns: 1fr !important; }
+  body.game-ui-upgrade .simcast-live-box-teams::after { display: none; }
+  body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team + .simcast-live-team { border-top: 3px solid var(--game-team-secondary) !important; }
+}
+
+/* Coaching module polish. */
+body.game-ui-upgrade :is(.simcast-strategy-controls, .simcast-lineup-presets, .simcast-substitution) {
+  min-height: 132px;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--game-team) 24%, var(--game-border)) !important;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--game-team) 5%, #18233a), #0c1425 76%) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.045), 0 8px 18px rgba(0,0,0,.2);
+}
+body.game-ui-upgrade :is(.simcast-strategy-controls, .simcast-lineup-presets, .simcast-substitution)::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--game-team-secondary), var(--game-team), transparent 82%);
+  content: "";
+  pointer-events: none;
+}
+body.game-ui-upgrade .simcast-lineup-presets { position: relative; padding-top: 30px !important; }
+body.game-ui-upgrade .simcast-lineup-presets > span {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  color: var(--game-team-secondary) !important;
+}
+body.game-ui-upgrade .simcast-strategy-controls { align-items: end; gap: 9px; }
+body.game-ui-upgrade .simcast-strategy-controls label,
+body.game-ui-upgrade .simcast-substitution label { display: grid; gap: 6px; }
+body.game-ui-upgrade .simcast-strategy-controls select,
+body.game-ui-upgrade .simcast-substitution select {
+  min-height: 40px;
+  border-color: color-mix(in srgb, var(--game-team) 28%, var(--game-border)) !important;
+  background: linear-gradient(180deg, #15223a, #0e192c) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.04);
+}
+body.game-ui-upgrade .simcast-lineup-presets button {
+  position: relative;
+  min-height: 40px;
+  border-color: color-mix(in srgb, var(--game-team) 30%, var(--game-border)) !important;
+  background: linear-gradient(180deg, #17243d, #0d182a) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.04);
+}
+body.game-ui-upgrade .simcast-lineup-presets button:hover {
+  border-color: var(--game-team-secondary) !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--game-team) 30%, #17243d), #101a2d) !important;
+  box-shadow: 0 6px 15px var(--game-team-glow);
+  transform: translateY(-1px);
+}
+body.game-ui-upgrade .simcast-substitution { position: relative; padding-right: 14px !important; }
+body.game-ui-upgrade .simcast-substitution label:first-of-type::after {
+  position: absolute;
+  top: 69px;
+  left: calc(50% - 55px);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--game-team-border);
+  border-radius: 50%;
+  color: var(--game-team-secondary);
+  background: #0a1323;
+  font-size: 14px;
+  content: "→";
+  pointer-events: none;
+}
+body.game-ui-upgrade .simcast-substitution button[data-simcast-coach="substitute"] {
+  min-width: 108px;
+  box-shadow: 0 8px 20px var(--game-team-glow), inset 0 1px rgba(255,255,255,.1);
+}
+
+body.game-ui-upgrade :is(.simcast-strategy-controls, .simcast-lineup-presets, .simcast-substitution) {
+  min-height: 116px;
+  border: 1px solid #34435e !important;
+  border-radius: 8px;
+  background: #101a2c !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.025);
+}
+body.game-ui-upgrade :is(.simcast-strategy-controls, .simcast-lineup-presets, .simcast-substitution)::after,
+body.game-ui-upgrade .simcast-substitution label:first-of-type::after { display: none; }
+body.game-ui-upgrade .simcast-strategy-controls,
+body.game-ui-upgrade .simcast-substitution,
+body.game-ui-upgrade .simcast-lineup-presets { padding: 14px !important; }
+body.game-ui-upgrade .simcast-strategy-controls::before,
+body.game-ui-upgrade .simcast-substitution::before {
+  position: static;
+  grid-column: 1 / -1;
+  margin-bottom: 1px;
+  padding: 0;
+  color: var(--game-text-muted);
+}
+body.game-ui-upgrade .simcast-lineup-presets > span {
+  position: static;
+  grid-column: 1 / -1;
+  color: var(--game-text-muted) !important;
+}
+body.game-ui-upgrade .simcast-strategy-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  align-content: center;
+}
+body.game-ui-upgrade .simcast-substitution {
+  grid-template-columns: minmax(150px,1fr) minmax(150px,1fr) 110px;
+  align-content: center;
+}
+body.game-ui-upgrade .simcast-coaching select {
+  background: #17243a !important;
+  box-shadow: none;
+}
+body.game-ui-upgrade .simcast-lineup-presets button {
+  border: 1px solid #42516c !important;
+  border-bottom: 1px solid #42516c !important;
+  background: #17243a !important;
+  box-shadow: none;
+}
+body.game-ui-upgrade .simcast-lineup-presets button:hover {
+  border-color: var(--game-team-border) !important;
+  background: var(--game-team-soft) !important;
+  box-shadow: none;
+  transform: none;
+}
+body.game-ui-upgrade .simcast-substitution button[data-simcast-coach="substitute"] {
+  box-shadow: none;
+}
+
+body.game-ui-upgrade .simcast-strategy-controls { --module-color: var(--game-info); }
+body.game-ui-upgrade .simcast-lineup-presets { --module-color: #9a7cff; }
+body.game-ui-upgrade .simcast-substitution { --module-color: var(--game-success); }
+body.game-ui-upgrade :is(.simcast-strategy-controls, .simcast-lineup-presets, .simcast-substitution) {
+  border: 1px solid color-mix(in srgb, var(--module-color) 34%, var(--game-border)) !important;
+  border-left: 4px solid var(--module-color) !important;
+  background: linear-gradient(110deg, color-mix(in srgb, var(--module-color) 7%, #142038), #0e182a 68%) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.04), 0 8px 18px rgba(0,0,0,.18);
+}
+body.game-ui-upgrade .simcast-strategy-controls::before,
+body.game-ui-upgrade .simcast-substitution::before,
+body.game-ui-upgrade .simcast-lineup-presets > span {
+  width: max-content;
+  padding: 4px 7px;
+  border: 1px solid color-mix(in srgb, var(--module-color) 38%, transparent);
+  border-radius: var(--game-radius-pill);
+  color: color-mix(in srgb, var(--module-color) 78%, #fff) !important;
+  background: color-mix(in srgb, var(--module-color) 11%, transparent);
+  line-height: 1;
+}
+body.game-ui-upgrade .simcast-strategy-controls select,
+body.game-ui-upgrade .simcast-substitution select {
+  border-color: color-mix(in srgb, var(--module-color) 28%, #44536d) !important;
+  background: linear-gradient(180deg, #192842, #111c30) !important;
+}
+body.game-ui-upgrade .simcast-strategy-controls select:hover,
+body.game-ui-upgrade .simcast-substitution select:hover {
+  border-color: var(--module-color) !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--module-color) 10%, transparent);
+}
+body.game-ui-upgrade .simcast-lineup-presets button {
+  border-color: color-mix(in srgb, var(--module-color) 28%, #44536d) !important;
+  background: linear-gradient(180deg, #192842, #111c30) !important;
+}
+body.game-ui-upgrade .simcast-lineup-presets button:hover {
+  border-color: var(--module-color) !important;
+  background: color-mix(in srgb, var(--module-color) 14%, #142038) !important;
+}
+body.game-ui-upgrade .simcast-substitution button[data-simcast-coach="substitute"] {
+  border-color: color-mix(in srgb, var(--module-color) 70%, #fff) !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--module-color) 72%, #17243d), color-mix(in srgb, var(--module-color) 42%, #101a2d)) !important;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--module-color) 16%, transparent);
+}
+body.game-ui-upgrade .simcast-coaching > header button[data-simcast-coach="timeout"] {
+  border-left: 3px solid var(--game-warning) !important;
+  color: #fff !important;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-warning) 14%, #192842), #111c30) !important;
+}
+
+/* Event-coded live broadcast feed. */
+body.game-ui-upgrade .simcast-feed-row {
+  --feed-accent: var(--game-text-dim);
+  display: grid !important;
+  grid-template-columns: 28px 46px 34px minmax(0,1fr) 58px !important;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 7px 11px !important;
+  border-left: 3px solid var(--feed-accent) !important;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--feed-accent) 4%, #101827), #0c1423 30%) !important;
+}
+body.game-ui-upgrade .simcast-feed-row.feed-score { --feed-accent: var(--game-success); }
+body.game-ui-upgrade .simcast-feed-row.feed-foul { --feed-accent: var(--game-warning); }
+body.game-ui-upgrade .simcast-feed-row.feed-turnover { --feed-accent: var(--game-danger); }
+body.game-ui-upgrade .simcast-feed-row.feed-timeout { --feed-accent: #9a7cff; }
+body.game-ui-upgrade .simcast-feed-row > i {
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border: 1px solid color-mix(in srgb, var(--feed-accent) 45%, transparent);
+  border-radius: 50%;
+  color: var(--feed-accent);
+  background: color-mix(in srgb, var(--feed-accent) 10%, transparent);
+  font-family: var(--game-font-heading);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 900;
+}
+body.game-ui-upgrade .simcast-feed-row > b {
+  color: #fff !important;
+  font-family: var(--game-font-numeric);
+  font-size: 10px;
+}
+body.game-ui-upgrade .simcast-feed-row > span {
+  width: max-content;
+  padding: 3px 6px;
+  border: 1px solid var(--game-border);
+  border-radius: var(--game-radius-pill);
+  color: var(--game-text-muted) !important;
+  background: rgba(5,10,19,.5);
+  font-size: 7px;
+}
+body.game-ui-upgrade .simcast-feed-row > p { font-size: 9px; line-height: 1.35; }
+body.game-ui-upgrade .simcast-feed-row > strong {
+  justify-self: end;
+  min-width: 50px;
+  padding: 5px 7px;
+  border: 1px solid color-mix(in srgb, var(--feed-accent) 35%, var(--game-border));
+  border-radius: 6px;
+  color: #fff !important;
+  background: color-mix(in srgb, var(--feed-accent) 9%, #0a1220);
+  font-family: var(--game-font-numeric);
+  font-size: 10px;
+  text-align: center;
+}
+body.game-ui-upgrade .simcast-feed-row:first-child {
+  box-shadow: inset 0 1px color-mix(in srgb, var(--feed-accent) 32%, transparent), inset 0 -1px color-mix(in srgb, var(--feed-accent) 18%, transparent);
+}
+
+/* Coaching header and tactical action buttons. */
+body.game-ui-upgrade .simcast-coaching > header {
+  position: relative;
+  min-height: 76px;
+  padding: 13px 16px 13px 19px !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--game-team) 40%, var(--game-border)) !important;
+  border-left: 4px solid var(--game-team) !important;
+  background: linear-gradient(100deg, color-mix(in srgb, var(--game-team) 13%, #121d32), #08101e 68%) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.045);
+}
+body.game-ui-upgrade .simcast-coaching > header > div {
+  position: relative;
+  display: grid;
+  gap: 5px;
+  padding-left: 42px;
+}
+body.game-ui-upgrade .simcast-coaching > header > div::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--game-team-border);
+  border-radius: 8px;
+  color: var(--game-team-secondary);
+  background: var(--game-team-soft);
+  font-family: var(--game-font-heading);
+  font-size: 12px;
+  transform: translateY(-50%);
+  content: "↗";
+}
+body.game-ui-upgrade .simcast-coaching > header span { color: var(--game-team-secondary) !important; letter-spacing: .14em; }
+body.game-ui-upgrade .simcast-coaching > header strong { font-size: 20px !important; line-height: 1; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-coaching > header button[data-simcast-coach="timeout"] {
+  position: relative;
+  min-width: 126px;
+  min-height: 42px;
+  padding-left: 37px !important;
+  border: 1px solid color-mix(in srgb, var(--game-warning) 58%, var(--game-border)) !important;
+  border-bottom: 3px solid var(--game-warning) !important;
+  border-radius: 7px !important;
+  color: #fff !important;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-warning) 17%, #1a2942), #101a2d) !important;
+  box-shadow: 0 7px 16px rgba(0,0,0,.25);
+}
+body.game-ui-upgrade .simcast-coaching > header button[data-simcast-coach="timeout"]::before {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  color: var(--game-warning);
+  font-size: 14px;
+  transform: translateY(-50%);
+  content: "Ⅱ";
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-lineup-presets button {
+  min-height: 40px;
+  border: 1px solid color-mix(in srgb, #9a7cff 40%, var(--game-border)) !important;
+  border-radius: 7px !important;
+  color: #fff !important;
+  background: linear-gradient(180deg, color-mix(in srgb, #9a7cff 9%, #1a2942), #101a2d) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.045);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-lineup-presets button:hover {
+  border-color: #9a7cff !important;
+  background: color-mix(in srgb, #9a7cff 18%, #14213a) !important;
+  box-shadow: 0 7px 16px rgba(103,76,190,.18);
+  transform: translateY(-1px);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-substitution button[data-simcast-coach="substitute"] {
+  min-width: 116px;
+  min-height: 42px;
+  border: 1px solid color-mix(in srgb, var(--game-success) 72%, #fff) !important;
+  border-bottom: 3px solid color-mix(in srgb, var(--game-success) 72%, #fff) !important;
+  border-radius: 7px !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, #177a4b, #105c3a) !important;
+  box-shadow: 0 8px 18px rgba(23,122,75,.24), inset 0 1px rgba(255,255,255,.09);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-substitution button[data-simcast-coach="substitute"]:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+
+/* Insight rail visual upgrade. */
+body.game-ui-upgrade .simcast-comparison-teams {
+  min-height: 52px;
+  padding: 8px 11px;
+  border-color: color-mix(in srgb, var(--game-team) 34%, var(--game-border));
+  background: linear-gradient(100deg, var(--game-team-soft), rgba(5,10,19,.55), color-mix(in srgb, var(--game-team-secondary) 7%, transparent));
+  box-shadow: inset 0 1px rgba(255,255,255,.035);
+}
+body.game-ui-upgrade .simcast-comparison-teams > b {
+  font-size: 15px;
+  text-shadow: 0 4px 10px rgba(0,0,0,.32);
+}
+body.game-ui-upgrade .simcast-comparison-teams > span {
+  border: 1px solid rgba(53,208,127,.28);
+  box-shadow: 0 0 10px rgba(53,208,127,.1);
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-stat-row {
+  position: relative;
+  min-height: 43px;
+  overflow: hidden;
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-stat-row::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--game-info), transparent 42%, transparent 58%, var(--game-team-secondary));
+  opacity: .24;
+  content: "";
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-stat-row b {
+  font-size: 16px;
+  text-shadow: 0 4px 10px rgba(0,0,0,.3);
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-stat-row span {
+  padding: 3px 6px;
+  border-radius: var(--game-radius-pill);
+  background: rgba(5,10,19,.38);
+  font-size: 7px;
+  letter-spacing: .08em;
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders {
+  background: linear-gradient(180deg, rgba(154,124,255,.035), transparent 46%) !important;
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders > div {
+  display: grid;
+  grid-template-columns: 58px minmax(0,1fr);
+  align-items: center;
+  min-height: 82px;
+  padding: 10px;
+  border-color: rgba(154,124,255,.24);
+  border-left-color: #9a7cff;
+  background: linear-gradient(100deg, rgba(154,124,255,.11), rgba(16,23,41,.86)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.035);
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders > div:hover {
+  border-color: rgba(154,124,255,.5);
+  background: linear-gradient(100deg, rgba(154,124,255,.17), rgba(16,23,41,.9)) !important;
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders > div > span {
+  display: grid;
+  gap: 4px;
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders > div > span > b { color: #fff !important; font-size: 11px; }
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders > div > span > small {
+  width: max-content;
+  padding: 3px 6px;
+  border-radius: var(--game-radius-pill);
+  color: #c9baff !important;
+  background: rgba(154,124,255,.09);
+  font-size: 7px;
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-leader-headshot {
+  width: 52px !important;
+  height: 52px !important;
+  border: 2px solid rgba(154,124,255,.55);
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0,0,0,.3);
+}
+
+/* Line-score refinement. */
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip {
+  border-color: color-mix(in srgb, var(--game-warning) 25%, var(--game-border)) !important;
+  background: linear-gradient(145deg, #111b2e, #08101d 76%) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-head {
+  background: #09111f !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-head > span.live {
+  color: #fff !important;
+  background: linear-gradient(180deg, rgba(154,124,255,.32), rgba(94,56,156,.26)) !important;
+  box-shadow: inset 0 -3px #9a7cff;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-head > span.future {
+  color: var(--game-text-dim) !important;
+  background: rgba(255,255,255,.008) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div:not(.simcast-period-head) {
+  min-height: 62px;
+  background: rgba(11,19,33,.72);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div.leading {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--game-success) 7%, #0d1728), #0b1423 58%, color-mix(in srgb, var(--game-success) 5%, #0b1423));
+  box-shadow: inset 4px 0 var(--game-success);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip b.live {
+  color: #fff !important;
+  background: linear-gradient(135deg, #2478ff, #1555b8) !important;
+  box-shadow: inset 0 0 0 1px rgba(126, 181, 255, .34), 0 0 14px rgba(36, 120, 255, .18);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip b.future {
+  color: #536079 !important;
+  background: rgba(255,255,255,.008) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip .simcast-margin.positive {
+  color: var(--game-success) !important;
+  background: var(--game-success-soft) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip .simcast-margin.negative {
+  color: var(--game-danger) !important;
+  background: var(--game-danger-soft) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip .simcast-margin.even {
+  color: var(--game-warning) !important;
+  background: var(--game-warning-soft) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > :last-child {
+  font-size: 20px !important;
+  font-weight: 900;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div.leading > :last-child {
+  border-left: 4px solid var(--game-success);
+  color: #fff !important;
+  background: linear-gradient(135deg, #176746, #104a35) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > * {
+  box-sizing: border-box;
+  margin: 0 !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div:not(.simcast-period-head) > :last-child {
+  border-left: 1px solid var(--game-border) !important;
+  color: #fff !important;
+  background: linear-gradient(180deg, #1a2540, #121b30) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div.leading > :last-child {
+  border-left: 4px solid var(--game-success) !important;
+  background: linear-gradient(135deg, #176746, #104a35) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > b,
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > span,
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > strong {
+  align-self: stretch;
+  place-content: center;
+}
+
+body.game-ui-upgrade .simcast-body {
+  align-items: stretch;
+}
+body.game-ui-upgrade .simcast-side-panel {
+  align-self: stretch;
+  height: 100%;
+  min-height: 100%;
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders {
+  flex: 1 1 auto;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div {
+  display: grid !important;
+  grid-template-columns: minmax(210px, 1.5fr) repeat(4, minmax(72px, 1fr)) minmax(82px, 1fr) minmax(110px, .8fr);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div > * {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  flex: none !important;
+}
+
+body.game-ui-upgrade .simcast-body .simcast-feed-panel {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  height: 520px !important;
+  min-height: 0 !important;
+  max-height: 680px;
+}
+body.game-ui-upgrade .simcast-body .simcast-feed-panel .simcast-feed {
+  flex: 1 1 auto;
+  height: auto !important;
+  max-height: none;
+  min-height: 0 !important;
+}
+body.game-ui-upgrade .simcast-body .simcast-side-panel {
+  height: clamp(590px, 64vh, 680px);
+  min-height: 0;
+  max-height: 680px;
+}
+
+body.game-ui-upgrade .simcast-coaching-grid > :is(.simcast-strategy-controls, .simcast-lineup-presets, .simcast-substitution) {
+  border-top: 1px solid color-mix(in srgb, var(--module-color) 56%, #fff) !important;
+  border-left: 1px solid color-mix(in srgb, var(--module-color) 25%, var(--game-border)) !important;
+  background: linear-gradient(155deg, color-mix(in srgb, var(--module-color) 8%, #17243c), #0c1526 72%) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.045), 0 10px 20px rgba(0,0,0,.2);
+}
+body.game-ui-upgrade .simcast-coaching-grid > :is(.simcast-strategy-controls, .simcast-lineup-presets, .simcast-substitution):hover {
+  border-color: color-mix(in srgb, var(--module-color) 45%, var(--game-border)) !important;
+}
+
+/* Live coaching command header. */
+body.game-ui-upgrade .simcast-coaching > header {
+  min-height: 86px;
+  padding: 14px 17px 14px 20px !important;
+  border-left: 5px solid var(--game-team) !important;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--game-team) 20%, transparent) 0 1px, transparent 1.4px) 78% 50% / 11px 11px,
+    linear-gradient(100deg, color-mix(in srgb, var(--game-team) 16%, #131f35), #08101d 62%) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.05), inset 0 -1px var(--game-team-border);
+}
+body.game-ui-upgrade .simcast-coaching > header > div {
+  grid-template-columns: auto auto;
+  align-items: center;
+  column-gap: 10px;
+  padding-left: 50px;
+}
+body.game-ui-upgrade .simcast-coaching > header > div::before {
+  width: 38px;
+  height: 38px;
+  border-color: color-mix(in srgb, var(--game-team) 56%, #fff);
+  color: #fff;
+  background: linear-gradient(135deg, var(--game-team), color-mix(in srgb, var(--game-team) 52%, #111a2d));
+  box-shadow: 0 7px 16px var(--game-team-glow), inset 0 1px rgba(255,255,255,.1);
+  font-size: 0;
+  content: "HC";
+}
+body.game-ui-upgrade .simcast-coaching > header > div::before { font-size: 9px; }
+body.game-ui-upgrade .simcast-coaching > header > div > span { grid-column: 1; grid-row: 1; }
+body.game-ui-upgrade .simcast-coaching > header > div > strong { grid-column: 1; grid-row: 2; font-size: 22px !important; }
+body.game-ui-upgrade .simcast-coaching > header > div::after {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  width: max-content;
+  padding: 5px 8px;
+  border: 1px solid rgba(53,208,127,.32);
+  border-radius: var(--game-radius-pill);
+  color: var(--game-success);
+  background: var(--game-success-soft);
+  font-family: var(--game-font-heading);
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  content: "LIVE COACHING";
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-coaching > header button[data-simcast-coach="timeout"] {
+  min-width: 140px;
+  min-height: 46px;
+  border-radius: 9px !important;
+  box-shadow: 0 9px 20px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.06) !important;
+}
+
+/* Complete live box-score presentation. */
+body.game-ui-upgrade .simcast-live-box > header {
+  position: relative;
+  min-height: 82px;
+  padding: 14px 17px 14px 70px !important;
+  overflow: hidden;
+  border-left: 5px solid var(--game-team) !important;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--game-team) 18%, transparent) 0 1px, transparent 1.4px) 82% 50% / 11px 11px,
+    linear-gradient(100deg, color-mix(in srgb, var(--game-team) 14%, #131f35), #08101d 66%) !important;
+}
+body.game-ui-upgrade .simcast-live-box > header::before {
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--game-team-border);
+  border-radius: 9px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--game-team), color-mix(in srgb, var(--game-team) 52%, #111a2d));
+  box-shadow: 0 8px 18px var(--game-team-glow);
+  font-family: var(--game-font-heading);
+  font-size: 9px;
+  transform: translateY(-50%);
+  content: "BOX";
+}
+body.game-ui-upgrade .simcast-live-box > header span { color: var(--game-team-secondary) !important; letter-spacing: .14em; }
+body.game-ui-upgrade .simcast-live-box > header strong { font-size: 22px !important; line-height: 1; }
+body.game-ui-upgrade .simcast-live-box > header > small {
+  position: relative;
+  padding: 6px 10px 6px 24px;
+  border: 1px solid rgba(53,208,127,.28);
+  color: var(--game-success) !important;
+  box-shadow: 0 0 12px rgba(53,208,127,.08);
+}
+body.game-ui-upgrade .simcast-live-box > header > small::before {
+  position: absolute;
+  top: 50%;
+  left: 9px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--game-success);
+  box-shadow: 0 0 8px var(--game-success);
+  transform: translateY(-50%);
+  content: "";
+}
+body.game-ui-upgrade .simcast-live-team-name {
+  min-height: 68px;
+  padding: 10px 15px !important;
+}
+body.game-ui-upgrade .simcast-live-team-name .simcast-box-logo {
+  width: 42px !important;
+  height: 42px !important;
+  filter: drop-shadow(0 7px 9px rgba(0,0,0,.32));
+}
+body.game-ui-upgrade .simcast-live-team-name > strong { font-size: 20px; }
+body.game-ui-upgrade .simcast-live-team-name > span {
+  min-width: 62px;
+  padding: 7px 10px;
+  font-size: 11px;
+  text-align: center;
+}
+body.game-ui-upgrade .simcast-live-team thead th {
+  height: 38px;
+  color: var(--game-text-soft) !important;
+  background: linear-gradient(180deg, #101a2d, #09111f) !important;
+  font-size: 7px;
+  letter-spacing: .08em;
+}
+body.game-ui-upgrade .simcast-live-team tbody td { height: 44px; border-bottom-color: rgba(92,111,145,.42) !important; }
+body.game-ui-upgrade .simcast-live-team tbody tr.on-court td:first-child::before {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--game-info);
+  box-shadow: 0 0 7px var(--game-info);
+  vertical-align: middle;
+  content: "";
+}
+body.game-ui-upgrade .simcast-live-team tbody tr.team-leader td:first-child {
+  position: relative;
+  padding-right: 44px;
+}
+body.game-ui-upgrade .simcast-live-team tbody tr.team-leader td:first-child::after {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  padding: 2px 5px;
+  border-radius: var(--game-radius-pill);
+  color: var(--game-warning);
+  background: var(--game-warning-soft);
+  font-family: var(--game-font-heading);
+  font-size: 5px;
+  letter-spacing: .08em;
+  transform: translateY(-50%);
+  content: "LEADER";
+}
+body.game-ui-upgrade .simcast-live-team tbody tr:hover td { background: color-mix(in srgb, var(--game-team) 7%, transparent); }
+body.game-ui-upgrade .simcast-live-team tbody td:nth-child(6) b { font-size: 13px; }
+body.game-ui-upgrade .simcast-live-team tbody td:last-child { color: var(--game-text-soft); }
+
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders { padding: 18px 16px !important; background: linear-gradient(160deg, rgba(154,124,255,.055), transparent 48%) !important; }
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders > span:first-child { color: var(--game-warning) !important; letter-spacing: .14em; }
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders > strong { margin-bottom: 12px; font-size: 19px; }
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders > .simcast-featured-leader {
+  position: relative; display: grid; grid-template-columns: 64px minmax(0,1fr) 48px; align-items: center; min-height: 94px; padding: 11px 12px; overflow: hidden;
+  border: 1px solid rgba(154,124,255,.3); border-left: 4px solid #9a7cff; border-radius: 9px;
+  background: linear-gradient(105deg, rgba(154,124,255,.14), rgba(16,23,41,.9) 58%) !important;
+  box-shadow: 0 9px 20px rgba(0,0,0,.22), inset 0 1px rgba(255,255,255,.04); cursor: pointer;
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders > .simcast-featured-leader::after { position: absolute; right: -20px; bottom: -34px; width: 90px; height: 70px; border: 10px solid rgba(154,124,255,.08); transform: rotate(-12deg); content: ""; pointer-events: none; }
+body.game-ui-upgrade .simcast-featured-leader .simcast-leader-headshot { width: 58px !important; height: 66px !important; border: 2px solid rgba(201,186,255,.65); border-radius: 10px; background: rgba(154,124,255,.09); }
+body.game-ui-upgrade .simcast-featured-leader > span { display: grid; gap: 4px; }
+body.game-ui-upgrade .simcast-featured-leader > span > em { color: #b9a7ff; font-family: var(--game-font-heading); font-size: 6px; font-style: normal; font-weight: 800; letter-spacing: .13em; }
+body.game-ui-upgrade .simcast-featured-leader > span > b { color: #fff !important; font-size: 11px; }
+body.game-ui-upgrade .simcast-featured-leader > span > small { color: var(--game-text-muted) !important; font-size: 7px; }
+body.game-ui-upgrade .simcast-featured-leader > strong { position: relative; z-index: 1; display: grid; place-items: center; align-content: center; width: 44px; height: 48px; border: 1px solid rgba(154,124,255,.42); border-radius: 8px; background: rgba(154,124,255,.11); }
+body.game-ui-upgrade .simcast-featured-leader > strong > b { color: #d2c7ff !important; font-family: var(--game-font-numeric); font-size: 17px; }
+body.game-ui-upgrade .simcast-featured-leader > strong > small { color: var(--game-text-muted) !important; font-size: 5px; }
+body.game-ui-upgrade .simcast-featured-leader:hover { border-color: rgba(201,186,255,.62); transform: translateX(3px); }
+
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders { padding-bottom: 24px !important; }
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders > .simcast-featured-leader { min-height: 108px; padding-block: 13px; }
+body.game-ui-upgrade .simcast-featured-leader .simcast-leader-headshot { height: 72px !important; }
+
+/* Use each matchup team's real theme colors. */
+body.game-ui-upgrade .simcast-team {
+  --team-side: var(--side-primary);
+  --team-side-secondary: var(--side-secondary);
+  border-color: color-mix(in srgb, var(--team-side) 40%, var(--game-border)) !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--team-side) 15%, #111a2d), #09111f 72%) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team.away { border-left-color: var(--side-primary) !important; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team.home { border-right-color: var(--side-primary) !important; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team > b { border-bottom-color: var(--side-primary) !important; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-scoreboard::before {
+  background: linear-gradient(100deg, color-mix(in srgb, var(--away-primary) 30%, transparent), transparent 82%) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-scoreboard::after {
+  background: linear-gradient(260deg, color-mix(in srgb, var(--home-primary) 30%, transparent), transparent 82%) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-team {
+  box-shadow: inset 0 1px color-mix(in srgb, var(--side-secondary) 14%, transparent), 0 12px 28px color-mix(in srgb, var(--side-primary) 10%, transparent) !important;
+}
+body.game-ui-upgrade .simcast-period-team { box-shadow: inset 4px 0 var(--side-primary); background: linear-gradient(90deg, color-mix(in srgb, var(--side-primary) 14%, transparent), transparent) !important; }
+body.game-ui-upgrade .simcast-period-strip > div:not(.simcast-period-head) {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--side-primary) 10%, #0b1423), #0b1423 58%) !important;
+}
+body.game-ui-upgrade .simcast-period-strip > div:not(.simcast-period-head) > strong:last-child {
+  border-left: 0 !important;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--side-primary) 42%, #171b36), color-mix(in srgb, var(--side-secondary) 22%, #171b36)) !important;
+  color: #fff !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div:not(.simcast-period-head) > strong:last-child,
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div.leading > strong:last-child {
+  border-left: 0 !important;
+  box-shadow: none !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div.leading > strong:last-child {
+  position: relative;
+  padding-left: 0 !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-period-strip > div.leading > strong:last-child::before {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 0;
+  width: 4px;
+  height: auto;
+  border: 0;
+  border-radius: 0 4px 4px 0;
+  background: #35d07f;
+  box-shadow: 0 0 12px rgba(53, 208, 127, .68);
+  content: "";
+}
+
+body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team:first-child .simcast-live-team-name {
+  border-bottom-color: var(--away-primary) !important;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--away-primary) 22%, #17233a), #111a2d) !important;
+}
+body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team:last-child .simcast-live-team-name {
+  border-bottom-color: var(--home-primary) !important;
+  background: linear-gradient(270deg, color-mix(in srgb, var(--home-primary) 22%, #17233a), #111a2d) !important;
+}
+body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team:first-child .simcast-live-team-name > span { color: var(--away-secondary) !important; background: color-mix(in srgb, var(--away-primary) 18%, #101a2d); }
+body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team:last-child .simcast-live-team-name > span { color: var(--home-secondary) !important; background: color-mix(in srgb, var(--home-primary) 18%, #101a2d); }
+body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team:first-child tbody tr.on-court { box-shadow: inset 3px 0 var(--away-primary); }
+body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team:last-child tbody tr.on-court { box-shadow: inset -3px 0 var(--home-primary); }
+body.game-ui-upgrade .simcast-live-box-teams::after { display: none !important; }
+body.game-ui-upgrade .simcast-live-box-teams > .simcast-live-team + .simcast-live-team {
+  border-left: 1px solid rgba(92, 111, 145, .48) !important;
+}
+
+/* Team-coded play-by-play: event tone stays on the icon, team identity owns the row. */
+body.game-ui-upgrade .simcast-feed-row.away {
+  --feed-accent: var(--away-secondary);
+  border-left: 4px solid var(--away-secondary) !important;
+  border-left-color: var(--away-secondary) !important;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--away-secondary) 13%, #0c1424), #0c1424 38%) !important;
+  box-shadow: none !important;
+}
+body.game-ui-upgrade .simcast-feed-row.home {
+  --feed-accent: var(--home-primary);
+  border-left: 4px solid var(--home-primary) !important;
+  border-left-color: var(--home-primary) !important;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--home-primary) 13%, #0c1424), #0c1424 38%) !important;
+  box-shadow: none !important;
+}
+body.game-ui-upgrade .simcast-feed-row.away > strong {
+  border-color: color-mix(in srgb, var(--away-secondary) 55%, var(--game-border)) !important;
+  background: color-mix(in srgb, var(--away-secondary) 14%, #10192a) !important;
+}
+body.game-ui-upgrade .simcast-feed-row.home > strong {
+  border-color: color-mix(in srgb, var(--home-primary) 55%, var(--game-border)) !important;
+  background: color-mix(in srgb, var(--home-primary) 14%, #10192a) !important;
+}
+body.game-ui-upgrade .simcast-feed-row.period {
+  --feed-accent: var(--away-secondary);
+  border-left: 4px solid var(--away-secondary) !important;
+  box-shadow: none !important;
+}
+body.game-ui-upgrade .simcast-feed-row.away:first-child { border-left-color: var(--away-secondary) !important; }
+body.game-ui-upgrade .simcast-feed-row.home:first-child { border-left-color: var(--home-primary) !important; }
+body.game-ui-upgrade .simcast-feed-row.feed-turnover > i {
+  border-color: color-mix(in srgb, var(--game-danger) 62%, transparent) !important;
+  color: var(--game-danger) !important;
+  background: color-mix(in srgb, var(--game-danger) 14%, transparent) !important;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--game-danger) 22%, transparent);
+}
+
+body.game-ui-upgrade .simcast-side-panel .simcast-comparison-teams > b:first-child { color: var(--away-secondary) !important; text-shadow: 0 0 12px color-mix(in srgb, var(--away-primary) 35%, transparent); }
+body.game-ui-upgrade .simcast-side-panel .simcast-comparison-teams > b:last-child { color: var(--home-secondary) !important; text-shadow: 0 0 12px color-mix(in srgb, var(--home-primary) 35%, transparent); }
+body.game-ui-upgrade .simcast-side-panel .simcast-comparison-teams > b {
+  display: flex;
+  align-items: center;
+  min-width: 42px;
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-comparison-teams > b:last-child { justify-content: flex-end; }
+body.game-ui-upgrade .simcast-comparison-logo {
+  width: 38px !important;
+  height: 38px !important;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .38));
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-comparison-teams {
+  border-color: rgba(255, 255, 255, .12) !important;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(36, 77, 105, .34) 0%, rgba(18, 34, 55, .16) 24%, transparent 47%),
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--away-primary) 42%, #142039) 0%,
+      color-mix(in srgb, var(--away-primary) 28%, #142039) 26%,
+      color-mix(in srgb, var(--away-primary) 10%, #12213a) 43%,
+      #112039 50%,
+      color-mix(in srgb, var(--home-primary) 10%, #12213a) 57%,
+      color-mix(in srgb, var(--home-primary) 28%, #142039) 74%,
+      color-mix(in srgb, var(--home-primary) 42%, #142039) 100%) !important;
+  box-shadow:
+    inset 3px 0 var(--away-primary),
+    inset -3px 0 var(--home-primary),
+    0 8px 20px rgba(0, 0, 0, .2) !important;
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-stat-row b:first-child { color: var(--away-secondary) !important; }
+body.game-ui-upgrade .simcast-side-panel .simcast-stat-row b:last-child { color: var(--home-secondary) !important; }
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders > .simcast-featured-leader:nth-of-type(1) { border-left-color: var(--away-primary); background: linear-gradient(105deg, color-mix(in srgb, var(--away-primary) 18%, #11182b), #101729 62%) !important; }
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders > .simcast-featured-leader:nth-of-type(2) { border-left-color: var(--home-primary); background: linear-gradient(105deg, color-mix(in srgb, var(--home-primary) 18%, #11182b), #101729 62%) !important; }
+
+body.game-ui-upgrade .simcast-body .simcast-feed-panel,
+body.game-ui-upgrade .simcast-body .simcast-side-panel {
+  height: 735px !important;
+  min-height: 735px !important;
+  max-height: 735px !important;
+}
+body.game-ui-upgrade .simcast-body .simcast-side-panel {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+body.game-ui-upgrade .simcast-side-panel .simcast-leaders {
+  min-height: 345px;
+}
+
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls {
+  border-top: 1px solid color-mix(in srgb, var(--game-team) 52%, #fff) !important;
+  background: linear-gradient(180deg, rgba(17,28,48,.98), rgba(6,11,20,.99)) !important;
+}
+body.game-ui-upgrade .simcast-controls :is(.simcast-speed, .actions) {
+  padding: 6px;
+  border-color: #35445f;
+  background: rgba(4,9,17,.58);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls button {
+  min-height: 44px;
+  border-radius: 8px !important;
+  font-weight: 800;
+  letter-spacing: .045em;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-speed button { min-width: 62px; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-speed button.active {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 1px var(--game-team-secondary), 0 8px 20px var(--game-team-glow) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls .actions button { padding-inline: 20px !important; }
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-controls button:hover:not(:disabled) { filter: brightness(1.14); transform: translateY(-2px); }
+
+/* Distinct color identities for SimCast command headers. */
+body.game-ui-upgrade .simcast-live-box > header {
+  border-left-color: #4f8bff !important;
+  border-bottom-color: rgba(79,139,255,.45) !important;
+  background:
+    radial-gradient(circle, rgba(79,139,255,.2) 0 1px, transparent 1.4px) 82% 50% / 11px 11px,
+    linear-gradient(100deg, rgba(30,67,128,.56), #0b1628 42%, #07101d 76%) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.055), inset 0 -1px rgba(79,139,255,.25), 0 9px 22px rgba(0,0,0,.22);
+}
+body.game-ui-upgrade .simcast-live-box > header::before {
+  border-color: rgba(111,166,255,.72);
+  background: linear-gradient(135deg, #326ed2, #193b78);
+  box-shadow: 0 8px 18px rgba(49,108,208,.3), inset 0 1px rgba(255,255,255,.12);
+}
+body.game-ui-upgrade .simcast-live-box > header span { color: #78aaff !important; }
+body.game-ui-upgrade .simcast-live-box > header strong { color: #f5f8ff !important; text-shadow: 0 4px 12px rgba(0,0,0,.32); }
+
+body.game-ui-upgrade .simcast-coaching > header {
+  border-left-color: var(--game-success) !important;
+  border-bottom-color: rgba(53,208,127,.38) !important;
+  background:
+    radial-gradient(circle, rgba(53,208,127,.16) 0 1px, transparent 1.4px) 78% 50% / 11px 11px,
+    linear-gradient(100deg, rgba(21,91,61,.52), #0d1b22 42%, #07101d 76%) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.05), inset 0 -1px rgba(53,208,127,.22), 0 9px 22px rgba(0,0,0,.22);
+}
+body.game-ui-upgrade .simcast-coaching > header > div::before {
+  border-color: rgba(92,224,155,.68);
+  background: linear-gradient(135deg, #1a8a58, #10583a);
+  box-shadow: 0 8px 18px rgba(26,138,88,.28), inset 0 1px rgba(255,255,255,.12);
+}
+body.game-ui-upgrade .simcast-coaching > header span { color: #5ce09b !important; }
+body.game-ui-upgrade .simcast-coaching > header strong { color: #f4fff9 !important; text-shadow: 0 4px 12px rgba(0,0,0,.32); }
+body.game-ui-upgrade .simcast-coaching > header > div::after {
+  border-color: rgba(92,224,155,.42);
+  color: #72edae;
+  background: rgba(25,126,82,.2);
+  box-shadow: 0 0 12px rgba(53,208,127,.1);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-coaching > header button[data-simcast-coach="timeout"] {
+  border-color: rgba(243,179,61,.68) !important;
+  border-bottom-color: #f3b33d !important;
+  background: linear-gradient(180deg, #3d2e16, #211b16) !important;
+  box-shadow: 0 8px 18px rgba(118,76,10,.22), inset 0 1px rgba(255,255,255,.06) !important;
+}
+body.game-ui-upgrade .command-center-cards article > header span {
+  color: color-mix(in srgb, var(--command-color) 82%, #fff) !important;
+  text-shadow: 0 0 12px color-mix(in srgb, var(--command-color) 25%, transparent);
+}
+body.game-ui-upgrade .command-center-cards article > header strong {
+  font-size: 17px !important;
+  letter-spacing: .025em;
+  text-shadow: 0 3px 8px rgba(0,0,0,.3);
+}
+
+body.game-ui-upgrade .vertical-slice-hero .team-record-winning {
+  color: var(--game-success) !important;
+  -webkit-text-fill-color: var(--game-success) !important;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-record-losing {
+  color: var(--game-danger) !important;
+  -webkit-text-fill-color: var(--game-danger) !important;
+}
+body.game-ui-upgrade .vertical-slice-hero .team-record-even {
+  color: var(--game-warning) !important;
+  -webkit-text-fill-color: var(--game-warning) !important;
+}
+
+/* Final next-game redesign: compact head-to-head broadcast card. */
+body.game-ui-upgrade.dashboard-mode .context-sidebar .sidebar-next-game {
+  gap: 8px !important;
+  min-height: 166px !important;
+  padding: 11px !important;
+  border-color: color-mix(in srgb, var(--game-team) 38%, var(--game-border)) !important;
+  background: linear-gradient(155deg, color-mix(in srgb, var(--game-team) 10%, #0b1322), #070d18 70%) !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-sidebar .sidebar-next-game::after {
+  right: -42px;
+  bottom: -62px;
+  width: 138px;
+  height: 138px;
+  border-width: 11px;
+  opacity: .16;
+}
+body.game-ui-upgrade.dashboard-mode .context-sidebar .sidebar-next-game-matchup {
+  display: grid !important;
+  grid-template-columns: 1fr 28px 1fr !important;
+  grid-template-rows: 1fr auto;
+  gap: 5px 4px !important;
+  min-height: 86px !important;
+  padding: 9px 10px 7px !important;
+  border: 1px solid rgba(110, 137, 181, .32) !important;
+  border-left: 3px solid var(--away-primary) !important;
+  border-right: 3px solid var(--home-primary) !important;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--away-primary) 13%, #0d1627), #080f1c 45%, #080f1c 55%, color-mix(in srgb, var(--home-primary) 13%, #0d1627)) !important;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-matchup-team {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  column-gap: 6px;
+  min-width: 0;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-matchup-team .sidebar-next-game-logo {
+  grid-row: 1 / 3;
+  width: 38px !important;
+  height: 38px !important;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-matchup-team b {
+  align-self: end;
+  color: #fff;
+  font-family: var(--game-font-display);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-matchup-team small {
+  align-self: start;
+  color: var(--game-text-muted);
+  font-family: var(--game-font-numeric);
+  font-size: 7px;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-matchup > em {
+  display: grid;
+  place-items: center;
+  align-self: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--game-border);
+  border-radius: 50%;
+  color: var(--game-text-soft);
+  background: #09111f;
+  font-family: var(--game-font-heading);
+  font-size: 7px;
+  font-style: normal;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-matchup > time {
+  grid-column: 1 / -1;
+  padding-top: 5px;
+  border-top: 1px solid rgba(92, 111, 145, .26);
+  color: var(--game-text-muted);
+  font-family: var(--game-font-heading);
+  font-size: 7px;
+  letter-spacing: .1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+/* Team-themed context navigation scrollbar. */
+body.game-ui-upgrade.dashboard-mode .context-nav {
+  padding-right: 7px !important;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--game-team) 72%, #7f93b7) #080f1c;
+}
+body.game-ui-upgrade.dashboard-mode .context-nav::-webkit-scrollbar { width: 8px; }
+body.game-ui-upgrade.dashboard-mode .context-nav::-webkit-scrollbar-track {
+  margin-block: 4px;
+  border: 1px solid rgba(92, 111, 145, .2);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #070d18, #0d1626);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
+}
+body.game-ui-upgrade.dashboard-mode .context-nav::-webkit-scrollbar-thumb {
+  min-height: 54px;
+  border: 2px solid #0a1220;
+  border-radius: 999px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 68%, #9badca), var(--game-team));
+  box-shadow: 0 0 9px var(--game-team-glow), inset 0 1px rgba(255, 255, 255, .24);
+}
+body.game-ui-upgrade.dashboard-mode .context-nav::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 52%, #d8e4ff), color-mix(in srgb, var(--game-team) 86%, #fff));
+}
+body.game-ui-upgrade.dashboard-mode .context-nav::-webkit-scrollbar-button { display: none; }
+
+body.game-ui-upgrade.dashboard-mode .career-date-pill {
+  min-width: 142px !important;
+  min-height: 42px !important;
+  justify-content: center;
+  gap: 10px !important;
+  padding: 0 16px !important;
+  border-radius: 8px !important;
+  font-size: 11px !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .05), 0 7px 18px rgba(0, 0, 0, .2) !important;
+}
+body.game-ui-upgrade.dashboard-mode .career-date-pill span { font-size: 13px !important; }
+body.game-ui-upgrade.dashboard-mode .career-date-pill strong,
+body.game-ui-upgrade.dashboard-mode .career-date-pill b {
+  font-size: 11px !important;
+  letter-spacing: .07em;
+}
+body.game-ui-upgrade.dashboard-mode .career-date-pill i { width: 4px !important; height: 4px !important; }
+
+/* Premium game-shell top bar. */
+body.game-ui-upgrade.dashboard-mode .broadcast-shell { grid-template-rows: 76px minmax(0, 1fr) !important; }
+body.game-ui-upgrade.dashboard-mode .topbar {
+  grid-template-columns: 236px minmax(0, 1fr) auto auto !important;
+  gap: 14px !important;
+  min-height: 76px !important;
+  padding: 0 20px !important;
+  background:
+    radial-gradient(circle at 78% 0%, color-mix(in srgb, var(--game-team) 12%, transparent), transparent 30%),
+    linear-gradient(180deg, rgba(16, 25, 43, .98), rgba(6, 11, 21, .98)) !important;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .38), inset 0 1px rgba(255,255,255,.04) !important;
+}
+body.game-ui-upgrade.dashboard-mode .topbar::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 5px;
+  background: linear-gradient(180deg, var(--game-team-secondary), var(--game-team));
+  box-shadow: 0 0 16px var(--game-team-glow);
+  content: "";
+}
+body.game-ui-upgrade.dashboard-mode .topbar::after {
+  height: 2px;
+  background: linear-gradient(90deg, var(--game-team), var(--game-team-secondary) 30%, transparent 72%) !important;
+  opacity: .95;
+}
+body.game-ui-upgrade.dashboard-mode .topbar-brand {
+  min-width: 236px !important;
+  gap: 12px !important;
+}
+body.game-ui-upgrade.dashboard-mode .league-mark {
+  width: 42px !important;
+  height: 48px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 9px 24px var(--game-team-glow), inset 0 1px rgba(255,255,255,.18) !important;
+}
+body.game-ui-upgrade.dashboard-mode .brand-title::before { font-size: 20px !important; }
+body.game-ui-upgrade.dashboard-mode .brand-title::after { font-size: 18px !important; }
+body.game-ui-upgrade.dashboard-mode .brand-subtitle { margin-top: 5px; font-size: 8px; color: #8190aa; }
+body.game-ui-upgrade.dashboard-mode .top-nav {
+  align-items: center;
+  align-self: center;
+  gap: 5px !important;
+  height: 48px;
+  padding: 4px !important;
+  border: 1px solid rgba(92, 111, 145, .2);
+  border-radius: 11px;
+  background: rgba(5, 10, 19, .48);
+  box-shadow: inset 0 1px rgba(255,255,255,.025);
+}
+body.game-ui-upgrade.dashboard-mode .top-nav button {
+  min-height: 38px !important;
+  padding: 0 14px !important;
+  border-radius: 7px !important;
+  font-size: 10px !important;
+}
+body.game-ui-upgrade.dashboard-mode .top-nav button::after {
+  right: 12px;
+  bottom: 3px;
+  left: 12px;
+  height: 2px;
+}
+body.game-ui-upgrade.dashboard-mode .top-nav button:is(:hover, :focus-visible) {
+  background: rgba(255,255,255,.055) !important;
+}
+body.game-ui-upgrade.dashboard-mode .top-nav button.active {
+  border: 1px solid color-mix(in srgb, var(--game-team) 30%, transparent) !important;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 18%, #17223a), color-mix(in srgb, var(--game-team) 8%, #0b1322)) !important;
+  box-shadow: 0 7px 16px color-mix(in srgb, var(--game-team) 14%, transparent), inset 0 1px rgba(255,255,255,.06);
+}
+body.game-ui-upgrade.dashboard-mode .topbar-team {
+  gap: 9px !important;
+  margin-left: 2px !important;
+  padding-left: 14px !important;
+}
+body.game-ui-upgrade.dashboard-mode .topbar-team .menu-link,
+body.game-ui-upgrade.dashboard-mode .theme-toggle-button {
+  min-width: 42px;
+  min-height: 42px !important;
+  border-radius: 9px !important;
+  background: linear-gradient(180deg, #17233a, #0c1525) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.05), 0 6px 14px rgba(0,0,0,.2) !important;
+}
+
+/* Crisp franchise identity in the sidebar. */
+body.game-ui-upgrade.dashboard-mode .context-heading {
+  min-height: 88px !important;
+  padding: 10px 11px 14px !important;
+  background: linear-gradient(105deg, color-mix(in srgb, var(--game-team) 17%, #0b1424), #080f1c 72%) !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-heading strong {
+  position: relative;
+  z-index: 1;
+  gap: 13px !important;
+  color: #f7f9ff !important;
+  font-size: 18px !important;
+  letter-spacing: .045em !important;
+  text-shadow: 0 3px 10px rgba(0,0,0,.42);
+}
+body.game-ui-upgrade.dashboard-mode .context-heading strong > span { gap: 4px !important; }
+body.game-ui-upgrade.dashboard-mode .context-heading strong > span > em {
+  color: color-mix(in srgb, var(--game-team-secondary) 82%, #fff) !important;
+  font-size: 8px !important;
+  letter-spacing: .19em !important;
+  text-shadow: 0 0 10px var(--game-team-glow);
+}
+body.game-ui-upgrade.dashboard-mode .context-team-logo {
+  width: 56px !important;
+  height: 56px !important;
+  padding: 4px !important;
+  border: 1px solid color-mix(in srgb, var(--game-team-secondary) 45%, var(--game-border)) !important;
+  border-radius: 12px !important;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--game-team) 24%, #1a2740), #0b1423) !important;
+  box-shadow: 0 10px 22px rgba(0,0,0,.36), 0 0 14px var(--game-team-glow), inset 0 1px rgba(255,255,255,.09) !important;
+  object-fit: contain !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-heading small {
+  gap: 8px !important;
+  margin-top: 1px !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-heading small > i {
+  color: #afbbce !important;
+  font-size: 7px !important;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+body.game-ui-upgrade.dashboard-mode .context-record {
+  padding: 4px 7px !important;
+  border: 1px solid currentColor;
+  font-size: 8px !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.06);
+}
+body.game-ui-upgrade.dashboard-mode .context-heading strong {
+  color: #ffffff !important;
+  font-size: 21px !important;
+  line-height: 1 !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-heading strong > span > em {
+  color: #ffffff !important;
+  font-size: 10px !important;
+  letter-spacing: .17em !important;
+  text-shadow: 0 3px 10px rgba(0,0,0,.48) !important;
+}
+
+/* Compact segmented primary navigation. */
+body.game-ui-upgrade.dashboard-mode .top-nav {
+  width: max-content !important;
+  max-width: 100%;
+  justify-self: start;
+  gap: 4px !important;
+  padding: 5px !important;
+  border-color: rgba(100, 120, 157, .28) !important;
+  border-radius: 12px !important;
+  background: linear-gradient(180deg, rgba(12, 21, 37, .88), rgba(5, 11, 21, .88)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.035), 0 8px 20px rgba(0,0,0,.22) !important;
+}
+body.game-ui-upgrade.dashboard-mode .top-nav button {
+  min-width: 72px;
+  min-height: 36px !important;
+  padding: 0 13px !important;
+  border: 1px solid transparent !important;
+  color: #aebbd0 !important;
+  font-size: 9px !important;
+  letter-spacing: .09em !important;
+}
+body.game-ui-upgrade.dashboard-mode .top-nav button:hover {
+  border-color: rgba(110, 133, 174, .24) !important;
+  color: #fff !important;
+  background: linear-gradient(180deg, rgba(31,45,70,.75), rgba(16,27,47,.75)) !important;
+}
+body.game-ui-upgrade.dashboard-mode .top-nav button.active {
+  border-color: color-mix(in srgb, var(--game-team) 48%, rgba(255,255,255,.2)) !important;
+  color: #fff !important;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--game-team) 24%, #202d49), color-mix(in srgb, var(--game-team) 11%, #101a2d)) !important;
+  box-shadow: 0 7px 16px color-mix(in srgb, var(--game-team) 18%, transparent), inset 0 1px rgba(255,255,255,.08) !important;
+}
+body.game-ui-upgrade.dashboard-mode .top-nav button.active::after {
+  right: 13px;
+  bottom: 2px;
+  left: 13px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--game-team-secondary), var(--game-team)) !important;
+  box-shadow: 0 0 9px var(--game-team-glow);
+}
+body.game-ui-upgrade.dashboard-mode .top-nav .nav-badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 17px;
+  height: 17px;
+  margin-left: 6px;
+  padding: 0 4px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 999px;
+  color: #fff !important;
+  background: linear-gradient(180deg, #ff4767, #c91848);
+  box-shadow: 0 0 10px rgba(255,53,94,.28);
+  font-family: var(--game-font-numeric);
+  font-size: 8px;
+}
+
+/* Add dimensional depth to the four dashboard metric panels. */
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric {
+  isolation: isolate;
+  overflow: hidden;
+  border-top-color: color-mix(in srgb, var(--metric-color) 35%, rgba(255,255,255,.2)) !important;
+  border-right-color: color-mix(in srgb, var(--metric-color) 22%, var(--game-border)) !important;
+  border-left-color: color-mix(in srgb, var(--metric-color) 28%, var(--game-border)) !important;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, .3),
+    0 4px 10px color-mix(in srgb, var(--metric-color) 10%, transparent),
+    inset 0 1px rgba(255,255,255,.11),
+    inset 0 -16px 28px rgba(0,0,0,.12) !important;
+  transform: translateY(0);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric::after {
+  position: absolute;
+  right: -34px;
+  bottom: -48px;
+  z-index: -1;
+  width: 138px;
+  height: 112px;
+  border: 18px solid color-mix(in srgb, var(--metric-color) 15%, transparent);
+  border-radius: 48% 12% 48% 12%;
+  background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--metric-color) 16%, transparent), transparent 62%);
+  opacity: .72;
+  transform: rotate(-14deg);
+  content: "";
+}
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric > * {
+  position: relative;
+  z-index: 1;
+}
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric::before {
+  box-shadow:
+    0 8px 18px color-mix(in srgb, var(--metric-color) 18%, transparent),
+    inset 0 1px rgba(255,255,255,.12) !important;
+}
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .reference-stat-grid > article.dashboard-metric:hover {
+  border-color: color-mix(in srgb, var(--metric-color) 48%, var(--game-border)) !important;
+  border-bottom-color: var(--metric-color) !important;
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, .36),
+    0 6px 18px color-mix(in srgb, var(--metric-color) 17%, transparent),
+    inset 0 1px rgba(255,255,255,.14) !important;
+  transform: translateY(-3px);
+}
+
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-matchup.logo-only {
+  grid-template-columns: 1fr 32px 1fr !important;
+  grid-template-rows: 58px auto !important;
+  min-height: 92px !important;
+  padding: 8px 10px 7px !important;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-matchup.logo-only .sidebar-matchup-team {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  grid-template-rows: 1fr !important;
+  place-items: center !important;
+  align-self: stretch;
+  justify-self: stretch;
+  min-width: 0;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-matchup.logo-only .sidebar-next-game-logo {
+  grid-row: auto !important;
+  grid-column: auto !important;
+  align-self: center !important;
+  justify-self: center !important;
+  width: 54px !important;
+  height: 54px !important;
+  margin: 0 !important;
+  filter: drop-shadow(0 9px 12px rgba(0,0,0,.42));
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-matchup-divider {
+  display: grid;
+  place-items: center;
+  align-self: center;
+  justify-self: center;
+  width: 29px;
+  height: 29px;
+  border: 1px solid rgba(174,194,231,.34);
+  border-radius: 50%;
+  background: linear-gradient(180deg, #17233a, #09111f);
+  box-shadow: 0 6px 14px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.06);
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-matchup-divider::after {
+  color: #dce5f5;
+  font-family: var(--game-font-heading);
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  content: "VS";
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-matchup.logo-only > time {
+  padding-top: 6px !important;
+  font-size: 8px !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-heading strong > span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-heading strong > span > em {
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+body.game-ui-upgrade.dashboard-mode .context-heading {
+  min-height: 98px !important;
+  padding-block: 12px 16px !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-heading strong {
+  font-size: 24px !important;
+  font-weight: 900 !important;
+  letter-spacing: .035em !important;
+  line-height: .96 !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-heading strong > span { gap: 6px !important; }
+body.game-ui-upgrade.dashboard-mode .context-heading strong > span > em {
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  letter-spacing: .2em !important;
+  line-height: 1 !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-heading small {
+  gap: 9px !important;
+  margin-top: 2px !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-record {
+  padding: 4px 8px !important;
+  font-size: 9px !important;
+  font-weight: 900 !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-heading small > i {
+  color: #d4dceb !important;
+  font-size: 8px !important;
+  font-weight: 900 !important;
+  letter-spacing: .1em !important;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-matchup-meta {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(92,111,145,.26);
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-matchup-meta b {
+  color: #dce5f5;
+  font-family: var(--game-font-heading);
+  font-size: 8px;
+  letter-spacing: .1em;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-matchup-meta b:last-child { text-align: right; }
+body.game-ui-upgrade.dashboard-mode .sidebar-matchup-meta time {
+  color: var(--game-text-muted);
+  font-family: var(--game-font-heading);
+  font-size: 8px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+body.game-ui-upgrade.dashboard-mode .context-sidebar .sidebar-next-game > span {
+  color: #ffffff !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  letter-spacing: .16em !important;
+  text-shadow: 0 3px 9px rgba(0,0,0,.42);
+}
+body.game-ui-upgrade.dashboard-mode .context-sidebar .sidebar-next-game > span > i {
+  padding: 4px 8px !important;
+  border-color: rgba(174,194,231,.38) !important;
+  color: #eef4ff !important;
+  background: linear-gradient(180deg, #17243a, #0b1424) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.06), 0 5px 12px rgba(0,0,0,.22);
+  font-size: 8px !important;
+  font-weight: 900;
+  letter-spacing: .1em;
+}
+
+/* Dimensional pass for the full franchise rail. */
+body.game-ui-upgrade.dashboard-mode .context-sidebar {
+  border-color: color-mix(in srgb, var(--game-team) 25%, var(--game-border)) !important;
+  background:
+    radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--game-team) 14%, transparent), transparent 25%),
+    linear-gradient(115deg, rgba(255,255,255,.025), transparent 38%),
+    linear-gradient(180deg, #0b1425, #060c17 72%) !important;
+  box-shadow:
+    0 24px 48px rgba(0,0,0,.42),
+    0 7px 18px color-mix(in srgb, var(--game-team) 8%, transparent),
+    inset 0 1px rgba(255,255,255,.08),
+    inset 1px 0 rgba(255,255,255,.025),
+    inset -1px 0 rgba(0,0,0,.28) !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-heading {
+  border-bottom-color: color-mix(in srgb, var(--game-team) 28%, var(--game-border)) !important;
+  box-shadow: 0 10px 22px rgba(0,0,0,.17), inset 0 -1px rgba(255,255,255,.025);
+}
+body.game-ui-upgrade.dashboard-mode .context-nav {
+  margin-top: 5px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255,255,255,.025);
+}
+body.game-ui-upgrade.dashboard-mode .context-nav button {
+  border: 1px solid transparent !important;
+  transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease !important;
+}
+body.game-ui-upgrade.dashboard-mode .context-nav button:hover {
+  border-color: rgba(110,133,174,.2) !important;
+  background: linear-gradient(90deg, rgba(38,54,84,.72), rgba(18,29,49,.52)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.035);
+  transform: translateX(2px);
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-nav-divider {
+  position: relative;
+  margin-top: 7px !important;
+  padding-top: 9px !important;
+  border-top: 1px solid rgba(92,111,145,.22);
+}
+body.game-ui-upgrade.dashboard-mode .context-sidebar .sidebar-next-game {
+  border-color: color-mix(in srgb, var(--game-team) 38%, var(--game-border)) !important;
+  box-shadow: 0 14px 26px rgba(0,0,0,.3), inset 0 1px rgba(255,255,255,.055) !important;
+}
+body.game-ui-upgrade.dashboard-mode .sidebar-next-game-matchup.logo-only {
+  box-shadow: 0 10px 20px rgba(0,0,0,.25), inset 0 1px rgba(255,255,255,.045) !important;
+}
+
+body.game-ui-upgrade.dashboard-mode .top-nav {
+  width: 100% !important;
+  max-width: none !important;
+  justify-self: stretch !important;
+}
+
+/* Refined simulation speed selector. */
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-speed {
+  gap: 7px !important;
+  padding: 7px 8px 7px 12px !important;
+  border: 1px solid rgba(112, 136, 178, .34) !important;
+  border-radius: 11px !important;
+  background: linear-gradient(180deg, #111d31, #09111f) !important;
+  box-shadow: 0 10px 22px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.055) !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-speed > span {
+  margin-right: 4px;
+  color: #c5d0e3 !important;
+  font-size: 7px !important;
+  letter-spacing: .16em !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-speed button {
+  position: relative;
+  min-width: 62px !important;
+  min-height: 42px !important;
+  border: 1px solid rgba(116, 141, 184, .42) !important;
+  border-radius: 8px !important;
+  color: #dbe5f5 !important;
+  background: linear-gradient(180deg, #1a2941, #111b2e) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.055), 0 5px 12px rgba(0,0,0,.18) !important;
+  font-size: 11px !important;
+  transition: transform .16s ease, border-color .16s ease, filter .16s ease, box-shadow .16s ease !important;
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-speed button:hover {
+  border-color: rgba(143,168,215,.64) !important;
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-speed button.active {
+  border-color: color-mix(in srgb, var(--game-team-secondary) 58%, #fff) !important;
+  color: #fff !important;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--game-team) 78%, #a078ff), var(--game-team)) !important;
+  box-shadow: 0 8px 18px var(--game-team-glow), inset 0 1px rgba(255,255,255,.18) !important;
+  transform: translateY(-1px);
+}
+body.game-ui-upgrade.dashboard-mode .simcast-shell .simcast-speed button.active::after {
+  position: absolute;
+  right: 10px;
+  bottom: 4px;
+  left: 10px;
+  height: 2px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--game-team-secondary) 72%, #fff);
+  box-shadow: 0 0 7px var(--game-team-glow);
+  content: "";
+}
+
+/* Solid icon tiles above the decorative metric-card pattern. */
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .dashboard-metric::before {
+  z-index: 3 !important;
+  border-width: 1px !important;
+  background-image: none !important;
+  box-shadow: 0 8px 16px rgba(0,0,0,.3), inset 0 1px rgba(255,255,255,.13) !important;
+  opacity: 1 !important;
+}
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .dashboard-metric--offense::before {
+  border-color: #4f8bff !important;
+  color: #dce9ff !important;
+  background-color: #17447f !important;
+}
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .dashboard-metric--defense::before {
+  border-color: #35d07f !important;
+  color: #e5fff1 !important;
+  background-color: #126241 !important;
+}
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .dashboard-metric--net::before {
+  border-color: #9a7cff !important;
+  color: #eee9ff !important;
+  background-color: #49347f !important;
+}
+body.game-ui-upgrade.dashboard-mode .reference-dashboard .dashboard-metric--cap::before {
+  border-color: #f3b33d !important;
+  color: #fff3d3 !important;
+  background-color: #704a08 !important;
+}
+
+/* Larger, clearer roster-needs tiles. */
+body.game-ui-upgrade.dashboard-mode .roster-command-grid { gap: 10px !important; }
+body.game-ui-upgrade.dashboard-mode .roster-command-grid > div {
+  grid-template-columns: 50px minmax(0,1fr) !important;
+  column-gap: 11px !important;
+  min-height: 108px !important;
+  padding: 12px !important;
+  box-shadow: 0 9px 18px rgba(0,0,0,.2), inset 0 1px rgba(255,255,255,.045);
+}
+body.game-ui-upgrade.dashboard-mode .roster-command-grid .roster-command-headshot,
+body.game-ui-upgrade.dashboard-mode .roster-command-grid > div > i {
+  width: 48px !important;
+  height: 48px !important;
+  border-width: 2px !important;
+  box-shadow: 0 7px 13px rgba(0,0,0,.3), inset 0 1px rgba(255,255,255,.08);
+}
+body.game-ui-upgrade.dashboard-mode .roster-command-grid > div > i { font-size: 22px !important; }
+body.game-ui-upgrade.dashboard-mode .roster-command-grid > div > span {
+  color: #aebbd0 !important;
+  font-size: 8px !important;
+  font-weight: 800;
+  letter-spacing: .09em !important;
+}
+body.game-ui-upgrade.dashboard-mode .roster-command-grid > div > strong {
+  color: #fff !important;
+  font-size: 14px !important;
+  line-height: 1.05;
+}
+body.game-ui-upgrade.dashboard-mode .roster-command-grid > div > b {
+  padding: 4px 7px !important;
+  font-size: 8px !important;
+  font-weight: 900;
+  letter-spacing: .05em;
+}
+
+
+/* Season-hero internals; the shared Phase 6 card owns its outer depth. */
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero .team-hero-identity {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 9px 14px rgba(0,0,0,.3));
+}
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero .reference-title-logo {
+  filter: drop-shadow(0 12px 14px rgba(0,0,0,.4)) drop-shadow(0 0 10px var(--game-team-glow)) !important;
+}
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero .team-hero-identity h2 {
+  text-shadow: 0 7px 18px rgba(0,0,0,.5), 0 1px rgba(255,255,255,.08) !important;
+}
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero .dashboard-next-matchup {
+  position: relative;
+  z-index: 2;
+  border-color: color-mix(in srgb, var(--game-team) 32%, var(--game-border)) !important;
+  background: linear-gradient(145deg, rgba(255,255,255,.045), transparent 36%), linear-gradient(180deg, #101a2d, #080f1c) !important;
+  box-shadow: 0 14px 28px rgba(0,0,0,.32), inset 0 1px rgba(255,255,255,.085), inset 0 -12px 20px rgba(0,0,0,.1) !important;
+}
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero .dashboard-matchup-logo { filter: drop-shadow(0 7px 9px rgba(0,0,0,.38)); }
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero > div:last-child > button {
+  box-shadow: 0 10px 20px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.09) !important;
+  transition: transform .16s ease, filter .16s ease, box-shadow .16s ease;
+}
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero > div:last-child > button:hover {
+  box-shadow: 0 14px 24px rgba(0,0,0,.34), 0 5px 14px var(--game-team-glow), inset 0 1px rgba(255,255,255,.12) !important;
+  transform: translateY(-2px);
+}
+
+/* Sidebar-heading accent; the shared Phase 6 pattern owns the larger motif. */
+body.game-ui-upgrade.dashboard-mode .context-heading::before {
+  position: absolute;
+  right: 12px;
+  bottom: -1px;
+  left: 12px;
+  z-index: 2;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--game-team-secondary), var(--game-team) 58%, transparent);
+  box-shadow: 0 0 12px var(--game-team-glow);
+  content: "";
+}
+body.game-ui-upgrade.dashboard-mode .reference-bars .recent-opponent-logo {
+  filter: drop-shadow(0 3px 3px rgba(0,0,0,.48)) drop-shadow(0 1px 1px rgba(0,0,0,.34));
+}
+body.game-ui-upgrade.dashboard-mode .context-team-logo {
+  transform: translateZ(0);
+  transition: transform .18s ease, filter .18s ease;
+}
+body.game-ui-upgrade.dashboard-mode .context-heading:hover .context-team-logo {
+  filter: drop-shadow(0 10px 13px rgba(0,0,0,.38)) drop-shadow(0 0 9px var(--game-team-glow));
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* Broadcast-style simulation actions in the season hero. */
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero > div:last-child { gap: 10px !important; }
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero > div:last-child > button {
+  display: grid !important;
+  grid-template-columns: 28px 1fr 14px;
+  align-items: center;
+  gap: 8px;
+  min-height: 54px !important;
+  padding: 7px 11px !important;
+  border-radius: 9px !important;
+  text-align: left;
+}
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero > div:last-child > button > i {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(5,10,19,.22);
+  font-size: 9px;
+  font-style: normal;
+  box-shadow: inset 0 1px rgba(255,255,255,.08);
+}
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero > div:last-child > button > span {
+  display: grid;
+  gap: 3px;
+  color: #fff !important;
+  font-family: var(--game-font-heading);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero > div:last-child > button small {
+  color: rgba(229,237,250,.66) !important;
+  font-family: var(--game-font-numeric);
+  font-size: 6px;
+  letter-spacing: .12em;
+}
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero > div:last-child > button > b {
+  color: #fff !important;
+  font-family: var(--game-font-heading);
+  font-size: 18px;
+  transition: transform .16s ease;
+}
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero > div:last-child > .reference-primary {
+  border-color: color-mix(in srgb, var(--game-team) 65%, #fff) !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--game-team) 82%, #fff), var(--game-team)) !important;
+  box-shadow: 0 11px 22px var(--game-team-glow), inset 0 1px rgba(255,255,255,.15) !important;
+}
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero > div:last-child > .reference-week-button {
+  border-color: rgba(130,153,194,.45) !important;
+  background: linear-gradient(180deg, #1b2942, #10192b) !important;
+  box-shadow: 0 10px 20px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.07) !important;
+}
+body.game-ui-upgrade.dashboard-mode .vertical-slice-hero > div:last-child > button:hover > b { transform: translateX(3px); }

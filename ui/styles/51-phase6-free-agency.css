@@ -1,0 +1,122 @@
+/* Phase 6 free-agent decision cards. */
+body.game-ui-upgrade.dashboard-mode .in-season-fa-player {
+  position: relative; min-height: 138px;
+  border-color: var(--phase6-border) !important; border-top-color: rgba(174,194,231,.38) !important;
+  color: var(--phase6-text) !important; background: linear-gradient(105deg,#142138,#0d1729 72%) !important;
+  box-shadow: 0 12px 26px rgba(0,0,0,.27),inset 0 1px rgba(255,255,255,.055) !important;
+  transition: border-color 160ms ease,box-shadow 160ms ease,transform 160ms ease;
+}
+body.game-ui-upgrade.dashboard-mode .in-season-fa-player::before { position:absolute; inset:0 auto 0 0; width:3px; content:""; background:linear-gradient(180deg,var(--phase6-blue),var(--phase6-purple)); opacity:.55; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-player:hover { border-color:rgba(93,157,255,.48) !important; box-shadow:0 17px 34px rgba(0,0,0,.34),0 0 20px rgba(93,157,255,.07),inset 0 1px rgba(255,255,255,.07) !important; transform:translateY(-1px); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-player > * { border-color:var(--phase6-border) !important; }
+
+body.game-ui-upgrade.dashboard-mode .in-season-fa-portrait { overflow:hidden; border:1px solid rgba(93,157,255,.45) !important; border-radius:10px !important; background:radial-gradient(circle at 50% 30%,#31496d,#172844 66%,#0b1525) !important; box-shadow:0 8px 16px rgba(0,0,0,.32),0 0 0 3px rgba(93,157,255,.06); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-headshot { background:transparent !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-ovr { border-color:rgba(93,157,255,.6) !important; background:linear-gradient(145deg,#245fbd,#163a78) !important; box-shadow:0 6px 13px rgba(16,69,155,.28),inset 0 1px rgba(255,255,255,.14); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-identity strong { color:#fff !important; font:800 14px/1.1 var(--phase6-font-heading) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-identity > span { color:var(--phase6-text-soft) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-identity > small { color:#9fc2ff !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-identity > em { color:var(--phase6-text-muted) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-star { color:var(--phase6-text-muted) !important; font-size:17px !important; transition:color 150ms ease,transform 150ms ease; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-star:hover { color:var(--phase6-gold) !important; transform:scale(1.12); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-pot b { color:var(--phase6-green) !important; }
+
+body.game-ui-upgrade.dashboard-mode .in-season-fa-stats { gap:8px !important; padding:14px 12px !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-stats > span { min-width:38px; padding:6px 4px; border:1px solid rgba(116,141,184,.17); border-radius:6px; background:rgba(20,31,51,.6); text-align:center; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-stats small { color:var(--phase6-text-muted) !important; letter-spacing:.07em; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-stats b { color:var(--phase6-text) !important; font-family:var(--phase6-font-numeric) !important; }
+
+body.game-ui-upgrade.dashboard-mode .in-season-fa-contract strong { color:#fff !important; font:800 24px/1 var(--phase6-font-numeric) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-contract strong small { color:var(--phase6-text-muted) !important; font-size:9px !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-contract span { width:max-content; padding:4px 7px; border-radius:5px; color:#bcd4ff !important; background:rgba(93,157,255,.11); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-contract em { color:var(--phase6-text-soft) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest,
+body.game-ui-upgrade.dashboard-mode .in-season-fa-fit { align-content:center; gap:5px !important; padding:12px !important; background:linear-gradient(180deg,rgba(19,31,52,.78),rgba(10,18,32,.68)); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest > header,
+body.game-ui-upgrade.dashboard-mode .in-season-fa-fit > header { display:flex; align-items:center; justify-content:space-between; width:100%; margin-bottom:2px; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest > header > span,
+body.game-ui-upgrade.dashboard-mode .in-season-fa-fit > header > span { color:var(--phase6-text-muted) !important; font:800 7px/1 var(--phase6-font-heading); letter-spacing:.1em; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest > header > b,
+body.game-ui-upgrade.dashboard-mode .in-season-fa-fit > header > b { padding:3px 5px; border-radius:4px; font:800 7px/1 var(--phase6-font-heading); letter-spacing:.06em; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest.strong > header > b { color:#baf4d4; background:rgba(53,208,127,.12); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest.medium > header > b { color:#bcd7ff; background:rgba(93,157,255,.12); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest.low > header > b { color:#ffc2c8; background:rgba(255,93,108,.12); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest > strong { color:var(--phase6-text) !important; font:800 30px/1 var(--phase6-font-numeric) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest > strong > small { color:var(--phase6-text-muted) !important; font-size:12px !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest > span { color:var(--phase6-text-soft) !important; font-size:8px !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest-meter { width:100%; height:5px; overflow:hidden; border-radius:8px; background:#070d18; box-shadow:inset 0 1px 2px rgba(0,0,0,.5); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest-meter > i { display:block; width:var(--interest); height:100%; border-radius:inherit; background:linear-gradient(90deg,#ff5d6c,#f3b33d); box-shadow:0 0 8px rgba(255,93,108,.3); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest.medium .in-season-fa-interest-meter > i { background:linear-gradient(90deg,#5d9dff,#9a7cff); box-shadow:0 0 8px rgba(93,157,255,.32); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest.strong .in-season-fa-interest-meter > i { background:linear-gradient(90deg,#35d07f,#67e7a5); box-shadow:0 0 8px rgba(53,208,127,.32); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest-stars { display:flex !important; gap:3px; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest-stars i { color:#334159 !important; text-shadow:none !important; font-size:9px; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest-stars i.filled { color:var(--phase6-blue) !important; text-shadow:0 0 8px rgba(93,157,255,.34) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest.low .in-season-fa-interest-stars i.filled { color:var(--phase6-red) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-interest > small { width:max-content; padding:3px 6px; border:1px solid rgba(116,141,184,.22); border-radius:4px; color:var(--phase6-text-muted) !important; background:rgba(7,13,24,.4); }
+
+body.game-ui-upgrade.dashboard-mode .in-season-fa-fit > header > b { color:#baf4d4; background:rgba(53,208,127,.11); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-fit.poor > header > b { color:#ffc2c8; background:rgba(255,93,108,.11); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-fit-score { display:flex; align-items:center; gap:9px; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-fit-score > span { color:var(--phase6-text-soft) !important; font:800 9px/1 var(--phase6-font-heading); text-transform:uppercase; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-fit-ring { flex:0 0 auto; filter:drop-shadow(0 5px 9px rgba(0,0,0,.26)); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-fit ul { display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px !important; width:100%; margin-top:3px !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-fit li { display:flex; align-items:center; min-height:20px; padding:3px 6px !important; border:1px solid rgba(116,141,184,.16); border-radius:5px; background:rgba(20,31,51,.72); font-size:7px !important; white-space:nowrap; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-fit li.good { border-color:rgba(53,208,127,.18); color:#9ee9c0 !important; background:rgba(53,208,127,.06); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-fit li.warn { border-color:rgba(243,179,61,.18); color:#f5cd82 !important; background:rgba(243,179,61,.06); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-fit li.bad { border-color:rgba(255,93,108,.18); color:#ffb7bf !important; background:rgba(255,93,108,.06); }
+
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions { align-content:center; gap:7px !important; padding:12px 10px !important; background:linear-gradient(180deg,rgba(13,23,41,.72),rgba(7,13,24,.58)); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .btn { display:grid !important; grid-template-columns:18px minmax(0,1fr); align-items:center; gap:5px; width:100%; min-height:32px !important; padding:0 8px !important; border-color:var(--phase6-button-border) !important; color:var(--phase6-text-soft) !important; background:var(--phase6-button-bg) !important; box-shadow:inset 0 1px rgba(255,255,255,.045),0 5px 10px rgba(0,0,0,.14) !important; font:800 8px/1 var(--phase6-font-heading); letter-spacing:.04em; text-align:left; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .btn > span { display:grid; place-items:center; width:18px; height:18px; border-radius:5px; font-size:10px; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .btn:hover { color:#fff !important; transform:translateY(-1px); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .fa-action-profile > span { color:#a9ceff; background:rgba(93,157,255,.12); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .fa-action-profile:hover { border-color:var(--phase6-blue) !important; background:linear-gradient(180deg,#234b83,#162f55) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .fa-action-compare > span { color:#d2c6ff; background:rgba(154,124,255,.13); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .fa-action-compare:hover { border-color:var(--phase6-purple) !important; background:linear-gradient(180deg,#4b3978,#2d2450) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .fa-action-scout > span { color:#ffe0a2; background:rgba(243,179,61,.12); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .fa-action-scout:hover { border-color:var(--phase6-gold) !important; background:linear-gradient(180deg,#61471d,#382b18) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .in-season-negotiate { grid-template-columns:18px minmax(0,1fr) 12px !important; min-height:38px !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .in-season-negotiate:not(:disabled) { border-color:#67e7a5 !important; color:#fff !important; background:linear-gradient(135deg,#35d07f,#168c55) !important; box-shadow:0 9px 18px rgba(53,208,127,.2),inset 0 1px rgba(255,255,255,.18) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .in-season-negotiate:not(:disabled):hover { border-color:#a1f3c8 !important; background:linear-gradient(135deg,#45dc8d,#1aa463) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .in-season-negotiate:not(:disabled) > span { color:#fff; background:rgba(255,255,255,.13); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .in-season-negotiate > i { color:inherit; font-size:12px; font-style:normal; text-align:right; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .in-season-negotiate:disabled { border-color:rgba(255,93,108,.42) !important; color:#e49aa3 !important; background:linear-gradient(180deg,rgba(92,32,44,.76),rgba(52,22,30,.82)) !important; opacity:.72; cursor:not-allowed; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .in-season-negotiate:disabled > span { color:#ffc2c8; background:rgba(255,93,108,.1); }
+
+body.game-ui-upgrade.dashboard-mode .in-season-fa-market { overflow:hidden; border-color:var(--phase6-border) !important; border-radius:var(--phase6-radius-card) !important; background:linear-gradient(180deg,#101a2d,#0a1221) !important; box-shadow:var(--phase6-shadow-card) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-toolbar { grid-template-columns:minmax(220px,.72fr) minmax(620px,1.5fr) !important; gap:24px; min-height:122px !important; padding:20px 24px !important; border-bottom-color:var(--phase6-border) !important; background:linear-gradient(105deg,#17243b,#101a2d) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-toolbar .card-label { color:#8fbaff !important; font-size:9px !important; letter-spacing:.13em !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-toolbar .player-name { color:#fff !important; font:800 27px/1 var(--phase6-font-heading) !important; letter-spacing:.035em; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-controls { grid-template-columns:minmax(220px,1fr) 140px 168px 122px !important; align-items:end !important; gap:9px !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-controls > label { position:relative; display:grid; gap:5px; min-width:0; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-controls > label > small { order:-1; color:var(--phase6-text-muted) !important; font:800 7px/1 var(--phase6-font-heading); letter-spacing:.1em; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-controls input,
+body.game-ui-upgrade.dashboard-mode .in-season-fa-controls select { box-sizing:border-box; width:100% !important; min-height:42px !important; margin:0 !important; border:1px solid var(--phase6-button-border) !important; border-radius:8px !important; color:var(--phase6-text) !important; -webkit-text-fill-color:var(--phase6-text) !important; background-color:#0c1628 !important; background-image:linear-gradient(180deg,#16243a,#0d1729) !important; box-shadow:inset 0 2px 5px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.04) !important; font:700 10px/1 var(--phase6-font-body) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-controls input { padding:0 12px 0 34px !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-search-field > span { position:absolute; z-index:1; bottom:12px; left:12px; color:#8fbaff; font-size:13px; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-controls input::placeholder { color:var(--phase6-text-muted) !important; -webkit-text-fill-color:var(--phase6-text-muted) !important; opacity:1; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-controls input:focus,
+body.game-ui-upgrade.dashboard-mode .in-season-fa-controls select:focus { border-color:var(--phase6-blue) !important; outline:0 !important; box-shadow:0 0 0 3px rgba(93,157,255,.11),inset 0 2px 5px rgba(0,0,0,.24) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-controls > button { display:flex; align-items:center; justify-content:center; gap:7px; min-height:42px !important; border-color:#79adff !important; color:#fff !important; background:linear-gradient(135deg,#337dff,#1157d7) !important; box-shadow:0 9px 18px rgba(17,87,215,.24),inset 0 1px rgba(255,255,255,.18) !important; font:800 9px/1 var(--phase6-font-heading); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-controls > button:hover { border-color:#b5d2ff !important; background:linear-gradient(135deg,#438aff,#1765ea) !important; transform:translateY(-1px); }
+
+body.game-ui-upgrade.dashboard-mode .in-season-fa-list-head,
+body.game-ui-upgrade.dashboard-mode .in-season-fa-player { grid-template-columns:minmax(310px,1.2fr) minmax(245px,.9fr) minmax(125px,.48fr) minmax(138px,.52fr) minmax(180px,.68fr) 100px !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-list-head { min-height:48px !important; padding:0 !important; border-bottom-color:var(--phase6-border) !important; color:var(--phase6-text-muted) !important; background:linear-gradient(180deg,#18263e,#111c30) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-list-head > span { display:flex; align-items:center; height:100%; padding:0 14px; border-right:1px solid var(--phase6-border); }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-list-head > span:last-child { justify-content:center; border-right:0; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-list-head .in-season-fa-stat-filter { box-sizing:border-box; gap:5px !important; padding:7px 10px !important; overflow:visible !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-stat-filter button { min-height:30px !important; border:1px solid rgba(116,141,184,.25) !important; color:var(--phase6-text-soft) !important; background:linear-gradient(180deg,#1b2a43,#131f34) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-stat-filter button:hover { border-color:rgba(93,157,255,.55) !important; color:#fff !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-stat-filter button.active { border-color:var(--phase6-blue) !important; color:#fff !important; background:linear-gradient(180deg,#285da5,#183d70) !important; box-shadow:0 5px 11px rgba(28,82,163,.22) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-stat-filter button.active::after { color:#91bdff !important; font-size:6px; }
+
+@media (max-width:1100px) {
+  body.game-ui-upgrade.dashboard-mode .in-season-fa-toolbar { grid-template-columns:1fr !important; }
+  body.game-ui-upgrade.dashboard-mode .in-season-fa-controls { grid-template-columns:minmax(220px,1fr) 130px 160px 120px !important; }
+}
+@media (max-width:760px) {
+  body.game-ui-upgrade.dashboard-mode .in-season-fa-controls { grid-template-columns:1fr 1fr !important; }
+  body.game-ui-upgrade.dashboard-mode .in-season-fa-search-field { grid-column:1 / -1; }
+}
+@media (max-width:900px) { body.game-ui-upgrade.dashboard-mode .in-season-fa-player { min-width:1060px; } body.game-ui-upgrade.dashboard-mode .in-season-fa-list-head { min-width:1060px; } }

@@ -335,6 +335,7 @@ function render() {
   lockPinnedDarkButtonStyles();
   lockPinnedDarkFormStyles();
   lockVerticalSliceControlStyles();
+  lockTradeControlStyles();
   attachActions();
   if (pageChanged) {
     const workspace = document.querySelector(".workspace");
@@ -505,7 +506,9 @@ function applyThemeMode() {
 
 function lockPinnedDarkButtonStyles() {
   const darkMode = document.body.classList.contains("dark-mode");
-  const rotationButtons = [...document.querySelectorAll(".rotation-footer button")];
+  const rotationButtons = [...document.querySelectorAll(".rotation-footer button:not([data-action='rotation-save'])")];
+  const rotationSaveButtons = [...document.querySelectorAll(".rotation-footer button[data-action='rotation-save']")];
+  const standingsButtons = [...document.querySelectorAll(".standings-tabs button, .standings-view-toggle button")];
   const freeAgencyButtons = [
     ...document.querySelectorAll("[data-in-season-waive]"),
     ...document.querySelectorAll("[data-action='filter-in-season-fa']"),
@@ -550,10 +553,21 @@ function lockPinnedDarkButtonStyles() {
     ...document.querySelectorAll(".sim-controls [data-sim-control]"),
     ...document.querySelectorAll(".matchup-card .actions [data-simcast-game]"),
     ...document.querySelectorAll(".matchup-card .actions [data-sim-game]"),
-    ...document.querySelectorAll(".matchup-card .actions button:disabled"),
-    ...document.querySelectorAll(".standings-tabs button:not(.active)"),
-    ...document.querySelectorAll(".standings-view-toggle button:not(.active)")
+    ...document.querySelectorAll(".matchup-card .actions button:disabled")
   ];
+  rotationSaveButtons.forEach((button) => {
+    const greenStyles = {
+      "border-color": "#55dfa0",
+      color: "#ffffff",
+      "-webkit-text-fill-color": "#ffffff",
+      "background-color": "#15945a",
+      "background-image": "linear-gradient(135deg, #35d07f, #15945a)",
+      "box-shadow": "0 10px 22px rgba(53, 208, 127, .24), inset 0 1px rgba(255, 255, 255, .2), inset 0 -2px rgba(0, 0, 0, .2)",
+      opacity: "1"
+    };
+    Object.entries(greenStyles).forEach(([property, value]) => button.style.setProperty(property, value, "important"));
+  });
+  standingsButtons.forEach(clearPinnedInlineStyles);
   if (!darkMode) {
     pinnedDarkButtons.forEach(clearPinnedInlineStyles);
     rotationButtons.forEach(clearPinnedInlineStyles);
@@ -697,7 +711,7 @@ function renderContextNav() {
   if (inCareer) {
     const selectedTeam = activeTeam();
     if (sectionLabel) sectionLabel.textContent = "";
-    if (contextTitle) contextTitle.innerHTML = `${teamLogo(selectedTeam, "context-team-logo")}<span>${escapeHtml(selectedTeam.city)} ${escapeHtml(selectedTeam.name)}<small>${selectedTeam.wins}-${selectedTeam.losses} · ${escapeHtml(selectedTeam.conf)}</small></span>`;
+    if (contextTitle) contextTitle.innerHTML = `${teamLogo(selectedTeam, "context-team-logo")}<span><em>${escapeHtml(selectedTeam.city)}</em>${escapeHtml(selectedTeam.name)}<small><b class="context-record ${selectedTeam.wins > selectedTeam.losses ? "winning" : selectedTeam.wins < selectedTeam.losses ? "losing" : "even"}">${selectedTeam.wins}-${selectedTeam.losses}</b><i>${escapeHtml(selectedTeam.conf)} CONFERENCE</i></small></span>`;
     const sidebarItems = [
       ["dashboard", "Dashboard", "⌁"], ["play", "Schedule", "▣"], ["standings", "Standings", "♜"],
       ["inventory", "Roster", "♙"], ["rotation", "Rotation", "◎"], ["strategy", "Gameplan", "◇"],
@@ -705,7 +719,7 @@ function renderContextNav() {
       ["development", "Player Development", "◆"], ["staff", "Staff", "♟"], ["scouting", "Scouting", "⌖"], ["finances", "Finances", "$"], ["social", "Social", "◉"], ["stats", "League Stats", "↗"],
       ["awards", "Awards", "☆"], ["history", "League History", "◷"], ["settings", "Settings", "⚙"]
     ];
-    contextNav.innerHTML = sidebarItems.map(([id, label, icon]) => `${id === "social" ? '<span class="sidebar-nav-divider">League</span>' : ""}<button class="${active === id ? "active" : ""}" data-nav="${id}"><i>${icon}</i><span>${label}</span>${active === id ? '<b aria-hidden="true"></b>' : ""}</button>`).join("");
+    contextNav.innerHTML = sidebarItems.map(([id, label, icon]) => `${id === "social" ? '<span class="sidebar-nav-divider">League</span>' : ""}<button class="phase6-nav-item ${active === id ? "active" : ""}" data-nav="${id}"><i>${icon}</i><span>${label}</span>${active === id ? '<b aria-hidden="true"></b>' : ""}</button>`).join("");
   } else {
   const current = currentNavSection();
   if (sectionLabel) sectionLabel.textContent = current.label;
@@ -729,16 +743,26 @@ function renderContextNav() {
 function renderSidebarNextGame() {
   const target = document.querySelector("#sidebar-next-game");
   if (!target) return;
-  if (active === "start" || active === "team-select" || active === "saves") { target.innerHTML = ""; return; }
+  if (active === "start" || active === "team-select" || active === "saves") { target.removeAttribute("style"); target.innerHTML = ""; return; }
   const selectedTeam = activeTeam();
   const schedule = Array.isArray(save.schedule) ? save.schedule : [];
   const next = schedule.find((game) => !game.played);
-  if (!next) { target.innerHTML = '<span>SEASON</span><strong>COMPLETE</strong><small>No games remaining</small>'; return; }
+  if (!next) { target.removeAttribute("style"); target.innerHTML = '<span>SEASON</span><strong>COMPLETE</strong><small>No games remaining</small>'; return; }
   const opponentId = next.home === selectedTeam.id ? next.away : next.home;
   const opponent = getTeam(opponentId);
   const venue = next.home === selectedTeam.id ? "vs" : "@";
   const opponentLabel = opponent?.abbr || opponent?.name || "TBD";
-  target.innerHTML = `<span>NEXT GAME</span><div class="sidebar-next-game-matchup">${teamLogo(opponent, "sidebar-next-game-logo")}<div><strong>${venue} ${escapeHtml(opponentLabel)}</strong><small>${formatShortDate(next.date)} &middot; ${next.home === selectedTeam.id ? "Home" : "Away"}</small></div></div><button class="btn primary sidebar-sim-game-button" data-sim-control="next" style="border-color: rgba(79, 139, 255, .95) !important; color: #fff !important; background: linear-gradient(180deg, #0d55ef, #063fcf) !important; box-shadow: 0 10px 20px rgba(6, 76, 255, .24) !important;">&#9655; SIM GAME</button>`;
+  target.setAttribute("style", `${simcastTeamVars(selectedTeam)};--game-team:var(--side-primary);--game-team-glow:color-mix(in srgb, var(--side-primary) 28%, transparent);${simcastMatchupVars(selectedTeam, opponent)}`);
+  target.innerHTML = `<span>NEXT GAME <i>${next.home === selectedTeam.id ? "HOME" : "AWAY"}</i></span><div class="sidebar-next-game-matchup logo-only" style="${simcastMatchupVars(selectedTeam, opponent)}"><div class="sidebar-matchup-team">${teamLogo(selectedTeam, "sidebar-next-game-logo")}</div><span class="sidebar-matchup-divider" aria-hidden="true"></span><div class="sidebar-matchup-team">${teamLogo(opponent, "sidebar-next-game-logo")}</div><div class="sidebar-matchup-meta"><b>${escapeHtml(selectedTeam.abbr)}</b><time>${formatShortDate(next.date)}</time><b>${escapeHtml(opponentLabel)}</b></div></div><button class="btn sidebar-sim-game-button phase6-button phase6-button--team primary" data-sim-control="next">&#9655; SIM GAME <span>›</span></button>`;
+  const simButton = target.querySelector(".sidebar-sim-game-button");
+  const teamTheme = teamThemes[selectedTeam.id] || teamThemes.bos;
+  if (simButton) {
+    simButton.style.setProperty("border-color", teamTheme.secondary, "important");
+    simButton.style.setProperty("color", "#fff", "important");
+    simButton.style.setProperty("-webkit-text-fill-color", "#fff", "important");
+    simButton.style.setProperty("background", `linear-gradient(135deg, color-mix(in srgb, ${teamTheme.primary} 82%, #fff), ${teamTheme.primary})`, "important");
+    simButton.style.setProperty("box-shadow", `0 10px 22px color-mix(in srgb, ${teamTheme.primary} 30%, transparent), inset 0 1px rgba(255,255,255,.15)`, "important");
+  }
   target.querySelector("[data-action='go-games']")?.addEventListener("click", () => { active = "play"; render(); });
 }
 
@@ -839,7 +863,7 @@ function renderProfile() {
     const seasonStart = new Date(`${save.season}-10-20T12:00:00`);
     const current = new Date(`${leagueDate}T12:00:00`);
     const week = Math.max(1, Math.floor((current - seasonStart) / 604800000) + 1);
-    datePill.innerHTML = `<span>&#9716;</span><strong>WEEK ${week}</strong><i></i><b>${current.toLocaleDateString([], { month: "short", day: "numeric" })}</b>`;
+    datePill.innerHTML = `<span>&#9716;</span><strong>WEEK ${week}</strong><i></i><b>${current.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" })}</b>`;
   }
 }
 
@@ -1240,7 +1264,59 @@ function lockVerticalSliceControlStyles() {
   document.querySelectorAll(".simcast-coaching select, .simcast-coaching button, .simcast-controls button").forEach((control) => {
     const activeControl = control.classList.contains("active") || control.classList.contains("primary");
     setImportant(control, control.disabled ? disabledStyle : activeControl ? activeStyle : base);
+    if (!control.disabled && control.matches('[data-simcast-coach="substitute"]')) setImportant(control, {
+      "border-color": "rgba(92, 224, 155, .72)", color: "#ffffff", "background-color": "#146b45",
+      "background-image": "linear-gradient(135deg, #1b8657, #105a3a)", "box-shadow": "0 8px 18px rgba(23, 122, 75, .25)"
+    });
+    if (!control.disabled && control.matches('[data-simcast-coach="timeout"]')) setImportant(control, {
+      "border-color": "rgba(243, 179, 61, .58)", color: "#ffffff", "background-color": "#382a12",
+      "background-image": "linear-gradient(180deg, #3a2c17, #1b1b22)", "box-shadow": "0 7px 16px rgba(0, 0, 0, .24)"
+    });
+    if (!control.disabled && control.matches('[data-simcast-preset]')) setImportant(control, {
+      "border-color": "rgba(154, 124, 255, .45)", color: "#ffffff", "background-color": "#1a2238",
+      "background-image": "linear-gradient(180deg, #202b47, #151e33)", "box-shadow": "inset 0 1px rgba(255, 255, 255, .04)"
+    });
+    if (!control.disabled && control.matches('[data-simcast-action="pause"]')) setImportant(control, {
+      "border-color": "rgba(243, 179, 61, .58)", color: "#ffffff", "background-color": "#302614",
+      "background-image": "linear-gradient(180deg, #3a2d18, #1b1b22)", "box-shadow": "0 7px 16px rgba(0, 0, 0, .22)"
+    });
+    if (!control.disabled && control.matches('[data-simcast-action="next-period"]')) setImportant(control, {
+      "border-color": "rgba(79, 139, 255, .62)", color: "#ffffff", "background-color": "#17315b",
+      "background-image": "linear-gradient(180deg, #21447a, #142a4c)", "box-shadow": "0 8px 18px rgba(36, 90, 180, .2)"
+    });
+    if (!control.disabled && control.matches('[data-simcast-action="finish"]')) setImportant(control, {
+      "border-color": "rgba(255, 93, 108, .72)", color: "#ffffff", "background-color": "#7a1f3a",
+      "background-image": "linear-gradient(135deg, #9a2948, #631a34)", "box-shadow": "0 8px 18px rgba(185, 35, 76, .24)"
+    });
   });
+}
+
+function lockTradeControlStyles() {
+  if (!document.body.classList.contains("game-ui-upgrade")) return;
+  const setImportant = (element, styles) => Object.entries(styles).forEach(([property, value]) => element.style.setProperty(property, value, "important"));
+  document.querySelectorAll(".multi-trade-asset select, .multi-trade-flow-block select").forEach((select) => setImportant(select, {
+    "border-color": "rgba(93, 157, 255, .48)",
+    color: "#dce9ff",
+    "-webkit-text-fill-color": "#dce9ff",
+    "background-color": "#111d31",
+    "background-image": "linear-gradient(180deg, #1a2941, #111b2e)",
+    "background-position": "0 0",
+    "background-size": "100% 100%",
+    "background-repeat": "no-repeat",
+    "box-shadow": "inset 0 1px rgba(255,255,255,.06), 0 5px 10px rgba(0,0,0,.16)"
+  }));
+  document.querySelectorAll("#multi-trade-team-search").forEach((input) => setImportant(input, {
+    color: "#f4f7fc",
+    "-webkit-text-fill-color": "#f4f7fc",
+    "background-color": "transparent",
+    "background-image": "none",
+    "box-shadow": "none"
+  }));
+  document.querySelectorAll(".multi-trade-picker-headshot, .multi-trade-player-headshot").forEach((image) => setImportant(image, {
+    "border-color": "rgba(93, 157, 255, .52)",
+    background: "radial-gradient(circle at 50% 28%, #385276, #1c2e4c 62%, #0d1829)",
+    "box-shadow": "0 7px 14px rgba(0,0,0,.36), 0 0 0 3px rgba(93,157,255,.07), inset 0 1px rgba(255,255,255,.08)"
+  }));
 }
 
 function safeSocialMediaUrl(value) {
@@ -1296,32 +1372,32 @@ function dashboardReferencePage() {
     <section class="reference-dashboard dashboard-test-page">
       <h1 class="reference-page-title">DASHBOARD</h1>
 
-      <section class="reference-season-hero panel-card selected-card vertical-slice-hero">
-        <div class="team-hero-identity">${teamLogo(selectedTeam, "page-hero-logo reference-hero-logo")}<div><span>${save.season}-${String(save.season + 1).slice(-2)} REGULAR SEASON &middot; ${escapeHtml(save.phase)}</span><h2>${escapeHtml(selectedTeam.city)} ${escapeHtml(selectedTeam.name)}</h2><p><strong>${selectedTeam.wins}-${selectedTeam.losses}</strong> ${escapeHtml(selectedTeam.conf)} Conference <b>${selectedTeam.wins >= selectedTeam.losses ? "PLAYOFF HUNT" : "BUILDING"}</b></p></div></div>${teamLogo(selectedTeam, "reference-hero-watermark")}
+      <section class="reference-season-hero panel-card selected-card vertical-slice-hero phase6-card phase6-card--hero">
+        <div class="team-hero-identity"><div><span>${save.season}-${String(save.season + 1).slice(-2)} REGULAR SEASON &middot; ${escapeHtml(save.phase)}</span><h2>${escapeHtml(selectedTeam.city)} ${escapeHtml(selectedTeam.name)}${teamLogo(selectedTeam, "reference-title-logo")}</h2><p><strong class="team-record-${selectedTeam.wins > selectedTeam.losses ? "winning" : selectedTeam.wins < selectedTeam.losses ? "losing" : "even"}">${selectedTeam.wins}-${selectedTeam.losses}</strong> ${escapeHtml(selectedTeam.conf)} Conference <b>${selectedTeam.wins >= selectedTeam.losses ? "PLAYOFF HUNT" : "BUILDING"}</b></p></div></div>${teamLogo(selectedTeam, "reference-hero-watermark")}
         ${nextGame && nextOpponent ? `<div class="dashboard-next-matchup"><span>NEXT MATCHUP · ${formatShortDate(nextGame.date)}</span><div>${teamLogo(selectedTeam, "dashboard-matchup-logo")}<b>${escapeHtml(selectedTeam.abbr)}</b><i>${nextGame.home === selectedTeam.id ? "VS" : "AT"}</i><b>${escapeHtml(nextOpponent.abbr)}</b>${teamLogo(nextOpponent, "dashboard-matchup-logo")}</div><small>${nextGame.home === selectedTeam.id ? "HOME" : "AWAY"} · ${escapeHtml(nextOpponent.city)} ${escapeHtml(nextOpponent.name)}</small></div>` : '<div class="dashboard-next-matchup"><span>SEASON STATUS</span><b>COMPLETE</b></div>'}
-        <div><button class="btn reference-primary" data-action="go-games">▷ SIM NEXT</button><button class="btn reference-week-button" data-sim-control="week">▷ SIM WEEK</button></div>
+        <div><button class="btn reference-primary phase6-button primary" data-action="go-games"><i>▶</i><span>SIM NEXT<small>1 GAME</small></span><b>›</b></button><button class="btn reference-week-button phase6-button" data-sim-control="week"><i>»</i><span>SIM WEEK<small>7 DAYS</small></span><b>›</b></button></div>
       </section>
 
       <section class="reference-stat-grid">
-        <article class="metric-card metric-card--blue featured dashboard-metric dashboard-metric--offense"><span class="metric-label">OFFENSIVE RTG</span><strong class="metric-value">${offensiveRating}</strong><small class="metric-subtitle">${Number(offensiveRating) >= 110 ? "EST. TOP-12 NBA" : "DEVELOPING"}</small><em class="metric-trend ${offenseTrend >= 0 ? "positive" : "negative"}">${offenseTrend >= 0 ? "+" : ""}${offenseTrend.toFixed(1)} over last five</em></article>
-        <article class="metric-card metric-card--blue dashboard-metric dashboard-metric--defense"><span class="metric-label">DEFENSIVE RTG</span><strong class="metric-value">${defensiveRating}</strong><small class="metric-subtitle">${Number(defensiveRating) <= 110 ? "TOP LEAGUE DEFENSE" : "ROOM TO IMPROVE"}</small><em class="metric-trend ${Number(defensiveRating) <= 110 ? "positive" : "warning"}">${Number(defensiveRating) <= 110 ? "Holding below target" : "Above 110 target"}</em></article>
-        <article class="metric-card metric-card--blue dashboard-metric dashboard-metric--net"><span class="metric-label">NET RATING</span><strong class="metric-value">${Number(netRating) >= 0 ? "+" : ""}${netRating}</strong><small class="metric-subtitle">${selectedTeam.conf} CONFERENCE</small><em class="metric-trend ${Number(netRating) >= 0 ? "positive" : "negative"}">${Number(netRating) >= 0 ? "Winning profile" : "Negative margin"}</em></article>
-        <article class="dashboard-metric dashboard-metric--cap"><span>CAP USED</span><strong>$${selectedTeam.payroll}M</strong><small>${escapeHtml(payrollStatus(selectedTeam))} · ${rosterRules.standard}/15</small><em class="metric-trend ${Number(selectedTeam.payroll) <= 175 ? "positive" : "negative"}">${Number(selectedTeam.payroll) <= 175 ? "Flexible position" : "Tax pressure"}</em></article>
+        <article class="metric-card metric-card--blue featured dashboard-metric dashboard-metric--offense phase6-card"><span class="metric-label">OFFENSIVE RTG</span><strong class="metric-value">${offensiveRating}</strong><small class="metric-subtitle">${Number(offensiveRating) >= 110 ? "EST. TOP-12 NBA" : "DEVELOPING"}</small><em class="metric-trend ${offenseTrend >= 0 ? "positive" : "negative"}">${offenseTrend >= 0 ? "+" : ""}${offenseTrend.toFixed(1)} over last five</em></article>
+        <article class="metric-card metric-card--blue dashboard-metric dashboard-metric--defense phase6-card"><span class="metric-label">DEFENSIVE RTG</span><strong class="metric-value">${defensiveRating}</strong><small class="metric-subtitle">${Number(defensiveRating) <= 110 ? "TOP LEAGUE DEFENSE" : "ROOM TO IMPROVE"}</small><em class="metric-trend ${Number(defensiveRating) <= 110 ? "positive" : "warning"}">${Number(defensiveRating) <= 110 ? "Holding below target" : "Above 110 target"}</em></article>
+        <article class="metric-card metric-card--blue dashboard-metric dashboard-metric--net phase6-card"><span class="metric-label">NET RATING</span><strong class="metric-value">${Number(netRating) >= 0 ? "+" : ""}${netRating}</strong><small class="metric-subtitle">${selectedTeam.conf} CONFERENCE</small><em class="metric-trend ${Number(netRating) >= 0 ? "positive" : "negative"}">${Number(netRating) >= 0 ? "Winning profile" : "Negative margin"}</em></article>
+        <article class="dashboard-metric dashboard-metric--cap phase6-card"><span>CAP USED</span><strong>$${selectedTeam.payroll}M</strong><small>${escapeHtml(payrollStatus(selectedTeam))} · ${rosterRules.standard}/15</small><em class="metric-trend ${Number(selectedTeam.payroll) <= 175 ? "positive" : "negative"}">${Number(selectedTeam.payroll) <= 175 ? "Flexible position" : "Tax pressure"}</em></article>
       </section>
 
       <section class="reference-analytics-grid">
-        <article class="reference-chart-panel panel-card">
+        <article class="reference-chart-panel panel-card phase6-card phase6-card--accent">
           <header><div><strong>LAST 8 GAMES</strong><small>${recentGames.length ? `${recentWins}-${recentGames.length - recentWins} RECENT FORM` : "SEASON START"}</small></div><span>AVG <b>${averagePoints || "--"}</b> PTS</span></header>
           <div class="reference-chart-scale"><span>135</span><span>118</span><span>101</span><span>84</span></div>
-          <div class="reference-bars">${Array.from({ length: 8 }, (_, index) => { const game = recentGames[index]; const points = teamPoints[index] || 0; const height = points ? Math.max(18, Math.min(96, (points / 140) * 100)) : 5; const won = game ? teamWonResult(selectedTeam.id, game) : false; return `<div class="${game ? won ? "win" : "loss" : "future"}"><i style="height:${height}%" class="${points ? "" : "empty"}"></i><span>${game ? won ? "W" : "L" : `G${index + 1}`}</span><b>${points || "—"}</b><small>${game ? escapeHtml(getTeam(game.home === selectedTeam.id ? game.away : game.home)?.abbr || "") : ""}</small></div>`; }).join("")}</div>
+          <div class="reference-bars">${Array.from({ length: 8 }, (_, index) => { const game = recentGames[index]; const points = teamPoints[index] || 0; const height = points ? Math.max(18, Math.min(96, (points / 140) * 100)) : 5; const won = game ? teamWonResult(selectedTeam.id, game) : false; const opponent = game ? getTeam(game.home === selectedTeam.id ? game.away : game.home) : null; return `<div class="${game ? won ? "win" : "loss" : "future"}"><i style="height:${height}%" class="${points ? "" : "empty"}"></i><span>${game ? won ? "W" : "L" : `G${index + 1}`}</span><b>${points || "—"}</b><small>${opponent ? teamLogo(opponent, "recent-opponent-logo") : ""}</small></div>`; }).join("")}</div>
         </article>
-        <article class="reference-leaders-panel panel-card data-table">
+        <article class="reference-leaders-panel panel-card data-table phase6-card phase6-card--accent">
           <header>TEAM LEADERS</header>
           ${[["PTS", scoringLeader, "points"], ["REB", reboundLeader, "rebounds"], ["AST", assistLeader, "assists"]].map(([label, item, field], index) => `<button class="dashboard-leader-row leader-${field}" data-view-player="${item.player.id}"><i>0${index + 1}</i>${playerHeadshot(item.player, "dashboard-leader-headshot")}<span>${label}<strong>${escapeHtml(item.player.name)}</strong><small>${escapeHtml(item.player.pos)} · ${item.player.ovr} OVR · VIEW PROFILE</small></span><b>${statPerGame(item.stats[field], item.stats.games)}<small>PER GAME</small></b></button>`).join("")}
         </article>
       </section>
 
-      <section class="reference-upcoming panel-card">
+      <section class="reference-upcoming panel-card phase6-card phase6-card--accent">
         <header>UPCOMING</header>
         <div>${upcomingItems.map(renderDashboardUpcomingCard).join("") || '<p>No upcoming games or league events remain.</p>'}</div>
       </section>
@@ -1389,10 +1465,7 @@ function renderDashboardUpcomingCard(item) {
     const home = item.venue === "vs";
     const teamAbbr = escapeHtml(item.team?.abbr || "USER");
     const opponentAbbr = escapeHtml(item.opponent?.abbr || "TBD");
-    const opponentPlace = escapeHtml(
-      item.opponent?.city || item.opponent?.name || opponentAbbr
-    );
-
+    const opponentPlace = escapeHtml(item.opponent?.city || item.opponent?.name || opponentAbbr);
     return `<button class="upcoming-card upcoming-game-card" data-action="${item.action}"><span class="upcoming-card-topline">${formatShortDate(item.date)}<b>${home ? "HOME" : "AWAY"}</b></span><span class="upcoming-matchup"><span><b>${teamAbbr}</b>${teamLogo(item.team, "upcoming-team-logo")}<small>${item.team?.wins || 0}-${item.team?.losses || 0}</small></span><i>${home ? "VS" : "AT"}</i><span><b>${opponentAbbr}</b>${teamLogo(item.opponent, "upcoming-team-logo")}<small>${item.opponent?.wins || 0}-${item.opponent?.losses || 0}</small></span></span><strong class="upcoming-matchup-label">${teamAbbr} ${home ? "vs" : "at"} ${opponentAbbr}</strong><small class="upcoming-card-detail">${home ? "Home" : "Away"} &middot; ${opponentPlace}</small><em>OPEN MATCHUP &rarr;</em></button>`;
   }
 
@@ -1403,7 +1476,7 @@ function renderDashboardUpcomingCard(item) {
         ? "NBA · DEADLINE"
         : "NBA · LEAGUE";
 
- return `<button class="upcoming-card upcoming-event-card upcoming-event-${escapeHtml(item.eventType)}" data-action="${item.action}"><span class="upcoming-card-topline">${formatShortDate(item.date)}<b>${escapeHtml(badge)}</b></span><span class="upcoming-event-summary"><span class="upcoming-event-copy"><strong>${escapeHtml(item.label)}</strong><small class="upcoming-card-detail">${escapeHtml(item.detail)}</small></span></span>${item.eventType === "deadline" ? "<em>REVIEW DEADLINE &rarr;</em>" : item.eventType === "all-star" ? "<em>VIEW EVENT &rarr;</em>" : ""}</button>`;
+ return `<button class="upcoming-card upcoming-event-card upcoming-event-${escapeHtml(item.eventType)}${/extension/i.test(item.label) ? " upcoming-extension-card" : ""}" data-action="${item.action}"><span class="upcoming-card-topline">${formatShortDate(item.date)}<b>${escapeHtml(badge)}</b></span><span class="upcoming-event-summary"><span class="upcoming-event-copy"><strong>${escapeHtml(item.label)}</strong><small class="upcoming-card-detail">${escapeHtml(item.detail)}</small></span></span>${item.eventType === "deadline" ? "<em>REVIEW DEADLINE &rarr;</em>" : item.eventType === "all-star" ? "<em>VIEW EVENT &rarr;</em>" : ""}</button>`;
 }
 
 function staffMarketPanel() {
@@ -1756,15 +1829,15 @@ function tradeMachine() {
   const tradePanelCount = Math.max(2, teams.length + (showAddTeamSlot ? 1 : 0));
   return `
     <h1 class="page-title trade-page-title">trade machine</h1>
-    <section class="card multi-trade-steps">
-      <div class="active"><b>1</b><span><strong>BUILD TRADE</strong><small>Add teams, players, and picks</small></span></div>
-      <div><b>2</b><span><strong>PREVIEW</strong><small>Review every team's return</small></span></div>
-      <div><b>3</b><span><strong>SUBMIT</strong><small>Finalize the transaction</small></span></div>
-      <button class="btn" data-action="trade-reset">Reset Trade</button>
+    <section class="card phase6-card multi-trade-steps" aria-label="Trade progress">
+      <div class="active" aria-current="step"><b><span>1</span></b><span><em>STEP 01</em><strong>BUILD TRADE</strong><small>Add teams, players, and picks</small></span></div>
+      <div><b><span>2</span></b><span><em>STEP 02</em><strong>PREVIEW</strong><small>Review every team's return</small></span></div>
+      <div><b><span>3</span></b><span><em>STEP 03</em><strong>SUBMIT</strong><small>Finalize the transaction</small></span></div>
+      <button class="btn trade-reset-button" data-action="trade-reset" type="button" style="border:1px solid #df5968 !important;color:#ffe6e9 !important;background:linear-gradient(180deg,#a83a4b 0%,#5d202d 100%) !important;background-image:linear-gradient(180deg,#a83a4b 0%,#5d202d 100%) !important;box-shadow:0 8px 17px rgba(157,42,60,.24),inset 0 1px rgba(255,255,255,.14) !important;opacity:1 !important;-webkit-appearance:none !important;appearance:none !important">Reset Trade</button>
     </section>
     <section class="card multi-trade-team-picker">
       <div><span>TEAMS IN TRADE</span><strong>${teams.length} TEAMS SELECTED</strong></div>
-      <div class="multi-trade-team-chips">${teams.map((team) => `<span>${teamLogo(team, "multi-trade-chip-logo")}<b>${escapeHtml(team.abbr)}</b>${team.id === userTeam.id ? '<small>YOU</small>' : `<button data-remove-trade-team="${team.id}" title="Remove team">&times;</button>`}</span>`).join("")}</div>
+      <div class="multi-trade-team-chips">${teams.map((team) => `<span>${teamLogo(team, "multi-trade-chip-logo")}<b>${escapeHtml(team.abbr)}</b>${team.id === userTeam.id ? '<small>YOU</small>' : `<button class="multi-trade-remove-team" data-remove-trade-team="${team.id}" type="button" aria-label="Remove ${escapeHtml(team.city)} ${escapeHtml(team.name)} from trade" title="Remove team" style="display:inline-flex !important;align-items:center !important;justify-content:center !important;width:28px !important;min-width:28px !important;height:28px !important;min-height:28px !important;margin-left:5px !important;padding:0 0 2px !important;border:1px solid #d95868 !important;border-radius:7px !important;color:#ffe4e7 !important;background:linear-gradient(180deg,#8f3041 0%,#4e1c28 100%) !important;background-image:linear-gradient(180deg,#8f3041 0%,#4e1c28 100%) !important;box-shadow:inset 0 1px rgba(255,255,255,.10),0 5px 10px rgba(0,0,0,.22) !important;font:700 16px/1 Arial,sans-serif !important;opacity:1 !important;-webkit-appearance:none !important;appearance:none !important">&times;</button>`}</span>`).join("")}</div>
       ${showTopAddTeam ? `<button class="multi-trade-top-add-team" data-action="trade-open-team-picker" aria-label="Add another trade team">+</button>` : ""}
     </section>
     <section class="multi-trade-team-grid" style="--trade-team-count:${tradePanelCount}">
@@ -1772,13 +1845,13 @@ function tradeMachine() {
       ${showAddTeamSlot ? multiTradeAddTeamSlot(availableTeams) : ""}
     </section>
     ${multiTradeTeamPickerOpen ? multiTradeTeamPickerCard(availableTeams) : ""}
-    <section class="card multi-trade-analysis ${decision.valid ? "valid" : "invalid"}">
-      <header><div><div class="card-label">trade analysis</div><strong>${decision.valid ? "This trade is successful" : "Trade needs changes"}</strong><small>${decision.valid ? "All teams satisfy current NBA roster, salary, and draft-pick rules." : `${failed.length} rule${failed.length === 1 ? "" : "s"} must be fixed before submission.`}</small></div><span>${decision.reasons.filter((reason) => reason.ok).length}/${decision.reasons.length} RULES PASSED</span></header>
+    <section class="card phase6-card phase6-card--accent multi-trade-analysis ${decision.valid ? "valid" : "invalid"}" aria-labelledby="trade-analysis-title">
+      <header><div class="trade-analysis-heading"><span class="trade-analysis-state" aria-hidden="true">${decision.valid ? "&#10003;" : "!"}</span><div><div class="card-label">trade analysis</div><strong id="trade-analysis-title">${decision.valid ? "Trade approved" : "Trade needs changes"}</strong><small>${decision.valid ? "Every team satisfies current roster, salary, and draft-pick rules." : `Resolve ${failed.length} blocking rule${failed.length === 1 ? "" : "s"} before this trade can be submitted.`}</small></div></div><div class="trade-analysis-progress"><span><b>${decision.reasons.filter((reason) => reason.ok).length}</b> of ${decision.reasons.length} rules passed</span><i aria-hidden="true"><b style="width:${decision.reasons.length ? decision.reasons.filter((reason) => reason.ok).length / decision.reasons.length * 100 : 0}%"></b></i></div></header>
       <div class="multi-trade-impact-grid">${teams.map((team) => multiTradeImpactCard(team, transaction)).join("")}</div>
       <div class="multi-trade-receiving-grid">${teams.map((team) => multiTradeReceivingCard(team, transaction)).join("")}</div>
-      <div class="trade-rule-list">${(failed.length ? failed : decision.reasons.slice(0, 4)).map((reason) => `<div class="trade-rule ${reason.ok ? "ok" : "bad"}"><span>${reason.ok ? "PASS" : "FIX"}</span>${escapeHtml(reason.message)}</div>`).join("")}</div>
+      <section class="trade-rule-section" aria-label="${failed.length ? "Required fixes" : "Passed rules"}"><header><div><span>${failed.length ? "REQUIRED FIXES" : "VALIDATION COMPLETE"}</span><small>${failed.length ? "Address each item below to unlock submission." : "This trade is ready to submit."}</small></div><b>${decision.valid ? `${decision.reasons.length}/${decision.reasons.length}` : failed.length}</b></header><div class="trade-rule-list phase6-scroll">${(failed.length ? failed : decision.reasons.slice(0, 4)).map((reason, index) => `<div class="trade-rule ${reason.ok ? "ok" : "bad"}"><span>${reason.ok ? "PASS" : String(index + 1).padStart(2, "0")}</span><div><strong>${reason.ok ? "Rule passed" : "Action required"}</strong><small>${escapeHtml(reason.message)}</small></div></div>`).join("")}</div></section>
       ${decision.requiresConsent ? `<label class="trade-consent"><input type="checkbox" id="trade-consent" ${tradeConsent ? "checked" : ""}> Player consent obtained for every no-trade clause</label>` : ""}
-      <footer><button class="btn" data-action="trade-back">Back</button><button class="btn primary" data-action="trade-submit" ${decision.valid ? "" : "disabled"}>Submit Trade</button></footer>
+      <footer><div class="trade-submit-status ${decision.valid ? "ready" : "blocked"}"><span aria-hidden="true">${decision.valid ? "&#10003;" : "!"}</span><div><strong>${decision.valid ? "Ready to submit" : `${failed.length} blocking item${failed.length === 1 ? "" : "s"} remaining`}</strong><small>${decision.valid ? "Send this transaction to the league office." : "Return to the trade builder and resolve every required fix."}</small></div></div><div class="trade-analysis-actions"><button class="btn phase6-button" data-action="trade-back">Back to trade</button><button class="btn primary phase6-button phase6-button--team trade-submit-button ${decision.valid ? "is-ready" : "is-locked"}" data-action="trade-submit" aria-disabled="${decision.valid ? "false" : "true"}" style="border:1px solid ${decision.valid ? "#68e9a7" : "#e45c69"} !important;color:${decision.valid ? "#ffffff" : "#ffe5e8"} !important;background:${decision.valid ? "linear-gradient(180deg,#38d783 0%,#14834e 100%)" : "linear-gradient(180deg,#c94a58 0%,#7d202d 100%)"} !important;box-shadow:${decision.valid ? "0 9px 20px rgba(29,190,105,.30),inset 0 1px rgba(255,255,255,.26)" : "0 8px 18px rgba(181,49,64,.25),inset 0 1px rgba(255,255,255,.16)"} !important;opacity:1 !important" ${decision.valid ? "" : "disabled"}>${decision.valid ? "Submit trade" : "Submission locked"}</button></div></footer>
     </section>
   `;
 }
@@ -1821,15 +1894,19 @@ function multiTradeTeamPanel(team, transaction) {
 function multiTradeAddTeamSlot(availableTeams) {
   return `<section class="card multi-trade-team-panel multi-trade-add-team-empty">
     <header><button class="multi-trade-team-logo multi-trade-add-team-mark" data-action="trade-open-team-picker" ${availableTeams.length ? "" : "disabled"} aria-label="Add trade team">+</button><div><strong>Add Team</strong><span>Select a trade partner</span></div><aside><small>CAP ROOM</small><b>-</b></aside></header>
+    <div class="multi-trade-empty-body"><span>TRADE PARTNER SLOT</span><strong>Choose another team</strong><small>Add a partner to compare salaries, route assets, and validate the deal.</small><button data-action="trade-open-team-picker" ${availableTeams.length ? "" : "disabled"}>Select Team</button></div>
   </section>`;
 }
 
 function multiTradeTeamPickerCard(availableTeams) {
+  const taxLine = cbaThresholds(save.season).tax;
   return `<section class="multi-trade-team-popover" role="dialog" aria-label="Select trade partner">
     <button class="multi-trade-team-popover-backdrop" data-action="trade-close-team-picker" aria-label="Close team picker"></button>
-    <article class="card multi-trade-team-select-card">
-      <header><div><span>ADD TRADE PARTNER</span><strong>Select Team</strong></div><button data-action="trade-close-team-picker" aria-label="Close team picker">&times;</button></header>
-      <div>${availableTeams.map((team) => `<button data-trade-select-team="${team.id}">${teamLogo(team, "multi-trade-select-logo")}<span><strong>${escapeHtml(team.city)} ${escapeHtml(team.name)}</strong><small>${escapeHtml(team.conf)} Conference &middot; $${team.payroll}M payroll</small></span><b>${escapeHtml(team.abbr)}</b></button>`).join("") || '<small class="multi-trade-empty">No more teams can be added.</small>'}</div>
+    <article class="card phase6-card phase6-card--accent multi-trade-team-select-card">
+      <header><div class="multi-trade-picker-title"><i aria-hidden="true"><img src="${localAssetUrl("nba-logo-white.png")}" alt=""></i><div><span>ADD TRADE PARTNER</span><strong>Select a team</strong><small>Compare payroll position and choose the next side in this deal.</small></div></div><aside><span>TRADE SLOT</span><b>${multiTradeTeamIds.length + 1}<small>/ 4</small></b></aside><button class="multi-trade-close-picker" data-action="trade-close-team-picker" type="button" aria-label="Close team picker" style="display:inline-flex !important;align-items:center !important;justify-content:center !important;width:34px !important;min-width:34px !important;height:34px !important;min-height:34px !important;padding:0 0 2px !important;border:1px solid #d95868 !important;border-radius:8px !important;color:#ffe4e7 !important;background:linear-gradient(180deg,#8f3041 0%,#4e1c28 100%) !important;background-image:linear-gradient(180deg,#8f3041 0%,#4e1c28 100%) !important;box-shadow:inset 0 1px rgba(255,255,255,.10),0 6px 12px rgba(0,0,0,.22) !important;font:700 18px/1 Arial,sans-serif !important;opacity:1 !important;-webkit-appearance:none !important;appearance:none !important">&times;</button></header>
+      <div class="multi-trade-picker-tools"><label><span aria-hidden="true">&#9906;</span><input id="multi-trade-team-search" type="search" placeholder="Search team, city, or abbreviation" autocomplete="off" aria-label="Search available teams"></label><div class="multi-trade-conference-filters" aria-label="Filter by conference"><button class="active" data-trade-team-filter="all">All</button><button data-trade-team-filter="East">East</button><button data-trade-team-filter="West">West</button></div><span><b id="multi-trade-team-result-count">${availableTeams.length}</b><small>teams available</small></span></div>
+      <div class="multi-trade-team-options phase6-scroll" data-active-conference="all">${availableTeams.map((team) => { const theme = teamThemes[team.id] || teamThemes.bos; const taxStatus = Number(team.payroll) > taxLine ? "Tax team" : "Below tax"; return `<button data-trade-select-team="${team.id}" data-team-conference="${escapeHtml(team.conf)}" data-team-search="${escapeHtml(`${team.city} ${team.name} ${team.abbr} ${team.conf}`.toLowerCase())}" style="--picker-team:${theme.primary};--picker-team-secondary:${theme.secondary}">${teamLogo(team, "multi-trade-select-logo")}<span><em>${escapeHtml(team.conf)} CONFERENCE</em><strong>${escapeHtml(team.city)} ${escapeHtml(team.name)}</strong><small><b>${team.wins}-${team.losses}</b><i></i>$${Number(team.payroll).toFixed(1)}M payroll</small></span><aside><b>${escapeHtml(team.abbr)}</b><small class="${Number(team.payroll) > taxLine ? "tax" : "flexible"}">${taxStatus}</small><i aria-hidden="true">&#8594;</i></aside></button>`; }).join("") || '<small class="multi-trade-empty">No more teams can be added.</small>'}</div>
+      <div class="multi-trade-picker-empty" hidden><strong>No matching teams</strong><small>Try another city, team name, or abbreviation.</small></div>
     </article>
   </section>`;
 }
@@ -1838,25 +1915,25 @@ function multiTradeAssetSummary(route, outgoing, otherTeams = []) {
   const player = route.asset.name ? route.asset : null;
   const label = player ? player.name : formatDraftPick(route.asset);
   const source = getTeam(route.sourceTeamId);
-  return `<article class="multi-trade-asset">${player ? playerHeadshot(player, "multi-trade-player-headshot") : '<span class="multi-trade-pick-mark">PICK</span>'}<div><strong>${escapeHtml(label)}</strong><small>${player ? `${escapeHtml(player.pos)} &middot; ${player.ovr} OVR &middot; $${contractSalary(player).toFixed(1)}M` : escapeHtml(teamName(route.sourceTeamId))}</small></div>${outgoing ? `<select data-multi-trade-route="${route.asset.id}">${otherTeams.map((team) => `<option value="${team.id}" ${route.destinationTeamId === team.id ? "selected" : ""}>to ${escapeHtml(team.abbr)}</option>`).join("")}</select><button data-remove-trade-asset="${route.asset.id}">&times;</button>` : `<b>FROM ${escapeHtml(source?.abbr || "-")}</b>`}</article>`;
+  return `<article class="multi-trade-asset">${player ? playerHeadshot(player, "multi-trade-player-headshot") : '<span class="multi-trade-pick-mark">PICK</span>'}<div><strong>${escapeHtml(label)}</strong><small>${player ? `${escapeHtml(player.pos)} &middot; ${player.ovr} OVR &middot; $${contractSalary(player).toFixed(1)}M` : escapeHtml(teamName(route.sourceTeamId))}</small></div>${outgoing ? `<select data-multi-trade-route="${route.asset.id}">${otherTeams.map((team) => `<option value="${team.id}" ${route.destinationTeamId === team.id ? "selected" : ""}>to ${escapeHtml(team.abbr)}</option>`).join("")}</select><button class="multi-trade-remove-asset" data-remove-trade-asset="${route.asset.id}" type="button" aria-label="Remove ${escapeHtml(label)} from trade">&times;</button>` : `<b>FROM ${escapeHtml(source?.abbr || "-")}</b>`}</article>`;
 }
 
 function multiTradePlayerPickerRow(player) {
   const selected = multiTradePlayerIds.some((id) => String(id) === String(player.id));
   const eligible = isPlayerTradeEligible(player);
-  return `<button class="${selected ? "selected" : ""}" data-multi-trade-player="${player.id}" ${eligible.ok ? "" : "disabled"}>${playerHeadshot(player, "multi-trade-picker-headshot")}<span><strong>${escapeHtml(player.name)}</strong><small>${escapeHtml(player.pos)} &middot; ${player.ovr} OVR${eligible.ok ? "" : ` &middot; ${escapeHtml(eligible.message)}`}</small></span><b>$${contractSalary(player).toFixed(1)}M</b></button>`;
+  return `<button class="multi-trade-player-option ${selected ? "selected" : ""}" data-multi-trade-player="${player.id}" ${eligible.ok ? "" : "disabled"}>${playerHeadshot(player, "multi-trade-picker-headshot")}<span class="multi-trade-picker-copy"><strong>${escapeHtml(player.name)}</strong><small>${escapeHtml(player.pos)}${eligible.ok ? "" : ` &middot; ${escapeHtml(eligible.message)}`}</small></span><span class="multi-trade-picker-meta"><em>${player.ovr} OVR</em><b>$${contractSalary(player).toFixed(1)}M</b></span></button>`;
 }
 
 function multiTradePickPickerRow(pick) {
   const selected = multiTradePickIds.some((id) => String(id) === String(pick.id));
-  return `<button class="${selected ? "selected" : ""}" data-multi-trade-pick="${pick.id}"><span class="multi-trade-pick-mark">R${pick.round}</span><span><strong>${pick.season} Round ${pick.round}</strong><small>${pick.originalTeamId === pick.ownerTeamId ? "Own pick" : `via ${escapeHtml(teamName(pick.originalTeamId))}`}</small></span></button>`;
+  return `<button class="multi-trade-pick-option ${selected ? "selected" : ""}" data-multi-trade-pick="${pick.id}"><span class="multi-trade-pick-mark"><small>${pick.season}</small><b>R${pick.round}</b></span><span class="multi-trade-pick-copy"><em>DRAFT CAPITAL</em><strong>${pick.season} Round ${pick.round}</strong><small>${pick.originalTeamId === pick.ownerTeamId ? "Own selection" : `via ${escapeHtml(teamName(pick.originalTeamId))}`}</small></span><span class="multi-trade-pick-action" aria-hidden="true">${selected ? "&#10003;" : "+"}</span></button>`;
 }
 
 function multiTradeImpactCard(team, transaction) {
   const sent = transaction.playerRoutes.filter((route) => route.sourceTeamId === team.id).reduce((sum, route) => sum + tradeAssetValue(team.id, route.asset), 0);
   const received = transaction.playerRoutes.filter((route) => route.destinationTeamId === team.id).reduce((sum, route) => sum + tradeAssetValue(team.id, route.asset), 0);
   const pickDelta = transaction.pickRoutes.filter((route) => route.destinationTeamId === team.id).length - transaction.pickRoutes.filter((route) => route.sourceTeamId === team.id).length;
-  return `<article>${teamLogo(team, "multi-trade-impact-logo")}<div><span>${escapeHtml(team.abbr)} IMPACT</span><strong class="${received - sent >= 0 ? "ok" : "bad"}">${received - sent >= 0 ? "+" : ""}${Math.round((received - sent) / 10)} VALUE</strong><small>${pickDelta >= 0 ? "+" : ""}${pickDelta} draft picks</small></div></article>`;
+  return `<article class="${received - sent >= 0 ? "positive" : "negative"}">${teamLogo(team, "multi-trade-impact-logo")}<div><span>${escapeHtml(team.abbr)} IMPACT</span><strong class="${received - sent >= 0 ? "ok" : "bad"}">${received - sent >= 0 ? "+" : ""}${Math.round((received - sent) / 10)} VALUE</strong><small>${pickDelta >= 0 ? "+" : ""}${pickDelta} draft picks</small></div></article>`;
 }
 
 function multiTradeReceivingCard(team, transaction) {
@@ -1949,11 +2026,7 @@ function strategyPage() {
   const fit = gamePlanFit(save.activeTeamId, plan);
   const threats = opponentId ? teamPlayers(opponentId).sort((a, b) => b.ovr - a.ovr).slice(0, 4) : [];
   const defenders = teamPlayers(save.activeTeamId).filter((player) => isPlayerGameEligible(player).ok).sort((a, b) => b.def - a.def).slice(0, 5);
-  return `<section class="gameplan-page">
-    <header class="gameplan-header">
-      <div><h1 class="page-title">Gameplan</h1><p>Build a simple strategy for the next game.</p></div>
-      <div class="gameplan-actions"><button>${next ? `${formatShortDate(next.date)} - Week ${Math.max(1, Math.ceil((new Date(next.date) - new Date(save.season, 9, 1)) / 604800000))}` : "No Game Scheduled"}</button><button class="primary" data-action="auto-game-plan">Use Coach Plan</button><button class="icon-button">S</button></div>
-    </header>
+  return `<section class="gameplan-page phase6-screen phase6-gameplan-screen">
     <section class="gameplan-summary-grid">
       <article class="gameplan-matchup-card">
         <span>Next Opponent</span>
@@ -2005,7 +2078,7 @@ function strategyPage() {
         <section class="gameplan-card opponent-threats"><header><h2>Opponent Threats</h2></header>${threats.map((player, index) => `<article>${playerHeadshot(player, "gameplan-threat-shot")}<div><b>${escapeHtml(player.name)}</b><span>${escapeHtml(player.pos)} - ${player.ovr} OVR</span></div><em>${["Primary Creator", "3PT Threat", "Paint Finisher", "Hot Streak"][index] || "Threat"}</em></article>`).join("") || '<div class="muted-line">Opponent threats will appear before the next game.</div>'}</section>
       </aside>
     </section>
-    <footer class="gameplan-footer"><button>Reset Plan</button><button data-action="save-plan-preset">Save Preset</button><div><b>${fit}</b><span>${fit >= 75 ? "Good Fit" : "Needs Tuning"}</span><small>Plan matches our strengths.</small></div><button class="primary" data-action="save-game-plan">Sim Game With Gameplan</button></footer>
+    <footer class="gameplan-footer"><button>Reset Plan</button><button data-action="save-plan-preset">Save Preset</button><button class="primary gameplan-coach-plan" data-action="auto-game-plan">Use Coach Plan</button><button class="icon-button gameplan-save-shortcut">S</button><div><b>${fit}</b><span>${fit >= 75 ? "Good Fit" : "Needs Tuning"}</span><small>Plan matches our strengths.</small></div><button class="primary" data-action="save-game-plan">Sim Game With Gameplan</button></footer>
   </section>`;
 }
 
@@ -2054,8 +2127,10 @@ function gameplanAction(title, detail, primary, secondary) {
 
 function rotationPage() {
   return `
+    <section class="phase6-screen phase6-rotation-screen">
     <h1 class="page-title rotation-page-title">rotation</h1>
     ${rotationManagementPanel()}
+    </section>
   `;
 }
 
@@ -2726,9 +2801,9 @@ function standingsPage() {
     <section class="standings-tabs" aria-label="Standings views">
       ${tabButton("standings", "Standings")}${tabButton("wildcard", "Wild Card")}${tabButton("power", "Power Rankings")}${tabButton("streaks", "Streaks")}${tabButton("cup", "NBA Cup")}
     </section>
-    <section class="standings-toolbar">
-      ${standingsView === "standings" ? `<div class="standings-view-toggle">${scopeButton("league", "League")}${scopeButton("conference", "Conference")}${scopeButton("division", "Division")}</div>` : "<div></div>"}
-    </section>
+    ${standingsView === "standings" ? `<section class="standings-toolbar">
+      <div class="standings-view-toggle">${scopeButton("league", "League")}${scopeButton("conference", "Conference")}${scopeButton("division", "Division")}</div>
+    </section>` : ""}
     ${standingsContent()}
   `;
 }
@@ -2829,9 +2904,10 @@ function standingsTable(title, rows, conference, compact = false) {
 function standingsRow(entry, compact = false) {
   const zone = entry.seed <= 6 ? "playoff-seed" : entry.seed <= 10 ? "playin-seed" : "";
   const activeClass = entry.team.id === save.activeTeamId ? " active-standing" : "";
-  return `<tr class="${zone}${activeClass}">
+  const theme = teamThemes[entry.team.id] || teamThemes.bos;
+  return `<tr class="${zone}${activeClass}" style="--standing-primary:${theme.primary};--standing-secondary:${theme.secondary}">
     <td>${entry.seed}</td>
-    <td><div class="standings-team-cell">${teamLogo(entry.team, "standings-team-logo")}<span><strong>${escapeHtml(entry.team.city)} ${escapeHtml(entry.team.name)}</strong></span></div></td>
+    <td><div class="standings-team-cell" title="${escapeHtml(entry.team.city)} ${escapeHtml(entry.team.name)}">${teamLogo(entry.team, "standings-team-logo")}<span><strong>${escapeHtml(entry.team.abbr)}</strong><small>${escapeHtml(entry.team.city)} ${escapeHtml(entry.team.name)}</small></span></div></td>
     <td>${entry.team.wins}</td><td>${entry.team.losses}</td><td>${entry.pct.toFixed(3).replace(/^0/, "")}</td><td>${entry.gb}</td>${compact ? "" : `<td>${entry.conf}</td><td>${entry.home}</td><td>${entry.away}</td>`}<td class="${entry.streak.startsWith("W") ? "ok" : entry.streak.startsWith("L") ? "bad" : ""}">${entry.streak}</td>
   </tr>`;
 }
@@ -2895,9 +2971,9 @@ function powerRankingsPanel() {
     .map((team) => ({ team, score: teamRating(team) + team.wins * 1.8 - team.losses * 1.2, streak: teamStreak(team.id), last10: teamLastTen(team.id) }))
     .sort((a, b) => b.score - a.score)
     .map((entry, index) => ({ ...entry, seed: index + 1 }));
-  return `<section class="card table-card standings-table standings-wide-table">
+  return `<section class="card table-card standings-table standings-wide-table power-rankings-table">
     <div class="standings-title"><span>Power Rankings</span></div>
-    <table><thead><tr><th></th><th>Team</th><th>W</th><th>L</th><th>Rating</th><th>L10</th><th>STRK</th></tr></thead><tbody>${rows.map((entry) => `<tr class="${entry.team.id === save.activeTeamId ? "active-standing" : ""}"><td>${entry.seed}</td><td><div class="standings-team-cell">${teamLogo(entry.team, "standings-team-logo")}<span><strong>${escapeHtml(entry.team.city)} ${escapeHtml(entry.team.name)}</strong></span></div></td><td>${entry.team.wins}</td><td>${entry.team.losses}</td><td>${Math.round(entry.score)}</td><td>${entry.last10}</td><td class="${entry.streak.startsWith("W") ? "ok" : entry.streak.startsWith("L") ? "bad" : ""}">${entry.streak}</td></tr>`).join("")}</tbody></table>
+    <table><thead><tr><th></th><th>Team</th><th>W</th><th>L</th><th>Rating</th><th>L10</th><th>STRK</th></tr></thead><tbody>${rows.map((entry) => { const theme = teamThemes[entry.team.id] || teamThemes.bos; return `<tr class="${entry.team.id === save.activeTeamId ? "active-standing" : ""}" style="--standing-primary:${theme.primary};--standing-secondary:${theme.secondary}"><td>${entry.seed}</td><td><div class="standings-team-cell" title="${escapeHtml(entry.team.city)} ${escapeHtml(entry.team.name)}">${teamLogo(entry.team, "standings-team-logo")}<span><strong>${escapeHtml(entry.team.abbr)}</strong><small>${escapeHtml(entry.team.city)} ${escapeHtml(entry.team.name)}</small></span></div></td><td>${entry.team.wins}</td><td>${entry.team.losses}</td><td>${Math.round(entry.score)}</td><td>${entry.last10}</td><td class="${entry.streak.startsWith("W") ? "ok" : entry.streak.startsWith("L") ? "bad" : ""}">${entry.streak}</td></tr>`; }).join("")}</tbody></table>
   </section>`;
 }
 
@@ -2905,9 +2981,9 @@ function streaksPanel() {
   const rows = [...save.teams]
     .map((team) => ({ team, streak: teamStreak(team.id) }))
     .sort((a, b) => streakSortValue(b.streak) - streakSortValue(a.streak) || teamWinPct(b.team) - teamWinPct(a.team));
-  return `<section class="card table-card standings-table standings-wide-table">
+  return `<section class="card table-card standings-table standings-wide-table streaks-rankings-table">
     <div class="standings-title"><span>Streaks</span></div>
-    <table><thead><tr><th></th><th>Team</th><th>W</th><th>L</th><th>L10</th><th>STRK</th></tr></thead><tbody>${rows.map((entry, index) => `<tr class="${entry.team.id === save.activeTeamId ? "active-standing" : ""}"><td>${index + 1}</td><td><div class="standings-team-cell">${teamLogo(entry.team, "standings-team-logo")}<span><strong>${escapeHtml(entry.team.city)} ${escapeHtml(entry.team.name)}</strong></span></div></td><td>${entry.team.wins}</td><td>${entry.team.losses}</td><td>${teamLastTen(entry.team.id)}</td><td class="${entry.streak.startsWith("W") ? "ok" : entry.streak.startsWith("L") ? "bad" : ""}">${entry.streak}</td></tr>`).join("")}</tbody></table>
+    <table><thead><tr><th></th><th>Team</th><th>W</th><th>L</th><th>L10</th><th>STRK</th></tr></thead><tbody>${rows.map((entry, index) => { const theme = teamThemes[entry.team.id] || teamThemes.bos; return `<tr class="${entry.team.id === save.activeTeamId ? "active-standing" : ""}" style="--standing-primary:${theme.primary};--standing-secondary:${theme.secondary}"><td>${index + 1}</td><td><div class="standings-team-cell" title="${escapeHtml(entry.team.city)} ${escapeHtml(entry.team.name)}">${teamLogo(entry.team, "standings-team-logo")}<span><strong>${escapeHtml(entry.team.abbr)}</strong><small>${escapeHtml(entry.team.city)} ${escapeHtml(entry.team.name)}</small></span></div></td><td>${entry.team.wins}</td><td>${entry.team.losses}</td><td>${teamLastTen(entry.team.id)}</td><td class="${entry.streak.startsWith("W") ? "ok" : entry.streak.startsWith("L") ? "bad" : ""}">${entry.streak}</td></tr>`; }).join("")}</tbody></table>
   </section>`;
 }
 
@@ -3138,8 +3214,7 @@ function inSeasonFreeAgencyPage() {
     });
   const playoffNote = rules.playoffWaiverEligible ? "Players signed now remain playoff eligible." : "Players waived after March 1 are not playoff eligible for a new team.";
   const waiverCandidates = [...teamPlayers(team.id)].filter((player) => rosterType(player) !== "twoWay").sort((a, b) => a.ovr - b.ovr || contractSalary(b) - contractSalary(a)).slice(0, 3);
-  return `<h1 class="page-title">free agency</h1>
-    <section class="card in-season-fa-hero">
+  return `<section class="card in-season-fa-hero">
       <div><div class="card-label">regular-season player market</div><div class="player-name">Upgrade the ${escapeHtml(team.abbr)} roster</div><p>Sign available veterans throughout the season without changing your current rotation.</p></div>
       <div class="in-season-fa-rule"><span>${rules.tenDayContracts ? "10-DAY WINDOW OPEN" : "STANDARD CONTRACTS"}</span><strong>${rosterSpots} ROSTER SPOT${rosterSpots === 1 ? "" : "S"}</strong><small>${escapeHtml(playoffNote)}</small></div>
     </section>
@@ -3149,15 +3224,15 @@ function inSeasonFreeAgencyPage() {
       ${inSeasonFaSummaryCard("cap", "cap space", `$${capSpace.toFixed(1)}M`, "red")}
       ${inSeasonFaSummaryCard("exception", "minimum exception", "Available", "red")}
     </section>
-    ${rosterSpots ? "" : `<section class="card in-season-waiver-strip"><div><div class="card-label">roster move required</div><strong>Open a standard roster spot before signing.</strong><small>Waived guaranteed salary remains on your cap. The player enters the league free-agent pool.</small></div><div>${waiverCandidates.map((player) => `<button class="btn danger" data-in-season-waive="${player.id}">Waive ${escapeHtml(player.name)} (${player.ovr})</button>`).join("")}</div></section>`}
+    ${rosterSpots ? "" : `<section class="card in-season-waiver-strip"><div><div class="card-label">roster move required</div><strong>Open a standard roster spot before signing.</strong><small>Waived guaranteed salary remains on your cap. The player enters the league free-agent pool.</small></div><div>${waiverCandidates.map((player) => `<button class="btn danger in-season-waive-button" data-in-season-waive="${player.id}" type="button">${playerHeadshot(player, "in-season-waive-headshot")}<span><strong>${escapeHtml(player.name)}</strong><small>${escapeHtml(player.pos)} &middot; ${player.ovr} OVR</small></span><em>WAIVE</em></button>`).join("")}</div></section>`}
     <section class="card in-season-fa-market">
       <header class="in-season-fa-toolbar">
         <div><div class="card-label">nba free-agent pool</div><div class="player-name">Available Players</div></div>
         <div class="in-season-fa-controls">
-          <input id="in-season-fa-search" value="${escapeHtml(inSeasonFaSearch)}" placeholder="Search player or archetype">
-          <select id="in-season-fa-position"><option value="all">All Positions</option>${["PG", "SG", "SF", "PF", "C"].map((position) => `<option value="${position}" ${inSeasonFaPosition === position ? "selected" : ""}>${position}</option>`).join("")}</select>
-          <select id="in-season-fa-sort"><option value="overall" ${inSeasonFaSort === "overall" ? "selected" : ""}>Best Overall</option><option value="salary" ${inSeasonFaSort === "salary" ? "selected" : ""}>Lowest Asking Price</option><option value="age" ${inSeasonFaSort === "age" ? "selected" : ""}>Youngest</option></select>
-          <button class="btn" data-action="filter-in-season-fa">Apply</button>
+          <label class="in-season-fa-search-field"><span aria-hidden="true">&#9906;</span><input id="in-season-fa-search" value="${escapeHtml(inSeasonFaSearch)}" placeholder="Search player or archetype"><small>PLAYER SEARCH</small></label>
+          <label><small>POSITION</small><select id="in-season-fa-position"><option value="all">All Positions</option>${["PG", "SG", "SF", "PF", "C"].map((position) => `<option value="${position}" ${inSeasonFaPosition === position ? "selected" : ""}>${position}</option>`).join("")}</select></label>
+          <label><small>SORT MARKET</small><select id="in-season-fa-sort"><option value="overall" ${inSeasonFaSort === "overall" ? "selected" : ""}>Best Overall</option><option value="salary" ${inSeasonFaSort === "salary" ? "selected" : ""}>Lowest Asking Price</option><option value="age" ${inSeasonFaSort === "age" ? "selected" : ""}>Youngest</option></select></label>
+          <button class="btn primary" data-action="filter-in-season-fa"><span aria-hidden="true">&#8635;</span> Apply Filters</button>
         </div>
       </header>
       <div class="in-season-fa-list"><div class="in-season-fa-list-head"><span>Player</span><span class="in-season-fa-stat-filter">${[["ppg", "PPG"], ["rpg", "RPG"], ["apg", "APG"], ["fg", "FG"], ["three", "3P"]].map(([value, label]) => `<button class="${inSeasonFaSort === value ? `active ${inSeasonFaSortDirection}` : ""}" data-in-season-fa-sort="${value}">${label}</button>`).join("")}</span><span>Contract</span><span>Interest</span><span>Fit</span><span>Actions</span></div>${freeAgents.map((player) => inSeasonFreeAgentCard(player, rules, rosterSpots)).join("") || '<div class="muted-line">No unsigned players match these filters.</div>'}</div>
@@ -3186,16 +3261,16 @@ function inSeasonFreeAgentCard(player, rules, rosterSpots) {
   const fitTone = fit >= 84 ? "excellent" : fit >= 70 ? "good" : fit >= 55 ? "average" : "poor";
   const fitLabel = fit >= 84 ? "Excellent" : fit >= 70 ? "Good" : fit >= 55 ? "Average" : "Poor";
   const badges = freeAgentFitBadges(player, fit);
-  return `<article class="in-season-fa-player">
+  return `<article class="in-season-fa-player phase6-card">
     <div class="in-season-fa-player-cell"><button class="in-season-fa-star" aria-label="Add ${escapeHtml(player.name)} to watchlist">☆</button><div class="in-season-fa-portrait">${playerHeadshot(player, "in-season-fa-headshot")}</div><div class="in-season-fa-ovr"><b>${player.ovr}</b><span>OVR</span></div><div class="in-season-fa-identity"><strong>${escapeHtml(player.name)}</strong><span>${escapeHtml(player.pos)} · ${player.age} Years Old</span><small>${escapeHtml(player.archetype || "NBA veteran")}</small><em>${teamLogo(player.originalTeamId || player.teamId || save.activeTeamId, "in-season-fa-mini-logo")} ${escapeHtml(player.contract?.freeAgentType || "UFA")} · ${Math.max(1, player.contract?.serviceYears || player.age - 19)} Yrs Exp</em></div><div class="in-season-fa-pot"><b>${player.pot}</b><span>POT</span></div></div>
     <div class="in-season-fa-stats">${[
       ["PPG", stats.ppg], ["RPG", stats.rpg], ["APG", stats.apg], ["FG", stats.fg], ["3P", stats.three], ["GP", stats.gp], ["MPG", stats.mpg], ["PER", stats.per], ["WS", stats.ws]
     ].map(([label, value]) => `<span><small>${label}</small><b>${value}</b></span>`).join("")}</div>
     <div class="in-season-fa-contract"><strong>$${market.toFixed(1)}M <small>/yr</small></strong><span>${contractYears} Year${contractYears === 1 ? "" : "s"}</span><em>Role: ${escapeHtml(role)}</em></div>
-    <div class="in-season-fa-interest ${interestTone}"><strong>${interest}%</strong><span>${interest >= 80 ? "Very Interested" : interest >= 60 ? "Interested" : interest >= 45 ? "Neutral" : "Not Very Interested"}</span><div>${Array.from({ length: 5 }, (_, index) => `<i class="${index < Math.round(interest / 20) ? "filled" : ""}">★</i>`).join("")}</div><small>${interest >= 80 ? "Top Priority" : interest >= 60 ? "Priority" : interest >= 45 ? "Watch List" : "Long Shot"}</small></div>
-    <div class="in-season-fa-fit ${fitTone}"><div class="in-season-fa-fit-ring" style="--fit:${fit * 3.6}deg"><strong>${fit}%</strong></div><span>${fitLabel}</span><ul>${badges.map((badge) => `<li class="${badge.tone}">${escapeHtml(badge.text)}</li>`).join("")}</ul></div>
+    <div class="in-season-fa-interest ${interestTone}" style="--interest:${interest}%"><header><span>PLAYER INTEREST</span><b>${interest >= 80 ? "HOT" : interest >= 60 ? "OPEN" : interest >= 45 ? "MIXED" : "LOW"}</b></header><strong>${interest}<small>%</small></strong><span>${interest >= 80 ? "Very Interested" : interest >= 60 ? "Interested" : interest >= 45 ? "Neutral" : "Not Very Interested"}</span><div class="in-season-fa-interest-meter"><i></i></div><div class="in-season-fa-interest-stars">${Array.from({ length: 5 }, (_, index) => `<i class="${index < Math.round(interest / 20) ? "filled" : ""}">★</i>`).join("")}</div><small>${interest >= 80 ? "Top Priority" : interest >= 60 ? "Priority" : interest >= 45 ? "Watch List" : "Long Shot"}</small></div>
+    <div class="in-season-fa-fit ${fitTone}"><header><span>TEAM FIT</span><b>${fitLabel.toUpperCase()}</b></header><div class="in-season-fa-fit-score"><div class="in-season-fa-fit-ring" style="--fit:${fit * 3.6}deg"><strong>${fit}%</strong></div><span>${fitLabel}</span></div><ul>${badges.map((badge) => `<li class="${badge.tone}">${escapeHtml(badge.text)}</li>`).join("")}</ul></div>
     <div class="in-season-fa-actions">
-      <button class="btn" data-view-player="${player.id}">Card</button><button class="btn" data-view-player="${player.id}">Compare</button><button class="btn" data-view-player="${player.id}">Scout</button><button class="btn primary in-season-negotiate" data-in-season-sign="${player.id}" data-contract-type="${canUseMarket ? "market" : rules.tenDayContracts ? "tenDay" : "minimum"}" ${rosterSpots && !formerTeamBlocked ? "" : "disabled"}>Negotiate</button>
+      <button class="btn fa-action-profile" data-view-player="${player.id}"><small>VIEW</small><strong>Profile</strong></button><button class="btn fa-action-compare" data-view-player="${player.id}"><small>VS</small><strong>Compare</strong></button><button class="btn fa-action-scout" data-view-player="${player.id}"><small>EVAL</small><strong>Scout</strong></button><button class="btn primary in-season-negotiate" data-in-season-sign="${player.id}" data-contract-type="${canUseMarket ? "market" : rules.tenDayContracts ? "tenDay" : "minimum"}" ${rosterSpots && !formerTeamBlocked ? "" : "disabled"}><small>${rosterSpots && !formerTeamBlocked ? "OFFER" : "LOCKED"}</small><strong>Negotiate</strong></button>
     </div>
   </article>`;
 }
@@ -6185,18 +6260,25 @@ function roster() {
   const averageAge = players.length ? (players.reduce((sum, player) => sum + Number(player.age || 0), 0) / players.length).toFixed(1) : "-";
   const expiring = players.filter((player) => contractYearsRemaining(player) <= 1).length;
   return `
+    <section class="phase6-screen phase6-roster-screen">
     <h1 class="page-title roster-page-title">rosters</h1>
-    <section class="card league-roster-browser">
+    <div class="phase6-roster-directory-shell">
+    <section class="card league-roster-browser phase6-card phase6-card--accent phase6-directory-card">
       <header><div><span>NBA TEAM DIRECTORY</span><strong>ALL 30 ROSTERS</strong></div><small>Select a franchise to view its complete roster</small></header>
-      <div class="roster-team-grid">${save.teams.map((team) => `<button class="${team.id === selectedTeam.id ? "active" : ""}" data-roster-team="${team.id}" title="${escapeHtml(team.city)} ${escapeHtml(team.name)}">${teamLogo(team, "roster-browser-logo")}<span>${escapeHtml(team.abbr)}</span></button>`).join("")}</div>
+      <div class="roster-team-grid">${save.teams.map((team) => {
+        const theme = teamThemes[team.id] || teamThemes.bos;
+        return `<button class="${team.id === selectedTeam.id ? "active" : ""}" style="--directory-primary:${theme.primary};--directory-secondary:${theme.secondary}" data-roster-team="${team.id}" title="${escapeHtml(team.city)} ${escapeHtml(team.name)}">${teamLogo(team, "roster-browser-logo")}<span>${escapeHtml(team.abbr)}</span></button>`;
+      }).join("")}</div>
     </section>
-    <section class="card roster-team-hero">
+    <section class="card roster-team-hero phase6-card phase6-card--hero phase6-team-hero">
       <div class="roster-team-identity">${teamLogo(selectedTeam, "roster-team-hero-logo")}<div><span>${escapeHtml(selectedTeam.conf)} CONFERENCE</span><strong>${escapeHtml(selectedTeam.city)} ${escapeHtml(selectedTeam.name)}</strong><small>${selectedTeam.wins}-${selectedTeam.losses} · ${escapeHtml(payrollStatus(selectedTeam))}</small></div></div>
       <div class="roster-team-overall"><span>TEAM OVR</span><b>${Math.round(teamRating(selectedTeam))}</b></div>
     </section>
-    <section class="grid-4 roster-view-summary">${statCard("players", players.length)}${statCard("average age", averageAge)}${statCard("payroll", `$${selectedTeam.payroll.toFixed(1)}M`)}${statCard("expiring deals", expiring)}</section>
+    </div>
+    <section class="grid-4 roster-view-summary">${statCard("players", players.length, "phase6-stat-card phase6-stat-card--blue")}${statCard("average age", averageAge, "phase6-stat-card phase6-stat-card--green")}${statCard("payroll", `$${selectedTeam.payroll.toFixed(1)}M`, "phase6-stat-card phase6-stat-card--gold")}${statCard("expiring deals", expiring, "phase6-stat-card phase6-stat-card--red")}</section>
     <section class="card roster-compliance-strip ${rules.valid ? "valid" : "invalid"}"><div><span>ROSTER STATUS</span><strong>${rules.valid ? "NBA LEGAL" : "NEEDS ATTENTION"}</strong></div><p>${rules.standard}/15 standard · ${rules.twoWay}/3 two-way · ${rules.total}/18 total</p></section>
-    <section class="card table-card league-roster-table"><table><thead><tr><th>Player</th><th>Type</th><th>Pos</th><th>Age</th><th>OVR</th><th>POT</th><th>Salary</th><th>Contract</th><th>Status</th><th>Action</th></tr></thead><tbody>${players.map(rosterViewerRow).join("")}</tbody></table></section>`;
+    <section class="card table-card league-roster-table phase6-card phase6-table-card phase6-scroll"><table><thead><tr><th>Player</th><th>Type</th><th>Pos</th><th>Age</th><th>OVR</th><th>POT</th><th>Salary</th><th>Contract</th><th>Status</th><th>Action</th></tr></thead><tbody>${players.map(rosterViewerRow).join("")}</tbody></table></section>
+    </section>`;
 }
 
 function rosterViewerRow(player) {
@@ -6217,30 +6299,31 @@ function rotationManagementPanel() {
   const rules = rosterRuleStatus(activeTeam().id);
   return `
     <h2 class="rotation-section-title">LINEUP &amp; MINUTES</h2>
-    <section class="card rotation-header">
+    <section class="card rotation-header phase6-card phase6-card--hero phase6-rotation-hero">
       <div class="team-hero-identity">${teamLogo(team, "page-hero-logo")}<div> 
         <div class="card-label">rotation and minutes</div>
         <div class="player-name">${escapeHtml(team.city)} ${escapeHtml(team.name)}</div>
         <div class="meta">Drag players into the first five spots to set starters, assign positions, allocate 240 minutes, and keep a legal active list.</div>
       </div></div>
+      <div class="rotation-hero-watermark" aria-hidden="true">${teamLogo(team, "rotation-hero-watermark-logo")}</div>
     </section>
     ${rotationMatchupPlanCard()}
     <section class="grid-4 rotation-summary">
-      ${statCard("rotation rating", Math.round(teamRating(activeTeam())))}
-      ${statCard("status", status.valid ? '<span class="ok">ready</span>' : '<span class="bad">incomplete</span>')}
-      ${statCard("standard deals", `${rules.standard}/15`)}
-      ${statCard("total roster", `${rules.total}/18`)}
+      ${statCard("rotation rating", Math.round(teamRating(activeTeam())), "phase6-stat-card phase6-stat-card--blue")}
+      ${statCard("status", status.valid ? '<span class="ok">ready</span>' : '<span class="bad">incomplete</span>', "phase6-stat-card phase6-stat-card--green")}
+      ${statCard("standard deals", `${rules.standard}/15`, "phase6-stat-card phase6-stat-card--gold")}
+      ${statCard("total roster", `${rules.total}/18`, "phase6-stat-card phase6-stat-card--purple")}
     </section>
-    <section class="card rotation-lineup-card">
+    <section class="card rotation-lineup-card phase6-card phase6-card--accent">
       <header><div class="rotation-lineup-title"><span>ROTATION LINEUP</span><small>ⓘ</small><div class="rotation-total ${status.valid ? "valid" : "invalid"}"><strong>${status.minutes}</strong><span>/ 240 minutes</span></div></div><strong>FIRST 5 START &nbsp;·&nbsp; POSITIONS EDITABLE &nbsp;·&nbsp; MINUTES PER GAME</strong></header>
       <div class="rotation-lineup-columns"><span>POS</span><span>PLAYER</span><span>OVR</span><span>MIN</span><div>${[0, 10, 20, 30, 40, 48].map((tick) => `<b>${tick}</b>`).join("")}</div></div>
       <div class="rotation-lineup-list">${players.map((player, index) => rotationPlayerRow(player, index)).join("")}</div>
     </section>
-    <section class="card rotation-footer">
+    <section class="card rotation-footer phase6-card">
       <div id="rotation-message" class="${status.valid ? "ok" : "bad"}">${escapeHtml(status.message)}</div>
       <div class="actions">
-        <button class="btn" data-action="rotation-reset">Auto Set Rotation</button>
-        <button class="btn primary" data-action="rotation-save">Save Rotation</button>
+        <button class="btn phase6-button" data-action="rotation-reset">Auto Set Rotation</button>
+        <button class="btn primary phase6-button" data-action="rotation-save">Save Rotation</button>
       </div>
     </section>
   `;
@@ -6256,7 +6339,7 @@ function rotationMatchupPlanCard() {
   const advice = opponentId ? tacticalAdvice(save.activeTeamId, opponentId) : "No opponent remains on the schedule.";
   const teamAbbr = team?.abbr || "";
   const opponentAbbr = opponent?.abbr || "";
-  return `<section class="card rotation-matchup-card">
+  return `<section class="card rotation-matchup-card phase6-card phase6-matchup-plan">
     <div class="rotation-matchup-main">
       <div>
         <div class="card-label">next matchup plan</div>
@@ -6415,8 +6498,8 @@ function settings() {
   `;
 }
 
-function statCard(label, value) {
-  return `<section class="card stat-card" title="${escapeHtml(contextTooltip(label))}"><div class="card-label">${label}</div><div class="stat-value">${value}</div></section>`;
+function statCard(label, value, extraClass = "") {
+  return `<section class="card stat-card ${extraClass}" title="${escapeHtml(contextTooltip(label))}"><div class="card-label">${label}</div><div class="stat-value">${value}</div></section>`;
 }
 
 function contextTooltip(label) {
@@ -7168,6 +7251,31 @@ function attachActions() {
     }
   }));
 
+  const filterTradeTeamOptions = () => {
+    const query = document.querySelector("#multi-trade-team-search")?.value.trim().toLowerCase() || "";
+    const conference = document.querySelector(".multi-trade-team-options")?.dataset.activeConference || "all";
+    const teamButtons = [...document.querySelectorAll(".multi-trade-team-options [data-trade-select-team]")];
+    let visibleCount = 0;
+    teamButtons.forEach((button) => {
+      const matchesSearch = !query || button.dataset.teamSearch.includes(query);
+      const matchesConference = conference === "all" || button.dataset.teamConference === conference;
+      const visible = matchesSearch && matchesConference;
+      button.hidden = !visible;
+      if (visible) visibleCount += 1;
+    });
+    const count = document.querySelector("#multi-trade-team-result-count");
+    const empty = document.querySelector(".multi-trade-picker-empty");
+    if (count) count.textContent = visibleCount;
+    if (empty) empty.hidden = visibleCount !== 0;
+  };
+  document.querySelector("#multi-trade-team-search")?.addEventListener("input", filterTradeTeamOptions);
+  document.querySelectorAll("[data-trade-team-filter]").forEach((button) => button.addEventListener("click", () => {
+    const options = document.querySelector(".multi-trade-team-options");
+    if (options) options.dataset.activeConference = button.dataset.tradeTeamFilter;
+    document.querySelectorAll("[data-trade-team-filter]").forEach((filter) => filter.classList.toggle("active", filter === button));
+    filterTradeTeamOptions();
+  }));
+
   document.querySelectorAll("[data-multi-trade-player]").forEach((button) => button.addEventListener("click", () => {
     const id = button.dataset.multiTradePlayer;
     const index = multiTradePlayerIds.findIndex((value) => String(value) === id);
@@ -7509,22 +7617,22 @@ function simcastPage() {
   return `
     <section class="simcast-shell">
       <header class="simcast-topline"><div><span>SIMCAST</span><strong>${state.completed ? "FINAL" : state.paused ? "PAUSED" : "LIVE"}</strong></div><div>${formatGameDate(game.date)} · ${game.home === save.activeTeamId ? "HOME" : "AWAY"}</div></header>
-      <section class="simcast-scoreboard card">
-        <div class="simcast-team away">${teamLogo(away, "simcast-team-logo")}<div><span>${escapeHtml(away.city)}</span><strong>${escapeHtml(away.name)}</strong><small>${away.wins}-${away.losses}</small></div><b id="simcast-away-score">${state.awayScore}</b></div>
+      <section class="simcast-scoreboard card" style="${simcastMatchupVars(away, home)}">
+        <div class="simcast-team away" style="${simcastTeamVars(away)}">${teamLogo(away, "simcast-team-logo")}<div><span>${escapeHtml(away.city)}</span><strong class="simcast-team-name${away.name.length > 14 ? " is-extra-long" : away.name.length > 9 ? " is-long" : ""}">${escapeHtml(away.name)}</strong><small>${away.wins}-${away.losses}</small></div><b id="simcast-away-score" class="score-digits-${String(state.awayScore).length}">${state.awayScore}</b></div>
         <div class="simcast-clock"><span id="simcast-period">${state.completed ? "FINAL" : simcastPeriodLabel(state.period)}</span><strong id="simcast-clock">${state.clock}</strong><small id="simcast-possession-team">${state.completed ? "GAME COMPLETE" : state.paused ? "SIMULATION PAUSED" : `${escapeHtml((state.teams[state.possessionSide]?.abbr || "").toUpperCase())} POSSESSION`}</small></div>
-        <div class="simcast-team home"><b id="simcast-home-score">${state.homeScore}</b><div><span>${escapeHtml(home.city)}</span><strong>${escapeHtml(home.name)}</strong><small>${home.wins}-${home.losses}</small></div>${teamLogo(home, "simcast-team-logo")}</div>
+        <div class="simcast-team home" style="${simcastTeamVars(home)}"><b id="simcast-home-score" class="score-digits-${String(state.homeScore).length}">${state.homeScore}</b><div><span>${escapeHtml(home.city)}</span><strong class="simcast-team-name${home.name.length > 14 ? " is-extra-long" : home.name.length > 9 ? " is-long" : ""}">${escapeHtml(home.name)}</strong><small>${home.wins}-${home.losses}</small></div>${teamLogo(home, "simcast-team-logo")}</div>
       </section>
       <section class="simcast-period-strip card" id="simcast-period-scores">${simcastPeriodScores(state, away, home)}</section>
       <div class="simcast-progress"><span id="simcast-progress" style="width:${progress}%"></span></div>
       <section class="simcast-body">
-        <article class="card simcast-feed-panel"><header><div><span>PLAY-BY-PLAY</span><strong>GAME FEED</strong></div><small id="simcast-possession">${state.completed ? "Final result" : "Live updates"}</small></header><div class="simcast-feed" id="simcast-feed">${feed.map(simcastFeedRow).join("") || '<div class="simcast-feed-empty">Opening tip is moments away.</div>'}</div></article>
-        <aside class="simcast-side-panel">
+        <article class="card simcast-feed-panel" style="${simcastMatchupVars(away, home)}"><header><div><span>PLAY-BY-PLAY</span><strong>GAME FEED</strong></div><small id="simcast-possession">${state.completed ? "Final result" : "Live updates"}</small></header><div class="simcast-feed" id="simcast-feed">${feed.map(simcastFeedRow).join("") || '<div class="simcast-feed-empty">Opening tip is moments away.</div>'}</div></article>
+        <aside class="simcast-side-panel" style="${simcastMatchupVars(away, home)}">
           <section class="card simcast-comparison" id="simcast-comparison">${simcastComparison(state)}</section>
           <section class="card simcast-leaders"><span>PLAYERS TO WATCH</span><strong>IMPACT LEADERS</strong>${simcastLeader(away)}${simcastLeader(home)}</section>
         </aside>
       </section>
       ${state.completed ? "" : simcastCoachingPanel(state)}
-      <section class="card simcast-live-box" id="simcast-live-box-score">${simcastLiveBoxScore(state)}</section>
+      <section class="card simcast-live-box" id="simcast-live-box-score" style="${simcastMatchupVars(away, home)}">${simcastLiveBoxScore(state)}</section>
       <footer class="simcast-controls card">
         <div class="simcast-speed"><span>SPEED</span>${[0.5, 1, 2, 4].map((speed) => `<button class="${state.speed === speed ? "active" : ""}" data-simcast-speed="${speed}" ${state.completed ? "disabled" : ""}>${speed}X</button>`).join("")}</div>
         <div class="actions">${state.completed ? '<button class="btn primary" data-simcast-action="exit">View Box Score</button>' : `<button class="btn" data-simcast-action="pause">${state.paused ? "Resume" : "Pause"}</button><button class="btn" data-simcast-action="next-period">Sim To Next ${state.period >= 4 ? "Period" : "Quarter"}</button><button class="btn primary" data-simcast-action="finish">Sim To End</button>`}</div>
@@ -7536,11 +7644,26 @@ function simcastPeriodLabel(period) {
   return period <= 4 ? `Q${period}` : `OT${period - 4}`;
 }
 
+function simcastTeamVars(team) {
+  const theme = teamThemes[team?.id] || teamThemes.bos;
+  return `--side-primary:${theme.primary};--side-secondary:${theme.secondary};--side-accent:${theme.accent || theme.secondary}`;
+}
+
+function simcastMatchupVars(away, home) {
+  const a = teamThemes[away?.id] || teamThemes.bos;
+  const h = teamThemes[home?.id] || teamThemes.bos;
+  return `--away-primary:${a.primary};--away-secondary:${a.secondary};--home-primary:${h.primary};--home-secondary:${h.secondary}`;
+}
+
 function simcastPeriodScores(state, away, home) {
   const periods = state.periodScores || [];
-  const headings = periods.map((_, index) => `<span>${simcastPeriodLabel(index + 1)}</span>`).join("");
-  const cells = (side) => periods.map((period, index) => `<b class="${index + 1 === state.period && !state.completed ? "live" : ""}">${period[side]}</b>`).join("");
-  return `<div class="simcast-period-head"><strong>TEAM</strong>${headings}<strong>T</strong></div><div><strong>${escapeHtml(away.abbr)}</strong>${cells("away")}<strong>${state.awayScore}</strong></div><div><strong>${escapeHtml(home.abbr)}</strong>${cells("home")}<strong>${state.homeScore}</strong></div>`;
+  const displayedPeriods = Math.max(4, periods.length);
+  const headings = Array.from({ length: displayedPeriods }, (_, index) => `<span class="${index + 1 === state.period && !state.completed ? "live" : index + 1 > state.period ? "future" : ""}">${simcastPeriodLabel(index + 1)}</span>`).join("");
+  const cells = (side) => Array.from({ length: displayedPeriods }, (_, index) => { const period = periods[index]; return `<b class="${index + 1 === state.period && !state.completed ? "live" : ""}${period ? "" : " future"}">${period ? period[side] : "—"}</b>`; }).join("");
+  const teamCell = (team) => `<strong class="simcast-period-team" style="${simcastTeamVars(team)}">${teamLogo(team, "simcast-period-logo")}<span><b>${escapeHtml(team.abbr)}</b><small>${team.wins}-${team.losses}</small></span></strong>`;
+  const margin = state.awayScore - state.homeScore;
+  const marginCell = (side) => { const value = side === "away" ? margin : -margin; return `<b class="simcast-margin ${value > 0 ? "positive" : value < 0 ? "negative" : "even"}">${value > 0 ? "+" : ""}${value}</b>`; };
+  return `<div class="simcast-period-head"><strong>MATCHUP</strong>${headings}<span>MARGIN</span><strong>TOTAL</strong></div><div class="${state.awayScore > state.homeScore ? "leading" : ""}" style="${simcastTeamVars(away)}">${teamCell(away)}${cells("away")}${marginCell("away")}<strong>${state.awayScore}</strong></div><div class="${state.homeScore > state.awayScore ? "leading" : ""}" style="${simcastTeamVars(home)}">${teamCell(home)}${cells("home")}${marginCell("home")}<strong>${state.homeScore}</strong></div>`;
 }
 
 function simcastCoachingPanel(state) {
@@ -7571,11 +7694,15 @@ function simcastLiveBoxScore(state) {
 
 function simcastLiveTeamTable(state, team, side) {
   const lines = state.boxScore?.[side] || [];
-  return `<div class="simcast-live-team"><div class="simcast-live-team-name">${teamLogo(team, "simcast-box-logo")}<strong>${escapeHtml(team.abbr)}</strong><span>${side === "away" ? state.awayScore : state.homeScore} PTS</span></div><div class="simcast-box-scroll"><table><thead><tr><th>PLAYER</th><th>MIN</th><th>FG</th><th>3PT</th><th>FT</th><th>PTS</th><th>REB</th><th>AST</th><th>STL</th><th>BLK</th><th>TO</th><th>PF</th><th>+/-</th></tr></thead><tbody>${lines.map((line) => `<tr class="${line.injured ? "injured" : line.fouledOut ? "fouled-out" : ""}"><td><strong>${escapeHtml(line.name)}</strong><small>${escapeHtml(line.injured ? "INJURED" : line.fouledOut ? "FOULED OUT" : line.pos)}</small></td><td>${Math.round(line.seconds / 60)}</td><td>${line.fgm}-${line.fga}</td><td>${line.threePm}-${line.threePa}</td><td>${line.ftm}-${line.fta}</td><td><b>${line.pts}</b></td><td>${line.reb}</td><td>${line.ast}</td><td>${line.stl}</td><td>${line.blk}</td><td>${line.tov}</td><td>${line.pf}</td><td>${line.plusMinus > 0 ? "+" : ""}${line.plusMinus}</td></tr>`).join("")}</tbody></table></div></div>`;
+  const leaders = Math.max(0, ...lines.map((line) => line.pts));
+  const onCourt = new Set(state.lineups?.[side] || []);
+  return `<div class="simcast-live-team"><div class="simcast-live-team-name">${teamLogo(team, "simcast-box-logo")}<strong>${escapeHtml(team.abbr)}</strong><small>${team.wins}-${team.losses}</small><span>${side === "away" ? state.awayScore : state.homeScore} PTS</span></div><div class="simcast-box-scroll"><table><thead><tr><th>PLAYER</th><th>MIN</th><th>FG</th><th>3PT</th><th>FT</th><th>PTS</th><th>REB</th><th>AST</th><th>STL</th><th>BLK</th><th>TO</th><th>PF</th><th>+/-</th></tr></thead><tbody>${lines.map((line) => `<tr class="${line.injured ? "injured " : line.fouledOut ? "fouled-out " : ""}${onCourt.has(line.playerId) ? "on-court " : ""}${leaders > 0 && line.pts === leaders ? "team-leader" : ""}"><td><strong>${escapeHtml(line.name)}</strong><small>${escapeHtml(line.injured ? "INJURED" : line.fouledOut ? "FOULED OUT" : line.pos)}</small></td><td>${Math.round(line.seconds / 60)}</td><td>${line.fgm}-${line.fga}</td><td>${line.threePm}-${line.threePa}</td><td>${line.ftm}-${line.fta}</td><td><b>${line.pts}</b></td><td>${line.reb}</td><td>${line.ast}</td><td>${line.stl}</td><td>${line.blk}</td><td>${line.tov}</td><td>${line.pf}</td><td>${line.plusMinus > 0 ? "+" : ""}${line.plusMinus}</td></tr>`).join("")}</tbody></table></div></div>`;
 }
 
 function simcastFeedRow(event) {
-  return `<div class="simcast-feed-row ${event.side || "period"}"><b>${event.clock}</b><span>${simcastPeriodLabel(event.period || event.quarter)}</span><p>${escapeHtml(event.text)}</p>${event.side ? `<strong>${event.awayScore}-${event.homeScore}</strong>` : ""}</div>`;
+  const tone = /timeout/i.test(event.text) ? "timeout" : /foul|free throw/i.test(event.text) ? "foul" : /turns? (?:the ball )?over|turnover|strips/i.test(event.text) ? "turnover" : /makes|hits|finishes|dunk|layup|jumper|three/i.test(event.text) ? "score" : "play";
+  const icon = tone === "score" ? "+" : tone === "foul" ? "!" : tone === "turnover" ? "↔" : tone === "timeout" ? "T" : "·";
+  return `<div class="simcast-feed-row ${event.side || "period"} feed-${tone}"><i>${icon}</i><b>${event.clock}</b><span>${simcastPeriodLabel(event.period || event.quarter)}</span><p>${escapeHtml(event.text)}</p>${event.side ? `<strong>${event.awayScore}-${event.homeScore}</strong>` : ""}</div>`;
 }
 
 function simcastStatRow(label, away, home) {
@@ -7583,7 +7710,9 @@ function simcastStatRow(label, away, home) {
 }
 
 function simcastComparison(state) {
-  return `<span>TEAM COMPARISON</span><strong>LIVE STATS</strong>${simcastStatRow("Points", state.awayScore, state.homeScore)}${simcastStatRow("Projected", simcastProjectedScore(state, "away"), simcastProjectedScore(state, "home"))}${simcastStatRow("Team fouls", state.teamFouls.away, state.teamFouls.home)}${simcastStatRow("Bonus", state.teamFouls.home >= 5 ? "YES" : "-", state.teamFouls.away >= 5 ? "YES" : "-")}${simcastStatRow("Timeouts", state.timeouts.away, state.timeouts.home)}${simcastStatRow("Possessions", state.teamStats.away.possessions, state.teamStats.home.possessions)}`;
+  const away = getTeam(state.awayId);
+  const home = getTeam(state.homeId);
+  return `<span>TEAM COMPARISON</span><strong>LIVE STATS</strong><div class="simcast-comparison-teams"><b title="${escapeHtml(away?.name || away?.abbr || "Away team")}">${teamLogo(away, "simcast-comparison-logo")}</b><span>LIVE</span><b title="${escapeHtml(home?.name || home?.abbr || "Home team")}">${teamLogo(home, "simcast-comparison-logo")}</b></div>${simcastStatRow("Points", state.awayScore, state.homeScore)}${simcastStatRow("Projected", simcastProjectedScore(state, "away"), simcastProjectedScore(state, "home"))}${simcastStatRow("Team fouls", state.teamFouls.away, state.teamFouls.home)}${simcastStatRow("Bonus", state.teamFouls.home >= 5 ? "YES" : "-", state.teamFouls.away >= 5 ? "YES" : "-")}${simcastStatRow("Timeouts", state.timeouts.away, state.timeouts.home)}${simcastStatRow("Possessions", state.teamStats.away.possessions, state.teamStats.home.possessions)}`;
 }
 
 function simcastProjectedScore(state, side) {
@@ -7601,7 +7730,7 @@ function simcastClockSeconds(clock) {
 
 function simcastLeader(team) {
   const leader = bestPlayer(team.id);
-  return `<div>${playerHeadshot(leader, "simcast-leader-headshot")}<span><b>${escapeHtml(leader?.name || "Team Leader")}</b><small>${escapeHtml(team.abbr)} · ${leader?.ovr || "-"} OVR</small></span></div>`;
+  return `<div class="simcast-featured-leader" data-view-player="${escapeHtml(leader?.id || "")}">${playerHeadshot(leader, "simcast-leader-headshot")}<span><em>${escapeHtml(team.abbr)} FEATURED</em><b>${escapeHtml(leader?.name || "Team Leader")}</b><small>${escapeHtml(leader?.pos || "-")} · ${leader?.ovr || "-"} OVR · ${leader?.pot || "-"} POT</small></span><strong><b>${leader?.ovr || "-"}</b><small>OVR</small></strong></div>`;
 }
 
 function scheduleSimcastTick() {
@@ -7624,6 +7753,10 @@ function updateSimcastDom() {
   const setText = (selector, value) => { const element = document.querySelector(selector); if (element) element.textContent = value; };
   setText("#simcast-away-score", simcastState.awayScore);
   setText("#simcast-home-score", simcastState.homeScore);
+  [["#simcast-away-score", simcastState.awayScore], ["#simcast-home-score", simcastState.homeScore]].forEach(([selector, score]) => {
+    const element = document.querySelector(selector);
+    if (element) element.className = `score-digits-${String(score).length}`;
+  });
   setText("#simcast-period", simcastPeriodLabel(simcastState.period));
   setText("#simcast-clock", simcastState.clock);
   setText("#simcast-possession-team", simcastState.completed ? "GAME COMPLETE" : `${simcastState.teams[simcastState.possessionSide]?.abbr || ""} POSSESSION`);
