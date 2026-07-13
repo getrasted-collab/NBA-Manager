@@ -229,8 +229,8 @@ body.dashboard-mode .in-season-fa-toolbar {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) auto !important;
   align-items: end !important;
-  min-height: 108px !important;
-  padding: 25px 30px !important;
+  min-height: 82px !important;
+  padding: 14px 25px !important;
   border-bottom: 1px solid rgba(202, 212, 231, .74) !important;
   background: rgba(255, 255, 255, .78) !important;
   box-shadow: none !important;

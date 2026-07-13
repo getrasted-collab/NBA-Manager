@@ -11,7 +11,7 @@ body.game-ui-upgrade.dashboard-mode .in-season-fa-player:hover { border-color:rg
 body.game-ui-upgrade.dashboard-mode .in-season-fa-player > * { border-color:var(--phase6-border) !important; }
 
 body.game-ui-upgrade.dashboard-mode .in-season-fa-portrait { overflow:hidden; border:1px solid rgba(93,157,255,.45) !important; border-radius:10px !important; background:radial-gradient(circle at 50% 30%,#31496d,#172844 66%,#0b1525) !important; box-shadow:0 8px 16px rgba(0,0,0,.32),0 0 0 3px rgba(93,157,255,.06); }
-body.game-ui-upgrade.dashboard-mode .in-season-fa-headshot { background:transparent !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-headshot { background:transparent !important; }   width: 112% !important;   height: 112% !important;  max-width: none !important;  object-fit: cover !important;  object-position: center 18% !important;  transform: translate(-5%, -4%); {}
 body.game-ui-upgrade.dashboard-mode .in-season-fa-ovr { border-color:rgba(93,157,255,.6) !important; background:linear-gradient(145deg,#245fbd,#163a78) !important; box-shadow:0 6px 13px rgba(16,69,155,.28),inset 0 1px rgba(255,255,255,.14); }
 body.game-ui-upgrade.dashboard-mode .in-season-fa-identity strong { color:#fff !important; font:800 14px/1.1 var(--phase6-font-heading) !important; }
 body.game-ui-upgrade.dashboard-mode .in-season-fa-identity > span { color:var(--phase6-text-soft) !important; }
@@ -84,7 +84,7 @@ body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .in-season-negotiate:d
 body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .in-season-negotiate:disabled > span { color:#ffc2c8; background:rgba(255,93,108,.1); }
 
 body.game-ui-upgrade.dashboard-mode .in-season-fa-market { overflow:hidden; border-color:var(--phase6-border) !important; border-radius:var(--phase6-radius-card) !important; background:linear-gradient(180deg,#101a2d,#0a1221) !important; box-shadow:var(--phase6-shadow-card) !important; }
-body.game-ui-upgrade.dashboard-mode .in-season-fa-toolbar { grid-template-columns:minmax(220px,.72fr) minmax(620px,1.5fr) !important; gap:24px; min-height:122px !important; padding:20px 24px !important; border-bottom-color:var(--phase6-border) !important; background:linear-gradient(105deg,#17243b,#101a2d) !important; }
+body.game-ui-upgrade.dashboard-mode .in-season-fa-toolbar { grid-template-columns:minmax(220px,.72fr) minmax(620px,1.5fr) !important; gap:24px; min-height:82px !important; padding:20px 24px !important; border-bottom-color:var(--phase6-border) !important; background:linear-gradient(105deg,#17243b,#101a2d) !important; }
 body.game-ui-upgrade.dashboard-mode .in-season-fa-toolbar .card-label { color:#8fbaff !important; font-size:9px !important; letter-spacing:.13em !important; }
 body.game-ui-upgrade.dashboard-mode .in-season-fa-toolbar .player-name { color:#fff !important; font:800 27px/1 var(--phase6-font-heading) !important; letter-spacing:.035em; }
 body.game-ui-upgrade.dashboard-mode .in-season-fa-controls { grid-template-columns:minmax(220px,1fr) 140px 168px 122px !important; align-items:end !important; gap:9px !important; }
