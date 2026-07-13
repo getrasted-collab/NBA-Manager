@@ -9962,31 +9962,18 @@ function formatDate(value) {
 
 function styleWaiveButtons() {
   document
-    .querySelectorAll(".in-season-fa-actions button")
-    .forEach((button) => {
-      const label = button.textContent.trim().toLowerCase();
+    .querySelectorAll(".in-season-fa-actions .btn")
+    .forEach((element) => {
+      const label = element.textContent
+        .replace(/\s+/g, " ")
+        .trim()
+        .toLowerCase();
 
-      if (label.includes("waive")) {
-        button.style.setProperty("color", "#ff5d6c", "important");
-      }
-    });
-}
+      if (label === "waive" || label.includes("waive")) {
+        element.style.setProperty("color", "#ff5d6c", "important");
 
-styleWaiveButtons();
-
-function styleWaiveButtons() {
-  document
-    .querySelectorAll(".in-season-fa-actions button")
-    .forEach((button) => {
-      const label = button.textContent.trim().toLowerCase();
-
-      if (label.includes("waive")) {
-        button.style.setProperty("color", "#ff5d6c", "important");
-
-        const textElements = button.querySelectorAll("span, strong, small, em");
-
-        textElements.forEach((element) => {
-          element.style.setProperty("color", "#ff5d6c", "important");
+        element.querySelectorAll("*").forEach((child) => {
+          child.style.setProperty("color", "#ff5d6c", "important");
         });
       }
     });

@@ -192,8 +192,3 @@ body.game-ui-upgrade.dashboard-mode .in-season-fa-actions .in-season-negotiate:d
   body.game-ui-upgrade.dark-mode.dashboard-mode .in-season-fa-summary { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
 }
 
-
-body.game-ui-upgrade.dashboard-mode
-.in-season-fa-actions > .btn:nth-child(4) {
-  color: #ff5d6c !important;
-}
