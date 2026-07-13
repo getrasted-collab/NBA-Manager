@@ -9959,3 +9959,44 @@ function formatDate(value) {
   if (Number.isNaN(date.getTime())) return "unknown";
   return date.toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
 }
+
+function styleWaiveButtons() {
+  document
+    .querySelectorAll(".in-season-fa-actions button")
+    .forEach((button) => {
+      const label = button.textContent.trim().toLowerCase();
+
+      if (label.includes("waive")) {
+        button.style.setProperty("color", "#ff5d6c", "important");
+      }
+    });
+}
+
+styleWaiveButtons();
+
+function styleWaiveButtons() {
+  document
+    .querySelectorAll(".in-season-fa-actions button")
+    .forEach((button) => {
+      const label = button.textContent.trim().toLowerCase();
+
+      if (label.includes("waive")) {
+        button.style.setProperty("color", "#ff5d6c", "important");
+
+        const textElements = button.querySelectorAll("span, strong, small, em");
+
+        textElements.forEach((element) => {
+          element.style.setProperty("color", "#ff5d6c", "important");
+        });
+      }
+    });
+}
+
+const waiveButtonObserver = new MutationObserver(styleWaiveButtons);
+
+waiveButtonObserver.observe(document.body, {
+  childList: true,
+  subtree: true,
+});
+
+styleWaiveButtons();
