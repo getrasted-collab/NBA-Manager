@@ -9969,16 +9969,24 @@ function styleWaiveButtons() {
         .trim()
         .toLowerCase();
 
-      if (label === "waive" || label.includes("waive")) {
-        element.style.setProperty("color", "#ff5d6c", "important");
+if (label === "waive" || label.includes("waive")) {
+  element.style.setProperty("color", "#ff5d6c", "important");
+  element.style.setProperty(
+    "-webkit-text-fill-color",
+    "#ff5d6c",
+    "important"
+  );
 
-        element.querySelectorAll("*").forEach((child) => {
-          child.style.setProperty("color", "#ff5d6c", "important");
-        });
-      }
-    });
+  element.querySelectorAll("*").forEach((child) => {
+    child.style.setProperty("color", "#ff5d6c", "important");
+    child.style.setProperty(
+      "-webkit-text-fill-color",
+      "#ff5d6c",
+      "important"
+    );
+  });
 }
-
+  
 const waiveButtonObserver = new MutationObserver(styleWaiveButtons);
 
 waiveButtonObserver.observe(document.body, {
@@ -9986,4 +9994,4 @@ waiveButtonObserver.observe(document.body, {
   subtree: true,
 });
 
-styleWaiveButtons();
+styleWaiveButtons();})}
